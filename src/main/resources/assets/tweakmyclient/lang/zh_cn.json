@@ -1,0 +1,26 @@
+{
+    "tweakmyclient.gui.title.configs": "Tweak My Client 设置",
+    "tweakmyclient.gui.button.config_gui.generic": "全局",
+    "tweakmyclient.gui.button.config_gui.disable_toggle": "禁用开关",
+    "tweakmyclient.gui.button.config_gui.disable_hotkeys": "禁用快捷键",
+
+    "tweakmyclient.config.generic.openConfigGui.name": "打开设置界面",
+    "tweakmyclient.config.generic.openConfigGui.comment": "打开设置界面的快捷键",
+
+    "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.name": "禁用客户端侧TNT运算",
+    "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.comment": "关闭客户端对TNT实体的运算.\n也许对与TNT有关的机器有帮助.",
+    "tweakmyclient.config.disable_toggle.disableClientEntityWitherUpdates.name": "禁用客户端侧凋零实体运算",
+    "tweakmyclient.config.disable_toggle.disableClientEntityWitherUpdates.comment": "关闭客户端对凋零实体的运算.\n也许对伪和平有帮助.",
+    "tweakmyclient.config.disable_toggle.disableClientEntityZombieVillagerUpdates.name": "禁用客户端侧僵尸村民实体运算",
+    "tweakmyclient.config.disable_toggle.disableClientEntityZombieVillagerUpdates.comment": "关闭客户端对僵尸村民实体的运算.\n也许对伪和平有帮助.",
+    "tweakmyclient.config.disable_toggle.disableEntityTNTRendering.name": "禁用TNT实体渲染",
+    "tweakmyclient.config.disable_toggle.disableEntityTNTRendering.comment": "关闭游戏对TNT实体的渲染.\n也许对与TNT有关的机器有帮助.",
+    "tweakmyclient.config.disable_toggle.disableEntityWitherRendering.name": "禁用凋零实体渲染",
+    "tweakmyclient.config.disable_toggle.disableEntityWitherRendering.comment": "关闭游戏对凋零实体的渲染.\n也许对伪和平有帮助.",
+    "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.name": "禁用僵尸村民实体渲染",
+    "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.comment": "关闭游戏对僵尸村民实体的渲染.\n也许对伪和平有帮助.",
+    "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.name": "禁用火焰渲染层",
+    "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.comment": "关闭在玩家实体着火时的第一视角特效.\n你将获得更广阔的视野.",
+    "tweakmyclient.config.disable_toggle.disableScoreboardRendering.name": "禁用计分板渲染",
+    "tweakmyclient.config.disable_toggle.disableScoreboardRendering.comment": "关闭游戏对计分板的UI渲染.\n你将获得更广阔的视野."
+}

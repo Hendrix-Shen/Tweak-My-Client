@@ -1,0 +1,41 @@
+{
+    "schemaVersion": 1,
+    "id": "tweak-my-client",
+    "name": "TweakMyClient",
+    "version": "${mod_version}",
+    "icon": "assets/tweakmyclient/icon.png",
+
+    "description": "Add something interesting <3",
+    "authors": [
+        {
+          "name": "Hendrix_Shen",
+          "contact": {
+            "homepage": "https://github.com/Hendrix-Shen"
+          }
+        }
+    ],
+    "contact": {
+        "homepage": "https://github.com/Hendrix-Shen",
+        "issues": "https://github.com/Hendrix-Shen/Tweak-My-Client/issues",
+        "sources": "https://github.com/Hendrix-Shen/Tweak-My-Client"
+    },
+
+    "license": "GPLv3",
+    "environment": "client",
+    "entrypoints": {
+        "main": [
+            "top.hendrixshen.TweakMyClient.TweakMyClient"
+        ],
+        "modmenu": [
+            "top.hendrixshen.TweakMyClient.compat.modmenu.ModMenuApiImpl"
+        ]
+    },
+
+    "mixins": [
+        "mixins.TweakMyClient.json"
+    ],
+
+    "depends": {
+        "malilib": ">=0.10.0-dev.21"
+    }
+}

@@ -1,0 +1,132 @@
+buildscript {
+    repositories {
+        jcenter()    
+        maven {
+            name = "Fabric"
+            url = "https://maven.fabricmc.net/"
+        }
+    }
+    dependencies {
+        classpath 'net.fabricmc:fabric-loom:0.5-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'fabric-loom' version '0.7-SNAPSHOT'
+    id 'maven-publish'
+}
+
+repositories {
+    maven {
+        url 'https://masa.dy.fi/maven'
+    }
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+ext.configFile = file "build.properties"
+
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    options.encoding = 'UTF-8'
+}
+
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${config.minecraft_version}"
+    mappings "net.fabricmc:yarn:${config.mappings_version}:v2"
+    modCompile "net.fabricmc:fabric-loader:${config.fabric_loader_version}"
+    compile "com.google.code.findbugs:jsr305:3+"
+
+    modCompile "fi.dy.masa.malilib:malilib-fabric-${config.minecraft_version_masa}:${config.malilib_version}"
+
+    // Fabric API. This is technically optional, but you probably want it anyway.
+    //modCompile "net.fabricmc.fabric-api:fabric-api:" + config.fabric_version
+
+    modCompileOnly "io.github.prospector:modmenu:" + config.mod_menu_version
+}
+
+minecraft {
+    ext.mod_version = config.mod_version
+    ext.mod_version_detail = config.mod_version_detail
+
+    mod_version = mod_version + "-" + mod_version_detail
+}
+
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    options.encoding = 'UTF-8'
+}
+
+group = config.group + "." + config.mod_id
+archivesBaseName = config.mod_file_name + '-' + config.minecraft_version_out
+version = project.minecraft.mod_version_detail
+
+processResources
+{
+    // Exclude the GIMP image files
+    exclude '**/*.xcf'
+    exclude '**/xcf'
+
+    // this will ensure that this task is redone when the versions change.
+    //inputs.property "mod_version", project.minecraft.mod_version
+    //inputs.property "minecraft_version", project.config.minecraft_version
+
+    inputs.property "mod_version", project.minecraft.mod_version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include "fabric.mod.json"
+        expand "mod_version": project.minecraft.mod_version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude "fabric.mod.json"
+    }
+}
+
+// ensure that the encoding is set to UTF-8, no matter what the system default is
+// this fixes some edge cases with special characters not displaying correctly
+// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+
+// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+// if it is present.
+// If you remove this task, sources will not be generated.
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+jar {
+    from "LICENSE"
+}
+
+tasks.publish.dependsOn build
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            // add all the jars that should be included when publishing to maven
+            artifact(jar) {
+                builtBy remapJar
+            }
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+        }
+    }
+
+    repositories {
+    }
+}
+
