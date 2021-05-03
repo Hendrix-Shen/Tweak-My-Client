@@ -7,7 +7,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.fabricmc:fabric-loom:0.5-SNAPSHOT'
+        classpath 'net.fabricmc:fabric-loom:0.7-SNAPSHOT'
     }
 }
 
@@ -47,9 +47,6 @@ dependencies {
 
     modCompile "fi.dy.masa.malilib:malilib-fabric-${config.minecraft_version_masa}:${config.malilib_version}"
 
-    // Fabric API. This is technically optional, but you probably want it anyway.
-    //modCompile "net.fabricmc.fabric-api:fabric-api:" + config.fabric_version
-
     modCompileOnly "io.github.prospector:modmenu:" + config.mod_menu_version
 }
 
@@ -57,7 +54,7 @@ minecraft {
     ext.mod_version = config.mod_version
     ext.mod_version_detail = config.mod_version_detail
 
-    mod_version = mod_version + "-" + mod_version_detail
+    mod_version = mod_version_detail
 }
 
 compileJava {
