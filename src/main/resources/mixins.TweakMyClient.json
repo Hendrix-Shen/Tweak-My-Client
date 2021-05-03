@@ -1,19 +1,18 @@
 {
-    "required": true,
-    "package": "top.hendrixshen.TweakMyClient.mixin",
-    "minVersion": "0.7",
-    "compatibilityLevel": "JAVA_8",
-    "client": [
-    ],
-    "injectors": {
-        "defaultRequire": 0
-    },
-    "mixins": [
-        "IMixinInGameOverlayRenderer",
-        "MixinBackgroundRenderer",
-        "MixinClientWorld",
-        "MixinEntityRenderDispatcher",
-        "MixinInGameHud",
-        "MixinInGameOverlayRenderer"
-    ]
+  "required": true,
+  "package": "top.hendrixshen.TweakMyClient.mixin",
+  "minVersion": "0.7",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  },
+  "mixins": [
+    "IMixinInGameOverlayRenderer",
+    "MixinClientWorld",
+    "MixinEntityRenderDispatcher",
+    "MixinInGameHud",
+    "MixinInGameOverlayRenderer"
+  ]
 }
