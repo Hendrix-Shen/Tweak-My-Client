@@ -28,10 +28,10 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('*.gradle', 'gradle.properties', '**/*.accesswidener') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
-    - name: Display build number
+    - name: Display commid hash
       run: |
         echo Tweak My Client \commit-${GITHUB_SHA::8}
-    - name: Set build number in codes
+    - name: Set commid hash in codes
       run: sed -i "s/build.undefined/${GITHUB_SHA::8}/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java build.properties
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
