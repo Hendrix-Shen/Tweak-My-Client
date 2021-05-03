@@ -20,9 +20,9 @@
     "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.name": "disableEntityZombieVillagerRendering",
     "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.comment": "Disables zombie villager entity rendering.\nMaybe it's useful for fake peace.",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.name": "disableRenderOverlayFire",
-    "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.comment": "Disables fire overlay rendering.\nYou will gain a broader view.",
+    "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.comment": "Disables fire overlay rendering when player is on fire.\nYou will gain a broader view.",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.name": "disableRenderOverlayPumpkin",
-    "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.comment": "Disables mask overlay when player is wearing pumpkin.\nYou will gain a broader view.",
+    "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.comment": "Disables mask overlay rendering when player is wearing pumpkin.\nYou will gain a broader view.",
     "tweakmyclient.config.disable_toggle.disableScoreboardRendering.name": "disableScoreboardRendering",
     "tweakmyclient.config.disable_toggle.disableScoreboardRendering.comment": "Disables Scoreboard rendering.\nYou will gain a broader view."
 }
