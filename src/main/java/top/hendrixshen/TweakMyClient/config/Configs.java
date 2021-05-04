@@ -21,7 +21,7 @@ public class Configs implements IConfigHandler {
 
     public static class Generic {
         private static final String PREFIX = String.format("%s.config.generic", Reference.MOD_ID);
-        public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 12000, 0, 24000);
+        public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
         public static final ConfigHotkey OPEN_CONFIG_GUI = new TranslatableConfigHotkey(PREFIX, "openConfigGui", "T,C");
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
                 DAYLIGHT_OVERRIDE_TIME,
