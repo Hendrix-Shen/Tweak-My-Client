@@ -15,6 +15,7 @@
     "MixinClientPlayerEntity",
     "MixinClientWorld",
     "MixinCobwebBlock",
+    "MixinDeathScreen",
     "MixinEntityRenderDispatcher",
     "MixinInGameHud",
     "MixinInGameOverlayRenderer"

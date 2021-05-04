@@ -32,6 +32,8 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "disableSlowdown",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "Cancels slowness effects caused by honey, soul sand and using items.",
 
+    "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "featureAutoRespawn",
+    "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "Automatically respawns you whenever you die.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "featureDaylightOverride",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "Override the client's world time to the day time you want."
 }

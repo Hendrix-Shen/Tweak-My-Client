@@ -42,8 +42,10 @@ public class Configs implements IConfigHandler {
 
     public static class Feature {
         private static final String PREFIX = String.format("%s.config.feature_toggle", Reference.MOD_ID);
+        public static final ConfigBooleanHotkeyed FEATURE_AUTO_RESPAWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoRespawn", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
+                FEATURE_AUTO_RESPAWN,
                 FEATURE_DAYLIGHT_OVERRIDE
         );
     }

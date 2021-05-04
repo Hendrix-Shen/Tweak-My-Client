@@ -32,6 +32,8 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "禁用减速",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "取消蜂蜜块, 灵魂沙和使用物品时的减速效果.",
 
+    "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "自动重生",
+    "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "死亡时自动重生.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "覆盖客户端世界时间",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "覆盖客户端的世界时间为你想要的时间."
 }
