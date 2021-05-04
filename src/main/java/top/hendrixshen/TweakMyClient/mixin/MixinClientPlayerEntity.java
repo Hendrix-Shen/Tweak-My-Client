@@ -9,7 +9,8 @@ import top.hendrixshen.TweakMyClient.config.Configs;
 
 @Mixin(ClientPlayerEntity.class)
 public class MixinClientPlayerEntity {
-    @Shadow private boolean usingItem;
+    @Shadow
+    private boolean usingItem;
 
     @Redirect(
             method = "tickMovement",

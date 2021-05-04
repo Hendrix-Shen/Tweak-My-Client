@@ -18,14 +18,12 @@ public class MixinCobwebBlock {
             method = "onEntityCollision",
             at = @At(
                     value = "INVOKE",
-                    target =  "Lnet/minecraft/entity/Entity;slowMovement(Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/Vec3d;)V"
+                    target = "Lnet/minecraft/entity/Entity;slowMovement(Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/Vec3d;)V"
             ),
             cancellable = true
     )
-    private void onWalkInCobWebBlock(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci)
-    {
-        if ((Configs.Disable.DISABLE_SLOWDOWN.getBooleanValue()) && entity instanceof PlayerEntity)
-        {
+    private void onWalkInCobWebBlock(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
+        if ((Configs.Disable.DISABLE_SLOWDOWN.getBooleanValue()) && entity instanceof PlayerEntity) {
             ci.cancel();
         }
     }

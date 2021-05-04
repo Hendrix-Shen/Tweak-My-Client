@@ -1,6 +1,5 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DeathScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,8 +16,8 @@ public class MixinDeathScreen {
                     value = "TAIL"
             )
     )
-    private void onTick(CallbackInfo ci){
-        if(Configs.Feature.FEATURE_AUTO_RESPAWN.getBooleanValue()) {
+    private void onTick(CallbackInfo ci) {
+        if (Configs.Feature.FEATURE_AUTO_RESPAWN.getBooleanValue()) {
             assert TweakMyClient.minecraftClient.player != null;
             TweakMyClient.minecraftClient.player.requestRespawn();
             TweakMyClient.minecraftClient.openScreen(null);
