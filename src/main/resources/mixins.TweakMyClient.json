@@ -9,6 +9,7 @@
     "defaultRequire": 0
   },
   "mixins": [
+    "ClientWorldProperties",
     "IMixinInGameOverlayRenderer",
     "MixinClientWorld",
     "MixinEntityRenderDispatcher",

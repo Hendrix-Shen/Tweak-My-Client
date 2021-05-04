@@ -19,6 +19,7 @@ public class InputHandler implements IKeybindProvider {
     @Override
     public void addKeysToMap(IKeybindManager manager) {
         for (ConfigHotkey configHotkey : Configs.Generic.HOTKEYS) manager.addKeybindToMap(configHotkey.getKeybind());
+        for (IHotkey configHotkey : Configs.Feature.OPTIONS) manager.addKeybindToMap(configHotkey.getKeybind());
         for (IHotkey configHotkey : Configs.Disable.OPTIONS) manager.addKeybindToMap(configHotkey.getKeybind());
     }
 

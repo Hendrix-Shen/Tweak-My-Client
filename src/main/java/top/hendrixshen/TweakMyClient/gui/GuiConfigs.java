@@ -57,6 +57,10 @@ public class GuiConfigs extends GuiConfigsBase
         {
             return 120;
         }
+        else if (tab == ConfigGuiTab.FEATURE_TOGGLES)
+        {
+            return 80;
+        }
         else if (tab == ConfigGuiTab.DISABLE_TOGGLES)
         {
             return 80;
@@ -80,6 +84,14 @@ public class GuiConfigs extends GuiConfigsBase
         if (tab == ConfigGuiTab.GENERIC)
         {
             configs = Configs.Generic.OPTIONS;
+        }
+        else if (tab == ConfigGuiTab.FEATURE_TOGGLES)
+        {
+            configs = ConfigUtils.createConfigWrapperForType(ConfigType.BOOLEAN, ImmutableList.copyOf(Configs.Feature.OPTIONS));
+        }
+        else if (tab == ConfigGuiTab.FEATURE_HOTKEYS)
+        {
+            configs = ConfigUtils.createConfigWrapperForType(ConfigType.HOTKEY, ImmutableList.copyOf(Configs.Feature.OPTIONS));
         }
         else if (tab == ConfigGuiTab.DISABLE_TOGGLES)
         {
@@ -121,6 +133,8 @@ public class GuiConfigs extends GuiConfigsBase
     public enum ConfigGuiTab
     {
         GENERIC         ("generic"),
+        FEATURE_TOGGLES ("feature_toggle"),
+        FEATURE_HOTKEYS ("feature_hotkeys"),
         DISABLE_TOGGLES ("disable_toggle"),
         DISABLE_HOTKEYS ("disable_hotkeys");
 
