@@ -21,7 +21,7 @@ public class GuiConfigs extends GuiConfigsBase
 
     public GuiConfigs()
     {
-        super(10, 50, Reference.MOD_ID, null, String.format("%s.gui.title.configs", Reference.MOD_ID));
+        super(10, 50, Reference.MOD_ID, null, StringUtils.translate(String.format("%s.gui.title.configs", Reference.MOD_ID)) + String.format(" (Version: %s)", Reference.MOD_VERSION));
     }
 
     @Override
