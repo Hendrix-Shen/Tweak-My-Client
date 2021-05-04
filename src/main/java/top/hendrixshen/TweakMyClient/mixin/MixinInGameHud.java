@@ -13,7 +13,8 @@ import top.hendrixshen.TweakMyClient.config.Configs;
 
 @Mixin(InGameHud.class)
 public abstract class MixinInGameHud {
-    @Shadow protected abstract void renderPumpkinOverlay();
+    @Shadow
+    protected abstract void renderPumpkinOverlay();
 
     @Inject(
             method = "renderScoreboardSidebar",
@@ -23,10 +24,11 @@ public abstract class MixinInGameHud {
             cancellable = true
     )
     private void onRenderScoreboardSidebar(MatrixStack matrices, ScoreboardObjective objective, CallbackInfo ci) {
-        if(Configs.Disable.DISABLE_SCOREBOARD_RENDERING.getBooleanValue()) {
+        if (Configs.Disable.DISABLE_SCOREBOARD_RENDERING.getBooleanValue()) {
             ci.cancel();
         }
     }
+
     @Redirect(
             method = "render",
             at = @At(
@@ -35,7 +37,7 @@ public abstract class MixinInGameHud {
             )
     )
     private void onRenderPumpkinOverlay(InGameHud inGameHud) {
-        if(!Configs.Disable.DISABLE_RENDER_OVERLAY_PUMPKIN.getBooleanValue()) {
+        if (!Configs.Disable.DISABLE_RENDER_OVERLAY_PUMPKIN.getBooleanValue()) {
             renderPumpkinOverlay();
         }
     }

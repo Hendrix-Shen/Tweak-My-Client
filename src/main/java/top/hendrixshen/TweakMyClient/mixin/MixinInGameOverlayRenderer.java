@@ -18,7 +18,7 @@ public abstract class MixinInGameOverlayRenderer {
             )
     )
     private static void onRenderFireOverlay(MinecraftClient minecraftClient, MatrixStack matrixStack) {
-        if(!Configs.Disable.DISABLE_RENDER_OVERLAY_FIRE.getBooleanValue()) {
+        if (!Configs.Disable.DISABLE_RENDER_OVERLAY_FIRE.getBooleanValue()) {
             IMixinInGameOverlayRenderer.invokeRenderFireOverlay(minecraftClient, matrixStack);
         }
     }

@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.TweakMyClient.config.Configs;
 
 @Mixin(EntityRenderDispatcher.class)
-public abstract class MixinEntityRenderDispatcher
-{
+public abstract class MixinEntityRenderDispatcher {
     @Inject(
             method = "shouldRender",
             at = @At(
@@ -25,16 +24,14 @@ public abstract class MixinEntityRenderDispatcher
 
             cancellable = true
     )
-    private void onShouldRender(Entity entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> cir)
-    {
+    private void onShouldRender(Entity entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
         if (Configs.Disable.DISABLE_ENTITY_TNT_RENDERING.getBooleanValue() && entity instanceof TntEntity) {
             cir.setReturnValue(false);
         }
         if (Configs.Disable.DISABLE_ENTITY_WITHER_RENDERING.getBooleanValue() && entity instanceof WitchEntity) {
             cir.setReturnValue(false);
         }
-        if (Configs.Disable.DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING.getBooleanValue() && entity instanceof ZombieEntity)
-        {
+        if (Configs.Disable.DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING.getBooleanValue() && entity instanceof ZombieEntity) {
             cir.setReturnValue(false);
         }
     }

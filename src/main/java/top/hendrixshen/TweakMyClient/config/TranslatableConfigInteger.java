@@ -10,6 +10,7 @@ public class TranslatableConfigInteger extends ConfigInteger {
         super(name, defaultValue, String.format("%s.%s.comment", prefix, name));
         this.guiDisplayName = String.format("%s.%s.name", prefix, name);
     }
+
     public TranslatableConfigInteger(String prefix, String name, int defaultValue, int minValue, int maxValue) {
         super(name, defaultValue, minValue, maxValue, String.format("%s.%s.comment", prefix, name));
         this.guiDisplayName = String.format("%s.%s.name", prefix, name);
