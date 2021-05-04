@@ -11,7 +11,10 @@
   "mixins": [
     "ClientWorldProperties",
     "IMixinInGameOverlayRenderer",
+    "MixinBlock",
+    "MixinClientPlayerEntity",
     "MixinClientWorld",
+    "MixinCobwebBlock",
     "MixinEntityRenderDispatcher",
     "MixinInGameHud",
     "MixinInGameOverlayRenderer"

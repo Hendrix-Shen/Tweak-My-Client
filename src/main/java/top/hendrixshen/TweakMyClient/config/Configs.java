@@ -59,6 +59,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_FIRE = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayFire", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_PUMPKIN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayPumpkin", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_SCOREBOARD_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableScoreboardRendering", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_SLOWDOWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableSlowdown", false, "");
 
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
                 DISABLE_CLIENT_ENTITY_TNT_UPDATES,
@@ -69,7 +70,8 @@ public class Configs implements IConfigHandler {
                 DISABLE_ENTITY_WITHER_RENDERING,
                 DISABLE_RENDER_OVERLAY_FIRE,
                 DISABLE_RENDER_OVERLAY_PUMPKIN,
-                DISABLE_SCOREBOARD_RENDERING
+                DISABLE_SCOREBOARD_RENDERING,
+                DISABLE_SLOWDOWN
         );
     }
 

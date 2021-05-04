@@ -29,6 +29,8 @@
     "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.comment": "关闭在玩家在穿戴南瓜时的渲染覆盖.\n你将获得更广阔的视野.",
     "tweakmyclient.config.disable_toggle.disableScoreboardRendering.name": "禁用计分板渲染",
     "tweakmyclient.config.disable_toggle.disableScoreboardRendering.comment": "关闭游戏对计分板的UI渲染.\n你将获得更广阔的视野.",
+    "tweakmyclient.config.disable_toggle.disableSlowdown.name": "禁用减速",
+    "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "取消蜂蜜块, 灵魂沙和使用物品时的减速效果.",
 
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "覆盖客户端世界时间",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "覆盖客户端的世界时间为你想要的时间."
