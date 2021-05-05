@@ -8,8 +8,12 @@
 
     "tweakmyclient.config.generic.daylightOverrideTime.name": "客户端时间",
     "tweakmyclient.config.generic.daylightOverrideTime.comment": "覆盖客户端的世界时间时设置的时间.",
+    "tweakmyclient.config.generic.getTargetBlockPosition.name": "获取方块坐标",
+    "tweakmyclient.config.generic.getTargetBlockPosition.comment": "获取你看向方块的坐标.\n此特性用于获取你指向方向最远端的方块坐标.",
     "tweakmyclient.config.generic.openConfigGui.name": "打开设置界面",
     "tweakmyclient.config.generic.openConfigGui.comment": "打开设置界面的快捷键.",
+    "tweakmyclient.config.generic.targetBlockMaxTraceDistance.name": "获取方块坐标最大追踪距离",
+    "tweakmyclient.config.generic.targetBlockMaxTraceDistance.comment": "获取方块的最大直线追踪距离.",
 
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.name": "禁用客户端侧TNT运算",
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.comment": "关闭客户端对TNT实体的运算.\n也许对与TNT有关的机器有帮助.",
