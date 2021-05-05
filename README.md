@@ -1,2 +1,49 @@
-# Tweak-My-Client
- Add something interesting <3
+# TweakMyClient
+[![License](https://img.shields.io/github/license/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/blob/main/LICENSE)
+[![Issues](https://img.shields.io/github/issues/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/pulls)
+[![Java CI with gradle](https://img.shields.io/github/workflow/status/Hendrix-Shen/Tweak-My-Client/Java%20CI%20with%20Gradle?label=Java%20CI%20with%20Gradle&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/actions/workflows/build.yml)
+[![Publish Release](https://img.shields.io/github/workflow/status/Hendrix-Shen/Tweak-My-Client/Publish%20Release?label=Publish%20Release&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/actions/workflows/publish.yml)
+[![Release](https://img.shields.io/github/v/release/Hendrix-Shen/Tweak-My-Client?include_prereleases&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
+[![Github Release Downloads](https://img.shields.io/github/downloads/Hendrix-Shen/Tweak-My-Client/total?label=Github%20Release%20Downloads&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
+#### Warning: The project is still in the early development stage.
+This mod depends on malilib([Curseforge](https://www.curseforge.com/minecraft/mc-mods/malilib) | [masa.dy.fi](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)). The default hotkey to open the in-game config GUI is **T + C**.
+## It includes the following features.
+### Disable Toggle
++ disableClientEntityTNTUpdates
+  - *Disables TNT entity updates on the client. Maybe useful for TNT related machines.*
+  - *关闭客户端对TNT实体的运算.也许对与TNT有关的机器有帮助.*
++ disableClientEntityWitherUpdates
+  - *Disables wither entity updates on the client. Maybe it's useful for fake peace.*
+  - *关闭客户端对凋零实体的运算. 也许对伪和平有帮助.*
++ disableClientEntityZombieVillagerUpdates
+  - *Disables zombie villager entity updates on the client. Maybe it's useful for fake peace.*
+  - *关闭客户端对僵尸村民实体的运算. 也许对伪和平有帮助.*
++ disableEntityTNTRendering
+  - *Disables TNT entity rendering. Maybe it's useful for fake peace.*
+  - *关闭游戏对TNT实体的渲染. 也许对与TNT有关的机器有帮助.*
++ disableEntityWitherRendering
+  - *Disables wither entity rendering. Maybe it's useful for fake peace.*
+  - *关闭游戏对凋零实体的渲染. 也许对伪和平有帮助.*
++ disableEntityZombieVillagerRendering
+  - *Disables zombie villager entity rendering. Maybe it's useful for fake peace.*
+  - *关闭游戏对僵尸村民实体的渲染. 也许对伪和平有帮助.*
++ disableRenderOverlayFire
+  - *Disables fire overlay rendering when player is on fire. You will gain a broader view.*
+  - *关闭在玩家着火时的渲染覆盖. 你将获得更广阔的视野.*
++ disableRenderOverlayPumpkin
+  - *Disables mask overlay rendering when player is wearing pumpkin. You will gain a broader view.*
+  - *关闭在玩家在穿戴南瓜时的渲染覆盖. 你将获得更广阔的视野.*
++ disableScoreboardRendering
+  - *Disables Scoreboard rendering. You will gain a broader view.*
+  - *关闭游戏对计分板的UI渲染. 你将获得更广阔的视野.*
++ disableSlowdown
+  - *Cancels slowness effects caused by honey, soul sand and using items.*
+  - *取消蜂蜜块, 灵魂沙和使用物品时的减速效果.*
+### Feature Toggle
++ featureAutoRespawn
+  - *Automatically respawns you whenever you die.*
+  - *死亡时自动重生.*
++ featureDaylightOverride
+  - *Override the client's world time to the day time you want.*
+  - *覆盖客户端的世界时间为你想要的时间.*
