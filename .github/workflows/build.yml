@@ -30,9 +30,9 @@ jobs:
           ${{ runner.os }}-gradle-
     - name: Display commid hash
       run: |
-        echo Tweak My Client \commit-${GITHUB_SHA::8}
+        echo Tweak My Client \commit-${GITHUB_SHA::7}
     - name: Set commid hash in codes
-      run: sed -i "s/build.undefined/${GITHUB_SHA::8}/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java build.properties
+      run: sed -i "s/build.undefined/${GITHUB_SHA::7}/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java build.properties
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
