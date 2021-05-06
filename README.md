@@ -15,15 +15,9 @@ This mod depends on malilib([Curseforge](https://www.curseforge.com/minecraft/mc
 + daylightOverrideTime
   - *The time set when overriding the client's world time.*
   - *覆盖客户端的世界时间时设置的时间.*
-+ getTargetBlockPosition
-  - *Gets the position of the looking block. This feature is used to get the coordinates of the farthest block you point to.*
-  - *获取你看向方块的坐标. 此特性用于获取你指向方向最远端的方块坐标.*
 + openConfigGui
   - *A hotkey to open the in-game Config GUI.*
   - *打开设置界面的快捷键.*
-+ targetBlockMaxTraceDistance
-  - *Maximum line tracking distance of target block position.*
-  - *获取方块的最大直线追踪距离.*
 
 ### Disable Toggle
 + disableClientEntityTNTUpadates
