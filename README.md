@@ -1,16 +1,32 @@
 # TweakMyClient
+[![For MC](https://cf.way2muchnoise.eu/versions/For%20MC_tweakmyclient_all.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient/files/all?filter-game-version=1738749986%3a70886)
 [![License](https://img.shields.io/github/license/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/blob/main/LICENSE)
 [![Issues](https://img.shields.io/github/issues/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/pulls)
 [![Java CI with gradle](https://img.shields.io/github/workflow/status/Hendrix-Shen/Tweak-My-Client/Java%20CI%20with%20Gradle?label=Java%20CI%20with%20Gradle&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/actions/workflows/build.yml)
 [![Publish Release](https://img.shields.io/github/workflow/status/Hendrix-Shen/Tweak-My-Client/Publish%20Release?label=Publish%20Release&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/actions/workflows/publish.yml)
 [![Release](https://img.shields.io/github/v/release/Hendrix-Shen/Tweak-My-Client?include_prereleases&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
-[![Github Release Downloads](https://img.shields.io/github/downloads/Hendrix-Shen/Tweak-My-Client/total?label=Github%20Release%20Downloads&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
+[![Github Release Downloads](https://img.shields.io/github/downloads/Hendrix-Shen/Tweak-My-Client/total?label=Github%20Release%20Downloads&style=flat-square)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient/files)
+[![CurseForge Downloads](https://cf.way2muchnoise.eu/tweakmyclient.svg?badge_style=flat)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
 #### Warning: The project is still in the early development stage.
 This mod depends on malilib([Curseforge](https://www.curseforge.com/minecraft/mc-mods/malilib) | [masa.dy.fi](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)). The default hotkey to open the in-game config GUI is **T + C**.
 ## It includes the following features.
+### Generic
++ daylightOverrideTime
+  - *The time set when overriding the client's world time.*
+  - *覆盖客户端的世界时间时设置的时间.*
++ getTargetBlockPosition
+  - *Gets the position of the looking block. This feature is used to get the coordinates of the farthest block you point to.*
+  - *获取你看向方块的坐标. 此特性用于获取你指向方向最远端的方块坐标.*
++ openConfigGui
+  - *A hotkey to open the in-game Config GUI.*
+  - *打开设置界面的快捷键.*
++ targetBlockMaxTraceDistance
+  - *Maximum line tracking distance of target block position.*
+  - *获取方块的最大直线追踪距离.*
+
 ### Disable Toggle
-+ disableClientEntityTNTUpdates
++ disableClientEntityTNTUpadates
   - *Disables TNT entity updates on the client. Maybe useful for TNT related machines.*
   - *关闭客户端对TNT实体的运算.也许对与TNT有关的机器有帮助.*
 + disableClientEntityWitherUpdates
