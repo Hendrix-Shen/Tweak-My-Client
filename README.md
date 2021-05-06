@@ -1,5 +1,5 @@
 # TweakMyClient
-[![For MC](https://cf.way2muchnoise.eu/versions/For%20MC_tweakmyclient_all.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient/files/all?filter-game-version=1738749986%3a70886)
+[![For MC](http://cf.way2muchnoise.eu/versions/For%20MC_tweakmyclient_all.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient/files/all?filter-game-version=1738749986%3a70886)
 [![License](https://img.shields.io/github/license/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/blob/main/LICENSE)
 [![Issues](https://img.shields.io/github/issues/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/pulls)
@@ -7,7 +7,7 @@
 [![Publish Release](https://img.shields.io/github/workflow/status/Hendrix-Shen/Tweak-My-Client/Publish%20Release?label=Publish%20Release&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/actions/workflows/publish.yml)
 [![Release](https://img.shields.io/github/v/release/Hendrix-Shen/Tweak-My-Client?include_prereleases&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
 [![Github Release Downloads](https://img.shields.io/github/downloads/Hendrix-Shen/Tweak-My-Client/total?label=Github%20Release%20Downloads&style=flat-square)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient/files)
-[![CurseForge Downloads](https://cf.way2muchnoise.eu/tweakmyclient.svg?badge_style=flat)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
+[![CurseForge Downloads](http://cf.way2muchnoise.eu/tweakmyclient.svg?badge_style=flat)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
 #### Warning: The project is still in the early development stage.
 This mod depends on malilib([Curseforge](https://www.curseforge.com/minecraft/mc-mods/malilib) | [masa.dy.fi](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)). The default hotkey to open the in-game config GUI is **T + C**.
 ## It includes the following features.
