@@ -8,10 +8,8 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.config.options.*;
 import fi.dy.masa.malilib.util.FileUtils;
-import fi.dy.masa.malilib.util.InfoUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
 import top.hendrixshen.TweakMyClient.Reference;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
@@ -29,11 +27,13 @@ public class Configs implements IConfigHandler {
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
         public static final ConfigHotkey OPEN_CONFIG_GUI = new TranslatableConfigHotkey(PREFIX, "openConfigGui", "T,C");
         public static final ConfigDouble TARGET_BLOCK_MAX_TRACE_DISTANCE = new TranslatableConfigDouble(PREFIX, "targetBlockMaxTraceDistance", 100, 0, 200);
+        public static final ConfigString TARGET_BLOCK_POSITION_FORMAT = new TranslatableConfigString(PREFIX, "targetBlockPositionFormat", "I'm tracing this position [x: {X},y: {Y}, z: {Z}]");
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
                 DAYLIGHT_OVERRIDE_TIME,
                 GET_TARGET_BLOCK_POSITION,
                 OPEN_CONFIG_GUI,
-                TARGET_BLOCK_MAX_TRACE_DISTANCE
+                TARGET_BLOCK_MAX_TRACE_DISTANCE,
+                TARGET_BLOCK_POSITION_FORMAT
         );
 
         public static final ImmutableList<ConfigHotkey> HOTKEYS = ImmutableList.of(
@@ -52,7 +52,11 @@ public class Configs implements IConfigHandler {
                 if (blockPos == null || mc.player == null) {
                     return false;
                 }
-                mc.player.sendChatMessage(String.format("[x: %d,y: %d, z: %d]", blockPos.getX(), blockPos.getY(), blockPos.getZ()));
+                String str = Generic.TARGET_BLOCK_POSITION_FORMAT.getStringValue();
+                str = str.replace("{X}", String.format("%d", blockPos.getX()));
+                str = str.replace("{Y}", String.format("%d", blockPos.getY()));
+                str = str.replace("{Z}", String.format("%d", blockPos.getZ()));
+                mc.player.sendChatMessage(str);
                 return true;
             });
         }

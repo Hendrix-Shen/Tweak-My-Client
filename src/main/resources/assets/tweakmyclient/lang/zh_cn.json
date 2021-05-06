@@ -14,6 +14,8 @@
     "tweakmyclient.config.generic.openConfigGui.comment": "打开设置界面的快捷键.",
     "tweakmyclient.config.generic.targetBlockMaxTraceDistance.name": "获取方块坐标最大追踪距离",
     "tweakmyclient.config.generic.targetBlockMaxTraceDistance.comment": "获取方块的最大直线追踪距离.",
+    "tweakmyclient.config.generic.targetBlockPositionFormat.name": "获取方块坐标格式",
+    "tweakmyclient.config.generic.targetBlockPositionFormat.comment": "发送至聊天窗的位置追踪格式.",
 
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.name": "禁用客户端侧TNT运算",
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.comment": "关闭客户端对TNT实体的运算.\n也许对与TNT有关的机器有帮助.",
