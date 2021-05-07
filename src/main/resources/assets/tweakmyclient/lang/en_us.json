@@ -16,6 +16,8 @@
     "tweakmyclient.config.generic.targetBlockMaxTraceDistance.comment": "Maximum line tracing distance of target block position.",
     "tweakmyclient.config.generic.targetBlockPositionFormat.name": "targetBlockPositionFormat",
     "tweakmyclient.config.generic.targetBlockPositionFormat.comment": "Position tracing format sent to public chat.",
+    "tweakmyclient.config.generic.targetBlockPositionPrintMode.name": "targetBlockPositionMode",
+    "tweakmyclient.config.generic.targetBlockPositionPrintMode.comment": "The block tracing position will be sent in this mode.\nprivate - Only you can see\npublic - Send to public chat",
 
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.name": "disableClientEntityTNTUpdates",
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.comment": "Disables TNT entity updates on the client.\nMaybe useful for TNT related machines.",
@@ -41,5 +43,10 @@
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "featureAutoRespawn",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "Automatically respawns you whenever you die.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "featureDaylightOverride",
-    "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "Override the client's world time to the day time you want."
+    "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "Override the client's world time to the day time you want.",
+    "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.name": "featureGetTargetBlockPosition",
+    "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.comment": "Allow you get the position of the farthest block you point to.",
+
+    "tweakmyclient.label.targetBlockPositionPrintMode.private": "private",
+    "tweakmyclient.label.targetBlockPositionPrintMode.public": "public"
 }

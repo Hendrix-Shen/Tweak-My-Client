@@ -16,6 +16,8 @@
     "tweakmyclient.config.generic.targetBlockMaxTraceDistance.comment": "获取方块的最大直线追踪距离.",
     "tweakmyclient.config.generic.targetBlockPositionFormat.name": "获取方块坐标格式",
     "tweakmyclient.config.generic.targetBlockPositionFormat.comment": "发送至聊天窗的位置追踪格式.",
+    "tweakmyclient.config.generic.targetBlockPositionPrintMode.name": "获取方块坐标发送模式",
+    "tweakmyclient.config.generic.targetBlockPositionPrintMode.comment": "获取到的追踪位置将以该模式发送.\n私有 - 仅你自己看到\n公共 - 发送至公屏聊天",
 
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.name": "禁用客户端侧TNT运算",
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.comment": "关闭客户端对TNT实体的运算.\n也许对与TNT有关的机器有帮助.",
@@ -41,5 +43,9 @@
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "自动重生",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "死亡时自动重生.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "覆盖客户端世界时间",
-    "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "覆盖客户端的世界时间为你想要的时间."
+    "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "覆盖客户端的世界时间为你想要的时间.",
+    "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.name": "获取方块坐标",
+    "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.comment": "允许获取你指向方向最远端的方块坐标.",
+    "tweakmyclient.label.targetBlockPositionPrintMode.private": "私人",
+    "tweakmyclient.label.targetBlockPositionPrintMode.public": "公共"
 }
