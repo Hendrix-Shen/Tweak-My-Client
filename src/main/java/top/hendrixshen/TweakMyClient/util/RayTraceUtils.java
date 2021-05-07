@@ -3,7 +3,6 @@ package top.hendrixshen.TweakMyClient.util;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -21,9 +20,9 @@ import java.util.List;
 import java.util.Optional;
 
 /*
-* This class file is from the RayTraceUtils file of litematica project, which is modified again
-*
-* */
+ * This class file is from the RayTraceUtils file of litematica project, which is modified again
+ *
+ * */
 public class RayTraceUtils {
     @Nullable
     public static BlockPos getTargetedPosition(World world, Entity player, double maxDistance, boolean sneakToOffset) {
@@ -235,6 +234,7 @@ public class RayTraceUtils {
         public BlockPos blockPos;
         public Direction facing;
         public BlockHitResult trace;
+
         public RayTraceCalcsData(Vec3d start, Vec3d end) {
             this.start = start;
             this.end = end;

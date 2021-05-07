@@ -5,6 +5,7 @@ import fi.dy.masa.malilib.util.StringUtils;
 
 public class TranslatableConfigDouble extends ConfigDouble {
     private final String guiDisplayName;
+
     public TranslatableConfigDouble(String prefix, String name, Double defaultValue) {
         super(name, defaultValue, String.format("%s.%s.comment", prefix, name));
 
