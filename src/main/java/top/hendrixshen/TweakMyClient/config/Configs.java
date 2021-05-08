@@ -70,8 +70,10 @@ public class Configs implements IConfigHandler {
                 switch (mode) {
                     case PUBLIC:
                         mc.player.sendChatMessage(str);
+                        break;
                     case PRIVATE:
                         mc.player.networkHandler.onGameMessage(new GameMessageS2CPacket(new LiteralText(str), MessageType.CHAT, mc.player.getUuid()));
+                        break;
                 }
                 return true;
             });
