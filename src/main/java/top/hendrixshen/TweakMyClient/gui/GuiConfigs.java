@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class GuiConfigs extends GuiConfigsBase {
-    private static ConfigGuiTab tab = ConfigGuiTab.DISABLE_TOGGLES;
+    private static ConfigGuiTab tab = ConfigGuiTab.GENERIC;
 
     public GuiConfigs() {
         super(10, 50, Reference.MOD_ID, null, StringUtils.translate(String.format("%s.gui.title.configs", Reference.MOD_ID)) + String.format(" (Version: %s)", Reference.MOD_VERSION));
