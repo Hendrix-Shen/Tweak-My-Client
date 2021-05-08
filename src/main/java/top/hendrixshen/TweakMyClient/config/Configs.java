@@ -116,6 +116,7 @@ public class Configs implements IConfigHandler {
                 DISABLE_SLOWDOWN
         );
     }
+
     private enum TargetBlockPositionPrintMode implements IConfigOptionListEntry {
         PUBLIC("public"),
         PRIVATE("private");
@@ -140,17 +141,12 @@ public class Configs implements IConfigHandler {
         public IConfigOptionListEntry cycle(boolean forward) {
             int id = this.ordinal();
 
-            if (forward)
-            {
-                if (++id >= values().length)
-                {
+            if (forward) {
+                if (++id >= values().length) {
                     id = 0;
                 }
-            }
-            else
-            {
-                if (--id < 0)
-                {
+            } else {
+                if (--id < 0) {
                     id = values().length - 1;
                 }
             }
@@ -159,10 +155,8 @@ public class Configs implements IConfigHandler {
 
         @Override
         public IConfigOptionListEntry fromString(String value) {
-            for (TargetBlockPositionPrintMode mode : TargetBlockPositionPrintMode.values())
-            {
-                if (mode.name.equalsIgnoreCase(name))
-                {
+            for (TargetBlockPositionPrintMode mode : TargetBlockPositionPrintMode.values()) {
+                if (mode.name.equalsIgnoreCase(name)) {
                     return mode;
                 }
             }
@@ -180,6 +174,7 @@ public class Configs implements IConfigHandler {
                 JsonObject root = element.getAsJsonObject();
                 ConfigUtils.readConfigBase(root, "Generic", Generic.OPTIONS);
                 ConfigUtils.readHotkeyToggleOptions(root, "DisableHotkey", "Disable", Disable.OPTIONS);
+                ConfigUtils.readHotkeyToggleOptions(root, "FeatureHotkey", "Feature", Feature.OPTIONS);
             }
         }
     }
@@ -191,6 +186,7 @@ public class Configs implements IConfigHandler {
             JsonObject root = new JsonObject();
             ConfigUtils.writeConfigBase(root, "Generic", Generic.OPTIONS);
             ConfigUtils.writeHotkeyToggleOptions(root, "DisableHotkey", "Disable", Disable.OPTIONS);
+            ConfigUtils.writeHotkeyToggleOptions(root, "FeatureHotkey", "Feature", Feature.OPTIONS);
             JsonUtils.writeJsonToFile(root, new File(dir, CONFIG_FILE_NAME));
         }
     }

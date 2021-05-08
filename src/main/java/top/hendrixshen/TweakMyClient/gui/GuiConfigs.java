@@ -60,7 +60,9 @@ public class GuiConfigs extends GuiConfigsBase {
 
     @Override
     protected boolean useKeybindSearch() {
-        return GuiConfigs.tab == ConfigGuiTab.DISABLE_HOTKEYS;
+        return GuiConfigs.tab == ConfigGuiTab.GENERIC ||
+                GuiConfigs.tab == ConfigGuiTab.DISABLE_HOTKEYS ||
+                GuiConfigs.tab == ConfigGuiTab.FEATURE_HOTKEYS;
     }
 
     @Override
