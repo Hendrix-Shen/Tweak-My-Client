@@ -7,7 +7,7 @@
 [![Publish Release](https://img.shields.io/github/workflow/status/Hendrix-Shen/Tweak-My-Client/Publish%20Release?label=Publish%20Release&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/actions/workflows/publish.yml)
 [![Release](https://img.shields.io/github/v/release/Hendrix-Shen/Tweak-My-Client?include_prereleases&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
 [![Github Release Downloads](https://img.shields.io/github/downloads/Hendrix-Shen/Tweak-My-Client/total?label=Github%20Release%20Downloads&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
-[![CurseForge Downloads](http://cf.way2muchnoise.eu/tweakmyclient.svg?badge_style=flat)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
+[![CurseForge Downloads](http://cf.way2muchnoise.eu/tweakmyclient.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient)
 #### Warning: The project is still in the early development stage.
 This mod depends on malilib([Curseforge](https://www.curseforge.com/minecraft/mc-mods/malilib) | [masa.dy.fi](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)). The default hotkey to open the in-game config GUI is **T + C**.
 ## It includes the following features.
