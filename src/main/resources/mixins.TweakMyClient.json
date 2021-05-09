@@ -9,12 +9,12 @@
     "defaultRequire": 0
   },
   "mixins": [
-    "ClientWorldProperties",
     "IMixinInGameOverlayRenderer",
     "MixinBlock",
     "MixinClientPlayerEntity",
     "MixinClientPlayNetworkHandler",
     "MixinClientWorld",
+    "MixinClientWorldProperties",
     "MixinCobwebBlock",
     "MixinDeathScreen",
     "MixinEntityRenderDispatcher",

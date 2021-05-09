@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.TweakMyClient.config.Configs;
 
 @Mixin(ClientWorld.Properties.class)
-public class ClientWorldProperties {
+public class MixinClientWorldProperties {
     @Inject(
             method = "getTimeOfDay",
             at = @At(
