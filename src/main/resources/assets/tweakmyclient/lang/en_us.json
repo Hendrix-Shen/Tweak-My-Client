@@ -19,6 +19,8 @@
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.name": "targetBlockPositionMode",
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.comment": "The block tracing position will be sent in this mode.\nprivate - Only you can see\npublic - Send to public chat",
 
+    "tweakmyclient.config.disable_toggle.disableClientBlockEvents.name": "disableClientBlockEvents",
+    "tweakmyclient.config.disable_toggle.disableClientBlockEvents.comment": "Disables block event rendering (eg pistons animations).",
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.name": "disableClientEntityTNTUpdates",
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.comment": "Disables TNT entity updates on the client.\nMaybe useful for TNT related machines.",
     "tweakmyclient.config.disable_toggle.disableClientEntityWitherUpdates.name": "disableClientEntityWitherUpdates",

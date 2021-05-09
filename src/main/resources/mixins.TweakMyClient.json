@@ -13,6 +13,7 @@
     "IMixinInGameOverlayRenderer",
     "MixinBlock",
     "MixinClientPlayerEntity",
+    "MixinClientPlayNetworkHandler",
     "MixinClientWorld",
     "MixinCobwebBlock",
     "MixinDeathScreen",

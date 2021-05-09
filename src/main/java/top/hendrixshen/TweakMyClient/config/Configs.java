@@ -94,6 +94,7 @@ public class Configs implements IConfigHandler {
 
     public static class Disable {
         private static final String PREFIX = String.format("%s.config.disable_toggle", Reference.MOD_ID);
+        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_BLOCK_EVENTS = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientBlockEvents", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_TNT_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityTNTUpdates", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_WITHER_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityWitherUpdates", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityZombieVillagerUpdates", false, "");
@@ -106,6 +107,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed DISABLE_SLOWDOWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableSlowdown", false, "");
 
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
+                DISABLE_CLIENT_BLOCK_EVENTS,
                 DISABLE_CLIENT_ENTITY_TNT_UPDATES,
                 DISABLE_CLIENT_ENTITY_WITHER_UPDATES,
                 DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_UPDATES,

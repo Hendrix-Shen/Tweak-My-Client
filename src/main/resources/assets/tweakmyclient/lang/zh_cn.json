@@ -19,6 +19,8 @@
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.name": "获取方块坐标发送模式",
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.comment": "获取到的追踪位置将以该模式发送.\n私有 - 仅你自己看到\n公共 - 发送至公屏聊天",
 
+    "tweakmyclient.config.disable_toggle.disableClientBlockEvents.name": "禁用客户端侧方块事件",
+    "tweakmyclient.config.disable_toggle.disableClientBlockEvents.comment": "关闭客户端侧方块事件渲染 (例如活塞动画).",
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.name": "禁用客户端侧TNT运算",
     "tweakmyclient.config.disable_toggle.disableClientEntityTNTUpdates.comment": "关闭客户端对TNT实体的运算.\n也许对与TNT有关的机器有帮助.",
     "tweakmyclient.config.disable_toggle.disableClientEntityWitherUpdates.name": "禁用客户端侧凋零实体运算",
