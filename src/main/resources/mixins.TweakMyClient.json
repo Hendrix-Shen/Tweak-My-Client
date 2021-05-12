@@ -3,6 +3,7 @@
   "package": "top.hendrixshen.TweakMyClient.mixin",
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
+  "plugin": "top.hendrixshen.TweakMyClient.TweakMyClientMixinPlugin",
   "client": [
   ],
   "injectors": {
