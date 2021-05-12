@@ -87,24 +87,6 @@ public class GuiConfigs extends GuiConfigsBase {
         return ConfigOptionWrapper.createFor(configs);
     }
 
-    private static class ButtonListener implements IButtonActionListener {
-        private final GuiConfigs parent;
-        private final ConfigGuiTab tab;
-
-        public ButtonListener(ConfigGuiTab tab, GuiConfigs parent) {
-            this.tab = tab;
-            this.parent = parent;
-        }
-
-        @Override
-        public void actionPerformedWithButton(ButtonBase button, int mouseButton) {
-            GuiConfigs.tab = this.tab;
-            this.parent.reCreateListWidget(); // apply the new config width
-            this.parent.getListWidget().resetScrollbarPosition();
-            this.parent.initGui();
-        }
-    }
-
     public enum ConfigGuiTab {
         GENERIC("generic"),
         FEATURE_TOGGLES("feature_toggle"),
@@ -120,6 +102,24 @@ public class GuiConfigs extends GuiConfigsBase {
 
         public String getDisplayName() {
             return StringUtils.translate(String.format("%s.gui.button.config_gui.%s", Reference.MOD_ID, name));
+        }
+    }
+
+    private static class ButtonListener implements IButtonActionListener {
+        private final GuiConfigs parent;
+        private final ConfigGuiTab tab;
+
+        public ButtonListener(ConfigGuiTab tab, GuiConfigs parent) {
+            this.tab = tab;
+            this.parent = parent;
+        }
+
+        @Override
+        public void actionPerformedWithButton(ButtonBase button, int mouseButton) {
+            GuiConfigs.tab = this.tab;
+            this.parent.reCreateListWidget(); // apply the new config width
+            this.parent.getListWidget().resetScrollbarPosition();
+            this.parent.initGui();
         }
     }
 }

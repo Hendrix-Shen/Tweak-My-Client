@@ -18,8 +18,12 @@
     "MixinClientWorldProperties",
     "MixinCobwebBlock",
     "MixinDeathScreen",
+    "MixinDisconnectedScreen",
     "MixinEntityRenderDispatcher",
     "MixinInGameHud",
-    "MixinInGameOverlayRenderer"
+    "MixinInGameOverlayRenderer",
+    "MixinMinecraftClient",
+    "authme.MixinDisconnectedScreen",
+    "reauth.MixinDisconnectedScreen"
   ]
 }

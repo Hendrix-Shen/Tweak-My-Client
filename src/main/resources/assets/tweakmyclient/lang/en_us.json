@@ -42,6 +42,8 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "disableSlowdown",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "Cancels slowness effects caused by honey, soul sand and using items.",
 
+    "tweakmyclient.config.feature_toggle.featureAutoReconnect.name": "featureAutoReconnect",
+    "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "featureAutoRespawn",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "Automatically respawns you whenever you die.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "featureDaylightOverride",
@@ -50,5 +52,11 @@
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.comment": "Allow you get the position of the farthest block you point to.",
 
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "private",
-    "tweakmyclient.label.targetBlockPositionPrintMode.public": "public"
+    "tweakmyclient.label.targetBlockPositionPrintMode.public": "public",
+
+    "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "Re-authenticate with AuthMe",
+    "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "Re-authenticate with ReAuth",
+    "tweakmyclient.message.autoReconnect.static": "AutoReconnect",
+    "tweakmyclient.message.autoReconnect.timer": "Toggle AutoReconnect (%d)",
+    "tweakmyclient.message.autoReconnect.toggle": "Toggle AutoReconnect"
 }

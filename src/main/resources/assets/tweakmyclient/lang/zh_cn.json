@@ -42,6 +42,8 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "禁用减速",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "取消蜂蜜块, 灵魂沙和使用物品时的减速效果.",
 
+    "tweakmyclient.config.feature_toggle.featureAutoReconnect.name": "自动重连",
+    "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "从服务器断开连接时自动重新连接服务器.",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "自动重生",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "死亡时自动重生.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "覆盖客户端世界时间",
@@ -49,5 +51,11 @@
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.name": "获取方块坐标",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.comment": "允许获取你指向方向最远端的方块坐标.",
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "私人",
-    "tweakmyclient.label.targetBlockPositionPrintMode.public": "公共"
+    "tweakmyclient.label.targetBlockPositionPrintMode.public": "公共",
+
+    "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "使用 AuthMe 验证会话",
+    "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "使用 ReAuth 验证会话",
+    "tweakmyclient.message.autoReconnect.static": "自动重连",
+    "tweakmyclient.message.autoReconnect.timer": "切换自动重连 (%d)",
+    "tweakmyclient.message.autoReconnect.toggle": "切换自动重连"
 }
