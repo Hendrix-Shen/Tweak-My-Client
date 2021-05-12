@@ -32,6 +32,9 @@ This mod depends on malilib([Curseforge](https://www.curseforge.com/minecraft/mc
   - *获取到的追踪位置将该模式发送.*
 
 ### Disable Toggle
++ disableClientBlockEvents
+  - *Disables block event rendering (eg pistons animations).*
+  - *关闭客户端侧方块事件渲染 (例如活塞动画).*
 + disableClientEntityTNTUpadates
   - *Disables TNT entity updates on the client. Maybe useful for TNT related machines.*
   - *关闭客户端对TNT实体的运算.也许对与TNT有关的机器有帮助.*
@@ -63,6 +66,9 @@ This mod depends on malilib([Curseforge](https://www.curseforge.com/minecraft/mc
   - *Cancels slowness effects caused by honey, soul sand and using items.*
   - *取消蜂蜜块, 灵魂沙和使用物品时的减速效果.*
 ### Feature Toggle
++ featureAutoReconnect
+  - *Automatically reconnects when you disconnect from the server.*
+  - *从服务器断开连接时自动重新连接服务器.*
 + featureAutoRespawn
   - *Automatically respawns you whenever you die.*
   - *死亡时自动重生.*
