@@ -20,6 +20,9 @@ repositories {
     maven {
         url 'https://masa.dy.fi/maven'
     }
+    maven {
+        url 'https://www.cursemaven.com/'
+    }
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -48,7 +51,10 @@ dependencies {
     modCompile "fi.dy.masa.malilib:malilib-fabric-${config.minecraft_version_masa}:${config.malilib_version}"
 
     modCompileOnly "io.github.prospector:modmenu:" + config.mod_menu_version
-}
+    modCompileOnly "curse.maven:authme-356643:3073169"
+    modCompileOnly "curse.maven:reauth-403928:3105780"
+
+}   //https://www.cursemaven.com/test/356643/3073169/authme
 
 minecraft {
     ext.mod_version = config.mod_version
