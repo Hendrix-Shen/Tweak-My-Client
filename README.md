@@ -9,7 +9,13 @@
 [![Github Release Downloads](https://img.shields.io/github/downloads/Hendrix-Shen/Tweak-My-Client/total?label=Github%20Release%20Downloads&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
 [![CurseForge Downloads](http://cf.way2muchnoise.eu/tweakmyclient.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient)
 #### Warning: The project is still in the early development stage.
-This mod depends on malilib([Curseforge](https://www.curseforge.com/minecraft/mc-mods/malilib) | [masa.dy.fi](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)). The default hotkey to open the in-game config GUI is **T + C**.
+The default hotkey to open the in-game config GUI is **T + C**.
+## Dependencies
+| Dependency      | Type     | Version                        | Download                                                                 |
+| --------------- | -------- | ------------------------------ | ------------------------------------------------------------------------ |
+| Auth Me         | Optional | \>=1.4.0                       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me)       |
+| MaliLib         | Required | \>=3.9.2                       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib)       |
+| ReAuth (Fabric) | Optional | \>=1.16.4-0.10.0-dev.21+arne.1 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric) |
 ## It includes the following features.
 ### Generic
 + daylightOverrideTime
