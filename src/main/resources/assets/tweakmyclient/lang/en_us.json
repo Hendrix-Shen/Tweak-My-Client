@@ -6,6 +6,8 @@
     "tweakmyclient.gui.button.config_gui.feature_toggle": "Feature Toggle",
     "tweakmyclient.gui.button.config_gui.feature_hotkeys": "Feature Hotkey",
 
+    "tweakmyclient.config.generic.autoReconnectTimer.name": "autoReconnectTimer",
+    "tweakmyclient.config.generic.autoReconnectTimer.comment": "How many seconds to wait for auto reconnection.",
     "tweakmyclient.config.generic.daylightOverrideTime.name": "daylightOverrideTime",
     "tweakmyclient.config.generic.daylightOverrideTime.comment": "The time set when overriding the client's world time.",
     "tweakmyclient.config.generic.getTargetBlockPosition.name": "getTargetBlockPosition",

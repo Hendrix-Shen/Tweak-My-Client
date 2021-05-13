@@ -48,7 +48,7 @@ public class MixinDisconnectedScreen extends Screen {
     )
     private void onInitDisconnectedScreen(CallbackInfo ci) {
         if (Configs.Feature.FEATURE_AUTO_RECONNECT.getBooleanValue()) {
-            AutoReconnect.ReconnectTimer = 100;
+            AutoReconnect.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
         }
 
         int backButtonX = width / 2 - 100;
@@ -71,7 +71,7 @@ public class MixinDisconnectedScreen extends Screen {
         featureAutoReconnect.setBooleanValue(!featureAutoReconnect.getBooleanValue());
 
         if (featureAutoReconnect.getBooleanValue()) {
-            AutoReconnect.ReconnectTimer = 100;
+            AutoReconnect.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
         }
     }
 

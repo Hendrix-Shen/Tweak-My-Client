@@ -112,6 +112,7 @@ public class Configs implements IConfigHandler {
 
     public static class Generic {
         private static final String PREFIX = String.format("%s.config.generic", Reference.MOD_ID);
+        public static final ConfigInteger AUTO_RECONNECT_TIMER = new TranslatableConfigInteger(PREFIX, "autoReconnectTimer", 5, 0, 60);
         public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
         public static final ConfigHotkey OPEN_CONFIG_GUI = new TranslatableConfigHotkey(PREFIX, "openConfigGui", "T,C");
@@ -120,6 +121,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigOptionList TARGET_BLOCK_POSITION_PRINT_MODE = new TranslatableConfigOptionList(PREFIX, "targetBlockPositionPrintMode", TargetBlockPositionPrintMode.PRIVATE);
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
+                AUTO_RECONNECT_TIMER,
                 DAYLIGHT_OVERRIDE_TIME,
                 GET_TARGET_BLOCK_POSITION,
                 OPEN_CONFIG_GUI,
