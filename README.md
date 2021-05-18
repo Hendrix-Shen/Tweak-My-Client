@@ -18,6 +18,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 | ReAuth (Fabric) | Optional | \>=3.9.2                       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric) |
 ## It includes the following features.
 ### Generic
++ autoReconnectTimer
+  - *How many seconds to wait for auto reconnection.*
+  - *等待多少秒后自动重连.*
 + daylightOverrideTime
   - *The time set when overriding the client's world time.*
   - *覆盖客户端的世界时间时设置的时间.*
@@ -62,6 +65,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + disableRenderOverlayFire
   - *Disables fire overlay rendering when player is on fire. You will gain a broader view.*
   - *关闭在玩家着火时的渲染覆盖. 你将获得更广阔的视野.*
++ disableGuiShadowLayer
+  - *Disables gui shadow overlay rendering when gui is opening.*
+  - *关闭打开GUI时的阴影层渲染.*
 + disableRenderOverlayPumpkin
   - *Disables mask overlay rendering when player is wearing pumpkin. You will gain a broader view.*
   - *关闭在玩家在穿戴南瓜时的渲染覆盖. 你将获得更广阔的视野.*
@@ -73,8 +79,8 @@ The default hotkey to open the in-game config GUI is **T + C**.
   - *取消蜂蜜块, 灵魂沙和使用物品时的减速效果.*
 ### Feature Toggle
 + featureAutoReconnect
-  - *Automatically reconnects when you disconnect from the server.*
-  - *从服务器断开连接时自动重新连接服务器.*
+  - *Automatically reconnects when you disconnect from the server. Adaptive Authme and Reauth session validation*
+  - *从服务器断开连接时自动重新连接服务器. 适配 [Authme](https://www.curseforge.com/minecraft/mc-mods/auth-me) 和 [Reauth](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric) 会话验证*
 + featureAutoRespawn
   - *Automatically respawns you whenever you die.*
   - *死亡时自动重生.*
