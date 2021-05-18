@@ -37,6 +37,8 @@
     "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.comment": "关闭游戏对僵尸村民实体的渲染.\n也许对伪和平有帮助.",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.name": "禁用火焰渲染层",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.comment": "关闭在玩家着火时的渲染覆盖.\n你将获得更广阔的视野.",
+    "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.name": "禁用GUI阴影层",
+    "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.comment": "关闭打开GUI时的阴影层渲染.",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.name": "禁用南瓜头渲染层",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.comment": "关闭在玩家在穿戴南瓜时的渲染覆盖.\n你将获得更广阔的视野.",
     "tweakmyclient.config.disable_toggle.disableScoreboardRendering.name": "禁用计分板渲染",
@@ -45,7 +47,7 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "取消蜂蜜块, 灵魂沙和使用物品时的减速效果.",
 
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.name": "自动重连",
-    "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "从服务器断开连接时自动重新连接服务器.",
+    "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "从服务器断开连接时自动重新连接服务器.\n适配 Authme 和 Reauth 会话验证",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "自动重生",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "死亡时自动重生.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "覆盖客户端世界时间",

@@ -37,6 +37,8 @@
     "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.comment": "Disables zombie villager entity rendering.\nMaybe it's useful for fake peace.",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.name": "disableRenderOverlayFire",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.comment": "Disables fire overlay rendering when player is on fire.\nYou will gain a broader view.",
+    "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.name": "disableGuiShadowLayer",
+    "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.comment": "Disables gui shadow overlay rendering when gui is opening.",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.name": "disableRenderOverlayPumpkin",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.comment": "Disables mask overlay rendering when player is wearing pumpkin.\nYou will gain a broader view.",
     "tweakmyclient.config.disable_toggle.disableScoreboardRendering.name": "disableScoreboardRendering",
@@ -45,7 +47,7 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "Cancels slowness effects caused by honey, soul sand and using items.",
 
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.name": "featureAutoReconnect",
-    "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.",
+    "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.\nAdaptive authme and reauth session validation.",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "featureAutoRespawn",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "Automatically respawns you whenever you die.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "featureDaylightOverride",

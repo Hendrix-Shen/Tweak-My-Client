@@ -189,6 +189,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_TNT_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityTNTRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_WITHER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityWitherRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityZombieVillagerRendering", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_GUI_SHADOW_LAYER = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableGuiShadowLayer", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_FIRE = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayFire", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_PUMPKIN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayPumpkin", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_SCOREBOARD_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableScoreboardRendering", false, "");
@@ -202,6 +203,7 @@ public class Configs implements IConfigHandler {
                 DISABLE_ENTITY_TNT_RENDERING,
                 DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING,
                 DISABLE_ENTITY_WITHER_RENDERING,
+                DISABLE_GUI_SHADOW_LAYER,
                 DISABLE_RENDER_OVERLAY_FIRE,
                 DISABLE_RENDER_OVERLAY_PUMPKIN,
                 DISABLE_SCOREBOARD_RENDERING,

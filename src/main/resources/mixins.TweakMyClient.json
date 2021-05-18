@@ -23,6 +23,7 @@
     "MixinInGameHud",
     "MixinInGameOverlayRenderer",
     "MixinMinecraftClient",
+    "MixinScreen",
     "authme.MixinDisconnectedScreen",
     "reauth.MixinDisconnectedScreen"
   ]
