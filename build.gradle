@@ -28,39 +28,27 @@ repositories {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-ext.configFile = file "build.properties"
-
 compileJava {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
     options.encoding = 'UTF-8'
 }
 
-configFile.withReader {
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
-}
-
 dependencies {
-    minecraft "com.mojang:minecraft:${config.minecraft_version}"
-    mappings "net.fabricmc:yarn:${config.mappings_version}:v2"
-    modCompile "net.fabricmc:fabric-loader:${config.fabric_loader_version}"
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.mappings_version}:v2"
+    modCompile "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
     compile "com.google.code.findbugs:jsr305:3+"
 
-    modCompile "fi.dy.masa.malilib:malilib-fabric-${config.minecraft_version_masa}:${config.malilib_version}"
+    modCompile "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_masa}:${project.malilib_version}"
 
-    modCompileOnly "io.github.prospector:modmenu:" + config.mod_menu_version
+    modCompileOnly "io.github.prospector:modmenu:" + project.mod_menu_version
     modCompileOnly "curse.maven:authme-356643:3073169"
     modCompileOnly "curse.maven:reauth-403928:3105780"
 
 }   //https://www.cursemaven.com/test/356643/3073169/authme
 
 minecraft {
-    ext.mod_version = config.mod_version
-    ext.mod_version_detail = config.mod_version_detail
-
-    mod_version = mod_version_detail
 }
 
 compileJava {
@@ -69,25 +57,15 @@ compileJava {
     options.encoding = 'UTF-8'
 }
 
-group = config.group + "." + config.mod_id
-archivesBaseName = config.mod_file_name + '-mc' + config.minecraft_version_out
-version = project.minecraft.mod_version_detail
+group = project.group + "." + project.mod_id
+archivesBaseName = project.mod_file_name + '-mc' + project.minecraft_version_out
+version = project.mod_version_detail
 
 processResources
 {
-    // Exclude the GIMP image files
-    exclude '**/*.xcf'
-    exclude '**/xcf'
-
-    // this will ensure that this task is redone when the versions change.
-    //inputs.property "mod_version", project.minecraft.mod_version
-    //inputs.property "minecraft_version", project.config.minecraft_version
-
-    inputs.property "mod_version", project.minecraft.mod_version
-
     from(sourceSets.main.resources.srcDirs) {
         include "fabric.mod.json"
-        expand "mod_version": project.minecraft.mod_version
+        expand "mod_version": project.mod_version
     }
 
     from(sourceSets.main.resources.srcDirs) {
