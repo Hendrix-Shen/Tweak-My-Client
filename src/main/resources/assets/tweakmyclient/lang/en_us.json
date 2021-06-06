@@ -22,6 +22,8 @@
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.name": "targetBlockPositionMode",
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.comment": "The block tracing position will be sent in this mode.\nprivate - Only you can see\npublic - Send to public chat",
 
+    "tweakmyclient.config.color.colorSidebarContent.name": "colorSidebarContent",
+    "tweakmyclient.config.color.colorSidebarContent.comment": "Custom sidebar content color.",
     "tweakmyclient.config.color.colorSidebarTitle.name": "colorSidebarTitle",
     "tweakmyclient.config.color.colorSidebarTitle.comment": "Custom sidebar title color.",
 
@@ -54,6 +56,8 @@
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.\nAdaptive authme and reauth session validation.",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "featureAutoRespawn",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "Automatically respawns you whenever you die.",
+    "tweakmyclient.config.feature_toggle.featureCustomSidebarContentBackgroundColor.name": "featureCustomSidebarContentBackgroundColor",
+    "tweakmyclient.config.feature_toggle.featureCustomSidebarContentBackgroundColor.comment": "Enable sidebar content background color override.",
     "tweakmyclient.config.feature_toggle.featureCustomSidebarTitleBackgroundColor.name": "featureCustomSidebarTitleBackgroundColor",
     "tweakmyclient.config.feature_toggle.featureCustomSidebarTitleBackgroundColor.comment": "Enable sidebar title background color override.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "featureDaylightOverride",

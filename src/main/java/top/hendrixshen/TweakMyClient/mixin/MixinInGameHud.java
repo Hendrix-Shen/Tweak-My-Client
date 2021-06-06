@@ -46,6 +46,21 @@ public abstract class MixinInGameHud {
     }
 
     @Redirect(
+            method = "renderScoreboardSidebar",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/options/GameOptions;getTextBackgroundColor(F)I",
+                    ordinal = 0
+            )
+    )
+    private int changeSidebarContentBackgroundColor(GameOptions gameOptions, float fallbackOpacity) {
+        if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_CONTENT_BACKGROUND_COLOR.getBooleanValue()) {
+            return Configs.Color.COLOR_SIDEBAR_CONTENT.getIntegerValue();
+        }
+        return gameOptions.getTextBackgroundColor(fallbackOpacity);
+    }
+
+    @Redirect(
             method = "render",
             at = @At(
                     value = "INVOKE",
