@@ -1,6 +1,7 @@
 {
     "tweakmyclient.gui.title.configs": "Tweak My Client - Config",
     "tweakmyclient.gui.button.config_gui.generic": "Generic",
+    "tweakmyclient.gui.button.config_gui.color": "Color",
     "tweakmyclient.gui.button.config_gui.disable_toggle": "Disable Toggle",
     "tweakmyclient.gui.button.config_gui.disable_hotkeys": "Disable Hotkey",
     "tweakmyclient.gui.button.config_gui.feature_toggle": "Feature Toggle",
@@ -20,6 +21,9 @@
     "tweakmyclient.config.generic.targetBlockPositionFormat.comment": "Position tracing format sent to public chat.",
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.name": "targetBlockPositionMode",
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.comment": "The block tracing position will be sent in this mode.\nprivate - Only you can see\npublic - Send to public chat",
+
+    "tweakmyclient.config.color.colorSidebarTitle.name": "colorSidebarTitle",
+    "tweakmyclient.config.color.colorSidebarTitle.comment": "Custom sidebar title color.",
 
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.name": "disableClientBlockEvents",
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.comment": "Disables block event rendering (eg pistons animations).",
@@ -50,6 +54,8 @@
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.\nAdaptive authme and reauth session validation.",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "featureAutoRespawn",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "Automatically respawns you whenever you die.",
+    "tweakmyclient.config.feature_toggle.featureCustomSidebarTitleBackgroundColor.name": "featureCustomSidebarTitleBackgroundColor",
+    "tweakmyclient.config.feature_toggle.featureCustomSidebarTitleBackgroundColor.comment": "Enable sidebar title background color override.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "featureDaylightOverride",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "Override the client's world time to the day time you want.",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.name": "featureGetTargetBlockPosition",

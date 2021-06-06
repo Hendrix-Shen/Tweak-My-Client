@@ -72,6 +72,8 @@ public class GuiConfigs extends GuiConfigsBase {
 
         if (tab == ConfigGuiTab.GENERIC) {
             configs = Configs.Generic.OPTIONS;
+        } else if (tab == ConfigGuiTab.COLOR) {
+            configs = Configs.Color.OPTIONS;
         } else if (tab == ConfigGuiTab.FEATURE_TOGGLES) {
             configs = ConfigUtils.createConfigWrapperForType(ConfigType.BOOLEAN, ImmutableList.copyOf(Configs.Feature.OPTIONS));
         } else if (tab == ConfigGuiTab.FEATURE_HOTKEYS) {
@@ -89,6 +91,7 @@ public class GuiConfigs extends GuiConfigsBase {
 
     public enum ConfigGuiTab {
         GENERIC("generic"),
+        COLOR("color"),
         FEATURE_TOGGLES("feature_toggle"),
         FEATURE_HOTKEYS("feature_hotkeys"),
         DISABLE_TOGGLES("disable_toggle"),

@@ -35,6 +35,7 @@ public class Configs implements IConfigHandler {
             if (element != null && element.isJsonObject()) {
                 JsonObject root = element.getAsJsonObject();
                 ConfigUtils.readConfigBase(root, "Generic", Generic.OPTIONS);
+                ConfigUtils.readConfigBase(root, "Color", Color.OPTIONS);
                 ConfigUtils.readHotkeyToggleOptions(root, "DisableHotkey", "Disable", Disable.OPTIONS);
                 ConfigUtils.readHotkeyToggleOptions(root, "FeatureHotkey", "Feature", Feature.OPTIONS);
             }
@@ -47,6 +48,7 @@ public class Configs implements IConfigHandler {
         if ((dir.exists() && dir.isDirectory()) || dir.mkdirs()) {
             JsonObject root = new JsonObject();
             ConfigUtils.writeConfigBase(root, "Generic", Generic.OPTIONS);
+            ConfigUtils.writeConfigBase(root, "Color", Color.OPTIONS);
             ConfigUtils.writeHotkeyToggleOptions(root, "DisableHotkey", "Disable", Disable.OPTIONS);
             ConfigUtils.writeHotkeyToggleOptions(root, "FeatureHotkey", "Feature", Feature.OPTIONS);
             JsonUtils.writeJsonToFile(root, new File(dir, CONFIG_FILE_NAME));
@@ -169,14 +171,24 @@ public class Configs implements IConfigHandler {
         private static final String PREFIX = String.format("%s.config.feature_toggle", Reference.MOD_ID);
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RECONNECT = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoReconnect", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RESPAWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoRespawn", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_TITLE_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarTitleBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
 
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
                 FEATURE_AUTO_RECONNECT,
                 FEATURE_AUTO_RESPAWN,
+                FEATURE_CUSTOM_SIDEBAR_TITLE_BACKGROUND_COLOR,
                 FEATURE_DAYLIGHT_OVERRIDE,
                 FEATURE_GET_TARGET_BLOCK_POSITION
+        );
+    }
+
+    public static class Color {
+        private static final String PREFIX = String.format("%s.config.color", Reference.MOD_ID);
+        public static final ConfigColor COLOR_SIDEBAR_TITLE = new TranslatableConfigColor(PREFIX, "colorSidebarTitle", "#66000000");
+        public static final ImmutableList<ConfigColor> OPTIONS = ImmutableList.of(
+                COLOR_SIDEBAR_TITLE
         );
     }
 

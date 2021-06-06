@@ -1,6 +1,7 @@
 {
     "tweakmyclient.gui.title.configs": "Tweak My Client 设置",
     "tweakmyclient.gui.button.config_gui.generic": "全局",
+    "tweakmyclient.gui.button.config_gui.color": "颜色",
     "tweakmyclient.gui.button.config_gui.disable_toggle": "禁用开关",
     "tweakmyclient.gui.button.config_gui.disable_hotkeys": "禁用快捷键",
     "tweakmyclient.gui.button.config_gui.feature_toggle": "特性开关",
@@ -20,6 +21,9 @@
     "tweakmyclient.config.generic.targetBlockPositionFormat.comment": "发送至聊天窗的位置追踪格式.",
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.name": "获取方块坐标发送模式",
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.comment": "获取到的追踪位置将以该模式发送.\n私有 - 仅你自己看到\n公共 - 发送至公屏聊天",
+
+    "tweakmyclient.config.color.colorSidebarTitle.name": "计分板标题颜色",
+    "tweakmyclient.config.color.colorSidebarTitle.comment": "自定义计分板标题颜色.",
 
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.name": "禁用客户端侧方块事件",
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.comment": "关闭客户端侧方块事件渲染 (例如活塞动画).",
@@ -50,6 +54,8 @@
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "从服务器断开连接时自动重新连接服务器.\n适配 Authme 和 Reauth 会话验证",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "自动重生",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "死亡时自动重生.",
+    "tweakmyclient.config.feature_toggle.featureCustomSidebarTitleBackgroundColor.name": "自定义计分板标题颜色",
+    "tweakmyclient.config.feature_toggle.featureCustomSidebarTitleBackgroundColor.comment": "启用计分板标题背景色覆写.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "覆盖客户端世界时间",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "覆盖客户端的世界时间为你想要的时间.",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.name": "获取方块坐标",

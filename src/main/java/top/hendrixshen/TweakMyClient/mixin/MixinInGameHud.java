@@ -1,6 +1,7 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.scoreboard.ScoreboardObjective;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,6 +28,21 @@ public abstract class MixinInGameHud {
         if (Configs.Disable.DISABLE_SCOREBOARD_RENDERING.getBooleanValue()) {
             ci.cancel();
         }
+    }
+
+    @Redirect(
+            method = "renderScoreboardSidebar",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/options/GameOptions;getTextBackgroundColor(F)I",
+                    ordinal = 1
+            )
+    )
+    private int changeSidebarTitleBackgroundColor(GameOptions gameOptions, float fallbackOpacity) {
+        if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_TITLE_BACKGROUND_COLOR.getBooleanValue()) {
+            return Configs.Color.COLOR_SIDEBAR_TITLE.getIntegerValue();
+        }
+        return gameOptions.getTextBackgroundColor(fallbackOpacity);
     }
 
     @Redirect(
