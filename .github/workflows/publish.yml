@@ -5,15 +5,56 @@ on:
        - published
 
 jobs:
-  build:
+  Get-Properties:
     runs-on: ubuntu-latest
+    outputs:
+      release-type: ${{ steps.type.outputs.release-type }}
+      curse-versions: ${{ steps.properties.outputs.release-curse-versions }}
+    steps:
+      - name: Checkout the sources
+        uses: actions/checkout@v2
+      - name: Determine release type
+        id: type
+        run: |
+          if ${{ github.event.release.prerelease }}; then
+            echo "::set-output name=release-type::beta"
+          else
+            echo "::set-output name=release-type::release"
+          fi
+      - name: Read relevant fields from gradle.properties
+        id: properties
+        run: |
+          path='./gradle.properties'
+          for property in release-curse-versions
+          do
+            result=$(sed -n "/^[[:space:]]*$property[[:space:]]*=[[:space:]]*/s/^[[:space:]]*$property[[:space:]]*=[[:space:]]*//p" "$path")
+            echo "$property: $result"
+            echo ::set-output name=$property::"$result"
+          done
+  build:
+    needs: [ Get-Properties ]
+    strategy:
+      matrix:
+        # Use these Java versions
+        java: [
+            1.8,  # Minimum supported by Minecraft
+            11,   # Current Java LTS
+            16    # Latest version
+        ]
+        # and run on both Linux and Windows
+        os: [ ubuntu-20.04, windows-latest ]
+    runs-on: ${{ matrix.os }}
 
     steps:
+    - name: Get info from branch to run
+      id: getbranchinfo
+      run: |
+          echo "::set-output name=curse-versions::${{ needs.Get-Properties.outputs.curse-versions }}"
     - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
+    - name: Set up JDK ${{ matrix.java }}
       uses: actions/setup-java@v1
       with:
-        java-version: 1.8
+        java-version: ${{ matrix.java }}
 
     - name: Cache gradle files
       uses: actions/cache@v2
@@ -28,13 +69,32 @@ jobs:
     - name: Display build number
       run: echo Tweak My Client \#$GITHUB_RUN_NUMBER
     - name: Set build number in codes
-      run: sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java build.properties
+      run: sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java gradle.properties
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Find correct JAR
+      if: ${{ runner.os == 'Linux' && matrix.java == '1.8' }} # Only upload artifacts built from java 1.8 on one OS
+      id: findjar
+      run: |
+          output="$(find build/libs/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
+          echo "::set-output name=jarname::$output"
     - name: Upload assets to GitHub
+      if: ${{ runner.os == 'Linux' && matrix.java == '1.8' }} # Only upload artifacts built from java 1.8 on one OS
       uses: AButler/upload-release-assets@v2.0
       with:
         files: 'build/libs/*'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload to Curseforge
+      if: ${{ runner.os == 'Linux' && matrix.java == '1.8' }} # Only upload artifacts built from java 1.8 on one OS
+      uses: itsmeow/curseforge-upload@v3
+      with:
+        token: ${{ secrets.CF_API_TOKEN }}
+        project_id: 478757
+        game_endpoint: minecraft
+        file_path: build/libs/${{ steps.findjar.outputs.jarname }}
+        changelog_type: markdown
+        changelog: ${{ github.event.release.body }}
+        game_versions: 7499,4458,${{ steps.getbranchinfo.outputs.curse-versions }} #Fabric,Java 8,[version (s) for the branch]
+        release_type: ${{ needs.Get-Properties.outputs.release-type }}
