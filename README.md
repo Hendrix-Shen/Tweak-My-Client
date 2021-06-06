@@ -39,7 +39,13 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + targetBlockPositionMode
   - *The block tracing position will be sent in this mode.*
   - *获取到的追踪位置将该模式发送.*
-
+### Color
++ colorSidebarContent
+  - *Custom sidebar content color.*
+  - *自定义计分板内容颜色.*
++ colorSidebarTitle
+  - *Custom sidebar title color.*
+  - *自定义计分板标题颜色.*
 ### Disable Toggle
 + disableClientBlockEvents
   - *Disables block event rendering (eg pistons animations).*
@@ -84,6 +90,12 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + featureAutoRespawn
   - *Automatically respawns you whenever you die.*
   - *死亡时自动重生.*
++ featureCustomSidebarContentBackgroundColor
+  - *Enable sidebar content background color override.*
+  - *自定义计分板内容颜色.*
++ featureCustomSidebarTitleBackgroundColor
+  - *Enable sidebar title background color override.*
+  - *自定义计分板标题颜色.*
 + featureDaylightOverride
   - *Override the client's world time to the day time you want.*
   - *覆盖客户端的世界时间为你想要的时间.*
