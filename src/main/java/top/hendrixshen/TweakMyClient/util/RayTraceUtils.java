@@ -13,9 +13,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +38,7 @@ public class RayTraceUtils {
         return pos;
     }
 
-    @Nonnull
+    @Nullable
     public static HitResult getRayTraceFromEntity(World world, Entity entity, boolean useLiquids, double range) {
         Vec3d eyesPos = entity.getCameraPosVec(1f);
         Vec3d rangedLookRot = entity.getRotationVec(1f).multiply(range);
