@@ -96,5 +96,5 @@ jobs:
         file_path: build/libs/${{ steps.findjar.outputs.jarname }}
         changelog_type: markdown
         changelog: ${{ github.event.release.body }}
-        game_versions: 7499,4458,${{ steps.getbranchinfo.outputs.curse-versions }} #Fabric,Java 8,[version (s) for the branch]
+        game_versions: 7499,4458,8320,8325,${{ steps.getbranchinfo.outputs.curse-versions }} #Fabric,Java 8, Java 11, Java 16 [version (s) for the branch]
         release_type: ${{ needs.Get-Properties.outputs.release-type }}
