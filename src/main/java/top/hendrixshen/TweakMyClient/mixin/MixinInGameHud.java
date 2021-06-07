@@ -39,7 +39,7 @@ public abstract class MixinInGameHud {
             )
     )
     private int changeSidebarTitleBackgroundColor(GameOptions gameOptions, float fallbackOpacity) {
-        if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_TITLE_BACKGROUND_COLOR.getBooleanValue()) {
+        if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR.getBooleanValue()) {
             return Configs.Color.COLOR_SIDEBAR_TITLE.getIntegerValue();
         }
         return gameOptions.getTextBackgroundColor(fallbackOpacity);
@@ -54,7 +54,7 @@ public abstract class MixinInGameHud {
             )
     )
     private int changeSidebarContentBackgroundColor(GameOptions gameOptions, float fallbackOpacity) {
-        if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_CONTENT_BACKGROUND_COLOR.getBooleanValue()) {
+        if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR.getBooleanValue()) {
             return Configs.Color.COLOR_SIDEBAR_CONTENT.getIntegerValue();
         }
         return gameOptions.getTextBackgroundColor(fallbackOpacity);
