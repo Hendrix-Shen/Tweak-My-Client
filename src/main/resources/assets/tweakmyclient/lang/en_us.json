@@ -24,6 +24,8 @@
 
     "tweakmyclient.config.color.colorGuiStart.name": "colorGuiStart",
     "tweakmyclient.config.color.colorGuiStart.comment": "Custom gui gradient start color.",
+    "tweakmyclient.config.color.colorGuiStop.name": "colorGuiStop",
+    "tweakmyclient.config.color.colorGuiStop.comment": "Custom gui gradient stop color.",
     "tweakmyclient.config.color.colorSidebarContent.name": "colorSidebarContent",
     "tweakmyclient.config.color.colorSidebarContent.comment": "Custom sidebar content color.",
     "tweakmyclient.config.color.colorSidebarTitle.name": "colorSidebarTitle",

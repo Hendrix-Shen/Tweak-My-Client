@@ -189,10 +189,12 @@ public class Configs implements IConfigHandler {
     public static class Color {
         private static final String PREFIX = String.format("%s.config.color", Reference.MOD_ID);
         public static final ConfigColor COLOR_GUI_START = new TranslatableConfigColor(PREFIX, "colorGuiStart", "#C00F0F0F");
+        public static final ConfigColor COLOR_GUI_STOP = new TranslatableConfigColor(PREFIX, "colorGuiStop", "#D00F0F0F");
         public static final ConfigColor COLOR_SIDEBAR_CONTENT = new TranslatableConfigColor(PREFIX, "colorSidebarContent", "#4C000000");
         public static final ConfigColor COLOR_SIDEBAR_TITLE = new TranslatableConfigColor(PREFIX, "colorSidebarTitle", "#66000000");
         public static final ImmutableList<ConfigColor> OPTIONS = ImmutableList.of(
                 COLOR_GUI_START,
+                COLOR_GUI_STOP,
                 COLOR_SIDEBAR_CONTENT,
                 COLOR_SIDEBAR_TITLE
         );

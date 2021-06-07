@@ -38,4 +38,18 @@ public class MixinScreen {
         }
         return startColor;
     }
+
+    @ModifyConstant(
+            method = "renderBackground(Lnet/minecraft/client/util/math/MatrixStack;I)V",
+            constant = @Constant(
+                    intValue = -804253680
+            )
+
+    )
+    private int customStopColor(int startColor) {
+        if (Configs.Feature.FEATURE_CUSTOM_GUI_BACKGROUND_COLOR.getBooleanValue()) {
+            return Configs.Color.COLOR_GUI_STOP.getIntegerValue();
+        }
+        return startColor;
+    }
 }

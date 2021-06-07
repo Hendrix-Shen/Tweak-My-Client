@@ -24,6 +24,8 @@
 
     "tweakmyclient.config.color.colorGuiStart.name": "界面渐变背景起始颜色",
     "tweakmyclient.config.color.colorGuiStart.comment": "自定义界面渐变起始颜色.",
+    "tweakmyclient.config.color.colorGuiStop.name": "界面渐变背景终止颜色",
+    "tweakmyclient.config.color.colorGuiStop.comment": "自定义界面渐变终止颜色.",
     "tweakmyclient.config.color.colorSidebarContent.name": "计分板内容颜色",
     "tweakmyclient.config.color.colorSidebarContent.comment": "自定义计分板内容颜色.",
     "tweakmyclient.config.color.colorSidebarTitle.name": "计分板标题颜色",
