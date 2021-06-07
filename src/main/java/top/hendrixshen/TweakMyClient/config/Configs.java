@@ -171,6 +171,7 @@ public class Configs implements IConfigHandler {
         private static final String PREFIX = String.format("%s.config.feature_toggle", Reference.MOD_ID);
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RECONNECT = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoReconnect", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RESPAWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoRespawn", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_GUI_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGuiBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
@@ -178,6 +179,7 @@ public class Configs implements IConfigHandler {
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
                 FEATURE_AUTO_RECONNECT,
                 FEATURE_AUTO_RESPAWN,
+                FEATURE_CUSTOM_GUI_BACKGROUND_COLOR,
                 FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR,
                 FEATURE_DAYLIGHT_OVERRIDE,
                 FEATURE_GET_TARGET_BLOCK_POSITION
@@ -186,9 +188,11 @@ public class Configs implements IConfigHandler {
 
     public static class Color {
         private static final String PREFIX = String.format("%s.config.color", Reference.MOD_ID);
+        public static final ConfigColor COLOR_GUI_START = new TranslatableConfigColor(PREFIX, "colorGuiStart", "#C00F0F0F");
         public static final ConfigColor COLOR_SIDEBAR_CONTENT = new TranslatableConfigColor(PREFIX, "colorSidebarContent", "#4C000000");
         public static final ConfigColor COLOR_SIDEBAR_TITLE = new TranslatableConfigColor(PREFIX, "colorSidebarTitle", "#66000000");
         public static final ImmutableList<ConfigColor> OPTIONS = ImmutableList.of(
+                COLOR_GUI_START,
                 COLOR_SIDEBAR_CONTENT,
                 COLOR_SIDEBAR_TITLE
         );
