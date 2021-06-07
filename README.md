@@ -40,6 +40,12 @@ The default hotkey to open the in-game config GUI is **T + C**.
   - *The block tracing position will be sent in this mode.*
   - *获取到的追踪位置将该模式发送.*
 ### Color
++ colorGuiStart
+  - *Custom gui gradient start color.*
+  - *自定义界面渐变起始颜色.*
++ colorGuiStop
+  - *Custom gui gradient stop color.*
+  - *自定义界面渐变终止颜色.*
 + colorSidebarContent
   - *Custom sidebar content color.*
   - *自定义计分板内容颜色.*
@@ -90,12 +96,12 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + featureAutoRespawn
   - *Automatically respawns you whenever you die.*
   - *死亡时自动重生.*
-+ featureCustomSidebarContentBackgroundColor
-  - *Enable sidebar content background color override.*
-  - *自定义计分板内容颜色.*
-+ featureCustomSidebarTitleBackgroundColor
-  - *Enable sidebar title background color override.*
-  - *自定义计分板标题颜色.*
++ featureGuiBackgroundColor
+  - *Enable gui background color override.*
+  - *启用计分板界面背景色覆写.*
++ featureCustomSidebarBackgroundColor
+  - *Enable sidebar background color override.*
+  - *启用计分板背景色覆写.*
 + featureDaylightOverride
   - *Override the client's world time to the day time you want.*
   - *覆盖客户端的世界时间为你想要的时间.*
