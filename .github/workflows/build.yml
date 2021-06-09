@@ -13,9 +13,7 @@ jobs:
       matrix:
         # Use these Java versions
         java: [
-            1.8,  # Minimum supported by Minecraft
-            11,   # Current Java LTS
-            16    # Latest version
+            16,  # Minimum supported by Minecraft
         ]
         # and run on both Linux and Windows
         os: [ ubuntu-20.04, windows-latest ]
@@ -48,7 +46,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Upload assets to GitHub
-      if: ${{ runner.os == 'Linux' && matrix.java == '1.8' }} # Only upload artifacts built from java 1.8 on one OS
+      if: ${{ runner.os == 'Linux' && matrix.java == '16' }} # Only upload artifacts built from java 16 on one OS
       uses: actions/upload-artifact@v2
       with:
         name: build-artifacts
