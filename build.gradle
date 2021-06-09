@@ -8,16 +8,19 @@ buildscript {
 }
 
 plugins {
-    id 'fabric-loom' version '0.7-SNAPSHOT'
+    id 'fabric-loom' version '0.8-SNAPSHOT'
     id 'maven-publish'
 }
 
 repositories {
     maven {
-        url 'https://masa.dy.fi/maven'
+        url 'https://masa.dy.fi/maven/'
     }
     maven {
         url 'https://www.cursemaven.com/'
+    }
+    maven {
+        url 'https://maven.terraformersmc.com/releases/'
     }
 }
 
@@ -29,7 +32,7 @@ dependencies {
     // Malilib
     modApi("fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_masa}:${project.malilib_version}")
     // ModMenu
-    modCompileOnly("io.github.prospector:modmenu:" + project.mod_menu_version)
+    modCompileOnly("com.terraformersmc:modmenu:" + project.mod_menu_version)
     // Optional mod compatibility Library
     modCompileOnly("curse.maven:authme-356643:3073169")
     modCompileOnly("curse.maven:reauth-403928:3105780")
