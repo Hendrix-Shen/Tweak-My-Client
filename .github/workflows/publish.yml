@@ -37,9 +37,7 @@ jobs:
       matrix:
         # Use these Java versions
         java: [
-            1.8,  # Minimum supported by Minecraft
-            11,   # Current Java LTS
-            16    # Latest version
+            16,  # Minimum supported by Minecraft
         ]
         # and run on both Linux and Windows
         os: [ ubuntu-20.04, windows-latest ]
@@ -75,19 +73,19 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Find correct JAR
-      if: ${{ runner.os == 'Linux' && matrix.java == '1.8' }} # Only upload artifacts built from java 1.8 on one OS
+      if: ${{ runner.os == 'Linux' && matrix.java == '16' }} # Only upload artifacts built from java 16 on one OS
       id: findjar
       run: |
           output="$(find build/libs/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
           echo "::set-output name=jarname::$output"
     - name: Upload assets to GitHub
-      if: ${{ runner.os == 'Linux' && matrix.java == '1.8' }} # Only upload artifacts built from java 1.8 on one OS
+      if: ${{ runner.os == 'Linux' && matrix.java == '16' }} # Only upload artifacts built from java 16 on one OS
       uses: AButler/upload-release-assets@v2.0
       with:
-        files: 'build/libs/*'
+        files: 'build/libs/${{ steps.findjar.outputs.jarname }}'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload to Curseforge
-      if: ${{ runner.os == 'Linux' && matrix.java == '1.8' }} # Only upload artifacts built from java 1.8 on one OS
+      if: ${{ runner.os == 'Linux' && matrix.java == '16' }} # Only upload artifacts built from java 16 on one OS
       uses: itsmeow/curseforge-upload@v3
       with:
         token: ${{ secrets.CF_API_TOKEN }}
@@ -96,5 +94,5 @@ jobs:
         file_path: build/libs/${{ steps.findjar.outputs.jarname }}
         changelog_type: markdown
         changelog: ${{ github.event.release.body }}
-        game_versions: 7499,4458,8320,8325,${{ steps.getbranchinfo.outputs.curse-versions }} #Fabric,Java 8, Java 11, Java 16 [version (s) for the branch]
+        game_versions: 7499,8325,${{ steps.getbranchinfo.outputs.curse-versions }} #Fabric, Java 16 [version (s) for the branch]
         release_type: ${{ needs.Get-Properties.outputs.release-type }}
