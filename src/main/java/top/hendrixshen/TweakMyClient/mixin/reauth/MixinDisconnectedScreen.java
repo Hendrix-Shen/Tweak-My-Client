@@ -49,7 +49,7 @@ public class MixinDisconnectedScreen extends Screen {
         if (reason == null || AutoReconnect.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
             Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
             if (TweakMyClientMixinPlugin.isReAuthLoaded) {
-                addButton(new ButtonWidget(backButtonX, backButtonY + (TweakMyClientMixinPlugin.isAuthMeLoaded ? 96 : 72), 200, 20,
+                addDrawableChild(new ButtonWidget(backButtonX, backButtonY + (TweakMyClientMixinPlugin.isAuthMeLoaded ? 96 : 72), 200, 20,
                         new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithReAuth", PREFIX))), button -> this.client.openScreen(new AuthScreen(parent))));
             }
         }

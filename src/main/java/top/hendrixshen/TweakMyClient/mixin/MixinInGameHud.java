@@ -1,11 +1,12 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.options.GameOptions;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.scoreboard.ScoreboardObjective;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -14,9 +15,6 @@ import top.hendrixshen.TweakMyClient.config.Configs;
 
 @Mixin(InGameHud.class)
 public abstract class MixinInGameHud {
-    @Shadow
-    protected abstract void renderPumpkinOverlay();
-
     @Inject(
             method = "renderScoreboardSidebar",
             at = @At(
@@ -34,7 +32,7 @@ public abstract class MixinInGameHud {
             method = "renderScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/options/GameOptions;getTextBackgroundColor(F)I",
+                    target = "Lnet/minecraft/client/option/GameOptions;getTextBackgroundColor(F)I",
                     ordinal = 1
             )
     )
@@ -49,7 +47,7 @@ public abstract class MixinInGameHud {
             method = "renderScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/options/GameOptions;getTextBackgroundColor(F)I",
+                    target = "Lnet/minecraft/client/option/GameOptions;getTextBackgroundColor(F)I",
                     ordinal = 0
             )
     )
@@ -64,12 +62,13 @@ public abstract class MixinInGameHud {
             method = "render",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/hud/InGameHud;renderPumpkinOverlay()V"
+                    target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"
             )
     )
-    private void onRenderPumpkinOverlay(InGameHud inGameHud) {
+    private boolean onRenderPumpkinOverlay(ItemStack itemStack, Item item) {
         if (!Configs.Disable.DISABLE_RENDER_OVERLAY_PUMPKIN.getBooleanValue()) {
-            renderPumpkinOverlay();
+            return itemStack.isOf(item);
         }
+        return false;
     }
 }

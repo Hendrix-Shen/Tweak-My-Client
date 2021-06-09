@@ -54,11 +54,11 @@ public class MixinDisconnectedScreen extends Screen {
         int backButtonX = width / 2 - 100;
         int backButtonY = Math.min(height / 2 + reasonHeight / 2 + 9, height - 30);
 
-        addButton(new ButtonWidget(backButtonX, backButtonY + 24, 200, 20,
+        addDrawableChild(new ButtonWidget(backButtonX, backButtonY + 24, 200, 20,
                 new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.static", PREFIX))), b -> AutoReconnect.reconnect(parent)));
 
         autoReconnectButton =
-                addButton(new ButtonWidget(backButtonX, backButtonY + 48, 200, 20,
+                addDrawableChild(new ButtonWidget(backButtonX, backButtonY + 48, 200, 20,
                         new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.toggle", PREFIX))), b -> onPressAutoReconnect()));
         if (reason == null || getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
             Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);

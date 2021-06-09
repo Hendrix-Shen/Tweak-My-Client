@@ -2,6 +2,7 @@ package top.hendrixshen.TweakMyClient.util;
 
 import net.minecraft.client.gui.screen.ConnectScreen;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.network.ServerAddress;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -22,7 +23,7 @@ public class AutoReconnect {
     public static void reconnect(Screen screen) {
         ServerInfo serverInfo = AutoReconnect.getLastServer();
         if (lastServer != null) {
-            TweakMyClient.minecraftClient.openScreen(new ConnectScreen(screen, TweakMyClient.minecraftClient, serverInfo));
+            ConnectScreen.connect(screen, TweakMyClient.minecraftClient, ServerAddress.parse(serverInfo.address), serverInfo);
         }
     }
 
