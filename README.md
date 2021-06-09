@@ -40,6 +40,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
   - *The block tracing position will be sent in this mode.*
   - *获取到的追踪位置将该模式发送.*
 ### Color
++ colorBlockOutside
+  - *Custom block outside color.*
+  - *自定义方块轮廓颜色.*
 + colorGuiStart
   - *Custom gui gradient start color.*
   - *自定义界面渐变起始颜色.*
@@ -96,6 +99,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + featureAutoRespawn
   - *Automatically respawns you whenever you die.*
   - *死亡时自动重生.*
++ featureBlockOutsideColor
+  - *Enable block outside color override.*
+  - *启用方块轮廓颜色覆写.*
 + featureGuiBackgroundColor
   - *Enable gui background color override.*
   - *启用计分板界面背景色覆写.*
