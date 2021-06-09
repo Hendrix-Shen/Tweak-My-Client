@@ -22,6 +22,8 @@
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.name": "获取方块坐标发送模式",
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.comment": "获取到的追踪位置将以该模式发送.\n私有 - 仅你自己看到\n公共 - 发送至公屏聊天",
 
+    "tweakmyclient.config.color.colorBlockOutside.name": "方块轮廓颜色",
+    "tweakmyclient.config.color.colorBlockOutside.comment": "自定义方块轮廓颜色.",
     "tweakmyclient.config.color.colorGuiStart.name": "界面渐变背景起始颜色",
     "tweakmyclient.config.color.colorGuiStart.comment": "自定义界面渐变起始颜色.",
     "tweakmyclient.config.color.colorGuiStop.name": "界面渐变背景终止颜色",
@@ -60,6 +62,8 @@
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "从服务器断开连接时自动重新连接服务器.\n适配 Authme 和 Reauth 会话验证",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "自动重生",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "死亡时自动重生.",
+    "tweakmyclient.config.feature_toggle.featureBlockOutsideColor.name": "自定义方块轮廓",
+    "tweakmyclient.config.feature_toggle.featureBlockOutsideColor.comment": "启用方块轮廓颜色覆写.",
     "tweakmyclient.config.feature_toggle.featureGuiBackgroundColor.name": "自定义界面背景颜色",
     "tweakmyclient.config.feature_toggle.featureGuiBackgroundColor.comment": "启用计分板界面背景色覆写.",
     "tweakmyclient.config.feature_toggle.featureCustomSidebarBackgroundColor.name": "自定义计分板背景颜色",

@@ -22,6 +22,8 @@
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.name": "targetBlockPositionMode",
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.comment": "The block tracing position will be sent in this mode.\nprivate - Only you can see\npublic - Send to public chat",
 
+    "tweakmyclient.config.color.colorBlockOutside.name": "colorBlockOutside",
+    "tweakmyclient.config.color.colorBlockOutside.comment": "Custom block outside color.",
     "tweakmyclient.config.color.colorGuiStart.name": "colorGuiStart",
     "tweakmyclient.config.color.colorGuiStart.comment": "Custom gui gradient start color.",
     "tweakmyclient.config.color.colorGuiStop.name": "colorGuiStop",
@@ -60,6 +62,8 @@
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.\nAdaptive authme and reauth session validation.",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "featureAutoRespawn",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "Automatically respawns you whenever you die.",
+    "tweakmyclient.config.feature_toggle.featureBlockOutsideColor.name": "featureBlockOutsideColor",
+    "tweakmyclient.config.feature_toggle.featureBlockOutsideColor.comment": "Enable block outside color override.",
     "tweakmyclient.config.feature_toggle.featureGuiBackgroundColor.name": "featureGuiBackgroundColor",
     "tweakmyclient.config.feature_toggle.featureGuiBackgroundColor.comment": "Enable gui background color override.",
     "tweakmyclient.config.feature_toggle.featureCustomSidebarBackgroundColor.name": "featureCustomSidebarContentBackgroundColor",
