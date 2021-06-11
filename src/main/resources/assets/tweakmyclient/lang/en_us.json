@@ -32,6 +32,10 @@
     "tweakmyclient.config.color.colorSidebarContent.comment": "Custom sidebar content color.",
     "tweakmyclient.config.color.colorSidebarTitle.name": "colorSidebarTitle",
     "tweakmyclient.config.color.colorSidebarTitle.comment": "Custom sidebar title color.",
+    "tweakmyclient.config.color.colorWaterOpen.name": "colorWaterOpen",
+    "tweakmyclient.config.color.colorWaterOpen.comment": "openWaterHelper open water outline color.",
+    "tweakmyclient.config.color.colorWaterShallow.name": "colorWaterShallow",
+    "tweakmyclient.config.color.colorWaterShallow.comment": "openWaterHelper open shallow outline color.",
 
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.name": "disableClientBlockEvents",
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.comment": "Disables block event rendering (eg pistons animations).",
@@ -72,6 +76,8 @@
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "Override the client's world time to the day time you want.",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.name": "featureGetTargetBlockPosition",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.comment": "Allow you get the position of the farthest block you point to.",
+    "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.name": "featureOpenWaterHelper",
+    "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.comment": "Shows whether or not you are fishing in 'open water' and draws a box around the area used for the open water calculation.",
 
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "private",
     "tweakmyclient.label.targetBlockPositionPrintMode.public": "public",

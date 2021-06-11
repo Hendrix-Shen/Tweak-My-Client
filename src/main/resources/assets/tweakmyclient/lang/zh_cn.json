@@ -32,6 +32,10 @@
     "tweakmyclient.config.color.colorSidebarContent.comment": "自定义计分板内容颜色.",
     "tweakmyclient.config.color.colorSidebarTitle.name": "计分板标题颜色",
     "tweakmyclient.config.color.colorSidebarTitle.comment": "自定义计分板标题颜色.",
+    "tweakmyclient.config.color.colorWaterOpen.name": "开阔水域颜色",
+    "tweakmyclient.config.color.colorWaterOpen.comment": "开阔水域助手开阔水域轮廓颜色.",
+    "tweakmyclient.config.color.colorWaterShallow.name": "潜水域颜色",
+    "tweakmyclient.config.color.colorWaterShallow.comment": "开阔水域助手潜水域轮廓颜色.",
 
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.name": "禁用客户端侧方块事件",
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.comment": "关闭客户端侧方块事件渲染 (例如活塞动画).",
@@ -72,6 +76,9 @@
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "覆盖客户端的世界时间为你想要的时间.",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.name": "获取方块坐标",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.comment": "允许获取你指向方向最远端的方块坐标.",
+    "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.name": "开阔水域",
+    "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.comment": "展示是否在'开放水域'钓鱼, 并在用于开阔水域计算的区域绘制一个方框",
+
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "私人",
     "tweakmyclient.label.targetBlockPositionPrintMode.public": "公共",
 

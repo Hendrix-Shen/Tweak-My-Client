@@ -8,6 +8,7 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.config.options.*;
+import fi.dy.masa.malilib.util.Color4f;
 import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.StringUtils;
@@ -176,6 +177,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_OPEN_WATER_HELPER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureOpenWaterHelper", false, "");
 
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
                 FEATURE_AUTO_RECONNECT,
@@ -184,7 +186,8 @@ public class Configs implements IConfigHandler {
                 FEATURE_CUSTOM_GUI_BACKGROUND_COLOR,
                 FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR,
                 FEATURE_DAYLIGHT_OVERRIDE,
-                FEATURE_GET_TARGET_BLOCK_POSITION
+                FEATURE_GET_TARGET_BLOCK_POSITION,
+                FEATURE_OPEN_WATER_HELPER
         );
     }
 
@@ -195,12 +198,16 @@ public class Configs implements IConfigHandler {
         public static final ConfigColor COLOR_GUI_STOP = new TranslatableConfigColor(PREFIX, "colorGuiStop", "#D00F0F0F");
         public static final ConfigColor COLOR_SIDEBAR_CONTENT = new TranslatableConfigColor(PREFIX, "colorSidebarContent", "#4C000000");
         public static final ConfigColor COLOR_SIDEBAR_TITLE = new TranslatableConfigColor(PREFIX, "colorSidebarTitle", "#66000000");
+        public static final ConfigColor COLOR_WATER_OPEN = new TranslatableConfigColor(PREFIX, "colorWaterOpen", "#7F00FF00");
+        public static final ConfigColor COLOR_WATER_SHALLOW = new TranslatableConfigColor(PREFIX, "colorWaterShallow", "#7FFF0000");
         public static final ImmutableList<ConfigColor> OPTIONS = ImmutableList.of(
                 COLOR_BLOCK_OUTSIDE,
                 COLOR_GUI_START,
                 COLOR_GUI_STOP,
                 COLOR_SIDEBAR_CONTENT,
-                COLOR_SIDEBAR_TITLE
+                COLOR_SIDEBAR_TITLE,
+                COLOR_WATER_OPEN,
+                COLOR_WATER_SHALLOW
         );
     }
 

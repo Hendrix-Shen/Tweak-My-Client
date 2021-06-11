@@ -20,6 +20,7 @@
     "MixinDeathScreen",
     "MixinDisconnectedScreen",
     "MixinEntityRenderDispatcher",
+    "MixinFishingBobberEntity",
     "MixinInGameHud",
     "MixinInGameOverlayRenderer",
     "MixinMinecraftClient",
