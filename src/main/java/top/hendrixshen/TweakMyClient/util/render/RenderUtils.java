@@ -11,8 +11,7 @@ import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
 public class RenderUtils {
-    public static void renderAreaOutline(BlockPos pos1, BlockPos pos2, float lineWidth,
-                                         Color4f colorX, Color4f colorY, Color4f colorZ, MinecraftClient mc)
+    public static void renderAreaOutline(BlockPos pos1, BlockPos pos2, float lineWidth, Color4f colorX, Color4f colorY, Color4f colorZ, MinecraftClient mc)
     {
         RenderSystem.lineWidth(lineWidth);
 
