@@ -25,8 +25,6 @@ public class OverlayRenderer {
             BlockPos pos1 = new BlockPos(fishHookPos.getX() - 2, fishHookPos.getY() - 3, fishHookPos.getZ() - 2);
             BlockPos pos2 = new BlockPos(fishHookPos.getX() + 2, fishHookPos.getY(), fishHookPos.getZ() + 2);
             RenderUtils.renderAreaOutline(pos1, pos2, 3.0f, color, color, color, mc);
-            //Only for debug
-            mc.player.networkHandler.onGameMessage(new GameMessageS2CPacket(new LiteralText("Debug: onRenderOpenWaterHelper"), MessageType.CHAT, mc.player.getUuid()));
         }
     }
     private boolean isInOpenWater(FishingBobberEntity fishHook)
