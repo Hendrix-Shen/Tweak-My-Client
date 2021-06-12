@@ -55,6 +55,12 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + colorSidebarTitle
   - *Custom sidebar title color.*
   - *自定义计分板标题颜色.*
++ colorWaterOpen
+  - *openWaterHelper open water outline color.*
+  - *开阔水域助手开阔水域轮廓颜色.*
++ colorWaterShallow
+  - *openWaterHelper open shallow outline color.*
+  - *开阔水域助手潜水域轮廓颜色.*
 ### Disable Toggle
 + disableClientBlockEvents
   - *Disables block event rendering (eg pistons animations).*
@@ -114,3 +120,6 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + featureGetTargetBlockPosition
   - *Allow you get the position of the farthest block you point to.*
   - *允许获取你指向方向最远端的方块坐标.*
++ featureOpenWaterHelper
+  - *Shows whether or not you are fishing in 'open water' and draws a box around the area used for the open water calculation.*
+  - *展示是否在'开放水域'钓鱼, 并在用于开阔水域计算的区域绘制一个方框.*
