@@ -21,6 +21,7 @@
     "MixinDisconnectedScreen",
     "MixinEntityRenderDispatcher",
     "MixinFishingBobberEntity",
+    "MixinGameRenderer",
     "MixinInGameHud",
     "MixinInGameOverlayRenderer",
     "MixinMinecraftClient",

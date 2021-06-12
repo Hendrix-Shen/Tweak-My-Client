@@ -178,6 +178,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_OPEN_WATER_HELPER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureOpenWaterHelper", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_UNFOCUSED_CPU = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureUnfocusedCPU", false, "");
 
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
                 FEATURE_AUTO_RECONNECT,
@@ -187,7 +188,8 @@ public class Configs implements IConfigHandler {
                 FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR,
                 FEATURE_DAYLIGHT_OVERRIDE,
                 FEATURE_GET_TARGET_BLOCK_POSITION,
-                FEATURE_OPEN_WATER_HELPER
+                FEATURE_OPEN_WATER_HELPER,
+                FEATURE_UNFOCUSED_CPU
         );
     }
 

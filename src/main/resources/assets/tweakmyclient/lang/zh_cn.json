@@ -78,6 +78,8 @@
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.comment": "允许获取你指向方向最远端的方块坐标.",
     "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.name": "开阔水域助手",
     "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.comment": "展示是否在'开放水域'钓鱼, 并在用于开阔水域计算的区域绘制一个方框",
+    "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.name": "失去焦点释放CPU",
+    "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.comment": "当焦点未处于 Minecraft 窗口时, 客户端将不会执行渲染.",
 
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "私人",
     "tweakmyclient.label.targetBlockPositionPrintMode.public": "公共",
