@@ -25,7 +25,7 @@ public abstract class MixinInGameHud {
             cancellable = true
     )
     private void onRenderScoreboardSidebar(MatrixStack matrices, ScoreboardObjective objective, CallbackInfo ci) {
-        if (Configs.Disable.DISABLE_SCOREBOARD_RENDERING.getBooleanValue()) {
+        if (Configs.Disable.DISABLE_RENDER_SCOREBOARD.getBooleanValue()) {
             ci.cancel();
         }
     }
