@@ -56,6 +56,8 @@
     "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.comment": "关闭打开GUI时的阴影层渲染.",
     "tweakmyclient.config.disable_toggle.disableRenderBossBar.name": "禁用Boss血条渲染",
     "tweakmyclient.config.disable_toggle.disableRenderBossBar.comment": "关闭在玩家在Boss附近渲染Boss血条.\n你将获得更广阔的视野.",
+    "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.name": "禁用火焰渲染层",
+    "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.comment": "关闭在玩家着火时的渲染覆盖.\n你将获得更广阔的视野.",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.name": "禁用南瓜头渲染层",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.comment": "关闭在玩家在穿戴南瓜时的渲染覆盖.\n你将获得更广阔的视野.",
     "tweakmyclient.config.disable_toggle.disableRenderScoreboard.name": "禁用计分板渲染",
@@ -93,5 +95,5 @@
     "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "使用 ReAuth 验证会话",
     "tweakmyclient.message.autoReconnect.static": "自动重连",
     "tweakmyclient.message.autoReconnect.timer": "切换自动重连 (%d)",
-    "tweakmyclient.message.autoReconnect.toggle": "切换自动重连"
+    "tweakmyclient.message.autoReconnect.toggle": "切换自动重连",
 }
