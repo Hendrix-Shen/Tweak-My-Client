@@ -23,7 +23,8 @@ public abstract class MixinWorldRenderer {
     private static void drawShapeOutline(MatrixStack matrixStack, VertexConsumer vertexConsumer, VoxelShape voxelShape, double d, double e, double f, float g, float h, float i, float j) {
     }
 
-    @Shadow private ClientWorld world;
+    @Shadow
+    private ClientWorld world;
 
     @Inject(
             method = "drawBlockOutline",
@@ -36,7 +37,7 @@ public abstract class MixinWorldRenderer {
     private void onDrawBlockOutline(MatrixStack matrixStack, VertexConsumer vertexConsumer, Entity entity, double d, double e, double f, BlockPos blockPos, BlockState blockState, CallbackInfo ci) {
         if (Configs.Feature.FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR.getBooleanValue()) {
             Color4f color = Color4f.fromColor(Configs.Color.COLOR_BLOCK_OUTSIDE.getIntegerValue());
-            drawShapeOutline(matrixStack, vertexConsumer, blockState.getOutlineShape(this.world, blockPos, ShapeContext.of(entity)), (double)blockPos.getX() - d, (double)blockPos.getY() - e, (double)blockPos.getZ() - f, color.r, color.g, color.b, color.a);
+            drawShapeOutline(matrixStack, vertexConsumer, blockState.getOutlineShape(this.world, blockPos, ShapeContext.of(entity)), (double) blockPos.getX() - d, (double) blockPos.getY() - e, (double) blockPos.getZ() - f, color.r, color.g, color.b, color.a);
             ci.cancel();
         }
     }

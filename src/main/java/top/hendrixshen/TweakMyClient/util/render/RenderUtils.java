@@ -11,8 +11,7 @@ import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
 public class RenderUtils {
-    public static void renderAreaOutline(BlockPos pos1, BlockPos pos2, float lineWidth, Color4f colorX, Color4f colorY, Color4f colorZ, MinecraftClient mc)
-    {
+    public static void renderAreaOutline(BlockPos pos1, BlockPos pos2, float lineWidth, Color4f colorX, Color4f colorY, Color4f colorZ, MinecraftClient mc) {
         RenderSystem.lineWidth(lineWidth);
 
         Vec3d cameraPos = mc.gameRenderer.getCamera().getPos();
@@ -30,8 +29,7 @@ public class RenderUtils {
         drawBoundingBoxEdges(minX, minY, minZ, maxX, maxY, maxZ, colorX, colorY, colorZ);
     }
 
-    private static void drawBoundingBoxEdges(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f colorX, Color4f colorY, Color4f colorZ)
-    {
+    private static void drawBoundingBoxEdges(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f colorX, Color4f colorY, Color4f colorZ) {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         bufferbuilder.begin(GL11.GL_LINES, VertexFormats.POSITION_COLOR);
@@ -43,8 +41,7 @@ public class RenderUtils {
         tessellator.draw();
     }
 
-    private static void drawBoundingBoxLinesX(BufferBuilder buffer, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f color)
-    {
+    private static void drawBoundingBoxLinesX(BufferBuilder buffer, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f color) {
         buffer.vertex(minX, minY, minZ).color(color.r, color.g, color.b, color.a).next();
         buffer.vertex(maxX, minY, minZ).color(color.r, color.g, color.b, color.a).next();
 
@@ -58,8 +55,7 @@ public class RenderUtils {
         buffer.vertex(maxX, maxY, maxZ).color(color.r, color.g, color.b, color.a).next();
     }
 
-    private static void drawBoundingBoxLinesY(BufferBuilder buffer, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f color)
-    {
+    private static void drawBoundingBoxLinesY(BufferBuilder buffer, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f color) {
         buffer.vertex(minX, minY, minZ).color(color.r, color.g, color.b, color.a).next();
         buffer.vertex(minX, maxY, minZ).color(color.r, color.g, color.b, color.a).next();
 
@@ -73,8 +69,7 @@ public class RenderUtils {
         buffer.vertex(maxX, maxY, maxZ).color(color.r, color.g, color.b, color.a).next();
     }
 
-    private static void drawBoundingBoxLinesZ(BufferBuilder buffer, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f color)
-    {
+    private static void drawBoundingBoxLinesZ(BufferBuilder buffer, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f color) {
         buffer.vertex(minX, minY, minZ).color(color.r, color.g, color.b, color.a).next();
         buffer.vertex(minX, minY, maxZ).color(color.r, color.g, color.b, color.a).next();
 
