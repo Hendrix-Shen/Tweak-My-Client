@@ -25,6 +25,7 @@ public class MixinScreen {
             ci.cancel();
         }
     }
+
     @ModifyConstant(
             method = "renderBackground(Lnet/minecraft/client/util/math/MatrixStack;I)V",
             constant = @Constant(

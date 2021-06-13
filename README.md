@@ -17,28 +17,6 @@ The default hotkey to open the in-game config GUI is **T + C**.
 | MaliLib         | Required | \>=1.16.4-0.10.0-dev.21+arne.1 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib)       |
 | ReAuth (Fabric) | Optional | \>=3.9.2                       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric) |
 ## It includes the following features.
-### Generic
-+ autoReconnectTimer
-  - *How many seconds to wait for auto reconnection.*
-  - *等待多少秒后自动重连.*
-+ daylightOverrideTime
-  - *The time set when overriding the client's world time.*
-  - *覆盖客户端的世界时间时设置的时间.*
-+ getTargetBlockPosition
-  - *Gets the position of the looking block. This feature is used to get the coordinates of the farthest block you point to.*
-  - *获取你看向方块的坐标. 此特性用于获取你指向方向最远端的方块坐标.*
-+ openConfigGui
-  - *A hotkey to open the in-game Config GUI.*
-  - *打开设置界面的快捷键.*
-+ targetBlockMaxTraceDistance
-  - *Maximum line tracking distance of target block position.*
-  - *获取方块的最大直线追踪距离.*
-+ targetBlockPositionFormat
-  - *Position tracing format sent to public chat.*
-  - *发送至聊天窗的位置追踪格式.*
-+ targetBlockPositionMode
-  - *The block tracing position will be sent in this mode.*
-  - *获取到的追踪位置将该模式发送.*
 ### Color
 + colorBlockOutside
   - *Custom block outside color.*
@@ -83,6 +61,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + disableEntityZombieVillagerRendering
   - *Disables zombie villager entity rendering. Maybe it's useful for fake peace.*
   - *关闭游戏对僵尸村民实体的渲染. 也许对伪和平有帮助.*
++ disableRenderBossBar
+  - *Disables boss bar rendering when player is near boss. You will gain a broader view.*
+  - *关闭在玩家在Boss附近渲染Boss血条. 你将获得更广阔的视野.*
 + disableRenderOverlayFire
   - *Disables fire overlay rendering when player is on fire. You will gain a broader view.*
   - *关闭在玩家着火时的渲染覆盖. 你将获得更广阔的视野.*
@@ -92,16 +73,19 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + disableRenderOverlayPumpkin
   - *Disables mask overlay rendering when player is wearing pumpkin. You will gain a broader view.*
   - *关闭在玩家在穿戴南瓜时的渲染覆盖. 你将获得更广阔的视野.*
-+ disableScoreboardRendering
++ disableRenderBossBar
   - *Disables Scoreboard rendering. You will gain a broader view.*
   - *关闭游戏对计分板的UI渲染. 你将获得更广阔的视野.*
 + disableSlowdown
   - *Cancels slowness effects caused by honey, soul sand and using items.*
   - *取消蜂蜜块, 灵魂沙和使用物品时的减速效果.*
 ### Feature Toggle
++ featureAutoDrop
+  - *Automatically drops unwanted items.*
+  - *丢掉不想要的东西.*
 + featureAutoReconnect
-  - *Automatically reconnects when you disconnect from the server. Adaptive Authme and Reauth session validation*
-  - *从服务器断开连接时自动重新连接服务器. 适配 [Authme](https://www.curseforge.com/minecraft/mc-mods/auth-me) 和 [Reauth](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric) 会话验证*
+  - *Automatically reconnects when you disconnect from the server. Adaptive [Authme](https://www.curseforge.com/minecraft/mc-mods/auth-me) and [Reauth](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric) session validation.*
+  - *从服务器断开连接时自动重新连接服务器. 适配 [Authme](https://www.curseforge.com/minecraft/mc-mods/auth-me) 和 [Reauth](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric) 会话验证.*
 + featureAutoRespawn
   - *Automatically respawns you whenever you die.*
   - *死亡时自动重生.*
@@ -123,3 +107,32 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + featureOpenWaterHelper
   - *Shows whether or not you are fishing in 'open water' and draws a box around the area used for the open water calculation.*
   - *展示是否在'开放水域'钓鱼, 并在用于开阔水域计算的区域绘制一个方框.*
++ featureUnfocusedCPU
+  - *Will not render anything when your Minecraft window is not focused.*
+  - *当焦点未处于 Minecraft 窗口时, 客户端将不会执行渲染.*
+### Generic
++ autoReconnectTimer
+  - *How many seconds to wait for auto reconnection.*
+  - *等待多少秒后自动重连.*
++ daylightOverrideTime
+  - *The time set when overriding the client's world time.*
+  - *覆盖客户端的世界时间时设置的时间.*
++ getTargetBlockPosition
+  - *Gets the position of the looking block. This feature is used to get the coordinates of the farthest block you point to.*
+  - *获取你看向方块的坐标. 此特性用于获取你指向方向最远端的方块坐标.*
++ openConfigGui
+  - *A hotkey to open the in-game Config GUI.*
+  - *打开设置界面的快捷键.*
++ targetBlockMaxTraceDistance
+  - *Maximum line tracking distance of target block position.*
+  - *获取方块的最大直线追踪距离.*
++ targetBlockPositionFormat
+  - *Position tracing format sent to public chat.*
+  - *发送至聊天窗的位置追踪格式.*
++ targetBlockPositionMode
+  - *The block tracing position will be sent in this mode.*
+  - *获取到的追踪位置将该模式发送.*
+### List
++ listAutoDrop
+  - *Auto drop item list.*
+  - *自动物品丢弃列表.*

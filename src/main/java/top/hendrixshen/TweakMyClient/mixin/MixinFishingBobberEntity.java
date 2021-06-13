@@ -9,14 +9,12 @@ import top.hendrixshen.TweakMyClient.interfaces.IFishingBobberEntity;
 @Mixin(FishingBobberEntity.class)
 public class MixinFishingBobberEntity implements IFishingBobberEntity {
     @Override
-    public boolean checkOpenWaterAround(BlockPos pos)
-    {
+    public boolean checkOpenWaterAround(BlockPos pos) {
         return isOpenOrWaterAround(pos);
     }
 
     @Shadow
-    private boolean isOpenOrWaterAround(BlockPos pos)
-    {
+    private boolean isOpenOrWaterAround(BlockPos pos) {
         return false;
     }
 }

@@ -3,9 +3,6 @@ package top.hendrixshen.TweakMyClient.util.render;
 import fi.dy.masa.malilib.util.Color4f;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.projectile.FishingBobberEntity;
-import net.minecraft.network.MessageType;
-import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
-import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
 import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.interfaces.IFishingBobberEntity;
@@ -27,9 +24,9 @@ public class OverlayRenderer {
             RenderUtils.renderAreaOutline(pos1, pos2, 3.0f, color, color, color, mc);
         }
     }
-    private boolean isInOpenWater(FishingBobberEntity fishHook)
-    {
-        return ((IFishingBobberEntity)fishHook).checkOpenWaterAround(fishHook.getBlockPos());
+
+    private boolean isInOpenWater(FishingBobberEntity fishHook) {
+        return ((IFishingBobberEntity) fishHook).checkOpenWaterAround(fishHook.getBlockPos());
     }
 
 

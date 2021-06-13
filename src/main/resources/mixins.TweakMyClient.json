@@ -12,7 +12,9 @@
   "mixins": [
     "IMixinInGameOverlayRenderer",
     "MixinBlock",
+    "MixinBossBarHud",
     "MixinClientPlayerEntity",
+    "MixinClientPlayerInteractionManager",
     "MixinClientPlayNetworkHandler",
     "MixinClientWorld",
     "MixinClientWorldProperties",
@@ -21,6 +23,7 @@
     "MixinDisconnectedScreen",
     "MixinEntityRenderDispatcher",
     "MixinFishingBobberEntity",
+    "MixinGameRenderer",
     "MixinInGameHud",
     "MixinInGameOverlayRenderer",
     "MixinMinecraftClient",
