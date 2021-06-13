@@ -86,11 +86,11 @@
     "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.name": "featureUnfocusedCPU",
     "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.comment": "Will not render anything when your Minecraft window is not focused.",
 
-    "tweakmyclient.label.targetBlockPositionPrintMode.private": "private",
-    "tweakmyclient.label.targetBlockPositionPrintMode.public": "public",
-
     "tweakmyclient.config.list.listAutoDrop.name": "listAutoDrop",
     "tweakmyclient.config.list.listAutoDrop.comment": "Auto drop item list.",
+
+    "tweakmyclient.label.targetBlockPositionPrintMode.private": "private",
+    "tweakmyclient.label.targetBlockPositionPrintMode.public": "public",
 
     "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "Re-authenticate with AuthMe",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "Re-authenticate with ReAuth",
