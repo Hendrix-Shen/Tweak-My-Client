@@ -12,7 +12,9 @@
   "mixins": [
     "IMixinInGameOverlayRenderer",
     "MixinBlock",
+    "MixinBossBarHud",
     "MixinClientPlayerEntity",
+    "MixinClientPlayerInteractionManager",
     "MixinClientPlayNetworkHandler",
     "MixinClientWorld",
     "MixinClientWorldProperties",

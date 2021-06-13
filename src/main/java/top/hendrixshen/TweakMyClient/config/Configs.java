@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import top.hendrixshen.TweakMyClient.Reference;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
+import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
 import top.hendrixshen.TweakMyClient.util.RayTraceUtils;
 
 import java.io.File;
@@ -35,11 +36,14 @@ public class Configs implements IConfigHandler {
             if (element != null && element.isJsonObject()) {
                 JsonObject root = element.getAsJsonObject();
                 ConfigUtils.readConfigBase(root, "Generic", Generic.OPTIONS);
+                ConfigUtils.readConfigBase(root, "List", List.OPTIONS);
                 ConfigUtils.readConfigBase(root, "Color", Color.OPTIONS);
                 ConfigUtils.readHotkeyToggleOptions(root, "DisableHotkey", "Disable", Disable.OPTIONS);
                 ConfigUtils.readHotkeyToggleOptions(root, "FeatureHotkey", "Feature", Feature.OPTIONS);
             }
         }
+
+        AutoDropUtils.itemStacks = top.hendrixshen.TweakMyClient.util.StringUtils.getItemStackSets(Configs.List.LIST_AUTO_DROP.getStrings());
     }
 
     public static void saveToFile() {
@@ -48,6 +52,7 @@ public class Configs implements IConfigHandler {
         if ((dir.exists() && dir.isDirectory()) || dir.mkdirs()) {
             JsonObject root = new JsonObject();
             ConfigUtils.writeConfigBase(root, "Generic", Generic.OPTIONS);
+            ConfigUtils.writeConfigBase(root, "List", List.OPTIONS);
             ConfigUtils.writeConfigBase(root, "Color", Color.OPTIONS);
             ConfigUtils.writeHotkeyToggleOptions(root, "DisableHotkey", "Disable", Disable.OPTIONS);
             ConfigUtils.writeHotkeyToggleOptions(root, "FeatureHotkey", "Feature", Feature.OPTIONS);
@@ -168,8 +173,17 @@ public class Configs implements IConfigHandler {
         }
     }
 
+    public static class List {
+        private static final String PREFIX = String.format("%s.config.list", Reference.MOD_ID);
+        public static final ConfigStringList LIST_AUTO_DROP = new TranslatableConfigStringList(PREFIX, "listAutoDrop", ImmutableList.of("minecraft:stone", "minecraft:dirt", "minecraft:cobblestone", "minecraft:gravel", "minecraft:rotten_flesh"));
+        public static final ImmutableList<ConfigStringList> OPTIONS = ImmutableList.of(
+                LIST_AUTO_DROP
+        );
+    }
+
     public static class Feature {
         private static final String PREFIX = String.format("%s.config.feature_toggle", Reference.MOD_ID);
+        public static final ConfigBooleanHotkeyed FEATURE_AUTO_DROP = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoDrop", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RECONNECT = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoReconnect", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RESPAWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoRespawn", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureBlockOutsideColor", false, "");
@@ -181,6 +195,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_UNFOCUSED_CPU = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureUnfocusedCPU", false, "");
 
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
+                FEATURE_AUTO_DROP,
                 FEATURE_AUTO_RECONNECT,
                 FEATURE_AUTO_RESPAWN,
                 FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR,
@@ -223,6 +238,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_WITHER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityWitherRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityZombieVillagerRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_GUI_SHADOW_LAYER = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableGuiShadowLayer", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_RENDER_BOSS_BAR = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderBossBar", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_FIRE = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayFire", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_PUMPKIN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayPumpkin", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_SCOREBOARD = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderScoreboard", false, "");
@@ -237,6 +253,7 @@ public class Configs implements IConfigHandler {
                 DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING,
                 DISABLE_ENTITY_WITHER_RENDERING,
                 DISABLE_GUI_SHADOW_LAYER,
+                DISABLE_RENDER_BOSS_BAR,
                 DISABLE_RENDER_OVERLAY_FIRE,
                 DISABLE_RENDER_OVERLAY_PUMPKIN,
                 DISABLE_RENDER_SCOREBOARD,

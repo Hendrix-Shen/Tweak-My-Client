@@ -6,6 +6,7 @@
     "tweakmyclient.gui.button.config_gui.disable_hotkeys": "Disable Hotkey",
     "tweakmyclient.gui.button.config_gui.feature_toggle": "Feature Toggle",
     "tweakmyclient.gui.button.config_gui.feature_hotkeys": "Feature Hotkey",
+    "tweakmyclient.gui.button.config_gui.list": "List",
 
     "tweakmyclient.config.generic.autoReconnectTimer.name": "autoReconnectTimer",
     "tweakmyclient.config.generic.autoReconnectTimer.comment": "How many seconds to wait for auto reconnection.",
@@ -51,10 +52,12 @@
     "tweakmyclient.config.disable_toggle.disableEntityWitherRendering.comment": "Disables wither entity rendering.\nMaybe it's useful for fake peace.",
     "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.name": "disableEntityZombieVillagerRendering",
     "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.comment": "Disables zombie villager entity rendering.\nMaybe it's useful for fake peace.",
-    "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.name": "disableRenderOverlayFire",
-    "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.comment": "Disables fire overlay rendering when player is on fire.\nYou will gain a broader view.",
     "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.name": "disableGuiShadowLayer",
     "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.comment": "Disables gui shadow overlay rendering when gui is opening.",
+    "tweakmyclient.config.disable_toggle.disableRenderBossBar.name": "disableRenderBossBar",
+    "tweakmyclient.config.disable_toggle.disableRenderBossBar.comment": "Disables boss bar rendering when player is near boss.\nYou will gain a broader view.",
+    "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.name": "disableRenderOverlayFire",
+    "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.comment": "Disables fire overlay rendering when player is on fire.\nYou will gain a broader view.",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.name": "disableRenderOverlayPumpkin",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.comment": "Disables mask overlay rendering when player is wearing pumpkin.\nYou will gain a broader view.",
     "tweakmyclient.config.disable_toggle.disableRenderScoreboard.name": "disableRenderScoreboard",
@@ -62,6 +65,8 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "disableSlowdown",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "Cancels slowness effects caused by honey, soul sand and using items.",
 
+    "tweakmyclient.config.feature_toggle.featureAutoDrop.name": "featureAutoDrop",
+    "tweakmyclient.config.feature_toggle.featureAutoDrop.comment": "Automatically drops unwanted items.",
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.name": "featureAutoReconnect",
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.\nAdaptive authme and reauth session validation.",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "featureAutoRespawn",
@@ -83,6 +88,9 @@
 
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "private",
     "tweakmyclient.label.targetBlockPositionPrintMode.public": "public",
+
+    "tweakmyclient.list.listAutoDrop.name": "listAutoDrop",
+    "tweakmyclient.list.listAutoDrop.comment": "Auto drop item list.",
 
     "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "Re-authenticate with AuthMe",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "Re-authenticate with ReAuth",
