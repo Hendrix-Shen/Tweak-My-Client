@@ -95,5 +95,5 @@
     "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "使用 ReAuth 验证会话",
     "tweakmyclient.message.autoReconnect.static": "自动重连",
     "tweakmyclient.message.autoReconnect.timer": "切换自动重连 (%d)",
-    "tweakmyclient.message.autoReconnect.toggle": "切换自动重连",
+    "tweakmyclient.message.autoReconnect.toggle": "切换自动重连"
 }
