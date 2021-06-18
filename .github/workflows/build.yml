@@ -46,7 +46,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - name: Upload assets to GitHub
-        if: ${{ runner.os == 'Linux' && matrix.java == '1.8' }} # Only upload artifacts built from java 1.8 on one OS
+        if: ${{ runner.os == 'Linux' && matrix.java == '16' }} # Only upload artifacts built from java 1.8 on one OS
         uses: actions/upload-artifact@v2
         with:
           name: build-artifacts
