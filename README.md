@@ -133,6 +133,12 @@ The default hotkey to open the in-game config GUI is **T + C**.
   - *The block tracing position will be sent in this mode.*
   - *获取到的追踪位置将该模式发送.*
 ### List
-+ listAutoDrop
-  - *Auto drop item list.*
-  - *自动物品丢弃列表.*
++ listAutoDropBlackList
+  - *Auto drop item black list. All items in this list won't be auto dropped.*
+  - *自动丢弃物品黑名单. 所有在此列表的物品将不会被丢弃.*
++ listAutoDropType
+  - *Auto drop item list type.*
+  - *自动丢弃物品列表类型.*
++ listAutoDropWhiteList
+  - *Auto drop item white list. All items in this list will be auto dropped.*
+  - *自动丢弃物品白名单. 所有在此列表的物品将会被丢弃..*
