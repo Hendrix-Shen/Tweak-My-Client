@@ -43,7 +43,8 @@ public class Configs implements IConfigHandler {
             }
         }
 
-        AutoDropUtils.itemStacks = top.hendrixshen.TweakMyClient.util.StringUtils.getItemStackSets(Configs.List.LIST_AUTO_DROP.getStrings());
+        AutoDropUtils.itemStacksBlackList = top.hendrixshen.TweakMyClient.util.StringUtils.getItemStackSets(List.LIST_AUTO_DROP_BLACK_LIST.getStrings());
+        AutoDropUtils.itemStacksWhitelist = top.hendrixshen.TweakMyClient.util.StringUtils.getItemStackSets(List.LIST_AUTO_DROP_WHITE_LIST.getStrings());
     }
 
     public static void saveToFile() {
@@ -116,6 +117,52 @@ public class Configs implements IConfigHandler {
             return TargetBlockPositionPrintMode.PRIVATE;
         }
     }
+    public enum AutoDropListType implements IConfigOptionListEntry {
+        BLACKLIST("blackList"),
+        WHITELIST("whiteList");
+
+        private final String name;
+
+        AutoDropListType(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String getStringValue() {
+            return this.name;
+        }
+
+        @Override
+        public String getDisplayName() {
+            return StringUtils.translate(String.format("%s.label.autoDropListType.%s", Reference.MOD_ID, this.name));
+        }
+
+        @Override
+        public IConfigOptionListEntry cycle(boolean forward) {
+            int id = this.ordinal();
+
+            if (forward) {
+                if (++id >= values().length) {
+                    id = 0;
+                }
+            } else {
+                if (--id < 0) {
+                    id = values().length - 1;
+                }
+            }
+            return values()[id % values().length];
+        }
+
+        @Override
+        public IConfigOptionListEntry fromString(String value) {
+            for (AutoDropListType mode : AutoDropListType.values()) {
+                if (mode.name.equalsIgnoreCase(name)) {
+                    return mode;
+                }
+            }
+            return AutoDropListType.WHITELIST;
+        }
+    }
 
     public static class Generic {
         private static final String PREFIX = String.format("%s.config.generic", Reference.MOD_ID);
@@ -175,9 +222,13 @@ public class Configs implements IConfigHandler {
 
     public static class List {
         private static final String PREFIX = String.format("%s.config.list", Reference.MOD_ID);
-        public static final ConfigStringList LIST_AUTO_DROP = new TranslatableConfigStringList(PREFIX, "listAutoDrop", ImmutableList.of("minecraft:stone", "minecraft:dirt", "minecraft:cobblestone", "minecraft:gravel", "minecraft:rotten_flesh"));
-        public static final ImmutableList<ConfigStringList> OPTIONS = ImmutableList.of(
-                LIST_AUTO_DROP
+        public static final ConfigStringList LIST_AUTO_DROP_BLACK_LIST = new TranslatableConfigStringList(PREFIX, "listAutoDropBlackList", ImmutableList.of("minecraft:bow", "minecraft:crossbow", "minecraft:diamond_axe", "minecraft:diamond_boots", "minecraft:diamond_chestplate", "minecraft:diamond_helmet", "minecraft:diamond_hoe", "minecraft:diamond_leggings", "minecraft:diamond_pickaxe", "minecraft:diamond_shovel", "minecraft:diamond_sword", "minecraft:elytra", "minecraft:enchanted_golden_apple", "minecraft:flint_and_steel", "minecraft:golden_apple", "minecraft:golden_axe", "minecraft:golden_boots", "minecraft:golden_chestplate", "minecraft:golden_helmet", "minecraft:golden_hoe", "minecraft:golden_leggings", "minecraft:golden_pickaxe", "minecraft:golden_shovel", "minecraft:golden_sword", "minecraft:iron_axe", "minecraft:iron_boots", "minecraft:iron_chestplate", "minecraft:iron_helmet", "minecraft:iron_hoe", "minecraft:iron_leggings", "minecraft:iron_pickaxe", "minecraft:iron_shovel", "minecraft:iron_sword", "minecraft:netherite_axe", "minecraft:netherite_boots", "minecraft:netherite_chestplate", "minecraft:netherite_helmet", "minecraft:netherite_hoe", "minecraft:netherite_leggings", "minecraft:netherite_pickaxe", "minecraft:netherite_shovel", "minecraft:netherite_sword", "minecraft:shears", "minecraft:shield", "minecraft:totem_of_undying", "minecraft:trident", "minecraft:turtle_helmet"));
+        public static final ConfigOptionList LIST_AUTO_DROP_TYPE = new TranslatableConfigOptionList(PREFIX, "listAutoDropType", AutoDropListType.WHITELIST);
+        public static final ConfigStringList LIST_AUTO_DROP_WHITE_LIST = new TranslatableConfigStringList(PREFIX, "listAutoDropWhiteList", ImmutableList.of("minecraft:stone", "minecraft:dirt", "minecraft:cobblestone", "minecraft:gravel", "minecraft:rotten_flesh"));
+        public static final ImmutableList<ConfigBase> OPTIONS = ImmutableList.of(
+                LIST_AUTO_DROP_BLACK_LIST,
+                LIST_AUTO_DROP_TYPE,
+                LIST_AUTO_DROP_WHITE_LIST
         );
     }
 
