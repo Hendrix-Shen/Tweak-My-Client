@@ -85,9 +85,16 @@
     "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.comment": "展示是否在'开放水域'钓鱼, 并在用于开阔水域计算的区域绘制一个方框",
     "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.name": "失去焦点释放CPU",
     "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.comment": "当焦点未处于 Minecraft 窗口时, 客户端将不会执行渲染.",
-    "tweakmyclient.config.list.listAutoDrop.name": "自动丢弃列表",
-    "tweakmyclient.config.list.listAutoDrop.comment": "自动物品丢弃列表.",
 
+    "tweakmyclient.config.list.listAutoDropBlackList.name": "自动丢弃黑名单",
+    "tweakmyclient.config.list.listAutoDropBlackList.comment": "自动丢弃物品黑名单.\n所有在此列表的物品将不会被丢弃.",
+    "tweakmyclient.config.list.listAutoDropType.name": "自动丢弃列表类型",
+    "tweakmyclient.config.list.listAutoDropType.comment": "自动丢弃物品列表类型.",
+    "tweakmyclient.config.list.listAutoDropWhiteList.name": "自动丢弃白名单",
+    "tweakmyclient.config.list.listAutoDropWhiteList.comment": "自动丢弃物品白名单.\n所有在此列表的物品将会被丢弃.",
+
+    "tweakmyclient.label.autoDropListType.blackList": "黑名单",
+    "tweakmyclient.label.autoDropListType.whiteList": "白名单",
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "私人",
     "tweakmyclient.label.targetBlockPositionPrintMode.public": "公共",
 

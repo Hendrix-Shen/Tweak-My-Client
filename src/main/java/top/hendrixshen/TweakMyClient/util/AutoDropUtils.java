@@ -6,12 +6,14 @@ import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
+import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.interfaces.IMinecraftClient;
 
 import java.util.HashSet;
 
 public class AutoDropUtils {
-    public static HashSet<Item> itemStacks;
+    public static HashSet<Item> itemStacksWhitelist;
+    public static HashSet<Item> itemStacksBlackList;
 
     public static void doDrop() {
         MinecraftClient mc = TweakMyClient.minecraftClient;
@@ -22,16 +24,26 @@ public class AutoDropUtils {
         for(int slot = 9; slot < 45; slot++)
         {
             int adjustedSlot = slot;
-            if(adjustedSlot >= 36)
+            if (adjustedSlot >= 36)
                 adjustedSlot -= 36;
             ItemStack stack = mc.player.getInventory().getStack(adjustedSlot);
 
-            if(stack.isEmpty())
+            if (stack.isEmpty())
                 continue;
 
-            if(!itemStacks.contains(stack.getItem()))
-                continue;
-            ((IMinecraftClient)mc).getInteractionManager().windowClickThrow(slot);
+            Configs.AutoDropListType mode = (Configs.AutoDropListType) Configs.List.LIST_AUTO_DROP_TYPE.getOptionListValue();
+            switch (mode) {
+                case BLACKLIST:
+                    if (!itemStacksBlackList.contains(stack.getItem())) {
+                        ((IMinecraftClient)mc).getInteractionManager().windowClickThrow(slot);
+                    }
+                    break;
+                case WHITELIST:
+                    if (itemStacksWhitelist.contains(stack.getItem())) {
+                        ((IMinecraftClient)mc).getInteractionManager().windowClickThrow(slot);
+                    }
+                    break;
+            }
         }
     }
 }
