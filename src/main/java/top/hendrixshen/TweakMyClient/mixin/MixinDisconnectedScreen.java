@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.Reference;
 import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.TweakMyClient.util.AutoReconnect;
+import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
 @Mixin(value = DisconnectedScreen.class, priority = 900)
 public class MixinDisconnectedScreen extends Screen {
@@ -48,14 +48,14 @@ public class MixinDisconnectedScreen extends Screen {
     )
     private void onInitDisconnectedScreen(CallbackInfo ci) {
         if (Configs.Feature.FEATURE_AUTO_RECONNECT.getBooleanValue()) {
-            AutoReconnect.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
+            AutoReconnectUtils.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
         }
 
         int backButtonX = width / 2 - 100;
         int backButtonY = Math.min(height / 2 + reasonHeight / 2 + 9, height - 30);
 
         addDrawableChild(new ButtonWidget(backButtonX, backButtonY + 24, 200, 20,
-                new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.static", PREFIX))), b -> AutoReconnect.reconnect(parent)));
+                new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.static", PREFIX))), b -> AutoReconnectUtils.reconnect(parent)));
 
         autoReconnectButton =
                 addDrawableChild(new ButtonWidget(backButtonX, backButtonY + 48, 200, 20,
@@ -71,7 +71,7 @@ public class MixinDisconnectedScreen extends Screen {
         featureAutoReconnect.setBooleanValue(!featureAutoReconnect.getBooleanValue());
 
         if (featureAutoReconnect.getBooleanValue()) {
-            AutoReconnect.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
+            AutoReconnectUtils.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
         }
     }
 
@@ -81,12 +81,12 @@ public class MixinDisconnectedScreen extends Screen {
             autoReconnectButton.setMessage(new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.toggle", PREFIX))));
             return;
         }
-        autoReconnectButton.setMessage(new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.timer", PREFIX), (int) Math.ceil(AutoReconnect.ReconnectTimer / 20.0))));
+        autoReconnectButton.setMessage(new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.timer", PREFIX), (int) Math.ceil(AutoReconnectUtils.ReconnectTimer / 20.0))));
 
-        if (AutoReconnect.ReconnectTimer > 0) {
-            AutoReconnect.ReconnectTimer--;
+        if (AutoReconnectUtils.ReconnectTimer > 0) {
+            AutoReconnectUtils.ReconnectTimer--;
             return;
         }
-        AutoReconnect.reconnect(parent);
+        AutoReconnectUtils.reconnect(parent);
     }
 }

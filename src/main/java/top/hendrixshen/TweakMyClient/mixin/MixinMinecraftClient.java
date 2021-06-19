@@ -12,11 +12,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.interfaces.IClientPlayerInteractionManager;
 import top.hendrixshen.TweakMyClient.interfaces.IMinecraftClient;
-import top.hendrixshen.TweakMyClient.util.AutoReconnect;
+import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
 @Mixin(MinecraftClient.class)
 public class MixinMinecraftClient implements IMinecraftClient {
-    @Shadow @Nullable public ClientPlayerInteractionManager interactionManager;
+    @Shadow
+    @Nullable
+    public ClientPlayerInteractionManager interactionManager;
 
     @Inject(
             method = "setCurrentServerEntry",
@@ -25,15 +27,14 @@ public class MixinMinecraftClient implements IMinecraftClient {
             )
     )
     private void setCurrentServerEntry(ServerInfo serverInfo, CallbackInfo info) {
-        AutoReconnect.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
+        AutoReconnectUtils.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
         if (serverInfo != null) {
-            AutoReconnect.setLastServer(serverInfo);
+            AutoReconnectUtils.setLastServer(serverInfo);
         }
     }
 
     @Override
-    public IClientPlayerInteractionManager getInteractionManager()
-    {
-        return (IClientPlayerInteractionManager)interactionManager;
+    public IClientPlayerInteractionManager getInteractionManager() {
+        return (IClientPlayerInteractionManager) interactionManager;
     }
 }

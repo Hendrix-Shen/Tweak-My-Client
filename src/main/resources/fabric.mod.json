@@ -1,47 +1,43 @@
 {
-    "schemaVersion": 1,
-    "id": "tweak-my-client",
-    "name": "TweakMyClient",
-    "version": "${mod_version}",
-    "icon": "assets/tweakmyclient/icon.png",
-
-    "description": "Add something interesting <3",
-    "authors": [
-        {
-          "name": "Hendrix_Shen",
-          "contact": {
-            "homepage": "https://github.com/Hendrix-Shen"
-          }
-        }
-    ],
-    "contact": {
-        "homepage": "https://www.curseforge.com/minecraft/mc-mods/tweakmyclient",
-        "issues": "https://github.com/Hendrix-Shen/Tweak-My-Client/issues",
-        "sources": "https://github.com/Hendrix-Shen/Tweak-My-Client"
-    },
-
-    "license": "GPLv3",
-    "environment": "client",
-    "entrypoints": {
-        "main": [
-            "top.hendrixshen.TweakMyClient.TweakMyClient"
-        ],
-        "modmenu": [
-            "top.hendrixshen.TweakMyClient.compat.modmenu.ModMenuApiImpl"
-        ]
-    },
-
-    "mixins": [
-        "mixins.TweakMyClient.json"
-    ],
-
-    "depends": {
-        "fabricloader": ">=0.9.0",
-        "malilib": ">=0.10.0-dev.22",
-        "minecraft": "1.17.x"
-    },
-    "suggests": {
-        "authme": ">=1.4.0",
-        "reauth": ">=3.9.2"
+  "schemaVersion": 1,
+  "id": "tweak-my-client",
+  "name": "TweakMyClient",
+  "version": "${mod_version}",
+  "icon": "assets/tweakmyclient/icon.png",
+  "description": "Add something interesting <3",
+  "authors": [
+    {
+      "name": "Hendrix_Shen",
+      "contact": {
+        "homepage": "https://github.com/Hendrix-Shen"
+      }
     }
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/tweakmyclient",
+    "issues": "https://github.com/Hendrix-Shen/Tweak-My-Client/issues",
+    "sources": "https://github.com/Hendrix-Shen/Tweak-My-Client"
+  },
+  "license": "GPLv3",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "top.hendrixshen.TweakMyClient.TweakMyClient"
+    ],
+    "modmenu": [
+      "top.hendrixshen.TweakMyClient.compat.modmenu.ModMenuApiImpl"
+    ]
+  },
+  "mixins": [
+    "mixins.TweakMyClient.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.9.0",
+    "malilib": ">=0.10.0-dev.22",
+    "minecraft": "1.17.x"
+  },
+  "suggests": {
+    "authme": ">=1.4.0",
+    "reauth": ">=3.9.2"
+  }
 }

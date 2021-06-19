@@ -10,37 +10,31 @@ import java.util.HashSet;
 import java.util.List;
 
 public class StringUtils {
-    public static ItemStack parseItemFromString(String str)
-    {
-        try
-        {
+    public static ItemStack parseItemFromString(String str) {
+        try {
             ItemStringReader reader = new ItemStringReader(new StringReader(str), true);
             reader.consume();
             Item item = reader.getItem();
 
-            if (item != null)
-            {
+            if (item != null) {
                 ItemStack stack = new ItemStack(item);
                 stack.setTag(reader.getNbt());
                 return stack;
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             TweakMyClient.logger.warn("Invalid item '{}'", str);
         }
 
         return ItemStack.EMPTY;
     }
+
     public static HashSet<Item> getItemStackSets(List<String> items) {
         HashSet<Item> itemStackSet = new HashSet<>();
-        for (String str : items)
-        {
+        for (String str : items) {
             ItemStack stack = parseItemFromString(str);
 
-            if (!stack.isEmpty())
-            {
+            if (!stack.isEmpty()) {
                 itemStackSet.add(stack.getItem());
             }
         }

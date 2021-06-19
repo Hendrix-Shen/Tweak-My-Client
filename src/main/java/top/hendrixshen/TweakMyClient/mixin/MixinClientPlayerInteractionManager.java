@@ -3,7 +3,6 @@ package top.hendrixshen.TweakMyClient.mixin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.SlotActionType;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,11 +14,12 @@ public abstract class MixinClientPlayerInteractionManager implements IClientPlay
     @Shadow
     public abstract void clickSlot(int syncId, int slotId, int button, SlotActionType actionType, PlayerEntity playerEntity);
 
-    @Shadow @Final private MinecraftClient client;
+    @Shadow
+    @Final
+    private MinecraftClient client;
 
     @Override
-    public void windowClickThrow(int slot)
-    {
+    public void windowClickThrow(int slot) {
         clickSlot(0, slot, 1, SlotActionType.THROW, client.player);
     }
 }

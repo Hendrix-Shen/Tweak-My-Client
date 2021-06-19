@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.Reference;
 import top.hendrixshen.TweakMyClient.TweakMyClientMixinPlugin;
 import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.TweakMyClient.util.AutoReconnect;
+import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
 @Mixin(value = DisconnectedScreen.class, priority = 899)
 public class MixinDisconnectedScreen extends Screen {
@@ -46,7 +46,7 @@ public class MixinDisconnectedScreen extends Screen {
     private void onInitDisconnectedScreen(CallbackInfo ci) {
         int backButtonX = width / 2 - 100;
         int backButtonY = Math.min(height / 2 + reasonHeight / 2 + 9, height - 30);
-        if (reason == null || AutoReconnect.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
+        if (reason == null || AutoReconnectUtils.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
             Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
             if (TweakMyClientMixinPlugin.isAuthMeLoaded) {
                 addDrawableChild(new ButtonWidget(backButtonX, backButtonY + 72, 200, 20,
