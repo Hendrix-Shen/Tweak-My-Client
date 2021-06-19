@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import top.hendrixshen.TweakMyClient.Reference;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
+import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
 import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
 import top.hendrixshen.TweakMyClient.util.RayTraceUtils;
 
@@ -166,6 +167,7 @@ public class Configs implements IConfigHandler {
 
     public static class Generic {
         private static final String PREFIX = String.format("%s.config.generic", Reference.MOD_ID);
+        public static final ConfigHotkey ANTI_GHOST_ITEMS_MANUAL_TRIGGER = new TranslatableConfigHotkey(PREFIX, "antiGhostItemsManualTrigger", "");
         public static final ConfigInteger AUTO_RECONNECT_TIMER = new TranslatableConfigInteger(PREFIX, "autoReconnectTimer", 5, 0, 60);
         public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
@@ -175,6 +177,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigOptionList TARGET_BLOCK_POSITION_PRINT_MODE = new TranslatableConfigOptionList(PREFIX, "targetBlockPositionPrintMode", TargetBlockPositionPrintMode.PRIVATE);
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
+                ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
                 AUTO_RECONNECT_TIMER,
                 DAYLIGHT_OVERRIDE_TIME,
                 GET_TARGET_BLOCK_POSITION,
@@ -184,13 +187,23 @@ public class Configs implements IConfigHandler {
                 TARGET_BLOCK_POSITION_PRINT_MODE
         );
         public static final ImmutableList<ConfigHotkey> HOTKEYS = ImmutableList.of(
-                OPEN_CONFIG_GUI,
-                GET_TARGET_BLOCK_POSITION
+                ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
+                GET_TARGET_BLOCK_POSITION,
+                OPEN_CONFIG_GUI
         );
 
         static {
-            OPEN_CONFIG_GUI.getKeybind().setCallback((keyAction, iKeybind) -> {
-                GuiConfigs.openGui(new GuiConfigs());
+            ANTI_GHOST_ITEMS_MANUAL_TRIGGER.getKeybind().setCallback((action, key) -> {
+                MinecraftClient mc = TweakMyClient.minecraftClient;
+                if (!Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue() || mc.player == null) {
+                    return true;
+                }
+                if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
+                    mc.player.sendMessage(new LiteralText(StringUtils.translate("tweakmyclient.message.antiGhostItemsManualTrigger.mustWait", AntiGhostItemsUtils.manualRefreshTimer / 20)), true);
+                    return true;
+                }
+                AntiGhostItemsUtils.refreshInventory();
+                AntiGhostItemsUtils.manualRefreshTimer = 200;
                 return true;
             });
             GET_TARGET_BLOCK_POSITION.getKeybind().setCallback((action, key) -> {
@@ -217,6 +230,10 @@ public class Configs implements IConfigHandler {
                 }
                 return true;
             });
+            OPEN_CONFIG_GUI.getKeybind().setCallback((keyAction, iKeybind) -> {
+                GuiConfigs.openGui(new GuiConfigs());
+                return true;
+            });
         }
     }
 
@@ -234,6 +251,7 @@ public class Configs implements IConfigHandler {
 
     public static class Feature {
         private static final String PREFIX = String.format("%s.config.feature_toggle", Reference.MOD_ID);
+        public static final ConfigBooleanHotkeyed FEATURE_ANTI_GHOST_ITEMS = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAntiGhostItems", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_DROP = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoDrop", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RECONNECT = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoReconnect", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RESPAWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoRespawn", false, "");
@@ -246,6 +264,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_UNFOCUSED_CPU = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureUnfocusedCPU", false, "");
 
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
+                FEATURE_ANTI_GHOST_ITEMS,
                 FEATURE_AUTO_DROP,
                 FEATURE_AUTO_RECONNECT,
                 FEATURE_AUTO_RESPAWN,

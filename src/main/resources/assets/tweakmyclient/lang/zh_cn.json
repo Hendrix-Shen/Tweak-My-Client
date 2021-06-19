@@ -8,6 +8,8 @@
     "tweakmyclient.gui.button.config_gui.feature_hotkeys": "特性快捷键",
     "tweakmyclient.gui.button.config_gui.list": "列表",
 
+    "tweakmyclient.config.generic.antiGhostItemsManualTrigger.name": "手动清除幽灵物品",
+    "tweakmyclient.config.generic.antiGhostItemsManualTrigger.comment": "手动触发一次清除幽灵物品.",
     "tweakmyclient.config.generic.autoReconnectTimer.name": "自动重连计时器",
     "tweakmyclient.config.generic.autoReconnectTimer.comment": "等待多少秒后自动重连.",
     "tweakmyclient.config.generic.daylightOverrideTime.name": "客户端时间",
@@ -65,6 +67,8 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "禁用减速",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "取消蜂蜜块, 灵魂沙和使用物品时的减速效果.",
 
+    "tweakmyclient.config.feature_toggle.featureAntiGhostItems.name": "清除幽灵物品",
+    "tweakmyclient.config.feature_toggle.featureAntiGhostItems.comment": "尝试向服务器发送虚假数据, 以便从服务端获取正确的玩家背包数据",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.name": "自动丢弃",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.comment": "丢掉不想要的东西.",
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.name": "自动重连",
@@ -98,6 +102,7 @@
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "私人",
     "tweakmyclient.label.targetBlockPositionPrintMode.public": "公共",
 
+    "tweakmyclient.message.antiGhostItemsManualTrigger.mustWait": "你必须等待 %d 秒才能再次使用幽灵物品清除",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "使用 AuthMe 验证会话",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "使用 ReAuth 验证会话",
     "tweakmyclient.message.autoReconnect.static": "自动重连",
