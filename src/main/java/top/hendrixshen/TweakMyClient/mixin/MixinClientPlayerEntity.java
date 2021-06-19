@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
 import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
 
 @Mixin(ClientPlayerEntity.class)
@@ -39,6 +40,11 @@ public class MixinClientPlayerEntity {
     private void onTick(CallbackInfo ci) {
         if (Configs.Feature.FEATURE_AUTO_DROP.getBooleanValue()) {
             AutoDropUtils.doDrop();
+        }
+        if (Configs.Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue()) {
+            if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
+                AntiGhostItemsUtils.manualRefreshTimer--;
+            }
         }
     }
 }

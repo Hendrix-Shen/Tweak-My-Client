@@ -8,6 +8,8 @@
     "tweakmyclient.gui.button.config_gui.feature_hotkeys": "Feature Hotkey",
     "tweakmyclient.gui.button.config_gui.list": "List",
 
+    "tweakmyclient.config.generic.antiGhostItemsManualTrigger.name": "antiGhostItemsManualTrigger",
+    "tweakmyclient.config.generic.antiGhostItemsManualTrigger.comment": "Manually trigger antiGhostItems once.",
     "tweakmyclient.config.generic.autoReconnectTimer.name": "autoReconnectTimer",
     "tweakmyclient.config.generic.autoReconnectTimer.comment": "How many seconds to wait for auto reconnection.",
     "tweakmyclient.config.generic.daylightOverrideTime.name": "daylightOverrideTime",
@@ -65,6 +67,8 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "disableSlowdown",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "Cancels slowness effects caused by honey, soul sand and using items.",
 
+    "tweakmyclient.config.feature_toggle.featureAntiGhostItems.name": "featureAntiGhostItems",
+    "tweakmyclient.config.feature_toggle.featureAntiGhostItems.comment": "Try to send false data to the server in order to get the correct player inventory data from the server.",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.name": "featureAutoDrop",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.comment": "Automatically drops unwanted items.",
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.name": "featureAutoReconnect",
@@ -99,6 +103,7 @@
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "private",
     "tweakmyclient.label.targetBlockPositionPrintMode.public": "public",
 
+    "tweakmyclient.message.antiGhostItemsManualTrigger.mustWait": "You have to wait %d second to trigger antiGhostItems again",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "Re-authenticate with AuthMe",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "Re-authenticate with ReAuth",
     "tweakmyclient.message.autoReconnect.static": "AutoReconnect",
