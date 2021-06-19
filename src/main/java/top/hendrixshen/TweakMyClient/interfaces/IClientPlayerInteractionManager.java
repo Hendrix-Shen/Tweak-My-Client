@@ -4,5 +4,5 @@ import net.minecraft.item.ItemStack;
 
 public interface IClientPlayerInteractionManager {
 
-    public ItemStack windowClickThrow(int slot);
+    ItemStack windowClickThrow(int slot);
 }

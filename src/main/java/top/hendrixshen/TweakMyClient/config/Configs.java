@@ -118,6 +118,7 @@ public class Configs implements IConfigHandler {
             return TargetBlockPositionPrintMode.PRIVATE;
         }
     }
+
     public enum AutoDropListType implements IConfigOptionListEntry {
         BLACKLIST("blackList"),
         WHITELIST("whiteList");

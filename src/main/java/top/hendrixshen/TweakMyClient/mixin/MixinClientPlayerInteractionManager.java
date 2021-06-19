@@ -15,11 +15,12 @@ public abstract class MixinClientPlayerInteractionManager implements IClientPlay
     @Shadow
     public abstract ItemStack clickSlot(int int_1, int int_2, int int_3, SlotActionType slotActionType_1, PlayerEntity playerEntity_1);
 
-    @Shadow @Final private MinecraftClient client;
+    @Shadow
+    @Final
+    private MinecraftClient client;
 
     @Override
-    public ItemStack windowClickThrow(int slot)
-    {
+    public ItemStack windowClickThrow(int slot) {
         return clickSlot(0, slot, 1, SlotActionType.THROW, client.player);
     }
 }

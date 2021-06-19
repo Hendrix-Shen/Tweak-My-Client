@@ -7,7 +7,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 
-public class AutoReconnect {
+public class AutoReconnectUtils {
     public static int ReconnectTimer;
     private static ServerInfo lastServer;
 
@@ -20,7 +20,7 @@ public class AutoReconnect {
     }
 
     public static void reconnect(Screen screen) {
-        ServerInfo serverInfo = AutoReconnect.getLastServer();
+        ServerInfo serverInfo = AutoReconnectUtils.getLastServer();
         if (lastServer != null) {
             TweakMyClient.minecraftClient.openScreen(new ConnectScreen(screen, TweakMyClient.minecraftClient, serverInfo));
         }
