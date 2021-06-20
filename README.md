@@ -80,6 +80,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
   - *Cancels slowness effects caused by honey, soul sand and using items.*
   - *取消蜂蜜块, 灵魂沙和使用物品时的减速效果.*
 ### Feature Toggle
++ featureAntiGhostItems
+  - *Try to send false data to the server in order to get the correct player inventory data from the server..*
+  - *尝试向服务器发送虚假数据, 以便从服务端获取正确的玩家背包数据.*
 + featureAutoDrop
   - *Automatically drops unwanted items.*
   - *丢掉不想要的东西.*
@@ -111,6 +114,15 @@ The default hotkey to open the in-game config GUI is **T + C**.
   - *Will not render anything when your Minecraft window is not focused.*
   - *当焦点未处于 Minecraft 窗口时, 客户端将不会执行渲染.*
 ### Generic
++ antiGhostItemsAutoTriggerInterval
+  - *How many seconds does antiGhostItems trigger automatically.*
+  - *多少秒自动触发一次清除幽灵物品.*
++ antiGhostItemsManualTrigger
+  - *Manually trigger antiGhostItems once.*
+  - *手动触发一次清除幽灵物品.*
++ antiGhostItemsMode
+  - *antiGhostItemsMode working mode.*
+  - *清除幽灵物品工作模式.*
 + autoReconnectTimer
   - *How many seconds to wait for auto reconnection.*
   - *等待多少秒后自动重连.*
@@ -141,4 +153,4 @@ The default hotkey to open the in-game config GUI is **T + C**.
   - *自动丢弃物品列表类型.*
 + listAutoDropWhiteList
   - *Auto drop item white list. All items in this list will be auto dropped.*
-  - *自动丢弃物品白名单. 所有在此列表的物品将会被丢弃..*
+  - *自动丢弃物品白名单. 所有在此列表的物品将会被丢弃.*
