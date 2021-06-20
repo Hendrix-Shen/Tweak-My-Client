@@ -9,16 +9,9 @@ import top.hendrixshen.TweakMyClient.TweakMyClient;
 
 public class AntiGhostItemsUtils {
     public static int manualRefreshTimer;
+    public static int automaticRefreshTimer;
 
     public static void refreshInventory() {
-        /*
-        *
-        short s = player.currentScreenHandler.getNextActionId(player.inventory);
-        int syncId = screen.getScreenHandler().syncId;
-        ItemStack fakeStack = new ItemStack(Items.BEDROCK);         // some item the player "shouldn't" have in their inventory, much less use it to craft
-        MinecraftClient.getInstance().getNetworkHandler().sendPacket(
-                new ClickSlotC2SPacket(syncId, 0, 0, SlotActionType.QUICK_MOVE, fakeStack, s)
-        );*/
         ClientPlayerEntity playerEntity = TweakMyClient.minecraftClient.player;
         if (playerEntity != null) {
             short playerNextActionId = playerEntity.currentScreenHandler.getNextActionId(playerEntity.inventory);
