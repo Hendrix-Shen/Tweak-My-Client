@@ -7,6 +7,7 @@
     "tweakmyclient.gui.button.config_gui.feature_toggle": "特性开关",
     "tweakmyclient.gui.button.config_gui.feature_hotkeys": "特性快捷键",
     "tweakmyclient.gui.button.config_gui.list": "列表",
+    "tweakmyclient.gui.button.config_gui.patch": "修补",
 
     "tweakmyclient.config.color.colorBlockOutside.name": "方块轮廓颜色",
     "tweakmyclient.config.color.colorBlockOutside.comment": "自定义方块轮廓颜色.",
@@ -100,6 +101,9 @@
     "tweakmyclient.config.list.listAutoDropType.comment": "自动丢弃物品列表类型.",
     "tweakmyclient.config.list.listAutoDropWhiteList.name": "自动丢弃白名单",
     "tweakmyclient.config.list.listAutoDropWhiteList.comment": "自动丢弃物品白名单.\n所有在此列表的物品将会被丢弃.",
+
+    "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.name": "禁用投影轻松放置失败提示",
+    "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "禁用轻松放置失败时那烦人的提示窗.\n注意: 仅当 litematica 加载时生效.",
 
     "tweakmyclient.label.antiGhostItemsMode.automatic": "自动",
     "tweakmyclient.label.antiGhostItemsMode.manual": "手动",

@@ -7,6 +7,8 @@
     "tweakmyclient.gui.button.config_gui.feature_toggle": "Feature Toggle",
     "tweakmyclient.gui.button.config_gui.feature_hotkeys": "Feature Hotkey",
     "tweakmyclient.gui.button.config_gui.list": "List",
+    "tweakmyclient.gui.button.config_gui.patch": "Patch",
+
     "tweakmyclient.config.color.colorBlockOutside.name": "colorBlockOutside",
     "tweakmyclient.config.color.colorBlockOutside.comment": "Custom block outside color.",
     "tweakmyclient.config.color.colorGuiStart.name": "colorGuiStart",
@@ -99,6 +101,9 @@
     "tweakmyclient.config.list.listAutoDropType.comment": "Auto drop item list type.",
     "tweakmyclient.config.list.listAutoDropWhiteList.name": "listAutoDropWhiteList",
     "tweakmyclient.config.list.listAutoDropWhiteList.comment": "Auto drop item white list.\nAll items in this list will be auto dropped.",
+
+    "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.name": "disableLitematicaEasyPlaceFailTip",
+    "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "Disable easyPlace failure that annoying prompt window.\nNote: Takes effect only when litematica is loaded.",
 
     "tweakmyclient.label.antiGhostItemsMode.automatic": "Automatic",
     "tweakmyclient.label.antiGhostItemsMode.manual": "Manual",

@@ -10,15 +10,19 @@ import java.util.Set;
 
 public class TweakMyClientMixinPlugin implements IMixinConfigPlugin {
     private static final String MIXIN_AUTHME = ".authme.";
+    private static final String MIXIN_LITEMATICA = ".litematica.";
     private static final String MIXIN_REAUTH = ".reauth.";
     public static boolean isAuthMeLoaded;
+    public static boolean isLitematicaLoaded;
     public static boolean isReAuthLoaded;
     public final String AUTHME_ID = "authme";
+    public final String LITEMATICA_ID = "litematica";
     private final String REAUTH_ID = "reauth";
 
     @Override
     public void onLoad(String mixinPackage) {
         isAuthMeLoaded = FabricLoader.getInstance().isModLoaded(this.AUTHME_ID);
+        isLitematicaLoaded = FabricLoader.getInstance().isModLoaded(this.LITEMATICA_ID);
         isReAuthLoaded = FabricLoader.getInstance().isModLoaded(this.REAUTH_ID);
     }
 
@@ -31,7 +35,12 @@ public class TweakMyClientMixinPlugin implements IMixinConfigPlugin {
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (!isAuthMeLoaded && mixinClassName.contains(MIXIN_AUTHME)) {
             return false;
-        } else return isReAuthLoaded || !mixinClassName.contains(MIXIN_REAUTH);
+        } else if (!isLitematicaLoaded && mixinClassName.contains(MIXIN_LITEMATICA)) {
+            return false;
+        } else if (!isReAuthLoaded && mixinClassName.contains(MIXIN_REAUTH)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

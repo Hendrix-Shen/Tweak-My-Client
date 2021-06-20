@@ -44,21 +44,6 @@ public class GuiConfigs extends GuiConfigsBase {
     }
 
     @Override
-    protected int getConfigWidth() {
-        ConfigGuiTab tab = GuiConfigs.tab;
-
-        if (tab == ConfigGuiTab.GENERIC) {
-            return 120;
-        } else if (tab == ConfigGuiTab.FEATURE_TOGGLES) {
-            return 80;
-        } else if (tab == ConfigGuiTab.DISABLE_TOGGLES) {
-            return 80;
-        }
-
-        return super.getConfigWidth();
-    }
-
-    @Override
     protected boolean useKeybindSearch() {
         return GuiConfigs.tab == ConfigGuiTab.GENERIC ||
                 GuiConfigs.tab == ConfigGuiTab.DISABLE_HOTKEYS ||
@@ -72,6 +57,8 @@ public class GuiConfigs extends GuiConfigsBase {
 
         if (tab == ConfigGuiTab.GENERIC) {
             configs = Configs.Generic.OPTIONS;
+        } else if (tab == ConfigGuiTab.PATCH) {
+            configs = Configs.Patch.OPTIONS;
         } else if (tab == ConfigGuiTab.LIST) {
             configs = Configs.List.OPTIONS;
         } else if (tab == ConfigGuiTab.COLOR) {
@@ -93,6 +80,7 @@ public class GuiConfigs extends GuiConfigsBase {
 
     public enum ConfigGuiTab {
         GENERIC("generic"),
+        PATCH("patch"),
         LIST("list"),
         COLOR("color"),
         FEATURE_TOGGLES("feature_toggle"),

@@ -37,6 +37,7 @@ public class Configs implements IConfigHandler {
             if (element != null && element.isJsonObject()) {
                 JsonObject root = element.getAsJsonObject();
                 ConfigUtils.readConfigBase(root, "Generic", Generic.OPTIONS);
+                ConfigUtils.readConfigBase(root, "Patch", Patch.OPTIONS);
                 ConfigUtils.readConfigBase(root, "List", List.OPTIONS);
                 ConfigUtils.readConfigBase(root, "Color", Color.OPTIONS);
                 ConfigUtils.readHotkeyToggleOptions(root, "DisableHotkey", "Disable", Disable.OPTIONS);
@@ -54,6 +55,7 @@ public class Configs implements IConfigHandler {
         if ((dir.exists() && dir.isDirectory()) || dir.mkdirs()) {
             JsonObject root = new JsonObject();
             ConfigUtils.writeConfigBase(root, "Generic", Generic.OPTIONS);
+            ConfigUtils.writeConfigBase(root, "Patch", Patch.OPTIONS);
             ConfigUtils.writeConfigBase(root, "List", List.OPTIONS);
             ConfigUtils.writeConfigBase(root, "Color", Color.OPTIONS);
             ConfigUtils.writeHotkeyToggleOptions(root, "DisableHotkey", "Disable", Disable.OPTIONS);
@@ -213,6 +215,88 @@ public class Configs implements IConfigHandler {
         }
     }
 
+    public static class Color {
+        private static final String PREFIX = String.format("%s.config.color", Reference.MOD_ID);
+        public static final ConfigColor COLOR_BLOCK_OUTSIDE = new TranslatableConfigColor(PREFIX, "colorBlockOutside", "#66000000");
+        public static final ConfigColor COLOR_GUI_START = new TranslatableConfigColor(PREFIX, "colorGuiStart", "#C00F0F0F");
+        public static final ConfigColor COLOR_GUI_STOP = new TranslatableConfigColor(PREFIX, "colorGuiStop", "#D00F0F0F");
+        public static final ConfigColor COLOR_SIDEBAR_CONTENT = new TranslatableConfigColor(PREFIX, "colorSidebarContent", "#4C000000");
+        public static final ConfigColor COLOR_SIDEBAR_TITLE = new TranslatableConfigColor(PREFIX, "colorSidebarTitle", "#66000000");
+        public static final ConfigColor COLOR_WATER_OPEN = new TranslatableConfigColor(PREFIX, "colorWaterOpen", "#7F00FF00");
+        public static final ConfigColor COLOR_WATER_SHALLOW = new TranslatableConfigColor(PREFIX, "colorWaterShallow", "#7FFF0000");
+        public static final ImmutableList<ConfigColor> OPTIONS = ImmutableList.of(
+                COLOR_BLOCK_OUTSIDE,
+                COLOR_GUI_START,
+                COLOR_GUI_STOP,
+                COLOR_SIDEBAR_CONTENT,
+                COLOR_SIDEBAR_TITLE,
+                COLOR_WATER_OPEN,
+                COLOR_WATER_SHALLOW
+        );
+    }
+
+    public static class Disable {
+        private static final String PREFIX = String.format("%s.config.disable_toggle", Reference.MOD_ID);
+        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_BLOCK_EVENTS = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientBlockEvents", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_TNT_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityTNTUpdates", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_WITHER_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityWitherUpdates", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityZombieVillagerUpdates", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_ENTITY_TNT_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityTNTRendering", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_ENTITY_WITHER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityWitherRendering", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityZombieVillagerRendering", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_GUI_SHADOW_LAYER = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableGuiShadowLayer", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_RENDER_BOSS_BAR = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderBossBar", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_FIRE = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayFire", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_PUMPKIN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayPumpkin", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_RENDER_SCOREBOARD = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderScoreboard", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_SLOWDOWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableSlowdown", false, "");
+
+        public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
+                DISABLE_CLIENT_BLOCK_EVENTS,
+                DISABLE_CLIENT_ENTITY_TNT_UPDATES,
+                DISABLE_CLIENT_ENTITY_WITHER_UPDATES,
+                DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_UPDATES,
+                DISABLE_ENTITY_TNT_RENDERING,
+                DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING,
+                DISABLE_ENTITY_WITHER_RENDERING,
+                DISABLE_GUI_SHADOW_LAYER,
+                DISABLE_RENDER_BOSS_BAR,
+                DISABLE_RENDER_OVERLAY_FIRE,
+                DISABLE_RENDER_OVERLAY_PUMPKIN,
+                DISABLE_RENDER_SCOREBOARD,
+                DISABLE_SLOWDOWN
+        );
+    }
+
+    public static class Feature {
+        private static final String PREFIX = String.format("%s.config.feature_toggle", Reference.MOD_ID);
+        public static final ConfigBooleanHotkeyed FEATURE_ANTI_GHOST_ITEMS = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAntiGhostItems", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_AUTO_DROP = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoDrop", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_AUTO_RECONNECT = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoReconnect", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_AUTO_RESPAWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoRespawn", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureBlockOutsideColor", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_GUI_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGuiBackgroundColor", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarBackgroundColor", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_OPEN_WATER_HELPER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureOpenWaterHelper", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_UNFOCUSED_CPU = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureUnfocusedCPU", false, "");
+
+        public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
+                FEATURE_ANTI_GHOST_ITEMS,
+                FEATURE_AUTO_DROP,
+                FEATURE_AUTO_RECONNECT,
+                FEATURE_AUTO_RESPAWN,
+                FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR,
+                FEATURE_CUSTOM_GUI_BACKGROUND_COLOR,
+                FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR,
+                FEATURE_DAYLIGHT_OVERRIDE,
+                FEATURE_GET_TARGET_BLOCK_POSITION,
+                FEATURE_OPEN_WATER_HELPER,
+                FEATURE_UNFOCUSED_CPU
+        );
+    }
+
     public static class Generic {
         private static final String PREFIX = String.format("%s.config.generic", Reference.MOD_ID);
         public static final ConfigInteger ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL = new TranslatableConfigInteger(PREFIX, "antiGhostItemsAutoTriggerInterval", 10, 10, Integer.MAX_VALUE);
@@ -301,85 +385,11 @@ public class Configs implements IConfigHandler {
         );
     }
 
-    public static class Feature {
-        private static final String PREFIX = String.format("%s.config.feature_toggle", Reference.MOD_ID);
-        public static final ConfigBooleanHotkeyed FEATURE_ANTI_GHOST_ITEMS = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAntiGhostItems", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_AUTO_DROP = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoDrop", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_AUTO_RECONNECT = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoReconnect", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_AUTO_RESPAWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoRespawn", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureBlockOutsideColor", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_GUI_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGuiBackgroundColor", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarBackgroundColor", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_OPEN_WATER_HELPER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureOpenWaterHelper", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_UNFOCUSED_CPU = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureUnfocusedCPU", false, "");
-
-        public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
-                FEATURE_ANTI_GHOST_ITEMS,
-                FEATURE_AUTO_DROP,
-                FEATURE_AUTO_RECONNECT,
-                FEATURE_AUTO_RESPAWN,
-                FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR,
-                FEATURE_CUSTOM_GUI_BACKGROUND_COLOR,
-                FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR,
-                FEATURE_DAYLIGHT_OVERRIDE,
-                FEATURE_GET_TARGET_BLOCK_POSITION,
-                FEATURE_OPEN_WATER_HELPER,
-                FEATURE_UNFOCUSED_CPU
-        );
-    }
-
-    public static class Color {
-        private static final String PREFIX = String.format("%s.config.color", Reference.MOD_ID);
-        public static final ConfigColor COLOR_BLOCK_OUTSIDE = new TranslatableConfigColor(PREFIX, "colorBlockOutside", "#66000000");
-        public static final ConfigColor COLOR_GUI_START = new TranslatableConfigColor(PREFIX, "colorGuiStart", "#C00F0F0F");
-        public static final ConfigColor COLOR_GUI_STOP = new TranslatableConfigColor(PREFIX, "colorGuiStop", "#D00F0F0F");
-        public static final ConfigColor COLOR_SIDEBAR_CONTENT = new TranslatableConfigColor(PREFIX, "colorSidebarContent", "#4C000000");
-        public static final ConfigColor COLOR_SIDEBAR_TITLE = new TranslatableConfigColor(PREFIX, "colorSidebarTitle", "#66000000");
-        public static final ConfigColor COLOR_WATER_OPEN = new TranslatableConfigColor(PREFIX, "colorWaterOpen", "#7F00FF00");
-        public static final ConfigColor COLOR_WATER_SHALLOW = new TranslatableConfigColor(PREFIX, "colorWaterShallow", "#7FFF0000");
-        public static final ImmutableList<ConfigColor> OPTIONS = ImmutableList.of(
-                COLOR_BLOCK_OUTSIDE,
-                COLOR_GUI_START,
-                COLOR_GUI_STOP,
-                COLOR_SIDEBAR_CONTENT,
-                COLOR_SIDEBAR_TITLE,
-                COLOR_WATER_OPEN,
-                COLOR_WATER_SHALLOW
-        );
-    }
-
-    public static class Disable {
-        private static final String PREFIX = String.format("%s.config.disable_toggle", Reference.MOD_ID);
-        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_BLOCK_EVENTS = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientBlockEvents", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_TNT_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityTNTUpdates", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_WITHER_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityWitherUpdates", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityZombieVillagerUpdates", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_ENTITY_TNT_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityTNTRendering", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_ENTITY_WITHER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityWitherRendering", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityZombieVillagerRendering", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_GUI_SHADOW_LAYER = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableGuiShadowLayer", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_RENDER_BOSS_BAR = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderBossBar", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_FIRE = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayFire", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_PUMPKIN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayPumpkin", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_RENDER_SCOREBOARD = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderScoreboard", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_SLOWDOWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableSlowdown", false, "");
-
-        public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
-                DISABLE_CLIENT_BLOCK_EVENTS,
-                DISABLE_CLIENT_ENTITY_TNT_UPDATES,
-                DISABLE_CLIENT_ENTITY_WITHER_UPDATES,
-                DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_UPDATES,
-                DISABLE_ENTITY_TNT_RENDERING,
-                DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING,
-                DISABLE_ENTITY_WITHER_RENDERING,
-                DISABLE_GUI_SHADOW_LAYER,
-                DISABLE_RENDER_BOSS_BAR,
-                DISABLE_RENDER_OVERLAY_FIRE,
-                DISABLE_RENDER_OVERLAY_PUMPKIN,
-                DISABLE_RENDER_SCOREBOARD,
-                DISABLE_SLOWDOWN
+    public static class Patch {
+        private static final String PREFIX = String.format("%s.config.patch", Reference.MOD_ID);
+        public static final ConfigBoolean DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP = new TranslatableConfigBoolean(PREFIX, "disableLitematicaEasyPlaceFailTip", false);
+        public static final ImmutableList<ConfigBoolean> OPTIONS = ImmutableList.of(
+                DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP
         );
     }
 }
