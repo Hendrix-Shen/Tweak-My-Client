@@ -1,6 +1,8 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,6 +17,8 @@ import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
 public class MixinClientPlayerEntity {
     @Shadow
     private boolean usingItem;
+
+    @Shadow @Final protected MinecraftClient client;
 
     @Redirect(
             method = "tickMovement",
@@ -42,8 +46,21 @@ public class MixinClientPlayerEntity {
             AutoDropUtils.doDrop();
         }
         if (Configs.Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue()) {
-            if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
-                AntiGhostItemsUtils.manualRefreshTimer--;
+            Configs.AntiGhostItemsMode mode = (Configs.AntiGhostItemsMode) Configs.Generic.ANTI_GHOST_ITEMS_MODE.getOptionListValue();
+            switch (mode) {
+                case MANUAL:
+                    if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
+                        AntiGhostItemsUtils.manualRefreshTimer--;
+                    }
+                    break;
+                case AUTOMATIC:
+                    if (AntiGhostItemsUtils.automaticRefreshTimer > 0) {
+                        AntiGhostItemsUtils.automaticRefreshTimer--;
+                    } else {
+                        AntiGhostItemsUtils.refreshInventory();
+                        AntiGhostItemsUtils.automaticRefreshTimer = Configs.Generic.ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL.getIntegerValue() * 20;
+                    }
+                    break;
             }
         }
     }

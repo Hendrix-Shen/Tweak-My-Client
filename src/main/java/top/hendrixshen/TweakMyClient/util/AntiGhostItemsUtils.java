@@ -10,6 +10,7 @@ import net.minecraft.screen.slot.SlotActionType;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 
 public class AntiGhostItemsUtils {
+    public static int automaticRefreshTimer;
     public static int manualRefreshTimer;
 
     public static void refreshInventory() {

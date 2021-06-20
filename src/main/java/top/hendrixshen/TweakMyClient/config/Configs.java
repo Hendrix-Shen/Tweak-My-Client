@@ -72,13 +72,13 @@ public class Configs implements IConfigHandler {
         saveToFile();
     }
 
-    private enum TargetBlockPositionPrintMode implements IConfigOptionListEntry {
-        PUBLIC("public"),
-        PRIVATE("private");
+    public enum AntiGhostItemsMode implements IConfigOptionListEntry {
+        AUTOMATIC("automatic"),
+        MANUAL("manual");
 
         private final String name;
 
-        TargetBlockPositionPrintMode(String name) {
+        AntiGhostItemsMode(String name) {
             this.name = name;
         }
 
@@ -89,7 +89,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.targetBlockPositionPrintMode.%s", Reference.MOD_ID, this.name));
+            return StringUtils.translate(String.format("%s.label.antiGhostItemsMode.%s", Reference.MOD_ID, this.name));
         }
 
         @Override
@@ -110,12 +110,12 @@ public class Configs implements IConfigHandler {
 
         @Override
         public IConfigOptionListEntry fromString(String value) {
-            for (TargetBlockPositionPrintMode mode : TargetBlockPositionPrintMode.values()) {
+            for (AntiGhostItemsMode mode : AntiGhostItemsMode.values()) {
                 if (mode.name.equalsIgnoreCase(name)) {
                     return mode;
                 }
             }
-            return TargetBlockPositionPrintMode.PRIVATE;
+            return AntiGhostItemsMode.AUTOMATIC;
         }
     }
 
@@ -166,9 +166,58 @@ public class Configs implements IConfigHandler {
         }
     }
 
+    private enum TargetBlockPositionPrintMode implements IConfigOptionListEntry {
+        PUBLIC("public"),
+        PRIVATE("private");
+
+        private final String name;
+
+        TargetBlockPositionPrintMode(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String getStringValue() {
+            return this.name;
+        }
+
+        @Override
+        public String getDisplayName() {
+            return StringUtils.translate(String.format("%s.label.targetBlockPositionPrintMode.%s", Reference.MOD_ID, this.name));
+        }
+
+        @Override
+        public IConfigOptionListEntry cycle(boolean forward) {
+            int id = this.ordinal();
+
+            if (forward) {
+                if (++id >= values().length) {
+                    id = 0;
+                }
+            } else {
+                if (--id < 0) {
+                    id = values().length - 1;
+                }
+            }
+            return values()[id % values().length];
+        }
+
+        @Override
+        public IConfigOptionListEntry fromString(String value) {
+            for (TargetBlockPositionPrintMode mode : TargetBlockPositionPrintMode.values()) {
+                if (mode.name.equalsIgnoreCase(name)) {
+                    return mode;
+                }
+            }
+            return TargetBlockPositionPrintMode.PRIVATE;
+        }
+    }
+
     public static class Generic {
         private static final String PREFIX = String.format("%s.config.generic", Reference.MOD_ID);
+        public static final ConfigInteger ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL = new TranslatableConfigInteger(PREFIX, "antiGhostItemsAutoTriggerInterval", 10, 10, Integer.MAX_VALUE);
         public static final ConfigHotkey ANTI_GHOST_ITEMS_MANUAL_TRIGGER = new TranslatableConfigHotkey(PREFIX, "antiGhostItemsManualTrigger", "");
+        public static final ConfigOptionList ANTI_GHOST_ITEMS_MODE = new TranslatableConfigOptionList(PREFIX, "antiGhostItemsMode", AntiGhostItemsMode.AUTOMATIC);
         public static final ConfigInteger AUTO_RECONNECT_TIMER = new TranslatableConfigInteger(PREFIX, "autoReconnectTimer", 5, 0, 60);
         public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
@@ -178,7 +227,9 @@ public class Configs implements IConfigHandler {
         public static final ConfigOptionList TARGET_BLOCK_POSITION_PRINT_MODE = new TranslatableConfigOptionList(PREFIX, "targetBlockPositionPrintMode", TargetBlockPositionPrintMode.PRIVATE);
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
+                ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL,
                 ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
+                ANTI_GHOST_ITEMS_MODE,
                 AUTO_RECONNECT_TIMER,
                 DAYLIGHT_OVERRIDE_TIME,
                 GET_TARGET_BLOCK_POSITION,
