@@ -35,6 +35,7 @@ dependencies {
     modCompileOnly("com.terraformersmc:modmenu:" + project.mod_menu_version)
     // Optional mod compatibility Library
     modCompileOnly("curse.maven:authme-356643:3073169")
+    modCompileOnly("curse.maven:litematica-308892:3353497")
     modCompileOnly("curse.maven:reauth-403928:3105780")
 }
 

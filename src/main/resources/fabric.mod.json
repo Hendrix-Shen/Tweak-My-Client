@@ -37,7 +37,8 @@
     "minecraft": "1.17.x"
   },
   "suggests": {
-    "authme": ">=1.4.0",
+    "authme": ">=1.5.0",
+    "litematica": ">=0.0.0-dev.20210616.033538",
     "reauth": ">=3.9.2"
   }
 }
