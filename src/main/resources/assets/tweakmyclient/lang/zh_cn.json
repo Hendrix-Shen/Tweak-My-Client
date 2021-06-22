@@ -1,5 +1,5 @@
 {
-    "tweakmyclient.gui.title.configs": "Tweak My Client 设置",
+    "tweakmyclient.gui.title.configs": "Tweak My Client 设置 - 版本: %s",
     "tweakmyclient.gui.button.config_gui.generic": "全局",
     "tweakmyclient.gui.button.config_gui.color": "颜色",
     "tweakmyclient.gui.button.config_gui.disable_toggle": "禁用开关",

@@ -17,7 +17,7 @@ public class TweakMyClientMixinPlugin implements IMixinConfigPlugin {
     public static boolean isReAuthLoaded;
     public final String AUTHME_ID = "authme";
     public final String LITEMATICA_ID = "litematica";
-    private final String REAUTH_ID = "reauth";
+    public final String REAUTH_ID = "reauth";
 
     @Override
     public void onLoad(String mixinPackage) {
