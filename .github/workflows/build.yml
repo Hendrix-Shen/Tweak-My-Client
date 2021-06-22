@@ -38,7 +38,7 @@ jobs:
             ${{ runner.os }}-gradle-
       - name: Display commid hash
         run: |
-          echo Tweak My Client \commit-${GITHUB_SHA::7} (Public Beta)
+          echo Tweak My Client \commit-${GITHUB_SHA::7} \(Public Beta\)
       - name: Set commid hash in codes
         run: |
           sed -i "s/build.undefined/${GITHUB_SHA::7}/g" gradle.properties
