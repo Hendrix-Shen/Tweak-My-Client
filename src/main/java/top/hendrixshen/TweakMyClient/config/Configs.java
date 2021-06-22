@@ -279,6 +279,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_LOW_HEALTH_WARNING = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureLowHealthWarning", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_OPEN_WATER_HELPER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureOpenWaterHelper", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_UNFOCUSED_CPU = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureUnfocusedCPU", false, "");
 
@@ -292,6 +293,7 @@ public class Configs implements IConfigHandler {
                 FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR,
                 FEATURE_DAYLIGHT_OVERRIDE,
                 FEATURE_GET_TARGET_BLOCK_POSITION,
+                FEATURE_LOW_HEALTH_WARNING,
                 FEATURE_OPEN_WATER_HELPER,
                 FEATURE_UNFOCUSED_CPU
         );
@@ -305,6 +307,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigInteger AUTO_RECONNECT_TIMER = new TranslatableConfigInteger(PREFIX, "autoReconnectTimer", 5, 0, 60);
         public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
+        public static final ConfigDouble LOW_HEALTH_THRESHOLD = new TranslatableConfigDouble(PREFIX, "lowHealthThreshold", 6, 0, 1000);
         public static final ConfigHotkey OPEN_CONFIG_GUI = new TranslatableConfigHotkey(PREFIX, "openConfigGui", "T,C");
         public static final ConfigDouble TARGET_BLOCK_MAX_TRACE_DISTANCE = new TranslatableConfigDouble(PREFIX, "targetBlockMaxTraceDistance", 100, 0, 200);
         public static final ConfigString TARGET_BLOCK_POSITION_FORMAT = new TranslatableConfigString(PREFIX, "targetBlockPositionFormat", "I'm tracing this position [x: {X},y: {Y}, z: {Z}]");
@@ -317,6 +320,7 @@ public class Configs implements IConfigHandler {
                 AUTO_RECONNECT_TIMER,
                 DAYLIGHT_OVERRIDE_TIME,
                 GET_TARGET_BLOCK_POSITION,
+                LOW_HEALTH_THRESHOLD,
                 OPEN_CONFIG_GUI,
                 TARGET_BLOCK_MAX_TRACE_DISTANCE,
                 TARGET_BLOCK_POSITION_FORMAT,

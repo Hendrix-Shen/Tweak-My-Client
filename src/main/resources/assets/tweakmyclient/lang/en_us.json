@@ -63,6 +63,8 @@
     "tweakmyclient.config.generic.daylightOverrideTime.comment": "The time set when overriding the client's world time.",
     "tweakmyclient.config.generic.getTargetBlockPosition.name": "getTargetBlockPosition",
     "tweakmyclient.config.generic.getTargetBlockPosition.comment": "Gets the position of the looking block.\nThis feature is used to get the position of the farthest block you point to.",
+    "tweakmyclient.config.generic.lowHealthThreshold.name": "lowHealthThreshold",
+    "tweakmyclient.config.generic.lowHealthThreshold.comment": "Trigger threshold of low health warning.",
     "tweakmyclient.config.generic.openConfigGui.name": "openConfigGui",
     "tweakmyclient.config.generic.openConfigGui.comment": "A hotkey to open the in-game Config GUI.",
     "tweakmyclient.config.generic.targetBlockMaxTraceDistance.name": "targetBlockMaxTraceDistance",
@@ -90,6 +92,8 @@
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "Override the client's world time to the day time you want.",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.name": "featureGetTargetBlockPosition",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.comment": "Allow you get the position of the farthest block you point to.",
+    "tweakmyclient.config.feature_toggle.featureLowHealthWarning.name": "featureLowHealthWarning",
+    "tweakmyclient.config.feature_toggle.featureLowHealthWarning.comment": "When your health is too low, use action bar to send a warning message.",
     "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.name": "featureOpenWaterHelper",
     "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.comment": "Shows whether or not you are fishing in 'open water' and draws a box around the area used for the open water calculation.",
     "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.name": "featureUnfocusedCPU",
@@ -117,5 +121,6 @@
     "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "Re-authenticate with ReAuth",
     "tweakmyclient.message.autoReconnect.static": "AutoReconnect",
     "tweakmyclient.message.autoReconnect.timer": "Toggle AutoReconnect (%d)",
-    "tweakmyclient.message.autoReconnect.toggle": "Toggle AutoReconnect"
+    "tweakmyclient.message.autoReconnect.toggle": "Toggle AutoReconnect",
+    "tweakmyclient.message.lowHealthWarning.warningMessage": "§eWarning: Your health is too low(Threshold: %s)."
 }
