@@ -69,6 +69,8 @@
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "覆盖客户端的世界时间为你想要的时间.",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.name": "获取方块坐标",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.comment": "允许获取你指向方向最远端的方块坐标.",
+    "tweakmyclient.config.feature_toggle.featureLowHealthWarning.name": "低血量警告",
+    "tweakmyclient.config.feature_toggle.featureLowHealthWarning.comment": "当你的血量过低时, 将使用动作条发送一条警告信息.",
     "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.name": "开阔水域助手",
     "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.comment": "展示是否在'开放水域'钓鱼, 并在用于开阔水域计算的区域绘制一个方框",
     "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.name": "失去焦点释放CPU",
