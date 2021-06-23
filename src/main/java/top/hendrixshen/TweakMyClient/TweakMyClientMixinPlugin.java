@@ -37,10 +37,7 @@ public class TweakMyClientMixinPlugin implements IMixinConfigPlugin {
             return false;
         } else if (!isLitematicaLoaded && mixinClassName.contains(MIXIN_LITEMATICA)) {
             return false;
-        } else if (!isReAuthLoaded && mixinClassName.contains(MIXIN_REAUTH)) {
-            return false;
-        }
-        return true;
+        } else return isReAuthLoaded || !mixinClassName.contains(MIXIN_REAUTH);
     }
 
     @Override

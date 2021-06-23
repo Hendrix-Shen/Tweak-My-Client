@@ -24,9 +24,12 @@ public abstract class MixinClientPlayerEntity extends LivingEntity {
     @Shadow
     private boolean usingItem;
 
-    @Shadow @Final protected MinecraftClient client;
+    @Shadow
+    @Final
+    protected MinecraftClient client;
 
-    @Shadow public abstract void sendMessage(Text message, boolean actionBar);
+    @Shadow
+    public abstract void sendMessage(Text message, boolean actionBar);
 
     protected MixinClientPlayerEntity(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
