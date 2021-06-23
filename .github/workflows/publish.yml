@@ -39,11 +39,9 @@ jobs:
     needs: [ Get-Properties ]
     strategy:
       matrix:
-        # Use these Java versions
         java: [
-            16    # Latest version
+            16
         ]
-        # and run on both Linux and Windows
         os: [ ubuntu-20.04 ]
         branch: [1.16, 1.17]
     runs-on: ${{ matrix.os }}
@@ -56,11 +54,9 @@ jobs:
           echo "::set-output name=branchname::${{ needs.Get-Properties.outputs.release-extra-branch-117 }}"
           echo "::set-output name=curse-versions::${{ needs.Get-Properties.outputs.release-curse-versions-117 }}"
           echo "::set-output name=curse-support::${{ needs.Get-Properties.outputs.release-curse-support-117 }}"
-          echo "::set-output name=upload::117"
         else
           echo "::set-output name=curse-versions::${{ needs.Get-Properties.outputs.release-curse-versions }}"
           echo "::set-output name=curse-support::${{ needs.Get-Properties.outputs.release-curse-support }}"
-          echo "::set-output name=upload::116"
         fi
     - name: Checkout the sources
       uses: actions/checkout@v2
@@ -82,9 +78,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
     - name: Display build number
-      run: echo Tweak My Client \#$GITHUB_RUN_NUMBER
+      run: echo Tweak My Client build\#$GITHUB_RUN_NUMBER \(Public Release\)
     - name: Set build number in codes
-      run: sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java gradle.properties
+      run: |
+        sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER/g" gradle.properties
+        sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER \(Public Release\)/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
