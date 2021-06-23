@@ -1,15 +1,19 @@
 name: Publish Release
 on:
   release:
-     types:
-       - published
+    types:
+      - published
 
 jobs:
   Get-Properties:
     runs-on: ubuntu-latest
     outputs:
       release-type: ${{ steps.type.outputs.release-type }}
-      curse-versions: ${{ steps.properties.outputs.release-curse-versions }}
+      release-curse-versions: ${{ steps.properties.outputs.release-curse-versions }}
+      release-curse-support: ${{ steps.properties.outputs.release-curse-support }}
+      release-extra-branch-117: ${{ steps.properties.outputs.release-extra-branch-117 }}
+      release-curse-versions-117: ${{ steps.properties.outputs.release-curse-versions-117 }}
+      release-curse-support-117: ${{ steps.properties.outputs.release-curse-support-117 }}
     steps:
       - name: Checkout the sources
         uses: actions/checkout@v2
@@ -25,7 +29,7 @@ jobs:
         id: properties
         run: |
           path='./gradle.properties'
-          for property in release-curse-versions
+          for property in release-curse-versions release-curse-support release-extra-branch-117 release-curse-versions-117 release-curse-support-117
           do
             result=$(sed -n "/^[[:space:]]*$property[[:space:]]*=[[:space:]]*/s/^[[:space:]]*$property[[:space:]]*=[[:space:]]*//p" "$path")
             echo "$property: $result"
@@ -35,64 +39,72 @@ jobs:
     needs: [ Get-Properties ]
     strategy:
       matrix:
-        # Use these Java versions
         java: [
-            16,  # Minimum supported by Minecraft
+            16
         ]
-        # and run on both Linux and Windows
-        os: [ ubuntu-20.04, windows-latest ]
+        os: [ ubuntu-20.04 ]
+        branch: [1.16, 1.17]
     runs-on: ${{ matrix.os }}
 
     steps:
-    - name: Get info from branch to run
-      id: getbranchinfo
-      run: |
-          echo "::set-output name=curse-versions::${{ needs.Get-Properties.outputs.curse-versions }}"
-    - uses: actions/checkout@v2
-    - name: Set up JDK ${{ matrix.java }}
-      uses: actions/setup-java@v1
-      with:
-        java-version: ${{ matrix.java }}
+      - name: Get info from branch to run
+        id: getbranchinfo
+        run: |
+          if ${{ matrix.branch == '1.17'}}; then
+            echo "::set-output name=branchname::${{ needs.Get-Properties.outputs.release-extra-branch-117 }}"
+            echo "::set-output name=curse-versions::${{ needs.Get-Properties.outputs.release-curse-versions-117 }}"
+            echo "::set-output name=curse-support::${{ needs.Get-Properties.outputs.release-curse-support-117 }}"
+          else
+            echo "::set-output name=curse-versions::${{ needs.Get-Properties.outputs.release-curse-versions }}"
+            echo "::set-output name=curse-support::${{ needs.Get-Properties.outputs.release-curse-support }}"
+          fi
+      - name: Checkout the sources
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.getbranchinfo.outputs.branchname }}
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
 
-    - name: Cache gradle files
-      uses: actions/cache@v2
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-          ./.gradle/loom-cache
-        key: ${{ runner.os }}-gradle-${{ hashFiles('*.gradle', 'gradle.properties', '**/*.accesswidener') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
-    - name: Display build number
-      run: echo Tweak My Client \#$GITHUB_RUN_NUMBER
-    - name: Set build number in codes
-      run: sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java gradle.properties
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
-    - name: Find correct JAR
-      if: ${{ runner.os == 'Linux' && matrix.java == '16' }} # Only upload artifacts built from java 16 on one OS
-      id: findjar
-      run: |
+      - name: Cache gradle files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ./.gradle/loom-cache
+          key: ${{ runner.os }}-gradle-${{ hashFiles('*.gradle', 'gradle.properties', '**/*.accesswidener') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Display build number
+        run: echo Tweak My Client build\#$GITHUB_RUN_NUMBER \(Public Release\)
+      - name: Set build number in codes
+        run: |
+          sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER/g" gradle.properties
+          sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER \(Public Release\)/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Find correct JAR
+        id: findjar
+        run: |
           output="$(find build/libs/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
           echo "::set-output name=jarname::$output"
-    - name: Upload assets to GitHub
-      if: ${{ runner.os == 'Linux' && matrix.java == '16' }} # Only upload artifacts built from java 16 on one OS
-      uses: AButler/upload-release-assets@v2.0
-      with:
-        files: 'build/libs/${{ steps.findjar.outputs.jarname }}'
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload to Curseforge
-      if: ${{ runner.os == 'Linux' && matrix.java == '16' }} # Only upload artifacts built from java 16 on one OS
-      uses: itsmeow/curseforge-upload@v3
-      with:
-        token: ${{ secrets.CF_API_TOKEN }}
-        project_id: 478757
-        game_endpoint: minecraft
-        file_path: build/libs/${{ steps.findjar.outputs.jarname }}
-        changelog_type: markdown
-        changelog: ${{ github.event.release.body }}
-        game_versions: 7499,8325,${{ steps.getbranchinfo.outputs.curse-versions }} #Fabric, Java 16 [version (s) for the branch]
-        release_type: ${{ needs.Get-Properties.outputs.release-type }}
+      - name: Upload assets to GitHub
+        uses: AButler/upload-release-assets@v2.0
+        with:
+          files: 'build/libs/${{ steps.findjar.outputs.jarname }}'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to Curseforge
+        uses: itsmeow/curseforge-upload@v3
+        with:
+          token: ${{ secrets.CF_API_TOKEN }}
+          project_id: 478757
+          game_endpoint: minecraft
+          file_path: build/libs/${{ steps.findjar.outputs.jarname }}
+          changelog_type: markdown
+          changelog: ${{ github.event.release.body }}
+          game_versions: ${{ steps.getbranchinfo.outputs.curse-support }}, ${{ steps.getbranchinfo.outputs.curse-versions }}
+          release_type: ${{ needs.Get-Properties.outputs.release-type }}

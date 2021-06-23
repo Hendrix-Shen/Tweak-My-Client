@@ -11,11 +11,9 @@ jobs:
   build:
     strategy:
       matrix:
-        # Use these Java versions
         java: [
-            16,  # Minimum supported by Minecraft
+            16
         ]
-        # and run on both Linux and Windows
         os: [ ubuntu-20.04, windows-latest ]
     runs-on: ${{ matrix.os }}
 
@@ -37,16 +35,20 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
     - name: Display commid hash
+      if: ${{ runner.os == 'Linux' && matrix.java == '16' }}
       run: |
-        echo Tweak My Client \commit-${GITHUB_SHA::7}
+        echo Tweak My Client \commit-${GITHUB_SHA::7} (Public Beta)
     - name: Set commid hash in codes
-      run: sed -i "s/build.undefined/${GITHUB_SHA::7}/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java gradle.properties
+      if: ${{ runner.os == 'Linux' && matrix.java == '16' }}
+      run: |
+        sed -i "s/build.undefined/${GITHUB_SHA::7}/g" gradle.properties
+        sed -i "s/build.undefined/${GITHUB_SHA::7} (Public Beta)/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
     - name: Upload assets to GitHub
-      if: ${{ runner.os == 'Linux' && matrix.java == '16' }} # Only upload artifacts built from java 16 on one OS
+      if: ${{ runner.os == 'Linux' && matrix.java == '16' }}
       uses: actions/upload-artifact@v2
       with:
         name: build-artifacts

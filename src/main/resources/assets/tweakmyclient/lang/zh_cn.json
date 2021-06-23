@@ -1,5 +1,5 @@
 {
-    "tweakmyclient.gui.title.configs": "Tweak My Client 设置",
+    "tweakmyclient.gui.title.configs": "Tweak My Client 设置 - 版本: %s",
     "tweakmyclient.gui.button.config_gui.generic": "全局",
     "tweakmyclient.gui.button.config_gui.color": "颜色",
     "tweakmyclient.gui.button.config_gui.disable_toggle": "禁用开关",
@@ -69,6 +69,8 @@
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "覆盖客户端的世界时间为你想要的时间.",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.name": "获取方块坐标",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.comment": "允许获取你指向方向最远端的方块坐标.",
+    "tweakmyclient.config.feature_toggle.featureLowHealthWarning.name": "低血量警告",
+    "tweakmyclient.config.feature_toggle.featureLowHealthWarning.comment": "当你的血量过低时, 将使用动作条发送一条警告信息.",
     "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.name": "开阔水域助手",
     "tweakmyclient.config.feature_toggle.featureOpenWaterHelper.comment": "展示是否在'开放水域'钓鱼, 并在用于开阔水域计算的区域绘制一个方框",
     "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.name": "失去焦点释放CPU",
@@ -86,6 +88,8 @@
     "tweakmyclient.config.generic.daylightOverrideTime.comment": "覆盖客户端的世界时间时设置的时间.",
     "tweakmyclient.config.generic.getTargetBlockPosition.name": "获取方块坐标",
     "tweakmyclient.config.generic.getTargetBlockPosition.comment": "获取你看向方块的坐标.\n此特性用于获取你指向方向最远端的方块坐标.",
+    "tweakmyclient.config.generic.lowHealthThreshold.name": "低生命值阈值",
+    "tweakmyclient.config.generic.lowHealthThreshold.comment": "触发低生命值警告的阈值.",
     "tweakmyclient.config.generic.openConfigGui.name": "打开设置界面",
     "tweakmyclient.config.generic.openConfigGui.comment": "打开设置界面的快捷键.",
     "tweakmyclient.config.generic.targetBlockMaxTraceDistance.name": "获取方块坐标最大追踪距离",
@@ -117,5 +121,6 @@
     "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "使用 ReAuth 验证会话",
     "tweakmyclient.message.autoReconnect.static": "自动重连",
     "tweakmyclient.message.autoReconnect.timer": "切换自动重连 (%d)",
-    "tweakmyclient.message.autoReconnect.toggle": "切换自动重连"
+    "tweakmyclient.message.autoReconnect.toggle": "切换自动重连",
+    "tweakmyclient.message.lowHealthWarning.warningMessage": "§e警告: 你的生命值过低(阈值: %s)."
 }

@@ -1,7 +1,13 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
+import fi.dy.masa.malilib.util.StringUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,11 +20,20 @@ import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
 import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
 
 @Mixin(ClientPlayerEntity.class)
-public class MixinClientPlayerEntity {
+public abstract class MixinClientPlayerEntity extends LivingEntity {
     @Shadow
     private boolean usingItem;
 
-    @Shadow @Final protected MinecraftClient client;
+    @Shadow
+    @Final
+    protected MinecraftClient client;
+
+    protected MixinClientPlayerEntity(EntityType<? extends LivingEntity> entityType, World world) {
+        super(entityType, world);
+    }
+
+    @Shadow
+    public abstract void sendMessage(Text message, boolean actionBar);
 
     @Redirect(
             method = "tickMovement",
@@ -62,6 +77,9 @@ public class MixinClientPlayerEntity {
                     }
                     break;
             }
+        }
+        if (Configs.Feature.FEATURE_LOW_HEALTH_WARNING.getBooleanValue() && this.getHealth() <= Configs.Generic.LOW_HEALTH_THRESHOLD.getDoubleValue()) {
+            this.sendMessage(new LiteralText(StringUtils.translate("tweakmyclient.message.lowHealthWarning.warningMessage", String.format("%.2f", Configs.Generic.LOW_HEALTH_THRESHOLD.getDoubleValue()))), true);
         }
     }
 }
