@@ -1,5 +1,5 @@
 # TweakMyClient
-[![For MC](http://cf.way2muchnoise.eu/versions/For%20MC_tweakmyclient_all.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient/files/all?filter-game-version=1738749986%3a70886)
+[![For MC](http://cf.way2muchnoise.eu/versions/For%20MC_478757_all.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient/files)
 [![License](https://img.shields.io/github/license/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/blob/main/LICENSE)
 [![Issues](https://img.shields.io/github/issues/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/Hendrix-Shen/Tweak-My-Client?style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/pulls)
@@ -7,15 +7,16 @@
 [![Publish Release](https://img.shields.io/github/workflow/status/Hendrix-Shen/Tweak-My-Client/Publish%20Release?label=Publish%20Release&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/actions/workflows/publish.yml)
 [![Release](https://img.shields.io/github/v/release/Hendrix-Shen/Tweak-My-Client?include_prereleases&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
 [![Github Release Downloads](https://img.shields.io/github/downloads/Hendrix-Shen/Tweak-My-Client/total?label=Github%20Release%20Downloads&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
-[![CurseForge Downloads](http://cf.way2muchnoise.eu/tweakmyclient.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient)
+[![CurseForge Downloads](http://cf.way2muchnoise.eu/478757.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient)
 #### Warning: The project is still in the early development stage.
 The default hotkey to open the in-game config GUI is **T + C**.
 ## Dependencies
-| Dependency      | Type     | Version                        | Download                                                                 |
-| --------------- | -------- | ------------------------------ | ------------------------------------------------------------------------ |
-| Auth Me         | Optional | \>=1.4.0                       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me)       |
-| MaliLib         | Required | \>=1.16.4-0.10.0-dev.21+arne.1 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib)       |
-| ReAuth (Fabric) | Optional | \>=3.9.2                       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric) |
+| Dependency      | Type     | Download                                                                                                                                            |
+| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Auth Me         | Optional | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                                |
+| MaliLib         | Required | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)        |
+| Litematica      | Optional | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica)  |
+| ReAuth (Fabric) | Optional | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                            |
 ## It includes the following features.
 ### Color
 + colorBlockOutside
@@ -107,6 +108,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + featureGetTargetBlockPosition
   - *Allow you get the position of the farthest block you point to.*
   - *允许获取你指向方向最远端的方块坐标.*
++ featureLowHealthWarning
+  - *When your health is too low, use action bar to send a warning message.*
+  - *当你的血量过低时, 将使用动作条发送一条警告信息.*
 + featureOpenWaterHelper
   - *Shows whether or not you are fishing in 'open water' and draws a box around the area used for the open water calculation.*
   - *展示是否在'开放水域'钓鱼, 并在用于开阔水域计算的区域绘制一个方框.*
@@ -132,6 +136,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + getTargetBlockPosition
   - *Gets the position of the looking block. This feature is used to get the coordinates of the farthest block you point to.*
   - *获取你看向方块的坐标. 此特性用于获取你指向方向最远端的方块坐标.*
++ lowHealthThreshold
+  - *Trigger threshold of low health warning.*
+  - *低生命值阈值.*
 + openConfigGui
   - *A hotkey to open the in-game Config GUI.*
   - *打开设置界面的快捷键.*
@@ -154,3 +161,7 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + listAutoDropWhiteList
   - *Auto drop item white list. All items in this list will be auto dropped.*
   - *自动丢弃物品白名单. 所有在此列表的物品将会被丢弃.*
+### Patch
++ disableLitematicaEasyPlaceFailTip
+  - *Disable easyPlace failure that annoying prompt window. Note: Takes effect only when [litematica](https://www.curseforge.com/minecraft/mc-mods/litematica) is loaded.*
+  - *禁用轻松放置失败时那烦人的提示窗. 注意: 仅当 [litematica](https://www.curseforge.com/minecraft/mc-mods/litematica) 加载时生效.*
