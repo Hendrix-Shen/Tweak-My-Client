@@ -18,7 +18,7 @@ public class StringUtils {
 
             if (item != null) {
                 ItemStack stack = new ItemStack(item);
-                stack.setTag(reader.getTag());
+                stack.setTag(reader.getNbt());
                 return stack;
             }
         } catch (Exception e) {

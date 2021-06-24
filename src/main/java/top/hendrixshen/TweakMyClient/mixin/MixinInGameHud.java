@@ -1,7 +1,7 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.options.GameOptions;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.scoreboard.ScoreboardObjective;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,7 +34,7 @@ public abstract class MixinInGameHud {
             method = "renderScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/options/GameOptions;getTextBackgroundColor(F)I",
+                    target = "Lnet/minecraft/client/option/GameOptions;getTextBackgroundColor(F)I",
                     ordinal = 1
             )
     )
@@ -49,7 +49,7 @@ public abstract class MixinInGameHud {
             method = "renderScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/options/GameOptions;getTextBackgroundColor(F)I",
+                    target = "Lnet/minecraft/client/option/GameOptions;getTextBackgroundColor(F)I",
                     ordinal = 0
             )
     )
