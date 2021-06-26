@@ -12,6 +12,7 @@ import top.hendrixshen.TweakMyClient.interfaces.IMinecraftClient;
 import java.util.HashSet;
 
 public class AutoDropUtils {
+    public static int waitTime;
     public static HashSet<Item> itemStacksWhitelist;
     public static HashSet<Item> itemStacksBlackList;
 

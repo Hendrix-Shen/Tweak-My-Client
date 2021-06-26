@@ -304,6 +304,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigInteger ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL = new TranslatableConfigInteger(PREFIX, "antiGhostItemsAutoTriggerInterval", 10, 10, Integer.MAX_VALUE);
         public static final ConfigHotkey ANTI_GHOST_ITEMS_MANUAL_TRIGGER = new TranslatableConfigHotkey(PREFIX, "antiGhostItemsManualTrigger", "");
         public static final ConfigOptionList ANTI_GHOST_ITEMS_MODE = new TranslatableConfigOptionList(PREFIX, "antiGhostItemsMode", AntiGhostItemsMode.AUTOMATIC);
+        public static final ConfigInteger AUTO_DROP_INTERVAL = new TranslatableConfigInteger(PREFIX, "autoDropInterval", 0, 0, 1200);
         public static final ConfigInteger AUTO_RECONNECT_TIMER = new TranslatableConfigInteger(PREFIX, "autoReconnectTimer", 5, 0, 60);
         public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
@@ -317,6 +318,7 @@ public class Configs implements IConfigHandler {
                 ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL,
                 ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
                 ANTI_GHOST_ITEMS_MODE,
+                AUTO_DROP_INTERVAL,
                 AUTO_RECONNECT_TIMER,
                 DAYLIGHT_OVERRIDE_TIME,
                 GET_TARGET_BLOCK_POSITION,

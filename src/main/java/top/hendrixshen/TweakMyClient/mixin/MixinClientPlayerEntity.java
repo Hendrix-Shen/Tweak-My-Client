@@ -58,7 +58,12 @@ public abstract class MixinClientPlayerEntity extends LivingEntity {
     )
     private void onTick(CallbackInfo ci) {
         if (Configs.Feature.FEATURE_AUTO_DROP.getBooleanValue()) {
-            AutoDropUtils.doDrop();
+            if (AutoDropUtils.waitTime > 0) {
+                AutoDropUtils.waitTime--;
+            } else {
+                AutoDropUtils.doDrop();
+                AutoDropUtils.waitTime = Configs.Generic.AUTO_DROP_INTERVAL.getIntegerValue();
+            }
         }
         if (Configs.Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue()) {
             Configs.AntiGhostItemsMode mode = (Configs.AntiGhostItemsMode) Configs.Generic.ANTI_GHOST_ITEMS_MODE.getOptionListValue();

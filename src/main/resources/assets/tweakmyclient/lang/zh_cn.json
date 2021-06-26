@@ -82,6 +82,8 @@
     "tweakmyclient.config.generic.antiGhostItemsManualTrigger.comment": "手动触发一次清除幽灵物品.",
     "tweakmyclient.config.generic.antiGhostItemsMode.name": "清除幽灵物品模式",
     "tweakmyclient.config.generic.antiGhostItemsMode.comment": "清除幽灵物品工作模式.",
+    "tweakmyclient.config.generic.autoDropInterval.name": "自动丢弃间隔",
+    "tweakmyclient.config.generic.autoDropInterval.comment": "每隔多少刻执行一次自动丢弃.",
     "tweakmyclient.config.generic.autoReconnectTimer.name": "自动重连计时器",
     "tweakmyclient.config.generic.autoReconnectTimer.comment": "等待多少秒后自动重连.",
     "tweakmyclient.config.generic.daylightOverrideTime.name": "客户端时间",

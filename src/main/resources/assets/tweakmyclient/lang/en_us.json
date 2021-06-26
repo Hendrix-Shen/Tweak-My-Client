@@ -57,6 +57,8 @@
     "tweakmyclient.config.generic.antiGhostItemsManualTrigger.comment": "Manually trigger antiGhostItems once.",
     "tweakmyclient.config.generic.antiGhostItemsMode.name": "antiGhostItemsMode",
     "tweakmyclient.config.generic.antiGhostItemsMode.comment": "antiGhostItemsMode working mode.",
+    "tweakmyclient.config.generic.autoDropInterval.name": "autoDropInterval",
+    "tweakmyclient.config.generic.autoDropInterval.comment": "How many ticks per interval to perform auto drop.",
     "tweakmyclient.config.generic.autoReconnectTimer.name": "autoReconnectTimer",
     "tweakmyclient.config.generic.autoReconnectTimer.comment": "How many seconds to wait for auto reconnection.",
     "tweakmyclient.config.generic.daylightOverrideTime.name": "daylightOverrideTime",
