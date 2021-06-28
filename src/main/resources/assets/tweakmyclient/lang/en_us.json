@@ -48,6 +48,8 @@
     "tweakmyclient.config.disable_toggle.disableRenderOverlayPumpkin.comment": "Disables mask overlay rendering when player is wearing pumpkin.\nYou will gain a broader view.",
     "tweakmyclient.config.disable_toggle.disableRenderScoreboard.name": "disableRenderScoreboard",
     "tweakmyclient.config.disable_toggle.disableRenderScoreboard.comment": "Disables Scoreboard rendering.\nYou will gain a broader view.",
+    "tweakmyclient.config.disable_toggle.disableRenderToast.name": "disableRenderToast",
+    "tweakmyclient.config.disable_toggle.disableRenderToast.comment": "Disable toast rendering.",
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "disableSlowdown",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "Cancels slowness effects caused by honey, soul sand and using items.",
 
@@ -57,6 +59,8 @@
     "tweakmyclient.config.generic.antiGhostItemsManualTrigger.comment": "Manually trigger antiGhostItems once.",
     "tweakmyclient.config.generic.antiGhostItemsMode.name": "antiGhostItemsMode",
     "tweakmyclient.config.generic.antiGhostItemsMode.comment": "antiGhostItemsMode working mode.",
+    "tweakmyclient.config.generic.autoDropInterval.name": "autoDropInterval",
+    "tweakmyclient.config.generic.autoDropInterval.comment": "How many ticks per interval to perform auto drop.",
     "tweakmyclient.config.generic.autoReconnectTimer.name": "autoReconnectTimer",
     "tweakmyclient.config.generic.autoReconnectTimer.comment": "How many seconds to wait for auto reconnection.",
     "tweakmyclient.config.generic.daylightOverrideTime.name": "daylightOverrideTime",
