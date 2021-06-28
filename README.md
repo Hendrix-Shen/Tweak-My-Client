@@ -74,6 +74,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + disableRenderOverlayPumpkin
   - *Disables mask overlay rendering when player is wearing pumpkin. You will gain a broader view.*
   - *关闭在玩家在穿戴南瓜时的渲染覆盖. 你将获得更广阔的视野.*
++ disableRenderToast
+  - *Disable toast rendering.*
+  - *禁用 toast 提醒消息渲染.*
 + disableRenderBossBar
   - *Disables Scoreboard rendering. You will gain a broader view.*
   - *关闭游戏对计分板的UI渲染. 你将获得更广阔的视野.*
@@ -127,6 +130,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + antiGhostItemsMode
   - *antiGhostItemsMode working mode.*
   - *清除幽灵物品工作模式.*
++ autoDropInterval
+  - *How many ticks per interval to perform auto drop.*
+  - *每隔多少刻执行一次自动丢弃.*
 + autoReconnectTimer
   - *How many seconds to wait for auto reconnection.*
   - *等待多少秒后自动重连.*
