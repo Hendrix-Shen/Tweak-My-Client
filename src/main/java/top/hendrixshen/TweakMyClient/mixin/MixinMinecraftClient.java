@@ -18,10 +18,12 @@ import top.hendrixshen.TweakMyClient.interfaces.IMinecraftClient;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
 @Mixin(MinecraftClient.class)
-public class MixinMinecraftClient implements IMinecraftClient {
+public abstract class MixinMinecraftClient implements IMinecraftClient {
     @Shadow
     @Nullable
     public ClientPlayerInteractionManager interactionManager;
+
+    @Shadow public abstract ToastManager getToastManager();
 
     @Inject(
             method = "setCurrentServerEntry",
@@ -46,6 +48,8 @@ public class MixinMinecraftClient implements IMinecraftClient {
     private void onRenderToast(ToastManager toastManager, MatrixStack matrices) {
         if (!Configs.Disable.DISABLE_RENDER_TOAST.getBooleanValue()) {
             toastManager.draw(matrices);
+        } else {
+            this.getToastManager().clear();
         }
     }
 
