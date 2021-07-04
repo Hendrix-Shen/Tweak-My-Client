@@ -48,7 +48,7 @@ public abstract class MixinMinecraftClient {
         if (!Configs.Disable.DISABLE_RENDER_TOAST.getBooleanValue()) {
             toastManager.draw(matrices);
         } else {
-            this.getToastManager().clear();
+            toastManager.clear();
         }
     }
 }
