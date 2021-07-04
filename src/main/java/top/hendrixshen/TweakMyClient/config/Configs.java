@@ -339,7 +339,7 @@ public class Configs implements IConfigHandler {
         static {
             ANTI_GHOST_ITEMS_MANUAL_TRIGGER.getKeybind().setCallback((action, key) -> {
                 MinecraftClient mc = TweakMyClient.minecraftClient;
-                if (!Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue() || mc.player == null) {
+                if (!Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue() || Generic.ANTI_GHOST_ITEMS_MODE.getOptionListValue() != AntiGhostItemsMode.MANUAL || mc.player == null) {
                     return true;
                 }
                 if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
