@@ -13,17 +13,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.TweakMyClient.interfaces.IClientPlayerInteractionManager;
-import top.hendrixshen.TweakMyClient.interfaces.IMinecraftClient;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
 @Mixin(MinecraftClient.class)
-public abstract class MixinMinecraftClient implements IMinecraftClient {
+public abstract class MixinMinecraftClient {
     @Shadow
     @Nullable
     public ClientPlayerInteractionManager interactionManager;
 
-    @Shadow public abstract ToastManager getToastManager();
+    @Shadow
+    public abstract ToastManager getToastManager();
 
     @Inject(
             method = "setCurrentServerEntry",
@@ -51,10 +50,5 @@ public abstract class MixinMinecraftClient implements IMinecraftClient {
         } else {
             this.getToastManager().clear();
         }
-    }
-
-    @Override
-    public IClientPlayerInteractionManager getInteractionManager() {
-        return (IClientPlayerInteractionManager) interactionManager;
     }
 }
