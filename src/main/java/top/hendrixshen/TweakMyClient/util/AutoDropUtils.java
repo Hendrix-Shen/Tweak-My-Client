@@ -3,11 +3,12 @@ package top.hendrixshen.TweakMyClient.util;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.slot.SlotActionType;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.TweakMyClient.interfaces.IMinecraftClient;
 
 import java.util.HashSet;
 
@@ -17,6 +18,7 @@ public class AutoDropUtils {
 
     public static void doDrop() {
         MinecraftClient mc = TweakMyClient.minecraftClient;
+        ClientPlayerInteractionManager playerInteractionManager = mc.interactionManager;
         if (mc.currentScreen instanceof HandledScreen && !(mc.currentScreen instanceof InventoryScreen)) {
             return;
         }
@@ -34,12 +36,14 @@ public class AutoDropUtils {
             switch (mode) {
                 case BLACKLIST:
                     if (!itemStacksBlackList.contains(stack.getItem())) {
-                        ((IMinecraftClient) mc).getInteractionManager().windowClickThrow(slot);
+                        assert playerInteractionManager != null;
+                        playerInteractionManager.clickSlot(0, slot, 1, SlotActionType.THROW, mc.player);
                     }
                     break;
                 case WHITELIST:
                     if (itemStacksWhitelist.contains(stack.getItem())) {
-                        ((IMinecraftClient) mc).getInteractionManager().windowClickThrow(slot);
+                        assert playerInteractionManager != null;
+                        playerInteractionManager.clickSlot(0, slot, 1, SlotActionType.THROW, mc.player);
                     }
                     break;
             }

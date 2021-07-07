@@ -13,12 +13,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.TweakMyClient.interfaces.IClientPlayerInteractionManager;
-import top.hendrixshen.TweakMyClient.interfaces.IMinecraftClient;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
 @Mixin(MinecraftClient.class)
-public class MixinMinecraftClient implements IMinecraftClient {
+public class MixinMinecraftClient {
     @Shadow
     @Nullable
     public ClientPlayerInteractionManager interactionManager;
@@ -46,11 +44,8 @@ public class MixinMinecraftClient implements IMinecraftClient {
     private void onRenderToast(ToastManager toastManager, MatrixStack matrices) {
         if (!Configs.Disable.DISABLE_RENDER_TOAST.getBooleanValue()) {
             toastManager.draw(matrices);
+        } else {
+            toastManager.clear();
         }
-    }
-
-    @Override
-    public IClientPlayerInteractionManager getInteractionManager() {
-        return (IClientPlayerInteractionManager) interactionManager;
     }
 }

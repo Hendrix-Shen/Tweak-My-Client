@@ -15,6 +15,7 @@ public class OverlayRenderer {
     }
 
     public void renderOpenWater(MinecraftClient mc) {
+        assert mc.player != null;
         FishingBobberEntity fishHook = mc.player.fishHook;
         if (fishHook != null) {
             BlockPos fishHookPos = fishHook.getBlockPos();
@@ -28,6 +29,4 @@ public class OverlayRenderer {
     private boolean isInOpenWater(FishingBobberEntity fishHook) {
         return ((IFishingBobberEntity) fishHook).checkOpenWaterAround(fishHook.getBlockPos());
     }
-
-
 }
