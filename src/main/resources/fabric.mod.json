@@ -33,12 +33,12 @@
   ],
   "depends": {
     "fabricloader": ">=0.9.0",
-    "malilib": ">=0.10.0-dev.22",
-    "minecraft": "1.17.x"
+    "malilib": ">=0.10.0-dev.23",
+    "minecraft": ">=1.17.1"
   },
   "suggests": {
     "authme": ">=1.5.0",
-    "litematica": ">=0.0.0-dev.20210616.033538",
+    "litematica": ">=0.0.0-dev.20210707.011234",
     "reauth": ">=3.9.2"
   }
 }

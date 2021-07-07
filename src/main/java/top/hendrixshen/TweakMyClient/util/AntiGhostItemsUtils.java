@@ -19,7 +19,7 @@ public class AntiGhostItemsUtils {
             ItemStack stack = new ItemStack(Items.BEDROCK);
             Int2ObjectMap<ItemStack> int2ObjectMap = new Int2ObjectOpenHashMap();
             TweakMyClient.minecraftClient.getNetworkHandler().sendPacket(
-                    new ClickSlotC2SPacket(0, 0, 0, SlotActionType.QUICK_MOVE, stack, int2ObjectMap)
+                    new ClickSlotC2SPacket(0, 0, 0, 0, SlotActionType.QUICK_MOVE, stack, int2ObjectMap)
             );
         }
     }
