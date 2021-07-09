@@ -67,6 +67,8 @@
     "tweakmyclient.config.feature_toggle.featureCustomGuiBackgroundColor.comment": "启用计分板界面背景色覆写.",
     "tweakmyclient.config.feature_toggle.featureCustomSidebarBackgroundColor.name": "自定义计分板背景颜色",
     "tweakmyclient.config.feature_toggle.featureCustomSidebarBackgroundColor.comment": "启用计分板背景色覆写.",
+    "tweakmyclient.config.feature_toggle.featureGlobalEventListener.name": "全局事件监听",
+    "tweakmyclient.config.feature_toggle.featureGlobalEventListener.comment": "打印全局事件触发坐标.",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.name": "覆盖客户端世界时间",
     "tweakmyclient.config.feature_toggle.featureDaylightOverride.comment": "覆盖客户端的世界时间为你想要的时间.",
     "tweakmyclient.config.feature_toggle.featureGetTargetBlockPosition.name": "获取方块坐标",
@@ -126,5 +128,8 @@
     "tweakmyclient.message.autoReconnect.static": "自动重连",
     "tweakmyclient.message.autoReconnect.timer": "切换自动重连 (%d)",
     "tweakmyclient.message.autoReconnect.toggle": "切换自动重连",
+    "tweakmyclient.message.globalEventListener.enderDragonDeath": "§e[全局事件]§f: 末影龙已被击败, 坐标 [x: %d, y: %d, z: %d]",
+    "tweakmyclient.message.globalEventListener.endPortalSpawn": "§e[全局事件]§f: 末影传送门已被激活, 坐标  [x: %d, y: %d, z: %d]",
+    "tweakmyclient.message.globalEventListener.witherSpawn": "§e[全局事件]§f: 凋零已生成, 坐标 [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.lowHealthWarning.warningMessage": "§e警告: 你的生命值过低(阈值: %s)."
 }

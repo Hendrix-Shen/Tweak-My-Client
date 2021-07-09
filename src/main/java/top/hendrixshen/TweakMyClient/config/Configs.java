@@ -279,6 +279,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomBlockOutsideColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_GUI_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomGuiBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarBackgroundColor", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_GLOBAL_EVENT_LISTENER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGlobalEventListener", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_LOW_HEALTH_WARNING = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureLowHealthWarning", false, "");
@@ -293,6 +294,7 @@ public class Configs implements IConfigHandler {
                 FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR,
                 FEATURE_CUSTOM_GUI_BACKGROUND_COLOR,
                 FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR,
+                FEATURE_GLOBAL_EVENT_LISTENER,
                 FEATURE_DAYLIGHT_OVERRIDE,
                 FEATURE_GET_TARGET_BLOCK_POSITION,
                 FEATURE_LOW_HEALTH_WARNING,
