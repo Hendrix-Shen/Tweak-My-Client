@@ -276,8 +276,8 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_DROP = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoDrop", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RECONNECT = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoReconnect", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RESPAWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoRespawn", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureBlockOutsideColor", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_GUI_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGuiBackgroundColor", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomBlockOutsideColor", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_GUI_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomGuiBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
