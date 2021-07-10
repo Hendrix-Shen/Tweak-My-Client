@@ -3,6 +3,7 @@ package top.hendrixshen.TweakMyClient.mixin;
 import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.mob.WitchEntity;
 import net.minecraft.entity.mob.ZombieEntity;
@@ -25,13 +26,13 @@ public abstract class MixinEntityRenderDispatcher {
             cancellable = true
     )
     private void onShouldRender(Entity entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.Disable.DISABLE_ENTITY_TNT_RENDERING.getBooleanValue() && entity instanceof TntEntity) {
+        if (Configs.Disable.DISABLE_ENTITY_TNT_RENDERING.getBooleanValue() && entity.getType() == EntityType.TNT) {
             cir.setReturnValue(false);
         }
-        if (Configs.Disable.DISABLE_ENTITY_WITHER_RENDERING.getBooleanValue() && entity instanceof WitchEntity) {
+        if (Configs.Disable.DISABLE_ENTITY_WITHER_RENDERING.getBooleanValue() && entity.getType() == EntityType.WITHER) {
             cir.setReturnValue(false);
         }
-        if (Configs.Disable.DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING.getBooleanValue() && entity instanceof ZombieEntity) {
+        if (Configs.Disable.DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING.getBooleanValue() && entity.getType() == EntityType.ZOMBIE_VILLAGER) {
             cir.setReturnValue(false);
         }
     }
