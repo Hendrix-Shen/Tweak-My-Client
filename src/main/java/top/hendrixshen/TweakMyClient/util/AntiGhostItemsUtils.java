@@ -7,6 +7,8 @@ import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
 import net.minecraft.screen.slot.SlotActionType;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 
+import java.util.Objects;
+
 public class AntiGhostItemsUtils {
     public static int manualRefreshTimer;
     public static int automaticRefreshTimer;
@@ -16,7 +18,7 @@ public class AntiGhostItemsUtils {
         if (playerEntity != null) {
             short playerNextActionId = playerEntity.currentScreenHandler.getNextActionId(playerEntity.inventory);
             ItemStack stack = new ItemStack(Items.BEDROCK);
-            TweakMyClient.minecraftClient.getNetworkHandler().sendPacket(
+            Objects.requireNonNull(TweakMyClient.minecraftClient.getNetworkHandler()).sendPacket(
                     new ClickSlotC2SPacket(0, 0, 0, SlotActionType.QUICK_MOVE, stack, playerNextActionId)
             );
         }

@@ -45,6 +45,7 @@ public abstract class MixinWorldRenderer {
             ci.cancel();
         }
     }
+
     @Inject(
             method = "processGlobalEvent",
             at = @At(
