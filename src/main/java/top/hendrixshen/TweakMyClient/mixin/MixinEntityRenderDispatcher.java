@@ -4,6 +4,7 @@ import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,6 +24,15 @@ public abstract class MixinEntityRenderDispatcher {
             cancellable = true
     )
     private void onShouldRender(Entity entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
+        if (entity instanceof PlayerEntity) {
+            return;
+        }
+        if (Configs.Disable.DISABLE_CLIENT_ENTITY_IN_LIST_RENDERING.getBooleanValue()) {
+            String entityName = entity.getType().getTranslationKey().split("\\.")[2];
+            if (Configs.List.LIST_DISABLE_CLIENT_ENTITY.getStrings().contains(entityName)) {
+                cir.setReturnValue(false);
+            }
+        }
         if (Configs.Disable.DISABLE_ENTITY_TNT_RENDERING.getBooleanValue() && entity.getType() == EntityType.TNT) {
             cir.setReturnValue(false);
         }

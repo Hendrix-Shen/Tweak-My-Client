@@ -32,6 +32,8 @@
     "tweakmyclient.config.disable_toggle.disableClientEntityWitherUpdates.comment": "Disables wither entity updates on the client.\nMaybe it's useful for fake peace.",
     "tweakmyclient.config.disable_toggle.disableClientEntityZombieVillagerUpdates.name": "disableClientEntityZombieVillagerUpdates",
     "tweakmyclient.config.disable_toggle.disableClientEntityZombieVillagerUpdates.comment": "Disables zombie villager entity updates on the client.\nMaybe it's useful for fake peace.",
+    "tweakmyclient.config.disable_toggle.disableClientEntityInListRendering.name": "disableClientEntityInListRendering",
+    "tweakmyclient.config.disable_toggle.disableClientEntityInListRendering.comment": "Disable rendering of entities in the list.\nThe priority of this setting is higher than the following: \n- disableEntityTNTRendering\n- disableEntityWitherRendering\n- disableEntityZombieVillagerRendering",
     "tweakmyclient.config.disable_toggle.disableEntityTNTRendering.name": "disableEntityTNTRendering",
     "tweakmyclient.config.disable_toggle.disableEntityTNTRendering.comment": "Disables TNT entity rendering.\nMaybe it's useful for fake peace.",
     "tweakmyclient.config.disable_toggle.disableEntityWitherRendering.name": "disableEntityWitherRendering",
@@ -111,6 +113,8 @@
     "tweakmyclient.config.list.listAutoDropType.comment": "Auto drop item list type.",
     "tweakmyclient.config.list.listAutoDropWhiteList.name": "listAutoDropWhiteList",
     "tweakmyclient.config.list.listAutoDropWhiteList.comment": "Auto drop item white list.\nAll items in this list will be auto dropped.",
+    "tweakmyclient.config.list.listDisableClientEntityRendering.name": "listDisableClientEntityRendering",
+    "tweakmyclient.config.list.listDisableClientEntityRendering.comment": "Disable client entity list.\nAll entities in this list will not be rendering.",
 
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.name": "disableLitematicaEasyPlaceFailTip",
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "Disable easyPlace failure that annoying prompt window.\nNote: Takes effect only when litematica is loaded.",
