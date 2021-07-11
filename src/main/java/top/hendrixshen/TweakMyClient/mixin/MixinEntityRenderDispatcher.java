@@ -29,7 +29,7 @@ public abstract class MixinEntityRenderDispatcher {
         }
         if (Configs.Disable.DISABLE_CLIENT_ENTITY_IN_LIST_RENDERING.getBooleanValue()) {
             String entityName = entity.getType().getTranslationKey().split("\\.")[2];
-            if (Configs.List.LIST_DISABLE_CLIENT_ENTITY.getStrings().contains(entityName)) {
+            if (Configs.List.LIST_DISABLE_CLIENT_ENTITY_RENDERING.getStrings().contains(entityName)) {
                 cir.setReturnValue(false);
             }
         }
