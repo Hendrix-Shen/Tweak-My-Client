@@ -19,6 +19,9 @@ repositories {
     maven {
         url 'https://www.cursemaven.com/'
     }
+    maven {
+        url 'https://api.modrinth.com/maven'
+    }
 }
 
 dependencies {
@@ -29,7 +32,7 @@ dependencies {
     // Malilib
     modApi("fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_masa}:${project.malilib_version}")
     // ModMenu
-    modCompileOnly("io.github.prospector:modmenu:" + project.mod_menu_version)
+    modCompileOnly("maven.modrinth:modmenu:" + project.mod_menu_version)
     // Optional mod compatibility Library
     modCompileOnly("curse.maven:authme-356643:3073169")
     modCompileOnly("curse.maven:litematica-308892:3349118")
@@ -79,7 +82,6 @@ jar {
     from "LICENSE"
 }
 
-tasks.publish.dependsOn build
 publishing {
     publications {
         mavenJava(MavenPublication) {
