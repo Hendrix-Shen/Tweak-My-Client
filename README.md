@@ -44,6 +44,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + disableClientBlockEvents
   - *Disables block event rendering (eg pistons animations).*
   - *关闭客户端侧方块事件渲染 (例如活塞动画).*
++ disableClientEntityInListUpdates
+  - *Disable entity updates in the list on the client. The priority of this setting is higher than the following: `disableClientEntityTNTUpadates`, `disableClientEntityWitherUpdates`, `disableClientEntityZombieVillagerUpdates`.*
+  - *关闭客户端对列表中实体的运算. 此设置的优先级高于以下: `禁用客户端侧TNT运算`, `禁用客户端侧凋零实体运算`, `禁用客户端侧僵尸村民实体运算`.*
 + disableClientEntityTNTUpadates
   - *Disables TNT entity updates on the client. Maybe useful for TNT related machines.*
   - *关闭客户端对TNT实体的运算.也许对与TNT有关的机器有帮助.*
@@ -53,14 +56,17 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + disableClientEntityZombieVillagerUpdates
   - *Disables zombie villager entity updates on the client. Maybe it's useful for fake peace.*
   - *关闭客户端对僵尸村民实体的运算. 也许对伪和平有帮助.*
++ disableClientEntityInListRendering
+  - *Disable rendering of entities in the list on the client. The priority of this setting is higher than the following: `disableEntityTNTRendering`, `disableEntityWitherRendering`, `disableEntityZombieVillagerRendering`.*
+  - *关闭游戏对列表中实体实体的渲染. 此设置的优先级高于以下: `禁用TNT实体渲染`, `禁用凋零实体渲染`, `禁用僵尸村民实体渲染`.*
 + disableEntityTNTRendering
-  - *Disables TNT entity rendering. Maybe it's useful for fake peace.*
+  - *Disables TNT entity rendering on the client. Maybe it's useful for fake peace.*
   - *关闭游戏对TNT实体的渲染. 也许对与TNT有关的机器有帮助.*
 + disableEntityWitherRendering
-  - *Disables wither entity rendering. Maybe it's useful for fake peace.*
+  - *Disables wither entity rendering on the client. Maybe it's useful for fake peace.*
   - *关闭游戏对凋零实体的渲染. 也许对伪和平有帮助.*
 + disableEntityZombieVillagerRendering
-  - *Disables zombie villager entity rendering. Maybe it's useful for fake peace.*
+  - *Disables zombie villager entity rendering on the client. Maybe it's useful for fake peace.*
   - *关闭游戏对僵尸村民实体的渲染. 也许对伪和平有帮助.*
 + disableRenderBossBar
   - *Disables boss bar rendering when player is near boss. You will gain a broader view.*
@@ -96,10 +102,10 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + featureAutoRespawn
   - *Automatically respawns you whenever you die.*
   - *死亡时自动重生.*
-+ featureBlockOutsideColor
++ featureCustomBlockOutsideColor
   - *Enable block outside color override.*
   - *启用方块轮廓颜色覆写.*
-+ featureGuiBackgroundColor
++ featureCustomGuiBackgroundColor
   - *Enable gui background color override.*
   - *启用计分板界面背景色覆写.*
 + featureCustomSidebarBackgroundColor
@@ -167,6 +173,12 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + listAutoDropWhiteList
   - *Auto drop item white list. All items in this list will be auto dropped.*
   - *自动丢弃物品白名单. 所有在此列表的物品将会被丢弃.*
++ listDisableClientEntityUpdates
+  - *Disable client entity updates list. All entities in this list will not be updated.*
+  - *禁用客户端侧运算实体的列表. 所有在此列表内的实体将不会被运算*
++ listDisableClientEntityRendering
+  - *Disable client entity rendering list. All entities in this list will not be rendered.*
+  - *禁用客户端侧渲染实体的列表. 所有在此列表内的实体将不会被渲染.*
 ### Patch
 + disableLitematicaEasyPlaceFailTip
   - *Disable easyPlace failure that annoying prompt window. Note: Takes effect only when [litematica](https://www.curseforge.com/minecraft/mc-mods/litematica) is loaded.*
