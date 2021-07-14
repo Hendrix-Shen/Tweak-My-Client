@@ -86,7 +86,6 @@ jar {
     from "LICENSE"
 }
 
-tasks.publish.dependsOn build
 publishing {
     publications {
         mavenJava(MavenPublication) {
