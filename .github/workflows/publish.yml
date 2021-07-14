@@ -32,7 +32,7 @@ jobs:
         id: properties
         run: |
           path='./gradle.properties'
-          for property in release-curse-versions release-curse-support release-extra-branch-117 release-curse-versions-117 release-curse-support-117
+          for property in release-curse-versions release-curse-support release-extra-branch-117 release-curse-versions-117 release-curse-support-117 release-extra-branch-118 release-curse-versions-118 release-curse-support-118
           do
             result=$(sed -n "/^[[:space:]]*$property[[:space:]]*=[[:space:]]*/s/^[[:space:]]*$property[[:space:]]*=[[:space:]]*//p" "$path")
             echo "$property: $result"
