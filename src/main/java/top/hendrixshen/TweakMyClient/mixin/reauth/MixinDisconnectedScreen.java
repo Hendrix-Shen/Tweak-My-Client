@@ -50,7 +50,10 @@ public class MixinDisconnectedScreen extends Screen {
             Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
             if (TweakMyClientMixinPlugin.isReAuthLoaded) {
                 addDrawableChild(new ButtonWidget(backButtonX, backButtonY + (TweakMyClientMixinPlugin.isAuthMeLoaded ? 96 : 72), 200, 20,
-                        new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithReAuth", PREFIX))), button -> this.client.openScreen(new AuthScreen(parent))));
+                        new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithReAuth", PREFIX))), button -> {
+                    assert this.client != null;
+                    this.client.setScreen(new AuthScreen(parent));
+                }));
             }
         }
     }
