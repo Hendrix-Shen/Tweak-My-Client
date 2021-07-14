@@ -46,7 +46,7 @@ jobs:
             16
         ]
         os: [ ubuntu-20.04 ]
-        branch: [1.16, 1.17]
+        branch: [1.16, 1.17, 1.18]
     runs-on: ${{ matrix.os }}
 
     steps:
