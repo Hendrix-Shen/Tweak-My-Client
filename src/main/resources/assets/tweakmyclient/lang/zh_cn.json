@@ -1,5 +1,5 @@
 {
-    "tweakmyclient.gui.title.configs": "Tweak My Client 设置 - 版本: %s",
+    "tweakmyclient.gui.title.configs": "Tweak My Client 设置 - 版本: %s (%s)",
     "tweakmyclient.gui.button.config_gui.generic": "全局",
     "tweakmyclient.gui.button.config_gui.color": "颜色",
     "tweakmyclient.gui.button.config_gui.disable_toggle": "禁用开关",
@@ -139,5 +139,9 @@
     "tweakmyclient.message.globalEventListener.enderDragonDeath": "§e[全局事件]§f: 末影龙已被击败, 坐标 [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.globalEventListener.endPortalSpawn": "§e[全局事件]§f: 末影传送门已被激活, 坐标  [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.globalEventListener.witherSpawn": "§e[全局事件]§f: 凋零已生成, 坐标 [x: %d, y: %d, z: %d]",
-    "tweakmyclient.message.lowHealthWarning.warningMessage": "§e警告: 你的生命值过低(阈值: %s)."
+    "tweakmyclient.message.lowHealthWarning.warningMessage": "§e警告: 你的生命值过低(阈值: %s).",
+
+    "tweakmyclient.misc.versionType.Public Beta": "公共测试版",
+    "tweakmyclient.misc.versionType.Public Release": "公共发行版",
+    "tweakmyclient.misc.versionType.Version Exception": "版本异常"
 }

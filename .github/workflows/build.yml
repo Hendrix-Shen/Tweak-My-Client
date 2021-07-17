@@ -37,12 +37,13 @@ jobs:
       - name: Display commid hash
         if: ${{ runner.os == 'Linux' && matrix.java == '16' }}
         run: |
-          echo Tweak My Client \commit-${GITHUB_SHA::7} \(Public Beta\)
+          echo Tweak My Client commit-${GITHUB_SHA::7} \(Public Beta\)
       - name: Set commid hash in codes
         if: ${{ runner.os == 'Linux' && matrix.java == '16' }}
         run: |
           sed -i "s/build.undefined/${GITHUB_SHA::7}/g" gradle.properties
-          sed -i "s/build.undefined/${GITHUB_SHA::7} \(Public Beta\)/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java
+          sed -i "s/build.undefined/${GITHUB_SHA::7}/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java
+          sed -i "s/Version Exception/Public Beta/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
@@ -51,5 +52,5 @@ jobs:
         if: ${{ runner.os == 'Linux' && matrix.java == '16' }}
         uses: actions/upload-artifact@v2
         with:
-          name: build-artifacts
+          name: TweakMyClient-mc1.16\({GITHUB_SHA::7}\)
           path: build/libs/
