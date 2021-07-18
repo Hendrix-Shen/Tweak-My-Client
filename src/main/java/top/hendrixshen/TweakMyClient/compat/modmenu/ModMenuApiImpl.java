@@ -1,7 +1,7 @@
 package top.hendrixshen.TweakMyClient.compat.modmenu;
 
-import io.github.prospector.modmenu.api.ConfigScreenFactory;
-import io.github.prospector.modmenu.api.ModMenuApi;
+import com.terraformersmc.modmenu.api.ConfigScreenFactory;
+import com.terraformersmc.modmenu.api.ModMenuApi;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
 
 public class ModMenuApiImpl implements ModMenuApi {
