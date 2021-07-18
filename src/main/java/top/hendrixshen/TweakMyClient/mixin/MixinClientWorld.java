@@ -4,9 +4,12 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.config.Configs;
 
 import java.util.function.Consumer;
@@ -22,8 +25,9 @@ public class MixinClientWorld {
     )
     private void onTickEntity(ClientWorld clientWorld, Consumer<Entity> tickConsumer, Entity entity) {
         if (Configs.Disable.DISABLE_CLIENT_ENTITY_IN_LIST_UPDATES.getBooleanValue()) {
-            String entityName = entity.getType().getTranslationKey().split("\\.")[2];
-            if (Configs.List.LIST_DISABLE_CLIENT_ENTITY_UPDATES.getStrings().contains(entityName) && !(entity instanceof PlayerEntity)) {
+            String entityID = Registry.ENTITY_TYPE.getId(entity.getType()).toString();
+            String entityName = entity.getName().getString();
+            if (Configs.List.LIST_DISABLE_CLIENT_ENTITY_UPDATES.getStrings().stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s)) && !(entity instanceof PlayerEntity)) {
                 return;
             }
         }

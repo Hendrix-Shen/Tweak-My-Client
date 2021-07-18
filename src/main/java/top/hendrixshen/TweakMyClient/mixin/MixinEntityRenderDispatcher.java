@@ -5,6 +5,7 @@ import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,12 +25,10 @@ public abstract class MixinEntityRenderDispatcher {
             cancellable = true
     )
     private void onShouldRender(Entity entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
-        if (entity instanceof PlayerEntity) {
-            return;
-        }
         if (Configs.Disable.DISABLE_CLIENT_ENTITY_IN_LIST_RENDERING.getBooleanValue()) {
-            String entityName = entity.getType().getTranslationKey().split("\\.")[2];
-            if (Configs.List.LIST_DISABLE_CLIENT_ENTITY_RENDERING.getStrings().contains(entityName)) {
+            String entityID = Registry.ENTITY_TYPE.getId(entity.getType()).toString();
+            String entityName = entity.getName().getString();
+            if (Configs.List.LIST_DISABLE_CLIENT_ENTITY_RENDERING.getStrings().stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s)) && !(entity instanceof PlayerEntity)) {
                 cir.setReturnValue(false);
             }
         }
