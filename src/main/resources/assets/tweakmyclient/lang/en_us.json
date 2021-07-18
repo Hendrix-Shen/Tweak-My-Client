@@ -1,5 +1,5 @@
 {
-    "tweakmyclient.gui.title.configs": "Tweak My Client - Config - Version: %s",
+    "tweakmyclient.gui.title.configs": "Tweak My Client - Config - Version: %s (%s)",
     "tweakmyclient.gui.button.config_gui.generic": "Generic",
     "tweakmyclient.gui.button.config_gui.color": "Color",
     "tweakmyclient.gui.button.config_gui.disable_toggle": "Disable Toggle",
@@ -139,5 +139,9 @@
     "tweakmyclient.message.globalEventListener.enderDragonDeath": "§e[GlobalEvent]§f: Ender Dragon Defeated at [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.globalEventListener.endPortalSpawn": "§e[GlobalEvent]§f: End Portal Activated at  [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.globalEventListener.witherSpawn": "§e[GlobalEvent]§f: Wither Spawned at [x: %d, y: %d, z: %d]",
-    "tweakmyclient.message.lowHealthWarning.warningMessage": "§eWarning: Your health is too low(Threshold: %s)."
+    "tweakmyclient.message.lowHealthWarning.warningMessage": "§eWarning: Your health is too low(Threshold: %s).",
+
+    "tweakmyclient.misc.versionType.Public Beta": "Public Beta",
+    "tweakmyclient.misc.versionType.Public Release": "Public Release",
+    "tweakmyclient.misc.versionType.Version Exception": "Version Exception"
 }
