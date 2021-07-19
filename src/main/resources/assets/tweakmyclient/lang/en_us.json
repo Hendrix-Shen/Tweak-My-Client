@@ -140,6 +140,9 @@
     "tweakmyclient.message.globalEventListener.endPortalSpawn": "§e[GlobalEvent]§f: End Portal Activated at  [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.globalEventListener.witherSpawn": "§e[GlobalEvent]§f: Wither Spawned at [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.lowHealthWarning.warningMessage": "§eWarning: Your health is too low(Threshold: %s).",
+    "tweakmyclient.message.toggled": "%s %s",
+    "tweakmyclient.message.value.enabled": "Enabled",
+    "tweakmyclient.message.value.disabled": "Disabled",
 
     "tweakmyclient.misc.versionType.Public Beta": "Public Beta",
     "tweakmyclient.misc.versionType.Public Release": "Public Release",

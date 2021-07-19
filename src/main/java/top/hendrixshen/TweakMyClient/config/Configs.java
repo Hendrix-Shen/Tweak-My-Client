@@ -21,6 +21,7 @@ import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
 import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
 import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
+import top.hendrixshen.TweakMyClient.util.InfoUtils;
 import top.hendrixshen.TweakMyClient.util.RayTraceUtils;
 
 import java.io.File;
@@ -349,7 +350,7 @@ public class Configs implements IConfigHandler {
                     return true;
                 }
                 if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
-                    mc.player.sendMessage(new LiteralText(StringUtils.translate("tweakmyclient.message.antiGhostItemsManualTrigger.mustWait", AntiGhostItemsUtils.manualRefreshTimer / 20)), true);
+                    InfoUtils.printActionBarMessage(StringUtils.translate("tweakmyclient.message.antiGhostItemsManualTrigger.mustWait", AntiGhostItemsUtils.manualRefreshTimer / 20));
                     return true;
                 }
                 AntiGhostItemsUtils.refreshInventory();
@@ -363,7 +364,7 @@ public class Configs implements IConfigHandler {
                 MinecraftClient mc = TweakMyClient.minecraftClient;
                 BlockPos blockPos = RayTraceUtils.getTargetedPosition(mc.world, mc.player, TARGET_BLOCK_MAX_TRACE_DISTANCE.getDoubleValue(), false);
                 if (blockPos == null || mc.player == null) {
-                    return false;
+                    return true;
                 }
                 String str = Generic.TARGET_BLOCK_POSITION_FORMAT.getStringValue();
                 str = str.replace("{X}", String.format("%d", blockPos.getX()));
