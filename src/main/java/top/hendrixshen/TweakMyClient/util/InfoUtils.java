@@ -24,9 +24,6 @@ public class InfoUtils {
 
     public static void printBooleanConfigToggleMessage(String translatedName, boolean newValue)
     {
-        TweakMyClient.logger.info(translatedName);
-        TweakMyClient.logger.info(StringUtils.translate(translatedName));
-
         String color = newValue ? GuiBase.TXT_GREEN : GuiBase.TXT_RED;
         String status = StringUtils.translate(String.format("%s.message.value.%s", Reference.MOD_ID, (newValue ? "enabled" : "disabled")));
         String message = StringUtils.translate(String.format("%s.message.toggled", Reference.MOD_ID), String.format("%s%s%s", color, status, GuiBase.TXT_RST), StringUtils.translate(translatedName));
