@@ -151,6 +151,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + lowHealthThreshold
   - *Trigger threshold of low health warning.*
   - *低生命值阈值.*
++ memoryCleaner
+  - *Force release memory.*
+  - *强制释放内存.*
 + openConfigGui
   - *A hotkey to open the in-game Config GUI.*
   - *打开设置界面的快捷键.*

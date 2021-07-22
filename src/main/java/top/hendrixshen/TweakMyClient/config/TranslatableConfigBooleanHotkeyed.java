@@ -11,12 +11,14 @@ public class TranslatableConfigBooleanHotkeyed extends ConfigBooleanHotkeyed {
         super(name, defaultValue, defaultHotkey, String.format("%s.%s.comment", prefix, name),
                 String.format("%s.%s.pretty_name", prefix, name));
         this.guiDisplayName = String.format("%s.%s.name", prefix, name);
+        this.keybind.setCallback(new CallBacks.KeyCallbackToggleBooleanConfigWithMessage(this, this.getConfigGuiDisplayName()));
     }
 
     public TranslatableConfigBooleanHotkeyed(String prefix, String name, boolean defaultValue, String defaultHotkey, KeybindSettings settings) {
         super(name, defaultValue, defaultHotkey, settings, String.format("%s.%s.comment", prefix, name),
                 String.format("%s.%s.pretty_name", prefix, name));
         this.guiDisplayName = String.format("%s.%s.name", prefix, name);
+        this.keybind.setCallback(new CallBacks.KeyCallbackToggleBooleanConfigWithMessage(this, this.getConfigGuiDisplayName()));
     }
 
     @Override
