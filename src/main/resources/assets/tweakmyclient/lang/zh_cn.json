@@ -100,6 +100,8 @@
     "tweakmyclient.config.generic.getTargetBlockPosition.comment": "获取你看向方块的坐标.\n此特性用于获取你指向方向最远端的方块坐标.",
     "tweakmyclient.config.generic.lowHealthThreshold.name": "低生命值阈值",
     "tweakmyclient.config.generic.lowHealthThreshold.comment": "触发低生命值警告的阈值.",
+    "tweakmyclient.config.generic.memoryCleaner.name": "内存清理",
+    "tweakmyclient.config.generic.memoryCleaner.comment": "强制释放内存.",
     "tweakmyclient.config.generic.openConfigGui.name": "打开设置界面",
     "tweakmyclient.config.generic.openConfigGui.comment": "打开设置界面的快捷键.",
     "tweakmyclient.config.generic.targetBlockMaxTraceDistance.name": "获取方块坐标最大追踪距离",

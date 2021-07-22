@@ -318,6 +318,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
         public static final ConfigDouble LOW_HEALTH_THRESHOLD = new TranslatableConfigDouble(PREFIX, "lowHealthThreshold", 6, 0, 1000);
+        public static final ConfigHotkey MEMORY_CLEANER = new TranslatableConfigHotkey(PREFIX, "memoryCleaner", "");
         public static final ConfigHotkey OPEN_CONFIG_GUI = new TranslatableConfigHotkey(PREFIX, "openConfigGui", "T,C");
         public static final ConfigDouble TARGET_BLOCK_MAX_TRACE_DISTANCE = new TranslatableConfigDouble(PREFIX, "targetBlockMaxTraceDistance", 100, 0, 200);
         public static final ConfigString TARGET_BLOCK_POSITION_FORMAT = new TranslatableConfigString(PREFIX, "targetBlockPositionFormat", "I'm tracing this position [x: {X},y: {Y}, z: {Z}]");
@@ -332,6 +333,7 @@ public class Configs implements IConfigHandler {
                 DAYLIGHT_OVERRIDE_TIME,
                 GET_TARGET_BLOCK_POSITION,
                 LOW_HEALTH_THRESHOLD,
+                MEMORY_CLEANER,
                 OPEN_CONFIG_GUI,
                 TARGET_BLOCK_MAX_TRACE_DISTANCE,
                 TARGET_BLOCK_POSITION_FORMAT,
@@ -340,6 +342,7 @@ public class Configs implements IConfigHandler {
         public static final ImmutableList<ConfigHotkey> HOTKEYS = ImmutableList.of(
                 ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
                 GET_TARGET_BLOCK_POSITION,
+                MEMORY_CLEANER,
                 OPEN_CONFIG_GUI
         );
 
@@ -381,7 +384,31 @@ public class Configs implements IConfigHandler {
                 }
                 return true;
             });
-            OPEN_CONFIG_GUI.getKeybind().setCallback((keyAction, iKeybind) -> {
+            MEMORY_CLEANER.getKeybind().setCallback(((action, key) -> {
+                class CleanerThread implements Runnable {
+                    public CleanerThread() {
+                    }
+                    @Override
+                    public void run() {
+                        TweakMyClient.logger.info(String.format("[%s]: Memory cleaner thread started!", Reference.MOD_NAME));
+                        System.gc();
+                        try {
+                            Thread.sleep(1000L);
+                        } catch (InterruptedException interruptedException) {
+                            // ignored
+                        }
+                        System.gc();
+                        TweakMyClient.logger.info(String.format("[%s]: Memory cleaner thread finished!", Reference.MOD_NAME));
+                    }
+                }
+                Runnable runnable = new CleanerThread();
+                Thread gcThread = new Thread(runnable, "MemoryCleaner GC Thread");
+                gcThread.setDaemon(true);
+                gcThread.start();
+                return true;
+
+            }));
+            OPEN_CONFIG_GUI.getKeybind().setCallback((action, key) -> {
                 GuiConfigs.openGui(new GuiConfigs());
                 return true;
             });
