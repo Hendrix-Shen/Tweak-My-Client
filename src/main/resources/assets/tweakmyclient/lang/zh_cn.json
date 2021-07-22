@@ -100,6 +100,8 @@
     "tweakmyclient.config.generic.getTargetBlockPosition.comment": "获取你看向方块的坐标.\n此特性用于获取你指向方向最远端的方块坐标.",
     "tweakmyclient.config.generic.lowHealthThreshold.name": "低生命值阈值",
     "tweakmyclient.config.generic.lowHealthThreshold.comment": "触发低生命值警告的阈值.",
+    "tweakmyclient.config.generic.memoryCleaner.name": "内存清理",
+    "tweakmyclient.config.generic.memoryCleaner.comment": "强制释放内存.",
     "tweakmyclient.config.generic.openConfigGui.name": "打开设置界面",
     "tweakmyclient.config.generic.openConfigGui.comment": "打开设置界面的快捷键.",
     "tweakmyclient.config.generic.targetBlockMaxTraceDistance.name": "获取方块坐标最大追踪距离",
@@ -140,6 +142,9 @@
     "tweakmyclient.message.globalEventListener.endPortalSpawn": "§e[全局事件]§f: 末影传送门已被激活, 坐标  [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.globalEventListener.witherSpawn": "§e[全局事件]§f: 凋零已生成, 坐标 [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.lowHealthWarning.warningMessage": "§e警告: 你的生命值过低(阈值: %s).",
+    "tweakmyclient.message.toggled": "%s %s",
+    "tweakmyclient.message.value.enabled": "启用",
+    "tweakmyclient.message.value.disabled": "禁用",
 
     "tweakmyclient.misc.versionType.Public Beta": "公共测试版",
     "tweakmyclient.misc.versionType.Public Release": "公共发行版",

@@ -21,6 +21,7 @@ import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
 import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
 import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
+import top.hendrixshen.TweakMyClient.util.InfoUtils;
 import top.hendrixshen.TweakMyClient.util.RayTraceUtils;
 
 import java.io.File;
@@ -317,6 +318,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
         public static final ConfigDouble LOW_HEALTH_THRESHOLD = new TranslatableConfigDouble(PREFIX, "lowHealthThreshold", 6, 0, 1000);
+        public static final ConfigHotkey MEMORY_CLEANER = new TranslatableConfigHotkey(PREFIX, "memoryCleaner", "");
         public static final ConfigHotkey OPEN_CONFIG_GUI = new TranslatableConfigHotkey(PREFIX, "openConfigGui", "T,C");
         public static final ConfigDouble TARGET_BLOCK_MAX_TRACE_DISTANCE = new TranslatableConfigDouble(PREFIX, "targetBlockMaxTraceDistance", 100, 0, 200);
         public static final ConfigString TARGET_BLOCK_POSITION_FORMAT = new TranslatableConfigString(PREFIX, "targetBlockPositionFormat", "I'm tracing this position [x: {X},y: {Y}, z: {Z}]");
@@ -331,6 +333,7 @@ public class Configs implements IConfigHandler {
                 DAYLIGHT_OVERRIDE_TIME,
                 GET_TARGET_BLOCK_POSITION,
                 LOW_HEALTH_THRESHOLD,
+                MEMORY_CLEANER,
                 OPEN_CONFIG_GUI,
                 TARGET_BLOCK_MAX_TRACE_DISTANCE,
                 TARGET_BLOCK_POSITION_FORMAT,
@@ -339,6 +342,7 @@ public class Configs implements IConfigHandler {
         public static final ImmutableList<ConfigHotkey> HOTKEYS = ImmutableList.of(
                 ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
                 GET_TARGET_BLOCK_POSITION,
+                MEMORY_CLEANER,
                 OPEN_CONFIG_GUI
         );
 
@@ -349,7 +353,7 @@ public class Configs implements IConfigHandler {
                     return true;
                 }
                 if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
-                    mc.player.sendMessage(new LiteralText(StringUtils.translate("tweakmyclient.message.antiGhostItemsManualTrigger.mustWait", AntiGhostItemsUtils.manualRefreshTimer / 20)), true);
+                    InfoUtils.printActionBarMessage(StringUtils.translate("tweakmyclient.message.antiGhostItemsManualTrigger.mustWait", AntiGhostItemsUtils.manualRefreshTimer / 20));
                     return true;
                 }
                 AntiGhostItemsUtils.refreshInventory();
@@ -363,7 +367,7 @@ public class Configs implements IConfigHandler {
                 MinecraftClient mc = TweakMyClient.minecraftClient;
                 BlockPos blockPos = RayTraceUtils.getTargetedPosition(mc.world, mc.player, TARGET_BLOCK_MAX_TRACE_DISTANCE.getDoubleValue(), false);
                 if (blockPos == null || mc.player == null) {
-                    return false;
+                    return true;
                 }
                 String str = Generic.TARGET_BLOCK_POSITION_FORMAT.getStringValue();
                 str = str.replace("{X}", String.format("%d", blockPos.getX()));
@@ -380,7 +384,31 @@ public class Configs implements IConfigHandler {
                 }
                 return true;
             });
-            OPEN_CONFIG_GUI.getKeybind().setCallback((keyAction, iKeybind) -> {
+            MEMORY_CLEANER.getKeybind().setCallback(((action, key) -> {
+                class CleanerThread implements Runnable {
+                    public CleanerThread() {
+                    }
+                    @Override
+                    public void run() {
+                        TweakMyClient.logger.info(String.format("[%s]: Memory cleaner thread started!", Reference.MOD_NAME));
+                        System.gc();
+                        try {
+                            Thread.sleep(1000L);
+                        } catch (InterruptedException interruptedException) {
+                            // ignored
+                        }
+                        System.gc();
+                        TweakMyClient.logger.info(String.format("[%s]: Memory cleaner thread finished!", Reference.MOD_NAME));
+                    }
+                }
+                Runnable runnable = new CleanerThread();
+                Thread gcThread = new Thread(runnable, "MemoryCleaner GC Thread");
+                gcThread.setDaemon(true);
+                gcThread.start();
+                return true;
+
+            }));
+            OPEN_CONFIG_GUI.getKeybind().setCallback((action, key) -> {
                 GuiConfigs.openGui(new GuiConfigs());
                 return true;
             });
@@ -392,8 +420,8 @@ public class Configs implements IConfigHandler {
         public static final ConfigStringList LIST_AUTO_DROP_BLACK_LIST = new TranslatableConfigStringList(PREFIX, "listAutoDropBlackList", ImmutableList.of("minecraft:bow", "minecraft:crossbow", "minecraft:diamond_axe", "minecraft:diamond_boots", "minecraft:diamond_chestplate", "minecraft:diamond_helmet", "minecraft:diamond_hoe", "minecraft:diamond_leggings", "minecraft:diamond_pickaxe", "minecraft:diamond_shovel", "minecraft:diamond_sword", "minecraft:elytra", "minecraft:enchanted_golden_apple", "minecraft:flint_and_steel", "minecraft:fishing_rod", "minecraft:golden_apple", "minecraft:golden_axe", "minecraft:golden_boots", "minecraft:golden_chestplate", "minecraft:golden_helmet", "minecraft:golden_hoe", "minecraft:golden_leggings", "minecraft:golden_pickaxe", "minecraft:golden_shovel", "minecraft:golden_sword", "minecraft:iron_axe", "minecraft:iron_boots", "minecraft:iron_chestplate", "minecraft:iron_helmet", "minecraft:iron_hoe", "minecraft:iron_leggings", "minecraft:iron_pickaxe", "minecraft:iron_shovel", "minecraft:iron_sword", "minecraft:netherite_axe", "minecraft:netherite_boots", "minecraft:netherite_chestplate", "minecraft:netherite_helmet", "minecraft:netherite_hoe", "minecraft:netherite_leggings", "minecraft:netherite_pickaxe", "minecraft:netherite_shovel", "minecraft:netherite_sword", "minecraft:shears", "minecraft:shield", "minecraft:totem_of_undying", "minecraft:trident", "minecraft:turtle_helmet"));
         public static final ConfigOptionList LIST_AUTO_DROP_TYPE = new TranslatableConfigOptionList(PREFIX, "listAutoDropType", AutoDropListType.WHITELIST);
         public static final ConfigStringList LIST_AUTO_DROP_WHITE_LIST = new TranslatableConfigStringList(PREFIX, "listAutoDropWhiteList", ImmutableList.of("minecraft:stone", "minecraft:dirt", "minecraft:cobblestone", "minecraft:gravel", "minecraft:rotten_flesh"));
-        public static final ConfigStringList LIST_DISABLE_CLIENT_ENTITY_UPDATES = new TranslatableConfigStringList(PREFIX, "listDisableClientEntityUpdates", ImmutableList.of("tnt"));
-        public static final ConfigStringList LIST_DISABLE_CLIENT_ENTITY_RENDERING = new TranslatableConfigStringList(PREFIX, "listDisableClientEntityRendering", ImmutableList.of("tnt"));
+        public static final ConfigStringList LIST_DISABLE_CLIENT_ENTITY_UPDATES = new TranslatableConfigStringList(PREFIX, "listDisableClientEntityUpdates", ImmutableList.of("zombi"));
+        public static final ConfigStringList LIST_DISABLE_CLIENT_ENTITY_RENDERING = new TranslatableConfigStringList(PREFIX, "listDisableClientEntityRendering", ImmutableList.of("zombi"));
         public static final ImmutableList<ConfigBase> OPTIONS = ImmutableList.of(
                 LIST_AUTO_DROP_BLACK_LIST,
                 LIST_AUTO_DROP_TYPE,

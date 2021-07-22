@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "tweak-my-client",
+  "id": "tweakmyclient",
   "name": "TweakMyClient",
   "version": "${mod_version}",
   "icon": "assets/tweakmyclient/icon.png",

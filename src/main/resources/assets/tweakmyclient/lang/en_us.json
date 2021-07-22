@@ -73,6 +73,8 @@
     "tweakmyclient.config.generic.getTargetBlockPosition.comment": "Gets the position of the looking block.\nThis feature is used to get the position of the farthest block you point to.",
     "tweakmyclient.config.generic.lowHealthThreshold.name": "lowHealthThreshold",
     "tweakmyclient.config.generic.lowHealthThreshold.comment": "Trigger threshold of low health warning.",
+    "tweakmyclient.config.generic.memoryCleaner.name": "memoryCleaner",
+    "tweakmyclient.config.generic.memoryCleaner.comment": "Force release memory.",
     "tweakmyclient.config.generic.openConfigGui.name": "openConfigGui",
     "tweakmyclient.config.generic.openConfigGui.comment": "A hotkey to open the in-game Config GUI.",
     "tweakmyclient.config.generic.targetBlockMaxTraceDistance.name": "targetBlockMaxTraceDistance",
@@ -140,6 +142,9 @@
     "tweakmyclient.message.globalEventListener.endPortalSpawn": "§e[GlobalEvent]§f: End Portal Activated at  [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.globalEventListener.witherSpawn": "§e[GlobalEvent]§f: Wither Spawned at [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.lowHealthWarning.warningMessage": "§eWarning: Your health is too low(Threshold: %s).",
+    "tweakmyclient.message.toggled": "%s %s",
+    "tweakmyclient.message.value.enabled": "Enabled",
+    "tweakmyclient.message.value.disabled": "Disabled",
 
     "tweakmyclient.misc.versionType.Public Beta": "Public Beta",
     "tweakmyclient.misc.versionType.Public Release": "Public Release",
