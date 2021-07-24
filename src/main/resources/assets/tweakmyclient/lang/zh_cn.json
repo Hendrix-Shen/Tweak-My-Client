@@ -61,6 +61,8 @@
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.comment": "尝试向服务器发送虚假数据, 以便从服务端获取正确的玩家背包数据.",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.name": "自动丢弃",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.comment": "丢掉不想要的东西.",
+    "tweakmyclient.config.feature_toggle.featureAutoClimb.name": "自动攀爬",
+    "tweakmyclient.config.feature_toggle.featureAutoClimb.comment": "当你靠近梯子/藤蔓并抬起头时, 你将会自动攀爬.",
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.name": "自动重连",
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "从服务器断开连接时自动重新连接服务器.\n适配 Authme 和 Reauth 会话验证",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "自动重生",

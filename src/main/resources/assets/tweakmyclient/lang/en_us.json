@@ -86,6 +86,8 @@
 
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.name": "featureAntiGhostItems",
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.comment": "Try to send false data to the server in order to get the correct player inventory data from the server.",
+    "tweakmyclient.config.feature_toggle.featureAutoClimb.name": "featureAutoClimb",
+    "tweakmyclient.config.feature_toggle.featureAutoClimb.comment": "When you is approaching the ladder / vine and raises your head, you will automatically climb.",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.name": "featureAutoDrop",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.comment": "Automatically drops unwanted items.",
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.name": "featureAutoReconnect",

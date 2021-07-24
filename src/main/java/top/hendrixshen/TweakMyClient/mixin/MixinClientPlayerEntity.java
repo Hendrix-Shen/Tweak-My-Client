@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,8 +32,23 @@ public abstract class MixinClientPlayerEntity extends LivingEntity {
     @Shadow
     public abstract void sendMessage(Text message, boolean actionBar);
 
+    @Shadow public abstract boolean isSneaking();
+
     protected MixinClientPlayerEntity(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @Inject(
+            method = "tickMovement",
+            at = @At(
+                    value = "HEAD"
+            )
+    )
+    private void onTickMovement(CallbackInfo ci) {
+        if (Configs.Feature.FEATURE_AUTO_CLIMB.getBooleanValue() && this.isClimbing() && this.pitch <= -50f && !this.isSneaking()) {
+            Vec3d vec3d = this.getVelocity();
+            this.setVelocity(vec3d.x, 0.1176D, vec3d.z);
+        }
     }
 
     @Redirect(
