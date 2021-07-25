@@ -29,6 +29,7 @@
     "MixinScreen",
     "MixinWorldRenderer",
     "authme.MixinDisconnectedScreen",
+    "ias.MixinDisconnectedScreen",
     "litematica.MixinWorldUtils",
     "reauth.MixinDisconnectedScreen"
   ]

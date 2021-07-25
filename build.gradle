@@ -35,6 +35,7 @@ dependencies {
     modCompileOnly("maven.modrinth:modmenu:" + project.mod_menu_version)
     // Optional mod compatibility Library
     modCompileOnly("curse.maven:authme-356643:3073169")
+    modCompileOnly("curse.maven:inGameAcountSwitcher-232676:3374098")
     modCompileOnly("curse.maven:litematica-308892:3349118")
     modCompileOnly("curse.maven:reauth-403928:3105780")
 }

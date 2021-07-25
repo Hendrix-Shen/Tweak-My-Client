@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.Reference;
+import top.hendrixshen.TweakMyClient.TweakMyClientMixinPlugin;
 import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
@@ -50,7 +51,6 @@ public class MixinDisconnectedScreen extends Screen {
         if (Configs.Feature.FEATURE_AUTO_RECONNECT.getBooleanValue()) {
             AutoReconnectUtils.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
         }
-
         int backButtonX = width / 2 - 100;
         int backButtonY = Math.min(height / 2 + reasonHeight / 2 + 9, height - 30);
 
@@ -60,9 +60,7 @@ public class MixinDisconnectedScreen extends Screen {
         autoReconnectButton =
                 addButton(new ButtonWidget(backButtonX, backButtonY + 48, 200, 20,
                         new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.toggle", PREFIX))), b -> onPressAutoReconnect()));
-        if (reason == null || getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
-            Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
-        }
+        AutoReconnectUtils.reAuthenticateButtonOffsetY = 0;
         ci.cancel();
     }
 

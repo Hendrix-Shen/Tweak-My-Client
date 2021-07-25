@@ -136,6 +136,7 @@
 
     "tweakmyclient.message.antiGhostItemsManualTrigger.mustWait": "你必须等待 %d 秒才能再次使用幽灵物品清除",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "使用 AuthMe 验证会话",
+    "tweakmyclient.message.autoReconnect.reAuthenticateWithInGameAccountSwitcher": "使用 In-Game Account Switcher 验证会话",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "使用 ReAuth 验证会话",
     "tweakmyclient.message.autoReconnect.static": "自动重连",
     "tweakmyclient.message.autoReconnect.timer": "切换自动重连 (%d)",

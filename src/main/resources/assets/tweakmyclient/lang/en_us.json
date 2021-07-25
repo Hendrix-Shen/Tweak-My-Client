@@ -136,6 +136,7 @@
 
     "tweakmyclient.message.antiGhostItemsManualTrigger.mustWait": "You have to wait %d second to trigger antiGhostItems again",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "Re-authenticate with AuthMe",
+    "tweakmyclient.message.autoReconnect.reAuthenticateWithInGameAccountSwitcher": "Re-authenticate with In-Game Account Switcher",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "Re-authenticate with ReAuth",
     "tweakmyclient.message.autoReconnect.static": "AutoReconnect",
     "tweakmyclient.message.autoReconnect.timer": "Toggle AutoReconnect (%d)",
