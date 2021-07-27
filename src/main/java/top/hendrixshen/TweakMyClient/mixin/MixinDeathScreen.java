@@ -20,7 +20,7 @@ public class MixinDeathScreen {
         if (Configs.Feature.FEATURE_AUTO_RESPAWN.getBooleanValue()) {
             assert TweakMyClient.minecraftClient.player != null;
             TweakMyClient.minecraftClient.player.requestRespawn();
-            TweakMyClient.minecraftClient.openScreen(null);
+            TweakMyClient.minecraftClient.setScreen(null);
         }
     }
 }

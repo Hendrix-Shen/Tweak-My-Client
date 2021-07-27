@@ -278,6 +278,7 @@ public class Configs implements IConfigHandler {
     public static class Feature {
         private static final String PREFIX = String.format("%s.config.feature_toggle", Reference.MOD_ID);
         public static final ConfigBooleanHotkeyed FEATURE_ANTI_GHOST_ITEMS = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAntiGhostItems", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_AUTO_CLIMB = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoClimb", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_DROP = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoDrop", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RECONNECT = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoReconnect", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_RESPAWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoRespawn", false, "");
@@ -293,6 +294,7 @@ public class Configs implements IConfigHandler {
 
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
                 FEATURE_ANTI_GHOST_ITEMS,
+                FEATURE_AUTO_CLIMB,
                 FEATURE_AUTO_DROP,
                 FEATURE_AUTO_RECONNECT,
                 FEATURE_AUTO_RESPAWN,

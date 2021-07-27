@@ -10,18 +10,22 @@ import java.util.Set;
 
 public class TweakMyClientMixinPlugin implements IMixinConfigPlugin {
     private static final String MIXIN_AUTHME = ".authme.";
+    private static final String MIXIN_IN_GAME_ACCOUNT_SWITCHER = ".ias.";
     private static final String MIXIN_LITEMATICA = ".litematica.";
     private static final String MIXIN_REAUTH = ".reauth.";
     public static boolean isAuthMeLoaded;
+    public static boolean isInGameAccountSwitcherLoaded;
     public static boolean isLitematicaLoaded;
     public static boolean isReAuthLoaded;
-    public final String AUTHME_ID = "authme";
+    public final String AUTH_ME_ID = "authme";
+    public final String IN_GAME_ACCOUNT_SWITCHER_ID = "ias";
     public final String LITEMATICA_ID = "litematica";
     public final String REAUTH_ID = "reauth";
 
     @Override
     public void onLoad(String mixinPackage) {
-        isAuthMeLoaded = FabricLoader.getInstance().isModLoaded(this.AUTHME_ID);
+        isAuthMeLoaded = FabricLoader.getInstance().isModLoaded(this.AUTH_ME_ID);
+        isInGameAccountSwitcherLoaded = FabricLoader.getInstance().isModLoaded(this.IN_GAME_ACCOUNT_SWITCHER_ID);
         isLitematicaLoaded = FabricLoader.getInstance().isModLoaded(this.LITEMATICA_ID);
         isReAuthLoaded = FabricLoader.getInstance().isModLoaded(this.REAUTH_ID);
     }
@@ -34,6 +38,8 @@ public class TweakMyClientMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (!isAuthMeLoaded && mixinClassName.contains(MIXIN_AUTHME)) {
+            return false;
+        } else if (!isInGameAccountSwitcherLoaded && mixinClassName.contains(MIXIN_IN_GAME_ACCOUNT_SWITCHER)) {
             return false;
         } else if (!isLitematicaLoaded && mixinClassName.contains(MIXIN_LITEMATICA)) {
             return false;

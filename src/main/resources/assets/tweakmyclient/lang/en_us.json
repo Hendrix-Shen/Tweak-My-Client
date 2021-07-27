@@ -86,10 +86,12 @@
 
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.name": "featureAntiGhostItems",
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.comment": "Try to send false data to the server in order to get the correct player inventory data from the server.",
+    "tweakmyclient.config.feature_toggle.featureAutoClimb.name": "featureAutoClimb",
+    "tweakmyclient.config.feature_toggle.featureAutoClimb.comment": "When you is approaching the ladder / vine and raises your head, you will automatically climb.",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.name": "featureAutoDrop",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.comment": "Automatically drops unwanted items.",
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.name": "featureAutoReconnect",
-    "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.\nAdaptive authme and reauth session validation.",
+    "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.\nAdaptive AuthMe, ReAuth and In-Game Account Switcher session validation.",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "featureAutoRespawn",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "Automatically respawns you whenever you die.",
     "tweakmyclient.config.feature_toggle.featureCustomBlockOutsideColor.name": "featureCustomBlockOutsideColor",
@@ -134,6 +136,7 @@
 
     "tweakmyclient.message.antiGhostItemsManualTrigger.mustWait": "You have to wait %d second to trigger antiGhostItems again",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "Re-authenticate with AuthMe",
+    "tweakmyclient.message.autoReconnect.reAuthenticateWithInGameAccountSwitcher": "Re-authenticate with In-Game Account Switcher",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithReAuth": "Re-authenticate with ReAuth",
     "tweakmyclient.message.autoReconnect.static": "AutoReconnect",
     "tweakmyclient.message.autoReconnect.timer": "Toggle AutoReconnect (%d)",
