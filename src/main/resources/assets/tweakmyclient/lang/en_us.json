@@ -91,7 +91,7 @@
     "tweakmyclient.config.feature_toggle.featureAutoDrop.name": "featureAutoDrop",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.comment": "Automatically drops unwanted items.",
     "tweakmyclient.config.feature_toggle.featureAutoReconnect.name": "featureAutoReconnect",
-    "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.\nAdaptive authme and reauth session validation.",
+    "tweakmyclient.config.feature_toggle.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.\nAdaptive AuthMe, ReAuth and In-Game Account Switcher session validation.",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.name": "featureAutoRespawn",
     "tweakmyclient.config.feature_toggle.featureAutoRespawn.comment": "Automatically respawns you whenever you die.",
     "tweakmyclient.config.feature_toggle.featureCustomBlockOutsideColor.name": "featureCustomBlockOutsideColor",
