@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import technicianlp.reauth.gui.AuthScreen;
 import top.hendrixshen.TweakMyClient.Reference;
-import top.hendrixshen.TweakMyClient.TweakMyClientMixinPlugin;
 import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
@@ -48,13 +47,11 @@ public class MixinDisconnectedScreen extends Screen {
         int backButtonY = Math.min(height / 2 + reasonHeight / 2 + 9, height - 30);
         if (reason == null || AutoReconnectUtils.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
             Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
-            if (TweakMyClientMixinPlugin.isReAuthLoaded) {
-                addDrawableChild(new ButtonWidget(backButtonX, backButtonY + (TweakMyClientMixinPlugin.isAuthMeLoaded ? 96 : 72), 200, 20,
-                        new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithReAuth", PREFIX))), button -> {
-                    assert this.client != null;
-                    this.client.setScreen(new AuthScreen(parent));
-                }));
-            }
+            addDrawableChild(new ButtonWidget(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
+                    new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithReAuth", PREFIX))), button -> {
+                assert this.client != null;
+                this.client.setScreen(new AuthScreen(parent));
+            }));
         }
     }
 }

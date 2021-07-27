@@ -11,6 +11,7 @@ import top.hendrixshen.TweakMyClient.TweakMyClient;
 public class AutoReconnectUtils {
     public static int ReconnectTimer;
     private static ServerInfo lastServer;
+    public static int reAuthenticateButtonOffsetY;
 
     public static ServerInfo getLastServer() {
         return lastServer;

@@ -23,6 +23,10 @@ public class TweakMyClient implements ModInitializer {
 
         IRenderer renderer = new RenderHandler();
         RenderEventHandler.getInstance().registerWorldLastRenderer(renderer);
-        logger.info(Reference.MOD_NAME + "-" + Reference.MOD_VERSION + " initialized.");
+        logger.info(String.format("[%s]: Mod initialized - Version: %s (%s)", Reference.MOD_NAME, Reference.MOD_VERSION, Reference.MOD_VERSION_TYPE));
+        logger.info(String.format("[%s]: AuthMe was %sdetectect.", Reference.MOD_NAME, (TweakMyClientMixinPlugin.isAuthMeLoaded ? "" : "not ")));
+        logger.info(String.format("[%s]: InGameAccountSwitcher was %sdetectect.", Reference.MOD_NAME, (TweakMyClientMixinPlugin.isInGameAccountSwitcherLoaded ? "" : "not ")));
+        logger.info(String.format("[%s]: Litematica was %sdetectect.", Reference.MOD_NAME, (TweakMyClientMixinPlugin.isLitematicaLoaded ? "" : "not ")));
+        logger.info(String.format("[%s]: ReAuth was %sdetectect.", Reference.MOD_NAME, (TweakMyClientMixinPlugin.isReAuthLoaded ? "" : "not ")));
     }
 }

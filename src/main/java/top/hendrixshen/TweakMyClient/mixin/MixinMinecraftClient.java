@@ -17,10 +17,6 @@ import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
 @Mixin(MinecraftClient.class)
 public class MixinMinecraftClient {
-    @Shadow
-    @Nullable
-    public ClientPlayerInteractionManager interactionManager;
-
     @Inject(
             method = "setCurrentServerEntry",
             at = @At(
@@ -31,21 +27,6 @@ public class MixinMinecraftClient {
         AutoReconnectUtils.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
         if (serverInfo != null) {
             AutoReconnectUtils.setLastServer(serverInfo);
-        }
-    }
-
-    @Redirect(
-            method = "render",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/toast/ToastManager;draw(Lnet/minecraft/client/util/math/MatrixStack;)V"
-            )
-    )
-    private void onRenderToast(ToastManager toastManager, MatrixStack matrices) {
-        if (!Configs.Disable.DISABLE_RENDER_TOAST.getBooleanValue()) {
-            toastManager.draw(matrices);
-        } else {
-            toastManager.clear();
         }
     }
 }

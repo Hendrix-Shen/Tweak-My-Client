@@ -8,7 +8,7 @@
 [![Release](https://img.shields.io/github/v/release/Hendrix-Shen/Tweak-My-Client?include_prereleases&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
 [![Github Release Downloads](https://img.shields.io/github/downloads/Hendrix-Shen/Tweak-My-Client/total?label=Github%20Release%20Downloads&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
 [![CurseForge Downloads](http://cf.way2muchnoise.eu/478757.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient)
-#### Warning: The project is still in the early development stage.
+
 The default hotkey to open the in-game config GUI is **T + C**.
 ## Dependencies
 | Dependency      | Type     | Download                                                                                                                                            |
@@ -93,6 +93,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + featureAntiGhostItems
   - *Try to send false data to the server in order to get the correct player inventory data from the server..*
   - *尝试向服务器发送虚假数据, 以便从服务端获取正确的玩家背包数据.*
++ featureAutoClimb
+  - *When you is approaching the ladder / vine and raises your head, you will automatically climb.*
+  - *当你靠近梯子/藤蔓并抬起头时, 你将会自动攀爬.*
 + featureAutoDrop
   - *Automatically drops unwanted items.*
   - *丢掉不想要的东西.*
