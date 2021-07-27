@@ -27,6 +27,7 @@
     "MixinInGameOverlayRenderer",
     "MixinMinecraftClient",
     "MixinScreen",
+    "MixinToastManager",
     "MixinWorldRenderer",
     "authme.MixinDisconnectedScreen",
     "ias.MixinDisconnectedScreen",

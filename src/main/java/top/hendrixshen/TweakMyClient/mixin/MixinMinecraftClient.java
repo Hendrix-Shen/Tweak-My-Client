@@ -26,19 +26,4 @@ public abstract class MixinMinecraftClient {
             AutoReconnectUtils.setLastServer(serverInfo);
         }
     }
-
-    @Redirect(
-            method = "render",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/toast/ToastManager;draw(Lnet/minecraft/client/util/math/MatrixStack;)V"
-            )
-    )
-    private void onRenderToast(ToastManager toastManager, MatrixStack matrices) {
-        if (!Configs.Disable.DISABLE_RENDER_TOAST.getBooleanValue()) {
-            toastManager.draw(matrices);
-        } else {
-            toastManager.clear();
-        }
-    }
 }
