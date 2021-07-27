@@ -12,6 +12,7 @@ import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.toast.ToastManager;
 import net.minecraft.network.MessageType;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
 import net.minecraft.text.LiteralText;
@@ -273,6 +274,13 @@ public class Configs implements IConfigHandler {
                 DISABLE_RENDER_TOAST,
                 DISABLE_SLOWDOWN
         );
+        static {
+            DISABLE_RENDER_TOAST.setValueChangeCallback((callback) -> {
+                if (callback.getBooleanValue()) {
+                    TweakMyClient.minecraftClient.getToastManager().clear();
+                }
+            });
+        }
     }
 
     public static class Feature {
