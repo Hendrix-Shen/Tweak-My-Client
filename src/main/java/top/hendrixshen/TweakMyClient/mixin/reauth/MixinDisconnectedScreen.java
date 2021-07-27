@@ -48,14 +48,12 @@ public class MixinDisconnectedScreen extends Screen {
         int backButtonY = Math.min(height / 2 + reasonHeight / 2 + 9, height - 30);
         if (reason == null || AutoReconnectUtils.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
             Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
-            if (TweakMyClientMixinPlugin.isReAuthLoaded) {
-                addButton(new ButtonWidget(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
-                        new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithReAuth", PREFIX))), button -> {
-                    assert this.client != null;
-                    this.client.openScreen(new AuthScreen(parent));
-                }));
-                AutoReconnectUtils.reAuthenticateButtonOffsetY += 24;
-            }
+            addButton(new ButtonWidget(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
+                    new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithReAuth", PREFIX))), button -> {
+                assert this.client != null;
+                this.client.openScreen(new AuthScreen(parent));
+            }));
+            AutoReconnectUtils.reAuthenticateButtonOffsetY += 24;
         }
     }
 }
