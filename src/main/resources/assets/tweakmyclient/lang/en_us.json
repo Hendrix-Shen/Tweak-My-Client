@@ -42,6 +42,8 @@
     "tweakmyclient.config.disable_toggle.disableEntityWitherRendering.comment": "Disables wither entity rendering on the client.\nMaybe it's useful for fake peace.",
     "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.name": "disableEntityZombieVillagerRendering",
     "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.comment": "Disables zombie villager entity rendering on the client.\nMaybe it's useful for fake peace.",
+    "tweakmyclient.config.disable_toggle.disableFovAffectedBySpeed.name": "disableFovAffectedBySpeed",
+    "tweakmyclient.config.disable_toggle.disableFovAffectedBySpeed.comment": "Disable speed multiplier effect fov transform.",
     "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.name": "disableGuiShadowLayer",
     "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.comment": "Disables gui shadow overlay rendering when gui is opening.",
     "tweakmyclient.config.disable_toggle.disableRenderBossBar.name": "disableRenderBossBar",

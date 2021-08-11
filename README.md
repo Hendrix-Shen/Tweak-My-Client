@@ -11,12 +11,13 @@
 
 The default hotkey to open the in-game config GUI is **T + C**.
 ## Dependencies
-| Dependency      | Type     | Download                                                                                                                                            |
-| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Auth Me         | Optional | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                                |
-| MaliLib         | Required | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)        |
-| Litematica      | Optional | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica)  |
-| ReAuth (Fabric) | Optional | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                            |
+| Dependency               | Type     | Download                                                                                                                                            |
+| ------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Auth Me                  | Optional | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                                |
+| In-Game Account Switcher | Optional | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                 |
+| MaliLib                  | Required | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)        |
+| Litematica               | Optional | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica)  |
+| ReAuth (Fabric)          | Optional | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                            |
 ## It includes the following features.
 ### Color
 + colorBlockOutside
@@ -68,24 +69,24 @@ The default hotkey to open the in-game config GUI is **T + C**.
 + disableEntityZombieVillagerRendering
   - *Disables zombie villager entity rendering on the client. Maybe it's useful for fake peace.*
   - *关闭游戏对僵尸村民实体的渲染. 也许对伪和平有帮助.*
++ disableFovAffectedBySpeed
+  - *Disable speed multiplier effect fov transform.*
+  - *关闭速度倍率对视角变换的影响.*
++ disableGuiShadowLayer
+  - *Disables gui shadow overlay rendering when gui is opening.*
+  - *关闭打开GUI时的阴影层渲染.*
 + disableRenderBossBar
   - *Disables boss bar rendering when player is near boss. You will gain a broader view.*
   - *关闭在玩家在Boss附近渲染Boss血条. 你将获得更广阔的视野.*
 + disableRenderOverlayFire
   - *Disables fire overlay rendering when player is on fire. You will gain a broader view.*
   - *关闭在玩家着火时的渲染覆盖. 你将获得更广阔的视野.*
-+ disableGuiShadowLayer
-  - *Disables gui shadow overlay rendering when gui is opening.*
-  - *关闭打开GUI时的阴影层渲染.*
 + disableRenderOverlayPumpkin
   - *Disables mask overlay rendering when player is wearing pumpkin. You will gain a broader view.*
   - *关闭在玩家在穿戴南瓜时的渲染覆盖. 你将获得更广阔的视野.*
 + disableRenderToast
   - *Disable toast rendering.*
   - *禁用 toast 提醒消息渲染.*
-+ disableRenderBossBar
-  - *Disables Scoreboard rendering. You will gain a broader view.*
-  - *关闭游戏对计分板的UI渲染. 你将获得更广阔的视野.*
 + disableSlowdown
   - *Cancels slowness effects caused by honey, soul sand and using items.*
   - *取消蜂蜜块, 灵魂沙和使用物品时的减速效果.*
