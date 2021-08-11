@@ -248,6 +248,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_TNT_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityTNTRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_WITHER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityWitherRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityZombieVillagerRendering", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_FOV_AFFECTED_BY_SPEED = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableFovAffectedBySpeed", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_GUI_SHADOW_LAYER = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableGuiShadowLayer", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_BOSS_BAR = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderBossBar", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_FIRE = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayFire", false, "");
@@ -266,6 +267,7 @@ public class Configs implements IConfigHandler {
                 DISABLE_ENTITY_TNT_RENDERING,
                 DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING,
                 DISABLE_ENTITY_WITHER_RENDERING,
+                DISABLE_FOV_AFFECTED_BY_SPEED,
                 DISABLE_GUI_SHADOW_LAYER,
                 DISABLE_RENDER_BOSS_BAR,
                 DISABLE_RENDER_OVERLAY_FIRE,

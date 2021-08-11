@@ -42,6 +42,8 @@
     "tweakmyclient.config.disable_toggle.disableEntityWitherRendering.comment": "关闭游戏对凋零实体的渲染.\n也许对伪和平有帮助.",
     "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.name": "禁用僵尸村民实体渲染",
     "tweakmyclient.config.disable_toggle.disableEntityZombieVillagerRendering.comment": "关闭游戏对僵尸村民实体的渲染.\n也许对伪和平有帮助.",
+    "tweakmyclient.config.disable_toggle.disableFovAffectedBySpeed.name": "禁用速度倍率影响视角",
+    "tweakmyclient.config.disable_toggle.disableFovAffectedBySpeed.comment": "关闭速度倍率对视角变换的影响.",
     "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.name": "禁用GUI阴影层",
     "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.comment": "关闭打开GUI时的阴影层渲染.",
     "tweakmyclient.config.disable_toggle.disableRenderBossBar.name": "禁用Boss血条渲染",
