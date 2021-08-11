@@ -89,7 +89,7 @@ jobs:
     - name: Set build number in codes
       run: |
         sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER/g" gradle.properties
-        sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER \(Public Release\)/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java
+        sed -i "s/Version Exception/Public Release/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
