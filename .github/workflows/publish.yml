@@ -101,7 +101,6 @@ jobs:
         output="$(find build/libs/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
         echo "::set-output name=jarname::$output"
     - name: Upload assets to GitHub Action
-      if: ${{ matrix.os == 'ubuntu-latest' }}
       uses: actions/upload-artifact@v2
       with:
         name: TweakMyClient-fabric-mc${{ matrix.branch }}-${{ steps.getid.outputs.commitID }}(Public Release)
