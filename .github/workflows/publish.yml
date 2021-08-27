@@ -89,7 +89,8 @@ jobs:
     - name: Set build number in codes
       run: |
         sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER/g" gradle.properties
-        sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER \(Public Release\)/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java
+        sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java
+        sed -i "s/Version Exception/Public Release/g" src/main/java/top/hendrixshen/TweakMyClient/Reference.java
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
@@ -99,6 +100,11 @@ jobs:
       run: |
         output="$(find build/libs/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
         echo "::set-output name=jarname::$output"
+    - name: Upload assets to GitHub Action
+      uses: actions/upload-artifact@v2
+      with:
+        name: TweakMyClient-fabric-mc${{ matrix.branch }}-${{ steps.getid.outputs.commitID }}(Public Release)
+        path: build/libs/
     - name: Upload assets to GitHub
       uses: AButler/upload-release-assets@v2.0
       with:
