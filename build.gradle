@@ -8,7 +8,7 @@ buildscript {
 }
 
 plugins {
-    id 'fabric-loom' version '0.8-SNAPSHOT'
+    id 'fabric-loom' version '0.9-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -46,7 +46,7 @@ minecraft {
 }
 
 loom {
-    customManifest = "https://gist.githubusercontent.com/Hendrix-Shen/f8c2d2db80feb72067273fb6380f546d/raw/57b90127dd9cf79eceeb0d9e33f0bc2b837225db/1_18_experimental-snapshot-3.json"
+    customMinecraftManifest = "https://gist.githubusercontent.com/Hendrix-Shen/eb67e77b3d8998ab96d8007b7aeaca3c/raw/a4711601e01a82f441d123d8e7415952d69bf7dd/1_18_experimental-snapshot-5.json"
 }
 
 compileJava {
