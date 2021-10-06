@@ -128,6 +128,8 @@
 
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.name": "禁用投影轻松放置失败提示",
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "禁用轻松放置失败时那烦人的提示窗.\n注意: 仅当 litematica 加载时生效.",
+    "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "强制活塞不受镐子影响",
+    "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "镐子将不再作为活塞的有效开采工具.",
 
     "tweakmyclient.label.antiGhostItemsMode.automatic": "自动",
     "tweakmyclient.label.antiGhostItemsMode.manual": "手动",

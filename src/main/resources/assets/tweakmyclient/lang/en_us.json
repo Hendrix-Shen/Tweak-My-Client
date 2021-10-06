@@ -128,6 +128,8 @@
 
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.name": "disableLitematicaEasyPlaceFailTip",
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "Disable easyPlace failure that annoying prompt window.\nNote: Takes effect only when litematica is loaded.",
+    "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "forcePistonWithoutAffectByTool",
+    "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "The pickaxe will no longer be used as an effective mining tool for pistons.",
 
     "tweakmyclient.label.antiGhostItemsMode.automatic": "Automatic",
     "tweakmyclient.label.antiGhostItemsMode.manual": "Manual",

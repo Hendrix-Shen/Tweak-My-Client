@@ -446,8 +446,10 @@ public class Configs implements IConfigHandler {
     public static class Patch {
         private static final String PREFIX = String.format("%s.config.patch", Reference.MOD_ID);
         public static final ConfigBoolean DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP = new TranslatableConfigBoolean(PREFIX, "disableLitematicaEasyPlaceFailTip", false);
+        public static final ConfigBoolean FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL = new TranslatableConfigBoolean(PREFIX, "forcePistonWithoutAffectByTool", false);
         public static final ImmutableList<ConfigBoolean> OPTIONS = ImmutableList.of(
-                DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP
+                DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP,
+                FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL
         );
     }
 }
