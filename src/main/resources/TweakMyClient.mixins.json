@@ -1,15 +1,9 @@
 {
   "required": true,
   "package": "top.hendrixshen.TweakMyClient.mixin",
-  "minVersion": "0.7",
+  "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
-  "plugin": "top.hendrixshen.TweakMyClient.TweakMyClientMixinPlugin",
   "client": [
-  ],
-  "injectors": {
-    "defaultRequire": 0
-  },
-  "mixins": [
     "IMixinInGameOverlayRenderer",
     "MixinBlock",
     "MixinBossBarHud",
@@ -29,10 +23,8 @@
     "MixinMiningToolItem",
     "MixinScreen",
     "MixinToastManager",
-    "MixinWorldRenderer",
-    "authme.MixinDisconnectedScreen",
-    "ias.MixinDisconnectedScreen",
-    "litematica.MixinWorldUtils",
-    "reauth.MixinDisconnectedScreen"
+    "MixinWorldRenderer"
+  ],
+  "mixins": [
   ]
 }

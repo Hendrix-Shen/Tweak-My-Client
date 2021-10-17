@@ -29,6 +29,9 @@ repositories {
     maven {
         url 'https://api.modrinth.com/maven'
     }
+    maven {
+        url 'https://www.jitpack.io'
+    }
 }
 
 dependencies {
@@ -36,6 +39,9 @@ dependencies {
     minecraft("com.mojang:minecraft:${project.minecraft_version}")
     mappings("net.fabricmc:yarn:${project.mappings_version}:v2")
     modApi("net.fabricmc:fabric-loader:${project.fabric_loader_version}")
+    // MagicLib - For some reason I have included it.
+    modApi("com.github.Hendrix-Shen:MagicLib:${project.magiclib_version}")
+    include("com.github.Hendrix-Shen:MagicLib:${project.magiclib_version}")
     // Malilib
     modApi("fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_masa}:${project.malilib_version}")
     // ModMenu

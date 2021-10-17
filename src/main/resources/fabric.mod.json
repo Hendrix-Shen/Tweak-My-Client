@@ -29,10 +29,12 @@
     ]
   },
   "mixins": [
-    "mixins.TweakMyClient.json"
+    "TweakMyClient.compat.mixins.json",
+    "TweakMyClient.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.9.0",
+    "magiclib": ">=1.0.0",
     "malilib": ">=0.10.0-dev.21",
     "minecraft": "1.16.x"
   },

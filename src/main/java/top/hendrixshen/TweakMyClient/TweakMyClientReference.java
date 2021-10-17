@@ -8,6 +8,11 @@ public class TweakMyClientReference {
     private static final String MOD_VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
     private static final String MOD_VERSION_TYPE = "Version Exception";
 
+    public static boolean isAuthMeLoaded = FabricLoader.getInstance().isModLoaded("authme");
+    public static boolean isInGameAccountSwitcherLoaded = FabricLoader.getInstance().isModLoaded("ias");
+    public static boolean isLitematicaLoaded = FabricLoader.getInstance().isModLoaded("litematica");
+    public static boolean isReAuthLoaded = FabricLoader.getInstance().isModLoaded("reauth");
+
     public static String getModId() {
         return MOD_ID;
     }

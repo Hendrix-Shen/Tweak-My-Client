@@ -1,6 +1,9 @@
-package top.hendrixshen.TweakMyClient.mixin.ias;
+package top.hendrixshen.TweakMyClient.mixin.compat.authme;
 
+import MagicLib.untils.mixin.Dependencies;
+import MagicLib.untils.mixin.Dependency;
 import fi.dy.masa.malilib.util.StringUtils;
+import me.axieum.mcmod.authme.gui.AuthScreen;
 import net.minecraft.client.gui.screen.DisconnectedScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -12,12 +15,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import the_fireplace.ias.gui.GuiAccountSelector;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
-@Mixin(value = DisconnectedScreen.class, priority = 898)
+@Dependencies(dependencyList = @Dependency(modid = "reauth", version = "*"))
+@Mixin(value = DisconnectedScreen.class, priority = 897)
 public class MixinDisconnectedScreen extends Screen {
     private final String PREFIX = TweakMyClientReference.getModId();
 
@@ -48,9 +51,9 @@ public class MixinDisconnectedScreen extends Screen {
         if (reason == null || AutoReconnectUtils.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
             Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
             addButton(new ButtonWidget(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
-                    new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithInGameAccountSwitcher", PREFIX))), button -> {
+                    new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithAuthMe", PREFIX))), button -> {
                 assert this.client != null;
-                this.client.openScreen(new GuiAccountSelector(parent));
+                this.client.openScreen(new AuthScreen(parent));
             }));
             AutoReconnectUtils.reAuthenticateButtonOffsetY += 24;
         }
