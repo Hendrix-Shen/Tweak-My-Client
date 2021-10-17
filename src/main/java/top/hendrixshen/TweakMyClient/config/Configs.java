@@ -19,10 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
-import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
-import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
-import top.hendrixshen.TweakMyClient.util.InfoUtils;
-import top.hendrixshen.TweakMyClient.util.RayTraceUtils;
+import top.hendrixshen.TweakMyClient.util.*;
 
 import java.io.File;
 
@@ -73,6 +70,53 @@ public class Configs implements IConfigHandler {
     @Override
     public void save() {
         saveToFile();
+    }
+
+    public enum AntiGhostBlocksMode implements IConfigOptionListEntry {
+        AUTOMATIC("automatic"),
+        MANUAL("manual");
+
+        private final String name;
+
+        AntiGhostBlocksMode(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String getStringValue() {
+            return this.name;
+        }
+
+        @Override
+        public String getDisplayName() {
+            return StringUtils.translate(String.format("%s.label.antiGhostBlocksMode.%s", TweakMyClientReference.getModId(), this.name));
+        }
+
+        @Override
+        public IConfigOptionListEntry cycle(boolean forward) {
+            int id = this.ordinal();
+
+            if (forward) {
+                if (++id >= values().length) {
+                    id = 0;
+                }
+            } else {
+                if (--id < 0) {
+                    id = values().length - 1;
+                }
+            }
+            return values()[id % values().length];
+        }
+
+        @Override
+        public IConfigOptionListEntry fromString(String value) {
+            for (AntiGhostBlocksMode mode : AntiGhostBlocksMode.values()) {
+                if (mode.name.equalsIgnoreCase(name)) {
+                    return mode;
+                }
+            }
+            return AntiGhostBlocksMode.AUTOMATIC;
+        }
     }
 
     public enum AntiGhostItemsMode implements IConfigOptionListEntry {
@@ -287,6 +331,7 @@ public class Configs implements IConfigHandler {
 
     public static class Feature {
         private static final String PREFIX = String.format("%s.config.feature_toggle", TweakMyClientReference.getModId());
+        public static final ConfigBooleanHotkeyed FEATURE_ANTI_GHOST_BLOCKS = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAntiGhostBlocks", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_ANTI_GHOST_ITEMS = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAntiGhostItems", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_CLIMB = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoClimb", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_DROP = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoDrop", false, "");
@@ -303,6 +348,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_UNFOCUSED_CPU = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureUnfocusedCPU", false, "");
 
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
+                FEATURE_ANTI_GHOST_BLOCKS,
                 FEATURE_ANTI_GHOST_ITEMS,
                 FEATURE_AUTO_CLIMB,
                 FEATURE_AUTO_DROP,
@@ -322,6 +368,9 @@ public class Configs implements IConfigHandler {
 
     public static class Generic {
         private static final String PREFIX = String.format("%s.config.generic", TweakMyClientReference.getModId());
+        public static final ConfigInteger ANTI_GHOST_BLOCKS_AUTO_TRIGGER_INTERVAL = new TranslatableConfigInteger(PREFIX, "antiGhostBlocksAutoTriggerInterval", 5, 5, Integer.MAX_VALUE);
+        public static final ConfigHotkey ANTI_GHOST_BLOCKS_MANUAL_TRIGGER = new TranslatableConfigHotkey(PREFIX, "antiGhostBlocksManualTrigger", "");
+        public static final ConfigOptionList ANTI_GHOST_BLOCKS_MODE = new TranslatableConfigOptionList(PREFIX, "antiGhostBlocksMode", AntiGhostBlocksMode.AUTOMATIC);
         public static final ConfigInteger ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL = new TranslatableConfigInteger(PREFIX, "antiGhostItemsAutoTriggerInterval", 10, 10, Integer.MAX_VALUE);
         public static final ConfigHotkey ANTI_GHOST_ITEMS_MANUAL_TRIGGER = new TranslatableConfigHotkey(PREFIX, "antiGhostItemsManualTrigger", "");
         public static final ConfigOptionList ANTI_GHOST_ITEMS_MODE = new TranslatableConfigOptionList(PREFIX, "antiGhostItemsMode", AntiGhostItemsMode.AUTOMATIC);
@@ -337,6 +386,9 @@ public class Configs implements IConfigHandler {
         public static final ConfigOptionList TARGET_BLOCK_POSITION_PRINT_MODE = new TranslatableConfigOptionList(PREFIX, "targetBlockPositionPrintMode", TargetBlockPositionPrintMode.PRIVATE);
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
+                ANTI_GHOST_BLOCKS_AUTO_TRIGGER_INTERVAL,
+                ANTI_GHOST_BLOCKS_MANUAL_TRIGGER,
+                ANTI_GHOST_BLOCKS_MODE,
                 ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL,
                 ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
                 ANTI_GHOST_ITEMS_MODE,
@@ -352,6 +404,7 @@ public class Configs implements IConfigHandler {
                 TARGET_BLOCK_POSITION_PRINT_MODE
         );
         public static final ImmutableList<ConfigHotkey> HOTKEYS = ImmutableList.of(
+                ANTI_GHOST_BLOCKS_MANUAL_TRIGGER,
                 ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
                 GET_TARGET_BLOCK_POSITION,
                 MEMORY_CLEANER,
@@ -359,6 +412,19 @@ public class Configs implements IConfigHandler {
         );
 
         static {
+            ANTI_GHOST_BLOCKS_MANUAL_TRIGGER.getKeybind().setCallback((action, key) -> {
+                MinecraftClient mc = TweakMyClient.getMinecraftClient();
+                if (!Feature.FEATURE_ANTI_GHOST_BLOCKS.getBooleanValue() || Generic.ANTI_GHOST_BLOCKS_MODE.getOptionListValue() != AntiGhostBlocksMode.MANUAL || mc.player == null) {
+                    return true;
+                }
+                if (AntiGhostBlocksUtils.manualRefreshTimer > 0) {
+                    InfoUtils.printActionBarMessage(StringUtils.translate("tweakmyclient.message.antiGhostBlocksManualTrigger.mustWait", AntiGhostBlocksUtils.manualRefreshTimer / 20));
+                    return true;
+                }
+                AntiGhostBlocksUtils.refreshBlocksAroundPlayer();
+                AntiGhostBlocksUtils.manualRefreshTimer = 100;
+                return true;
+            });
             ANTI_GHOST_ITEMS_MANUAL_TRIGGER.getKeybind().setCallback((action, key) -> {
                 MinecraftClient mc = TweakMyClient.getMinecraftClient();
                 if (!Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue() || Generic.ANTI_GHOST_ITEMS_MODE.getOptionListValue() != AntiGhostItemsMode.MANUAL || mc.player == null) {

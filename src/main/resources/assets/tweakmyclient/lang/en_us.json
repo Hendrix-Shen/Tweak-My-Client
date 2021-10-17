@@ -59,6 +59,12 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "disableSlowdown",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "Cancels slowness effects caused by honey, soul sand and using items.",
 
+    "tweakmyclient.config.generic.antiGhostBlocksAutoTriggerInterval.name": "antiGhostBlocksAutoTriggerInterval",
+    "tweakmyclient.config.generic.antiGhostBlocksAutoTriggerInterval.comment": "How many seconds does antiGhostBlocks trigger automatically.",
+    "tweakmyclient.config.generic.antiGhostBlocksManualTrigger.name": "antiGhostBlocksManualTrigger",
+    "tweakmyclient.config.generic.antiGhostBlocksManualTrigger.comment": "Manually trigger antiGhostBlocks once.",
+    "tweakmyclient.config.generic.antiGhostBlocksMode.name": "antiGhostBlocksMode",
+    "tweakmyclient.config.generic.antiGhostBlocksMode.comment": "antiGhostBlocksMode working mode.",
     "tweakmyclient.config.generic.antiGhostItemsAutoTriggerInterval.name": "antiGhostItemsAutoTriggerInterval",
     "tweakmyclient.config.generic.antiGhostItemsAutoTriggerInterval.comment": "How many seconds does antiGhostItems trigger automatically.",
     "tweakmyclient.config.generic.antiGhostItemsManualTrigger.name": "antiGhostItemsManualTrigger",
@@ -86,6 +92,8 @@
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.name": "targetBlockPositionMode",
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.comment": "The block tracing position will be sent in this mode.\nprivate - Only you can see\npublic - Send to public chat",
 
+    "tweakmyclient.config.feature_toggle.featureAntiGhostBlocks.name": "featureAntiGhostBlocks",
+    "tweakmyclient.config.feature_toggle.featureAntiGhostBlocks.comment": "send mining abort packets to allow the server to reply with the correct data.",
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.name": "featureAntiGhostItems",
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.comment": "Try to send false data to the server in order to get the correct player inventory data from the server.",
     "tweakmyclient.config.feature_toggle.featureAutoClimb.name": "featureAutoClimb",
@@ -131,6 +139,8 @@
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "forcePistonWithoutAffectByTool",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "The pickaxe will no longer be used as an effective mining tool for pistons.",
 
+    "tweakmyclient.label.antiGhostBlocksMode.automatic": "Automatic",
+    "tweakmyclient.label.antiGhostBlocksMode.manual": "Manual",
     "tweakmyclient.label.antiGhostItemsMode.automatic": "Automatic",
     "tweakmyclient.label.antiGhostItemsMode.manual": "Manual",
     "tweakmyclient.label.autoDropListType.blackList": "Black List",
@@ -138,6 +148,7 @@
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "private",
     "tweakmyclient.label.targetBlockPositionPrintMode.public": "public",
 
+    "tweakmyclient.message.antiGhostBlocksManualTrigger.mustWait": "You have to wait %d second to trigger antiGhostBlocks again",
     "tweakmyclient.message.antiGhostItemsManualTrigger.mustWait": "You have to wait %d second to trigger antiGhostItems again",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "Re-authenticate with AuthMe",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithInGameAccountSwitcher": "Re-authenticate with In-Game Account Switcher",

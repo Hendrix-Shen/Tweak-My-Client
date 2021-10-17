@@ -59,6 +59,8 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "禁用减速",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "取消蜂蜜块, 灵魂沙和使用物品时的减速效果.",
 
+    "tweakmyclient.config.feature_toggle.featureAntiGhostBlocks.name": "清除幽灵方块",
+    "tweakmyclient.config.feature_toggle.featureAntiGhostBlocks.comment": "发送挖掘终止数据包以让服务端回复正确的数据.",
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.name": "清除幽灵物品",
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.comment": "尝试向服务器发送虚假数据, 以便从服务端获取正确的玩家背包数据.",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.name": "自动丢弃",
@@ -88,6 +90,12 @@
     "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.name": "失去焦点释放CPU",
     "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.comment": "当焦点未处于 Minecraft 窗口时, 客户端将不会执行渲染.",
 
+    "tweakmyclient.config.generic.antiGhostBlocksAutoTriggerInterval.name": "自动清理幽灵方块间隔",
+    "tweakmyclient.config.generic.antiGhostBlocksAutoTriggerInterval.comment": "多少秒自动触发一次清除幽灵方块.",
+    "tweakmyclient.config.generic.antiGhostBlocksManualTrigger.name": "手动清除幽灵方块",
+    "tweakmyclient.config.generic.antiGhostBlocksManualTrigger.comment": "手动触发一次清除幽灵方块.",
+    "tweakmyclient.config.generic.antiGhostBlocksMode.name": "清除幽灵方块模式",
+    "tweakmyclient.config.generic.antiGhostBlocksMode.comment": "清除幽灵方块工作模式.",
     "tweakmyclient.config.generic.antiGhostItemsAutoTriggerInterval.name": "自动清理幽灵物品间隔",
     "tweakmyclient.config.generic.antiGhostItemsAutoTriggerInterval.comment": "多少秒自动触发一次清除幽灵物品.",
     "tweakmyclient.config.generic.antiGhostItemsManualTrigger.name": "手动清除幽灵物品",
@@ -131,6 +139,8 @@
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "强制活塞不受镐子影响",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "镐子将不再作为活塞的有效开采工具.",
 
+    "tweakmyclient.label.antiGhostBlocksMode.automatic": "自动",
+    "tweakmyclient.label.antiGhostBlocksMode.manual": "手动",
     "tweakmyclient.label.antiGhostItemsMode.automatic": "自动",
     "tweakmyclient.label.antiGhostItemsMode.manual": "手动",
     "tweakmyclient.label.autoDropListType.blackList": "黑名单",
@@ -138,6 +148,7 @@
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "私人",
     "tweakmyclient.label.targetBlockPositionPrintMode.public": "公共",
 
+    "tweakmyclient.message.antiGhostBlocksManualTrigger.mustWait": "你必须等待 %d 秒才能再次使用幽灵方块清除",
     "tweakmyclient.message.antiGhostItemsManualTrigger.mustWait": "你必须等待 %d 秒才能再次使用幽灵物品清除",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "使用 AuthMe 验证会话",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithInGameAccountSwitcher": "使用 In-Game Account Switcher 验证会话",

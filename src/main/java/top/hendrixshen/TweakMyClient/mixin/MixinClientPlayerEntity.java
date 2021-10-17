@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.TweakMyClient.util.AntiGhostBlocksUtils;
 import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
 import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
 
@@ -96,6 +97,24 @@ public abstract class MixinClientPlayerEntity extends LivingEntity {
                     } else {
                         AntiGhostItemsUtils.refreshInventory();
                         AntiGhostItemsUtils.automaticRefreshTimer = Configs.Generic.ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL.getIntegerValue() * 20;
+                    }
+                    break;
+            }
+        }
+        if (Configs.Feature.FEATURE_ANTI_GHOST_BLOCKS.getBooleanValue()) {
+            Configs.AntiGhostBlocksMode mode = (Configs.AntiGhostBlocksMode) Configs.Generic.ANTI_GHOST_BLOCKS_MODE.getOptionListValue();
+            switch (mode) {
+                case MANUAL:
+                    if (AntiGhostBlocksUtils.manualRefreshTimer > 0) {
+                        AntiGhostBlocksUtils.manualRefreshTimer--;
+                    }
+                    break;
+                case AUTOMATIC:
+                    if (AntiGhostBlocksUtils.automaticRefreshTimer > 0) {
+                        AntiGhostBlocksUtils.automaticRefreshTimer--;
+                    } else {
+                        AntiGhostBlocksUtils.refreshBlocksAroundPlayer();
+                        AntiGhostBlocksUtils.automaticRefreshTimer = Configs.Generic.ANTI_GHOST_BLOCKS_AUTO_TRIGGER_INTERVAL.getIntegerValue() * 20;
                     }
                     break;
             }
