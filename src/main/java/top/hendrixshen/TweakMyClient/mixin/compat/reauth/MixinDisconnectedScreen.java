@@ -19,7 +19,7 @@ import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
-@Dependencies(dependencyList = @Dependency(modid = "ias", version = "*"))
+@Dependencies(dependencyList = @Dependency(modid = "reauth", version = "*"))
 @Mixin(value = DisconnectedScreen.class, priority = 899)
 public class MixinDisconnectedScreen extends Screen {
     private final String PREFIX = TweakMyClientReference.getModId();
