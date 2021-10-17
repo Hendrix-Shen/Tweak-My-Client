@@ -14,11 +14,11 @@ public class AntiGhostItemsUtils {
     public static int automaticRefreshTimer;
 
     public static void refreshInventory() {
-        ClientPlayerEntity playerEntity = TweakMyClient.minecraftClient.player;
+        ClientPlayerEntity playerEntity = TweakMyClient.getMinecraftClient().player;
         if (playerEntity != null) {
             short playerNextActionId = playerEntity.currentScreenHandler.getNextActionId(playerEntity.inventory);
             ItemStack stack = new ItemStack(Items.BEDROCK);
-            Objects.requireNonNull(TweakMyClient.minecraftClient.getNetworkHandler()).sendPacket(
+            Objects.requireNonNull(TweakMyClient.getMinecraftClient().getNetworkHandler()).sendPacket(
                     new ClickSlotC2SPacket(0, 0, 0, SlotActionType.QUICK_MOVE, stack, playerNextActionId)
             );
         }

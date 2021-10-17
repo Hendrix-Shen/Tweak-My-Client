@@ -54,7 +54,7 @@ public abstract class MixinWorldRenderer {
     )
     private void onProcessGlobalEvent(int eventId, BlockPos pos, int i, CallbackInfo ci) {
         if (Configs.Feature.FEATURE_GLOBAL_EVENT_LISTENER.getBooleanValue()) {
-            ClientPlayerEntity player = TweakMyClient.minecraftClient.player;
+            ClientPlayerEntity player = TweakMyClient.getMinecraftClient().player;
             assert player != null;
             if (eventId == 1023) { //SoundEvents.ENTITY_WITHER_SPAWN
                 player.sendMessage(new LiteralText(StringUtils.translate("tweakmyclient.message.globalEventListener.witherSpawn", pos.getX(), pos.getY(), pos.getZ())), false);

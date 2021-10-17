@@ -23,7 +23,7 @@ public class AutoReconnectUtils {
     public static void reconnect(Screen screen) {
         ServerInfo serverInfo = AutoReconnectUtils.getLastServer();
         if (lastServer != null) {
-            TweakMyClient.minecraftClient.openScreen(new ConnectScreen(screen, TweakMyClient.minecraftClient, serverInfo));
+            TweakMyClient.getMinecraftClient().openScreen(new ConnectScreen(screen, TweakMyClient.getMinecraftClient(), serverInfo));
         }
     }
 

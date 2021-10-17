@@ -14,7 +14,9 @@ import java.util.Deque;
 
 @Mixin(ToastManager.class)
 public class MixinToastManager {
-    @Shadow @Final private Deque<Toast> toastQueue;
+    @Shadow
+    @Final
+    private Deque<Toast> toastQueue;
 
     @Inject(
             method = "add",

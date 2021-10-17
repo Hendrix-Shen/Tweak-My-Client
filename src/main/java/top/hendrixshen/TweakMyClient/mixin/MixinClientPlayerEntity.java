@@ -32,7 +32,8 @@ public abstract class MixinClientPlayerEntity extends LivingEntity {
     @Shadow
     public abstract void sendMessage(Text message, boolean actionBar);
 
-    @Shadow public abstract boolean isSneaking();
+    @Shadow
+    public abstract boolean isSneaking();
 
     protected MixinClientPlayerEntity(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);

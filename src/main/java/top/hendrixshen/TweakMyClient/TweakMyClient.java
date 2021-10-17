@@ -13,20 +13,29 @@ import top.hendrixshen.TweakMyClient.event.InputHandler;
 import top.hendrixshen.TweakMyClient.event.RenderHandler;
 
 public class TweakMyClient implements ModInitializer {
-    public static final Logger logger = LogManager.getLogger(Reference.MOD_ID);
-    public static MinecraftClient minecraftClient = MinecraftClient.getInstance();
+    private static final Logger logger = LogManager.getLogger(TweakMyClientReference.getModId());
+    private static final MinecraftClient minecraftClient = MinecraftClient.getInstance();
 
     @Override
     public void onInitialize() {
-        ConfigManager.getInstance().registerConfigHandler(Reference.MOD_ID, new Configs());
+        ConfigManager.getInstance().registerConfigHandler(TweakMyClientReference.getModId(), new Configs());
         InputEventHandler.getKeybindManager().registerKeybindProvider(InputHandler.getInstance());
 
         IRenderer renderer = new RenderHandler();
         RenderEventHandler.getInstance().registerWorldLastRenderer(renderer);
-        logger.info(String.format("[%s]: Mod initialized - Version: %s (%s)", Reference.MOD_NAME, Reference.MOD_VERSION, Reference.MOD_VERSION_TYPE));
-        logger.info(String.format("[%s]: AuthMe was %sdetectect.", Reference.MOD_NAME, (TweakMyClientMixinPlugin.isAuthMeLoaded ? "" : "not ")));
-        logger.info(String.format("[%s]: InGameAccountSwitcher was %sdetectect.", Reference.MOD_NAME, (TweakMyClientMixinPlugin.isInGameAccountSwitcherLoaded ? "" : "not ")));
-        logger.info(String.format("[%s]: Litematica was %sdetectect.", Reference.MOD_NAME, (TweakMyClientMixinPlugin.isLitematicaLoaded ? "" : "not ")));
-        logger.info(String.format("[%s]: ReAuth was %sdetectect.", Reference.MOD_NAME, (TweakMyClientMixinPlugin.isReAuthLoaded ? "" : "not ")));
+        String modName = TweakMyClientReference.getModName();
+        logger.info(String.format("[%s]: Mod initialized - Version: %s (%s)", modName, TweakMyClientReference.getModVersion(), TweakMyClientReference.getModVersionType()));
+        logger.info(String.format("[%s]: AuthMe was %sdetectect.", modName, (TweakMyClientMixinPlugin.isAuthMeLoaded ? "" : "not ")));
+        logger.info(String.format("[%s]: InGameAccountSwitcher was %sdetectect.", modName, (TweakMyClientMixinPlugin.isInGameAccountSwitcherLoaded ? "" : "not ")));
+        logger.info(String.format("[%s]: Litematica was %sdetectect.", modName, (TweakMyClientMixinPlugin.isLitematicaLoaded ? "" : "not ")));
+        logger.info(String.format("[%s]: ReAuth was %sdetectect.", modName, (TweakMyClientMixinPlugin.isReAuthLoaded ? "" : "not ")));
+    }
+
+    public static MinecraftClient getMinecraftClient() {
+        return minecraftClient;
+    }
+
+    public static Logger getLogger() {
+        return logger;
     }
 }

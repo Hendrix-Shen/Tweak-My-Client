@@ -18,7 +18,7 @@ public class AutoDropUtils {
     public static HashSet<Item> itemStacksBlackList;
 
     public static void doDrop() {
-        MinecraftClient mc = TweakMyClient.minecraftClient;
+        MinecraftClient mc = TweakMyClient.getMinecraftClient();
         ClientPlayerInteractionManager interactionManager = mc.interactionManager;
         if (mc.currentScreen instanceof HandledScreen && !(mc.currentScreen instanceof InventoryScreen)) {
             return;
@@ -39,13 +39,13 @@ public class AutoDropUtils {
                 case BLACKLIST:
                     if (!itemStacksBlackList.contains(stack.getItem())) {
                         assert interactionManager != null;
-                        interactionManager.clickSlot(0, slot, 1, SlotActionType.THROW, TweakMyClient.minecraftClient.player);
+                        interactionManager.clickSlot(0, slot, 1, SlotActionType.THROW, TweakMyClient.getMinecraftClient().player);
                     }
                     break;
                 case WHITELIST:
                     if (itemStacksWhitelist.contains(stack.getItem())) {
                         assert interactionManager != null;
-                        interactionManager.clickSlot(0, slot, 1, SlotActionType.THROW, TweakMyClient.minecraftClient.player);
+                        interactionManager.clickSlot(0, slot, 1, SlotActionType.THROW, TweakMyClient.getMinecraftClient().player);
                     }
                     break;
             }

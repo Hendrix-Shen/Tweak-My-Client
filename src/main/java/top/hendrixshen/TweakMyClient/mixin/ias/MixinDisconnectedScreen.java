@@ -13,14 +13,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import the_fireplace.ias.gui.GuiAccountSelector;
-import top.hendrixshen.TweakMyClient.Reference;
-import top.hendrixshen.TweakMyClient.TweakMyClientMixinPlugin;
+import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
 @Mixin(value = DisconnectedScreen.class, priority = 898)
 public class MixinDisconnectedScreen extends Screen {
-    private final String PREFIX = Reference.MOD_ID;
+    private final String PREFIX = TweakMyClientReference.getModId();
 
     @Shadow
     @Final

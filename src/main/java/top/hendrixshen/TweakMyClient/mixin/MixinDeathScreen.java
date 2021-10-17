@@ -18,9 +18,9 @@ public class MixinDeathScreen {
     )
     private void onTick(CallbackInfo ci) {
         if (Configs.Feature.FEATURE_AUTO_RESPAWN.getBooleanValue()) {
-            assert TweakMyClient.minecraftClient.player != null;
-            TweakMyClient.minecraftClient.player.requestRespawn();
-            TweakMyClient.minecraftClient.openScreen(null);
+            assert TweakMyClient.getMinecraftClient().player != null;
+            TweakMyClient.getMinecraftClient().player.requestRespawn();
+            TweakMyClient.getMinecraftClient().openScreen(null);
         }
     }
 }

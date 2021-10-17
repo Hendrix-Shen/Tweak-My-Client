@@ -1,6 +1,9 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
-import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.PistonBlock;
+import net.minecraft.block.PistonExtensionBlock;
+import net.minecraft.block.PistonHeadBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MiningToolItem;
 import org.spongepowered.asm.mixin.Mixin;

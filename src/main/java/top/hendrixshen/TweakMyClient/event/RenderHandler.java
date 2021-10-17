@@ -12,7 +12,7 @@ public class RenderHandler implements IRenderer {
     private final MinecraftClient mc;
 
     public RenderHandler() {
-        this.mc = TweakMyClient.minecraftClient;
+        this.mc = TweakMyClient.getMinecraftClient();
     }
 
     public static RenderHandler getInstance() {

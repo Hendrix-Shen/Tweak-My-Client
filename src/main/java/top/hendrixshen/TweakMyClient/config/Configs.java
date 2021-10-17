@@ -12,13 +12,12 @@ import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.toast.ToastManager;
 import net.minecraft.network.MessageType;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.math.BlockPos;
-import top.hendrixshen.TweakMyClient.Reference;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
+import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
 import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
 import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
@@ -28,7 +27,7 @@ import top.hendrixshen.TweakMyClient.util.RayTraceUtils;
 import java.io.File;
 
 public class Configs implements IConfigHandler {
-    private static final String CONFIG_FILE_NAME = Reference.MOD_ID + ".json";
+    private static final String CONFIG_FILE_NAME = TweakMyClientReference.getModId() + ".json";
 
     public static void loadFromFile() {
         File configFile = new File(FileUtils.getConfigDirectory(), CONFIG_FILE_NAME);
@@ -93,7 +92,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.antiGhostItemsMode.%s", Reference.MOD_ID, this.name));
+            return StringUtils.translate(String.format("%s.label.antiGhostItemsMode.%s", TweakMyClientReference.getModId(), this.name));
         }
 
         @Override
@@ -140,7 +139,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.autoDropListType.%s", Reference.MOD_ID, this.name));
+            return StringUtils.translate(String.format("%s.label.autoDropListType.%s", TweakMyClientReference.getModId(), this.name));
         }
 
         @Override
@@ -187,7 +186,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.targetBlockPositionPrintMode.%s", Reference.MOD_ID, this.name));
+            return StringUtils.translate(String.format("%s.label.targetBlockPositionPrintMode.%s", TweakMyClientReference.getModId(), this.name));
         }
 
         @Override
@@ -218,7 +217,7 @@ public class Configs implements IConfigHandler {
     }
 
     public static class Color {
-        private static final String PREFIX = String.format("%s.config.color", Reference.MOD_ID);
+        private static final String PREFIX = String.format("%s.config.color", TweakMyClientReference.getModId());
         public static final ConfigColor COLOR_BLOCK_OUTSIDE = new TranslatableConfigColor(PREFIX, "colorBlockOutside", "#66000000");
         public static final ConfigColor COLOR_GUI_START = new TranslatableConfigColor(PREFIX, "colorGuiStart", "#C00F0F0F");
         public static final ConfigColor COLOR_GUI_STOP = new TranslatableConfigColor(PREFIX, "colorGuiStop", "#D00F0F0F");
@@ -238,7 +237,7 @@ public class Configs implements IConfigHandler {
     }
 
     public static class Disable {
-        private static final String PREFIX = String.format("%s.config.disable_toggle", Reference.MOD_ID);
+        private static final String PREFIX = String.format("%s.config.disable_toggle", TweakMyClientReference.getModId());
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_BLOCK_EVENTS = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientBlockEvents", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_IN_LIST_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityInListUpdates", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_TNT_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityTNTUpdates", false, "");
@@ -276,17 +275,18 @@ public class Configs implements IConfigHandler {
                 DISABLE_RENDER_TOAST,
                 DISABLE_SLOWDOWN
         );
+
         static {
             DISABLE_RENDER_TOAST.setValueChangeCallback((callback) -> {
                 if (callback.getBooleanValue()) {
-                    TweakMyClient.minecraftClient.getToastManager().clear();
+                    TweakMyClient.getMinecraftClient().getToastManager().clear();
                 }
             });
         }
     }
 
     public static class Feature {
-        private static final String PREFIX = String.format("%s.config.feature_toggle", Reference.MOD_ID);
+        private static final String PREFIX = String.format("%s.config.feature_toggle", TweakMyClientReference.getModId());
         public static final ConfigBooleanHotkeyed FEATURE_ANTI_GHOST_ITEMS = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAntiGhostItems", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_CLIMB = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoClimb", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_AUTO_DROP = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureAutoDrop", false, "");
@@ -321,7 +321,7 @@ public class Configs implements IConfigHandler {
     }
 
     public static class Generic {
-        private static final String PREFIX = String.format("%s.config.generic", Reference.MOD_ID);
+        private static final String PREFIX = String.format("%s.config.generic", TweakMyClientReference.getModId());
         public static final ConfigInteger ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL = new TranslatableConfigInteger(PREFIX, "antiGhostItemsAutoTriggerInterval", 10, 10, Integer.MAX_VALUE);
         public static final ConfigHotkey ANTI_GHOST_ITEMS_MANUAL_TRIGGER = new TranslatableConfigHotkey(PREFIX, "antiGhostItemsManualTrigger", "");
         public static final ConfigOptionList ANTI_GHOST_ITEMS_MODE = new TranslatableConfigOptionList(PREFIX, "antiGhostItemsMode", AntiGhostItemsMode.AUTOMATIC);
@@ -360,7 +360,7 @@ public class Configs implements IConfigHandler {
 
         static {
             ANTI_GHOST_ITEMS_MANUAL_TRIGGER.getKeybind().setCallback((action, key) -> {
-                MinecraftClient mc = TweakMyClient.minecraftClient;
+                MinecraftClient mc = TweakMyClient.getMinecraftClient();
                 if (!Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue() || Generic.ANTI_GHOST_ITEMS_MODE.getOptionListValue() != AntiGhostItemsMode.MANUAL || mc.player == null) {
                     return true;
                 }
@@ -376,7 +376,7 @@ public class Configs implements IConfigHandler {
                 if (!Feature.FEATURE_GET_TARGET_BLOCK_POSITION.getBooleanValue()) {
                     return true;
                 }
-                MinecraftClient mc = TweakMyClient.minecraftClient;
+                MinecraftClient mc = TweakMyClient.getMinecraftClient();
                 BlockPos blockPos = RayTraceUtils.getTargetedPosition(mc.world, mc.player, TARGET_BLOCK_MAX_TRACE_DISTANCE.getDoubleValue(), false);
                 if (blockPos == null || mc.player == null) {
                     return true;
@@ -400,9 +400,10 @@ public class Configs implements IConfigHandler {
                 class CleanerThread implements Runnable {
                     public CleanerThread() {
                     }
+
                     @Override
                     public void run() {
-                        TweakMyClient.logger.info(String.format("[%s]: Memory cleaner thread started!", Reference.MOD_NAME));
+                        TweakMyClient.getLogger().info(String.format("[%s]: Memory cleaner thread started!", TweakMyClientReference.getModName()));
                         System.gc();
                         try {
                             Thread.sleep(1000L);
@@ -410,7 +411,7 @@ public class Configs implements IConfigHandler {
                             // ignored
                         }
                         System.gc();
-                        TweakMyClient.logger.info(String.format("[%s]: Memory cleaner thread finished!", Reference.MOD_NAME));
+                        TweakMyClient.getLogger().info(String.format("[%s]: Memory cleaner thread finished!", TweakMyClientReference.getModName()));
                     }
                 }
                 Runnable runnable = new CleanerThread();
@@ -428,7 +429,7 @@ public class Configs implements IConfigHandler {
     }
 
     public static class List {
-        private static final String PREFIX = String.format("%s.config.list", Reference.MOD_ID);
+        private static final String PREFIX = String.format("%s.config.list", TweakMyClientReference.getModId());
         public static final ConfigStringList LIST_AUTO_DROP_BLACK_LIST = new TranslatableConfigStringList(PREFIX, "listAutoDropBlackList", ImmutableList.of("minecraft:bow", "minecraft:crossbow", "minecraft:diamond_axe", "minecraft:diamond_boots", "minecraft:diamond_chestplate", "minecraft:diamond_helmet", "minecraft:diamond_hoe", "minecraft:diamond_leggings", "minecraft:diamond_pickaxe", "minecraft:diamond_shovel", "minecraft:diamond_sword", "minecraft:elytra", "minecraft:enchanted_golden_apple", "minecraft:flint_and_steel", "minecraft:fishing_rod", "minecraft:golden_apple", "minecraft:golden_axe", "minecraft:golden_boots", "minecraft:golden_chestplate", "minecraft:golden_helmet", "minecraft:golden_hoe", "minecraft:golden_leggings", "minecraft:golden_pickaxe", "minecraft:golden_shovel", "minecraft:golden_sword", "minecraft:iron_axe", "minecraft:iron_boots", "minecraft:iron_chestplate", "minecraft:iron_helmet", "minecraft:iron_hoe", "minecraft:iron_leggings", "minecraft:iron_pickaxe", "minecraft:iron_shovel", "minecraft:iron_sword", "minecraft:netherite_axe", "minecraft:netherite_boots", "minecraft:netherite_chestplate", "minecraft:netherite_helmet", "minecraft:netherite_hoe", "minecraft:netherite_leggings", "minecraft:netherite_pickaxe", "minecraft:netherite_shovel", "minecraft:netherite_sword", "minecraft:shears", "minecraft:shield", "minecraft:totem_of_undying", "minecraft:trident", "minecraft:turtle_helmet"));
         public static final ConfigOptionList LIST_AUTO_DROP_TYPE = new TranslatableConfigOptionList(PREFIX, "listAutoDropType", AutoDropListType.WHITELIST);
         public static final ConfigStringList LIST_AUTO_DROP_WHITE_LIST = new TranslatableConfigStringList(PREFIX, "listAutoDropWhiteList", ImmutableList.of("minecraft:stone", "minecraft:dirt", "minecraft:cobblestone", "minecraft:gravel", "minecraft:rotten_flesh"));
@@ -444,7 +445,7 @@ public class Configs implements IConfigHandler {
     }
 
     public static class Patch {
-        private static final String PREFIX = String.format("%s.config.patch", Reference.MOD_ID);
+        private static final String PREFIX = String.format("%s.config.patch", TweakMyClientReference.getModId());
         public static final ConfigBoolean DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP = new TranslatableConfigBoolean(PREFIX, "disableLitematicaEasyPlaceFailTip", false);
         public static final ConfigBoolean FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL = new TranslatableConfigBoolean(PREFIX, "forcePistonWithoutAffectByTool", false);
         public static final ImmutableList<ConfigBoolean> OPTIONS = ImmutableList.of(
