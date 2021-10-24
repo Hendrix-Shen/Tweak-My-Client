@@ -1,7 +1,7 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ServerInfo;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ServerData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -9,18 +9,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 
-@Mixin(MinecraftClient.class)
-public abstract class MixinMinecraftClient {
+@Mixin(Minecraft.class)
+public abstract class MixinMinecraft {
     @Inject(
-            method = "setCurrentServerEntry",
+            method = "setCurrentServer",
             at = @At(
                     "HEAD"
             )
     )
-    private void setCurrentServerEntry(ServerInfo serverInfo, CallbackInfo info) {
+    private void setCurrentServerEntry(ServerData serverData, CallbackInfo ci) {
         AutoReconnectUtils.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
-        if (serverInfo != null) {
-            AutoReconnectUtils.setLastServer(serverInfo);
+        if (serverData != null) {
+            AutoReconnectUtils.setLastServer(serverData);
         }
     }
 }

@@ -2,8 +2,8 @@ package top.hendrixshen.TweakMyClient.util;
 
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.util.StringUtils;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.text.LiteralText;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.TextComponent;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 
@@ -17,9 +17,10 @@ public class InfoUtils {
     }
 
     public static void printChatMessageOrActionBar(String message, boolean useActionBar) {
-        ClientPlayerEntity player = TweakMyClient.getMinecraftClient().player;
-        assert player != null;
-        player.sendMessage(new LiteralText(message), useActionBar);
+        LocalPlayer localPlayer = TweakMyClient.getMinecraftClient().player;
+        if (localPlayer != null) {
+            localPlayer.displayClientMessage(new TextComponent(message), useActionBar);
+        }
     }
 
     public static void printBooleanConfigToggleMessage(String translatedName, boolean newValue) {

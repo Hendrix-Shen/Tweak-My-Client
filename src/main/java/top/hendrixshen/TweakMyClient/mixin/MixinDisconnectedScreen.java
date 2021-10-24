@@ -2,12 +2,11 @@ package top.hendrixshen.TweakMyClient.mixin;
 
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import fi.dy.masa.malilib.util.StringUtils;
-import net.minecraft.client.gui.screen.DisconnectedScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.DisconnectedScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,21 +21,14 @@ import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 public class MixinDisconnectedScreen extends Screen {
     private final String PREFIX = TweakMyClientReference.getModId();
     @Shadow
-    private int reasonHeight;
-    @Shadow
     @Final
     private Screen parent;
     @Shadow
-    @Final
-    private Text reason;
-    private ButtonWidget autoReconnectButton;
+    private int textHeight;
+    private Button autoReconnectButton;
 
-    protected MixinDisconnectedScreen(Text title) {
-        super(title);
-    }
-
-    private static String getTranslationKey(Text component) {
-        return component instanceof TranslatableText ? ((TranslatableText) component).getKey() : "";
+    protected MixinDisconnectedScreen(Component component) {
+        super(component);
     }
 
     @Inject(
@@ -51,14 +43,14 @@ public class MixinDisconnectedScreen extends Screen {
             AutoReconnectUtils.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
         }
         int backButtonX = width / 2 - 100;
-        int backButtonY = Math.min(height / 2 + reasonHeight / 2 + 9, height - 30);
+        int backButtonY = Math.min(height / 2 + textHeight / 2 + 9, height - 30);
 
-        addButton(new ButtonWidget(backButtonX, backButtonY + 24, 200, 20,
-                new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.static", PREFIX))), b -> AutoReconnectUtils.reconnect(parent)));
+        addButton(new Button(backButtonX, backButtonY + 24, 200, 20,
+                new TextComponent(StringUtils.translate(String.format("%s.message.autoReconnect.static", PREFIX))), b -> AutoReconnectUtils.reconnect(parent)));
 
         autoReconnectButton =
-                addButton(new ButtonWidget(backButtonX, backButtonY + 48, 200, 20,
-                        new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.toggle", PREFIX))), b -> onPressAutoReconnect()));
+                addButton(new Button(backButtonX, backButtonY + 48, 200, 20,
+                        new TextComponent(StringUtils.translate(String.format("%s.message.autoReconnect.toggle", PREFIX))), b -> onPressAutoReconnect()));
         AutoReconnectUtils.reAuthenticateButtonOffsetY = 0;
         ci.cancel();
     }
@@ -75,10 +67,10 @@ public class MixinDisconnectedScreen extends Screen {
     @Override
     public void tick() {
         if (!Configs.Feature.FEATURE_AUTO_RECONNECT.getBooleanValue()) {
-            autoReconnectButton.setMessage(new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.toggle", PREFIX))));
+            autoReconnectButton.setMessage(new TextComponent(StringUtils.translate(String.format("%s.message.autoReconnect.toggle", PREFIX))));
             return;
         }
-        autoReconnectButton.setMessage(new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.timer", PREFIX), (int) Math.ceil(AutoReconnectUtils.ReconnectTimer / 20.0))));
+        autoReconnectButton.setMessage(new TextComponent(StringUtils.translate(String.format("%s.message.autoReconnect.timer", PREFIX), (int) Math.ceil(AutoReconnectUtils.ReconnectTimer / 20.0))));
 
         if (AutoReconnectUtils.ReconnectTimer > 0) {
             AutoReconnectUtils.ReconnectTimer--;

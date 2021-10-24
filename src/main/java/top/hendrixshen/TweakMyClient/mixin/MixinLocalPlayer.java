@@ -1,15 +1,13 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
 import fi.dy.masa.malilib.util.StringUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import org.spongepowered.asm.mixin.Final;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,51 +19,44 @@ import top.hendrixshen.TweakMyClient.util.AntiGhostBlocksUtils;
 import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
 import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
 
-@Mixin(ClientPlayerEntity.class)
-public abstract class MixinClientPlayerEntity extends LivingEntity {
+@Mixin(LocalPlayer.class)
+public abstract class MixinLocalPlayer extends LivingEntity {
     @Shadow
-    private boolean usingItem;
+    private boolean startedUsingItem;
 
-    @Shadow
-    @Final
-    protected MinecraftClient client;
-
-    @Shadow
-    public abstract void sendMessage(Text message, boolean actionBar);
-
-    @Shadow
-    public abstract boolean isSneaking();
-
-    protected MixinClientPlayerEntity(EntityType<? extends LivingEntity> entityType, World world) {
-        super(entityType, world);
+    protected MixinLocalPlayer(EntityType<? extends LivingEntity> entityType, Level level) {
+        super(entityType, level);
     }
 
+    @Shadow
+    public abstract void displayClientMessage(Component component, boolean bl);
+
     @Inject(
-            method = "tickMovement",
+            method = "aiStep",
             at = @At(
                     value = "HEAD"
             )
     )
-    private void onTickMovement(CallbackInfo ci) {
-        if (Configs.Feature.FEATURE_AUTO_CLIMB.getBooleanValue() && this.isClimbing() && this.pitch <= -50f && !this.isSneaking()) {
-            Vec3d vec3d = this.getVelocity();
-            this.setVelocity(vec3d.x, 0.1176D, vec3d.z);
+    private void onClimbable(CallbackInfo ci) {
+        if (Configs.Feature.FEATURE_AUTO_CLIMB.getBooleanValue() && this.onClimbable() && this.xRot <= -50f && !this.isCrouching()) {
+            Vec3 vec3 = this.getDeltaMovement();
+            this.setDeltaMovement(vec3.x, 0.1176D, vec3.z);
         }
     }
 
     @Redirect(
-            method = "tickMovement",
+            method = "aiStep",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z",
+                    target = "net/minecraft/client/player/LocalPlayer.isUsingItem ()Z",
                     ordinal = 0
             )
     )
-    private boolean getUsingItemState(ClientPlayerEntity clientPlayerEntity) {
+    private boolean getUsingItemState(LocalPlayer instance) {
         if (Configs.Disable.DISABLE_SLOWDOWN.getBooleanValue()) {
             return false;
         }
-        return this.usingItem;
+        return this.startedUsingItem;
     }
 
     @Inject(
@@ -120,7 +111,7 @@ public abstract class MixinClientPlayerEntity extends LivingEntity {
             }
         }
         if (Configs.Feature.FEATURE_LOW_HEALTH_WARNING.getBooleanValue() && this.getHealth() <= Configs.Generic.LOW_HEALTH_THRESHOLD.getDoubleValue()) {
-            this.sendMessage(new LiteralText(StringUtils.translate("tweakmyclient.message.lowHealthWarning.warningMessage", String.format("%.2f", Configs.Generic.LOW_HEALTH_THRESHOLD.getDoubleValue()))), true);
+            this.displayClientMessage(new TextComponent(StringUtils.translate("tweakmyclient.message.lowHealthWarning.warningMessage", String.format("%.2f", Configs.Generic.LOW_HEALTH_THRESHOLD.getDoubleValue()))), true);
         }
     }
 }

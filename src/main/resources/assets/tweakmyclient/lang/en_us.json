@@ -166,5 +166,5 @@
 
     "tweakmyclient.misc.versionType.Public Beta": "Public Beta",
     "tweakmyclient.misc.versionType.Public Release": "Public Release",
-    "tweakmyclient.misc.versionType.Version Exception": "Version Exception"
+    "tweakmyclient.misc.versionType.Development": "Development"
 }

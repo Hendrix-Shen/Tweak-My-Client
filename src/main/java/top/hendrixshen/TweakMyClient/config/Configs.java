@@ -11,15 +11,22 @@ import fi.dy.masa.malilib.config.options.*;
 import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.StringUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.network.MessageType;
-import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
-import net.minecraft.text.LiteralText;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.MultiPlayerGameMode;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.protocol.game.ClientboundChatPacket;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
-import top.hendrixshen.TweakMyClient.util.*;
+import top.hendrixshen.TweakMyClient.util.AntiGhostBlocksUtils;
+import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
+import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
+import top.hendrixshen.TweakMyClient.util.InfoUtils;
 
 import java.io.File;
 
@@ -323,7 +330,7 @@ public class Configs implements IConfigHandler {
         static {
             DISABLE_RENDER_TOAST.setValueChangeCallback((callback) -> {
                 if (callback.getBooleanValue()) {
-                    TweakMyClient.getMinecraftClient().getToastManager().clear();
+                    TweakMyClient.getMinecraftClient().getToasts().clear();
                 }
             });
         }
@@ -381,10 +388,16 @@ public class Configs implements IConfigHandler {
         public static final ConfigDouble LOW_HEALTH_THRESHOLD = new TranslatableConfigDouble(PREFIX, "lowHealthThreshold", 6, 0, 1000);
         public static final ConfigHotkey MEMORY_CLEANER = new TranslatableConfigHotkey(PREFIX, "memoryCleaner", "");
         public static final ConfigHotkey OPEN_CONFIG_GUI = new TranslatableConfigHotkey(PREFIX, "openConfigGui", "T,C");
+        public static final ImmutableList<ConfigHotkey> HOTKEYS = ImmutableList.of(
+                ANTI_GHOST_BLOCKS_MANUAL_TRIGGER,
+                ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
+                GET_TARGET_BLOCK_POSITION,
+                MEMORY_CLEANER,
+                OPEN_CONFIG_GUI
+        );
         public static final ConfigDouble TARGET_BLOCK_MAX_TRACE_DISTANCE = new TranslatableConfigDouble(PREFIX, "targetBlockMaxTraceDistance", 100, 0, 200);
         public static final ConfigString TARGET_BLOCK_POSITION_FORMAT = new TranslatableConfigString(PREFIX, "targetBlockPositionFormat", "I'm tracing this position [x: {X},y: {Y}, z: {Z}]");
         public static final ConfigOptionList TARGET_BLOCK_POSITION_PRINT_MODE = new TranslatableConfigOptionList(PREFIX, "targetBlockPositionPrintMode", TargetBlockPositionPrintMode.PRIVATE);
-
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
                 ANTI_GHOST_BLOCKS_AUTO_TRIGGER_INTERVAL,
                 ANTI_GHOST_BLOCKS_MANUAL_TRIGGER,
@@ -403,18 +416,11 @@ public class Configs implements IConfigHandler {
                 TARGET_BLOCK_POSITION_FORMAT,
                 TARGET_BLOCK_POSITION_PRINT_MODE
         );
-        public static final ImmutableList<ConfigHotkey> HOTKEYS = ImmutableList.of(
-                ANTI_GHOST_BLOCKS_MANUAL_TRIGGER,
-                ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
-                GET_TARGET_BLOCK_POSITION,
-                MEMORY_CLEANER,
-                OPEN_CONFIG_GUI
-        );
 
         static {
             ANTI_GHOST_BLOCKS_MANUAL_TRIGGER.getKeybind().setCallback((action, key) -> {
-                MinecraftClient mc = TweakMyClient.getMinecraftClient();
-                if (!Feature.FEATURE_ANTI_GHOST_BLOCKS.getBooleanValue() || Generic.ANTI_GHOST_BLOCKS_MODE.getOptionListValue() != AntiGhostBlocksMode.MANUAL || mc.player == null) {
+                Minecraft minecraft = TweakMyClient.getMinecraftClient();
+                if (!Feature.FEATURE_ANTI_GHOST_BLOCKS.getBooleanValue() || Generic.ANTI_GHOST_BLOCKS_MODE.getOptionListValue() != AntiGhostBlocksMode.MANUAL || minecraft.player == null) {
                     return true;
                 }
                 if (AntiGhostBlocksUtils.manualRefreshTimer > 0) {
@@ -426,8 +432,8 @@ public class Configs implements IConfigHandler {
                 return true;
             });
             ANTI_GHOST_ITEMS_MANUAL_TRIGGER.getKeybind().setCallback((action, key) -> {
-                MinecraftClient mc = TweakMyClient.getMinecraftClient();
-                if (!Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue() || Generic.ANTI_GHOST_ITEMS_MODE.getOptionListValue() != AntiGhostItemsMode.MANUAL || mc.player == null) {
+                Minecraft minecraft = TweakMyClient.getMinecraftClient();
+                if (!Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue() || Generic.ANTI_GHOST_ITEMS_MODE.getOptionListValue() != AntiGhostItemsMode.MANUAL || minecraft.player == null) {
                     return true;
                 }
                 if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
@@ -442,23 +448,28 @@ public class Configs implements IConfigHandler {
                 if (!Feature.FEATURE_GET_TARGET_BLOCK_POSITION.getBooleanValue()) {
                     return true;
                 }
-                MinecraftClient mc = TweakMyClient.getMinecraftClient();
-                BlockPos blockPos = RayTraceUtils.getTargetedPosition(mc.world, mc.player, TARGET_BLOCK_MAX_TRACE_DISTANCE.getDoubleValue(), false);
-                if (blockPos == null || mc.player == null) {
-                    return true;
-                }
-                String str = Generic.TARGET_BLOCK_POSITION_FORMAT.getStringValue();
-                str = str.replace("{X}", String.format("%d", blockPos.getX()));
-                str = str.replace("{Y}", String.format("%d", blockPos.getY()));
-                str = str.replace("{Z}", String.format("%d", blockPos.getZ()));
-                TargetBlockPositionPrintMode mode = (TargetBlockPositionPrintMode) Generic.TARGET_BLOCK_POSITION_PRINT_MODE.getOptionListValue();
-                switch (mode) {
-                    case PUBLIC:
-                        mc.player.sendChatMessage(str);
-                        break;
-                    case PRIVATE:
-                        mc.player.networkHandler.onGameMessage(new GameMessageS2CPacket(new LiteralText(str), MessageType.CHAT, mc.player.getUuid()));
-                        break;
+                Minecraft minecraft = TweakMyClient.getMinecraftClient();
+                Entity cameraEntity = minecraft.cameraEntity;
+                MultiPlayerGameMode multiPlayerGameMode = minecraft.gameMode;
+                if (cameraEntity != null && multiPlayerGameMode != null) {
+                    HitResult hitResult = cameraEntity.pick(TARGET_BLOCK_MAX_TRACE_DISTANCE.getDoubleValue(), minecraft.getFrameTime(), false);
+                    if (hitResult.getType() == HitResult.Type.BLOCK) {
+                        BlockPos blockPos = ((BlockHitResult) hitResult).getBlockPos();
+                        String str = Generic.TARGET_BLOCK_POSITION_FORMAT.getStringValue();
+                        str = str.replace("{X}", String.format("%d", blockPos.getX()));
+                        str = str.replace("{Y}", String.format("%d", blockPos.getY()));
+                        str = str.replace("{Z}", String.format("%d", blockPos.getZ()));
+                        if (minecraft.player != null) {
+                            switch ((TargetBlockPositionPrintMode) Generic.TARGET_BLOCK_POSITION_PRINT_MODE.getOptionListValue()) {
+                                case PUBLIC:
+                                    minecraft.player.chat(str);
+                                    break;
+                                case PRIVATE:
+                                    minecraft.player.connection.handleChat(new ClientboundChatPacket(new TextComponent(str), ChatType.CHAT, minecraft.player.getUUID()));
+                                    break;
+                            }
+                        }
+                    }
                 }
                 return true;
             });

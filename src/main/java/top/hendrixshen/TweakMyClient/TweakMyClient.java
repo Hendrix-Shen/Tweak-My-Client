@@ -5,7 +5,7 @@ import fi.dy.masa.malilib.event.InputEventHandler;
 import fi.dy.masa.malilib.event.RenderEventHandler;
 import fi.dy.masa.malilib.interfaces.IRenderer;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import top.hendrixshen.TweakMyClient.config.Configs;
@@ -14,7 +14,15 @@ import top.hendrixshen.TweakMyClient.event.RenderHandler;
 
 public class TweakMyClient implements ModInitializer {
     private static final Logger logger = LogManager.getLogger(TweakMyClientReference.getModId());
-    private static final MinecraftClient minecraftClient = MinecraftClient.getInstance();
+    private static final Minecraft minecraftClient = Minecraft.getInstance();
+
+    public static Minecraft getMinecraftClient() {
+        return minecraftClient;
+    }
+
+    public static Logger getLogger() {
+        return logger;
+    }
 
     @Override
     public void onInitialize() {
@@ -29,13 +37,5 @@ public class TweakMyClient implements ModInitializer {
         logger.info(String.format("[%s]: InGameAccountSwitcher was %sdetectect.", modName, (TweakMyClientReference.isInGameAccountSwitcherLoaded ? "" : "not ")));
         logger.info(String.format("[%s]: Litematica was %sdetectect.", modName, (TweakMyClientReference.isLitematicaLoaded ? "" : "not ")));
         logger.info(String.format("[%s]: ReAuth was %sdetectect.", modName, (TweakMyClientReference.isReAuthLoaded ? "" : "not ")));
-    }
-
-    public static MinecraftClient getMinecraftClient() {
-        return minecraftClient;
-    }
-
-    public static Logger getLogger() {
-        return logger;
     }
 }

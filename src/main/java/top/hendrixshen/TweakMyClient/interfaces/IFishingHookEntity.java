@@ -1,7 +1,7 @@
 package top.hendrixshen.TweakMyClient.interfaces;
 
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 
-public interface IFishingBobberEntity {
+public interface IFishingHookEntity {
     boolean checkOpenWaterAround(BlockPos pos);
 }

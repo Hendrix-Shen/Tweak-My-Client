@@ -166,5 +166,5 @@
 
     "tweakmyclient.misc.versionType.Public Beta": "公共测试版",
     "tweakmyclient.misc.versionType.Public Release": "公共发行版",
-    "tweakmyclient.misc.versionType.Version Exception": "版本异常"
+    "tweakmyclient.misc.versionType.Development": "开发版"
 }

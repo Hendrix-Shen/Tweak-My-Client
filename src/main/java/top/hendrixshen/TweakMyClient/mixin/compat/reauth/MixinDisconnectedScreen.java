@@ -3,11 +3,11 @@ package top.hendrixshen.TweakMyClient.mixin.compat.reauth;
 import MagicLib.untils.mixin.Dependencies;
 import MagicLib.untils.mixin.Dependency;
 import fi.dy.masa.malilib.util.StringUtils;
-import net.minecraft.client.gui.screen.DisconnectedScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.DisconnectedScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,20 +23,17 @@ import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 @Mixin(value = DisconnectedScreen.class, priority = 899)
 public class MixinDisconnectedScreen extends Screen {
     private final String PREFIX = TweakMyClientReference.getModId();
-
+    @Shadow
+    private int textHeight;
     @Shadow
     @Final
-    private Text reason;
-
-    @Shadow
-    private int reasonHeight;
-
+    private Component reason;
     @Shadow
     @Final
     private Screen parent;
 
-    protected MixinDisconnectedScreen(Text title) {
-        super(title);
+    protected MixinDisconnectedScreen(Component component) {
+        super(component);
     }
 
     @Inject(
@@ -47,13 +44,13 @@ public class MixinDisconnectedScreen extends Screen {
     )
     private void onInitDisconnectedScreen(CallbackInfo ci) {
         int backButtonX = width / 2 - 100;
-        int backButtonY = Math.min(height / 2 + reasonHeight / 2 + 9, height - 30);
+        int backButtonY = Math.min(height / 2 + textHeight / 2 + 9, height - 30);
         if (reason == null || AutoReconnectUtils.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
             Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
-            addButton(new ButtonWidget(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
-                    new LiteralText(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithReAuth", PREFIX))), button -> {
-                assert this.client != null;
-                this.client.openScreen(new AuthScreen(parent));
+            addButton(new Button(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
+                    new TextComponent(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithReAuth", PREFIX))), button -> {
+                assert this.minecraft != null;
+                this.minecraft.setScreen(new AuthScreen(parent));
             }));
             AutoReconnectUtils.reAuthenticateButtonOffsetY += 24;
         }

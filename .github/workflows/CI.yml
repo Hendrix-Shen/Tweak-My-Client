@@ -30,8 +30,8 @@ jobs:
           java-version: ${{ matrix.java }}
       - name: Set build number in codes
         run: |
-          sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER/g" gradle.properties
-          sed -i "s/Version Exception/Public Beta/g" src/main/java/top/hendrixshen/TweakMyClient/TweakMyClientReference.java
+          sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER\(${GITHUB_SHA::7}\)/g" gradle.properties
+          sed -i "s/Development/Public Beta/g" src/main/java/top/hendrixshen/TweakMyClient/TweakMyClientReference.java
       - name: Read relevant fields from gradle.properties
         id: properties
         run: |
@@ -86,8 +86,8 @@ jobs:
           java-version: ${{ matrix.java }}
       - name: Set build number in codes
         run: |
-          sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER/g" gradle.properties
-          sed -i "s/Version Exception/Public Beta/g" src/main/java/top/hendrixshen/TweakMyClient/TweakMyClientReference.java
+          sed -i "s/build.undefined/build.$GITHUB_RUN_NUMBER\(${GITHUB_SHA::7}\)/g" gradle.properties
+          sed -i "s/Development/Public Beta/g" src/main/java/top/hendrixshen/TweakMyClient/TweakMyClientReference.java
       - name: Read relevant fields from gradle.properties
         id: properties
         run: |

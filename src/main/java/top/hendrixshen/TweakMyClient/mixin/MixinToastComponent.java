@@ -1,7 +1,7 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
-import net.minecraft.client.toast.Toast;
-import net.minecraft.client.toast.ToastManager;
+import net.minecraft.client.gui.components.toasts.Toast;
+import net.minecraft.client.gui.components.toasts.ToastComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,14 +12,14 @@ import top.hendrixshen.TweakMyClient.config.Configs;
 
 import java.util.Deque;
 
-@Mixin(ToastManager.class)
-public class MixinToastManager {
+@Mixin(ToastComponent.class)
+public class MixinToastComponent {
     @Shadow
     @Final
-    private Deque<Toast> toastQueue;
+    private Deque<Toast> queued;
 
     @Inject(
-            method = "add",
+            method = "addToast",
             at = @At(
                     value = "HEAD"
             ),
@@ -27,7 +27,7 @@ public class MixinToastManager {
     )
     private void onAddToToastQueue(Toast toast, CallbackInfo ci) {
         if (Configs.Disable.DISABLE_RENDER_TOAST.getBooleanValue()) {
-            toastQueue.clear();
+            queued.clear();
             ci.cancel();
         }
     }

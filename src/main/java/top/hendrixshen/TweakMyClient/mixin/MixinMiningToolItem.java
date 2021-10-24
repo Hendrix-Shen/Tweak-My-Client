@@ -1,28 +1,28 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.PistonBlock;
-import net.minecraft.block.PistonExtensionBlock;
-import net.minecraft.block.PistonHeadBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.MiningToolItem;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.piston.MovingPistonBlock;
+import net.minecraft.world.level.block.piston.PistonBaseBlock;
+import net.minecraft.world.level.block.piston.PistonHeadBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.TweakMyClient.config.Configs;
 
-@Mixin(MiningToolItem.class)
+@Mixin(DiggerItem.class)
 public class MixinMiningToolItem {
     @Inject(
-            method = "getMiningSpeedMultiplier",
+            method = "getDestroySpeed",
             at = @At(
                     value = "HEAD"
             ),
             cancellable = true
     )
-    private void onGetMiningSpeedMultiplier(ItemStack stack, BlockState state, CallbackInfoReturnable<Float> cir) {
-        if (Configs.Patch.FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL.getBooleanValue() && (state.getBlock() instanceof PistonBlock || state.getBlock() instanceof PistonExtensionBlock || state.getBlock() instanceof PistonHeadBlock)) {
+    private void onGetMiningSpeedMultiplier(ItemStack itemStack, BlockState blockState, CallbackInfoReturnable<Float> cir) {
+        if (Configs.Patch.FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL.getBooleanValue() && (blockState.getBlock() instanceof PistonBaseBlock || blockState.getBlock() instanceof MovingPistonBlock || blockState.getBlock() instanceof PistonHeadBlock)) {
             cir.setReturnValue(1.0F);
         }
     }

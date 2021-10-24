@@ -1,11 +1,11 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
-import net.minecraft.client.render.Frustum;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.core.Registry;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,17 +18,17 @@ public abstract class MixinEntityRenderDispatcher {
             method = "shouldRender",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/render/entity/EntityRenderDispatcher;getRenderer(Lnet/minecraft/entity/Entity;)Lnet/minecraft/client/render/entity/EntityRenderer;",
+                    target = "Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;getRenderer(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/client/renderer/entity/EntityRenderer;",
                     shift = At.Shift.BEFORE
             ),
 
             cancellable = true
     )
-    private void onShouldRender(Entity entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
+    private void onShouldRender(Entity entity, Frustum frustum, double d, double e, double f, CallbackInfoReturnable<Boolean> cir) {
         if (Configs.Disable.DISABLE_CLIENT_ENTITY_IN_LIST_RENDERING.getBooleanValue()) {
-            String entityID = Registry.ENTITY_TYPE.getId(entity.getType()).toString();
+            String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
             String entityName = entity.getName().getString();
-            if (Configs.List.LIST_DISABLE_CLIENT_ENTITY_RENDERING.getStrings().stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s)) && !(entity instanceof PlayerEntity)) {
+            if (Configs.List.LIST_DISABLE_CLIENT_ENTITY_RENDERING.getStrings().stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s)) && !(entity instanceof Player)) {
                 cir.setReturnValue(false);
             }
         }

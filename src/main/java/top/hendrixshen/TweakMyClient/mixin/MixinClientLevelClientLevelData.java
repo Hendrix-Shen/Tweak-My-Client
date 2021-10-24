@@ -1,16 +1,16 @@
 package top.hendrixshen.TweakMyClient.mixin;
 
-import net.minecraft.client.world.ClientWorld;
+import net.minecraft.client.multiplayer.ClientLevel;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.TweakMyClient.config.Configs;
 
-@Mixin(ClientWorld.Properties.class)
-public class MixinClientWorldProperties {
+@Mixin(ClientLevel.ClientLevelData.class)
+public class MixinClientLevelClientLevelData {
     @Inject(
-            method = "getTimeOfDay",
+            method = "getDayTime",
             at = @At(
                     value = "RETURN"
             ),

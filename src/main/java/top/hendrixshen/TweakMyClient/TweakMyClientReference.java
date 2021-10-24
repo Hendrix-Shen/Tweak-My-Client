@@ -6,7 +6,7 @@ public class TweakMyClientReference {
     private static final String MOD_ID = "tweakmyclient";
     private static final String MOD_NAME = "TweakMyClient";
     private static final String MOD_VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
-    private static final String MOD_VERSION_TYPE = "Version Exception";
+    private static final String MOD_VERSION_TYPE = "Development";
 
     public static boolean isAuthMeLoaded = FabricLoader.getInstance().isModLoaded("authme");
     public static boolean isInGameAccountSwitcherLoaded = FabricLoader.getInstance().isModLoaded("ias");
