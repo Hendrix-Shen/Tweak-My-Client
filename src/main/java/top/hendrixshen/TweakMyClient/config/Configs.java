@@ -294,7 +294,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_TNT_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityTNTUpdates", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_WITHER_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityWitherUpdates", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityZombieVillagerUpdates", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_IN_LIST_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityInListRendering", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_ENTITY_IN_LIST_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityInListRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_TNT_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityTNTRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_WITHER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityWitherRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityZombieVillagerRendering", false, "");
@@ -313,7 +313,7 @@ public class Configs implements IConfigHandler {
                 DISABLE_CLIENT_ENTITY_TNT_UPDATES,
                 DISABLE_CLIENT_ENTITY_WITHER_UPDATES,
                 DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_UPDATES,
-                DISABLE_CLIENT_ENTITY_IN_LIST_RENDERING,
+                DISABLE_ENTITY_IN_LIST_RENDERING,
                 DISABLE_ENTITY_TNT_RENDERING,
                 DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING,
                 DISABLE_ENTITY_WITHER_RENDERING,
@@ -347,8 +347,8 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomBlockOutsideColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_GUI_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomGuiBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarBackgroundColor", false, "");
-        public static final ConfigBooleanHotkeyed FEATURE_GLOBAL_EVENT_LISTENER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGlobalEventListener", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_GLOBAL_EVENT_LISTENER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGlobalEventListener", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_LOW_HEALTH_WARNING = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureLowHealthWarning", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_OPEN_WATER_HELPER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureOpenWaterHelper", false, "");
@@ -364,8 +364,8 @@ public class Configs implements IConfigHandler {
                 FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR,
                 FEATURE_CUSTOM_GUI_BACKGROUND_COLOR,
                 FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR,
-                FEATURE_GLOBAL_EVENT_LISTENER,
                 FEATURE_DAYLIGHT_OVERRIDE,
+                FEATURE_GLOBAL_EVENT_LISTENER,
                 FEATURE_GET_TARGET_BLOCK_POSITION,
                 FEATURE_LOW_HEALTH_WARNING,
                 FEATURE_OPEN_WATER_HELPER,
@@ -511,13 +511,13 @@ public class Configs implements IConfigHandler {
         public static final ConfigOptionList LIST_AUTO_DROP_TYPE = new TranslatableConfigOptionList(PREFIX, "listAutoDropType", AutoDropListType.WHITELIST);
         public static final ConfigStringList LIST_AUTO_DROP_WHITE_LIST = new TranslatableConfigStringList(PREFIX, "listAutoDropWhiteList", ImmutableList.of("minecraft:stone", "minecraft:dirt", "minecraft:cobblestone", "minecraft:gravel", "minecraft:rotten_flesh"));
         public static final ConfigStringList LIST_DISABLE_CLIENT_ENTITY_UPDATES = new TranslatableConfigStringList(PREFIX, "listDisableClientEntityUpdates", ImmutableList.of("zombi"));
-        public static final ConfigStringList LIST_DISABLE_CLIENT_ENTITY_RENDERING = new TranslatableConfigStringList(PREFIX, "listDisableClientEntityRendering", ImmutableList.of("zombi"));
+        public static final ConfigStringList LIST_DISABLE_ENTITY_RENDERING = new TranslatableConfigStringList(PREFIX, "listDisableEntityRendering", ImmutableList.of("zombi"));
         public static final ImmutableList<ConfigBase> OPTIONS = ImmutableList.of(
                 LIST_AUTO_DROP_BLACK_LIST,
                 LIST_AUTO_DROP_TYPE,
                 LIST_AUTO_DROP_WHITE_LIST,
                 LIST_DISABLE_CLIENT_ENTITY_UPDATES,
-                LIST_DISABLE_CLIENT_ENTITY_RENDERING
+                LIST_DISABLE_ENTITY_RENDERING
         );
     }
 
