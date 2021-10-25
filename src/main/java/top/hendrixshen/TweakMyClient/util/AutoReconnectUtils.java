@@ -1,34 +1,34 @@
 package top.hendrixshen.TweakMyClient.util;
 
-import net.minecraft.client.gui.screen.ConnectScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.network.ServerAddress;
-import net.minecraft.client.network.ServerInfo;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.client.gui.screens.ConnectScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.multiplayer.resolver.ServerAddress;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 
 public class AutoReconnectUtils {
     public static int ReconnectTimer;
-    private static ServerInfo lastServer;
     public static int reAuthenticateButtonOffsetY;
+    private static ServerData lastServer;
 
-    public static ServerInfo getLastServer() {
+    public static ServerData getLastServer() {
         return lastServer;
     }
 
-    public static void setLastServer(ServerInfo serverInfo) {
+    public static void setLastServer(ServerData serverInfo) {
         lastServer = serverInfo;
     }
 
     public static void reconnect(Screen screen) {
-        ServerInfo serverInfo = AutoReconnectUtils.getLastServer();
+        ServerData serverInfo = AutoReconnectUtils.getLastServer();
         if (lastServer != null) {
-            ConnectScreen.connect(screen, TweakMyClient.minecraftClient, ServerAddress.parse(serverInfo.address), serverInfo);
+            ConnectScreen.startConnecting(screen, TweakMyClient.getMinecraftClient(), ServerAddress.parseString(serverInfo.ip), serverInfo);
         }
     }
 
-    public static String getTranslationKey(Text component) {
-        return component instanceof TranslatableText ? ((TranslatableText) component).getKey() : "";
+    public static String getTranslationKey(Component component) {
+        return component instanceof TranslatableComponent ? ((TranslatableComponent) component).getKey() : "";
     }
 }

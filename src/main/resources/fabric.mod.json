@@ -29,16 +29,18 @@
     ]
   },
   "mixins": [
-    "mixins.TweakMyClient.json"
+    "TweakMyClient.compat.mixins.json",
+    "TweakMyClient.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.9.0",
-    "malilib": ">=0.10.0-dev.23",
-    "minecraft": ">=1.17.1"
+    "magiclib": ">=1.0.0",
+    "malilib": ">=0.10.0-dev.21",
+    "minecraft": "1.18.x"
   },
   "suggests": {
-    "authme": ">=1.5.0",
-    "litematica": ">=0.0.0-dev.20210707.011234",
+    "authme": ">=1.4.0",
+    "litematica": ">=0.0.0-dev.20210612.170003",
     "reauth": ">=3.9.2"
   }
 }

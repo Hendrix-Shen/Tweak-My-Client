@@ -9,7 +9,7 @@ import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import fi.dy.masa.malilib.util.StringUtils;
-import top.hendrixshen.TweakMyClient.Reference;
+import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.config.Configs;
 
 import java.util.Collections;
@@ -19,7 +19,7 @@ public class GuiConfigs extends GuiConfigsBase {
     private static ConfigGuiTab tab = ConfigGuiTab.GENERIC;
 
     public GuiConfigs() {
-        super(10, 50, Reference.MOD_ID, null, StringUtils.translate(String.format("%s.gui.title.configs", Reference.MOD_ID), Reference.MOD_VERSION, StringUtils.translate(String.format("%s.misc.versionType.%s", Reference.MOD_ID, Reference.MOD_VERSION_TYPE))));
+        super(10, 50, TweakMyClientReference.getModId(), null, StringUtils.translate(String.format("%s.gui.title.configs", TweakMyClientReference.getModId()), TweakMyClientReference.getModVersion(), StringUtils.translate(String.format("%s.misc.versionType.%s", TweakMyClientReference.getModId(), TweakMyClientReference.getModVersionType()))));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class GuiConfigs extends GuiConfigsBase {
     private int createButton(int x, int y, int width, ConfigGuiTab tab) {
         ButtonGeneric button = new ButtonGeneric(x, y, width, 20, tab.getDisplayName());
         button.setEnabled(GuiConfigs.tab != tab);
-        this.addButton(button, new ButtonListener(tab, this));
+        this.addButton(button, new GuiConfigs.ButtonListener(tab, this));
 
         return button.getWidth() + 2;
     }
@@ -95,7 +95,7 @@ public class GuiConfigs extends GuiConfigsBase {
         }
 
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.gui.button.config_gui.%s", Reference.MOD_ID, name));
+            return StringUtils.translate(String.format("%s.gui.button.config_gui.%s", TweakMyClientReference.getModId(), name));
         }
     }
 
