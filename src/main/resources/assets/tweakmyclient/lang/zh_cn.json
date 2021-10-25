@@ -34,8 +34,8 @@
     "tweakmyclient.config.disable_toggle.disableClientEntityWitherUpdates.comment": "关闭客户端对凋零实体的运算.\n也许对伪和平有帮助.",
     "tweakmyclient.config.disable_toggle.disableClientEntityZombieVillagerUpdates.name": "禁用客户端侧僵尸村民实体运算",
     "tweakmyclient.config.disable_toggle.disableClientEntityZombieVillagerUpdates.comment": "关闭客户端对僵尸村民实体的运算.\n也许对伪和平有帮助.",
-    "tweakmyclient.config.disable_toggle.disableClientEntityInListRendering.name": "禁用列表内实体渲染",
-    "tweakmyclient.config.disable_toggle.disableClientEntityInListRendering.comment": "关闭游戏对列表中实体的渲染.\n此设置的优先级高于以下: \n- 禁用TNT实体渲染\n- 禁用凋零实体渲染\n- 禁用僵尸村民实体渲染",
+    "tweakmyclient.config.disable_toggle.disableEntityInListRendering.name": "禁用列表内实体渲染",
+    "tweakmyclient.config.disable_toggle.disableEntityInListRendering.comment": "关闭游戏对列表中实体的渲染.\n此设置的优先级高于以下: \n- 禁用TNT实体渲染\n- 禁用凋零实体渲染\n- 禁用僵尸村民实体渲染",
     "tweakmyclient.config.disable_toggle.disableEntityTNTRendering.name": "禁用TNT实体渲染",
     "tweakmyclient.config.disable_toggle.disableEntityTNTRendering.comment": "关闭游戏对TNT实体的渲染.\n也许对与TNT有关的机器有帮助.",
     "tweakmyclient.config.disable_toggle.disableEntityWitherRendering.name": "禁用凋零实体渲染",
@@ -59,6 +59,8 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "禁用减速",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "取消蜂蜜块, 灵魂沙和使用物品时的减速效果.",
 
+    "tweakmyclient.config.feature_toggle.featureAntiGhostBlocks.name": "清除幽灵方块",
+    "tweakmyclient.config.feature_toggle.featureAntiGhostBlocks.comment": "发送挖掘终止数据包以让服务端回复正确的数据.",
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.name": "清除幽灵物品",
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.comment": "尝试向服务器发送虚假数据, 以便从服务端获取正确的玩家背包数据.",
     "tweakmyclient.config.feature_toggle.featureAutoDrop.name": "自动丢弃",
@@ -88,6 +90,12 @@
     "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.name": "失去焦点释放CPU",
     "tweakmyclient.config.feature_toggle.featureUnfocusedCPU.comment": "当焦点未处于 Minecraft 窗口时, 客户端将不会执行渲染.",
 
+    "tweakmyclient.config.generic.antiGhostBlocksAutoTriggerInterval.name": "自动清理幽灵方块间隔",
+    "tweakmyclient.config.generic.antiGhostBlocksAutoTriggerInterval.comment": "多少秒自动触发一次清除幽灵方块.",
+    "tweakmyclient.config.generic.antiGhostBlocksManualTrigger.name": "手动清除幽灵方块",
+    "tweakmyclient.config.generic.antiGhostBlocksManualTrigger.comment": "手动触发一次清除幽灵方块.",
+    "tweakmyclient.config.generic.antiGhostBlocksMode.name": "清除幽灵方块模式",
+    "tweakmyclient.config.generic.antiGhostBlocksMode.comment": "清除幽灵方块工作模式.",
     "tweakmyclient.config.generic.antiGhostItemsAutoTriggerInterval.name": "自动清理幽灵物品间隔",
     "tweakmyclient.config.generic.antiGhostItemsAutoTriggerInterval.comment": "多少秒自动触发一次清除幽灵物品.",
     "tweakmyclient.config.generic.antiGhostItemsManualTrigger.name": "手动清除幽灵物品",
@@ -123,14 +131,16 @@
     "tweakmyclient.config.list.listAutoDropWhiteList.comment": "自动丢弃物品白名单.\n所有在此列表的物品将会被丢弃.",
     "tweakmyclient.config.list.listDisableClientEntityUpdates.name": "禁用客户端侧实体运算列表",
     "tweakmyclient.config.list.listDisableClientEntityUpdates.comment": "禁用客户端侧运算实体的列表.\n所有在此列表内的实体将不会被运算.",
-    "tweakmyclient.config.list.listDisableClientEntityRendering.name": "禁用客户端侧实体渲染列表",
-    "tweakmyclient.config.list.listDisableClientEntityRendering.comment": "禁用客户端侧渲染实体的列表.\n所有在此列表内的实体将不会被渲染.",
+    "tweakmyclient.config.list.listDisableEntityRendering.name": "禁用客户端侧实体渲染列表",
+    "tweakmyclient.config.list.listDisableEntityRendering.comment": "禁用客户端侧渲染实体的列表.\n所有在此列表内的实体将不会被渲染.",
 
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.name": "禁用投影轻松放置失败提示",
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "禁用轻松放置失败时那烦人的提示窗.\n注意: 仅当 litematica 加载时生效.",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "强制活塞不受镐子影响",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "镐子将不再作为活塞的有效开采工具.",
 
+    "tweakmyclient.label.antiGhostBlocksMode.automatic": "自动",
+    "tweakmyclient.label.antiGhostBlocksMode.manual": "手动",
     "tweakmyclient.label.antiGhostItemsMode.automatic": "自动",
     "tweakmyclient.label.antiGhostItemsMode.manual": "手动",
     "tweakmyclient.label.autoDropListType.blackList": "黑名单",
@@ -138,6 +148,7 @@
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "私人",
     "tweakmyclient.label.targetBlockPositionPrintMode.public": "公共",
 
+    "tweakmyclient.message.antiGhostBlocksManualTrigger.mustWait": "你必须等待 %d 秒才能再次使用幽灵方块清除",
     "tweakmyclient.message.antiGhostItemsManualTrigger.mustWait": "你必须等待 %d 秒才能再次使用幽灵物品清除",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "使用 AuthMe 验证会话",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithInGameAccountSwitcher": "使用 In-Game Account Switcher 验证会话",
@@ -155,5 +166,5 @@
 
     "tweakmyclient.misc.versionType.Public Beta": "公共测试版",
     "tweakmyclient.misc.versionType.Public Release": "公共发行版",
-    "tweakmyclient.misc.versionType.Version Exception": "版本异常"
+    "tweakmyclient.misc.versionType.Development": "开发版"
 }

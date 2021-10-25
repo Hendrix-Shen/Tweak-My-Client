@@ -34,8 +34,8 @@
     "tweakmyclient.config.disable_toggle.disableClientEntityWitherUpdates.comment": "Disables wither entity updates on the client.\nMaybe it's useful for fake peace.",
     "tweakmyclient.config.disable_toggle.disableClientEntityZombieVillagerUpdates.name": "disableClientEntityZombieVillagerUpdates",
     "tweakmyclient.config.disable_toggle.disableClientEntityZombieVillagerUpdates.comment": "Disables zombie villager entity updates on the client.\nMaybe it's useful for fake peace.",
-    "tweakmyclient.config.disable_toggle.disableClientEntityInListRendering.name": "disableClientEntityInListRendering",
-    "tweakmyclient.config.disable_toggle.disableClientEntityInListRendering.comment": "Disable rendering of entities in the list.\nThe priority of this setting is higher than the following: \n- disableEntityTNTRendering\n- disableEntityWitherRendering\n- disableEntityZombieVillagerRendering",
+    "tweakmyclient.config.disable_toggle.disableEntityInListRendering.name": "disableClientEntityInListRendering",
+    "tweakmyclient.config.disable_toggle.disableEntityInListRendering.comment": "Disable rendering of entities in the list.\nThe priority of this setting is higher than the following: \n- disableEntityTNTRendering\n- disableEntityWitherRendering\n- disableEntityZombieVillagerRendering",
     "tweakmyclient.config.disable_toggle.disableEntityTNTRendering.name": "disableEntityTNTRendering",
     "tweakmyclient.config.disable_toggle.disableEntityTNTRendering.comment": "Disables TNT entity rendering on the client.\nMaybe it's useful for fake peace.",
     "tweakmyclient.config.disable_toggle.disableEntityWitherRendering.name": "disableEntityWitherRendering",
@@ -59,6 +59,12 @@
     "tweakmyclient.config.disable_toggle.disableSlowdown.name": "disableSlowdown",
     "tweakmyclient.config.disable_toggle.disableSlowdown.comment": "Cancels slowness effects caused by honey, soul sand and using items.",
 
+    "tweakmyclient.config.generic.antiGhostBlocksAutoTriggerInterval.name": "antiGhostBlocksAutoTriggerInterval",
+    "tweakmyclient.config.generic.antiGhostBlocksAutoTriggerInterval.comment": "How many seconds does antiGhostBlocks trigger automatically.",
+    "tweakmyclient.config.generic.antiGhostBlocksManualTrigger.name": "antiGhostBlocksManualTrigger",
+    "tweakmyclient.config.generic.antiGhostBlocksManualTrigger.comment": "Manually trigger antiGhostBlocks once.",
+    "tweakmyclient.config.generic.antiGhostBlocksMode.name": "antiGhostBlocksMode",
+    "tweakmyclient.config.generic.antiGhostBlocksMode.comment": "antiGhostBlocksMode working mode.",
     "tweakmyclient.config.generic.antiGhostItemsAutoTriggerInterval.name": "antiGhostItemsAutoTriggerInterval",
     "tweakmyclient.config.generic.antiGhostItemsAutoTriggerInterval.comment": "How many seconds does antiGhostItems trigger automatically.",
     "tweakmyclient.config.generic.antiGhostItemsManualTrigger.name": "antiGhostItemsManualTrigger",
@@ -86,6 +92,8 @@
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.name": "targetBlockPositionMode",
     "tweakmyclient.config.generic.targetBlockPositionPrintMode.comment": "The block tracing position will be sent in this mode.\nprivate - Only you can see\npublic - Send to public chat",
 
+    "tweakmyclient.config.feature_toggle.featureAntiGhostBlocks.name": "featureAntiGhostBlocks",
+    "tweakmyclient.config.feature_toggle.featureAntiGhostBlocks.comment": "send mining abort packets to allow the server to reply with the correct data.",
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.name": "featureAntiGhostItems",
     "tweakmyclient.config.feature_toggle.featureAntiGhostItems.comment": "Try to send false data to the server in order to get the correct player inventory data from the server.",
     "tweakmyclient.config.feature_toggle.featureAutoClimb.name": "featureAutoClimb",
@@ -123,14 +131,16 @@
     "tweakmyclient.config.list.listAutoDropWhiteList.comment": "Auto drop item white list.\nAll items in this list will be auto dropped.",
     "tweakmyclient.config.list.listDisableClientEntityUpdates.name": "listDisableClientEntityUpdates",
     "tweakmyclient.config.list.listDisableClientEntityUpdates.comment": "Disable client entity updates list.\nAll entities in this list will not be updated.",
-    "tweakmyclient.config.list.listDisableClientEntityRendering.name": "listDisableClientEntityRendering",
-    "tweakmyclient.config.list.listDisableClientEntityRendering.comment": "Disable client entity rendering list.\nAll entities in this list will not be rendered.",
+    "tweakmyclient.config.list.listDisableEntityRendering.name": "listDisableClientEntityRendering",
+    "tweakmyclient.config.list.listDisableEntityRendering.comment": "Disable client entity rendering list.\nAll entities in this list will not be rendered.",
 
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.name": "disableLitematicaEasyPlaceFailTip",
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "Disable easyPlace failure that annoying prompt window.\nNote: Takes effect only when litematica is loaded.",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "forcePistonWithoutAffectByTool",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "The pickaxe will no longer be used as an effective mining tool for pistons.",
 
+    "tweakmyclient.label.antiGhostBlocksMode.automatic": "Automatic",
+    "tweakmyclient.label.antiGhostBlocksMode.manual": "Manual",
     "tweakmyclient.label.antiGhostItemsMode.automatic": "Automatic",
     "tweakmyclient.label.antiGhostItemsMode.manual": "Manual",
     "tweakmyclient.label.autoDropListType.blackList": "Black List",
@@ -138,6 +148,7 @@
     "tweakmyclient.label.targetBlockPositionPrintMode.private": "private",
     "tweakmyclient.label.targetBlockPositionPrintMode.public": "public",
 
+    "tweakmyclient.message.antiGhostBlocksManualTrigger.mustWait": "You have to wait %d second to trigger antiGhostBlocks again",
     "tweakmyclient.message.antiGhostItemsManualTrigger.mustWait": "You have to wait %d second to trigger antiGhostItems again",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithAuthMe": "Re-authenticate with AuthMe",
     "tweakmyclient.message.autoReconnect.reAuthenticateWithInGameAccountSwitcher": "Re-authenticate with In-Game Account Switcher",
@@ -155,5 +166,5 @@
 
     "tweakmyclient.misc.versionType.Public Beta": "Public Beta",
     "tweakmyclient.misc.versionType.Public Release": "Public Release",
-    "tweakmyclient.misc.versionType.Version Exception": "Version Exception"
+    "tweakmyclient.misc.versionType.Development": "Development"
 }
