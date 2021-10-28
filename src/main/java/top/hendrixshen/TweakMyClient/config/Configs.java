@@ -1,6 +1,7 @@
 package top.hendrixshen.TweakMyClient.config;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.malilib.config.ConfigUtils;
@@ -29,6 +30,7 @@ import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
 import top.hendrixshen.TweakMyClient.util.InfoUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Configs implements IConfigHandler {
     private static final String CONFIG_FILE_NAME = TweakMyClientReference.getModId() + ".json";
@@ -525,9 +527,15 @@ public class Configs implements IConfigHandler {
         private static final String PREFIX = String.format("%s.config.patch", TweakMyClientReference.getModId());
         public static final ConfigBoolean DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP = new TranslatableConfigBoolean(PREFIX, "disableLitematicaEasyPlaceFailTip", false);
         public static final ConfigBoolean FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL = new TranslatableConfigBoolean(PREFIX, "forcePistonWithoutAffectByTool", false);
-        public static final ImmutableList<ConfigBoolean> OPTIONS = ImmutableList.of(
-                DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP,
-                FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL
-        );
+        public static ImmutableList<ConfigBoolean> OPTIONS;
+
+        static {
+            ArrayList<ConfigBoolean> arrayList = new ArrayList<>();
+            if (!TweakMyClientReference.isMasaGadgetLoaded && TweakMyClientReference.isLitematicaLoaded) {
+                arrayList.add(DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP);
+            }
+            arrayList.add(FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL);
+            OPTIONS = ImmutableList.copyOf(arrayList);
+        }
     }
 }
