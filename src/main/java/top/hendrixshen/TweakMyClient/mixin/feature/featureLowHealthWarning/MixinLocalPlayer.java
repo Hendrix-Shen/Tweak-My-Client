@@ -11,17 +11,17 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.config.Configs;
 
 @Mixin(LocalPlayer.class)
 public abstract class MixinLocalPlayer extends LivingEntity {
-    @Shadow public abstract void displayClientMessage(Component component, boolean bl);
-
     protected MixinLocalPlayer(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
     }
+
+    @Shadow
+    public abstract void displayClientMessage(Component component, boolean bl);
 
     @Inject(
             method = "tick",
