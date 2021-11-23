@@ -311,6 +311,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed DISABLE_SLOWDOWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableSlowdown", false, "");
 
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
+                DISABLE_ATTACK_ENTITY,
                 DISABLE_CLIENT_BLOCK_EVENTS,
                 DISABLE_CLIENT_ENTITY_IN_LIST_UPDATES,
                 DISABLE_CLIENT_ENTITY_TNT_UPDATES,
