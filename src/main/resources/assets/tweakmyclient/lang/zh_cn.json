@@ -24,6 +24,8 @@
     "tweakmyclient.config.color.colorWaterShallow.name": "潜水域颜色",
     "tweakmyclient.config.color.colorWaterShallow.comment": "开阔水域助手潜水域轮廓颜色.",
 
+    "tweakmyclient.config.disable_toggle.disableAttackEntity.name": "禁用实体攻击",
+    "tweakmyclient.config.disable_toggle.disableAttackEntity.comment": "禁用攻击在列表中的实体.",
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.name": "禁用客户端侧方块事件",
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.comment": "关闭客户端侧方块事件渲染 (例如活塞动画).",
     "tweakmyclient.config.disable_toggle.disableClientEntityInListUpdates.name": "禁用客户端侧列表内实体运算",
@@ -129,6 +131,8 @@
     "tweakmyclient.config.list.listAutoDropType.comment": "自动丢弃物品列表类型.",
     "tweakmyclient.config.list.listAutoDropWhiteList.name": "自动丢弃白名单",
     "tweakmyclient.config.list.listAutoDropWhiteList.comment": "自动丢弃物品白名单.\n所有在此列表的物品将会被丢弃.",
+    "tweakmyclient.config.list.listDisableAttackEntity.name": "禁用实体攻击列表",
+    "tweakmyclient.config.list.listDisableAttackEntity.comment": "禁用实体攻击的列表.\n所有在此列表内的实体将不会被攻击.",
     "tweakmyclient.config.list.listDisableClientEntityUpdates.name": "禁用客户端侧实体运算列表",
     "tweakmyclient.config.list.listDisableClientEntityUpdates.comment": "禁用客户端侧运算实体的列表.\n所有在此列表内的实体将不会被运算.",
     "tweakmyclient.config.list.listDisableEntityRendering.name": "禁用客户端侧实体渲染列表",
