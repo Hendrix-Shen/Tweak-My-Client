@@ -1,6 +1,7 @@
 package top.hendrixshen.TweakMyClient.config;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.malilib.config.ConfigUtils;
@@ -29,6 +30,7 @@ import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
 import top.hendrixshen.TweakMyClient.util.InfoUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Configs implements IConfigHandler {
     private static final String CONFIG_FILE_NAME = TweakMyClientReference.getModId() + ".json";
@@ -289,6 +291,7 @@ public class Configs implements IConfigHandler {
 
     public static class Disable {
         private static final String PREFIX = String.format("%s.config.disable_toggle", TweakMyClientReference.getModId());
+        public static final ConfigBooleanHotkeyed DISABLE_ATTACK_ENTITY = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableAttackEntity", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_BLOCK_EVENTS = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientBlockEvents", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_IN_LIST_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityInListUpdates", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_TNT_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityTNTUpdates", false, "");
@@ -308,6 +311,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed DISABLE_SLOWDOWN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableSlowdown", false, "");
 
         public static final ImmutableList<ConfigBooleanHotkeyed> OPTIONS = ImmutableList.of(
+                DISABLE_ATTACK_ENTITY,
                 DISABLE_CLIENT_BLOCK_EVENTS,
                 DISABLE_CLIENT_ENTITY_IN_LIST_UPDATES,
                 DISABLE_CLIENT_ENTITY_TNT_UPDATES,
@@ -388,6 +392,10 @@ public class Configs implements IConfigHandler {
         public static final ConfigDouble LOW_HEALTH_THRESHOLD = new TranslatableConfigDouble(PREFIX, "lowHealthThreshold", 6, 0, 1000);
         public static final ConfigHotkey MEMORY_CLEANER = new TranslatableConfigHotkey(PREFIX, "memoryCleaner", "");
         public static final ConfigHotkey OPEN_CONFIG_GUI = new TranslatableConfigHotkey(PREFIX, "openConfigGui", "T,C");
+        public static final ConfigDouble TARGET_BLOCK_MAX_TRACE_DISTANCE = new TranslatableConfigDouble(PREFIX, "targetBlockMaxTraceDistance", 100, 0, 200);
+        public static final ConfigString TARGET_BLOCK_POSITION_FORMAT = new TranslatableConfigString(PREFIX, "targetBlockPositionFormat", "I'm tracing this position [x: {X},y: {Y}, z: {Z}]");
+        public static final ConfigOptionList TARGET_BLOCK_POSITION_PRINT_MODE = new TranslatableConfigOptionList(PREFIX, "targetBlockPositionPrintMode", TargetBlockPositionPrintMode.PRIVATE);
+
         public static final ImmutableList<ConfigHotkey> HOTKEYS = ImmutableList.of(
                 ANTI_GHOST_BLOCKS_MANUAL_TRIGGER,
                 ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
@@ -395,9 +403,7 @@ public class Configs implements IConfigHandler {
                 MEMORY_CLEANER,
                 OPEN_CONFIG_GUI
         );
-        public static final ConfigDouble TARGET_BLOCK_MAX_TRACE_DISTANCE = new TranslatableConfigDouble(PREFIX, "targetBlockMaxTraceDistance", 100, 0, 200);
-        public static final ConfigString TARGET_BLOCK_POSITION_FORMAT = new TranslatableConfigString(PREFIX, "targetBlockPositionFormat", "I'm tracing this position [x: {X},y: {Y}, z: {Z}]");
-        public static final ConfigOptionList TARGET_BLOCK_POSITION_PRINT_MODE = new TranslatableConfigOptionList(PREFIX, "targetBlockPositionPrintMode", TargetBlockPositionPrintMode.PRIVATE);
+
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
                 ANTI_GHOST_BLOCKS_AUTO_TRIGGER_INTERVAL,
                 ANTI_GHOST_BLOCKS_MANUAL_TRIGGER,
@@ -510,12 +516,14 @@ public class Configs implements IConfigHandler {
         public static final ConfigStringList LIST_AUTO_DROP_BLACK_LIST = new TranslatableConfigStringList(PREFIX, "listAutoDropBlackList", ImmutableList.of("minecraft:bow", "minecraft:crossbow", "minecraft:diamond_axe", "minecraft:diamond_boots", "minecraft:diamond_chestplate", "minecraft:diamond_helmet", "minecraft:diamond_hoe", "minecraft:diamond_leggings", "minecraft:diamond_pickaxe", "minecraft:diamond_shovel", "minecraft:diamond_sword", "minecraft:elytra", "minecraft:enchanted_golden_apple", "minecraft:flint_and_steel", "minecraft:fishing_rod", "minecraft:golden_apple", "minecraft:golden_axe", "minecraft:golden_boots", "minecraft:golden_chestplate", "minecraft:golden_helmet", "minecraft:golden_hoe", "minecraft:golden_leggings", "minecraft:golden_pickaxe", "minecraft:golden_shovel", "minecraft:golden_sword", "minecraft:iron_axe", "minecraft:iron_boots", "minecraft:iron_chestplate", "minecraft:iron_helmet", "minecraft:iron_hoe", "minecraft:iron_leggings", "minecraft:iron_pickaxe", "minecraft:iron_shovel", "minecraft:iron_sword", "minecraft:netherite_axe", "minecraft:netherite_boots", "minecraft:netherite_chestplate", "minecraft:netherite_helmet", "minecraft:netherite_hoe", "minecraft:netherite_leggings", "minecraft:netherite_pickaxe", "minecraft:netherite_shovel", "minecraft:netherite_sword", "minecraft:shears", "minecraft:shield", "minecraft:totem_of_undying", "minecraft:trident", "minecraft:turtle_helmet"));
         public static final ConfigOptionList LIST_AUTO_DROP_TYPE = new TranslatableConfigOptionList(PREFIX, "listAutoDropType", AutoDropListType.WHITELIST);
         public static final ConfigStringList LIST_AUTO_DROP_WHITE_LIST = new TranslatableConfigStringList(PREFIX, "listAutoDropWhiteList", ImmutableList.of("minecraft:stone", "minecraft:dirt", "minecraft:cobblestone", "minecraft:gravel", "minecraft:rotten_flesh"));
+        public static final ConfigStringList LIST_DISABLE_ATTACK_ENTITY = new TranslatableConfigStringList(PREFIX, "listDisableAttackEntity", ImmutableList.of("player"));
         public static final ConfigStringList LIST_DISABLE_CLIENT_ENTITY_UPDATES = new TranslatableConfigStringList(PREFIX, "listDisableClientEntityUpdates", ImmutableList.of("zombi"));
         public static final ConfigStringList LIST_DISABLE_ENTITY_RENDERING = new TranslatableConfigStringList(PREFIX, "listDisableEntityRendering", ImmutableList.of("zombi"));
         public static final ImmutableList<ConfigBase> OPTIONS = ImmutableList.of(
                 LIST_AUTO_DROP_BLACK_LIST,
                 LIST_AUTO_DROP_TYPE,
                 LIST_AUTO_DROP_WHITE_LIST,
+                LIST_DISABLE_ATTACK_ENTITY,
                 LIST_DISABLE_CLIENT_ENTITY_UPDATES,
                 LIST_DISABLE_ENTITY_RENDERING
         );
@@ -525,9 +533,15 @@ public class Configs implements IConfigHandler {
         private static final String PREFIX = String.format("%s.config.patch", TweakMyClientReference.getModId());
         public static final ConfigBoolean DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP = new TranslatableConfigBoolean(PREFIX, "disableLitematicaEasyPlaceFailTip", false);
         public static final ConfigBoolean FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL = new TranslatableConfigBoolean(PREFIX, "forcePistonWithoutAffectByTool", false);
-        public static final ImmutableList<ConfigBoolean> OPTIONS = ImmutableList.of(
-                DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP,
-                FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL
-        );
+        public static ImmutableList<ConfigBoolean> OPTIONS;
+
+        static {
+            ArrayList<ConfigBoolean> arrayList = new ArrayList<>();
+            if (!TweakMyClientReference.isMasaGadgetLoaded && TweakMyClientReference.isLitematicaLoaded) {
+                arrayList.add(DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP);
+            }
+            arrayList.add(FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL);
+            OPTIONS = ImmutableList.copyOf(arrayList);
+        }
     }
 }

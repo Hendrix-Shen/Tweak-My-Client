@@ -24,6 +24,8 @@
     "tweakmyclient.config.color.colorWaterShallow.name": "colorWaterShallow",
     "tweakmyclient.config.color.colorWaterShallow.comment": "openWaterHelper open shallow outline color.",
 
+    "tweakmyclient.config.disable_toggle.disableAttackEntity.name": "disableAttackEntity",
+    "tweakmyclient.config.disable_toggle.disableAttackEntity.comment": "Disable attacks on entities in the list.",
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.name": "disableClientBlockEvents",
     "tweakmyclient.config.disable_toggle.disableClientBlockEvents.comment": "Disables block event rendering (eg pistons animations).",
     "tweakmyclient.config.disable_toggle.disableClientEntityInListUpdates.name": "disableClientEntityInListUpdates",
@@ -129,6 +131,8 @@
     "tweakmyclient.config.list.listAutoDropType.comment": "Auto drop item list type.",
     "tweakmyclient.config.list.listAutoDropWhiteList.name": "listAutoDropWhiteList",
     "tweakmyclient.config.list.listAutoDropWhiteList.comment": "Auto drop item white list.\nAll items in this list will be auto dropped.",
+    "tweakmyclient.config.list.listDisableAttackEntity.name": "listDisableAttackEntity",
+    "tweakmyclient.config.list.listDisableAttackEntity.comment": "Disable attack entity list.\nAll entities in this list will not be attacked.",
     "tweakmyclient.config.list.listDisableClientEntityUpdates.name": "listDisableClientEntityUpdates",
     "tweakmyclient.config.list.listDisableClientEntityUpdates.comment": "Disable client entity updates list.\nAll entities in this list will not be updated.",
     "tweakmyclient.config.list.listDisableEntityRendering.name": "listDisableClientEntityRendering",

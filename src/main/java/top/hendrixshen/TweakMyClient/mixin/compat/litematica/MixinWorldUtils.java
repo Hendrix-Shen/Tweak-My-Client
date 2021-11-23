@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import top.hendrixshen.TweakMyClient.config.Configs;
 
-@Dependencies(dependencyList = @Dependency(modid = "litematica", version = "*"))
+@Dependencies(dependencyList = {@Dependency(modid = "litematica", version = "*"), @Dependency(modid = "masa_gadget_mod", version = ">=2.0.6", dependencyType = Dependency.DependencyType.CONFLICT)})
 @Mixin(WorldUtils.class)
 public class MixinWorldUtils {
     @Redirect(
