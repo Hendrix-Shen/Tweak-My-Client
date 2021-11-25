@@ -4,6 +4,7 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "client": [
+    "disable.disableAttackEntity.MixinMinecraft",
     "disable.disableClientBlockEvents.MixinClientPacketListener",
     "disable.disableClientEntityUpdates.MixinClientLevel",
     "disable.disableEntityRendering.MixinEntityRenderDispatcher",
@@ -33,5 +34,7 @@
     "feature.featureOpenWaterHelper.MixinFishingHook",
     "feature.featureUnfocusedCPU.MixinGameRenderer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem"
+  ],
+  "mixins": [
   ]
 }
