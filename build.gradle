@@ -1,18 +1,34 @@
-buildscript {
-    repositories {
-        maven {
-            name = "Fabric"
-            url = "https://maven.fabricmc.net/"
-        }
-    }
-}
+import com.modrinth.minotaur.TaskModrinthUpload
+import com.modrinth.minotaur.request.VersionType
 
 plugins {
-    id 'fabric-loom' version '0.9-SNAPSHOT'
+    id 'fabric-loom' version '0.10-SNAPSHOT'
     id 'maven-publish'
+	id "com.modrinth.minotaur" version "1.2.1"
 }
 
+static String getVersionString() {
+	String git_commit_id = System.getenv("GIT_COMMIT_ID")
+	if (git_commit_id != null) {
+		return git_commit_id
+	} else {
+		return new Date().format('yyyyMMdd.HHmmss')
+	}
+}
+
+group = "${project.group}.${project.mod_id}" as Object
+archivesBaseName = "${project.mod_file_name}-mc${project.minecraft_version_out}"
+version = "${project.mod_version}+${getVersionString()}" as Object
+
 repositories {
+	// Add repositories to retrieve artifacts from in here.
+	// You should only use this when depending on other mods because
+	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
+	// for more information about repositories.
+    maven {
+        url 'https://api.modrinth.com/maven'
+    }
     maven {
         url 'https://masa.dy.fi/maven'
     }
@@ -20,38 +36,26 @@ repositories {
         url 'https://www.cursemaven.com/'
     }
     maven {
-        url 'https://api.modrinth.com/maven'
+        url 'https://www.jitpack.io'
     }
 }
 
 dependencies {
-    // Minecraft, Fabric and mappings versions
+    // Development Environment
     minecraft("com.mojang:minecraft:${project.minecraft_version}")
-    mappings("net.fabricmc:yarn:${project.mappings_version}:v2")
+    mappings(loom.officialMojangMappings())
     modApi("net.fabricmc:fabric-loader:${project.fabric_loader_version}")
-    // Malilib
-    modApi("fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_masa}:${project.malilib_version}")
-    // ModMenu
-    modCompileOnly("maven.modrinth:modmenu:" + project.mod_menu_version)
-    // Optional mod compatibility Library
-    modCompileOnly("curse.maven:authme-356643:3073169")
-    modCompileOnly("curse.maven:inGameAcountSwitcher-232676:3374098")
-    modCompileOnly("curse.maven:litematica-308892:3349118")
-    modCompileOnly("curse.maven:reauth-403928:3105780")
+    // Required library
+    modApi("com.github.Hendrix-Shen:MagicLib:${project.library_magiclib_version}")
+    include("com.github.Hendrix-Shen:MagicLib:${project.library_magiclib_version}")
+    modApi("fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_masa}:${project.library_malilib_version}")
+    // Optional mod compatibility library
+    modCompileOnly("curse.maven:authme-356643:${project.library_authme_version}")
+    modCompileOnly("curse.maven:inGameAcountSwitcher-232676:${project.library_inGameAcountSwitcher_version}")
+    modCompileOnly("curse.maven:litematica-308892:${project.library_litematica_version}")
+    modCompileOnly("curse.maven:reauth-403928:${project.library_reauth_version}")
+    modCompileOnly("maven.modrinth:modmenu:${project.library_mod_menu_version}")
 }
-
-minecraft {
-}
-
-compileJava {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-    options.encoding = 'UTF-8'
-}
-
-group = project.group + "." + project.mod_id
-archivesBaseName = project.mod_file_name + '-mc' + project.minecraft_version_out
-version = project.mod_version_detail
 
 processResources
 {
@@ -63,40 +67,76 @@ processResources
     }
 }
 
-// ensure that the encoding is set to UTF-8, no matter what the system default is
-// this fixes some edge cases with special characters not displaying correctly
-// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
+tasks.withType(JavaCompile).configureEach {
+	// ensure that the encoding is set to UTF-8, no matter what the system default is
+	// this fixes some edge cases with special characters not displaying correctly
+	// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+	// If Javadoc is generated, this must be specified in that task too.
+	it.options.encoding = "UTF-8"
+	it.sourceCompatibility = JavaVersion.VERSION_1_8
+	it.targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+task publishModrinth (type: TaskModrinthUpload) {
+	onlyIf {
+		System.getenv("MODRINTH_API_TOKEN")
+	}
+	token = System.getenv("MODRINTH_API_TOKEN")
+	projectId = "${project.modrinth_project_id}"
+	versionNumber = System.getenv("VERSION_NUMBER")
+	changelog = System.getenv("CHANGE_LOG")
+	uploadFile = remapJar
+	switch ("${project.modrinth_release_type}") {
+		case "alpha":
+			versionType = VersionType.ALPHA
+			break
+		case "beta":
+			versionType = VersionType.BETA
+			break
+		case "release":
+			versionType = VersionType.RELEASE
+			break
+	}
+	addGameVersion("${project.minecraft_version}")
+	addLoader('fabric')
+}
 
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
-// If you remove this task, sources will not be generated.
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
+runClient {
+	defaultCharacterEncoding = "UTF-8"
+}
+
+runServer {
+	defaultCharacterEncoding = "UTF-8"
+}
+
+java {
+	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+	// if it is present.
+	// If you remove this line, sources will not be generated.
+	withSourcesJar()
 }
 
 jar {
-    from "LICENSE"
+	from("LICENSE") {
+		rename { "${it}_${project.archivesBaseName}"}
+	}
 }
 
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
-            artifact(jar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-        }
-    }
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
 
-    repositories {
-    }
+	repositories {
+		// Add repositories to publish to here.
+		// Notice: This block does NOT have the same function as the block in the top level.
+		// The repositories here will be used for publishing your artifact, not for
+		// retrieving dependencies.
+		maven {
+			url "$projectDir/publish"
+		}
+	}
 }
 

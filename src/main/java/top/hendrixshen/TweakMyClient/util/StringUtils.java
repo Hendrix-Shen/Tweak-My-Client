@@ -1,9 +1,9 @@
 package top.hendrixshen.TweakMyClient.util;
 
 import com.mojang.brigadier.StringReader;
-import net.minecraft.command.argument.ItemStringReader;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.commands.arguments.item.ItemParser;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 
 import java.util.HashSet;
@@ -12,8 +12,8 @@ import java.util.List;
 public class StringUtils {
     public static ItemStack parseItemFromString(String str) {
         try {
-            ItemStringReader reader = new ItemStringReader(new StringReader(str), true);
-            reader.consume();
+            ItemParser reader = new ItemParser(new StringReader(str), true);
+            reader.parse();
             Item item = reader.getItem();
 
             if (item != null) {
@@ -23,7 +23,7 @@ public class StringUtils {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            TweakMyClient.logger.warn("Invalid item '{}'", str);
+            TweakMyClient.getLogger().warn("Invalid item '{}'", str);
         }
 
         return ItemStack.EMPTY;
