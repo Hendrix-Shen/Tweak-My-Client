@@ -84,7 +84,7 @@ jobs:
       matrix:
         java: [16, 17]
         os: [ubuntu-latest]
-        branch: [1.14, 1.15, 1.16, 1.17, 1.18]
+        branch: [1.16, 1.17, 1.18]
         exclude:
           - java: 16
             os: ubuntu-latest
