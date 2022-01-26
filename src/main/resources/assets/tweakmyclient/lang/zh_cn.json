@@ -144,6 +144,8 @@
 
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.name": "禁用投影轻松放置失败提示",
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "禁用轻松放置失败时那烦人的提示窗.\n注意: 仅当 litematica 加载时生效.",
+    "tweakmyclient.config.patch.endPortalRendererFix.name": "末路之地传送门渲染修复",
+    "tweakmyclient.config.patch.endPortalRendererFix.comment": "修复末路之地传送门只会在顶部渲染材质.",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "强制活塞不受镐子影响",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "镐子将不再作为活塞的有效开采工具.",
 
