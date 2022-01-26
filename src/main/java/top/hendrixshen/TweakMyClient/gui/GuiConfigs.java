@@ -46,8 +46,8 @@ public class GuiConfigs extends GuiConfigsBase {
     @Override
     protected boolean useKeybindSearch() {
         return GuiConfigs.tab == ConfigGuiTab.GENERIC ||
-                GuiConfigs.tab == ConfigGuiTab.DISABLE_HOTKEYS ||
-                GuiConfigs.tab == ConfigGuiTab.FEATURE_HOTKEYS;
+                GuiConfigs.tab == ConfigGuiTab.DISABLE ||
+                GuiConfigs.tab == ConfigGuiTab.FEATURE;
     }
 
     @Override
@@ -63,14 +63,10 @@ public class GuiConfigs extends GuiConfigsBase {
             configs = Configs.List.OPTIONS;
         } else if (tab == ConfigGuiTab.COLOR) {
             configs = Configs.Color.OPTIONS;
-        } else if (tab == ConfigGuiTab.FEATURE_TOGGLES) {
-            configs = ConfigUtils.createConfigWrapperForType(ConfigType.BOOLEAN, ImmutableList.copyOf(Configs.Feature.OPTIONS));
-        } else if (tab == ConfigGuiTab.FEATURE_HOTKEYS) {
-            configs = ConfigUtils.createConfigWrapperForType(ConfigType.HOTKEY, ImmutableList.copyOf(Configs.Feature.OPTIONS));
-        } else if (tab == ConfigGuiTab.DISABLE_TOGGLES) {
-            configs = ConfigUtils.createConfigWrapperForType(ConfigType.BOOLEAN, ImmutableList.copyOf(Configs.Disable.OPTIONS));
-        } else if (tab == ConfigGuiTab.DISABLE_HOTKEYS) {
-            configs = ConfigUtils.createConfigWrapperForType(ConfigType.HOTKEY, ImmutableList.copyOf(Configs.Disable.OPTIONS));
+        } else if (tab == ConfigGuiTab.FEATURE) {
+            configs = Configs.Feature.OPTIONS;
+        } else if (tab == ConfigGuiTab.DISABLE) {
+            configs = Configs.Disable.OPTIONS;
         } else {
             return Collections.emptyList();
         }
@@ -83,10 +79,8 @@ public class GuiConfigs extends GuiConfigsBase {
         PATCH("patch"),
         LIST("list"),
         COLOR("color"),
-        FEATURE_TOGGLES("feature_toggle"),
-        FEATURE_HOTKEYS("feature_hotkeys"),
-        DISABLE_TOGGLES("disable_toggle"),
-        DISABLE_HOTKEYS("disable_hotkeys");
+        FEATURE("feature"),
+        DISABLE("disable");
 
         private final String name;
 

@@ -2,10 +2,8 @@
     "tweakmyclient.gui.title.configs": "Tweak My Client - Config - Version: %s (%s)",
     "tweakmyclient.gui.button.config_gui.generic": "Generic",
     "tweakmyclient.gui.button.config_gui.color": "Color",
-    "tweakmyclient.gui.button.config_gui.disable_toggle": "Disable Toggle",
-    "tweakmyclient.gui.button.config_gui.disable_hotkeys": "Disable Hotkey",
-    "tweakmyclient.gui.button.config_gui.feature_toggle": "Feature Toggle",
-    "tweakmyclient.gui.button.config_gui.feature_hotkeys": "Feature Hotkey",
+    "tweakmyclient.gui.button.config_gui.disable": "Disable Toggle",
+    "tweakmyclient.gui.button.config_gui.feature": "Feature Toggle",
     "tweakmyclient.gui.button.config_gui.list": "List",
     "tweakmyclient.gui.button.config_gui.patch": "Patch",
 
