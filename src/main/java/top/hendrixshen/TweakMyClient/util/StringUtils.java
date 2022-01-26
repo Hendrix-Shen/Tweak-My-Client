@@ -23,7 +23,7 @@ public class StringUtils {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            TweakMyClient.getLogger().warn("Invalid item '{}'", str);
+            TweakMyClient.getLogger().debug("Invalid item '{}'", str);
         }
 
         return ItemStack.EMPTY;
