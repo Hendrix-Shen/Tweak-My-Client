@@ -10,6 +10,7 @@
     "disable.disableEntityRendering.MixinEntityRenderDispatcher",
     "disable.disableFovAffectedBySpeed.MixinGameRenderer",
     "disable.disableGuiShadowLayer.MixinScreen",
+    "disable.disableItemGlowing.MixinItemStack",
     "disable.disableRenderBossBar.MixinBossHealthOverlay",
     "disable.disableRenderOverlayFire.IMixinScreenEffectRenderer",
     "disable.disableRenderOverlayFire.MixinScreenEffectRenderer",
