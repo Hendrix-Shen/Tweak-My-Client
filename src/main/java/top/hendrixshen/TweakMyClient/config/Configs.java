@@ -1,7 +1,6 @@
 package top.hendrixshen.TweakMyClient.config;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.malilib.config.ConfigUtils;
@@ -19,6 +18,7 @@ import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundChatPacket;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
@@ -31,9 +31,11 @@ import top.hendrixshen.TweakMyClient.util.InfoUtils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Configs implements IConfigHandler {
     private static final String CONFIG_FILE_NAME = TweakMyClientReference.getModId() + ".json";
+    private static HashSet<Item> ITEM_GLOWING_BLACKLIST = new HashSet<>();
 
     public static void loadFromFile() {
         File configFile = new File(FileUtils.getConfigDirectory(), CONFIG_FILE_NAME);
@@ -54,6 +56,7 @@ public class Configs implements IConfigHandler {
 
         AutoDropUtils.itemStacksBlackList = top.hendrixshen.TweakMyClient.util.StringUtils.getItemStackSets(List.LIST_AUTO_DROP_BLACK_LIST.getStrings());
         AutoDropUtils.itemStacksWhitelist = top.hendrixshen.TweakMyClient.util.StringUtils.getItemStackSets(List.LIST_AUTO_DROP_WHITE_LIST.getStrings());
+        ITEM_GLOWING_BLACKLIST = top.hendrixshen.TweakMyClient.util.StringUtils.getItemStackSets(List.LIST_DISABLE_ITEM_GLOWING.getStrings());
     }
 
     public static void saveToFile() {
@@ -303,6 +306,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityZombieVillagerRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_FOV_AFFECTED_BY_SPEED = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableFovAffectedBySpeed", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_GUI_SHADOW_LAYER = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableGuiShadowLayer", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_ITEM_GLOWING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableItemGlowing", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_BOSS_BAR = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderBossBar", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_FIRE = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayFire", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_PUMPKIN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayPumpkin", false, "");
@@ -323,6 +327,7 @@ public class Configs implements IConfigHandler {
                 DISABLE_ENTITY_WITHER_RENDERING,
                 DISABLE_FOV_AFFECTED_BY_SPEED,
                 DISABLE_GUI_SHADOW_LAYER,
+                DISABLE_ITEM_GLOWING,
                 DISABLE_RENDER_BOSS_BAR,
                 DISABLE_RENDER_OVERLAY_FIRE,
                 DISABLE_RENDER_OVERLAY_PUMPKIN,
@@ -519,19 +524,22 @@ public class Configs implements IConfigHandler {
         public static final ConfigStringList LIST_DISABLE_ATTACK_ENTITY = new TranslatableConfigStringList(PREFIX, "listDisableAttackEntity", ImmutableList.of("player"));
         public static final ConfigStringList LIST_DISABLE_CLIENT_ENTITY_UPDATES = new TranslatableConfigStringList(PREFIX, "listDisableClientEntityUpdates", ImmutableList.of("zombi"));
         public static final ConfigStringList LIST_DISABLE_ENTITY_RENDERING = new TranslatableConfigStringList(PREFIX, "listDisableEntityRendering", ImmutableList.of("zombi"));
+        public static final ConfigStringList LIST_DISABLE_ITEM_GLOWING = new TranslatableConfigStringList(PREFIX, "listItemGlowing", ImmutableList.of("minecraft:enchanted_book", "potion"));
         public static final ImmutableList<ConfigBase> OPTIONS = ImmutableList.of(
                 LIST_AUTO_DROP_BLACK_LIST,
                 LIST_AUTO_DROP_TYPE,
                 LIST_AUTO_DROP_WHITE_LIST,
                 LIST_DISABLE_ATTACK_ENTITY,
                 LIST_DISABLE_CLIENT_ENTITY_UPDATES,
-                LIST_DISABLE_ENTITY_RENDERING
+                LIST_DISABLE_ENTITY_RENDERING,
+                LIST_DISABLE_ITEM_GLOWING
         );
     }
 
     public static class Patch {
         private static final String PREFIX = String.format("%s.config.patch", TweakMyClientReference.getModId());
         public static final ConfigBoolean DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP = new TranslatableConfigBoolean(PREFIX, "disableLitematicaEasyPlaceFailTip", false);
+        public static final ConfigBoolean ENDER_PORTAL_RENDERER_FIX = new TranslatableConfigBoolean(PREFIX, "endPortalRendererFix", false);
         public static final ConfigBoolean FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL = new TranslatableConfigBoolean(PREFIX, "forcePistonWithoutAffectByTool", false);
         public static ImmutableList<ConfigBoolean> OPTIONS;
 
@@ -540,8 +548,13 @@ public class Configs implements IConfigHandler {
             if (!TweakMyClientReference.isMasaGadgetLoaded && TweakMyClientReference.isLitematicaLoaded) {
                 arrayList.add(DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP);
             }
+            arrayList.add(ENDER_PORTAL_RENDERER_FIX);
             arrayList.add(FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL);
             OPTIONS = ImmutableList.copyOf(arrayList);
         }
+    }
+
+    public static HashSet<Item> getItemGlowingBlackList() {
+        return ITEM_GLOWING_BLACKLIST;
     }
 }

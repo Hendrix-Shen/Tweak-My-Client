@@ -48,6 +48,8 @@
     "tweakmyclient.config.disable_toggle.disableFovAffectedBySpeed.comment": "关闭速度倍率对视角变换的影响.",
     "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.name": "禁用GUI阴影层",
     "tweakmyclient.config.disable_toggle.disableGuiShadowLayer.comment": "关闭打开GUI时的阴影层渲染.",
+    "tweakmyclient.config.disable_toggle.disableItemGlowing.name": "禁用物品发光",
+    "tweakmyclient.config.disable_toggle.disableItemGlowing.comment": "禁用物品的附魔发光效果.",
     "tweakmyclient.config.disable_toggle.disableRenderBossBar.name": "禁用Boss血条渲染",
     "tweakmyclient.config.disable_toggle.disableRenderBossBar.comment": "关闭在玩家在Boss附近渲染Boss血条.\n你将获得更广阔的视野.",
     "tweakmyclient.config.disable_toggle.disableRenderOverlayFire.name": "禁用火焰渲染层",
@@ -137,9 +139,13 @@
     "tweakmyclient.config.list.listDisableClientEntityUpdates.comment": "禁用客户端侧运算实体的列表.\n所有在此列表内的实体将不会被运算.",
     "tweakmyclient.config.list.listDisableEntityRendering.name": "禁用客户端侧实体渲染列表",
     "tweakmyclient.config.list.listDisableEntityRendering.comment": "禁用客户端侧渲染实体的列表.\n所有在此列表内的实体将不会被渲染.",
+    "tweakmyclient.config.list.listItemGlowing.name": "禁用物品发光列表",
+    "tweakmyclient.config.list.listItemGlowing.comment": "禁用发光物品列表.\n所有在此列表内的物品将不会被发光效果装饰.",
 
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.name": "禁用投影轻松放置失败提示",
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "禁用轻松放置失败时那烦人的提示窗.\n注意: 仅当 litematica 加载时生效.",
+    "tweakmyclient.config.patch.endPortalRendererFix.name": "末路之地传送门渲染修复",
+    "tweakmyclient.config.patch.endPortalRendererFix.comment": "修复末路之地传送门只会在顶部渲染材质.",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "强制活塞不受镐子影响",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "镐子将不再作为活塞的有效开采工具.",
 

@@ -10,6 +10,7 @@
     "disable.disableEntityRendering.MixinEntityRenderDispatcher",
     "disable.disableFovAffectedBySpeed.MixinGameRenderer",
     "disable.disableGuiShadowLayer.MixinScreen",
+    "disable.disableItemGlowing.MixinItemStack",
     "disable.disableRenderBossBar.MixinBossHealthOverlay",
     "disable.disableRenderOverlayFire.IMixinScreenEffectRenderer",
     "disable.disableRenderOverlayFire.MixinScreenEffectRenderer",
@@ -33,6 +34,8 @@
     "feature.featureLowHealthWarning.MixinLocalPlayer",
     "feature.featureOpenWaterHelper.MixinFishingHook",
     "feature.featureUnfocusedCPU.MixinGameRenderer",
+    "patch.endPortalRendererFix.MixinTheEndPortalBlockEntity",
+    "patch.endPortalRendererFix.MixinTheEndPortalRenderer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem"
   ],
   "mixins": [
