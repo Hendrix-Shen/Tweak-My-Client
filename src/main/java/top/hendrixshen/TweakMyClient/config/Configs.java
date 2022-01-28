@@ -25,6 +25,7 @@ import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
 import top.hendrixshen.TweakMyClient.util.*;
+import top.hendrixshen.TweakMyClient.util.render.EnderPortalRenderMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -383,6 +384,8 @@ public class Configs implements IConfigHandler {
             FEATURE_CUSTOM_WINDOW_TITLE.setValueChangeCallback((callback) -> {
                 CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE);
                 CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE_WITH_ACTIVITY);
+                // If set to false this is necessary.
+                TweakMyClient.getMinecraftClient().updateTitle();
             });
         }
     }
@@ -400,6 +403,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigString CUSTOM_WINDOW_TITLE = new TranslatableConfigString(PREFIX, "customWindowTitle", "Minecraft %mc_version% with TweakMyClient %tmc_version% | Player %mc_username% | FPS: %mc_fps%");
         public static final ConfigString CUSTOM_WINDOW_TITLE_WITH_ACTIVITY = new TranslatableConfigString(PREFIX, "customWindowTitleWithActivity", "Minecraft %mc_version% (%mc_activity%) with TweakMyClient %tmc_version% | Player %mc_username% | FPS: %mc_fps%");
         public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
+        public static final ConfigOptionList ENDER_PORTAL_RENDER_MODE = new TranslatableConfigOptionList(PREFIX, "enderPortalRenderMode", EnderPortalRenderMode.ACTUAL);
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
         public static final ConfigDouble LOW_HEALTH_THRESHOLD = new TranslatableConfigDouble(PREFIX, "lowHealthThreshold", 6, 0, 1000);
         public static final ConfigHotkey MEMORY_CLEANER = new TranslatableConfigHotkey(PREFIX, "memoryCleaner", "");
@@ -427,6 +431,7 @@ public class Configs implements IConfigHandler {
                 DAYLIGHT_OVERRIDE_TIME,
                 CUSTOM_WINDOW_TITLE,
                 CUSTOM_WINDOW_TITLE_WITH_ACTIVITY,
+                ENDER_PORTAL_RENDER_MODE,
                 GET_TARGET_BLOCK_POSITION,
                 LOW_HEALTH_THRESHOLD,
                 MEMORY_CLEANER,

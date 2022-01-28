@@ -165,6 +165,16 @@ The available placeholders are as follows:
 - %tmc_version%
 - %tmc_version_type%
 
+### enderPortalRenderMode
+If `endPortalRendererFix` is enabled, the ender portal renders in the specified mode.
+
+The available modes are as follows:
+
+- Actual - Rendering the ender portal using its hit box.
+- Full - Rendering the ender portal as a full block.
+- Legacy - Rendering the ender portal with Minecraft 21w13a below.
+- Modern - Rendering the ender portal with Minecraft 21w13a and above.
+
 ### getTargetBlockPosition
 Gets the position of the looking block. This feature is used to get the position of the farthest block you point to.
 
