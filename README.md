@@ -54,22 +54,22 @@ openWaterHelper open shallow outline color.
 Disable attacks on entities in the list.
 
 ### disableClientBlockEvents
-Disables block event rendering (eg pistons animations).
+Disable block event rendering (eg pistons animations).
 
 ### disableClientEntityInListUpdates
 Disable entity updates in the list on the client.
 The priority of this setting is higher than the following: `disableClientEntityTNTUpdates`, `disableClientEntityWitherUpdates`, `disableClientEntityZombieVillagerUpdates`
 
 ### disableClientEntityTNTUpdates
-Disables TNT entity updates on the client.
+Disable TNT entity updates on the client.
 Maybe useful for TNT related machines.
 
 ### disableClientEntityWitherUpdates
-Disables wither entity updates on the client.
+Disable wither entity updates on the client.
 Maybe it's useful for fake peace.
 
 ### disableClientEntityZombieVillagerUpdates
-Disables zombie villager entity updates on the client.
+Disable zombie villager entity updates on the client.
 Maybe it's useful for fake peace.
 
 ### disableClientEntityInListRendering
@@ -80,22 +80,25 @@ The priority of this setting is higher than the following: `disableEntityTNTRend
 Disable speed multiplier effect fov transform.
 
 ### disableGuiShadowLayer
-Disables gui shadow overlay rendering when gui is opening.
+Disable gui shadow overlay rendering when gui is opening.
+
+### disableItemGlowing
+Disable items with enchanted glowing effects.
 
 ### disableRenderBossBar
-Disables boss bar rendering when player is near boss.
+Disable boss bar rendering when player is near boss.
 You will gain a broader view.
 
 ### disableRenderOverlayFire
-Disables fire overlay rendering when player is on fire.
+Disable fire overlay rendering when player is on fire.
 You will gain a broader view.
 
 ### disableRenderOverlayPumpkin
-Disables mask overlay rendering when player is wearing pumpkin.
+Disable mask overlay rendering when player is wearing pumpkin.
 You will gain a broader view.
 
 ### disableRenderScoreboard
-Disables Scoreboard rendering.
+Disable Scoreboard rendering.
 You will gain a broader view.
 
 ### disableRenderToast
@@ -133,6 +136,35 @@ How many seconds to wait for auto reconnection.
 ### daylightOverrideTime
 The time set when overriding the client's world time.
 
+### customWindowTitle
+Modify current window title. 
+
+The available placeholders are as follows:
+- %fabric_loader_asm_version%
+- %fabric_loader_version%
+- %fabric_mod_ver:<modid>%
+- %mc_fps%
+- %mc_protocol_version%
+- %mc_username%
+- %mc_version%
+- %tmc_version%
+- %tmc_version_type%
+
+### customWindowTitleWithActivity
+Modify the current window title with the current activity. 
+
+The available placeholders are as follows:
+- %fabric_loader_asm_version%
+- %fabric_loader_version%
+- %fabric_mod_ver:<modid>%
+- %mc_activity%
+- %mc_fps%
+- %mc_protocol_version%
+- %mc_username%
+- %mc_version%
+- %tmc_version%
+- %tmc_version_type%
+
 ### getTargetBlockPosition
 Gets the position of the looking block. This feature is used to get the position of the farthest block you point to.
 
@@ -152,7 +184,9 @@ Maximum line tracing distance of target block position.
 Position tracing format sent to public chat.
 
 ### targetBlockPositionMode
-The block tracing position will be sent in this mode. private - Only you can see public - Send to public chat
+The block tracing position will be sent in this mode. 
+- private - Only you can see 
+- public - Send to public chat
 
 ### Feature
 
@@ -181,7 +215,10 @@ Enable block outside color override.
 Enable gui background color override.
 
 ### featureCustomSidebarBackgroundColor
-featureCustomSidebarBackgroundColor
+Enable sidebar background color override.
+
+### featureCustomWindowTitle
+Enable window title override.
 
 ### featureGlobalEventListener
 Print global event trigger coordinates.
@@ -216,18 +253,22 @@ Auto drop item white list. All items in this list will be auto dropped.
 Disable attack entity list. All entities in this list will not be attacked.
 
 ### listDisableClientEntityUpdates
-Disable client entity updates list.
-All entities in this list will not be updated.
+Disable client entity updates list. All entities in this list will not be updated.
 
 ### listDisableClientEntityRendering
-Disable client entity rendering list.
-All entities in this list will not be rendered.
+Disable client entity rendering list. All entities in this list will not be rendered.
+
+### listItemGlowing
+Disable items glowing list. All items in this list will not be glowed.
 
 ### Patch
 
 ### disableLitematicaEasyPlaceFailTip
 Disable easyPlace failure that annoying prompt window.
 Note: Takes effect only when litematica is loaded.
+
+### endPortalRendererFix
+Fixing the endPortal to only render materials at the top.
 
 ### forcePistonWithoutAffectByTool
 The pickaxe will no longer be used as an effective mining tool for pistons.
