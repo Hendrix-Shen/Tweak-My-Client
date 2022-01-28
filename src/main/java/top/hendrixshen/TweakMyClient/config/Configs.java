@@ -383,6 +383,8 @@ public class Configs implements IConfigHandler {
             FEATURE_CUSTOM_WINDOW_TITLE.setValueChangeCallback((callback) -> {
                 CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE);
                 CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE_WITH_ACTIVITY);
+                // If set to false this is necessary.
+                TweakMyClient.getMinecraftClient().updateTitle();
             });
         }
     }
