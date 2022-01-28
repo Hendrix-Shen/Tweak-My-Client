@@ -24,10 +24,7 @@ import net.minecraft.world.phys.HitResult;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
-import top.hendrixshen.TweakMyClient.util.AntiGhostBlocksUtils;
-import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
-import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
-import top.hendrixshen.TweakMyClient.util.InfoUtils;
+import top.hendrixshen.TweakMyClient.util.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -356,6 +353,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomBlockOutsideColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_GUI_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomGuiBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarBackgroundColor", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_WINDOW_TITLE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomWindowTitle", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GLOBAL_EVENT_LISTENER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGlobalEventListener", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
@@ -373,6 +371,7 @@ public class Configs implements IConfigHandler {
                 FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR,
                 FEATURE_CUSTOM_GUI_BACKGROUND_COLOR,
                 FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR,
+                FEATURE_CUSTOM_WINDOW_TITLE,
                 FEATURE_DAYLIGHT_OVERRIDE,
                 FEATURE_GLOBAL_EVENT_LISTENER,
                 FEATURE_GET_TARGET_BLOCK_POSITION,
@@ -380,6 +379,12 @@ public class Configs implements IConfigHandler {
                 FEATURE_OPEN_WATER_HELPER,
                 FEATURE_UNFOCUSED_CPU
         );
+        static {
+            FEATURE_CUSTOM_WINDOW_TITLE.setValueChangeCallback((callback) -> {
+                CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE);
+                CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE_WITH_ACTIVITY);
+            });
+        }
     }
 
     public static class Generic {
@@ -392,6 +397,8 @@ public class Configs implements IConfigHandler {
         public static final ConfigOptionList ANTI_GHOST_ITEMS_MODE = new TranslatableConfigOptionList(PREFIX, "antiGhostItemsMode", AntiGhostItemsMode.AUTOMATIC);
         public static final ConfigInteger AUTO_DROP_INTERVAL = new TranslatableConfigInteger(PREFIX, "autoDropInterval", 0, 0, 1200);
         public static final ConfigInteger AUTO_RECONNECT_TIMER = new TranslatableConfigInteger(PREFIX, "autoReconnectTimer", 5, 0, 60);
+        public static final ConfigString CUSTOM_WINDOW_TITLE = new TranslatableConfigString(PREFIX, "customWindowTitle", "Minecraft %mc_version% with TweakMyClient %tmc_version% | Player %mc_username% | FPS: %mc_fps%");
+        public static final ConfigString CUSTOM_WINDOW_TITLE_WITH_ACTIVITY = new TranslatableConfigString(PREFIX, "customWindowTitleWithActivity", "Minecraft %mc_version% (%mc_activity%) with TweakMyClient %tmc_version% | Player %mc_username% | FPS: %mc_fps%");
         public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
         public static final ConfigDouble LOW_HEALTH_THRESHOLD = new TranslatableConfigDouble(PREFIX, "lowHealthThreshold", 6, 0, 1000);
@@ -400,7 +407,6 @@ public class Configs implements IConfigHandler {
         public static final ConfigDouble TARGET_BLOCK_MAX_TRACE_DISTANCE = new TranslatableConfigDouble(PREFIX, "targetBlockMaxTraceDistance", 100, 0, 200);
         public static final ConfigString TARGET_BLOCK_POSITION_FORMAT = new TranslatableConfigString(PREFIX, "targetBlockPositionFormat", "I'm tracing this position [x: {X},y: {Y}, z: {Z}]");
         public static final ConfigOptionList TARGET_BLOCK_POSITION_PRINT_MODE = new TranslatableConfigOptionList(PREFIX, "targetBlockPositionPrintMode", TargetBlockPositionPrintMode.PRIVATE);
-
         public static final ImmutableList<ConfigHotkey> HOTKEYS = ImmutableList.of(
                 ANTI_GHOST_BLOCKS_MANUAL_TRIGGER,
                 ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
@@ -419,6 +425,8 @@ public class Configs implements IConfigHandler {
                 AUTO_DROP_INTERVAL,
                 AUTO_RECONNECT_TIMER,
                 DAYLIGHT_OVERRIDE_TIME,
+                CUSTOM_WINDOW_TITLE,
+                CUSTOM_WINDOW_TITLE_WITH_ACTIVITY,
                 GET_TARGET_BLOCK_POSITION,
                 LOW_HEALTH_THRESHOLD,
                 MEMORY_CLEANER,
@@ -455,6 +463,8 @@ public class Configs implements IConfigHandler {
                 AntiGhostItemsUtils.manualRefreshTimer = 200;
                 return true;
             });
+            CUSTOM_WINDOW_TITLE.setValueChangeCallback((callback) -> CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE));
+            CUSTOM_WINDOW_TITLE_WITH_ACTIVITY.setValueChangeCallback((callback) -> CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE_WITH_ACTIVITY));
             GET_TARGET_BLOCK_POSITION.getKeybind().setCallback((action, key) -> {
                 if (!Feature.FEATURE_GET_TARGET_BLOCK_POSITION.getBooleanValue()) {
                     return true;

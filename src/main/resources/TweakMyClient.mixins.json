@@ -29,6 +29,7 @@
     "feature.featureAutoRespawn.MixinDeathScreen",
     "feature.featureCustomBlockOutsideColor.MixinLevelRenderer",
     "feature.featureCustomSidebarBackgroundColor.MixinGui",
+    "feature.featureCustomWindowTitle.MixinMinecraft",
     "feature.featureDaylightOverride.MixinClientLevelClientLevelData",
     "feature.featureGlobalEventListener.MixinLevelRenderer",
     "feature.featureLowHealthWarning.MixinLocalPlayer",
