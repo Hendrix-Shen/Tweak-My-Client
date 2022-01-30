@@ -24,6 +24,7 @@ import net.minecraft.world.phys.HitResult;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
+import top.hendrixshen.TweakMyClient.interfaces.IMinecraft;
 import top.hendrixshen.TweakMyClient.util.*;
 import top.hendrixshen.TweakMyClient.util.render.EnderPortalRenderMode;
 
@@ -354,6 +355,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomBlockOutsideColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_GUI_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomGuiBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarBackgroundColor", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_WINDOW_ICON = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomWindowIcon", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_WINDOW_TITLE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomWindowTitle", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GLOBAL_EVENT_LISTENER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGlobalEventListener", false, "");
@@ -372,6 +374,7 @@ public class Configs implements IConfigHandler {
                 FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR,
                 FEATURE_CUSTOM_GUI_BACKGROUND_COLOR,
                 FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR,
+                FEATURE_CUSTOM_WINDOW_ICON,
                 FEATURE_CUSTOM_WINDOW_TITLE,
                 FEATURE_DAYLIGHT_OVERRIDE,
                 FEATURE_GLOBAL_EVENT_LISTENER,
@@ -381,6 +384,7 @@ public class Configs implements IConfigHandler {
                 FEATURE_UNFOCUSED_CPU
         );
         static {
+            FEATURE_CUSTOM_WINDOW_ICON.setValueChangeCallback((callback) -> ((IMinecraft) TweakMyClient.getMinecraftClient()).refreshIcon());
             FEATURE_CUSTOM_WINDOW_TITLE.setValueChangeCallback((callback) -> {
                 CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE);
                 CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE_WITH_ACTIVITY);

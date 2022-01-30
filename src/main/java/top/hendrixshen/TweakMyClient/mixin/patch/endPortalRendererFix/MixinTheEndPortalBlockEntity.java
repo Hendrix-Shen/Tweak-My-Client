@@ -20,9 +20,9 @@ public class MixinTheEndPortalBlockEntity {
     )
     private void shouldRenderFace(Direction direction, CallbackInfoReturnable<Boolean> cir) {
         if (Configs.Patch.ENDER_PORTAL_RENDERER_FIX.getBooleanValue()) {
-            if (Configs.Generic.ENDER_PORTAL_RENDER_MODE.getOptionListValue() == EnderPortalRenderMode.MODERN) {
-                cir.setReturnValue(direction.getAxis() == Direction.Axis.Y);
-            } else if (Configs.Generic.ENDER_PORTAL_RENDER_MODE.getOptionListValue() != EnderPortalRenderMode.LEGACY) {
+            if (Configs.Generic.ENDER_PORTAL_RENDER_MODE.getOptionListValue() == EnderPortalRenderMode.LEGACY) {
+                cir.setReturnValue(direction == Direction.UP);
+            } else if (Configs.Generic.ENDER_PORTAL_RENDER_MODE.getOptionListValue() != EnderPortalRenderMode.MODERN) {
                 cir.setReturnValue(true);
             }
         }
