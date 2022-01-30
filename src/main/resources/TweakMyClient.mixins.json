@@ -29,6 +29,8 @@
     "feature.featureAutoRespawn.MixinDeathScreen",
     "feature.featureCustomBlockOutsideColor.MixinLevelRenderer",
     "feature.featureCustomSidebarBackgroundColor.MixinGui",
+    "feature.featureCustomWindowIcon.MixinMain",
+    "feature.featureCustomWindowIcon.MixinMinecraft",
     "feature.featureCustomWindowTitle.MixinMinecraft",
     "feature.featureDaylightOverride.MixinClientLevelClientLevelData",
     "feature.featureGlobalEventListener.MixinLevelRenderer",

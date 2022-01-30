@@ -227,6 +227,13 @@ Enable gui background color override.
 ### featureCustomSidebarBackgroundColor
 Enable sidebar background color override.
 
+### featureCustomWindowIcon
+Enable window icon override.
+You can define your own icons using the following resource pack namespace files:
+tweakmyclient:icons/icon_16x16.png
+tweakmyclient:icons/icon_32x32.png
+Note: You must reload the resource pack to apply the file changes.
+
 ### featureCustomWindowTitle
 Enable window title override.
 

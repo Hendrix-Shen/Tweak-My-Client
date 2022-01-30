@@ -120,6 +120,8 @@
     "tweakmyclient.config.feature_toggle.featureCustomGuiBackgroundColor.comment": "Enable gui background color override.",
     "tweakmyclient.config.feature_toggle.featureCustomSidebarBackgroundColor.name": "featureCustomSidebarBackgroundColor",
     "tweakmyclient.config.feature_toggle.featureCustomSidebarBackgroundColor.comment": "Enable sidebar background color override.",
+    "tweakmyclient.config.feature_toggle.featureCustomWindowIcon.name": "featureCustomWindowIcon",
+    "tweakmyclient.config.feature_toggle.featureCustomWindowIcon.comment": "Enable window icon override.\nYou can define your own icons using the following resource pack namespace files:\ntweakmyclient:icons/icon_16x16.png\ntweakmyclient:icons/icon_32x32.png\nNote: You must reload the resource pack to apply the file changes.",
     "tweakmyclient.config.feature_toggle.featureCustomWindowTitle.name": "featureCustomWindowTitle",
     "tweakmyclient.config.feature_toggle.featureCustomWindowTitle.comment": "Enable window title override.",
     "tweakmyclient.config.feature_toggle.featureGlobalEventListener.name": "featureGlobalEventListener",
