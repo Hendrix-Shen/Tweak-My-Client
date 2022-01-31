@@ -1,7 +1,5 @@
 package top.hendrixshen.TweakMyClient.mixin.compat.ias;
 
-import MagicLib.untils.mixin.Dependencies;
-import MagicLib.untils.mixin.Dependency;
 import fi.dy.masa.malilib.util.StringUtils;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
@@ -18,6 +16,8 @@ import the_fireplace.ias.gui.GuiAccountSelector;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
+import top.hendrixshen.magiclib.untils.dependency.Dependencies;
+import top.hendrixshen.magiclib.untils.dependency.Dependency;
 
 @Dependencies(dependencyList = @Dependency(modid = "ias", version = "*"))
 @Mixin(value = DisconnectedScreen.class, priority = 898)

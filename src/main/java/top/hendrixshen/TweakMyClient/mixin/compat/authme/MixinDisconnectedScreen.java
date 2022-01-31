@@ -1,7 +1,5 @@
 package top.hendrixshen.TweakMyClient.mixin.compat.authme;
 
-import MagicLib.untils.mixin.Dependencies;
-import MagicLib.untils.mixin.Dependency;
 import fi.dy.masa.malilib.util.StringUtils;
 import me.axieum.mcmod.authme.gui.AuthScreen;
 import net.minecraft.client.gui.components.Button;
@@ -18,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
+import top.hendrixshen.magiclib.untils.dependency.Dependencies;
+import top.hendrixshen.magiclib.untils.dependency.Dependency;
 
 @Dependencies(dependencyList = @Dependency(modid = "reauth", version = "*"))
 @Mixin(value = DisconnectedScreen.class, priority = 897)
