@@ -27,6 +27,7 @@ import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
 import top.hendrixshen.TweakMyClient.interfaces.IMinecraft;
 import top.hendrixshen.TweakMyClient.util.*;
 import top.hendrixshen.TweakMyClient.util.render.EnderPortalRenderMode;
+import top.hendrixshen.magiclib.untils.malilib.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -383,6 +384,7 @@ public class Configs implements IConfigHandler {
                 FEATURE_OPEN_WATER_HELPER,
                 FEATURE_UNFOCUSED_CPU
         );
+
         static {
             FEATURE_CUSTOM_WINDOW_ICON.setValueChangeCallback((callback) -> ((IMinecraft) TweakMyClient.getMinecraftClient()).refreshIcon());
             FEATURE_CUSTOM_WINDOW_TITLE.setValueChangeCallback((callback) -> {

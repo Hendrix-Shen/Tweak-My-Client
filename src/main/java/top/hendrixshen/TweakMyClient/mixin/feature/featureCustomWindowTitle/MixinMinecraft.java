@@ -13,9 +13,11 @@ import top.hendrixshen.TweakMyClient.util.CustomWindowUtils;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
-    @Shadow public abstract void updateTitle();
+    @Shadow
+    public abstract void updateTitle();
 
-    @Shadow private static int fps;
+    @Shadow
+    private static int fps;
 
     @Inject(
             method = "createTitle",

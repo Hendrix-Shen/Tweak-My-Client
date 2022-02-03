@@ -16,7 +16,8 @@ import top.hendrixshen.TweakMyClient.util.render.EnderPortalRenderMode;
 
 @Mixin(TheEndPortalRenderer.class)
 public abstract class MixinTheEndPortalRenderer {
-    @Shadow protected abstract void renderFace(TheEndPortalBlockEntity theEndPortalBlockEntity, Matrix4f matrix4f, VertexConsumer vertexConsumer, float f, float g, float h, float i, float j, float k, float l, float m, float n, float o, float p, Direction direction);
+    @Shadow
+    protected abstract void renderFace(TheEndPortalBlockEntity theEndPortalBlockEntity, Matrix4f matrix4f, VertexConsumer vertexConsumer, float f, float g, float h, float i, float j, float k, float l, float m, float n, float o, float p, Direction direction);
 
     @Inject(
             method = "renderCube",

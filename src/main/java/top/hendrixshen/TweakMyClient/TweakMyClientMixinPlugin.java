@@ -1,6 +1,6 @@
 package top.hendrixshen.TweakMyClient;
 
-import MagicLib.untils.mixin.MagicMixinPlugin;
+import top.hendrixshen.magiclib.untils.mixin.MagicMixinPlugin;
 
 public class TweakMyClientMixinPlugin extends MagicMixinPlugin {
 }
