@@ -35,9 +35,9 @@ repositories {
     maven {
         url 'https://www.cursemaven.com/'
     }
-    maven {
+	maven {
 		url 'https://raw.githubusercontent.com/Hendrix-Shen/Maven/master'
-    }
+	}
 }
 
 dependencies {
@@ -48,7 +48,7 @@ dependencies {
     // Required library
     modApi("top.hendrixshen.magiclib:magiclib:${project.library_magiclib_version}")
     include("top.hendrixshen.magiclib:magiclib:${project.library_magiclib_version}")
-    modApi("fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_masa}:${project.library_malilib_version}")
+	modApi("fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_masa}:${project.library_malilib_version}")
     // Optional mod compatibility library
     modCompileOnly("curse.maven:authme-356643:${project.library_authme_version}")
     modCompileOnly("curse.maven:inGameAcountSwitcher-232676:${project.library_inGameAcountSwitcher_version}")
