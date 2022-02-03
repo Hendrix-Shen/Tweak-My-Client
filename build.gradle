@@ -36,7 +36,7 @@ repositories {
 		url 'https://www.cursemaven.com/'
 	}
 	maven {
-		url 'https://www.jitpack.io'
+		url 'https://raw.githubusercontent.com/Hendrix-Shen/Maven/master'
 	}
 }
 
@@ -46,8 +46,8 @@ dependencies {
 	mappings(loom.officialMojangMappings())
 	modApi("net.fabricmc:fabric-loader:${project.fabric_loader_version}")
 	// Required library
-	modApi("com.github.Hendrix-Shen:MagicLib:${project.library_magiclib_version}")
-	include("com.github.Hendrix-Shen:MagicLib:${project.library_magiclib_version}")
+	modApi("top.hendrixshen.magiclib:magiclib:${project.library_magiclib_version}")
+	include("top.hendrixshen.magiclib:magiclib:${project.library_magiclib_version}")
 	modApi("fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_masa}:${project.library_malilib_version}")
 	// Optional mod compatibility library
 	modCompileOnly("curse.maven:authme-356643:${project.library_authme_version}")

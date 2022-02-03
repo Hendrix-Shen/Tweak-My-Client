@@ -19,7 +19,6 @@ public class RenderHandler implements IRenderer {
         return INSTANCE;
     }
 
-
     public void onRenderWorldLast(float partialTicks, PoseStack matrixStack) {
         if (Configs.Feature.FEATURE_OPEN_WATER_HELPER.getBooleanValue()) {
             OverlayRenderer.getInstance().renderOpenWater(minecraft);
