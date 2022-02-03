@@ -13,9 +13,11 @@ import top.hendrixshen.TweakMyClient.config.Configs;
 
 @Mixin(ItemStack.class)
 public abstract class MixinItemStack {
-    @Shadow public abstract Item getItem();
+    @Shadow
+    public abstract Item getItem();
 
-    @Shadow public abstract Component getDisplayName();
+    @Shadow
+    public abstract Component getDisplayName();
 
     @Inject(
             method = "hasFoil",

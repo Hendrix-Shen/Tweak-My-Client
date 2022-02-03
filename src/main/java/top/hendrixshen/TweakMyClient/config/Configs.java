@@ -384,6 +384,7 @@ public class Configs implements IConfigHandler {
                 FEATURE_OPEN_WATER_HELPER,
                 FEATURE_UNFOCUSED_CPU
         );
+
         static {
             FEATURE_CUSTOM_WINDOW_ICON.setValueChangeCallback((callback) -> ((IMinecraft) TweakMyClient.getMinecraftClient()).refreshIcon());
             FEATURE_CUSTOM_WINDOW_TITLE.setValueChangeCallback((callback) -> {

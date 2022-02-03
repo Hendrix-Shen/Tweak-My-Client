@@ -25,6 +25,7 @@ public class CustomWindowUtils {
     private static String TITLE_CACHE_WITH_ACTIVITY;
 
     public static final Minecraft mc = TweakMyClient.getMinecraftClient();
+
     // These data should not be changed
     static {
         PLACEHOLDER_STATIC_MAP.put("%fabric_loader_version%", FabricLoaderImpl.VERSION);
