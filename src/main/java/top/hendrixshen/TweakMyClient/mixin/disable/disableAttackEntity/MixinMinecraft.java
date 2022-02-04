@@ -17,9 +17,13 @@ import top.hendrixshen.TweakMyClient.config.Configs;
 
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
-    @Shadow @Nullable public HitResult hitResult;
+    @Shadow
+    @Nullable
+    public HitResult hitResult;
 
-    @Shadow @Nullable public LocalPlayer player;
+    @Shadow
+    @Nullable
+    public LocalPlayer player;
 
     @Inject(
             method = "startAttack",
@@ -31,7 +35,7 @@ public class MixinMinecraft {
     )
     private void onAttack(CallbackInfo ci) {
         assert this.hitResult != null;
-        Entity entity = ((EntityHitResult)this.hitResult).getEntity();
+        Entity entity = ((EntityHitResult) this.hitResult).getEntity();
         String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
         String entityName = entity.getName().getString();
         if (Configs.Disable.DISABLE_ATTACK_ENTITY.getBooleanValue() && Configs.List.LIST_DISABLE_ATTACK_ENTITY.getStrings().stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s))) {

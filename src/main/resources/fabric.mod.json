@@ -34,7 +34,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.9.0",
-    "magiclib": ">=1.0.0",
+    "magiclib": ">=0.1.9",
     "malilib": ">=0.10.0-dev.21",
     "minecraft": "1.18.x"
   },

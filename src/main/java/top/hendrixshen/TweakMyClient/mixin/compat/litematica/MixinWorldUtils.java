@@ -1,7 +1,5 @@
 package top.hendrixshen.TweakMyClient.mixin.compat.litematica;
 
-import MagicLib.untils.mixin.Dependencies;
-import MagicLib.untils.mixin.Dependency;
 import fi.dy.masa.litematica.util.WorldUtils;
 import fi.dy.masa.malilib.gui.Message;
 import fi.dy.masa.malilib.util.InfoUtils;
@@ -9,6 +7,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.magiclib.untils.dependency.Dependencies;
+import top.hendrixshen.magiclib.untils.dependency.Dependency;
 
 @Dependencies(dependencyList = {@Dependency(modid = "litematica", version = "*"), @Dependency(modid = "masa_gadget_mod", version = ">=2.0.6", dependencyType = Dependency.DependencyType.CONFLICT)})
 @Mixin(WorldUtils.class)
