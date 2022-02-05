@@ -139,30 +139,30 @@ The time set when overriding the client's world time.
 Modify current window title. 
 
 The available placeholders are as follows:
-- %fabric_loader_asm_version%
-- %fabric_loader_version%
-- %fabric_mod_ver:<modid>%
-- %mc_fps%
-- %mc_protocol_version%
-- %mc_username%
-- %mc_version%
-- %tmc_version%
-- %tmc_version_type%
+- {fabric_loader_asm_version}
+- {fabric_loader_version}
+- {fabric_mod_ver:<modid>}
+- {mc_fps}
+- {mc_protocol_version}
+- {mc_username}
+- {mc_version}
+- {tmc_version}
+- {tmc_version_type}
 
 ### customWindowTitleWithActivity
 Modify the current window title with the current activity. 
 
 The available placeholders are as follows:
-- %fabric_loader_asm_version%
-- %fabric_loader_version%
-- %fabric_mod_ver:<modid>%
-- %mc_activity%
-- %mc_fps%
-- %mc_protocol_version%
-- %mc_username%
-- %mc_version%
-- %tmc_version%
-- %tmc_version_type%
+- {fabric_loader_asm_version}
+- {fabric_loader_version}
+- {fabric_mod_ver:<modid>}
+- {mc_activity}
+- {mc_fps}
+- {mc_protocol_version}
+- {mc_username}
+- {mc_version}
+- {tmc_version}
+- {tmc_version_type}
 
 ### enderPortalRenderMode
 If `endPortalRendererFix` is enabled, the ender portal renders in the specified mode.
