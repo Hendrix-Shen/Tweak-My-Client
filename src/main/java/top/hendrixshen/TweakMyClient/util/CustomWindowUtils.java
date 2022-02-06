@@ -76,7 +76,7 @@ public class CustomWindowUtils {
     }
 
     public static void updateFPS(int fps) {
-        PLACEHOLDER_MAP.put("%mc_fps}", String.valueOf(fps));
+        PLACEHOLDER_MAP.put("{mc_fps}", String.valueOf(fps));
     }
 
     public static void rebuildCache(TitleType type) {
