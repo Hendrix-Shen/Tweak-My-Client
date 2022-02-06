@@ -1,7 +1,7 @@
 package top.hendrixshen.TweakMyClient.mixin.compat.authme;
 
 import fi.dy.masa.malilib.util.StringUtils;
-import me.axieum.mcmod.authme.gui.AuthScreen;
+import me.axieum.mcmod.authme.impl.gui.AuthMethodScreen;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
 import net.minecraft.client.gui.screens.Screen;
@@ -19,7 +19,7 @@ import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 import top.hendrixshen.magiclib.untils.dependency.Dependencies;
 import top.hendrixshen.magiclib.untils.dependency.Dependency;
 
-@Dependencies(dependencyList = @Dependency(modid = "reauth", version = "*"))
+@Dependencies(dependencyList = @Dependency(modid = "authme", version = "*"))
 @Mixin(value = DisconnectedScreen.class, priority = 897)
 public class MixinDisconnectedScreen extends Screen {
     @Shadow
@@ -49,7 +49,7 @@ public class MixinDisconnectedScreen extends Screen {
             addRenderableWidget(new Button(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
                     new TextComponent(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithAuthMe", TweakMyClientReference.getModId()))), button -> {
                 assert this.minecraft != null;
-                this.minecraft.setScreen(new AuthScreen(parent));
+                this.minecraft.setScreen(new AuthMethodScreen(parent));
             }));
             AutoReconnectUtils.reAuthenticateButtonOffsetY += 24;
         }
