@@ -19,7 +19,7 @@ import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 import top.hendrixshen.magiclib.untils.dependency.Dependencies;
 import top.hendrixshen.magiclib.untils.dependency.Dependency;
 
-@Dependencies(dependencyList = @Dependency(modid = "reauth", version = "*"))
+@Dependencies(dependencyList = @Dependency(modid = "authme", version = "*"))
 @Mixin(value = DisconnectedScreen.class, priority = 897)
 public class MixinDisconnectedScreen extends Screen {
     @Shadow
