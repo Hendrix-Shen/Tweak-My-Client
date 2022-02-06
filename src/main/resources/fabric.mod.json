@@ -36,11 +36,6 @@
     "fabricloader": ">=0.9.0",
     "magiclib": ">=0.1.9",
     "malilib": ">=0.10.0-dev.21",
-    "minecraft": "1.16.x"
-  },
-  "suggests": {
-    "authme": ">=1.4.0",
-    "litematica": ">=0.0.0-dev.20210612.170003",
-    "reauth": ">=3.9.2"
+    "minecraft": "1.16.5"
   }
 }

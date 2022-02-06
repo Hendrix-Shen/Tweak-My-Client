@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public class CustomWindowUtils {
     public static final HashMap<String, String> PLACEHOLDER_MAP = Maps.newHashMap();
     public static final HashMap<String, String> PLACEHOLDER_STATIC_MAP = Maps.newHashMap();
-    public static final Pattern MOD_PATTERN = Pattern.compile("(?<=(%fabric_mod_ver:)).*?(?=(%))");
+    public static final Pattern MOD_PATTERN = Pattern.compile("(?<=(\\{fabric_mod_ver:)).*?(?=(}))");
     private static String TITLE_CACHE;
     private static String TITLE_CACHE_WITH_ACTIVITY;
 
@@ -28,12 +28,12 @@ public class CustomWindowUtils {
 
     // These data should not be changed
     static {
-        PLACEHOLDER_STATIC_MAP.put("%fabric_loader_version%", FabricLoaderImpl.VERSION);
-        PLACEHOLDER_STATIC_MAP.put("%fabric_loader_asm_version%", String.valueOf(FabricLoaderImpl.ASM_VERSION));
-        PLACEHOLDER_STATIC_MAP.put("%mc_protocol_version%", String.valueOf(SharedConstants.getProtocolVersion()));
-        PLACEHOLDER_STATIC_MAP.put("%mc_version%", SharedConstants.getCurrentVersion().getName());
-        PLACEHOLDER_STATIC_MAP.put("%tmc_version%", TweakMyClientReference.getModVersion());
-        PLACEHOLDER_STATIC_MAP.put("%tmc_version_type%", TweakMyClientReference.getModVersionType());
+        PLACEHOLDER_STATIC_MAP.put("{fabric_loader_version}", FabricLoaderImpl.VERSION);
+        PLACEHOLDER_STATIC_MAP.put("(fabric_loader_asm_version}", String.valueOf(FabricLoaderImpl.ASM_VERSION));
+        PLACEHOLDER_STATIC_MAP.put("{mc_protocol_version}", String.valueOf(SharedConstants.getProtocolVersion()));
+        PLACEHOLDER_STATIC_MAP.put("{mc_version}", SharedConstants.getCurrentVersion().getName());
+        PLACEHOLDER_STATIC_MAP.put("{tmc_version}", TweakMyClientReference.getModVersion());
+        PLACEHOLDER_STATIC_MAP.put("{tmc_version_type}", TweakMyClientReference.getModVersionType());
         if (Configs.Feature.FEATURE_CUSTOM_WINDOW_TITLE.getBooleanValue()) {
             rebuildCache(TitleType.TITLE);
             rebuildCache(TitleType.TITLE_WITH_ACTIVITY);
@@ -70,13 +70,13 @@ public class CustomWindowUtils {
 
     public static void updatePlaceholders() {
         // Maybe changed by other mods.
-        PLACEHOLDER_MAP.put("%mc_username%", TweakMyClient.getMinecraftClient().getUser().getName());
+        PLACEHOLDER_MAP.put("{mc_username}", TweakMyClient.getMinecraftClient().getUser().getName());
         // Activity data.
-        PLACEHOLDER_MAP.put("%mc_activity%", hasActivity() ? getActivity() : "Null");
+        PLACEHOLDER_MAP.put("{mc_activity}", hasActivity() ? getActivity() : "Null");
     }
 
     public static void updateFPS(int fps) {
-        PLACEHOLDER_MAP.put("%mc_fps%", String.valueOf(fps));
+        PLACEHOLDER_MAP.put("{mc_fps}", String.valueOf(fps));
     }
 
     public static void rebuildCache(TitleType type) {
@@ -94,7 +94,7 @@ public class CustomWindowUtils {
         while (matcher.find()) {
             String group = matcher.group();
             Optional<ModContainer> container = FabricLoader.getInstance().getModContainer(group);
-            str = str.replace(String.format("%%fabric_mod_ver:%s%%", group), container.isPresent() ? container.get().getMetadata().getVersion().getFriendlyString() : "Null");
+            str = str.replace(String.format("{fabric_mod_ver:%s}", group), container.isPresent() ? container.get().getMetadata().getVersion().getFriendlyString() : "Null");
         }
         return str;
     }
