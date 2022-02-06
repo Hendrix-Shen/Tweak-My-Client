@@ -406,8 +406,8 @@ public class Configs implements IConfigHandler {
         public static final ConfigOptionList ANTI_GHOST_ITEMS_MODE = new TranslatableConfigOptionList(PREFIX, "antiGhostItemsMode", AntiGhostItemsMode.AUTOMATIC);
         public static final ConfigInteger AUTO_DROP_INTERVAL = new TranslatableConfigInteger(PREFIX, "autoDropInterval", 0, 0, 1200);
         public static final ConfigInteger AUTO_RECONNECT_TIMER = new TranslatableConfigInteger(PREFIX, "autoReconnectTimer", 5, 0, 60);
-        public static final ConfigString CUSTOM_WINDOW_TITLE = new TranslatableConfigString(PREFIX, "customWindowTitle", "Minecraft %mc_version% with TweakMyClient %tmc_version% | Player %mc_username% | FPS: %mc_fps%");
-        public static final ConfigString CUSTOM_WINDOW_TITLE_WITH_ACTIVITY = new TranslatableConfigString(PREFIX, "customWindowTitleWithActivity", "Minecraft %mc_version% (%mc_activity%) with TweakMyClient %tmc_version% | Player %mc_username% | FPS: %mc_fps%");
+        public static final ConfigString CUSTOM_WINDOW_TITLE = new TranslatableConfigString(PREFIX, "customWindowTitle", "Minecraft {mc_version} with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}");
+        public static final ConfigString CUSTOM_WINDOW_TITLE_WITH_ACTIVITY = new TranslatableConfigString(PREFIX, "customWindowTitleWithActivity", "Minecraft {mc_version} ({mc_activity}) with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}");
         public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
         public static final ConfigOptionList ENDER_PORTAL_RENDER_MODE = new TranslatableConfigOptionList(PREFIX, "enderPortalRenderMode", EnderPortalRenderMode.ACTUAL);
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
