@@ -29,7 +29,7 @@ public class CustomWindowUtils {
     // These data should not be changed
     static {
         PLACEHOLDER_STATIC_MAP.put("{fabric_loader_version}", FabricLoaderImpl.VERSION);
-        PLACEHOLDER_STATIC_MAP.put("(fabric_loader_asm_version}", String.valueOf(FabricLoaderImpl.ASM_VERSION));
+        PLACEHOLDER_STATIC_MAP.put("{fabric_loader_asm_version}", String.valueOf(FabricLoaderImpl.ASM_VERSION));
         PLACEHOLDER_STATIC_MAP.put("{mc_protocol_version}", String.valueOf(SharedConstants.getProtocolVersion()));
         PLACEHOLDER_STATIC_MAP.put("{mc_version}", SharedConstants.getCurrentVersion().getName());
         PLACEHOLDER_STATIC_MAP.put("{tmc_version}", TweakMyClientReference.getModVersion());
