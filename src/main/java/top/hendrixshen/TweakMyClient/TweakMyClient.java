@@ -33,9 +33,10 @@ public class TweakMyClient implements ModInitializer {
         RenderEventHandler.getInstance().registerWorldLastRenderer(renderer);
         String modName = TweakMyClientReference.getModName();
         logger.info(String.format("[%s]: Mod initialized - Version: %s (%s)", modName, TweakMyClientReference.getModVersion(), TweakMyClientReference.getModVersionType()));
-        logger.info(String.format("[%s]: AuthMe was %sdetectect.", modName, (TweakMyClientReference.isAuthMeLoaded ? "" : "not ")));
-        logger.info(String.format("[%s]: InGameAccountSwitcher was %sdetectect.", modName, (TweakMyClientReference.isInGameAccountSwitcherLoaded ? "" : "not ")));
-        logger.info(String.format("[%s]: Litematica was %sdetectect.", modName, (TweakMyClientReference.isLitematicaLoaded ? "" : "not ")));
-        logger.info(String.format("[%s]: ReAuth was %sdetectect.", modName, (TweakMyClientReference.isReAuthLoaded ? "" : "not ")));
+        logger.info(String.format("[%s]: AuthMe was %sdetected.", modName, (TweakMyClientReference.isAuthMeLoaded ? "" : "not ")));
+        logger.info(String.format("[%s]: InGameAccountSwitcher was %sdetected.", modName, (TweakMyClientReference.isInGameAccountSwitcherLoaded ? "" : "not ")));
+        logger.info(String.format("[%s]: Litematica was %sdetected.", modName, (TweakMyClientReference.isLitematicaLoaded ? "" : "not ")));
+        logger.info(String.format("[%s]: ReAuth was %sdetected.", modName, (TweakMyClientReference.isReAuthLoaded ? "" : "not ")));
+    
     }
 }
