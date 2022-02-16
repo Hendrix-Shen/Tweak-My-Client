@@ -36,7 +36,7 @@ repositories {
         url 'https://www.cursemaven.com/'
     }
     maven {
-        url 'https://raw.githubusercontent.com/Hendrix-Shen/Maven/master'
+        url 'https://maven.hendrixshen.top'
     }
 }
 

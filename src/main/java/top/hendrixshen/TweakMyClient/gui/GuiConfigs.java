@@ -8,9 +8,9 @@ import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
-import fi.dy.masa.malilib.util.StringUtils;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.magiclib.untils.language.I18n;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +19,7 @@ public class GuiConfigs extends GuiConfigsBase {
     private static ConfigGuiTab tab = ConfigGuiTab.GENERIC;
 
     public GuiConfigs() {
-        super(10, 50, TweakMyClientReference.getModId(), null, StringUtils.translate(String.format("%s.gui.title.configs", TweakMyClientReference.getModId()), TweakMyClientReference.getModVersion(), StringUtils.translate(String.format("%s.misc.versionType.%s", TweakMyClientReference.getModId(), TweakMyClientReference.getModVersionType()))));
+        super(10, 50, TweakMyClientReference.getModId(), null, I18n.translate("tweakmyclient.gui.title.configs", TweakMyClientReference.getModVersion(), I18n.translate(String.format("tweakmyclient.misc.versionType.%s", TweakMyClientReference.getModVersionType()))));
     }
 
     @Override
@@ -95,7 +95,7 @@ public class GuiConfigs extends GuiConfigsBase {
         }
 
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.gui.button.config_gui.%s", TweakMyClientReference.getModId(), name));
+            return I18n.translate(String.format("%s.gui.button.config_gui.%s", TweakMyClientReference.getModId(), name));
         }
     }
 
