@@ -10,7 +10,6 @@ import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.config.options.*;
 import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
-import fi.dy.masa.malilib.util.StringUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
@@ -27,6 +26,7 @@ import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
 import top.hendrixshen.TweakMyClient.interfaces.IMinecraft;
 import top.hendrixshen.TweakMyClient.util.*;
 import top.hendrixshen.TweakMyClient.util.render.EnderPortalRenderMode;
+import top.hendrixshen.magiclib.untils.language.I18n;
 import top.hendrixshen.magiclib.untils.malilib.*;
 
 import java.io.File;
@@ -101,7 +101,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.antiGhostBlocksMode.%s", TweakMyClientReference.getModId(), this.name));
+            return I18n.translate(String.format("%s.label.antiGhostBlocksMode.%s", TweakMyClientReference.getModId(), this.name));
         }
 
         @Override
@@ -148,7 +148,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.antiGhostItemsMode.%s", TweakMyClientReference.getModId(), this.name));
+            return I18n.translate(String.format("%s.label.antiGhostItemsMode.%s", TweakMyClientReference.getModId(), this.name));
         }
 
         @Override
@@ -195,7 +195,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.autoDropListType.%s", TweakMyClientReference.getModId(), this.name));
+            return I18n.translate(String.format("%s.label.autoDropListType.%s", TweakMyClientReference.getModId(), this.name));
         }
 
         @Override
@@ -242,7 +242,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.targetBlockPositionPrintMode.%s", TweakMyClientReference.getModId(), this.name));
+            return I18n.translate(String.format("%s.label.targetBlockPositionPrintMode.%s", TweakMyClientReference.getModId(), this.name));
         }
 
         @Override
@@ -454,7 +454,7 @@ public class Configs implements IConfigHandler {
                     return true;
                 }
                 if (AntiGhostBlocksUtils.manualRefreshTimer > 0) {
-                    InfoUtils.printActionBarMessage(StringUtils.translate("tweakmyclient.message.antiGhostBlocksManualTrigger.mustWait", AntiGhostBlocksUtils.manualRefreshTimer / 20));
+                    InfoUtils.printActionBarMessage(I18n.translate("tweakmyclient.message.antiGhostBlocksManualTrigger.mustWait", AntiGhostBlocksUtils.manualRefreshTimer / 20));
                     return true;
                 }
                 AntiGhostBlocksUtils.refreshBlocksAroundPlayer();
@@ -467,7 +467,7 @@ public class Configs implements IConfigHandler {
                     return true;
                 }
                 if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
-                    InfoUtils.printActionBarMessage(StringUtils.translate("tweakmyclient.message.antiGhostItemsManualTrigger.mustWait", AntiGhostItemsUtils.manualRefreshTimer / 20));
+                    InfoUtils.printActionBarMessage(I18n.translate("tweakmyclient.message.antiGhostItemsManualTrigger.mustWait", AntiGhostItemsUtils.manualRefreshTimer / 20));
                     return true;
                 }
                 AntiGhostItemsUtils.refreshInventory();
