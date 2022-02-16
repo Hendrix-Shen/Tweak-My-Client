@@ -1,8 +1,8 @@
 package top.hendrixshen.TweakMyClient.util.render;
 
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
-import fi.dy.masa.malilib.util.StringUtils;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
+import top.hendrixshen.magiclib.untils.language.I18n;
 
 public enum EnderPortalRenderMode implements IConfigOptionListEntry {
     ACTUAL("actual"),
@@ -23,7 +23,7 @@ public enum EnderPortalRenderMode implements IConfigOptionListEntry {
 
     @Override
     public String getDisplayName() {
-        return StringUtils.translate(String.format("%s.label.enderPortalRenderMode.%s", TweakMyClientReference.getModId(), this.name));
+        return I18n.translate(String.format("%s.label.enderPortalRenderMode.%s", TweakMyClientReference.getModId(), this.name));
     }
 
     @Override
