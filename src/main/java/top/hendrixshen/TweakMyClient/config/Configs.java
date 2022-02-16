@@ -1,7 +1,6 @@
 package top.hendrixshen.TweakMyClient.config;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.malilib.config.ConfigUtils;
@@ -11,7 +10,6 @@ import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.config.options.*;
 import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
-import fi.dy.masa.malilib.util.StringUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
@@ -19,21 +17,25 @@ import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundChatPacket;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import top.hendrixshen.TweakMyClient.TweakMyClient;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.gui.GuiConfigs;
-import top.hendrixshen.TweakMyClient.util.AntiGhostBlocksUtils;
-import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
-import top.hendrixshen.TweakMyClient.util.AutoDropUtils;
-import top.hendrixshen.TweakMyClient.util.InfoUtils;
+import top.hendrixshen.TweakMyClient.interfaces.IMinecraft;
+import top.hendrixshen.TweakMyClient.util.*;
+import top.hendrixshen.TweakMyClient.util.render.EnderPortalRenderMode;
+import top.hendrixshen.magiclib.untils.language.I18n;
+import top.hendrixshen.magiclib.untils.malilib.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Configs implements IConfigHandler {
     private static final String CONFIG_FILE_NAME = TweakMyClientReference.getModId() + ".json";
+    private static HashSet<Item> ITEM_GLOWING_BLACKLIST = new HashSet<>();
 
     public static void loadFromFile() {
         File configFile = new File(FileUtils.getConfigDirectory(), CONFIG_FILE_NAME);
@@ -54,6 +56,7 @@ public class Configs implements IConfigHandler {
 
         AutoDropUtils.itemStacksBlackList = top.hendrixshen.TweakMyClient.util.StringUtils.getItemStackSets(List.LIST_AUTO_DROP_BLACK_LIST.getStrings());
         AutoDropUtils.itemStacksWhitelist = top.hendrixshen.TweakMyClient.util.StringUtils.getItemStackSets(List.LIST_AUTO_DROP_WHITE_LIST.getStrings());
+        ITEM_GLOWING_BLACKLIST = top.hendrixshen.TweakMyClient.util.StringUtils.getItemStackSets(List.LIST_DISABLE_ITEM_GLOWING.getStrings());
     }
 
     public static void saveToFile() {
@@ -98,7 +101,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.antiGhostBlocksMode.%s", TweakMyClientReference.getModId(), this.name));
+            return I18n.translate(String.format("%s.label.antiGhostBlocksMode.%s", TweakMyClientReference.getModId(), this.name));
         }
 
         @Override
@@ -145,7 +148,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.antiGhostItemsMode.%s", TweakMyClientReference.getModId(), this.name));
+            return I18n.translate(String.format("%s.label.antiGhostItemsMode.%s", TweakMyClientReference.getModId(), this.name));
         }
 
         @Override
@@ -192,7 +195,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.autoDropListType.%s", TweakMyClientReference.getModId(), this.name));
+            return I18n.translate(String.format("%s.label.autoDropListType.%s", TweakMyClientReference.getModId(), this.name));
         }
 
         @Override
@@ -239,7 +242,7 @@ public class Configs implements IConfigHandler {
 
         @Override
         public String getDisplayName() {
-            return StringUtils.translate(String.format("%s.label.targetBlockPositionPrintMode.%s", TweakMyClientReference.getModId(), this.name));
+            return I18n.translate(String.format("%s.label.targetBlockPositionPrintMode.%s", TweakMyClientReference.getModId(), this.name));
         }
 
         @Override
@@ -303,6 +306,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityZombieVillagerRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_FOV_AFFECTED_BY_SPEED = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableFovAffectedBySpeed", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_GUI_SHADOW_LAYER = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableGuiShadowLayer", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_ITEM_GLOWING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableItemGlowing", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_BOSS_BAR = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderBossBar", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_FIRE = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayFire", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_RENDER_OVERLAY_PUMPKIN = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableRenderOverlayPumpkin", false, "");
@@ -323,6 +327,7 @@ public class Configs implements IConfigHandler {
                 DISABLE_ENTITY_WITHER_RENDERING,
                 DISABLE_FOV_AFFECTED_BY_SPEED,
                 DISABLE_GUI_SHADOW_LAYER,
+                DISABLE_ITEM_GLOWING,
                 DISABLE_RENDER_BOSS_BAR,
                 DISABLE_RENDER_OVERLAY_FIRE,
                 DISABLE_RENDER_OVERLAY_PUMPKIN,
@@ -351,6 +356,8 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomBlockOutsideColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_GUI_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomGuiBackgroundColor", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomSidebarBackgroundColor", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_WINDOW_ICON = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomWindowIcon", false, "");
+        public static final ConfigBooleanHotkeyed FEATURE_CUSTOM_WINDOW_TITLE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureCustomWindowTitle", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_DAYLIGHT_OVERRIDE = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureDaylightOverride", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GLOBAL_EVENT_LISTENER = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGlobalEventListener", false, "");
         public static final ConfigBooleanHotkeyed FEATURE_GET_TARGET_BLOCK_POSITION = new TranslatableConfigBooleanHotkeyed(PREFIX, "featureGetTargetBlockPosition", false, "");
@@ -368,6 +375,8 @@ public class Configs implements IConfigHandler {
                 FEATURE_CUSTOM_BLOCK_OUTSIDE_COLOR,
                 FEATURE_CUSTOM_GUI_BACKGROUND_COLOR,
                 FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR,
+                FEATURE_CUSTOM_WINDOW_ICON,
+                FEATURE_CUSTOM_WINDOW_TITLE,
                 FEATURE_DAYLIGHT_OVERRIDE,
                 FEATURE_GLOBAL_EVENT_LISTENER,
                 FEATURE_GET_TARGET_BLOCK_POSITION,
@@ -375,6 +384,16 @@ public class Configs implements IConfigHandler {
                 FEATURE_OPEN_WATER_HELPER,
                 FEATURE_UNFOCUSED_CPU
         );
+
+        static {
+            FEATURE_CUSTOM_WINDOW_ICON.setValueChangeCallback((callback) -> ((IMinecraft) TweakMyClient.getMinecraftClient()).refreshIcon());
+            FEATURE_CUSTOM_WINDOW_TITLE.setValueChangeCallback((callback) -> {
+                CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE);
+                CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE_WITH_ACTIVITY);
+                // If set to false this is necessary.
+                TweakMyClient.getMinecraftClient().updateTitle();
+            });
+        }
     }
 
     public static class Generic {
@@ -387,7 +406,10 @@ public class Configs implements IConfigHandler {
         public static final ConfigOptionList ANTI_GHOST_ITEMS_MODE = new TranslatableConfigOptionList(PREFIX, "antiGhostItemsMode", AntiGhostItemsMode.AUTOMATIC);
         public static final ConfigInteger AUTO_DROP_INTERVAL = new TranslatableConfigInteger(PREFIX, "autoDropInterval", 0, 0, 1200);
         public static final ConfigInteger AUTO_RECONNECT_TIMER = new TranslatableConfigInteger(PREFIX, "autoReconnectTimer", 5, 0, 60);
+        public static final ConfigString CUSTOM_WINDOW_TITLE = new TranslatableConfigString(PREFIX, "customWindowTitle", "Minecraft {mc_version} with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}");
+        public static final ConfigString CUSTOM_WINDOW_TITLE_WITH_ACTIVITY = new TranslatableConfigString(PREFIX, "customWindowTitleWithActivity", "Minecraft {mc_version} ({mc_activity}) with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}");
         public static final ConfigInteger DAYLIGHT_OVERRIDE_TIME = new TranslatableConfigInteger(PREFIX, "daylightOverrideTime", 6000, 0, 24000);
+        public static final ConfigOptionList ENDER_PORTAL_RENDER_MODE = new TranslatableConfigOptionList(PREFIX, "enderPortalRenderMode", EnderPortalRenderMode.ACTUAL);
         public static final ConfigHotkey GET_TARGET_BLOCK_POSITION = new TranslatableConfigHotkey(PREFIX, "getTargetBlockPosition", "");
         public static final ConfigDouble LOW_HEALTH_THRESHOLD = new TranslatableConfigDouble(PREFIX, "lowHealthThreshold", 6, 0, 1000);
         public static final ConfigHotkey MEMORY_CLEANER = new TranslatableConfigHotkey(PREFIX, "memoryCleaner", "");
@@ -395,7 +417,6 @@ public class Configs implements IConfigHandler {
         public static final ConfigDouble TARGET_BLOCK_MAX_TRACE_DISTANCE = new TranslatableConfigDouble(PREFIX, "targetBlockMaxTraceDistance", 100, 0, 200);
         public static final ConfigString TARGET_BLOCK_POSITION_FORMAT = new TranslatableConfigString(PREFIX, "targetBlockPositionFormat", "I'm tracing this position [x: {X},y: {Y}, z: {Z}]");
         public static final ConfigOptionList TARGET_BLOCK_POSITION_PRINT_MODE = new TranslatableConfigOptionList(PREFIX, "targetBlockPositionPrintMode", TargetBlockPositionPrintMode.PRIVATE);
-
         public static final ImmutableList<ConfigHotkey> HOTKEYS = ImmutableList.of(
                 ANTI_GHOST_BLOCKS_MANUAL_TRIGGER,
                 ANTI_GHOST_ITEMS_MANUAL_TRIGGER,
@@ -414,6 +435,9 @@ public class Configs implements IConfigHandler {
                 AUTO_DROP_INTERVAL,
                 AUTO_RECONNECT_TIMER,
                 DAYLIGHT_OVERRIDE_TIME,
+                CUSTOM_WINDOW_TITLE,
+                CUSTOM_WINDOW_TITLE_WITH_ACTIVITY,
+                ENDER_PORTAL_RENDER_MODE,
                 GET_TARGET_BLOCK_POSITION,
                 LOW_HEALTH_THRESHOLD,
                 MEMORY_CLEANER,
@@ -430,7 +454,7 @@ public class Configs implements IConfigHandler {
                     return true;
                 }
                 if (AntiGhostBlocksUtils.manualRefreshTimer > 0) {
-                    InfoUtils.printActionBarMessage(StringUtils.translate("tweakmyclient.message.antiGhostBlocksManualTrigger.mustWait", AntiGhostBlocksUtils.manualRefreshTimer / 20));
+                    InfoUtils.printActionBarMessage(I18n.translate("tweakmyclient.message.antiGhostBlocksManualTrigger.mustWait", AntiGhostBlocksUtils.manualRefreshTimer / 20));
                     return true;
                 }
                 AntiGhostBlocksUtils.refreshBlocksAroundPlayer();
@@ -443,13 +467,15 @@ public class Configs implements IConfigHandler {
                     return true;
                 }
                 if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
-                    InfoUtils.printActionBarMessage(StringUtils.translate("tweakmyclient.message.antiGhostItemsManualTrigger.mustWait", AntiGhostItemsUtils.manualRefreshTimer / 20));
+                    InfoUtils.printActionBarMessage(I18n.translate("tweakmyclient.message.antiGhostItemsManualTrigger.mustWait", AntiGhostItemsUtils.manualRefreshTimer / 20));
                     return true;
                 }
                 AntiGhostItemsUtils.refreshInventory();
                 AntiGhostItemsUtils.manualRefreshTimer = 200;
                 return true;
             });
+            CUSTOM_WINDOW_TITLE.setValueChangeCallback((callback) -> CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE));
+            CUSTOM_WINDOW_TITLE_WITH_ACTIVITY.setValueChangeCallback((callback) -> CustomWindowUtils.rebuildCache(CustomWindowUtils.TitleType.TITLE_WITH_ACTIVITY));
             GET_TARGET_BLOCK_POSITION.getKeybind().setCallback((action, key) -> {
                 if (!Feature.FEATURE_GET_TARGET_BLOCK_POSITION.getBooleanValue()) {
                     return true;
@@ -519,19 +545,22 @@ public class Configs implements IConfigHandler {
         public static final ConfigStringList LIST_DISABLE_ATTACK_ENTITY = new TranslatableConfigStringList(PREFIX, "listDisableAttackEntity", ImmutableList.of("player"));
         public static final ConfigStringList LIST_DISABLE_CLIENT_ENTITY_UPDATES = new TranslatableConfigStringList(PREFIX, "listDisableClientEntityUpdates", ImmutableList.of("zombi"));
         public static final ConfigStringList LIST_DISABLE_ENTITY_RENDERING = new TranslatableConfigStringList(PREFIX, "listDisableEntityRendering", ImmutableList.of("zombi"));
+        public static final ConfigStringList LIST_DISABLE_ITEM_GLOWING = new TranslatableConfigStringList(PREFIX, "listItemGlowing", ImmutableList.of("minecraft:enchanted_book", "potion"));
         public static final ImmutableList<ConfigBase> OPTIONS = ImmutableList.of(
                 LIST_AUTO_DROP_BLACK_LIST,
                 LIST_AUTO_DROP_TYPE,
                 LIST_AUTO_DROP_WHITE_LIST,
                 LIST_DISABLE_ATTACK_ENTITY,
                 LIST_DISABLE_CLIENT_ENTITY_UPDATES,
-                LIST_DISABLE_ENTITY_RENDERING
+                LIST_DISABLE_ENTITY_RENDERING,
+                LIST_DISABLE_ITEM_GLOWING
         );
     }
 
     public static class Patch {
         private static final String PREFIX = String.format("%s.config.patch", TweakMyClientReference.getModId());
         public static final ConfigBoolean DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP = new TranslatableConfigBoolean(PREFIX, "disableLitematicaEasyPlaceFailTip", false);
+        public static final ConfigBoolean ENDER_PORTAL_RENDERER_FIX = new TranslatableConfigBoolean(PREFIX, "endPortalRendererFix", false);
         public static final ConfigBoolean FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL = new TranslatableConfigBoolean(PREFIX, "forcePistonWithoutAffectByTool", false);
         public static ImmutableList<ConfigBoolean> OPTIONS;
 
@@ -540,8 +569,13 @@ public class Configs implements IConfigHandler {
             if (!TweakMyClientReference.isMasaGadgetLoaded && TweakMyClientReference.isLitematicaLoaded) {
                 arrayList.add(DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP);
             }
+            arrayList.add(ENDER_PORTAL_RENDERER_FIX);
             arrayList.add(FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL);
             OPTIONS = ImmutableList.copyOf(arrayList);
         }
+    }
+
+    public static HashSet<Item> getItemGlowingBlackList() {
+        return ITEM_GLOWING_BLACKLIST;
     }
 }

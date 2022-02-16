@@ -1,9 +1,8 @@
 name: CI
 on:
   push:
-    paths:
-      - "src/**"
-      - ".github/workflows/**"
+    branches-ignore:
+      - 'master'
   release:
     types:
       - published
