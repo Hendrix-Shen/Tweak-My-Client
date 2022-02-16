@@ -1,6 +1,5 @@
 package top.hendrixshen.TweakMyClient.mixin.compat.authme;
 
-import fi.dy.masa.malilib.util.StringUtils;
 import me.axieum.mcmod.authme.impl.gui.AuthMethodScreen;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
@@ -18,6 +17,7 @@ import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 import top.hendrixshen.magiclib.untils.dependency.Dependencies;
 import top.hendrixshen.magiclib.untils.dependency.Dependency;
+import top.hendrixshen.magiclib.untils.language.I18n;
 
 @Dependencies(dependencyList = @Dependency(modid = "authme", version = "*"))
 @Mixin(value = DisconnectedScreen.class, priority = 897)
@@ -47,7 +47,7 @@ public class MixinDisconnectedScreen extends Screen {
         if (reason == null || AutoReconnectUtils.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
             Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
             addRenderableWidget(new Button(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
-                    new TextComponent(StringUtils.translate(String.format("%s.message.autoReconnect.reAuthenticateWithAuthMe", TweakMyClientReference.getModId()))), button -> {
+                    new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.reAuthenticateWithAuthMe", TweakMyClientReference.getModId()))), button -> {
                 assert this.minecraft != null;
                 this.minecraft.setScreen(new AuthMethodScreen(parent));
             }));
