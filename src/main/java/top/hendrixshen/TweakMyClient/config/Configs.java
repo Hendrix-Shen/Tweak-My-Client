@@ -567,7 +567,7 @@ public class Configs implements IConfigHandler {
 
         static {
             ArrayList<ConfigBoolean> arrayList = new ArrayList<>();
-            if (!TweakMyClientReference.isMasaGadgetLoaded && TweakMyClientReference.isLitematicaLoaded) {
+            if (!TweakMyClientReference.isOMMCLoaded && TweakMyClientReference.isLitematicaLoaded) {
                 arrayList.add(DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP);
             }
             arrayList.add(ENDER_PORTAL_RENDERER_FIX);

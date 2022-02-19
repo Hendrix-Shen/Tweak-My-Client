@@ -10,7 +10,7 @@ import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.magiclib.untils.dependency.Dependencies;
 import top.hendrixshen.magiclib.untils.dependency.Dependency;
 
-@Dependencies(dependencyList = {@Dependency(modid = "litematica", version = "*"), @Dependency(modid = "masa_gadget_mod", version = ">=2.0.6", dependencyType = Dependency.DependencyType.CONFLICT)})
+@Dependencies(dependencyList = {@Dependency(modid = "litematica", version = "*"), @Dependency(modid = "ommc", version = ">=2.0.6", dependencyType = Dependency.DependencyType.CONFLICT)})
 @Mixin(WorldUtils.class)
 public class MixinWorldUtils {
     @Redirect(
