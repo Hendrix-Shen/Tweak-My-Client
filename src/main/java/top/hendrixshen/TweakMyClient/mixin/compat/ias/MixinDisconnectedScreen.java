@@ -19,7 +19,7 @@ import top.hendrixshen.magiclib.untils.dependency.Dependencies;
 import top.hendrixshen.magiclib.untils.dependency.Dependency;
 import top.hendrixshen.magiclib.untils.language.I18n;
 
-@Dependencies(dependencyList = @Dependency(modid = "ias", version = "*"))
+@Dependencies(dependencyList = @Dependency(modid = "ias", version = ">=7.1.3"))
 @Mixin(value = DisconnectedScreen.class, priority = 898)
 public class MixinDisconnectedScreen extends Screen {
     private final String PREFIX = TweakMyClientReference.getModId();

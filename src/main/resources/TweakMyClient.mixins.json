@@ -39,6 +39,7 @@
     "feature.featureUnfocusedCPU.MixinGameRenderer",
     "patch.endPortalRendererFix.MixinTheEndPortalBlockEntity",
     "patch.endPortalRendererFix.MixinTheEndPortalRenderer",
+    "patch.forceDebugInfoDetailed.MixinPlayer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem"
   ],
   "mixins": [

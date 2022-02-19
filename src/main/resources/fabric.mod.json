@@ -36,6 +36,13 @@
     "fabricloader": ">=0.9.0",
     "magiclib": ">=0.1.13 <0.2",
     "malilib": ">=0.11.5",
-    "minecraft": "1.18.1"
+    "minecraft": "1.19-Deep.Dark.Experimental.Snapshot.1"
+  },
+  "custom": {
+    "compatible": {
+      "authme": ">=2.2.0",
+      "ias": ">=7.1.3",
+      "reauth": ">=3.9.3"
+    }
   }
 }
