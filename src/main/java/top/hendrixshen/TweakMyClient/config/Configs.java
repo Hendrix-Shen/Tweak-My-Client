@@ -561,15 +561,17 @@ public class Configs implements IConfigHandler {
         private static final String PREFIX = String.format("%s.config.patch", TweakMyClientReference.getModId());
         public static final ConfigBoolean DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP = new TranslatableConfigBoolean(PREFIX, "disableLitematicaEasyPlaceFailTip", false);
         public static final ConfigBoolean ENDER_PORTAL_RENDERER_FIX = new TranslatableConfigBoolean(PREFIX, "endPortalRendererFix", false);
+        public static final ConfigBoolean FORCE_DEBUG_INFO_DETAILED = new TranslatableConfigBoolean(PREFIX, "forceDebugInfoDetailed", false);
         public static final ConfigBoolean FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL = new TranslatableConfigBoolean(PREFIX, "forcePistonWithoutAffectByTool", false);
         public static ImmutableList<ConfigBoolean> OPTIONS;
 
         static {
             ArrayList<ConfigBoolean> arrayList = new ArrayList<>();
-            if (!TweakMyClientReference.isMasaGadgetLoaded && TweakMyClientReference.isLitematicaLoaded) {
+            if (!TweakMyClientReference.isOMMCLoaded && TweakMyClientReference.isLitematicaLoaded) {
                 arrayList.add(DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP);
             }
             arrayList.add(ENDER_PORTAL_RENDERER_FIX);
+            arrayList.add(FORCE_DEBUG_INFO_DETAILED);
             arrayList.add(FORCE_PISTON_WITHOUT_AFFECT_BY_TOOL);
             OPTIONS = ImmutableList.copyOf(arrayList);
         }

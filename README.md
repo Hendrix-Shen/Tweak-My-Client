@@ -19,9 +19,9 @@ The default hotkey to open the in-game config GUI is **T + C**.
 
 | Dependency               | Type     | 1.16.5                       | 1.17.1                       | 1.18.1         | Download                                                                                                                                           |
 |--------------------------|----------|------------------------------|------------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Auth Me                  | Optional | \>=1.4.0                     | \>=1.5.0                     | \>=2.2.0       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
-| In-Game Account Switcher | Optional | \>=7.1.0-pre3                | \>=7.1.2                     | \>=7.1.3       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
-| MagicLib                 | Required | \>=0.1.13 <0.2               | \>=0.1.13 <0.2               | \>=0.1.13 <0.2 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
+| Auth Me                  | Optional | \>=2.1.0                     | \>=2.1.0                     | \>=2.2.0       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
+| In-Game Account Switcher | Optional | \>=7.1.3                     | \>=7.1.3                     | \>=7.1.3       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
+| MagicLib                 | Required | \>=0.1.14 <0.2               | \>=0.1.14 <0.2               | \>=0.1.14 <0.2 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
 | MaliLib                  | Required | \>=0.10.0-dev.21             | \>=0.10.0-dev.26             | \>=0.11.5      | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
 | Litematica               | Optional | \>=0.0.0-dev.20210612.170003 | \>=0.0.0-dev.20210906.183617 | \>=0.10.1      | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
 | ReAuth (Fabric)          | Optional | \>=3.9.2                     | \>=3.9.2                     | \>=3.9.2       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
@@ -397,6 +397,11 @@ Note: Takes effect only when litematica is loaded.
 ### endPortalRendererFix
 
 Fixing the endPortal to only render materials at the top.
+
+### forceDebugInfoDetailed
+
+Always show full debug information, even if game rule reducedDebugInfo is true.
+
 
 ### forcePistonWithoutAffectByTool
 

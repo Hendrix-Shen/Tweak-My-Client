@@ -11,7 +11,7 @@ public class TweakMyClientReference {
     public static boolean isAuthMeLoaded = FabricLoader.getInstance().isModLoaded("authme");
     public static boolean isInGameAccountSwitcherLoaded = FabricLoader.getInstance().isModLoaded("ias");
     public static boolean isLitematicaLoaded = FabricLoader.getInstance().isModLoaded("litematica");
-    public static boolean isMasaGadgetLoaded = FabricLoader.getInstance().isModLoaded("masa_gadget_mod");
+    public static boolean isOMMCLoaded = FabricLoader.getInstance().isModLoaded("ommc");
     public static boolean isReAuthLoaded = FabricLoader.getInstance().isModLoaded("reauth");
 
     public static String getModId() {
