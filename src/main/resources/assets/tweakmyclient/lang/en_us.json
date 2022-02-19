@@ -156,6 +156,8 @@
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "Disable easyPlace failure that annoying prompt window.\nNote: Takes effect only when litematica is loaded.",
     "tweakmyclient.config.patch.endPortalRendererFix.name": "endPortalRendererFix",
     "tweakmyclient.config.patch.endPortalRendererFix.comment": "Fixing the endPortal to only render materials at the top.",
+    "tweakmyclient.config.patch.forceDebugInfoDetailed.name": "forceDebugInfoDetailed",
+    "tweakmyclient.config.patch.forceDebugInfoDetailed.comment": "Always show full debug information, even if game rule reducedDebugInfo is true.",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "forcePistonWithoutAffectByTool",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "The pickaxe will no longer be used as an effective mining tool for pistons.",
 
