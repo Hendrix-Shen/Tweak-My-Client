@@ -19,7 +19,7 @@ import top.hendrixshen.magiclib.untils.dependency.Dependencies;
 import top.hendrixshen.magiclib.untils.dependency.Dependency;
 import top.hendrixshen.magiclib.untils.language.I18n;
 
-@Dependencies(dependencyList = @Dependency(modid = "authme", version = "*"))
+@Dependencies(dependencyList = @Dependency(modid = "authme", version = ">=2.2.0"))
 @Mixin(value = DisconnectedScreen.class, priority = 897)
 public class MixinDisconnectedScreen extends Screen {
     @Shadow
