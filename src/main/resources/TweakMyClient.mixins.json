@@ -6,8 +6,8 @@
   "client": [
     "disable.disableAttackEntity.MixinMinecraft",
     "disable.disableClientBlockEvents.MixinClientPacketListener",
-    "disable.disableClientEntityUpdates.MixinClientLevel",
-    "disable.disableEntityRendering.MixinEntityRenderDispatcher",
+    "disable.disableClientEntityUpdates.MixinLevel",
+    "disable.disableClientEntityRendering.MixinEntityRenderDispatcher",
     "disable.disableFovAffectedBySpeed.MixinGameRenderer",
     "disable.disableGuiShadowLayer.MixinScreen",
     "disable.disableItemGlowing.MixinItemStack",
