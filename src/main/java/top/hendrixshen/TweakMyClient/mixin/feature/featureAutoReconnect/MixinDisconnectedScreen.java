@@ -5,7 +5,6 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -46,11 +45,11 @@ public class MixinDisconnectedScreen extends Screen {
         int backButtonY = Math.min(height / 2 + textHeight / 2 + 9, height - 30);
 
         addButton(new Button(backButtonX, backButtonY + 24, 200, 20,
-                new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.static", PREFIX))), b -> AutoReconnectUtils.reconnect(parent)));
+                I18n.translate(String.format("%s.message.autoReconnect.static", PREFIX)), b -> AutoReconnectUtils.reconnect(parent)));
 
         autoReconnectButton =
                 addButton(new Button(backButtonX, backButtonY + 48, 200, 20,
-                        new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.toggle", PREFIX))), b -> onPressAutoReconnect()));
+                        I18n.translate(String.format("%s.message.autoReconnect.toggle", PREFIX)), b -> onPressAutoReconnect()));
         AutoReconnectUtils.reAuthenticateButtonOffsetY = 0;
         ci.cancel();
     }
@@ -67,10 +66,10 @@ public class MixinDisconnectedScreen extends Screen {
     @Override
     public void tick() {
         if (!Configs.Feature.FEATURE_AUTO_RECONNECT.getBooleanValue()) {
-            autoReconnectButton.setMessage(new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.toggle", PREFIX))));
+            autoReconnectButton.setMessage(I18n.translate(String.format("%s.message.autoReconnect.toggle", PREFIX)));
             return;
         }
-        autoReconnectButton.setMessage(new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.timer", PREFIX), (int) Math.ceil(AutoReconnectUtils.ReconnectTimer / 20.0))));
+        autoReconnectButton.setMessage(I18n.translate(String.format("%s.message.autoReconnect.timer", PREFIX), (int) Math.ceil(AutoReconnectUtils.ReconnectTimer / 20.0)));
 
         if (AutoReconnectUtils.ReconnectTimer > 0) {
             AutoReconnectUtils.ReconnectTimer--;

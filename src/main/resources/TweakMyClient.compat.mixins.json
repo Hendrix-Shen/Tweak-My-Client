@@ -7,7 +7,6 @@
   "client": [
     "authme.MixinDisconnectedScreen",
     "ias.MixinDisconnectedScreen",
-    "litematica.MixinWorldUtils",
-    "reauth.MixinDisconnectedScreen"
+    "litematica.MixinWorldUtils"
   ]
 }

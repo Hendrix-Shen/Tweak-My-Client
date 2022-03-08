@@ -16,7 +16,7 @@ public class AntiGhostBlocksUtils {
         ClientPacketListener clientPlayNetworkHandler = minecraftClient.getConnection();
         assert minecraftClient.player != null;
         assert clientPlayNetworkHandler != null;
-        BlockPos blockPos = minecraftClient.player.blockPosition();
+        BlockPos blockPos = new BlockPos(minecraftClient.player);
         int x = blockPos.getX();
         int y = blockPos.getY();
         int z = blockPos.getZ();

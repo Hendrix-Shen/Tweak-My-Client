@@ -21,17 +21,16 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
      * 6 – colorEnd
      */
     @ModifyArgs(
-            method = "renderBackground(Lcom/mojang/blaze3d/vertex/PoseStack;I)V",
+            method = "renderBackground(I)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V"
+                    target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(IIIIII)V"
             )
     )
     private void onFillGradient(Args args) {
         if (!Configs.Disable.DISABLE_GUI_SHADOW_LAYER.getBooleanValue()) {
-            args.set(5, Configs.Color.COLOR_GUI_START.getIntegerValue());
-            args.set(6, Configs.Color.COLOR_GUI_STOP.getIntegerValue());
+            args.set(4, Configs.Color.COLOR_GUI_START.getIntegerValue());
+            args.set(5, Configs.Color.COLOR_GUI_STOP.getIntegerValue());
         }
-
     }
 }

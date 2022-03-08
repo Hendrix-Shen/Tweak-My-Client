@@ -497,7 +497,7 @@ public class Configs implements IConfigHandler {
                                     minecraft.player.chat(str);
                                     break;
                                 case PRIVATE:
-                                    minecraft.player.connection.handleChat(new ClientboundChatPacket(new TextComponent(str), ChatType.CHAT, minecraft.player.getUUID()));
+                                    minecraft.player.connection.handleChat(new ClientboundChatPacket(new TextComponent(str), ChatType.CHAT));
                                     break;
                             }
                         }

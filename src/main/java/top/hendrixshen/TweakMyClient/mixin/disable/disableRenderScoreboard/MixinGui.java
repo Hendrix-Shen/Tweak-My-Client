@@ -18,7 +18,7 @@ public abstract class MixinGui {
             ),
             cancellable = true
     )
-    private void onRenderScoreboardSidebar(PoseStack poseStack, Objective objective, CallbackInfo ci) {
+    private void onRenderScoreboardSidebar(Objective objective, CallbackInfo ci) {
         if (Configs.Disable.DISABLE_RENDER_SCOREBOARD.getBooleanValue()) {
             ci.cancel();
         }

@@ -47,7 +47,6 @@ dependencies {
     modCompileOnly("curse.maven:authme-356643:${project.library_authme_version}")
     modCompileOnly("curse.maven:inGameAcountSwitcher-232676:${project.library_inGameAcountSwitcher_version}")
     modCompileOnly("curse.maven:litematica-308892:${project.library_litematica_version}")
-    modCompileOnly("curse.maven:reauth-403928:${project.library_reauth_version}")
     modCompileOnly("curse.maven:modmenu-308702:${project.library_mod_menu_version}")
 }
 

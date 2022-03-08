@@ -1,14 +1,14 @@
 package top.hendrixshen.TweakMyClient.mixin.feature.featureDaylightOverride;
 
-import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.level.storage.LevelData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.TweakMyClient.config.Configs;
 
-@Mixin(ClientLevel.ClientLevelData.class)
-public class MixinClientLevelClientLevelData {
+@Mixin(LevelData.class)
+public class MixinLevelData {
     @Inject(
             method = "getDayTime",
             at = @At(

@@ -1,6 +1,6 @@
 package top.hendrixshen.TweakMyClient.mixin.compat.authme;
 
-import me.axieum.mcmod.authme.impl.gui.AuthMethodScreen;
+import me.axieum.mcmod.authme.gui.AuthScreen;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
 import net.minecraft.client.gui.screens.Screen;
@@ -47,9 +47,9 @@ public class MixinDisconnectedScreen extends Screen {
         if (reason == null || AutoReconnectUtils.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
             Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
             addButton(new Button(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
-                    new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.reAuthenticateWithAuthMe", TweakMyClientReference.getModId()))), button -> {
+                    I18n.translate(String.format("%s.message.autoReconnect.reAuthenticateWithAuthMe", TweakMyClientReference.getModId())), button -> {
                 assert this.minecraft != null;
-                this.minecraft.setScreen(new AuthMethodScreen(parent));
+                this.minecraft.setScreen(new AuthScreen(parent));
             }));
             AutoReconnectUtils.reAuthenticateButtonOffsetY += 24;
         }

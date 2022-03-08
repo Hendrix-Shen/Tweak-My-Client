@@ -48,7 +48,7 @@ public class MixinDisconnectedScreen extends Screen {
         if (reason == null || AutoReconnectUtils.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
             Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
             addButton(new Button(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
-                    new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.reAuthenticateWithInGameAccountSwitcher", PREFIX))), button -> {
+                    I18n.translate(String.format("%s.message.autoReconnect.reAuthenticateWithInGameAccountSwitcher", PREFIX)), button -> {
                 assert this.minecraft != null;
                 this.minecraft.setScreen(new GuiAccountSelector(parent));
             }));

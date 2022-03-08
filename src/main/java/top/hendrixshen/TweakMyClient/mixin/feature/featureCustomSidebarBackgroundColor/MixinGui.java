@@ -13,13 +13,13 @@ public abstract class MixinGui {
             method = "displayScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/Gui;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V",
+                    target = "Lnet/minecraft/client/gui/Gui;fill(IIIII)V",
                     ordinal = 1
             )
     )
     private void changeSidebarTitleBackgroundColor(Args args) {
         if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR.getBooleanValue()) {
-            args.set(5, Configs.Color.COLOR_SIDEBAR_TITLE.getIntegerValue());
+            args.set(4, Configs.Color.COLOR_SIDEBAR_TITLE.getIntegerValue());
         }
     }
 
@@ -27,13 +27,13 @@ public abstract class MixinGui {
             method = "displayScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/Gui;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V",
+                    target = "Lnet/minecraft/client/gui/Gui;fill(IIIII)V",
                     ordinal = 0
             )
     )
     private void changeSidebarContentBackgroundColor_1(Args args) {
         if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR.getBooleanValue()) {
-            args.set(5, Configs.Color.COLOR_SIDEBAR_CONTENT.getIntegerValue());
+            args.set(4, Configs.Color.COLOR_SIDEBAR_CONTENT.getIntegerValue());
         }
     }
 
@@ -41,13 +41,13 @@ public abstract class MixinGui {
             method = "displayScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/Gui;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V",
+                    target = "Lnet/minecraft/client/gui/Gui;fill(IIIII)V",
                     ordinal = 2
             )
     )
     private void changeSidebarContentBackgroundColor_2(Args args) {
         if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR.getBooleanValue()) {
-            args.set(5, Configs.Color.COLOR_SIDEBAR_CONTENT.getIntegerValue());
+            args.set(4, Configs.Color.COLOR_SIDEBAR_CONTENT.getIntegerValue());
         }
     }
 }

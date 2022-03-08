@@ -24,7 +24,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             )
     )
     private void onClimbable(CallbackInfo ci) {
-        if (Configs.Feature.FEATURE_AUTO_CLIMB.getBooleanValue() && this.onClimbable() && this.xRot <= -50f && !this.isCrouching()) {
+        if (Configs.Feature.FEATURE_AUTO_CLIMB.getBooleanValue() && this.onLadder() && this.xRot <= -50f && !this.isCrouching()) {
             Vec3 vec3 = this.getDeltaMovement();
             this.setDeltaMovement(vec3.x, 0.1176D, vec3.z);
         }

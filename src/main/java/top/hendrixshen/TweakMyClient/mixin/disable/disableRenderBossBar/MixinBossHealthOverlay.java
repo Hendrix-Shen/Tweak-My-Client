@@ -17,7 +17,7 @@ public class MixinBossHealthOverlay {
             ),
             cancellable = true
     )
-    private void onRender(PoseStack poseStack, CallbackInfo ci) {
+    private void onRender(CallbackInfo ci) {
         if (Configs.Disable.DISABLE_RENDER_BOSS_BAR.getBooleanValue()) {
             ci.cancel();
         }
