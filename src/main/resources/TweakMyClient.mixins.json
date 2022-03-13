@@ -6,8 +6,8 @@
   "client": [
     "disable.disableAttackEntity.MixinMinecraft",
     "disable.disableClientBlockEvents.MixinClientPacketListener",
-    "disable.disableClientEntityUpdates.MixinClientLevel",
-    "disable.disableEntityRendering.MixinEntityRenderDispatcher",
+    "disable.disableClientEntityRendering.MixinEntityRenderDispatcher",
+    "disable.disableClientEntityUpdates.MixinLevel",
     "disable.disableFovAffectedBySpeed.MixinGameRenderer",
     "disable.disableGuiShadowLayer.MixinScreen",
     "disable.disableItemGlowing.MixinItemStack",
@@ -28,6 +28,7 @@
     "feature.featureAutoReconnect.MixinMinecraft",
     "feature.featureAutoRespawn.MixinDeathScreen",
     "feature.featureCustomBlockOutsideColor.MixinLevelRenderer",
+    "feature.featureCustomGuiBackgroundColor.MixinScreen",
     "feature.featureCustomSidebarBackgroundColor.MixinGui",
     "feature.featureCustomWindowIcon.MixinMain",
     "feature.featureCustomWindowIcon.MixinMinecraft",

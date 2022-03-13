@@ -300,10 +300,10 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_TNT_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityTNTUpdates", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_WITHER_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityWitherUpdates", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_UPDATES = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityZombieVillagerUpdates", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_ENTITY_IN_LIST_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityInListRendering", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_ENTITY_TNT_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityTNTRendering", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_ENTITY_WITHER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityWitherRendering", false, "");
-        public static final ConfigBooleanHotkeyed DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableEntityZombieVillagerRendering", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_IN_LIST_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityInListRendering", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_TNT_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityTNTRendering", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_WITHER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityWitherRendering", false, "");
+        public static final ConfigBooleanHotkeyed DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_RENDERING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableClientEntityZombieVillagerRendering", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_FOV_AFFECTED_BY_SPEED = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableFovAffectedBySpeed", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_GUI_SHADOW_LAYER = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableGuiShadowLayer", false, "");
         public static final ConfigBooleanHotkeyed DISABLE_ITEM_GLOWING = new TranslatableConfigBooleanHotkeyed(PREFIX, "disableItemGlowing", false, "");
@@ -321,10 +321,10 @@ public class Configs implements IConfigHandler {
                 DISABLE_CLIENT_ENTITY_TNT_UPDATES,
                 DISABLE_CLIENT_ENTITY_WITHER_UPDATES,
                 DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_UPDATES,
-                DISABLE_ENTITY_IN_LIST_RENDERING,
-                DISABLE_ENTITY_TNT_RENDERING,
-                DISABLE_ENTITY_ZOMBIE_VILLAGER_RENDERING,
-                DISABLE_ENTITY_WITHER_RENDERING,
+                DISABLE_CLIENT_ENTITY_IN_LIST_RENDERING,
+                DISABLE_CLIENT_ENTITY_TNT_RENDERING,
+                DISABLE_CLIENT_ENTITY_ZOMBIE_VILLAGER_RENDERING,
+                DISABLE_CLIENT_ENTITY_WITHER_RENDERING,
                 DISABLE_FOV_AFFECTED_BY_SPEED,
                 DISABLE_GUI_SHADOW_LAYER,
                 DISABLE_ITEM_GLOWING,
@@ -544,7 +544,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigStringList LIST_AUTO_DROP_WHITE_LIST = new TranslatableConfigStringList(PREFIX, "listAutoDropWhiteList", ImmutableList.of("minecraft:stone", "minecraft:dirt", "minecraft:cobblestone", "minecraft:gravel", "minecraft:rotten_flesh"));
         public static final ConfigStringList LIST_DISABLE_ATTACK_ENTITY = new TranslatableConfigStringList(PREFIX, "listDisableAttackEntity", ImmutableList.of("player"));
         public static final ConfigStringList LIST_DISABLE_CLIENT_ENTITY_UPDATES = new TranslatableConfigStringList(PREFIX, "listDisableClientEntityUpdates", ImmutableList.of("zombi"));
-        public static final ConfigStringList LIST_DISABLE_ENTITY_RENDERING = new TranslatableConfigStringList(PREFIX, "listDisableEntityRendering", ImmutableList.of("zombi"));
+        public static final ConfigStringList LIST_DISABLE_CLIENT_ENTITY_RENDERING = new TranslatableConfigStringList(PREFIX, "listDisableClientEntityRendering", ImmutableList.of("zombi"));
         public static final ConfigStringList LIST_DISABLE_ITEM_GLOWING = new TranslatableConfigStringList(PREFIX, "listItemGlowing", ImmutableList.of("minecraft:enchanted_book", "potion"));
         public static final ImmutableList<ConfigBase> OPTIONS = ImmutableList.of(
                 LIST_AUTO_DROP_BLACK_LIST,
@@ -552,7 +552,7 @@ public class Configs implements IConfigHandler {
                 LIST_AUTO_DROP_WHITE_LIST,
                 LIST_DISABLE_ATTACK_ENTITY,
                 LIST_DISABLE_CLIENT_ENTITY_UPDATES,
-                LIST_DISABLE_ENTITY_RENDERING,
+                LIST_DISABLE_CLIENT_ENTITY_RENDERING,
                 LIST_DISABLE_ITEM_GLOWING
         );
     }
