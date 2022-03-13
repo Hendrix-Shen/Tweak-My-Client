@@ -73,7 +73,7 @@ jobs:
       matrix:
         java: [17]
         os: [ubuntu-latest]
-        branch: [1.16, 1.17, 1.18, 1.19]
+        branch: [1.15, 1.16, 1.17, 1.18, 1.19]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout the sources
