@@ -5,18 +5,14 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.TweakMyClient.util.AntiGhostBlocksUtils;
+import top.hendrixshen.TweakMyClient.util.AntiGhostItemsUtils;
 
 @Mixin(LocalPlayer.class)
 public abstract class MixinLocalPlayer extends LivingEntity {
-    @Shadow
-    private boolean startedUsingItem;
-
     protected MixinLocalPlayer(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
     }
@@ -28,20 +24,20 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             )
     )
     private void onTick(CallbackInfo ci) {
-        if (Configs.Feature.FEATURE_ANTI_GHOST_BLOCKS.getBooleanValue()) {
-            Configs.AntiGhostBlocksMode mode = (Configs.AntiGhostBlocksMode) Configs.Generic.ANTI_GHOST_BLOCKS_MODE.getOptionListValue();
+        if (Configs.Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue()) {
+            Configs.AntiGhostItemsMode mode = (Configs.AntiGhostItemsMode) Configs.Generic.ANTI_GHOST_ITEMS_MODE.getOptionListValue();
             switch (mode) {
                 case MANUAL:
-                    if (AntiGhostBlocksUtils.manualRefreshTimer > 0) {
-                        AntiGhostBlocksUtils.manualRefreshTimer--;
+                    if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
+                        AntiGhostItemsUtils.manualRefreshTimer--;
                     }
                     break;
                 case AUTOMATIC:
-                    if (AntiGhostBlocksUtils.automaticRefreshTimer > 0) {
-                        AntiGhostBlocksUtils.automaticRefreshTimer--;
+                    if (AntiGhostItemsUtils.automaticRefreshTimer > 0) {
+                        AntiGhostItemsUtils.automaticRefreshTimer--;
                     } else {
-                        AntiGhostBlocksUtils.refreshBlocksAroundPlayer();
-                        AntiGhostBlocksUtils.automaticRefreshTimer = Configs.Generic.ANTI_GHOST_BLOCKS_AUTO_TRIGGER_INTERVAL.getIntegerValue() * 20;
+                        AntiGhostItemsUtils.refreshInventory();
+                        AntiGhostItemsUtils.automaticRefreshTimer = Configs.Generic.ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL.getIntegerValue() * 20;
                     }
                     break;
             }
