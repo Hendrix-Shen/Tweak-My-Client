@@ -25,7 +25,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
     )
     private void onTick(CallbackInfo ci) {
         if (Configs.Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue()) {
-            Configs.AntiGhostItemsMode mode = (Configs.AntiGhostItemsMode) Configs.Generic.ANTI_GHOST_BLOCKS_MODE.getOptionListValue();
+            Configs.AntiGhostItemsMode mode = (Configs.AntiGhostItemsMode) Configs.Generic.ANTI_GHOST_ITEMS_MODE.getOptionListValue();
             switch (mode) {
                 case MANUAL:
                     if (AntiGhostItemsUtils.manualRefreshTimer > 0) {
@@ -37,7 +37,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
                         AntiGhostItemsUtils.automaticRefreshTimer--;
                     } else {
                         AntiGhostItemsUtils.refreshInventory();
-                        AntiGhostItemsUtils.automaticRefreshTimer = Configs.Generic.ANTI_GHOST_BLOCKS_AUTO_TRIGGER_INTERVAL.getIntegerValue() * 20;
+                        AntiGhostItemsUtils.automaticRefreshTimer = Configs.Generic.ANTI_GHOST_ITEMS_AUTO_TRIGGER_INTERVAL.getIntegerValue() * 20;
                     }
                     break;
             }
