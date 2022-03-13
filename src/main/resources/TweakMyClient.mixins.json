@@ -28,6 +28,7 @@
     "feature.featureAutoReconnect.MixinMinecraft",
     "feature.featureAutoRespawn.MixinDeathScreen",
     "feature.featureCustomBlockOutsideColor.MixinLevelRenderer",
+    "feature.featureCustomGuiBackgroundColor.MixinScreen",
     "feature.featureCustomSidebarBackgroundColor.MixinGui",
     "feature.featureCustomWindowIcon.MixinMain",
     "feature.featureCustomWindowIcon.MixinMinecraft",
