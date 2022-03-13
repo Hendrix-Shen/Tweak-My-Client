@@ -1,5 +1,6 @@
 package top.hendrixshen.TweakMyClient.mixin.compat.reauth;
 
+import me.axieum.mcmod.authme.impl.gui.AuthMethodScreen;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
 import net.minecraft.client.gui.screens.Screen;
@@ -11,7 +12,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import technicianlp.reauth.gui.AuthScreen;
 import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.TweakMyClient.config.Configs;
 import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
@@ -50,7 +50,7 @@ public class MixinDisconnectedScreen extends Screen {
             addRenderableWidget(new Button(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
                     new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.reAuthenticateWithReAuth", PREFIX))), button -> {
                 assert this.minecraft != null;
-                this.minecraft.setScreen(new AuthScreen(parent));
+                this.minecraft.setScreen(new AuthMethodScreen(parent));
             }));
             AutoReconnectUtils.reAuthenticateButtonOffsetY += 24;
         }

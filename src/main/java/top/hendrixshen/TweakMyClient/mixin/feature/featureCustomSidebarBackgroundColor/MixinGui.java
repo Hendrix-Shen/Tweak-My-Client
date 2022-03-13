@@ -1,41 +1,53 @@
 package top.hendrixshen.TweakMyClient.mixin.feature.featureCustomSidebarBackgroundColor;
 
-import net.minecraft.client.Options;
 import net.minecraft.client.gui.Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import top.hendrixshen.TweakMyClient.config.Configs;
 
 @Mixin(Gui.class)
 public abstract class MixinGui {
-    @Redirect(
+    @ModifyArgs(
             method = "displayScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/Options;getBackgroundColor(F)I",
+                    target = "Lnet/minecraft/client/gui/Gui;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V",
                     ordinal = 1
             )
     )
-    private int changeSidebarTitleBackgroundColor(Options instance, float f) {
+    private void changeSidebarTitleBackgroundColor(Args args) {
         if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR.getBooleanValue()) {
-            return Configs.Color.COLOR_SIDEBAR_TITLE.getIntegerValue();
+            args.set(5, Configs.Color.COLOR_SIDEBAR_TITLE.getIntegerValue());
         }
-        return instance.getBackgroundColor(f);
     }
 
-    @Redirect(
+    @ModifyArgs(
             method = "displayScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/Options;getBackgroundColor(F)I",
+                    target = "Lnet/minecraft/client/gui/Gui;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V",
                     ordinal = 0
             )
     )
-    private int changeSidebarContentBackgroundColor(Options instance, float f) {
+    private void changeSidebarContentBackgroundColor_1(Args args) {
         if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR.getBooleanValue()) {
-            return Configs.Color.COLOR_SIDEBAR_CONTENT.getIntegerValue();
+            args.set(5, Configs.Color.COLOR_SIDEBAR_CONTENT.getIntegerValue());
         }
-        return instance.getBackgroundColor(f);
+    }
+
+    @ModifyArgs(
+            method = "displayScoreboardSidebar",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/gui/Gui;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V",
+                    ordinal = 2
+            )
+    )
+    private void changeSidebarContentBackgroundColor_2(Args args) {
+        if (Configs.Feature.FEATURE_CUSTOM_SIDEBAR_BACKGROUND_COLOR.getBooleanValue()) {
+            args.set(5, Configs.Color.COLOR_SIDEBAR_CONTENT.getIntegerValue());
+        }
     }
 }

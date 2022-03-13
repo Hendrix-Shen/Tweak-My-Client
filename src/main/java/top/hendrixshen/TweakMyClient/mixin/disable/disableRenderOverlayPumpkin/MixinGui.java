@@ -1,26 +1,25 @@
 package top.hendrixshen.TweakMyClient.mixin.disable.disableRenderOverlayPumpkin;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.TweakMyClient.config.Configs;
 
 @Mixin(Gui.class)
 public abstract class MixinGui {
-    @Redirect(
+    @Inject(
             method = "render",
             at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"
-            )
+                    value = "HEAD"
+            ),
+            cancellable = true
     )
-    private boolean onRenderPumpkinOverlay(ItemStack instance, Item item) {
-        if (!Configs.Disable.DISABLE_RENDER_OVERLAY_PUMPKIN.getBooleanValue()) {
-            return instance.is(item);
+    private void onRenderPumpkinOverlay(PoseStack poseStack, float f, CallbackInfo ci) {
+        if (Configs.Disable.DISABLE_RENDER_OVERLAY_PUMPKIN.getBooleanValue()) {
+            ci.cancel();
         }
-        return false;
     }
 }
