@@ -28,8 +28,8 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             )
     )
     private void onTick(CallbackInfo ci) {
-        if (Configs.Feature.FEATURE_ANTI_GHOST_BLOCKS.getBooleanValue()) {
-            Configs.AntiGhostBlocksMode mode = (Configs.AntiGhostBlocksMode) Configs.Generic.ANTI_GHOST_BLOCKS_MODE.getOptionListValue();
+        if (Configs.Feature.FEATURE_ANTI_GHOST_ITEMS.getBooleanValue()) {
+            Configs.AntiGhostItemsMode mode = (Configs.AntiGhostItemsMode) Configs.Generic.ANTI_GHOST_ITEMS_MODE.getOptionListValue();
             switch (mode) {
                 case MANUAL:
                     if (AntiGhostBlocksUtils.manualRefreshTimer > 0) {
