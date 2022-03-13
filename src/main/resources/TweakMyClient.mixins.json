@@ -12,7 +12,6 @@
     "disable.disableGuiShadowLayer.MixinScreen",
     "disable.disableItemGlowing.MixinItemStack",
     "disable.disableRenderBossBar.MixinBossHealthOverlay",
-    "disable.disableRenderOverlayFire.IMixinScreenEffectRenderer",
     "disable.disableRenderOverlayFire.MixinScreenEffectRenderer",
     "disable.disableRenderOverlayPumpkin.MixinGui",
     "disable.disableRenderScoreboard.MixinGui",
