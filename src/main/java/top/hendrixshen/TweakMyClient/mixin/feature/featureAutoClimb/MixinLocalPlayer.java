@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.feature.featureAutoClimb;
+package top.hendrixshen.tweakmyclient.mixin.feature.featureAutoClimb;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.EntityType;
@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(LocalPlayer.class)
 public abstract class MixinLocalPlayer extends LivingEntity {
@@ -24,7 +24,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             )
     )
     private void onClimbable(CallbackInfo ci) {
-        if (Configs.Feature.FEATURE_AUTO_CLIMB.getBooleanValue() && this.onClimbable() && this.xRot <= -50f && !this.isCrouching()) {
+        if (Configs.featureAutoClimb.getBooleanValue() && this.onClimbable() && this.xRot <= -50f && !this.isCrouching()) {
             Vec3 vec3 = this.getDeltaMovement();
             this.setDeltaMovement(vec3.x, 0.1176D, vec3.z);
         }

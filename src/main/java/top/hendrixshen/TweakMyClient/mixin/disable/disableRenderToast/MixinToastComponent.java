@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.disable.disableRenderToast;
+package top.hendrixshen.tweakmyclient.mixin.disable.disableRenderToast;
 
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 import java.util.Deque;
 
@@ -26,8 +26,7 @@ public class MixinToastComponent {
             cancellable = true
     )
     private void onAddToToastQueue(Toast toast, CallbackInfo ci) {
-        if (Configs.Disable.DISABLE_RENDER_TOAST.getBooleanValue()) {
-            queued.clear();
+        if (Configs.disableRenderToast.getBooleanValue()) {
             ci.cancel();
         }
     }

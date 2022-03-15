@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.disable.disableSlowdown;
+package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.EntityType;
@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(LocalPlayer.class)
 public abstract class MixinLocalPlayer extends LivingEntity {
@@ -28,7 +28,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             )
     )
     private boolean getUsingItemState(LocalPlayer instance) {
-        if (Configs.Disable.DISABLE_SLOWDOWN.getBooleanValue()) {
+        if (Configs.disableSlowdown.getBooleanValue()) {
             return false;
         }
         return this.startedUsingItem;

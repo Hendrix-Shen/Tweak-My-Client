@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.util.render;
+package top.hendrixshen.tweakmyclient.util.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
@@ -10,7 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 import org.lwjgl.opengl.GL11;
 
-public class RenderUtils {
+public class RenderUtil {
     public static void renderAreaOutline(BlockPos pos1, BlockPos pos2, float lineWidth, Color4f colorX, Color4f colorY, Color4f colorZ, Minecraft minecraft) {
         RenderSystem.lineWidth(lineWidth);
 

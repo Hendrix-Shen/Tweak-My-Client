@@ -1,13 +1,13 @@
-package top.hendrixshen.TweakMyClient.util;
+package top.hendrixshen.tweakmyclient.util;
 
 import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
-import top.hendrixshen.TweakMyClient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.TweakMyClient;
 
-public class AutoReconnectUtils {
+public class AutoReconnectUtil {
     public static int ReconnectTimer;
     public static int reAuthenticateButtonOffsetY;
     private static ServerData lastServer;
@@ -21,7 +21,7 @@ public class AutoReconnectUtils {
     }
 
     public static void reconnect(Screen screen) {
-        ServerData serverInfo = AutoReconnectUtils.getLastServer();
+        ServerData serverInfo = AutoReconnectUtil.getLastServer();
         if (lastServer != null) {
             TweakMyClient.getMinecraftClient().setScreen(new ConnectScreen(screen, TweakMyClient.getMinecraftClient(), serverInfo));
         }
