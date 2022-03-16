@@ -7,5 +7,5 @@ public class ConfigCategory {
     public static final String FEATURE = "feature";
     public static final String GENERIC = "generic";
     public static final String LIST = "list";
-    public static final String Patch = "patch";
+    public static final String PATCH = "patch";
 }

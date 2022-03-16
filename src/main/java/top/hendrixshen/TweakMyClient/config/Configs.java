@@ -63,16 +63,16 @@ public class Configs {
     public static final ConfigOptionList targetBlockPositionPrintMode = cm.createOptionList("targetBlockPositionPrintMode", TargetBlockPositionPrintMode.PRIVATE);
 
     // Patch configs
-    @Config(category = ConfigCategory.Patch)
+    @Config(category = ConfigCategory.PATCH)
     public static final ConfigBoolean disableLitematicaEasyPlaceFailTip = cm.createBoolean("disableLitematicaEasyPlaceFailTip", false);
 
-    @Config(category = ConfigCategory.Patch)
+    @Config(category = ConfigCategory.PATCH)
     public static final ConfigBoolean endPortalRendererFix = cm.createBoolean("endPortalRendererFix", false);
 
-    @Config(category = ConfigCategory.Patch)
+    @Config(category = ConfigCategory.PATCH)
     public static final ConfigBoolean forceDebugInfoDetailed = cm.createBoolean("forceDebugInfoDetailed", false);
 
-    @Config(category = ConfigCategory.Patch)
+    @Config(category = ConfigCategory.PATCH)
     public static final ConfigBoolean forcePistonWithoutAffectByTool = cm.createBoolean("forcePistonWithoutAffectByTool", false);
 
     // List configs
