@@ -18,7 +18,6 @@ import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import top.hendrixshen.magiclib.untils.language.I18n;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.config.ConfigCategory;
@@ -28,8 +27,6 @@ import top.hendrixshen.tweakmyclient.helper.TargetBlockPositionPrintMode;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 import top.hendrixshen.tweakmyclient.util.InfoUtil;
 import top.hendrixshen.tweakmyclient.util.InventoryUtil;
-
-import java.awt.*;
 
 import static top.hendrixshen.tweakmyclient.TweakMyClient.cm;
 
@@ -162,7 +159,7 @@ public class CallBacks {
     }
 
     public static boolean openConfigGuiCallback(KeyAction keyAction, IKeybind keybind) {
-        GuiBase.openGui(new ConfigGui(TweakMyClientReference.getModId(), ConfigCategory.GENERIC, cm));
+        GuiBase.openGui(ConfigGui.getInstance());
         return true;
     }
 }
