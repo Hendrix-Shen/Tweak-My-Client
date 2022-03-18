@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.feature.featureAutoReconnect;
+package top.hendrixshen.tweakmyclient.mixin.feature.featureAutoReconnect;
 
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 import net.minecraft.client.gui.components.Button;
@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.TweakMyClient.TweakMyClientReference;
-import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
 import top.hendrixshen.magiclib.untils.language.I18n;
+import top.hendrixshen.tweakmyclient.TweakMyClientReference;
+import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.util.AutoReconnectUtil;
 
 @Mixin(value = DisconnectedScreen.class, priority = 900)
 public class MixinDisconnectedScreen extends Screen {
@@ -39,43 +39,43 @@ public class MixinDisconnectedScreen extends Screen {
             cancellable = true
     )
     private void onInitDisconnectedScreen(CallbackInfo ci) {
-        if (Configs.Feature.FEATURE_AUTO_RECONNECT.getBooleanValue()) {
-            AutoReconnectUtils.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
+        if (Configs.featureAutoReconnect.getBooleanValue()) {
+            AutoReconnectUtil.ReconnectTimer = Configs.autoReconnectTimer.getIntegerValue() * 20;
         }
         int backButtonX = width / 2 - 100;
         int backButtonY = Math.min(height / 2 + textHeight / 2 + 9, height - 30);
 
         addRenderableWidget(new Button(backButtonX, backButtonY + 24, 200, 20,
-                new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.static", PREFIX))), b -> AutoReconnectUtils.reconnect(parent)));
+                new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.static", PREFIX))), b -> AutoReconnectUtil.reconnect(parent)));
 
         autoReconnectButton =
                 addRenderableWidget(new Button(backButtonX, backButtonY + 48, 200, 20,
                         new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.toggle", PREFIX))), b -> onPressAutoReconnect()));
-        AutoReconnectUtils.reAuthenticateButtonOffsetY = 0;
+        AutoReconnectUtil.reAuthenticateButtonOffsetY = 0;
         ci.cancel();
     }
 
     private void onPressAutoReconnect() {
-        ConfigBooleanHotkeyed featureAutoReconnect = Configs.Feature.FEATURE_AUTO_RECONNECT;
+        ConfigBooleanHotkeyed featureAutoReconnect = Configs.featureAutoReconnect;
         featureAutoReconnect.setBooleanValue(!featureAutoReconnect.getBooleanValue());
 
         if (featureAutoReconnect.getBooleanValue()) {
-            AutoReconnectUtils.ReconnectTimer = Configs.Generic.AUTO_RECONNECT_TIMER.getIntegerValue() * 20;
+            AutoReconnectUtil.ReconnectTimer = Configs.autoReconnectTimer.getIntegerValue() * 20;
         }
     }
 
     @Override
     public void tick() {
-        if (!Configs.Feature.FEATURE_AUTO_RECONNECT.getBooleanValue()) {
+        if (!Configs.featureAutoReconnect.getBooleanValue()) {
             autoReconnectButton.setMessage(new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.toggle", PREFIX))));
             return;
         }
-        autoReconnectButton.setMessage(new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.timer", PREFIX), (int) Math.ceil(AutoReconnectUtils.ReconnectTimer / 20.0))));
+        autoReconnectButton.setMessage(new TextComponent(I18n.translate(String.format("%s.message.autoReconnect.timer", PREFIX), (int) Math.ceil(AutoReconnectUtil.ReconnectTimer / 20.0))));
 
-        if (AutoReconnectUtils.ReconnectTimer > 0) {
-            AutoReconnectUtils.ReconnectTimer--;
+        if (AutoReconnectUtil.ReconnectTimer > 0) {
+            AutoReconnectUtil.ReconnectTimer--;
             return;
         }
-        AutoReconnectUtils.reconnect(parent);
+        AutoReconnectUtil.reconnect(parent);
     }
 }

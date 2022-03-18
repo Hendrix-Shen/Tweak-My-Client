@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.disable.disableAttackEntity;
+package top.hendrixshen.tweakmyclient.mixin.disable.disableAttackEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
@@ -33,15 +33,15 @@ public class MixinMinecraft {
             ),
             cancellable = true
     )
-    private void onAttack(CallbackInfo ci) {
+    private void onAttack(CallbackInfoReturnable<Boolean> cir) {
         assert this.hitResult != null;
         Entity entity = ((EntityHitResult) this.hitResult).getEntity();
         String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
         String entityName = entity.getName().getString();
-        if (Configs.Disable.DISABLE_ATTACK_ENTITY.getBooleanValue() && Configs.List.LIST_DISABLE_ATTACK_ENTITY.getStrings().stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s))) {
+        if (Configs.disableAttackEntity.getBooleanValue() && Configs.listDisableAttackEntity.getStrings().stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s))) {
             assert this.player != null;
             this.player.swing(InteractionHand.MAIN_HAND);
-            ci.cancel();
+            cir.cancel();
         }
     }
 }

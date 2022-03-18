@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.disable.disableItemGlowing;
+package top.hendrixshen.tweakmyclient.mixin.disable.disableItemGlowing;
 
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
@@ -9,7 +9,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.helper.ListCache;
 
 @Mixin(ItemStack.class)
 public abstract class MixinItemStack {
@@ -27,11 +28,11 @@ public abstract class MixinItemStack {
             cancellable = true
     )
     private void isFoil(CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.Disable.DISABLE_ITEM_GLOWING.getBooleanValue()) {
+        if (Configs.disableItemGlowing.getBooleanValue()) {
             String itemStackID = Registry.ITEM.getKey(this.getItem()).toString();
             String itemStackName = this.getDisplayName().getString();
-            if (Configs.getItemGlowingBlackList().contains(this.getItem()) ||
-                    Configs.List.LIST_DISABLE_ITEM_GLOWING.getStrings().stream().anyMatch((s -> itemStackID.contains(s) || itemStackName.contains(s)))) {
+            if (ListCache.itemGlowingBlacklist.contains(this.getItem()) ||
+                    Configs.listItemGlowingBlacklist.getStrings().stream().anyMatch((s -> itemStackID.contains(s) || itemStackName.contains(s)))) {
                 cir.setReturnValue(false);
             }
         }

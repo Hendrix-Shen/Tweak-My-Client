@@ -1,12 +1,12 @@
-package top.hendrixshen.TweakMyClient.mixin.feature.featureAutoRespawn;
+package top.hendrixshen.tweakmyclient.mixin.feature.featureAutoRespawn;
 
 import net.minecraft.client.gui.screens.DeathScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.TweakMyClient.TweakMyClient;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(DeathScreen.class)
 public class MixinDeathScreen {
@@ -17,7 +17,7 @@ public class MixinDeathScreen {
             )
     )
     private void onTick(CallbackInfo ci) {
-        if (Configs.Feature.FEATURE_AUTO_RESPAWN.getBooleanValue()) {
+        if (Configs.featureAutoRespawn.getBooleanValue()) {
             assert TweakMyClient.getMinecraftClient().player != null;
             TweakMyClient.getMinecraftClient().player.respawn();
             TweakMyClient.getMinecraftClient().setScreen(null);

@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.feature.featureCustomWindowTitle;
+package top.hendrixshen.tweakmyclient.mixin.feature.featureCustomWindowTitle;
 
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.TweakMyClient.util.CustomWindowUtils;
+import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
@@ -27,8 +27,8 @@ public abstract class MixinMinecraft {
             cancellable = true
     )
     private void onCreateTitle(CallbackInfoReturnable<String> cir) {
-        if (Configs.Feature.FEATURE_CUSTOM_WINDOW_TITLE.getBooleanValue()) {
-            cir.setReturnValue(CustomWindowUtils.getWindowTitle());
+        if (Configs.featureCustomWindowTitle.getBooleanValue()) {
+            cir.setReturnValue(CustomWindowUtil.getWindowTitle());
         }
     }
 
@@ -40,8 +40,8 @@ public abstract class MixinMinecraft {
             )
     )
     private void onRunTick(CallbackInfo ci) {
-        if (Configs.Feature.FEATURE_CUSTOM_WINDOW_TITLE.getBooleanValue()) {
-            CustomWindowUtils.updatePlaceholders();
+        if (Configs.featureCustomWindowTitle.getBooleanValue()) {
+            CustomWindowUtil.updatePlaceholders();
             this.updateTitle();
         }
     }
@@ -66,6 +66,6 @@ public abstract class MixinMinecraft {
             )
     )
     private void afterCalculateFPS(boolean bl, CallbackInfo ci) {
-        CustomWindowUtils.updateFPS(fps);
+        CustomWindowUtil.updateFPS(fps);
     }
 }

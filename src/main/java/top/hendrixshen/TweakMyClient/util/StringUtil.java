@@ -1,24 +1,25 @@
-package top.hendrixshen.TweakMyClient.util;
+package top.hendrixshen.tweakmyclient.util;
 
 import com.mojang.brigadier.StringReader;
 import net.minecraft.commands.arguments.item.ItemParser;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import top.hendrixshen.TweakMyClient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.TweakMyClient;
 
 import java.util.HashSet;
 import java.util.List;
 
-public class StringUtils {
+public class StringUtil {
     public static ItemStack parseItemFromString(String str) {
         try {
-            ItemParser reader = new ItemParser(new StringReader(str), true);
-            reader.parse();
-            Item item = reader.getItem();
+            ItemParser.ItemResult result = ItemParser.parseForItem(new HolderLookup.RegistryLookup<>(Registry.ITEM), new StringReader(str));
 
+            Item item = result.item().value();
             if (item != null) {
                 ItemStack stack = new ItemStack(item);
-                stack.setTag(reader.getNbt());
+                stack.setTag(result.nbt());
                 return stack;
             }
         } catch (Exception e) {
