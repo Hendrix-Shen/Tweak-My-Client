@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.interfaces;
+package top.hendrixshen.tweakmyclient.fakeInterface;
 
 public interface IMinecraft {
     void refreshIcon();

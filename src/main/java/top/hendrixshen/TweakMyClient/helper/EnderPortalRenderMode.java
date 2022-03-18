@@ -1,8 +1,8 @@
-package top.hendrixshen.TweakMyClient.util.render;
+package top.hendrixshen.tweakmyclient.helper;
 
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
-import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.magiclib.untils.language.I18n;
+import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 
 public enum EnderPortalRenderMode implements IConfigOptionListEntry {
     ACTUAL("actual"),

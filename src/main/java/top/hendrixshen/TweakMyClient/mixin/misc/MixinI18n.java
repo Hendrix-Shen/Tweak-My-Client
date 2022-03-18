@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.misc;
+package top.hendrixshen.tweakmyclient.mixin.misc;
 
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.resources.language.Locale;

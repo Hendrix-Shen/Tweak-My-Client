@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.feature.featureCustomGuiBackgroundColor;
+package top.hendrixshen.tweakmyclient.mixin.feature.featureCustomGuiBackgroundColor;
 
 import net.minecraft.client.gui.components.events.AbstractContainerEventHandler;
 import net.minecraft.client.gui.screens.Screen;
@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(Screen.class)
 public abstract class MixinScreen extends AbstractContainerEventHandler {
@@ -28,9 +28,9 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             )
     )
     private void onFillGradient(Args args) {
-        if (Configs.Feature.FEATURE_CUSTOM_GUI_BACKGROUND_COLOR.getBooleanValue()) {
-            args.set(4, Configs.Color.COLOR_GUI_START.getIntegerValue());
-            args.set(5, Configs.Color.COLOR_GUI_STOP.getIntegerValue());
+        if (Configs.featureCustomGuiBackgroundColor.getBooleanValue()) {
+            args.set(4, Configs.colorGuiStart.getIntegerValue());
+            args.set(5, Configs.colorGuiStop.getIntegerValue());
         }
     }
 }

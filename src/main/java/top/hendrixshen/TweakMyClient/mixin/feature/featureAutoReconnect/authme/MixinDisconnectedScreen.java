@@ -1,25 +1,24 @@
-package top.hendrixshen.TweakMyClient.mixin.compat.authme;
+package top.hendrixshen.tweakmyclient.mixin.feature.featureAutoReconnect.authme;
 
 import me.axieum.mcmod.authme.gui.AuthScreen;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.TweakMyClient.TweakMyClientReference;
-import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.TweakMyClient.util.AutoReconnectUtils;
-import top.hendrixshen.magiclib.untils.dependency.Dependencies;
-import top.hendrixshen.magiclib.untils.dependency.Dependency;
+import top.hendrixshen.magiclib.api.dependencyValidator.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependencyValidator.annotation.Dependency;
 import top.hendrixshen.magiclib.untils.language.I18n;
+import top.hendrixshen.tweakmyclient.TweakMyClientReference;
+import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.util.AutoReconnectUtil;
 
-@Dependencies(dependencyList = @Dependency(modid = "authme", version = ">=2.1.0"))
+@Dependencies(require = @Dependency(value = "authme", versionPredicates = ">=2.1.0"))
 @Mixin(value = DisconnectedScreen.class, priority = 897)
 public class MixinDisconnectedScreen extends Screen {
     @Shadow
@@ -44,14 +43,14 @@ public class MixinDisconnectedScreen extends Screen {
     private void onInitDisconnectedScreen(CallbackInfo ci) {
         int backButtonX = width / 2 - 100;
         int backButtonY = Math.min(height / 2 + textHeight / 2 + 9, height - 30);
-        if (reason == null || AutoReconnectUtils.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
-            Configs.Feature.FEATURE_AUTO_RECONNECT.setBooleanValue(false);
-            addButton(new Button(backButtonX, 72 + backButtonY + AutoReconnectUtils.reAuthenticateButtonOffsetY, 200, 20,
+        if (reason == null || AutoReconnectUtil.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
+            Configs.featureAutoReconnect.setBooleanValue(false);
+            addButton(new Button(backButtonX, 72 + backButtonY + AutoReconnectUtil.reAuthenticateButtonOffsetY, 200, 20,
                     I18n.translate(String.format("%s.message.autoReconnect.reAuthenticateWithAuthMe", TweakMyClientReference.getModId())), button -> {
                 assert this.minecraft != null;
                 this.minecraft.setScreen(new AuthScreen(parent));
             }));
-            AutoReconnectUtils.reAuthenticateButtonOffsetY += 24;
+            AutoReconnectUtil.reAuthenticateButtonOffsetY += 24;
         }
     }
 }

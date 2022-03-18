@@ -1,12 +1,11 @@
-package top.hendrixshen.TweakMyClient.mixin.disable.disableRenderBossBar;
+package top.hendrixshen.tweakmyclient.mixin.disable.disableRenderBossBar;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.BossHealthOverlay;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(BossHealthOverlay.class)
 public class MixinBossHealthOverlay {
@@ -18,7 +17,7 @@ public class MixinBossHealthOverlay {
             cancellable = true
     )
     private void onRender(CallbackInfo ci) {
-        if (Configs.Disable.DISABLE_RENDER_BOSS_BAR.getBooleanValue()) {
+        if (Configs.disableRenderBossBar.getBooleanValue()) {
             ci.cancel();
         }
     }

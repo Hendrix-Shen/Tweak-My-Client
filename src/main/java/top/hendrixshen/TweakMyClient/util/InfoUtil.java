@@ -1,13 +1,13 @@
-package top.hendrixshen.TweakMyClient.util;
+package top.hendrixshen.tweakmyclient.util;
 
 import fi.dy.masa.malilib.gui.GuiBase;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.TextComponent;
-import top.hendrixshen.TweakMyClient.TweakMyClient;
-import top.hendrixshen.TweakMyClient.TweakMyClientReference;
 import top.hendrixshen.magiclib.untils.language.I18n;
+import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 
-public class InfoUtils {
+public class InfoUtil {
     public static void printActionBarMessage(String message) {
         printChatMessageOrActionBar(message, true);
     }

@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.util;
+package top.hendrixshen.tweakmyclient.util;
 
 import com.google.common.collect.Maps;
 import net.fabricmc.loader.api.FabricLoader;
@@ -8,16 +8,16 @@ import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.resources.language.I18n;
-import top.hendrixshen.TweakMyClient.TweakMyClient;
-import top.hendrixshen.TweakMyClient.TweakMyClientReference;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.TweakMyClientReference;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomWindowUtils {
+public class CustomWindowUtil {
     public static final HashMap<String, String> PLACEHOLDER_MAP = Maps.newHashMap();
     public static final HashMap<String, String> PLACEHOLDER_STATIC_MAP = Maps.newHashMap();
     public static final Pattern MOD_PATTERN = Pattern.compile("(?<=(\\{fabric_mod_ver:)).*?(?=(}))");
@@ -34,7 +34,7 @@ public class CustomWindowUtils {
         PLACEHOLDER_STATIC_MAP.put("{mc_version}", SharedConstants.getCurrentVersion().getName());
         PLACEHOLDER_STATIC_MAP.put("{tmc_version}", TweakMyClientReference.getModVersion());
         PLACEHOLDER_STATIC_MAP.put("{tmc_version_type}", TweakMyClientReference.getModVersionType());
-        if (Configs.Feature.FEATURE_CUSTOM_WINDOW_TITLE.getBooleanValue()) {
+        if (Configs.featureCustomWindowTitle.getBooleanValue()) {
             rebuildCache(TitleType.TITLE);
             rebuildCache(TitleType.TITLE_WITH_ACTIVITY);
         }
@@ -81,10 +81,10 @@ public class CustomWindowUtils {
 
     public static void rebuildCache(TitleType type) {
         if (type == TitleType.TITLE) {
-            TITLE_CACHE = replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.Generic.CUSTOM_WINDOW_TITLE.getStringValue());
+            TITLE_CACHE = replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.customWindowTitle.getStringValue());
             TITLE_CACHE = replaceModVersion(TITLE_CACHE);
         } else if (type == TitleType.TITLE_WITH_ACTIVITY) {
-            TITLE_CACHE_WITH_ACTIVITY = replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.Generic.CUSTOM_WINDOW_TITLE_WITH_ACTIVITY.getStringValue());
+            TITLE_CACHE_WITH_ACTIVITY = replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.customWindowTitleWithActivity.getStringValue());
             TITLE_CACHE_WITH_ACTIVITY = replaceModVersion(TITLE_CACHE_WITH_ACTIVITY);
         }
     }

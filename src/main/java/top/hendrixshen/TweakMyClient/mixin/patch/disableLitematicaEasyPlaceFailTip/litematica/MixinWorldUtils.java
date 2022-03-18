@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.compat.litematica;
+package top.hendrixshen.tweakmyclient.mixin.patch.disableLitematicaEasyPlaceFailTip.litematica;
 
 import fi.dy.masa.litematica.util.WorldUtils;
 import fi.dy.masa.malilib.gui.Message;
@@ -6,11 +6,11 @@ import fi.dy.masa.malilib.util.InfoUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.magiclib.untils.dependency.Dependencies;
-import top.hendrixshen.magiclib.untils.dependency.Dependency;
+import top.hendrixshen.magiclib.api.dependencyValidator.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependencyValidator.annotation.Dependency;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
-@Dependencies(dependencyList = {@Dependency(modid = "litematica", version = "*"), @Dependency(modid = "ommc", version = ">=2.0.6", dependencyType = Dependency.DependencyType.CONFLICT)})
+@Dependencies(require = @Dependency(value = "litematica", versionPredicates = "*"), conflict = @Dependency(value = "ommc", versionPredicates = ">=2.0.6"))
 @Mixin(WorldUtils.class)
 public class MixinWorldUtils {
     @Redirect(
@@ -22,7 +22,7 @@ public class MixinWorldUtils {
             remap = false
     )
     private static void onHandleEasyPlace(Message.MessageType type, String translationKey, Object[] args) {
-        if (!Configs.Patch.DISABLE_LITEMATICA_EASY_PLACE_FAIL_TIP.getBooleanValue()) {
+        if (!Configs.disableLitematicaEasyPlaceFailTip.getBooleanValue()) {
             InfoUtils.showGuiOrInGameMessage(type, translationKey, args);
         }
     }
