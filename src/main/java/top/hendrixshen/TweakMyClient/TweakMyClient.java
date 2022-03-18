@@ -30,11 +30,11 @@ public class TweakMyClient implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        InitializationHandler.getInstance().registerInitializationHandler(()-> {
+        InitializationHandler.getInstance().registerInitializationHandler(() -> {
             cm.parseConfigClass(Configs.class);
             fi.dy.masa.malilib.config.ConfigManager.getInstance().registerConfigHandler(TweakMyClientReference.getModId(), new ConfigStorage());
             InputEventHandler.getKeybindManager().registerKeybindProvider(new InputHandler());
-            RenderEventHandler.getInstance().registerWorldLastRenderer(new RenderHandler());
+            RenderEventHandler.getInstance().registerWorldLastRenderer(RenderHandler.getInstance());
             Configs.initCallbacks();
         });
 

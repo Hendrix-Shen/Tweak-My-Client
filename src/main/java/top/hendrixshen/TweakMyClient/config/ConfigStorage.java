@@ -31,7 +31,7 @@ public class ConfigStorage implements IConfigHandler {
     public List<ConfigBooleanHotkeyed> getCoveredList(List<IConfigBase> category) {
         List<ConfigBooleanHotkeyed> list = Lists.newArrayList();
         for (IConfigBase iConfigBase : category) {
-            if(iConfigBase instanceof ConfigBooleanHotkeyed) {
+            if (iConfigBase instanceof ConfigBooleanHotkeyed) {
                 list.add((ConfigBooleanHotkeyed) iConfigBase);
             }
         }

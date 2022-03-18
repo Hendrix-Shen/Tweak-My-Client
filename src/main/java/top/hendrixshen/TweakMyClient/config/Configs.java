@@ -238,7 +238,7 @@ public class Configs {
         cm.getAllConfigOptionStream().forEach(
                 iConfigBase -> {
                     if (iConfigBase instanceof ConfigBooleanHotkeyed) {
-                        ((ConfigBooleanHotkeyed)iConfigBase).getKeybind().setCallback(new CallBacks.KeyCallbackToggleBooleanConfigWithMessage((IConfigBoolean) iConfigBase, iConfigBase.getConfigGuiDisplayName()));
+                        ((ConfigBooleanHotkeyed) iConfigBase).getKeybind().setCallback(new CallBacks.KeyCallbackToggleBooleanConfigWithMessage((IConfigBoolean) iConfigBase, iConfigBase.getConfigGuiDisplayName()));
                     }
                 }
         );
