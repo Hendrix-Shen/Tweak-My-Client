@@ -1,11 +1,11 @@
-package top.hendrixshen.TweakMyClient.mixin.patch.forceDebugInfoDetailed;
+package top.hendrixshen.tweakmyclient.mixin.patch.forceDebugInfoDetailed;
 
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(Player.class)
 public class MixinPlayer {
@@ -17,7 +17,7 @@ public class MixinPlayer {
             cancellable = true
     )
     private void isReducedDebugInfo(CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.Patch.FORCE_DEBUG_INFO_DETAILED.getBooleanValue()) {
+        if (Configs.forceDebugInfoDetailed.getBooleanValue()) {
             cir.setReturnValue(false);
         }
     }

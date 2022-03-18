@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.feature.featureCustomWindowIcon;
+package top.hendrixshen.tweakmyclient.mixin.feature.featureCustomWindowIcon;
 
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Minecraft;
@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.TweakMyClient.TweakMyClient;
-import top.hendrixshen.TweakMyClient.TweakMyClientReference;
-import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.TweakMyClient.interfaces.IMinecraft;
+import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.TweakMyClientReference;
+import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.fakeInterface.IMinecraft;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,7 +47,7 @@ public abstract class MixinMinecraft implements IMinecraft {
         try {
             InputStream icon16x;
             InputStream icon32x;
-            if (Configs.Feature.FEATURE_CUSTOM_WINDOW_ICON.getBooleanValue()) {
+            if (Configs.featureCustomWindowIcon.getBooleanValue()) {
                 icon16x = this.getResourceManager().getResource(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_16x16.png")).getInputStream();
                 icon32x = this.getResourceManager().getResource(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_32x32.png")).getInputStream();
             } else {

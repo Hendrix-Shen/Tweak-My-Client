@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.disable.disableSlowdown;
+package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(WebBlock.class)
 public class MixinWebBlock {
@@ -23,7 +23,7 @@ public class MixinWebBlock {
             cancellable = true
     )
     private void onWalkInCobWebBlock(BlockState blockState, Level level, BlockPos blockPos, Entity entity, CallbackInfo ci) {
-        if ((Configs.Disable.DISABLE_SLOWDOWN.getBooleanValue()) && entity instanceof Player) {
+        if ((Configs.disableSlowdown.getBooleanValue()) && entity instanceof Player) {
             ci.cancel();
         }
     }

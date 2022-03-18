@@ -1,11 +1,11 @@
-package top.hendrixshen.TweakMyClient;
+package top.hendrixshen.tweakmyclient;
 
-import top.hendrixshen.magiclib.untils.fabricloader.DependencyValidator;
-import top.hendrixshen.magiclib.untils.mixin.MagicMixinPlugin;
+import top.hendrixshen.magiclib.api.dependencyValidator.mixin.MagicMixinPlugin;
+import top.hendrixshen.magiclib.util.FabricUtil;
 
 public class TweakMyClientMixinPlugin extends MagicMixinPlugin {
     @Override
     public void onLoad(String mixinPackage) {
-        DependencyValidator.customValidator(TweakMyClientReference.getModId(), "compatible");
+        FabricUtil.customValidator(TweakMyClientReference.getModId());
     }
 }
