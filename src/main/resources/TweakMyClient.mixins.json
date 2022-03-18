@@ -1,9 +1,12 @@
 {
   "required": true,
-  "package": "top.hendrixshen.TweakMyClient.mixin",
+  "package": "top.hendrixshen.tweakmyclient.mixin",
+  "plugin": "top.hendrixshen.tweakmyclient.TweakMyClientMixinPlugin",
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "client": [
+  ],
+  "mixins": [
     "disable.disableAttackEntity.MixinMinecraft",
     "disable.disableClientBlockEvents.MixinClientPacketListener",
     "disable.disableClientEntityRendering.MixinEntityRenderDispatcher",
@@ -19,12 +22,13 @@
     "disable.disableSlowdown.MixinBlock",
     "disable.disableSlowdown.MixinLocalPlayer",
     "disable.disableSlowdown.MixinWebBlock",
-    "feature.featureAntiGhostBlocks.MixinLocalPlayer",
-    "feature.featureAntiGhostItems.MixinLocalPlayer",
     "feature.featureAutoClimb.MixinLocalPlayer",
     "feature.featureAutoDrop.MixinLocalPlayer",
     "feature.featureAutoReconnect.MixinDisconnectedScreen",
     "feature.featureAutoReconnect.MixinMinecraft",
+    "feature.featureAutoReconnect.authme.MixinDisconnectedScreen",
+    "feature.featureAutoReconnect.ias.MixinDisconnectedScreen",
+    "feature.featureAutoReconnect.reauth.MixinDisconnectedScreen",
     "feature.featureAutoRespawn.MixinDeathScreen",
     "feature.featureCustomBlockOutsideColor.MixinLevelRenderer",
     "feature.featureCustomGuiBackgroundColor.MixinScreen",
@@ -37,11 +41,13 @@
     "feature.featureLowHealthWarning.MixinLocalPlayer",
     "feature.featureOpenWaterHelper.MixinFishingHook",
     "feature.featureUnfocusedCPU.MixinGameRenderer",
+    "patch.disableLitematicaEasyPlaceFailTip.litematica.MixinWorldUtils",
     "patch.endPortalRendererFix.MixinTheEndPortalBlockEntity",
     "patch.endPortalRendererFix.MixinTheEndPortalRenderer",
     "patch.forceDebugInfoDetailed.MixinPlayer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem"
   ],
-  "mixins": [
-  ]
+  "injectors": {
+    "defaultRequire": 0
+  }
 }

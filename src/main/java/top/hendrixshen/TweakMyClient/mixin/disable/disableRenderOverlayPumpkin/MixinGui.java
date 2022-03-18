@@ -1,11 +1,11 @@
-package top.hendrixshen.TweakMyClient.mixin.disable.disableRenderOverlayPumpkin;
+package top.hendrixshen.tweakmyclient.mixin.disable.disableRenderOverlayPumpkin;
 
 import net.minecraft.client.gui.Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(Gui.class)
 public abstract class MixinGui {
@@ -17,7 +17,7 @@ public abstract class MixinGui {
             cancellable = true
     )
     private void onRenderPumpkinOverlay(CallbackInfo ci) {
-        if (Configs.Disable.DISABLE_RENDER_OVERLAY_PUMPKIN.getBooleanValue()) {
+        if (Configs.disableRenderOverlayPumpkin.getBooleanValue()) {
             ci.cancel();
         }
     }

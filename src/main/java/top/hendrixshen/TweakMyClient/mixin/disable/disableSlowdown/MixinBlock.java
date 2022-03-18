@@ -1,11 +1,11 @@
-package top.hendrixshen.TweakMyClient.mixin.disable.disableSlowdown;
+package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
 import net.minecraft.world.level.block.Block;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(Block.class)
 public class MixinBlock {
@@ -17,7 +17,7 @@ public class MixinBlock {
             cancellable = true
     )
     private void onGetVelocityMultiplier(CallbackInfoReturnable<Float> cir) {
-        if (Configs.Disable.DISABLE_SLOWDOWN.getBooleanValue() && cir.getReturnValueF() < 1.0F) {
+        if (Configs.disableSlowdown.getBooleanValue() && cir.getReturnValueF() < 1.0F) {
             cir.setReturnValue(1.0F);
         }
     }
