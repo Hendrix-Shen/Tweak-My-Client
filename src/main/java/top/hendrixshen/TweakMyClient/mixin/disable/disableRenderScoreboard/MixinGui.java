@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.mixin.disable.disableRenderScoreboard;
+package top.hendrixshen.tweakmyclient.mixin.disable.disableRenderScoreboard;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Gui;
@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.TweakMyClient.config.Configs;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(Gui.class)
 public abstract class MixinGui {
@@ -19,7 +19,7 @@ public abstract class MixinGui {
             cancellable = true
     )
     private void onRenderScoreboardSidebar(PoseStack poseStack, Objective objective, CallbackInfo ci) {
-        if (Configs.Disable.DISABLE_RENDER_SCOREBOARD.getBooleanValue()) {
+        if (Configs.disableRenderScoreboard.getBooleanValue()) {
             ci.cancel();
         }
     }

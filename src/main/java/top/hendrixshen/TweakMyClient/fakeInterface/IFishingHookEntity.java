@@ -1,4 +1,4 @@
-package top.hendrixshen.TweakMyClient.interfaces;
+package top.hendrixshen.tweakmyclient.fakeInterface;
 
 import net.minecraft.core.BlockPos;
 

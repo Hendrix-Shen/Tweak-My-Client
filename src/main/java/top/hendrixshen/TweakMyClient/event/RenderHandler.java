@@ -1,12 +1,12 @@
-package top.hendrixshen.TweakMyClient.event;
+package top.hendrixshen.tweakmyclient.event;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Matrix4f;
 import fi.dy.masa.malilib.interfaces.IRenderer;
 import net.minecraft.client.Minecraft;
-import top.hendrixshen.TweakMyClient.TweakMyClient;
-import top.hendrixshen.TweakMyClient.config.Configs;
-import top.hendrixshen.TweakMyClient.util.render.OverlayRenderer;
+import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.util.render.OverlayRenderer;
 
 public class RenderHandler implements IRenderer {
     private static final RenderHandler INSTANCE = new RenderHandler();
@@ -22,7 +22,7 @@ public class RenderHandler implements IRenderer {
 
     @Override
     public void onRenderWorldLast(PoseStack matrixStack, Matrix4f projMatrix) {
-        if (Configs.Feature.FEATURE_OPEN_WATER_HELPER.getBooleanValue()) {
+        if (Configs.featureOpenWaterHelper.getBooleanValue()) {
             OverlayRenderer.getInstance().renderOpenWater(minecraft);
         }
     }
