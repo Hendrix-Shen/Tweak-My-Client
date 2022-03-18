@@ -20,7 +20,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
-import top.hendrixshen.tweakmyclient.config.ConfigCategory;
 import top.hendrixshen.tweakmyclient.config.ConfigGui;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.helper.TargetBlockPositionPrintMode;

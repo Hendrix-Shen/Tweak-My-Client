@@ -14,10 +14,6 @@ import java.util.Deque;
 
 @Mixin(ToastComponent.class)
 public class MixinToastComponent {
-    @Shadow
-    @Final
-    private Deque<Toast> queued;
-
     @Inject(
             method = "addToast",
             at = @At(
