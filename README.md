@@ -7,7 +7,7 @@
 [![Issues](https://img.shields.io/github/issues/Hendrix-Shen/Tweak-My-Client?label=Issuess&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/Hendrix-Shen/Tweak-My-Client?label=Pull%20Requests&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/pulls)
 [![Last build](https://img.shields.io/github/workflow/status/Hendrix-Shen/Tweak-My-Client/CI/dev?label=Last%20build&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/actions/workflows/CI.yml)
-[![Github Release](https://img.shields.io/github/v/release/Hendrix-Shen/Tweak-My-Client?label=Github%20Release&include_prereleases&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
+[![Github Release](https://img.shields.io/github/v/release/Hendrix-Shen/Tweak-My-Client?label=Github%20Release&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
 [![Github Release Downloads](https://img.shields.io/github/downloads/Hendrix-Shen/Tweak-My-Client/total?label=Github%20Release%20Downloads&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)
 [![CurseForge Downloads](http://cf.way2muchnoise.eu/478757.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient)
 
@@ -15,7 +15,7 @@
 
 The default hotkey to open the in-game config GUI is **T + C**.
 
-## Dependencies
+## Dependencies (WIP)
 
 | Dependency               | Type     | 1.16.5                       | 1.17.1                       | 1.18.1         | Download                                                                                                                                           |
 |--------------------------|----------|------------------------------|------------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -26,7 +26,14 @@ The default hotkey to open the in-game config GUI is **T + C**.
 | Litematica               | Optional | \>=0.0.0-dev.20210612.170003 | \>=0.0.0-dev.20210906.183617 | \>=0.10.1      | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
 | ReAuth (Fabric)          | Optional | \>=3.9.2                     | \>=3.9.2                     | \>=3.9.2       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
 
-## Config List
+## Latest builds (Keep only the latest build files)
+- [1.15.2](https://github.com/Hendrix-Shen/Tweak-My-Client/releases/tag/dev-1.15)
+- [1.16.5](https://github.com/Hendrix-Shen/Tweak-My-Client/releases/tag/dev-1.16)
+- [1.17.1](https://github.com/Hendrix-Shen/Tweak-My-Client/releases/tag/dev-1.17)
+- [1.18.2](https://github.com/Hendrix-Shen/Tweak-My-Client/releases/tag/dev-1.18)
+- [22w11a](https://github.com/Hendrix-Shen/Tweak-My-Client/releases/tag/dev-1.19)
+
+## Config List (WIP)
 
 ### Color
 
