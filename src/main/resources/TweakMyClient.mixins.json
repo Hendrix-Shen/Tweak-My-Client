@@ -20,6 +20,7 @@
     "disable.disableRenderScoreboard.MixinGui",
     "disable.disableRenderToast.MixinToastComponent",
     "disable.disableSlowdown.MixinBlock",
+    "disable.disableSlowdown.MixinEntity",
     "disable.disableSlowdown.MixinLocalPlayer",
     "disable.disableSlowdown.MixinWebBlock",
     "feature.featureAutoClimb.MixinLocalPlayer",
