@@ -1,4 +1,5 @@
 name: CI
+
 on:
   push:
     branches-ignore:
@@ -7,6 +8,7 @@ on:
     types:
       - published
   pull_request:
+
 jobs:
   build:
     if: ${{ github.event_name == 'push' }}
@@ -15,54 +17,74 @@ jobs:
         java: [17]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
+
     steps:
       - name: Checkout the sources
         uses: actions/checkout@v2
+
       - name: Set up JDK ${{ matrix.java }}
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.java }}
+
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
+
       - name: Get short commit sha
         id: get_short_sha
         run: |
           short_sha=$(echo ${GITHUB_SHA} | cut -c1-7)
           echo "::set-output name=short_sha::$short_sha"
+
       - name: Set build number in codes
         run: |
           sed -i "s/Development/Public Beta/g" src/main/java/top/hendrixshen/tweakmyclient/TweakMyClientReference.java
-      - name: Read relevant fields from gradle.properties
-        id: properties
-        run: |
-          path='./gradle.properties'
-          for property in mod_name mod_version minecraft_version
-          do
-            result=$(sed -n "/^[[:space:]]*$property[[:space:]]*=[[:space:]]*/s/^[[:space:]]*$property[[:space:]]*=[[:space:]]*//p" "$path")
-            echo "$property: $result"
-            echo ::set-output name=$property::"$result"
-          done
+
+      - name: Read Properties mod_version
+        id: mod_version
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: mod_version
+
+      - name: Read Properties minecraft_version
+        id: minecraft_version
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: minecraft_version
+
+      - name: Read Properties mod_name
+        id: mod_name
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: mod_name
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Build with Gradle
         env:
           GIT_COMMIT_ID: ${{ steps.get_short_sha.outputs.short_sha }}
         run: ./gradlew build
+
       - name: Create Github release
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "dev-${{ github.ref_name }}"
           prerelease: true
-          title: "[CI#${{ github.run_number}}]${{ steps.properties.outputs.mod_name }} ${{ steps.properties.outputs.mod_version }}-${{ steps.get_short_sha.outputs.short_sha }} for Minecraft ${{ steps.properties.outputs.minecraft_version }}"
+          title: "[CI#${{ github.run_number}}]${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}-${{ steps.get_short_sha.outputs.short_sha }} for Minecraft ${{ steps.minecraft_version.outputs.value }}"
           files: |
             LICENSE
             build/libs/*.jar
+
   publish:
     if: ${{ github.event_name == 'release' }}
     strategy:
@@ -71,98 +93,181 @@ jobs:
         os: [ubuntu-latest]
         branch: [1.15, 1.16, 1.17, 1.18, 1.19]
     runs-on: ${{ matrix.os }}
+
     steps:
       - name: Checkout the sources
         uses: actions/checkout@v2
         with:
           ref: ${{ matrix.branch }}
+
       - name: Set up JDK ${{ matrix.java }}
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.java }}
+
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
+
       - name: Get commit sha from the corresponding branch
         id: get_sha
         uses: mego22/actions-git-sha@main
         with:
           repo: "https://github.com/Hendrix-Shen/Bilibili-Danmaku"
           branch: "${{ matrix.branch }}"
+
       - name: Get short commit sha
         id: get_short_sha
         run: |
           short_sha=$(echo ${{ steps.get_sha.outputs.sha }} | cut -c1-7)
           echo "::set-output name=short_sha::$short_sha"
+
       - name: Set build number in codes
         run: |
           sed -i "s/Development/Public Beta/g" src/main/java/top/hendrixshen/tweakmyclient/TweakMyClientReference.java
-      - name: Read relevant fields from gradle.properties
-        id: properties
-        run: |
-          path='./gradle.properties'
-          for property in mod_file_name mod_version minecraft_version_out cruseforge_gameversion cruseforge_projectid cruseforge_relations cruseforge_release cruseforge_release_type github_release modrinth_release modrinth_release_type
-          do
-            result=$(sed -n "/^[[:space:]]*$property[[:space:]]*=[[:space:]]*/s/^[[:space:]]*$property[[:space:]]*=[[:space:]]*//p" "$path")
-            echo "$property: $result"
-            echo ::set-output name=$property::"$result"
-          done
+
+      - name: Read Properties mod_version
+        id: mod_version
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: mod_version
+
+      - name: Read Properties minecraft_version_out
+        id: minecraft_version_out
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: minecraft_version_out
+
+      - name: Read Properties mod_file_name
+        id: mod_file_name
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: mod_file_name
+
+      - name: Read Properties curseforge_gameversion
+        id: curseforge_gameversion
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: curseforge_gameversion
+
+      - name: Read Properties curseforge_projectid
+        id: curseforge_projectid
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: curseforge_projectid
+
+      - name: Read Properties curseforge_relations
+        id: curseforge_relations
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: curseforge_relations
+
+      - name: Read Properties curseforge_release
+        id: curseforge_release
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: curseforge_release
+
+      - name: Read Properties curseforge_release_type
+        id: curseforge_release_type
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: curseforge_release_type
+
+      - name: Read Properties github_release
+        id: github_release
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: github_release
+
+      - name: Read Properties modrinth_release
+        id: modrinth_release
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: modrinth_release
+
+      - name: Read Properties modrinth_release_type
+        id: modrinth_release_type
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: modrinth_release_type
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Build with Gradle
         env:
           GIT_COMMIT_ID: ${{ steps.get_short_sha.outputs.short_sha }}
         run: ./gradlew build
+
       - name: Publish maven with Gradle
         env:
           GIT_COMMIT_ID: ${{ steps.get_short_sha.outputs.short_sha }}
         run: ./gradlew publish
+
       - name: Find correct jar
         id: findjar
         run: |
           output="$(find build/libs/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
           echo "::set-output name=jarname::$output"
+
       - name: Upload assets to GitHub Action
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ steps.properties.outputs.mod_file_name }}-mc${{ steps.properties.outputs.minecraft_version_out }}-${{ steps.properties.outputs.mod_version }}+${{ steps.get_short_sha.outputs.short_sha }}(Public Release)
+          name: ${{ steps.mod_file_name.outputs.value }}-mc${{ steps.minecraft_version_out.outputs.value }}-${{ steps.mod_version.outputs.value }}+${{ steps.get_short_sha.outputs.short_sha }}(Public Release)
           path: build/libs/
+
       - name: Upload maven to GitHub Action
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ steps.properties.outputs.mod_file_name }}-mc${{ steps.properties.outputs.minecraft_version_out }}-${{ steps.properties.outputs.mod_version }}+${{ steps.get_short_sha.outputs.short_sha }}(Maven)
+          name: ${{ steps.mod_file_name.outputs.value }}-mc${{ steps.minecraft_version_out.outputs.value }}-${{ steps.mod_version.outputs.value }}+${{ steps.get_short_sha.outputs.short_sha }}(Maven)
           path: publish/
+
       - name: Upload assets to GitHub Release
-        if: ${{ steps.properties.outputs.github_release == 'true' }}
+        if: ${{ steps.github_release.outputs.value == 'true' }}
         uses: AButler/upload-release-assets@v2.0
         with:
           files: 'build/libs/${{ steps.findjar.outputs.jarname }}'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Upload assets to Curseforge
-        if: ${{ steps.properties.outputs.cruseforge_release == 'true' }}
+        if: ${{ steps.curseforge_release.outputs.value == 'true' }}
         uses: itsmeow/curseforge-upload@v3
         with:
           token: ${{ secrets.CF_API_TOKEN }}
-          project_id: ${{ steps.properties.outputs.cruseforge_projectid }}
+          project_id: ${{ steps.curseforge_projectid.outputs.value }}
           game_endpoint: minecraft
           file_path: build/libs/${{ steps.findjar.outputs.jarname }}
           changelog_type: markdown
           changelog: ${{ github.event.release.body }}
-          game_versions: ${{ steps.properties.outputs.cruseforge_gameversion }}
-          release_type: ${{ steps.properties.outputs.cruseforge_release_type }}
-          relations: ${{ steps.properties.outputs.cruseforge_relations }}
+          game_versions: ${{ steps.curseforge_gameversion.outputs.value }}
+          release_type: ${{ steps.curseforge_release_type.outputs.value }}
+          relations: ${{ steps.curseforge_relations.outputs.value }}
+
       - name: Upload assets to Modrinth
-        if: ${{ steps.properties.outputs.modrinth_release == 'true' }}
+        if: ${{ steps.modrinth_release.outputs.value == 'true' }}
         run: ./gradlew publishModrinth
         env:
           CHANGE_LOG: ${{ github.event.release.body }}
           GIT_COMMIT_ID: ${{ steps.get_short_sha.outputs.short_sha }}
           MODRINTH_API_TOKEN: ${{ secrets.MODRINTH_API_TOKEN }}
-          VERSION_NUMBER: ${{ steps.properties.outputs.mod_file_name }}-mc${{ steps.properties.outputs.minecraft_version_out }}-${{ steps.properties.outputs.mod_version }}+${{ steps.get_short_sha.outputs.short_sha }}
+          VERSION_NUMBER: ${{ steps.mod_file_name.outputs.value }}-mc${{ steps.minecraft_version_out.outputs.value }}-${{ steps.mod_version.outputs.value }}+${{ steps.get_short_sha.outputs.short_sha }}
+
   pull_request:
     if: ${{ github.event_name == 'pull_request' }}
     strategy:
@@ -170,15 +275,19 @@ jobs:
         java: [17]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
+
     steps:
       - name: Checkout the sources
         uses: actions/checkout@v2
+
       - name: Set up JDK ${{ matrix.java }}
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.java }}
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Build with Gradle
         run: ./gradlew build
