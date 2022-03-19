@@ -36,12 +36,12 @@ jobs:
           echo "::set-output name=short_sha::$short_sha"
       - name: Set build number in codes
         run: |
-          sed -i "s/Development/Public Beta/g" src/main/java/top/hendrixshen/TweakMyClient/TweakMyClientReference.java
+          sed -i "s/Development/Public Beta/g" src/main/java/top/hendrixshen/tweakmyclient/TweakMyClientReference.java
       - name: Read relevant fields from gradle.properties
         id: properties
         run: |
           path='./gradle.properties'
-          for property in mod_file_name mod_version minecraft_version_out
+          for property in mod_name mod_version minecraft_version
           do
             result=$(sed -n "/^[[:space:]]*$property[[:space:]]*=[[:space:]]*/s/^[[:space:]]*$property[[:space:]]*=[[:space:]]*//p" "$path")
             echo "$property: $result"
@@ -53,20 +53,16 @@ jobs:
         env:
           GIT_COMMIT_ID: ${{ steps.get_short_sha.outputs.short_sha }}
         run: ./gradlew build
-      - name: Publish maven with Gradle
-        env:
-          GIT_COMMIT_ID: ${{ steps.get_short_sha.outputs.short_sha }}
-        run: ./gradlew publish
-      - name: Upload assets to GitHub Action
-        uses: actions/upload-artifact@v2
+      - name: Create Github release
+        uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
-          name: ${{ steps.properties.outputs.mod_file_name }}-mc${{ steps.properties.outputs.minecraft_version_out }}-${{ steps.properties.outputs.mod_version }}+${{ steps.get_short_sha.outputs.short_sha }}(Public Beta)
-          path: build/libs/
-      - name: Upload maven to GitHub Action
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ steps.properties.outputs.mod_file_name }}-mc${{ steps.properties.outputs.minecraft_version_out }}-${{ steps.properties.outputs.mod_version }}+${{ steps.get_short_sha.outputs.short_sha }}(Maven)
-          path: publish/
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "dev-${{ github.ref_name }}"
+          prerelease: true
+          title: "[CI#${{ github.run_number}}]${{ steps.properties.outputs.mod_name }} ${{ steps.properties.outputs.mod_version }}-${{ steps.get_short_sha.outputs.short_sha }} for Minecraft ${{ steps.properties.outputs.minecraft_version }}"
+          files: |
+            LICENSE
+            build/libs/*.jar
   publish:
     if: ${{ github.event_name == 'release' }}
     strategy:
@@ -80,17 +76,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ matrix.branch }}
-      - name: Get commit sha from the corresponding branch
-        id: get_sha
-        uses: mego22/actions-git-sha@main
-        with:
-          repo: "https://github.com/Hendrix-Shen/Tweak-My-Client"
-          branch: "${{ matrix.branch }}"
-      - name: Get short commit sha
-        id: get_short_sha
-        run: |
-          short_sha=$(echo ${{ steps.get_sha.outputs.sha }} | cut -c1-7)
-          echo "::set-output name=short_sha::$short_sha"
       - name: Set up JDK ${{ matrix.java }}
         uses: actions/setup-java@v2
         with:
@@ -102,9 +87,20 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
+      - name: Get commit sha from the corresponding branch
+        id: get_sha
+        uses: mego22/actions-git-sha@main
+        with:
+          repo: "https://github.com/Hendrix-Shen/Bilibili-Danmaku"
+          branch: "${{ matrix.branch }}"
+      - name: Get short commit sha
+        id: get_short_sha
+        run: |
+          short_sha=$(echo ${{ steps.get_sha.outputs.sha }} | cut -c1-7)
+          echo "::set-output name=short_sha::$short_sha"
       - name: Set build number in codes
         run: |
-          sed -i "s/Development/Public Beta/g" src/main/java/top/hendrixshen/TweakMyClient/TweakMyClientReference.java
+          sed -i "s/Development/Public Beta/g" src/main/java/top/hendrixshen/tweakmyclient/TweakMyClientReference.java
       - name: Read relevant fields from gradle.properties
         id: properties
         run: |
