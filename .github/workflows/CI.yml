@@ -57,7 +57,7 @@ jobs:
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "dev-1.16"
+          automatic_release_tag: "dev-${{ github.ref_name }}"
           prerelease: true
           title: "[CI#${{ github.run_number}}]${{ steps.properties.outputs.mod_name }} ${{ steps.properties.outputs.mod_version }}-${{ steps.get_short_sha.outputs.short_sha }} for Minecraft ${{ steps.properties.outputs.minecraft_version }}"
           files: |
