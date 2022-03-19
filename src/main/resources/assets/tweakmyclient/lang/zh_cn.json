@@ -55,6 +55,8 @@
     "tweakmyclient.config.disableRenderBossBar.comment": "关闭在玩家在Boss附近渲染Boss血条.\n你将获得更广阔的视野.",
     "tweakmyclient.config.disableRenderOverlayFire.name": "禁用火焰渲染层",
     "tweakmyclient.config.disableRenderOverlayFire.comment": "关闭在玩家着火时的渲染覆盖.\n你将获得更广阔的视野.",
+    "tweakmyclient.config.disableRenderOverlayPowderSnow.name": "禁用细雪渲染层",
+    "tweakmyclient.config.disableRenderOverlayPowderSnow.comment": "关闭在玩家在陷入细雪时的渲染覆盖.\n你将获得更广阔的视野.",
     "tweakmyclient.config.disableRenderOverlayPumpkin.name": "禁用南瓜头渲染层",
     "tweakmyclient.config.disableRenderOverlayPumpkin.comment": "关闭在玩家在穿戴南瓜时的渲染覆盖.\n你将获得更广阔的视野.",
     "tweakmyclient.config.disableRenderScoreboard.name": "禁用计分板渲染",
