@@ -55,6 +55,8 @@
     "tweakmyclient.config.disableRenderBossBar.comment": "Disable boss bar rendering when player is near boss.\nYou will gain a broader view.",
     "tweakmyclient.config.disableRenderOverlayFire.name": "disableRenderOverlayFire",
     "tweakmyclient.config.disableRenderOverlayFire.comment": "Disable fire overlay rendering when player is on fire.\nYou will gain a broader view.",
+    "tweakmyclient.config.disableRenderOverlayPowderSnow.name": "disableRenderOverlayPowderSnow",
+    "tweakmyclient.config.disableRenderOverlayPowderSnow.comment": "Disable frozen overlay rendering when player is stuck in powder snow.\nYou will gain a broader view.",
     "tweakmyclient.config.disableRenderOverlayPumpkin.name": "disableRenderOverlayPumpkin",
     "tweakmyclient.config.disableRenderOverlayPumpkin.comment": "Disable mask overlay rendering when player is wearing pumpkin.\nYou will gain a broader view.",
     "tweakmyclient.config.disableRenderScoreboard.name": "disableRenderScoreboard",

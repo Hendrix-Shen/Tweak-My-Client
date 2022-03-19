@@ -208,6 +208,9 @@ public class Configs {
     @Config(category = ConfigCategory.DISABLE)
     public static ConfigBooleanHotkeyed disableRenderOverlayFire = cm.createBooleanHotkeyed("disableRenderOverlayFire", false, "");
 
+    @Config(category = ConfigCategory.DISABLE, dependencies = @Dependencies(require = @Dependency(value = "minecraft", versionPredicates = ">=1.17")))
+    public static ConfigBooleanHotkeyed disableRenderOverlayPowderSnow = cm.createBooleanHotkeyed("disableRenderOverlayPowderSnow", false, "");
+
     @Config(category = ConfigCategory.DISABLE)
     public static ConfigBooleanHotkeyed disableRenderOverlayPumpkin = cm.createBooleanHotkeyed("disableRenderOverlayPumpkin", false, "");
 
