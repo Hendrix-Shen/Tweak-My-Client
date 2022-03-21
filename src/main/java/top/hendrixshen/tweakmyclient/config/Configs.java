@@ -72,7 +72,7 @@ public class Configs {
     @Config(category = ConfigCategory.PATCH)
     public static final ConfigBoolean forceDebugInfoDetailed = cm.createBoolean("forceDebugInfoDetailed", false);
 
-    @Config(category = ConfigCategory.PATCH)
+    @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(require = @Dependency(value = "minecraft", versionPredicates = ">=1.16")))
     public static final ConfigBoolean forcePistonWithoutAffectByTool = cm.createBoolean("forcePistonWithoutAffectByTool", false);
 
     // List configs

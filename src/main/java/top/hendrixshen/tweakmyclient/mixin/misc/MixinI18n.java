@@ -14,7 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 */
 @Mixin(I18n.class)
 public class MixinI18n {
-    @Shadow private static Locale locale;
+    @Shadow
+    private static Locale locale;
 
     @Inject(
             method = "get",
