@@ -29,10 +29,10 @@ public class MixinSlimeBlock extends Block {
     private void onbounceUp(Entity entity, CallbackInfo ci) {
         if (Configs.disableSlowdown.getBooleanValue() && entity instanceof LocalPlayer) {
             Vec3 vec3 = entity.getDeltaMovement();
-            if (vec3.y < 0) {
+            if (vec3.y < 0 && vec3.y > -0.0792) { // Vertical momentum at 2x steady state.
                 entity.setDeltaMovement(vec3.x, 0, vec3.z);
+                ci.cancel();
             }
-            ci.cancel();
         }
     }
 
