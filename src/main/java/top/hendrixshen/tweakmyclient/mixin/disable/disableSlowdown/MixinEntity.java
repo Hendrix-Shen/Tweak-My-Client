@@ -12,7 +12,8 @@ import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(Entity.class)
 public class MixinEntity {
-    @Shadow protected Vec3 stuckSpeedMultiplier;
+    @Shadow
+    protected Vec3 stuckSpeedMultiplier;
 
     @Redirect(
             method = "move",
