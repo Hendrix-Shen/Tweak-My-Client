@@ -21,4 +21,17 @@ public class MixinBlock {
             cir.setReturnValue(1.0F);
         }
     }
+
+    @Inject(
+            method = "getFriction",
+            at = @At(
+                    value = "HEAD"
+            ),
+            cancellable = true
+    )
+    private void onGetFriction(CallbackInfoReturnable<Float> cir) {
+        if (Configs.disableSlowdown.getBooleanValue() && cir.getReturnValueF() < 0.6F) {
+            cir.setReturnValue(0.6F);
+        }
+    }
 }
