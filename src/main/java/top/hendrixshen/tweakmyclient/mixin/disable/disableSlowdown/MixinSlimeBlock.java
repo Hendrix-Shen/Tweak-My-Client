@@ -1,9 +1,7 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlimeBlock;
 import net.minecraft.world.phys.Vec3;
@@ -33,19 +31,6 @@ public class MixinSlimeBlock extends Block {
                 entity.setDeltaMovement(vec3.x, 0, vec3.z);
                 ci.cancel();
             }
-        }
-    }
-
-    @Inject(
-            method = "stepOn",
-            at = @At(
-                    value = "HEAD"
-            ),
-            cancellable = true
-    )
-    private void stepOn(Level level, BlockPos blockPos, Entity entity, CallbackInfo ci) {
-        if (Configs.disableSlowdown.getBooleanValue()) {
-            ci.cancel();
         }
     }
 }
