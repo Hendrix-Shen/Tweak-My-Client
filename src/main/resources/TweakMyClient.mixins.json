@@ -5,8 +5,6 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "client": [
-  ],
-  "mixins": [
     "disable.disableAttackEntity.MixinMinecraft",
     "disable.disableClientBlockEvents.MixinClientPacketListener",
     "disable.disableClientEntityRendering.MixinEntityRenderDispatcher",
@@ -49,6 +47,7 @@
     "patch.forceDebugInfoDetailed.MixinPlayer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem"
   ],
+  "mixins": [],
   "injectors": {
     "defaultRequire": 0
   }
