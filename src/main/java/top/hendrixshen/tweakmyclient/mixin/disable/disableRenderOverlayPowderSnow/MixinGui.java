@@ -12,7 +12,9 @@ import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(Gui.class)
 public abstract class MixinGui {
-    @Shadow @Final private static ResourceLocation POWDER_SNOW_OUTLINE_LOCATION;
+    @Shadow
+    @Final
+    private static ResourceLocation POWDER_SNOW_OUTLINE_LOCATION;
 
     @Inject(
             method = "renderTextureOverlay",

@@ -5,8 +5,6 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "client": [
-  ],
-  "mixins": [
     "disable.disableAttackEntity.MixinMinecraft",
     "disable.disableClientBlockEvents.MixinClientPacketListener",
     "disable.disableClientEntityRendering.MixinEntityRenderDispatcher",
@@ -23,7 +21,9 @@
     "disable.disableSlowdown.MixinBlock",
     "disable.disableSlowdown.MixinEntity",
     "disable.disableSlowdown.MixinLocalPlayer",
+    "disable.disableSlowdown.MixinSlimeBlock",
     "disable.disableSlowdown.MixinWebBlock",
+    "disable.disableSlowdown.tweakeroo.MixinSlimeBlock",
     "feature.featureAutoClimb.MixinLocalPlayer",
     "feature.featureAutoDrop.MixinLocalPlayer",
     "feature.featureAutoReconnect.MixinDisconnectedScreen",
@@ -49,6 +49,7 @@
     "patch.forceDebugInfoDetailed.MixinPlayer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem"
   ],
+  "mixins": [],
   "injectors": {
     "defaultRequire": 0
   }
