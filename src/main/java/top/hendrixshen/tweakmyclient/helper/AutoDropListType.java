@@ -1,8 +1,7 @@
 package top.hendrixshen.tweakmyclient.helper;
 
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
-import top.hendrixshen.magiclib.untils.language.I18n;
-import top.hendrixshen.tweakmyclient.TweakMyClientReference;
+import fi.dy.masa.malilib.util.StringUtils;
 
 public enum AutoDropListType implements IConfigOptionListEntry {
     BLACKLIST("blackList"),
@@ -21,7 +20,7 @@ public enum AutoDropListType implements IConfigOptionListEntry {
 
     @Override
     public String getDisplayName() {
-        return I18n.translate(String.format("%s.label.autoDropListType.%s", TweakMyClientReference.getModId(), this.name));
+        return StringUtils.translate(String.format("tweakmyclient.label.autoDropListType.%s", this.name));
     }
 
     @Override

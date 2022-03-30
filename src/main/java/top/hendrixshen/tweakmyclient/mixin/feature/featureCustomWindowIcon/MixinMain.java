@@ -5,9 +5,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
-import top.hendrixshen.tweakmyclient.fakeInterface.IMinecraft;
+import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
+@Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.15"))
 @Mixin(Main.class)
 public class MixinMain {
     @Inject(
@@ -19,6 +22,6 @@ public class MixinMain {
             remap = false
     )
     private static void finishInitializationRenderSystem(String[] strings, CallbackInfo ci) {
-        ((IMinecraft) TweakMyClient.getMinecraftClient()).refreshIcon();
+        CustomWindowUtil.updateIcon(TweakMyClient.getMinecraftClient().getWindow());
     }
 }

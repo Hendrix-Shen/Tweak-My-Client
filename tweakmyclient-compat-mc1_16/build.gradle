@@ -1,0 +1,11 @@
+dependencies {
+    minecraft("com.mojang:minecraft:${project.minecraft_version}")
+
+    modImplementation("curse.maven:malilib-303119:${project.library_malilib_version}")
+    modImplementation("curse.maven:modmenu-308702:${project.library_modmenu_version}")
+
+    modRuntimeOnly("curse.maven:in-game-account-switcher-232676:${project.library_inGameAccountSwitcher_version}")
+    modRuntimeOnly("curse.maven:authme-356643:${project.library_authme_version}")
+    modRuntimeOnly("curse.maven:litematica-308892:${project.library_litematica_version}")
+    modRuntimeOnly("curse.maven:reauth-403928:${project.library_reauth_version}")
+}

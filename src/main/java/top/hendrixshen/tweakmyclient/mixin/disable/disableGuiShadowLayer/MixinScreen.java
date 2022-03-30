@@ -7,8 +7,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
+@Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.16"))
 @Mixin(Screen.class)
 public abstract class MixinScreen extends AbstractContainerEventHandler {
     @Inject(
@@ -20,7 +23,7 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             cancellable = true
     )
     private void onFillGradient(PoseStack poseStack, int i, CallbackInfo ci) {
-        if (Configs.disableGuiShadowLayer.getBooleanValue()) {
+        if (Configs.disableGuiShadowLayer) {
             ci.cancel();
         }
     }

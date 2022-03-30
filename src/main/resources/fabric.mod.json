@@ -33,15 +33,9 @@
   ],
   "depends": {
     "fabricloader": ">=0.9.0",
-    "magiclib": ">=0.2.4 <0.3",
-    "malilib": ">=0.10.0-dev.21",
-    "minecraft": "1.16.5"
+    "magiclib": ">=0.3.24"
   },
   "custom": {
-    "compat": {
-      "authme": ">=2.1.0",
-      "ias": ">=7.1.3",
-      "reauth": ">=3.9.3"
-    }
+    "modmenu:clientsideOnly": true
   }
 }

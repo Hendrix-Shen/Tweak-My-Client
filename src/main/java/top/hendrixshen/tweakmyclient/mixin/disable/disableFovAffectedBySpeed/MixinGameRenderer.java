@@ -17,7 +17,7 @@ public class MixinGameRenderer {
             )
     )
     private void onGetFovFov(Args args) {
-        if (Configs.disableFovAffectedBySpeed.getBooleanValue()) {
+        if (Configs.disableFovAffectedBySpeed) {
             args.set(1, 1.0F);
             args.set(2, 1.0F);
         }

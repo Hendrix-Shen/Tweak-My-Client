@@ -11,11 +11,11 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !startsWith(github.event.ref, 'refs/tags/') }}
     strategy:
       matrix:
-        java: [17]
-        os: [ubuntu-latest]
+        java: [ 17 ]
+        os: [ ubuntu-latest ]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -41,9 +41,12 @@ jobs:
           short_sha=$(echo ${GITHUB_SHA} | cut -c1-7)
           echo "::set-output name=short_sha::$short_sha"
 
-      - name: Set build number in codes
-        run: |
-          sed -i "s/Development/Public Beta/g" src/main/java/top/hendrixshen/tweakmyclient/TweakMyClientReference.java
+      - name: Read Properties mod_name
+        id: mod_name
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: mod_name
 
       - name: Read Properties mod_version
         id: mod_version
@@ -52,26 +55,14 @@ jobs:
           path: gradle.properties
           property: mod_version
 
-      - name: Read Properties minecraft_version
-        id: minecraft_version
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: minecraft_version
-
-      - name: Read Properties mod_name
-        id: mod_name
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: mod_name
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Build with Gradle
         env:
-          GIT_COMMIT_ID: ${{ steps.get_short_sha.outputs.short_sha }}
+          COMMIT_SHA: ${{ steps.get_short_sha.outputs.short_sha }}
+          BUILD_TYPE: "BETA"
+          BUILD_NUMBER: ${{ github.run_number}}
         run: ./gradlew build
 
       - name: Create Github release
@@ -80,7 +71,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "dev-${{ github.ref_name }}"
           prerelease: true
-          title: "[CI#${{ github.run_number}}]${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}-${{ steps.get_short_sha.outputs.short_sha }} for Minecraft ${{ steps.minecraft_version.outputs.value }}"
+          title: "[CI#${{ github.run_number}}]${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}"
           files: |
             LICENSE
             build/libs/*.jar
@@ -89,9 +80,9 @@ jobs:
     if: ${{ github.event_name == 'release' }}
     strategy:
       matrix:
-        java: [17]
-        os: [ubuntu-latest]
-        branch: [1.15, 1.16, 1.17, 1.18, 1.19]
+        java: [ 17 ]
+        os: [ ubuntu-latest ]
+        branch: [ 1.15, 1.16, 1.17, 1.18, 1.19 ]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -265,8 +256,8 @@ jobs:
     if: ${{ github.event_name == 'pull_request' }}
     strategy:
       matrix:
-        java: [17]
-        os: [ubuntu-latest]
+        java: [ 17 ]
+        os: [ ubuntu-latest ]
     runs-on: ${{ matrix.os }}
 
     steps:

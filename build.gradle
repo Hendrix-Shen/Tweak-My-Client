@@ -1,135 +1,136 @@
-import com.modrinth.minotaur.TaskModrinthUpload
-import com.modrinth.minotaur.request.VersionType
-
 plugins {
     id 'fabric-loom' version '0.11-SNAPSHOT'
-    id 'maven-publish'
-    id "com.modrinth.minotaur" version "1.2.1"
+    id 'io.github.juuxel.loom-quiltflower' version '1.6.1'
 }
 
-static String getVersionString() {
-    String git_commit_id = System.getenv("GIT_COMMIT_ID")
-    if (git_commit_id != null) {
-        return git_commit_id
-    } else {
-        return new Date().format('yyyyMMdd.HHmmss')
-    }
+def baseVersion = "${project.mod_version}" as String
+def ENV = System.getenv()
+
+if (ENV.BUILD_NUMBER) {
+    baseVersion = baseVersion + '.' + ENV.BUILD_NUMBER
+} else {
+    baseVersion = baseVersion + '.0'
 }
 
-group = "${project.group}.${project.mod_id}" as Object
-archivesBaseName = "${project.mod_file_name}-mc${project.minecraft_version_out}"
-version = "${project.mod_version}+${getVersionString()}" as Object
-
-repositories {
-    // Add repositories to retrieve artifacts from in here.
-    // You should only use this when depending on other mods because
-    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-    // for more information about repositories.
-    maven {
-        url 'https://www.cursemaven.com/'
-    }
-    maven {
-        url 'https://maven.hendrixshen.top'
-    }
+if (ENV.COMMIT_SHA) {
+    baseVersion = baseVersion + "+" + ENV.COMMIT_SHA
 }
+if (ENV.BUILD_TYPE) {
+    if (ENV.BUILD_TYPE == "RELEASE") {
+        baseVersion = baseVersion + "-stable"
+    } else if (ENV.BUILD_TYPE == "BETA") {
+        baseVersion = baseVersion + "-beta"
+    }
+} else {
+    baseVersion = baseVersion + "-dev"
+}
+
+version = baseVersion
 
 dependencies {
-    // Development Environment
     minecraft("com.mojang:minecraft:${project.minecraft_version}")
-    mappings(loom.officialMojangMappings())
-    modApi("net.fabricmc:fabric-loader:${project.fabric_loader_version}")
-    // Required library
-    modApi("top.hendrixshen.magiclib:magiclib:${project.library_magiclib_version}")
-    include("top.hendrixshen.magiclib:magiclib:${project.library_magiclib_version}")
-    modApi("curse.maven:malilib-303119:${project.library_malilib_version}")
-    // Optional mod compatibility library
     modCompileOnly("curse.maven:authme-356643:${project.library_authme_version}")
     modCompileOnly("curse.maven:inGameAcountSwitcher-232676:${project.library_inGameAcountSwitcher_version}")
     modCompileOnly("curse.maven:litematica-308892:${project.library_litematica_version}")
+    modCompileOnly("curse.maven:malilib-303119:${project.library_malilib_version}")
     modCompileOnly("curse.maven:reauth-403928:${project.library_reauth_version}")
-    modCompileOnly("curse.maven:modmenu-308702:${project.library_mod_menu_version}")
-}
 
-processResources {
-    inputs.property "version", project.version
+    if (project.gradle.startParameter.projectDir != null &&
+            !project.gradle.startParameter.projectDir.getName().startsWith("tweakmyclient-compat")) {
+        modRuntimeOnly("curse.maven:authme-356643:${project.library_authme_version}")
+        modRuntimeOnly("curse.maven:inGameAcountSwitcher-232676:${project.library_inGameAcountSwitcher_version}")
+        modRuntimeOnly("curse.maven:litematica-308892:${project.library_litematica_version}")
+        modRuntimeOnly("curse.maven:malilib-303119:${project.library_malilib_version}")
+        modRuntimeOnly("curse.maven:reauth-403928:${project.library_reauth_version}")
+        modImplementation("curse.maven:modmenu-308702:${project.library_mod_menu_version}")
 
-    filesMatching("fabric.mod.json") {
-        include "fabric.mod.json"
-        expand "mod_version": project.version
+        runtimeOnly(fileTree(dir: "tweakmyclient-compat-mc1_16/build/devlibs", include: ["*-dev.jar"]))
+    }
+
+    subprojects.each {
+        include(project("${it.name}:"))
     }
 }
 
-tasks.withType(JavaCompile).configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
-    // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
-    it.options.encoding = "UTF-8"
-    it.sourceCompatibility = JavaVersion.VERSION_1_8
-    it.targetCompatibility = JavaVersion.VERSION_1_8
-}
+allprojects {
+    apply plugin: 'fabric-loom'
+    apply plugin: 'io.github.juuxel.loom-quiltflower'
 
-task publishModrinth(type: TaskModrinthUpload) {
-    onlyIf {
-        System.getenv("MODRINTH_API_TOKEN")
+    group = "${project.group}.${project.mod_id}" as String
+    archivesBaseName = "${project.mod_id}"
+
+    loom.runConfigs.configureEach {
+        property('mixin.debug.export', 'true')
     }
-    token = System.getenv("MODRINTH_API_TOKEN")
-    projectId = "${project.modrinth_project_id}"
-    versionNumber = System.getenv("VERSION_NUMBER")
-    changelog = System.getenv("CHANGE_LOG")
-    uploadFile = remapJar
-    switch ("${project.modrinth_release_type}") {
-        case "alpha":
-            versionType = VersionType.ALPHA
-            break
-        case "beta":
-            versionType = VersionType.BETA
-            break
-        case "release":
-            versionType = VersionType.RELEASE
-            break
+
+    version = rootProject.version
+    group = rootProject.group
+
+    repositories {
+        maven {
+            url 'https://www.cursemaven.com/'
+        }
+        maven {
+            url 'https://maven.hendrixshen.top'
+        }
     }
-    addGameVersion("${project.minecraft_version}")
-    addLoader('fabric')
+
+    dependencies {
+        mappings(loom.officialMojangMappings())
+        modImplementation("net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}")
+        modImplementation("top.hendrixshen.magiclib:magiclib:${project.library_magiclib_version}")
+        modRuntimeOnly("curse.maven:lazydfu-433518:${project.library_lazydfu_version}")
+    }
+
+    loom {
+        runs {
+            client {
+                runDir = "$project.name/run"
+            }
+        }
+    }
+
+    runClient {
+        defaultCharacterEncoding = "UTF-8"
+    }
+
+    runServer {
+        defaultCharacterEncoding = "UTF-8"
+    }
+
+    java {
+        withSourcesJar()
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        it.options.encoding = "UTF-8"
+        it.sourceCompatibility = JavaVersion.VERSION_1_8
+        it.targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    processResources {
+        inputs.property "version", rootProject.version
+
+        filesMatching("fabric.mod.json") {
+            include "fabric.mod.json"
+            expand "mod_version": rootProject.version
+        }
+    }
 }
 
-runClient {
-    defaultCharacterEncoding = "UTF-8"
-}
-
-runServer {
-    defaultCharacterEncoding = "UTF-8"
-}
-
-java {
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
-    withSourcesJar()
+subprojects {
+    if (project.gradle.startParameter.taskNames.size() == 1 && project.gradle.startParameter.taskNames.get(0) == "runClient") {
+        dependencies {
+            modImplementation(rootProject)
+        }
+    } else {
+        dependencies {
+            implementation(rootProject)
+        }
+    }
 }
 
 jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
-    }
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-
-    repositories {
-        // Add repositories to publish to here.
-        // Notice: This block does NOT have the same function as the block in the top level.
-        // The repositories here will be used for publishing your artifact, not for
-        // retrieving dependencies.
-        maven {
-            url "$projectDir/publish"
-        }
-    }
+    from("LICENSE")
 }
 

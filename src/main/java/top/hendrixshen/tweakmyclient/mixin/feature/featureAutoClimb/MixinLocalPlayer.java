@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.hendrixshen.tweakmyclient.compat.proxy.entity.EntityCompatApi;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(LocalPlayer.class)
@@ -24,7 +25,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             )
     )
     private void onClimbable(CallbackInfo ci) {
-        if (Configs.featureAutoClimb.getBooleanValue() && this.onClimbable() && this.xRot <= -50f && !this.isCrouching()) {
+        if (Configs.featureAutoClimb && EntityCompatApi.getInstance().onClimbable(this) && EntityCompatApi.getInstance().getXRot(this) <= -50f && !EntityCompatApi.getInstance().isCrouching(this)) {
             Vec3 vec3 = this.getDeltaMovement();
             this.setDeltaMovement(vec3.x, 0.1176D, vec3.z);
         }

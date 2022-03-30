@@ -6,8 +6,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
+import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
+@Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.16"))
 @Mixin(Screen.class)
 public abstract class MixinScreen extends AbstractContainerEventHandler {
     /**
@@ -28,9 +31,9 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             )
     )
     private void onFillGradient(Args args) {
-        if (Configs.featureCustomGuiBackgroundColor.getBooleanValue()) {
-            args.set(5, Configs.colorGuiStart.getIntegerValue());
-            args.set(6, Configs.colorGuiStop.getIntegerValue());
+        if (Configs.featureCustomGuiBackgroundColor) {
+            args.set(5, Configs.colorGuiStart.intValue);
+            args.set(6, Configs.colorGuiStop.intValue);
         }
     }
 }

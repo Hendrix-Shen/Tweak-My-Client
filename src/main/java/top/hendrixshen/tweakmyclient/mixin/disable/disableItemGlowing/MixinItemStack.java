@@ -28,11 +28,11 @@ public abstract class MixinItemStack {
             cancellable = true
     )
     private void isFoil(CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.disableItemGlowing.getBooleanValue()) {
+        if (Configs.disableItemGlowing) {
             String itemStackID = Registry.ITEM.getKey(this.getItem()).toString();
             String itemStackName = this.getDisplayName().getString();
             if (ListCache.itemGlowingBlacklist.contains(this.getItem()) ||
-                    Configs.listItemGlowingBlacklist.getStrings().stream().anyMatch((s -> itemStackID.contains(s) || itemStackName.contains(s)))) {
+                    Configs.listItemGlowingBlacklist.stream().anyMatch((s -> itemStackID.contains(s) || itemStackName.contains(s)))) {
                 cir.setReturnValue(false);
             }
         }

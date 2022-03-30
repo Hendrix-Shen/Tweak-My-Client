@@ -1,0 +1,26 @@
+{
+  "required": true,
+  "package": "top.hendrixshen.tweakmyclient.compat.mixin",
+  "plugin": "top.hendrixshen.tweakmyclient.TweakMyClientMixinPlugin",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+  ],
+  "mixins": [
+    "disable.disableAttackEntity.MixinMinecraft",
+    "disable.disableRenderBossBar.MixinBossHealthOverlay",
+    "disable.disableRenderOverlayPowderSnow.MixinGui",
+    "disable.disableRenderOverlayPumpkin.MixinGui",
+    "disable.disableSlowdown.MixinEntity",
+    "disable.disableSlowdown.MixinSlimeBlock",
+    "disable.disableSlowdown.tweakeroo.MixinSlimeBlock",
+    "feature.featureAutoReconnect.MixinDisconnectedScreen",
+    "feature.featureAutoReconnect.MixinScreen",
+    "feature.featureAutoRespawn.MixinDeathScreen",
+    "patch.endPortalRendererFix.MixinTheEndPortalBlockEntity",
+    "patch.endPortalRendererFix.MixinTheEndPortalRenderer"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

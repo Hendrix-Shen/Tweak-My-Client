@@ -5,8 +5,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
+import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
+@Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.16"))
 @Mixin(Gui.class)
 public abstract class MixinGui {
     @ModifyArgs(
@@ -18,8 +21,8 @@ public abstract class MixinGui {
             )
     )
     private void changeSidebarTitleBackgroundColor(Args args) {
-        if (Configs.featureCustomSidebarBackgroundColor.getBooleanValue()) {
-            args.set(5, Configs.colorSidebarTitle.getIntegerValue());
+        if (Configs.featureCustomSidebarBackgroundColor) {
+            args.set(5, Configs.colorSidebarTitle.intValue);
         }
     }
 
@@ -32,8 +35,8 @@ public abstract class MixinGui {
             )
     )
     private void changeSidebarContentBackgroundColor_1(Args args) {
-        if (Configs.featureCustomSidebarBackgroundColor.getBooleanValue()) {
-            args.set(5, Configs.colorSidebarContent.getIntegerValue());
+        if (Configs.featureCustomSidebarBackgroundColor) {
+            args.set(5, Configs.colorSidebarContent.intValue);
         }
     }
 
@@ -46,8 +49,8 @@ public abstract class MixinGui {
             )
     )
     private void changeSidebarContentBackgroundColor_2(Args args) {
-        if (Configs.featureCustomSidebarBackgroundColor.getBooleanValue()) {
-            args.set(5, Configs.colorSidebarContent.getIntegerValue());
+        if (Configs.featureCustomSidebarBackgroundColor) {
+            args.set(5, Configs.colorSidebarContent.intValue);
         }
     }
 }

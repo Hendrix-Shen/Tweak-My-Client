@@ -26,12 +26,12 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             )
     )
     private void onTick(CallbackInfo ci) {
-        if (Configs.featureAutoDrop.getBooleanValue()) {
+        if (Configs.featureAutoDrop) {
             if (this.autoDropTimer > 0) {
                 this.autoDropTimer--;
             } else {
                 InventoryUtil.doDrop();
-                this.autoDropTimer = Configs.autoDropInterval.getIntegerValue();
+                this.autoDropTimer = Configs.autoDropInterval;
             }
         }
     }

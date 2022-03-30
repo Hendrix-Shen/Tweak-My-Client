@@ -8,9 +8,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
+@Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.15"))
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
     @Shadow
@@ -27,7 +30,7 @@ public abstract class MixinMinecraft {
             cancellable = true
     )
     private void onCreateTitle(CallbackInfoReturnable<String> cir) {
-        if (Configs.featureCustomWindowTitle.getBooleanValue()) {
+        if (Configs.featureCustomWindowTitle) {
             cir.setReturnValue(CustomWindowUtil.getWindowTitle());
         }
     }
@@ -40,9 +43,8 @@ public abstract class MixinMinecraft {
             )
     )
     private void onRunTick(CallbackInfo ci) {
-        if (Configs.featureCustomWindowTitle.getBooleanValue()) {
-            CustomWindowUtil.updatePlaceholders();
-            this.updateTitle();
+        if (Configs.featureCustomWindowTitle) {
+            CustomWindowUtil.updateTitle();
         }
     }
 

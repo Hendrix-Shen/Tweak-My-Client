@@ -18,7 +18,7 @@ public class MixinToastComponent {
             cancellable = true
     )
     private void onAddToToastQueue(Toast toast, CallbackInfo ci) {
-        if (Configs.disableRenderToast.getBooleanValue()) {
+        if (Configs.disableRenderToast) {
             ci.cancel();
         }
     }

@@ -1,11 +1,8 @@
 package top.hendrixshen.tweakmyclient.event;
 
-import fi.dy.masa.malilib.config.IConfigBoolean;
-import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
-import fi.dy.masa.malilib.hotkeys.KeyCallbackToggleBoolean;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
@@ -18,16 +15,18 @@ import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
+import top.hendrixshen.magiclib.config.Option;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.TweakMyClientConfigGui;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
-import top.hendrixshen.tweakmyclient.config.ConfigGui;
 import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.helper.ListCache;
 import top.hendrixshen.tweakmyclient.helper.TargetBlockPositionPrintMode;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
-import top.hendrixshen.tweakmyclient.util.InfoUtil;
 import top.hendrixshen.tweakmyclient.util.InventoryUtil;
-
-import static top.hendrixshen.tweakmyclient.TweakMyClient.cm;
+import top.hendrixshen.tweakmyclient.util.StringUtil;
 
 public class CallBacks {
     public static boolean getTargetBlockPositionCallback(KeyAction keyAction, IKeybind keybind) {
@@ -35,15 +34,15 @@ public class CallBacks {
         Entity cameraEntity = minecraft.cameraEntity;
         MultiPlayerGameMode multiPlayerGameMode = minecraft.gameMode;
         if (cameraEntity != null && multiPlayerGameMode != null) {
-            HitResult hitResult = cameraEntity.pick(Configs.targetBlockMaxTraceDistance.getDoubleValue(), minecraft.getFrameTime(), false);
+            HitResult hitResult = cameraEntity.pick(Configs.targetBlockMaxTraceDistance, minecraft.getFrameTime(), false);
             if (hitResult.getType() == HitResult.Type.BLOCK) {
                 BlockPos blockPos = ((BlockHitResult) hitResult).getBlockPos();
-                String str = Configs.targetBlockPositionFormat.getStringValue();
+                String str = Configs.targetBlockPositionFormat;
                 str = str.replace("{X}", String.format("%d", blockPos.getX()));
                 str = str.replace("{Y}", String.format("%d", blockPos.getY()));
                 str = str.replace("{Z}", String.format("%d", blockPos.getZ()));
                 if (minecraft.player != null) {
-                    switch ((TargetBlockPositionPrintMode) Configs.targetBlockPositionPrintMode.getOptionListValue()) {
+                    switch ((TargetBlockPositionPrintMode) Configs.targetBlockPositionPrintMode) {
                         case PUBLIC:
                             minecraft.player.chat(str);
                             break;
@@ -82,24 +81,11 @@ public class CallBacks {
         return true;
     }
 
-    public static void debugModeCallBack(ConfigBoolean configBoolean) {
-        cm.setHideDebug(!configBoolean.getBooleanValue());
-        ConfigGui.getInstance().reDraw();
-    }
-
-    public static void displayDevelopmentOnlyConfigCallBack(ConfigBoolean configBoolean) {
-        cm.setHideDevOnly(!configBoolean.getBooleanValue());
-        ConfigGui.getInstance().reDraw();
-    }
-
-    public static void displayDisabledConfigConfigCallBack(ConfigBoolean configBoolean) {
-        cm.setHideDisabled(!configBoolean.getBooleanValue());
-        ConfigGui.getInstance().reDraw();
-    }
-
-    public static void displayUnSupportMinecraftConfigCallBack(ConfigBoolean configBoolean) {
-        cm.setHideUnmatchedMinecraftVersion(!configBoolean.getBooleanValue());
-        ConfigGui.getInstance().reDraw();
+    public static void debugModeCallBack(Option option) {
+        Configurator.setLevel(TweakMyClientReference.getModId(), Level.toLevel((Configs.debugMode ? "DEBUG" : "INFO")));
+        if (option != null) {
+            TweakMyClientConfigGui.getInstance().reDraw();
+        }
     }
 
     public static boolean syncInventoryCallback(KeyAction keyAction, IKeybind keybind) {
@@ -126,39 +112,37 @@ public class CallBacks {
         return true;
     }
 
-    public static class KeyCallbackToggleBooleanConfigWithMessage extends KeyCallbackToggleBoolean {
-        private final String translatedName;
-
-        public KeyCallbackToggleBooleanConfigWithMessage(IConfigBoolean config, String translatedName) {
-            super(config);
-            this.translatedName = translatedName;
-        }
-
-        @Override
-        public boolean onKeyAction(KeyAction action, IKeybind key) {
-            super.onKeyAction(action, key);
-            InfoUtil.printBooleanConfigToggleMessage(translatedName, this.config.getBooleanValue());
-            return true;
-        }
-
-    }
-
-    public static void disableRenderToastCallback(ConfigBoolean configBoolean) {
-        if (configBoolean.getBooleanValue()) {
+    public static void disableRenderToastCallback(Option option) {
+        if (Configs.disableRenderToast) {
             TweakMyClient.getMinecraftClient().getToasts().clear();
         }
     }
 
-    public static void featureCustomWindowTitleCallback(ConfigBoolean configBoolean) {
-        CustomWindowUtil.rebuildCache(CustomWindowUtil.TitleType.TITLE);
-        CustomWindowUtil.rebuildCache(CustomWindowUtil.TitleType.TITLE_WITH_ACTIVITY);
-        if (!configBoolean.getBooleanValue()) {
-            TweakMyClient.getMinecraftClient().updateTitle();
+    public static void featureCustomWindowTitleCallback(Option option) {
+        if (Configs.featureCustomWindowTitle) {
+            CustomWindowUtil.rebuildCache(CustomWindowUtil.TitleType.TITLE);
+            CustomWindowUtil.rebuildCache(CustomWindowUtil.TitleType.TITLE_WITH_ACTIVITY);
+            CustomWindowUtil.updateTitle();
+        } else {
+            CustomWindowUtil.reSetTitle();
         }
     }
 
     public static boolean openConfigGuiCallback(KeyAction keyAction, IKeybind keybind) {
-        GuiBase.openGui(ConfigGui.getInstance());
+        GuiBase.openGui(TweakMyClientConfigGui.getInstance());
         return true;
+    }
+
+    public static void listAutoDropBlackListCallback(Option option) {
+        ListCache.itemAutoDropBlackList = StringUtil.getItemStackSets(Configs.listAutoDropBlackList);
+    }
+
+    public static void listAutoDropWhiteListCallback(Option option) {
+        ListCache.itemAutoDropWhiteList = StringUtil.getItemStackSets(Configs.listAutoDropWhiteList);
+    }
+
+    public static void listItemGlowingBlacklistCallback(Option option) {
+        ListCache.itemGlowingBlacklist = StringUtil.getItemStackSets(Configs.listItemGlowingBlacklist);
+
     }
 }

@@ -18,7 +18,7 @@ public class MixinGameRenderer {
             cancellable = true
     )
     private void onRenderHead(float tickDelta, long startTime, boolean tick, CallbackInfo ci) {
-        if (Configs.featureUnfocusedCPU.getBooleanValue() && !TweakMyClient.getMinecraftClient().isWindowActive()) {
+        if (Configs.featureUnfocusedCPU && !TweakMyClient.getMinecraftClient().isWindowActive()) {
             ci.cancel();
         }
     }

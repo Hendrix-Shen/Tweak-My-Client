@@ -28,7 +28,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             )
     )
     private boolean getUsingItemState(LocalPlayer instance) {
-        if (Configs.disableSlowdown.getBooleanValue()) {
+        if (Configs.disableSlowdown) {
             return false;
         }
         return this.startedUsingItem;

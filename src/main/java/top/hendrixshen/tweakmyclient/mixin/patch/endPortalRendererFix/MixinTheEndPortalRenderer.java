@@ -11,9 +11,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.annotation.Dependency;
+import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.helper.EnderPortalRenderMode;
 
+@Dependencies(and = {@Dependency(value = "minecraft", versionPredicate = ">=1.15"), @Dependency(value = "minecraft", versionPredicate = "<1.17")})
 @Mixin(TheEndPortalRenderer.class)
 public abstract class MixinTheEndPortalRenderer {
     @Shadow
@@ -30,8 +34,8 @@ public abstract class MixinTheEndPortalRenderer {
             cancellable = true
     )
     private void onRenderCube(TheEndPortalBlockEntity theEndPortalBlockEntity, float f, float g, Matrix4f matrix4f, VertexConsumer vertexConsumer, CallbackInfo ci, float h, float i, float j) {
-        if (Configs.endPortalRendererFix.getBooleanValue() && Configs.enderPortalRenderMode.getOptionListValue() != EnderPortalRenderMode.LEGACY) {
-            if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.ACTUAL) {
+        if (Configs.endPortalRendererFix && Configs.enderPortalRenderMode != EnderPortalRenderMode.LEGACY) {
+            if (Configs.enderPortalRenderMode == EnderPortalRenderMode.ACTUAL) {
                 // Rendering the ender portal using its hit box.
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 0.0F, f, 1.0F, 1.0F, 1.0F, 1.0F, h, i, j, Direction.SOUTH);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, f, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, h, i, j, Direction.NORTH);
@@ -39,7 +43,7 @@ public abstract class MixinTheEndPortalRenderer {
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 0.0F, 0.0F, f, 0.0F, 1.0F, 1.0F, 0.0F, h, i, j, Direction.WEST);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, h, i, j, Direction.DOWN);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, f, f, 1.0F, 1.0F, 0.0F, 0.0F, h, i, j, Direction.UP);
-            } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.FULL) {
+            } else if (Configs.enderPortalRenderMode == EnderPortalRenderMode.FULL) {
                 // Rendering the end portal as a full block.
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, h, i, j, Direction.SOUTH);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, h, i, j, Direction.NORTH);
@@ -47,7 +51,7 @@ public abstract class MixinTheEndPortalRenderer {
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, h, i, j, Direction.WEST);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, h, i, j, Direction.DOWN);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, h, i, j, Direction.UP);
-            } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.MODERN) {
+            } else if (Configs.enderPortalRenderMode == EnderPortalRenderMode.MODERN) {
                 // Rendering the end portal with Minecraft 21w13a and above.
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, h, i, j, Direction.SOUTH);
                 this.renderFace(theEndPortalBlockEntity, matrix4f, vertexConsumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, h, i, j, Direction.NORTH);

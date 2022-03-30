@@ -5,6 +5,8 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "client": [
+  ],
+  "mixins": [
     "disable.disableAttackEntity.MixinMinecraft",
     "disable.disableClientBlockEvents.MixinClientPacketListener",
     "disable.disableClientEntityRendering.MixinEntityRenderDispatcher",
@@ -12,24 +14,16 @@
     "disable.disableFovAffectedBySpeed.MixinGameRenderer",
     "disable.disableGuiShadowLayer.MixinScreen",
     "disable.disableItemGlowing.MixinItemStack",
-    "disable.disableRenderBossBar.MixinBossHealthOverlay",
     "disable.disableRenderOverlayFire.MixinScreenEffectRenderer",
     "disable.disableRenderOverlayPumpkin.MixinGui",
     "disable.disableRenderScoreboard.MixinGui",
     "disable.disableRenderToast.MixinToastComponent",
     "disable.disableSlowdown.MixinBlock",
     "disable.disableSlowdown.MixinLocalPlayer",
-    "disable.disableSlowdown.MixinSlimeBlock",
     "disable.disableSlowdown.MixinWebBlock",
-    "disable.disableSlowdown.tweakeroo.MixinSlimeBlock",
     "feature.featureAutoClimb.MixinLocalPlayer",
     "feature.featureAutoDrop.MixinLocalPlayer",
-    "feature.featureAutoReconnect.MixinDisconnectedScreen",
     "feature.featureAutoReconnect.MixinMinecraft",
-    "feature.featureAutoReconnect.authme.MixinDisconnectedScreen",
-    "feature.featureAutoReconnect.ias.MixinDisconnectedScreen",
-    "feature.featureAutoReconnect.reauth.MixinDisconnectedScreen",
-    "feature.featureAutoRespawn.MixinDeathScreen",
     "feature.featureCustomBlockOutsideColor.MixinLevelRenderer",
     "feature.featureCustomGuiBackgroundColor.MixinScreen",
     "feature.featureCustomSidebarBackgroundColor.MixinGui",
@@ -47,8 +41,7 @@
     "patch.forceDebugInfoDetailed.MixinPlayer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem"
   ],
-  "mixins": [],
   "injectors": {
-    "defaultRequire": 0
+    "defaultRequire": 1
   }
 }

@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 import org.lwjgl.opengl.GL11;
+import top.hendrixshen.tweakmyclient.compat.proxy.render.BufferBuilderCompatApi;
 
 public class RenderUtil {
     public static void renderAreaOutline(BlockPos pos1, BlockPos pos2, float lineWidth, Color4f colorX, Color4f colorY, Color4f colorZ, Minecraft minecraft) {
@@ -32,7 +33,9 @@ public class RenderUtil {
     private static void drawBoundingBoxEdges(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f colorX, Color4f colorY, Color4f colorZ) {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tesselator.getBuilder();
-        bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
+
+        BufferBuilderCompatApi.getInstance().compat_1_17_above();
+        BufferBuilderCompatApi.getInstance().beginGLLines(bufferbuilder);
 
         drawBoundingBoxLinesX(bufferbuilder, minX, minY, minZ, maxX, maxY, maxZ, colorX);
         drawBoundingBoxLinesY(bufferbuilder, minX, minY, minZ, maxX, maxY, maxZ, colorY);

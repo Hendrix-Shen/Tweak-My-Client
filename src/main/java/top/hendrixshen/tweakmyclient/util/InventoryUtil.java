@@ -10,10 +10,13 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.compat.proxy.entity.PlayerCompatApi;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.helper.AutoDropListType;
 import top.hendrixshen.tweakmyclient.helper.ListCache;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 
 public class InventoryUtil {
@@ -29,23 +32,23 @@ public class InventoryUtil {
             if (adjustedSlot >= 36)
                 adjustedSlot -= 36;
             assert minecraftClient.player != null;
-            ItemStack stack = minecraftClient.player.inventory.getItem(adjustedSlot);
+            ItemStack stack = PlayerCompatApi.getInstance().getInventory(minecraftClient.player).getItem(adjustedSlot);
 
             if (stack.isEmpty())
                 continue;
 
-            AutoDropListType mode = (AutoDropListType) Configs.listAutoDropType.getOptionListValue();
+            AutoDropListType mode = (AutoDropListType) Configs.listAutoDropType;
             switch (mode) {
                 case BLACKLIST:
                     if (!ListCache.itemAutoDropBlackList.contains(stack.getItem())) {
                         assert interactionManager != null;
-                        interactionManager.handleInventoryMouseClick(0, slot, 1, ClickType.THROW, TweakMyClient.getMinecraftClient().player);
+                        PlayerCompatApi.getInstance().handleInventoryMouseClick(interactionManager, 0, slot, 1, ClickType.THROW, TweakMyClient.getMinecraftClient().player);
                     }
                     break;
                 case WHITELIST:
                     if (ListCache.itemAutoDropWhiteList.contains(stack.getItem())) {
                         assert interactionManager != null;
-                        interactionManager.handleInventoryMouseClick(0, slot, 1, ClickType.THROW, TweakMyClient.getMinecraftClient().player);
+                        PlayerCompatApi.getInstance().handleInventoryMouseClick(interactionManager, 0, slot, 1, ClickType.THROW, TweakMyClient.getMinecraftClient().player);
                     }
                     break;
             }
