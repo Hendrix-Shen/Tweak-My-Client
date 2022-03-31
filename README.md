@@ -3,7 +3,7 @@
 [![Minecraft](http://cf.way2muchnoise.eu/versions/Minecraft_478757_all.svg?badge_style=flat)](https://www.curseforge.com/minecraft/mc-mods/tweakmyclient/files)
 [![License](https://img.shields.io/github/license/Hendrix-Shen/Tweak-My-Client?label=License&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/blob/master/LICENSE)
 ![Languages](https://img.shields.io/github/languages/top/Hendrix-Shen/Tweak-My-Client?style=flat-square)
-![Java-8~16](https://img.shields.io/badge/Java-8%20%7C%209%20%7C%2010%20%7C%2011%20%7C%2012%20%7C%2013%20%7C%2014%20%7C%2015%20%7C%2016-orange?style=flat-square)
+![Java-8~17](https://img.shields.io/badge/Java-8%20%7C%209%20%7C%2010%20%7C%2011%20%7C%2012%20%7C%2013%20%7C%2014%20%7C%2015%20%7C%2016%20%7C%2017-orange?style=flat-square)
 [![Issues](https://img.shields.io/github/issues/Hendrix-Shen/Tweak-My-Client?label=Issuess&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/Hendrix-Shen/Tweak-My-Client?label=Pull%20Requests&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/pulls)
 [![Last build](https://img.shields.io/github/workflow/status/Hendrix-Shen/Tweak-My-Client/CI/dev?label=Last%20build&style=flat-square)](https://github.com/Hendrix-Shen/Tweak-My-Client/actions/workflows/CI.yml)
@@ -17,21 +17,14 @@ The default hotkey to open the in-game config GUI is **T + C**.
 
 ## Dependencies (WIP)
 
-| Dependency               | Type     | 1.16.5                       | 1.17.1                       | 1.18.1         | Download                                                                                                                                           |
-|--------------------------|----------|------------------------------|------------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Auth Me                  | Optional | \>=2.1.0                     | \>=2.1.0                     | \>=2.2.0       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
-| In-Game Account Switcher | Optional | \>=7.1.3                     | \>=7.1.3                     | \>=7.1.3       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
-| MagicLib                 | Required | \>=0.1.14 <0.2               | \>=0.1.14 <0.2               | \>=0.1.14 <0.2 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
-| MaliLib                  | Required | \>=0.10.0-dev.21             | \>=0.10.0-dev.26             | \>=0.11.5      | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
-| Litematica               | Optional | \>=0.0.0-dev.20210612.170003 | \>=0.0.0-dev.20210906.183617 | \>=0.10.1      | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
-| ReAuth (Fabric)          | Optional | \>=3.9.2                     | \>=3.9.2                     | \>=3.9.2       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
-
-## Latest builds (Keep only the latest build files)
-- [1.15.2](https://github.com/Hendrix-Shen/Tweak-My-Client/releases/tag/dev-1.15)
-- [1.16.5](https://github.com/Hendrix-Shen/Tweak-My-Client/releases/tag/dev-1.16)
-- [1.17.1](https://github.com/Hendrix-Shen/Tweak-My-Client/releases/tag/dev-1.17)
-- [1.18.2](https://github.com/Hendrix-Shen/Tweak-My-Client/releases/tag/dev-1.18)
-- [22w11a](https://github.com/Hendrix-Shen/Tweak-My-Client/releases/tag/dev-1.19)
+| Dependency               | Type     | Version   | Download                                                                                                                                           |
+|--------------------------|----------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Auth Me                  | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
+| In-Game Account Switcher | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
+| MagicLib                 | Required | \>=0.3.25 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
+| MaliLib                  | Required | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
+| Litematica               | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
+| ReAuth (Fabric)          | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
 
 ## Config List (WIP)
 
