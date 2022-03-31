@@ -76,26 +76,40 @@ jobs:
             build/libs/*.jar
 
       - name: Publish realease to curseforge
-      - if: contains(github.event.head_commit.message, '[publish skip]') == false
+        if: contains(github.event.head_commit.message, '[publish skip]') == false
         uses: Kir-Antipov/mc-publish@v2.1
         with:
           curseforge-id: 478757
           curseforge-token: ${{ secrets.CF_API_TOKEN }}
 
-          github-tag: ${{ github.ref_name }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
           files-primary: build/libs/!(*-@(dev|sources)).jar
           files-secondary: build/libs/*-@(dev|sources).jar
 
-          name: ""
-          version-type: "alpha"
+          name: ''
+          version: ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
+          version-type: alpha
 
           changelog: ${{ github.event.push.head_commit.message }}
-          loaders: "farbic"
-          game-versions: "1.14\n1.15\n1.16\n1.17\n1.18\n1.19"
-          version-resolver: "latest"
-          java: "8\n9\n10\n11\n12\n13\n14\n15\n16\n17"
+          loaders: farbic
+          game-versions: |
+            1.14
+            1.15
+            1.16
+            1.17
+            1.18
+            1.19
+          version-resolver: latest
+          java: |
+            8
+            9
+            10
+            11
+            12
+            13
+            14
+            15
+            16
+            17
 
           retry-attempts: 2
           retry-delay: 10000
@@ -169,20 +183,34 @@ jobs:
           curseforge-id: 478757
           curseforge-token: ${{ secrets.CF_API_TOKEN }}
 
-          github-tag: ${{ github.ref_name }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
           files-primary: build/libs/!(*-@(dev|sources)).jar
           files-secondary: build/libs/*-@(dev|sources).jar
 
-          name: ""
-          version-type: "release"
+          name: ''
+          version: ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
+          version-type: 'release'
 
           changelog: ${{ github.event.release.body }}
-          loaders: "farbic"
-          game-versions: "1.14\n1.15\n1.16\n1.17\n1.18\n1.19"
-          version-resolver: "latest"
-          java: "8\n9\n10\n11\n12\n13\n14\n15\n16\n17"
+          loaders: farbic
+          game-versions: |
+            1.14
+            1.15
+            1.16
+            1.17
+            1.18
+            1.19
+          version-resolver: 'release'
+          java: |
+            8
+            9
+            10
+            11
+            12
+            13
+            14
+            15
+            16
+            17
 
           retry-attempts: 2
           retry-delay: 10000
