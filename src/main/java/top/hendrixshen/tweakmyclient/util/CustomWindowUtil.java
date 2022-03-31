@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
+import top.hendrixshen.tweakmyclient.compat.proxy.client.SharedConstantCompatApi;
 import top.hendrixshen.tweakmyclient.compat.proxy.client.WindowCompatApi;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
@@ -36,8 +37,8 @@ public class CustomWindowUtil {
     static {
         PLACEHOLDER_STATIC_MAP.put("{fabric_loader_version}", FabricLoaderImpl.VERSION);
         PLACEHOLDER_STATIC_MAP.put("{fabric_loader_asm_version}", String.valueOf(FabricLoaderImpl.ASM_VERSION));
-        PLACEHOLDER_STATIC_MAP.put("{mc_protocol_version}", String.valueOf(SharedConstants.getCurrentVersion().getProtocolVersion()));
-        PLACEHOLDER_STATIC_MAP.put("{mc_version}", SharedConstants.getCurrentVersion().getName());
+        PLACEHOLDER_STATIC_MAP.put("{mc_protocol_version}", Integer.toString(SharedConstantCompatApi.getInstance().getProtocolVersion()));
+        PLACEHOLDER_STATIC_MAP.put("{mc_version}", SharedConstantCompatApi.getInstance().getCurrentVersionName());
         PLACEHOLDER_STATIC_MAP.put("{tmc_version}", TweakMyClientReference.getModVersion());
         PLACEHOLDER_STATIC_MAP.put("{tmc_version_type}", TweakMyClientReference.getModVersionType());
         if (Configs.featureCustomWindowTitle) {
