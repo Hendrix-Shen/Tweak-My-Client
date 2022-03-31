@@ -15,6 +15,7 @@ public class TweakMyClientReference {
     public static boolean isAuthMeLoaded = FabricUtil.isModLoaded("authme");
     public static boolean isInGameAccountSwitcherLoaded = FabricUtil.isModLoaded("ias");
     public static boolean isReAuthLoaded = FabricUtil.isModLoaded("reauth");
+    public static boolean isOauthLoaded = FabricUtil.isModLoaded("oauth-fabric");
 
     public static String getModId() {
         return MOD_ID;

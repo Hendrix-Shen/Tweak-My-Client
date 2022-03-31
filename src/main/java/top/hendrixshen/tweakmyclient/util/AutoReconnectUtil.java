@@ -77,6 +77,26 @@ public class AutoReconnectUtil {
             modHashMap.put("ias", new ReAuthenticateMod(screen, screen == null));
         }
 
+        if (TweakMyClientReference.isOauthLoaded) {
+            Screen screen = null;
+
+            try { // LoginTypeScreen
+                screen = (Screen) Class.forName("com.sintinium.oauthfabric.gui.profile.ProfileSelectionScreen").getDeclaredConstructor().newInstance(); // For MC 1.16 & 1.18
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                try {
+                    screen = (Screen) Class.forName("com.sintinium.oauth.oauthfabric.gui.LoginTypeScreen").getDeclaredConstructor(Screen.class).newInstance(parent); // For MC 1.17
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException ex) {
+                    TweakMyClient.getLogger().error("Can't invoke OAuth Screen");
+                }
+            }
+
+            if (screen != null) {
+                compatReAuthenticateMods++;
+            }
+
+            modHashMap.put("oauth", new ReAuthenticateMod(screen, screen == null));
+        }
+
         if (TweakMyClientReference.isReAuthLoaded) {
             Screen screen = null;
 
@@ -143,11 +163,11 @@ public class AutoReconnectUtil {
                             ScreenCompatApi.getInstance().addButton(current,
                                     ScreenCompatApi.getInstance().createButton(backButtonX + offsetX.get(),
                                             48 + backButtonY,
-                                            (200 / compatReAuthenticateMods) - (compatReAuthenticateMods - 1) * 2,
+                                            (200 / compatReAuthenticateMods) - (compatReAuthenticateMods > 1 ? 2 : 0),
                                             20,
                                             StringUtils.translate(String.format("tweakmyclient.message.autoReconnect.authenticate.%s", id)),
                                             b -> TweakMyClient.getMinecraftClient().setScreen(reAuthenticateMod.authScreen)));
-                            offsetX.addAndGet((200 / compatReAuthenticateMods + 2));
+                            offsetX.addAndGet((200 / compatReAuthenticateMods + 1));
                         }
                     }
             );

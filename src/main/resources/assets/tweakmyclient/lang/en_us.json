@@ -164,6 +164,7 @@
 
     "tweakmyclient.message.autoReconnect.authenticate.authme": "Auth Me",
     "tweakmyclient.message.autoReconnect.authenticate.ias": "IAS",
+    "tweakmyclient.message.autoReconnect.authenticate.oauth": "OAuth",
     "tweakmyclient.message.autoReconnect.authenticate.reauth": "ReAuth",
     "tweakmyclient.message.autoReconnect.static": "Reconnect",
     "tweakmyclient.message.autoReconnect.timer": "Toggle AutoReconnect (%d)",
