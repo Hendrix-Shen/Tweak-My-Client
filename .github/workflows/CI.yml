@@ -17,7 +17,6 @@ jobs:
         java: [ 17 ]
         os: [ ubuntu-latest ]
     runs-on: ${{ matrix.os }}
-
     steps:
       - name: Checkout the sources
         uses: actions/checkout@v2
@@ -76,20 +75,41 @@ jobs:
             LICENSE
             build/libs/*.jar
 
+      - name: Publish realease to curseforge
+      - if: contains(github.event.head_commit.message, '[publish skip]') == false
+        uses: Kir-Antipov/mc-publish@v2.1
+        with:
+          curseforge-id: 478757
+          curseforge-token: ${{ secrets.CF_API_TOKEN }}
+
+          github-tag: ${{ github.ref_name }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+          files-primary: build/libs/!(*-@(dev|sources)).jar
+          files-secondary: build/libs/*-@(dev|sources).jar
+
+          name: ""
+          version-type: "alpha"
+
+          changelog: ${{ github.event.push.head_commit.message }}
+          loaders: "farbic"
+          game-versions: "1.14\n1.15\n1.16\n1.17\n1.18\n1.19"
+          version-resolver: "latest"
+          java: "8\n9\n10\n11\n12\n13\n14\n15\n16\n17"
+
+          retry-attempts: 2
+          retry-delay: 10000
+
   publish:
     if: ${{ github.event_name == 'release' }}
     strategy:
       matrix:
         java: [ 17 ]
         os: [ ubuntu-latest ]
-        branch: [ 1.15, 1.16, 1.17, 1.18, 1.19 ]
     runs-on: ${{ matrix.os }}
-
     steps:
       - name: Checkout the sources
         uses: actions/checkout@v2
-        with:
-          ref: ${{ matrix.branch }}
 
       - name: Set up JDK ${{ matrix.java }}
         uses: actions/setup-java@v2
@@ -104,22 +124,18 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
-      - name: Get commit sha from the corresponding branch
-        id: get_sha
-        uses: mego22/actions-git-sha@main
-        with:
-          repo: "https://github.com/Hendrix-Shen/Bilibili-Danmaku"
-          branch: "${{ matrix.branch }}"
-
       - name: Get short commit sha
         id: get_short_sha
         run: |
-          short_sha=$(echo ${{ steps.get_sha.outputs.sha }} | cut -c1-7)
+          short_sha=$(echo ${GITHUB_SHA} | cut -c1-7)
           echo "::set-output name=short_sha::$short_sha"
 
-      - name: Set build number in codes
-        run: |
-          sed -i "s/Development/Public Beta/g" src/main/java/top/hendrixshen/tweakmyclient/TweakMyClientReference.java
+      - name: Read Properties mod_name
+        id: mod_name
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: gradle.properties
+          property: mod_name
 
       - name: Read Properties mod_version
         id: mod_version
@@ -128,129 +144,49 @@ jobs:
           path: gradle.properties
           property: mod_version
 
-      - name: Read Properties minecraft_version_out
-        id: minecraft_version_out
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: minecraft_version_out
-
-      - name: Read Properties mod_file_name
-        id: mod_file_name
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: mod_file_name
-
-      - name: Read Properties curseforge_gameversion
-        id: curseforge_gameversion
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: curseforge_gameversion
-
-      - name: Read Properties curseforge_projectid
-        id: curseforge_projectid
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: curseforge_projectid
-
-      - name: Read Properties curseforge_relations
-        id: curseforge_relations
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: curseforge_relations
-
-      - name: Read Properties curseforge_release
-        id: curseforge_release
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: curseforge_release
-
-      - name: Read Properties curseforge_release_type
-        id: curseforge_release_type
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: curseforge_release_type
-
-      - name: Read Properties github_release
-        id: github_release
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: github_release
-
-      - name: Read Properties modrinth_release
-        id: modrinth_release
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: modrinth_release
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Build with Gradle
         env:
-          GIT_COMMIT_ID: ${{ steps.get_short_sha.outputs.short_sha }}
+          COMMIT_SHA: ${{ steps.get_short_sha.outputs.short_sha }}
+          BUILD_TYPE: "RELEASE"
+          BUILD_NUMBER: ${{ github.run_number}}
         run: ./gradlew build
 
-      - name: Publish maven with Gradle
+      - name: Upload Maven to GitHub
+        uses: s0/git-publish-subdir-action@v2.5.0
         env:
-          GIT_COMMIT_ID: ${{ steps.get_short_sha.outputs.short_sha }}
-        run: ./gradlew publish
+          REPO: git@github.com:Hendrix-Shen/Maven.git
+          BRANCH: master
+          FOLDER: publish
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+          CLEAR_GLOBS_FILE: '.clear-target-files'
 
-      - name: Find correct jar
-        id: findjar
-        run: |
-          output="$(find build/libs/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
-          echo "::set-output name=jarname::$output"
-
-      - name: Upload assets to GitHub Action
-        uses: actions/upload-artifact@v2
+      - name: Publish realease to curseforge
+        uses: Kir-Antipov/mc-publish@v2.1
         with:
-          name: ${{ steps.mod_file_name.outputs.value }}-mc${{ steps.minecraft_version_out.outputs.value }}-${{ steps.mod_version.outputs.value }}+${{ steps.get_short_sha.outputs.short_sha }}(Public Release)
-          path: build/libs/
+          curseforge-id: 478757
+          curseforge-token: ${{ secrets.CF_API_TOKEN }}
 
-      - name: Upload maven to GitHub Action
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ steps.mod_file_name.outputs.value }}-mc${{ steps.minecraft_version_out.outputs.value }}-${{ steps.mod_version.outputs.value }}+${{ steps.get_short_sha.outputs.short_sha }}(Maven)
-          path: publish/
+          github-tag: ${{ github.ref_name }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload assets to GitHub Release
-        if: ${{ steps.github_release.outputs.value == 'true' }}
-        uses: AButler/upload-release-assets@v2.0
-        with:
-          files: 'build/libs/${{ steps.findjar.outputs.jarname }}'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          files-primary: build/libs/!(*-@(dev|sources)).jar
+          files-secondary: build/libs/*-@(dev|sources).jar
 
-      - name: Upload assets to Curseforge
-        if: ${{ steps.curseforge_release.outputs.value == 'true' }}
-        uses: itsmeow/curseforge-upload@v3
-        with:
-          token: ${{ secrets.CF_API_TOKEN }}
-          project_id: ${{ steps.curseforge_projectid.outputs.value }}
-          game_endpoint: minecraft
-          file_path: build/libs/${{ steps.findjar.outputs.jarname }}
-          changelog_type: markdown
+          name: ""
+          version-type: "release"
+
           changelog: ${{ github.event.release.body }}
-          game_versions: ${{ steps.curseforge_gameversion.outputs.value }}
-          release_type: ${{ steps.curseforge_release_type.outputs.value }}
-          relations: ${{ steps.curseforge_relations.outputs.value }}
+          loaders: "farbic"
+          game-versions: "1.14\n1.15\n1.16\n1.17\n1.18\n1.19"
+          version-resolver: "latest"
+          java: "8\n9\n10\n11\n12\n13\n14\n15\n16\n17"
 
-      - name: Upload assets to Modrinth
-        if: ${{ steps.modrinth_release.outputs.value == 'true' }}
-        run: ./gradlew publishModrinth
-        env:
-          CHANGE_LOG: ${{ github.event.release.body }}
-          GIT_COMMIT_ID: ${{ steps.get_short_sha.outputs.short_sha }}
-          MODRINTH_API_TOKEN: ${{ secrets.MODRINTH_API_TOKEN }}
-          VERSION_NUMBER: ${{ steps.mod_file_name.outputs.value }}-mc${{ steps.minecraft_version_out.outputs.value }}-${{ steps.mod_version.outputs.value }}+${{ steps.get_short_sha.outputs.short_sha }}
+          retry-attempts: 2
+          retry-delay: 10000
+
 
   pull_request:
     if: ${{ github.event_name == 'pull_request' }}
