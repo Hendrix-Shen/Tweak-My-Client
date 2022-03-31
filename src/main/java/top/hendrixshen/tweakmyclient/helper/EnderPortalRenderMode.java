@@ -45,7 +45,7 @@ public enum EnderPortalRenderMode implements IConfigOptionListEntry {
     @Override
     public IConfigOptionListEntry fromString(String value) {
         for (EnderPortalRenderMode mode : EnderPortalRenderMode.values()) {
-            if (mode.name.equalsIgnoreCase(name)) {
+            if (mode.name.equalsIgnoreCase(value)) {
                 return mode;
             }
         }

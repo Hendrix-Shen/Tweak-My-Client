@@ -42,7 +42,7 @@ public enum AutoDropListType implements IConfigOptionListEntry {
     @Override
     public IConfigOptionListEntry fromString(String value) {
         for (AutoDropListType mode : AutoDropListType.values()) {
-            if (mode.name.equalsIgnoreCase(name)) {
+            if (mode.name.equalsIgnoreCase(value)) {
                 return mode;
             }
         }

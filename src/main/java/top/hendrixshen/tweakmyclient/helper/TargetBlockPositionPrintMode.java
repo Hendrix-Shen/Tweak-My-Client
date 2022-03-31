@@ -42,7 +42,7 @@ public enum TargetBlockPositionPrintMode implements IConfigOptionListEntry {
     @Override
     public IConfigOptionListEntry fromString(String value) {
         for (TargetBlockPositionPrintMode mode : TargetBlockPositionPrintMode.values()) {
-            if (mode.name.equalsIgnoreCase(name)) {
+            if (mode.name.equalsIgnoreCase(value)) {
                 return mode;
             }
         }
