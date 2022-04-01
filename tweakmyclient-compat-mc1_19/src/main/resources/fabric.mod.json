@@ -33,8 +33,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.9.0",
-    "malilib": ">=0.10.0-dev.26",
-    "minecraft": "1.19.x"
+    "tweakmyclient": "*"
   },
   "custom": {
     "modmenu:parent": "tweakmyclient",

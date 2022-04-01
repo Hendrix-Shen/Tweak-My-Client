@@ -29,7 +29,6 @@
     "TweakMyClient-Compat.mixins.json"
   ],
   "depends": {
-    "malilib": ">=0.10.0-dev.26",
     "minecraft": "1.17.x",
     "tweakmyclient": "*"
   },
