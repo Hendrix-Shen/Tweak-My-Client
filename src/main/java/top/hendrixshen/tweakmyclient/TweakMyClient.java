@@ -6,6 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import top.hendrixshen.magiclib.config.ConfigHandler;
 import top.hendrixshen.magiclib.config.ConfigManager;
+import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
 public class TweakMyClient implements ModInitializer {
@@ -22,6 +24,16 @@ public class TweakMyClient implements ModInitializer {
         return logger;
     }
 
+    @Dependencies(
+            or = {
+                    @Dependency(value = "minecraft", versionPredicate = "1.14.4"),
+                    @Dependency(value = "minecraft", versionPredicate = "1.15.2"),
+                    @Dependency(value = "minecraft", versionPredicate = "1.16.5"),
+                    @Dependency(value = "minecraft", versionPredicate = "1.17.1"),
+                    @Dependency(value = "minecraft", versionPredicate = "1.18.2"),
+                    @Dependency(value = "minecraft", versionPredicate = "1.19.x"),
+            }
+    )
     @Override
     public void onInitialize() {
         cm.parseConfigClass(Configs.class);
