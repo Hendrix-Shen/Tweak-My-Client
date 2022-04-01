@@ -96,7 +96,8 @@ jobs:
           version-type: alpha
 
           changelog: ${{ github.event.push.head_commit.message }}
-          loaders: farbic
+          loaders:
+            fabric
           game-versions: |
             1.14.4
             1.15.2
@@ -194,7 +195,8 @@ jobs:
           version-type: 'release'
 
           changelog: ${{ github.event.release.body }}
-          loaders: farbic
+          loaders:
+            fabric
           game-versions: |
             1.14.4
             1.15.2
