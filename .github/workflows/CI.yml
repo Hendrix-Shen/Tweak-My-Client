@@ -64,11 +64,17 @@ jobs:
           BUILD_NUMBER: ${{ github.run_number}}
         run: ./gradlew build
 
+      - name: Upload assets to GitHub Action
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
+          path: build/libs/
+
       - name: Create Github release
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "dev-${{ github.ref_name }}"
+          automatic_release_tag: "dev"
           prerelease: true
           title: "[CI#${{ github.run_number}}]${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}"
           files: |
@@ -92,11 +98,11 @@ jobs:
           changelog: ${{ github.event.push.head_commit.message }}
           loaders: farbic
           game-versions: |
-            1.14
-            1.15
-            1.16
-            1.17
-            1.18
+            1.14.4
+            1.15.2
+            1.16.5
+            1.17.1
+            1.18.2
             1.19
           version-resolver: latest
           java: |
@@ -168,14 +174,11 @@ jobs:
           BUILD_NUMBER: ${{ github.run_number}}
         run: ./gradlew build
 
-      - name: Upload Maven to GitHub
-        uses: s0/git-publish-subdir-action@v2.5.0
-        env:
-          REPO: git@github.com:Hendrix-Shen/Maven.git
-          BRANCH: master
-          FOLDER: publish
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-          CLEAR_GLOBS_FILE: '.clear-target-files'
+      - name: Upload assets to GitHub Action
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
+          path: build/libs/
 
       - name: Publish realease to curseforge
         uses: Kir-Antipov/mc-publish@v2.1
@@ -193,13 +196,13 @@ jobs:
           changelog: ${{ github.event.release.body }}
           loaders: farbic
           game-versions: |
-            1.14
-            1.15
-            1.16
-            1.17
-            1.18
+            1.14.4
+            1.15.2
+            1.16.5
+            1.17.1
+            1.18.2
             1.19
-          version-resolver: 'release'
+          version-resolver: latest
           java: |
             8
             9
