@@ -1,7 +1,6 @@
 package top.hendrixshen.tweakmyclient.compat.proxy.parser;
 
 import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.arguments.item.ItemParser;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;

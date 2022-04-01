@@ -2,8 +2,6 @@ package top.hendrixshen.tweakmyclient;
 
 import fi.dy.masa.malilib.event.RenderEventHandler;
 import net.fabricmc.api.ModInitializer;
-import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.compat.event.RenderHandler;
 import top.hendrixshen.tweakmyclient.compat.proxy.client.SharedConstantCompatImpl;
 import top.hendrixshen.tweakmyclient.compat.proxy.client.WindowCompatImpl;

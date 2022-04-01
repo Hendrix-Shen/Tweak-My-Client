@@ -2,13 +2,11 @@ package top.hendrixshen.tweakmyclient.util.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import fi.dy.masa.malilib.util.Color4f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
-import org.lwjgl.opengl.GL11;
 import top.hendrixshen.tweakmyclient.compat.proxy.render.BufferBuilderCompatApi;
 
 public class RenderUtil {

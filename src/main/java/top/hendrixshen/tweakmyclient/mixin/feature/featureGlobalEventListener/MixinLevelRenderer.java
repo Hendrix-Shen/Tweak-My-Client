@@ -1,6 +1,5 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.featureGlobalEventListener;
 
-import fi.dy.masa.malilib.util.InfoUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.LevelRenderer;

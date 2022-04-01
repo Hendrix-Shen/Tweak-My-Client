@@ -11,13 +11,14 @@ public class ScreenCompatImpl extends ScreenCompatApi {
 
     @Override
     public Button addButton(Screen screen, Button button) {
-        return ((IScreen)screen).addButtonEx(button);
+        return ((IScreen) screen).addButtonEx(button);
     }
 
     @Override
     public Button createButton(int x, int y, int width, int height, String message, Button.OnPress onPress) {
         return new Button(x, y, width, height, message, onPress);
     }
+
     @Override
     public void setButtonMessage(Button button, String message) {
         button.setMessage(message);

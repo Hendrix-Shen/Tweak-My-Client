@@ -15,7 +15,9 @@ import java.util.concurrent.CompletableFuture;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft implements IMinecraft {
-    @Shadow @Final private Window window;
+    @Shadow
+    @Final
+    private Window window;
 
     @Inject(
             method = "reloadResourcePacks",

@@ -11,8 +11,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.util.AutoReconnectUtil;
 
-import java.lang.reflect.InvocationTargetException;
-
 @Mixin(value = DisconnectedScreen.class, priority = 900)
 public class MixinDisconnectedScreen extends Screen {
     @Shadow
@@ -22,7 +20,9 @@ public class MixinDisconnectedScreen extends Screen {
     @Shadow
     private int textHeight;
 
-    @Shadow @Final private Component reason;
+    @Shadow
+    @Final
+    private Component reason;
 
     protected MixinDisconnectedScreen(Component component) {
         super(component);

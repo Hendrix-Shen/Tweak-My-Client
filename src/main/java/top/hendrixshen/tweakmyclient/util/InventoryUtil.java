@@ -15,8 +15,6 @@ import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.helper.AutoDropListType;
 import top.hendrixshen.tweakmyclient.helper.ListCache;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Objects;
 
 public class InventoryUtil {

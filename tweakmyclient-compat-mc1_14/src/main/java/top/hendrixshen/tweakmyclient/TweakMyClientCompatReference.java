@@ -1,7 +1,6 @@
 package top.hendrixshen.tweakmyclient;
 
 import net.fabricmc.loader.api.FabricLoader;
-import top.hendrixshen.magiclib.util.FabricUtil;
 import top.hendrixshen.tweakmyclient.util.VersionParser;
 
 public class TweakMyClientCompatReference {

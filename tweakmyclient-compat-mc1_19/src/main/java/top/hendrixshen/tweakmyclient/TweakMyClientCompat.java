@@ -8,7 +8,6 @@ import top.hendrixshen.tweakmyclient.compat.proxy.client.WindowCompatImpl;
 import top.hendrixshen.tweakmyclient.compat.proxy.entity.EntityCompatImpl;
 import top.hendrixshen.tweakmyclient.compat.proxy.entity.PlayerCompatImpl;
 import top.hendrixshen.tweakmyclient.compat.proxy.parser.ItemStackCompatImpl;
-import top.hendrixshen.tweakmyclient.compat.proxy.render.BufferBuilderCompatApi;
 import top.hendrixshen.tweakmyclient.compat.proxy.render.BufferBuilderCompatImpl;
 import top.hendrixshen.tweakmyclient.compat.proxy.screen.ConnectionCompatScreenImpl;
 import top.hendrixshen.tweakmyclient.compat.proxy.screen.ScreenCompatImpl;

@@ -20,7 +20,9 @@ public class MixinDisconnectedScreen extends Screen {
     @Shadow
     private int textHeight;
 
-    @Shadow @Final private Component reason;
+    @Shadow
+    @Final
+    private Component reason;
 
     protected MixinDisconnectedScreen(Component component) {
         super(component);

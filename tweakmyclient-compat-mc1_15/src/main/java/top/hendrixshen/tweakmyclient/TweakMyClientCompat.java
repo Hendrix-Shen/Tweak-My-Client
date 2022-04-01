@@ -1,8 +1,6 @@
 package top.hendrixshen.tweakmyclient;
 
 import net.fabricmc.api.ModInitializer;
-import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.compat.proxy.client.SharedConstantCompatImpl;
 import top.hendrixshen.tweakmyclient.compat.proxy.client.WindowCompatImpl;
 import top.hendrixshen.tweakmyclient.compat.proxy.entity.EntityCompatImpl;

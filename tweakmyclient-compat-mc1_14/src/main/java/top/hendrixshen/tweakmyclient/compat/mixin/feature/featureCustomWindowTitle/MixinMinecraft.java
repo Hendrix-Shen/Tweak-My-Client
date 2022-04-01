@@ -1,12 +1,10 @@
 package top.hendrixshen.tweakmyclient.compat.mixin.feature.featureCustomWindowTitle;
 
 import net.minecraft.client.Minecraft;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.config.Configs;
@@ -14,7 +12,8 @@ import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
-    @Shadow private static int fps;
+    @Shadow
+    private static int fps;
 
     @Inject(
             method = "run",

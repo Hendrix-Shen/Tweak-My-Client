@@ -9,7 +9,8 @@ import top.hendrixshen.tweakmyclient.fakeInterface.IScreen;
 
 @Mixin(Screen.class)
 public abstract class MixinScreen implements IScreen {
-    @Shadow protected abstract AbstractWidget addButton(AbstractWidget par1);
+    @Shadow
+    protected abstract AbstractWidget addButton(AbstractWidget par1);
 
     @Override
     public Button addButtonEx(Button button) {

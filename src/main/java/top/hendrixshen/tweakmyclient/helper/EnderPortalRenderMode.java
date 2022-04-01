@@ -2,7 +2,6 @@ package top.hendrixshen.tweakmyclient.helper;
 
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.util.StringUtils;
-import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 
 public enum EnderPortalRenderMode implements IConfigOptionListEntry {
     ACTUAL("actual"),

@@ -10,7 +10,6 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
 public class CommonCompatLib {
@@ -23,7 +22,7 @@ public class CommonCompatLib {
             }
         }
     }
-    
+
     public static boolean disableClientEntity(Entity entity) {
         if (Configs.disableClientEntityInListRendering) {
             String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
@@ -39,7 +38,7 @@ public class CommonCompatLib {
     }
 
     public static boolean disableAttackEntity(HitResult hitResult, Player player) {
-        Entity entity = ((EntityHitResult)hitResult).getEntity();
+        Entity entity = ((EntityHitResult) hitResult).getEntity();
         String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
         String entityName = entity.getName().getString();
         if (Configs.disableAttackEntity && Configs.listDisableAttackEntity.stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s))) {
