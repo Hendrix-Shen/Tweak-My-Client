@@ -1,16 +1,23 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.featureOpenWaterHelper;
 
+//#if MC < 11600
+//$$ import net.minecraft.client.Minecraft;
+//#else
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.projectile.FishingHook;
+//#endif
 import org.spongepowered.asm.mixin.Mixin;
+//#if MC >= 11600
 import org.spongepowered.asm.mixin.Shadow;
-import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.fakeInterface.IFishingHookEntity;
 
-@Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.16"))
 @Mixin(FishingHook.class)
 public class MixinFishingHook implements IFishingHookEntity {
+//#else
+//$$ @Mixin(Minecraft.class)
+//$$ public class MixinFishingHook {
+//#endif
+    //#if MC >= 11600
     @Override
     public boolean checkOpenWaterAround(BlockPos pos) {
         return calculateOpenWater(pos);
@@ -20,4 +27,5 @@ public class MixinFishingHook implements IFishingHookEntity {
     private boolean calculateOpenWater(BlockPos pos) {
         return false;
     }
+    //#endif
 }

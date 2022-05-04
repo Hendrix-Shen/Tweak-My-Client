@@ -9,20 +9,27 @@ import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
 import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
-@Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.16"))
 @Mixin(Gui.class)
 public abstract class MixinGui {
     @ModifyArgs(
             method = "displayScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
+                    //#if MC >= 11600
                     target = "Lnet/minecraft/client/gui/Gui;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V",
+                    //#else
+                    //$$ target = "Lnet/minecraft/client/gui/Gui;fill(IIIII)V",
+                    //#endif
                     ordinal = 1
             )
     )
     private void changeSidebarTitleBackgroundColor(Args args) {
         if (Configs.featureCustomSidebarBackgroundColor) {
+            //#if MC >= 11600
             args.set(5, Configs.colorSidebarTitle.intValue);
+            //#else
+            //$$ args.set(4, Configs.colorSidebarTitle.intValue);
+            //#endif
         }
     }
 
@@ -30,13 +37,21 @@ public abstract class MixinGui {
             method = "displayScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
+                    //#if MC >= 11600
                     target = "Lnet/minecraft/client/gui/Gui;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V",
+                    //#else
+                    //$$ target = "Lnet/minecraft/client/gui/Gui;fill(IIIII)V",
+                    //#endif
                     ordinal = 0
             )
     )
     private void changeSidebarContentBackgroundColor_1(Args args) {
         if (Configs.featureCustomSidebarBackgroundColor) {
+            //#if MC >= 11600
             args.set(5, Configs.colorSidebarContent.intValue);
+            //#else
+            //$$ args.set(4, Configs.colorSidebarContent.intValue);
+            //#endif
         }
     }
 
@@ -44,13 +59,21 @@ public abstract class MixinGui {
             method = "displayScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
+                    //#if MC >= 11600
                     target = "Lnet/minecraft/client/gui/Gui;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V",
+                    //#else
+                    //$$ target = "Lnet/minecraft/client/gui/Gui;fill(IIIII)V",
+                    //#endif
                     ordinal = 2
             )
     )
     private void changeSidebarContentBackgroundColor_2(Args args) {
         if (Configs.featureCustomSidebarBackgroundColor) {
+            //#if MC >= 11600
             args.set(5, Configs.colorSidebarContent.intValue);
+            //#else
+            //$$ args.set(4, Configs.colorSidebarContent.intValue);
+            //#endif
         }
     }
 }

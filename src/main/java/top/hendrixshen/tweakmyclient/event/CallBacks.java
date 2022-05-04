@@ -1,5 +1,6 @@
 package top.hendrixshen.tweakmyclient.event;
 
+import fi.dy.masa.malilib.config.options.ConfigStringList;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
@@ -42,12 +43,16 @@ public class CallBacks {
                 str = str.replace("{Y}", String.format("%d", blockPos.getY()));
                 str = str.replace("{Z}", String.format("%d", blockPos.getZ()));
                 if (minecraft.player != null) {
-                    switch ((TargetBlockPositionPrintMode) Configs.targetBlockPositionPrintMode) {
+                    switch (Configs.targetBlockPositionPrintMode) {
                         case PUBLIC:
                             minecraft.player.chat(str);
                             break;
                         case PRIVATE:
+                            //#if MC >= 11600
                             minecraft.player.connection.handleChat(new ClientboundChatPacket(new TextComponent(str), ChatType.CHAT, minecraft.player.getUUID()));
+                            //#else
+                            //$$ minecraft.player.connection.handleChat(new ClientboundChatPacket(new TextComponent(str), ChatType.CHAT));
+                            //#endif
                             break;
                     }
                 }
@@ -129,20 +134,9 @@ public class CallBacks {
     }
 
     public static boolean openConfigGuiCallback(KeyAction keyAction, IKeybind keybind) {
-        GuiBase.openGui(TweakMyClientConfigGui.getInstance());
+        TweakMyClientConfigGui tweakMyClientConfigGui = TweakMyClientConfigGui.getInstance();
+        tweakMyClientConfigGui.setParentGui(TweakMyClient.getMinecraftClient().screen);
+        TweakMyClient.getMinecraftClient().setScreen(tweakMyClientConfigGui);
         return true;
-    }
-
-    public static void listAutoDropBlackListCallback(Option option) {
-        ListCache.itemAutoDropBlackList = StringUtil.getItemStackSets(Configs.listAutoDropBlackList);
-    }
-
-    public static void listAutoDropWhiteListCallback(Option option) {
-        ListCache.itemAutoDropWhiteList = StringUtil.getItemStackSets(Configs.listAutoDropWhiteList);
-    }
-
-    public static void listItemGlowingBlacklistCallback(Option option) {
-        ListCache.itemGlowingBlacklist = StringUtil.getItemStackSets(Configs.listItemGlowingBlacklist);
-
     }
 }

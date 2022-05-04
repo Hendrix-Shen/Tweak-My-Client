@@ -1,7 +1,6 @@
 package top.hendrixshen.tweakmyclient.config;
 
 import com.google.common.collect.Lists;
-import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.config.options.ConfigHotkey;
 import fi.dy.masa.malilib.util.Color4f;
 import fi.dy.masa.malilib.util.StringUtils;
@@ -42,7 +41,7 @@ public class Configs {
     public static int daylightOverrideTime = 6000;
 
     @Config(category = ConfigCategory.GENERIC)
-    public static IConfigOptionListEntry enderPortalRenderMode = EnderPortalRenderMode.ACTUAL;
+    public static EnderPortalRenderMode enderPortalRenderMode = EnderPortalRenderMode.ACTUAL;
 
     @Hotkey()
     @Config(category = ConfigCategory.GENERIC)
@@ -76,7 +75,7 @@ public class Configs {
     public static String targetBlockPositionFormat = "I'm looking at [x: {X},y: {Y}, z: {Z}]";
 
     @Config(category = ConfigCategory.GENERIC)
-    public static IConfigOptionListEntry targetBlockPositionPrintMode = TargetBlockPositionPrintMode.PRIVATE;
+    public static TargetBlockPositionPrintMode targetBlockPositionPrintMode = TargetBlockPositionPrintMode.PRIVATE;
 
     // Patch configs
     @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency(value = "litematica"), not = @Dependency(value = "ommc", versionPredicate = ">=2.0.6")))
@@ -96,7 +95,7 @@ public class Configs {
     public static ArrayList<String> listAutoDropBlackList = Lists.newArrayList("minecraft:bow", "minecraft:crossbow", "minecraft:diamond_axe", "minecraft:diamond_boots", "minecraft:diamond_chestplate", "minecraft:diamond_helmet", "minecraft:diamond_hoe", "minecraft:diamond_leggings", "minecraft:diamond_pickaxe", "minecraft:diamond_shovel", "minecraft:diamond_sword", "minecraft:elytra", "minecraft:enchanted_golden_apple", "minecraft:flint_and_steel", "minecraft:fishing_rod", "minecraft:golden_apple", "minecraft:golden_axe", "minecraft:golden_boots", "minecraft:golden_chestplate", "minecraft:golden_helmet", "minecraft:golden_hoe", "minecraft:golden_leggings", "minecraft:golden_pickaxe", "minecraft:golden_shovel", "minecraft:golden_sword", "minecraft:iron_axe", "minecraft:iron_boots", "minecraft:iron_chestplate", "minecraft:iron_helmet", "minecraft:iron_hoe", "minecraft:iron_leggings", "minecraft:iron_pickaxe", "minecraft:iron_shovel", "minecraft:iron_sword", "minecraft:netherite_axe", "minecraft:netherite_boots", "minecraft:netherite_chestplate", "minecraft:netherite_helmet", "minecraft:netherite_hoe", "minecraft:netherite_leggings", "minecraft:netherite_pickaxe", "minecraft:netherite_shovel", "minecraft:netherite_sword", "minecraft:shears", "minecraft:shield", "minecraft:totem_of_undying", "minecraft:trident", "minecraft:turtle_helmet");
 
     @Config(category = ConfigCategory.LIST)
-    public static IConfigOptionListEntry listAutoDropType = AutoDropListType.WHITELIST;
+    public static AutoDropListType listAutoDropType = AutoDropListType.WHITELIST;
 
     @Config(category = ConfigCategory.LIST)
     public static ArrayList<String> listAutoDropWhiteList = Lists.newArrayList("minecraft:stone", "minecraft:dirt", "minecraft:cobblestone", "minecraft:gravel", "minecraft:rotten_flesh");
@@ -280,7 +279,7 @@ public class Configs {
     public static void initCallbacks(ConfigManager cm) {
         // Set callback for all BooleanHotkeyed config.
         /* TODO
-        Old MagicLib impl
+        Legacy MagicLib impl
         cm.forEach(
                 iConfigBase -> {
                     if (iConfigBase instanceof ConfigBooleanHotkeyed) {
@@ -296,16 +295,12 @@ public class Configs {
         syncInventory.getKeybind().setCallback(CallBacks::syncInventoryCallback);
         syncBlocks.getKeybind().setCallback(CallBacks::syncBlocksCallback);
         syncBlocks.getKeybind().setCallback(CallBacks::syncBlocksCallback);
+
         cm.setValueChangeCallback("customWindowTitle", CallBacks::featureCustomWindowTitleCallback);
         cm.setValueChangeCallback("customWindowTitleWithActivity", CallBacks::featureCustomWindowTitleCallback);
 
-        // List config callbacks.
-        cm.setValueChangeCallback("listAutoDropBlackList", CallBacks::listAutoDropBlackListCallback);
-        cm.setValueChangeCallback("listAutoDropWhiteList", CallBacks::listAutoDropWhiteListCallback);
-        cm.setValueChangeCallback("listItemGlowingBlacklist", CallBacks::listItemGlowingBlacklistCallback);
-
         // Feature config callbacks. customWindowTitleWithActivity
-        cm.setValueChangeCallback("featureCustomWindowIcon", option -> CustomWindowUtil.updateIcon(((IMinecraft) TweakMyClient.getMinecraftClient()).getWindow()));
+        cm.setValueChangeCallback("featureCustomWindowIcon", option -> CustomWindowUtil.updateIcon(((IMinecraft) TweakMyClient.getMinecraftClient()).tmc$getWindow()));
         cm.setValueChangeCallback("featureCustomWindowTitle", CallBacks::featureCustomWindowTitleCallback);
 
         // Disable config callbacks.

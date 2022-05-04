@@ -1,15 +1,27 @@
 package top.hendrixshen.tweakmyclient.util.render;
 
+//#if MC >= 11600
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
+//#if MC >= 11700
+import com.mojang.blaze3d.vertex.VertexFormat;
+//#endif
 import fi.dy.masa.malilib.util.Color4f;
 import net.minecraft.client.Minecraft;
+//#if MC >= 11700
+import net.minecraft.client.renderer.GameRenderer;
+//#endif
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
-import top.hendrixshen.tweakmyclient.compat.proxy.render.BufferBuilderCompatApi;
+//#if MC < 11700
+import org.lwjgl.opengl.GL11;
+//#endif
+//#endif
 
 public class RenderUtil {
+    //#if MC >= 11600
     public static void renderAreaOutline(BlockPos pos1, BlockPos pos2, float lineWidth, Color4f colorX, Color4f colorY, Color4f colorZ, Minecraft minecraft) {
         RenderSystem.lineWidth(lineWidth);
 
@@ -32,8 +44,13 @@ public class RenderUtil {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tesselator.getBuilder();
 
-        BufferBuilderCompatApi.getInstance().compat_1_17_above();
-        BufferBuilderCompatApi.getInstance().beginGLLines(bufferbuilder);
+        //#if MC > 11700
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        RenderSystem.applyModelViewMatrix();
+        bufferbuilder.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
+        //#else
+        //$$ bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
+        //#endif
 
         drawBoundingBoxLinesX(bufferbuilder, minX, minY, minZ, maxX, maxY, maxZ, colorX);
         drawBoundingBoxLinesY(bufferbuilder, minX, minY, minZ, maxX, maxY, maxZ, colorY);
@@ -83,4 +100,5 @@ public class RenderUtil {
         buffer.vertex(maxX, maxY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
         buffer.vertex(maxX, maxY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
     }
+    //#endif
 }

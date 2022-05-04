@@ -5,15 +5,15 @@ import com.mojang.blaze3d.platform.Window;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
+import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
+import org.lwjgl.glfw.GLFW;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
-import top.hendrixshen.tweakmyclient.compat.proxy.client.SharedConstantCompatApi;
-import top.hendrixshen.tweakmyclient.compat.proxy.client.WindowCompatApi;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
 import java.io.IOException;
@@ -34,15 +34,19 @@ public class CustomWindowUtil {
 
     // These data should not be changed
     static {
-        PLACEHOLDER_STATIC_MAP.put("{fabric_loader_version}", FabricLoaderImpl.VERSION);
-        PLACEHOLDER_STATIC_MAP.put("{fabric_loader_asm_version}", String.valueOf(FabricLoaderImpl.ASM_VERSION));
-        PLACEHOLDER_STATIC_MAP.put("{mc_protocol_version}", Integer.toString(SharedConstantCompatApi.getInstance().getProtocolVersion()));
-        PLACEHOLDER_STATIC_MAP.put("{mc_version}", SharedConstantCompatApi.getInstance().getCurrentVersionName());
-        PLACEHOLDER_STATIC_MAP.put("{tmc_version}", TweakMyClientReference.getModVersion());
-        PLACEHOLDER_STATIC_MAP.put("{tmc_version_type}", TweakMyClientReference.getModVersionType());
+        CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{fabric_loader_version}", FabricLoaderImpl.VERSION);
+        CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{fabric_loader_asm_version}", String.valueOf(FabricLoaderImpl.ASM_VERSION));
+        //#if MC >= 11600
+        CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{mc_protocol_version}", Integer.toString(SharedConstants.getProtocolVersion()));
+        //#else
+        //$$ CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{mc_protocol_version}", Integer.toString(SharedConstants.getCurrentVersion().getProtocolVersion()));
+        //#endif
+        CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{mc_version}", SharedConstants.getCurrentVersion().getName());
+        CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{tmc_version}", TweakMyClientReference.getModVersion());
+        CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{tmc_version_type}", TweakMyClientReference.getModVersionType());
         if (Configs.featureCustomWindowTitle) {
-            rebuildCache(TitleType.TITLE);
-            rebuildCache(TitleType.TITLE_WITH_ACTIVITY);
+            CustomWindowUtil.rebuildCache(TitleType.TITLE);
+            CustomWindowUtil.rebuildCache(TitleType.TITLE_WITH_ACTIVITY);
         }
     }
 
@@ -54,7 +58,7 @@ public class CustomWindowUtil {
     }
 
     public static String getWindowTitle() {
-        return replacePlaceholders(PLACEHOLDER_MAP, (hasActivity() ? TITLE_CACHE_WITH_ACTIVITY : TITLE_CACHE));
+        return CustomWindowUtil.replacePlaceholders(PLACEHOLDER_MAP, (hasActivity() ? TITLE_CACHE_WITH_ACTIVITY : TITLE_CACHE));
     }
 
     public static String getActivity() {
@@ -76,22 +80,22 @@ public class CustomWindowUtil {
 
     public static void updatePlaceholders() {
         // Maybe changed by other mods.
-        PLACEHOLDER_MAP.put("{mc_username}", TweakMyClient.getMinecraftClient().getUser().getName());
+        CustomWindowUtil.PLACEHOLDER_MAP.put("{mc_username}", TweakMyClient.getMinecraftClient().getUser().getName());
         // Activity data.
-        PLACEHOLDER_MAP.put("{mc_activity}", hasActivity() ? getActivity() : "Null");
+        CustomWindowUtil.PLACEHOLDER_MAP.put("{mc_activity}", hasActivity() ? getActivity() : "Null");
     }
 
     public static void updateFPS(int fps) {
-        PLACEHOLDER_MAP.put("{mc_fps}", String.valueOf(fps));
+        CustomWindowUtil.PLACEHOLDER_MAP.put("{mc_fps}", String.valueOf(fps));
     }
 
     public static void rebuildCache(TitleType type) {
         if (type == TitleType.TITLE) {
-            TITLE_CACHE = replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.customWindowTitle);
-            TITLE_CACHE = replaceModVersion(TITLE_CACHE);
+            TITLE_CACHE = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.customWindowTitle);
+            TITLE_CACHE = CustomWindowUtil.replaceModVersion(TITLE_CACHE);
         } else if (type == TitleType.TITLE_WITH_ACTIVITY) {
-            TITLE_CACHE_WITH_ACTIVITY = replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.customWindowTitleWithActivity);
-            TITLE_CACHE_WITH_ACTIVITY = replaceModVersion(TITLE_CACHE_WITH_ACTIVITY);
+            TITLE_CACHE_WITH_ACTIVITY = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.customWindowTitleWithActivity);
+            TITLE_CACHE_WITH_ACTIVITY = CustomWindowUtil.replaceModVersion(TITLE_CACHE_WITH_ACTIVITY);
         }
     }
 
@@ -111,12 +115,20 @@ public class CustomWindowUtil {
     }
 
     public static void reSetTitle() {
-        WindowCompatApi.getInstance().resetTitle();
+        //#if MC >= 11500
+        GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().getWindow().getWindow(), "Minecraft " + SharedConstants.getCurrentVersion().getName());
+        //#else
+        //$$ GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().window.getWindow(), "Minecraft " + SharedConstants.getCurrentVersion().getName());
+        //#endif
     }
 
     public static void updateTitle() {
         updatePlaceholders();
-        WindowCompatApi.getInstance().setTitle(WindowCompatApi.getInstance().getWindow().getWindow(), getWindowTitle());
+        //#if MC >= 11500
+        GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().getWindow().getWindow(), CustomWindowUtil.getWindowTitle());
+        //#else
+        //$$ GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().window.getWindow(), CustomWindowUtil.getWindowTitle());
+        //#endif
     }
 
     public static void updateIcon(Window window) {

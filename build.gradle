@@ -1,138 +1,49 @@
 plugins {
-    id 'fabric-loom' version '0.11-SNAPSHOT'
-    id 'io.github.juuxel.loom-quiltflower' version '1.6.1'
+    id("maven-publish")
+    id("fabric-loom").version("0.12-SNAPSHOT").apply(false)
+    // https://github.com/Juuxel/LoomQuiltflower
+    id("io.github.juuxel.loom-quiltflower").version("1.7.0").apply(false)
+    // https://github.com/ReplayMod/preprocessor
+    // https://github.com/Fallen-Breath/preprocessor
+    id("com.replaymod.preprocess").version("b7207cffa9")
 }
 
-def baseVersion = "${project.mod_version}" as String
+preprocess {
+    def mc114 = createNode("1.14.4", 1_14_04, "mojang")
+    def mc115 = createNode("1.15.2", 1_15_02, "mojang")
+    def mc116 = createNode("1.16.5", 1_16_05, "mojang")
+    def mc117 = createNode("1.17.1", 1_17_01, "mojang")
+    def mc118 = createNode("1.18.2", 1_18_02, "mojang") // root
+    def mcSnapshot = createNode("snapshot", 1_19_00, "mojang")
+
+    mc114.link(mc115, null)
+    mc115.link(mc116, null)
+    mc116.link(mc117, null)
+    mc117.link(mc118, null)
+    mc118.link(mcSnapshot, null)
+}
+
 def ENV = System.getenv()
+String realVersion = "${project.mod_version}"
 
 if (ENV.BUILD_NUMBER) {
-    baseVersion = baseVersion + '.' + ENV.BUILD_NUMBER
+    realVersion += ".${ENV.BUILD_NUMBER}"
 } else {
-    baseVersion = baseVersion + '.0'
+    realVersion += ".0"
 }
 
 if (ENV.COMMIT_SHA) {
-    baseVersion = baseVersion + "+" + ENV.COMMIT_SHA
+    realVersion += "+${ENV.COMMIT_SHA}"
 }
+
 if (ENV.BUILD_TYPE) {
     if (ENV.BUILD_TYPE == "RELEASE") {
-        baseVersion = baseVersion + "-stable"
+        realVersion += "-stable"
     } else if (ENV.BUILD_TYPE == "BETA") {
-        baseVersion = baseVersion + "-beta"
+        realVersion += "-beta"
     }
 } else {
-    baseVersion = baseVersion + "-dev"
+    realVersion += "-dev"
 }
 
-version = baseVersion
-
-dependencies {
-    minecraft("com.mojang:minecraft:${project.minecraft_version}")
-    modCompileOnly("curse.maven:authme-356643:${project.library_authme_version}")
-    modCompileOnly("curse.maven:inGameAcountSwitcher-232676:${project.library_inGameAcountSwitcher_version}")
-    modCompileOnly("curse.maven:malilib-303119:${project.library_malilib_version}")
-    modCompileOnly("curse.maven:litematica-308892:${project.library_litematica_version}")
-    modCompileOnly("curse.maven:oauth-515054:${project.library_oauth_version}")
-    modCompileOnly("curse.maven:reauth-403928:${project.library_reauth_version}")
-
-    if (project.gradle.startParameter.projectDir != null &&
-            !project.gradle.startParameter.projectDir.getName().startsWith("tweakmyclient-compat")) {
-        modRuntimeOnly("curse.maven:authme-356643:${project.library_authme_version}")
-        modRuntimeOnly("curse.maven:inGameAcountSwitcher-232676:${project.library_inGameAcountSwitcher_version}")
-        modRuntimeOnly("curse.maven:malilib-303119:${project.library_malilib_version}")
-        modRuntimeOnly("curse.maven:litematica-308892:${project.library_litematica_version}")
-        modRuntimeOnly("curse.maven:oauth-515054:${project.library_oauth_version}")
-        modRuntimeOnly("curse.maven:reauth-403928:${project.library_reauth_version}")
-        modImplementation("curse.maven:modmenu-308702:${project.library_mod_menu_version}")
-
-        runtimeOnly(fileTree(dir: "tweakmyclient-compat-mc1_16/build/devlibs", include: ["*-dev.jar"]))
-    }
-
-    subprojects.each {
-        include(project("${it.name}:"))
-    }
-}
-
-allprojects {
-    apply plugin: 'fabric-loom'
-    apply plugin: 'io.github.juuxel.loom-quiltflower'
-
-    group = "${project.group}.${project.mod_id}" as String
-    archivesBaseName = "${project.mod_id}"
-
-    loom.runConfigs.configureEach {
-        property('mixin.debug.export', 'true')
-    }
-
-    version = rootProject.version
-    group = rootProject.group
-
-    repositories {
-        maven {
-            url 'https://www.cursemaven.com/'
-        }
-        maven {
-            url 'https://maven.hendrixshen.top'
-        }
-    }
-
-    dependencies {
-        mappings(loom.officialMojangMappings())
-        modImplementation("net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}")
-        modImplementation("top.hendrixshen.magiclib:magiclib:${project.library_magiclib_version}")
-        modRuntimeOnly("curse.maven:lazydfu-433518:${project.library_lazydfu_version}")
-    }
-
-    loom {
-        runs {
-            client {
-                runDir = "$project.name/run"
-            }
-        }
-    }
-
-    runClient {
-        defaultCharacterEncoding = "UTF-8"
-    }
-
-    runServer {
-        defaultCharacterEncoding = "UTF-8"
-    }
-
-    java {
-        withSourcesJar()
-    }
-
-    tasks.withType(JavaCompile).configureEach {
-        it.options.encoding = "UTF-8"
-        it.sourceCompatibility = JavaVersion.VERSION_1_8
-        it.targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    processResources {
-        inputs.property "version", rootProject.version
-
-        filesMatching("fabric.mod.json") {
-            include "fabric.mod.json"
-            expand "mod_version": rootProject.version
-        }
-    }
-}
-
-subprojects {
-    if (project.gradle.startParameter.taskNames.size() == 1 && project.gradle.startParameter.taskNames.get(0) == "runClient") {
-        dependencies {
-            modImplementation(rootProject)
-        }
-    } else {
-        dependencies {
-            implementation(rootProject)
-        }
-    }
-}
-
-jar {
-    from("LICENSE")
-}
-
+version = realVersion

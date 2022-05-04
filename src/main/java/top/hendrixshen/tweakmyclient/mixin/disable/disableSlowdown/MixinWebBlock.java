@@ -1,8 +1,8 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.WebBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,7 +23,7 @@ public class MixinWebBlock {
             cancellable = true
     )
     private void onWalkInCobWebBlock(BlockState blockState, Level level, BlockPos blockPos, Entity entity, CallbackInfo ci) {
-        if ((Configs.disableSlowdown) && entity instanceof Player) {
+        if ((Configs.disableSlowdown) && entity instanceof LocalPlayer) {
             ci.cancel();
         }
     }

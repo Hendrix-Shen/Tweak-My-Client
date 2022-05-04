@@ -2,18 +2,23 @@ package top.hendrixshen.tweakmyclient.mixin.disable.disableAttackEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Registry;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.annotation.Dependency;
-import top.hendrixshen.tweakmyclient.helper.CommonCompatLib;
+//#if MC >= 11800
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#else
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#endif
+import top.hendrixshen.tweakmyclient.config.Configs;
 
-@Dependencies(not = @Dependency(value = "minecraft", versionPredicate = ">1.18"))
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
     @Shadow
@@ -32,9 +37,19 @@ public class MixinMinecraft {
             ),
             cancellable = true
     )
-    private void onAttack(CallbackInfo ci) {
-        if (CommonCompatLib.disableAttackEntity(this.hitResult, this.player)) {
-            ci.cancel();
+    //#if MC >= 11800
+    private void onStartAttack(CallbackInfoReturnable<Boolean> cir) {
+    //#else
+    //$$ private void onStartAttack(CallbackInfo cir) {
+    //#endif
+        if (this.hitResult != null && this.player != null) {
+            Entity entity = ((EntityHitResult) hitResult).getEntity();
+            String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
+            String entityName = entity.getName().getString();
+            if (Configs.disableAttackEntity && Configs.listDisableAttackEntity.stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s))) {
+                player.swing(InteractionHand.MAIN_HAND);
+                cir.cancel();
+            }
         }
     }
 }

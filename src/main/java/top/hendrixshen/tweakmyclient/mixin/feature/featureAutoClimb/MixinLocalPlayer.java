@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.compat.proxy.entity.EntityCompatApi;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(LocalPlayer.class)
@@ -24,8 +23,16 @@ public abstract class MixinLocalPlayer extends LivingEntity {
                     value = "HEAD"
             )
     )
-    private void onClimbable(CallbackInfo ci) {
-        if (Configs.featureAutoClimb && EntityCompatApi.getInstance().onClimbable(this) && EntityCompatApi.getInstance().getXRot(this) <= -50f && !EntityCompatApi.getInstance().isCrouching(this)) {
+    private void onAiStep(CallbackInfo ci) {
+        //#if MC >= 11700
+        if (Configs.featureAutoClimb && this.onClimbable() && this.getXRot() <= -50f && this.isCrouching()) {
+        //#elseif MC >= 11600
+        //$$ if (Configs.featureAutoClimb && this.onClimbable() && this.xRot <= -50f && this.isCrouching()) {
+        //#elseif MC >= 11500
+        //$$ if (Configs.featureAutoClimb && this.onLadder() && this.xRot <= -50f && this.isCrouching()) {
+        //#else
+        //$$ if (Configs.featureAutoClimb && this.onLadder() && this.xRot <= -50f && this.isVisuallySneaking()) {
+        //#endif
             Vec3 vec3 = this.getDeltaMovement();
             this.setDeltaMovement(vec3.x, 0.1176D, vec3.z);
         }

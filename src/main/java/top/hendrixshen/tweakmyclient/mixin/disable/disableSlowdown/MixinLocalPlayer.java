@@ -23,7 +23,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             method = "aiStep",
             at = @At(
                     value = "INVOKE",
-                    target = "net/minecraft/client/player/LocalPlayer.isUsingItem ()Z",
+                    target = "Lnet/minecraft/client/player/LocalPlayer;isUsingItem ()Z",
                     ordinal = 0
             )
     )

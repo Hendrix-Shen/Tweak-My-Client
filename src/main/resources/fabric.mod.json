@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "tweakmyclient",
-  "name": "TweakMyClient",
+  "id": "${mod_id}-${minecraft_version_id}",
   "version": "${mod_version}",
-  "icon": "assets/tweakmyclient/icon.png",
-  "description": "Add something interesting <3",
+  "icon": "assets/${mod_id}/icon.png",
+  "name": "${mod_name} for ${minecraft_version}",
+  "description": "${mod_name} for ${minecraft_version}",
   "authors": [
     {
       "name": "Hendrix_Shen",
@@ -14,14 +14,14 @@
     }
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/tweakmyclient",
-    "issues": "https://github.com/Hendrix-Shen/Tweak-My-Client/issues",
-    "sources": "https://github.com/Hendrix-Shen/Tweak-My-Client"
+    "homepage": "${mod_homepage}",
+    "issues": "${mod_sources}/issues",
+    "sources": "${mod_sources}"
   },
-  "license": "GPLv3",
+  "license": "${mod_license}",
   "environment": "client",
   "entrypoints": {
-    "main": [
+    "client": [
       "top.hendrixshen.tweakmyclient.TweakMyClient"
     ],
     "modmenu": [
@@ -29,13 +29,16 @@
     ]
   },
   "mixins": [
-    "TweakMyClient.mixins.json"
+    "${mod_id}.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.9.0",
-    "magiclib": ">=0.3.24"
+    "minecraft": "${minecraft_dependency}",
+    "magiclib-${minecraft_version_id}": ">=${magiclib_version}"
   },
   "custom": {
-    "modmenu:clientsideOnly": true
+    "modmenu:parent": "${mod_id}",
+    "modmenu": {
+      "parent": "${mod_id}"
+    }
   }
 }

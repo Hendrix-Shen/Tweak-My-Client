@@ -1,19 +1,15 @@
 package top.hendrixshen.tweakmyclient;
 
-import fi.dy.masa.malilib.util.StringUtils;
 import top.hendrixshen.magiclib.config.ConfigManager;
 import top.hendrixshen.magiclib.gui.ConfigGui;
 import top.hendrixshen.tweakmyclient.config.ConfigCategory;
+import top.hendrixshen.tweakmyclient.util.StringUtil;
 
 public class TweakMyClientConfigGui extends ConfigGui {
-    private static final TweakMyClientConfigGui INSTANCE;
+    private final static TweakMyClientConfigGui INSTANCE = new TweakMyClientConfigGui(TweakMyClientReference.getModId(), ConfigCategory.GENERIC, TweakMyClientReference.getConfigHandler().configManager);
 
     public TweakMyClientConfigGui(String identifier, String defaultTab, ConfigManager configManager) {
-        super(identifier, defaultTab, configManager, StringUtils.translate("tweakmyclient.gui.title", TweakMyClientReference.getModVersion(), StringUtils.translate(String.format("tweakmyclient.misc.versionType.%s", TweakMyClientReference.getModVersionType()))));
-    }
-
-    static {
-        INSTANCE = new TweakMyClientConfigGui(TweakMyClientReference.getModId(), ConfigCategory.GENERIC, TweakMyClient.cm);
+        super(identifier, defaultTab, configManager, () -> StringUtil.tr("gui.title", TweakMyClientReference.getModVersion(), StringUtil.tr(String.format("misc.versionType.%s", TweakMyClientReference.getModVersionType()))));
     }
 
     public static TweakMyClientConfigGui getInstance() {

@@ -8,20 +8,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
-@Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.15"))
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
     @Shadow
-    public abstract void updateTitle();
-
-    @Shadow
     private static int fps;
 
+    //#if MC >= 11500
     @Inject(
             method = "createTitle",
             at = @At(
@@ -34,6 +29,21 @@ public abstract class MixinMinecraft {
             cir.setReturnValue(CustomWindowUtil.getWindowTitle());
         }
     }
+    //#else
+    //$$ @Inject(
+    //$$         method = "run",
+    //$$         at = @At(
+    //$$                 value = "INVOKE",
+    //$$                 target = "Lnet/minecraft/client/Minecraft;init()V",
+    //$$                 shift = At.Shift.AFTER
+    //$$         )
+    //$$ )
+    //$$ private void afterInit(CallbackInfo ci) {
+    //$$     if (Configs.featureCustomWindowTitle) {
+    //$$         CustomWindowUtil.updateTitle();
+    //$$     }
+    //$$ }
+    //#endif
 
     @Inject(
             method = "run",
