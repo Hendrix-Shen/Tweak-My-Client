@@ -30,9 +30,12 @@ jobs:
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
+          path: |
+            ~/.gradle/caches
+            ./.gradle/loom-caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('*.gradle', 'gradle.properties', '**/*.accesswidener') }}
+          restore-keys: ${{ runner.os }}-gradle-
 
       - name: Get short commit sha
         id: get_short_sha
@@ -70,19 +73,26 @@ jobs:
           name: ${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
           path: build/libs/
 
-      - name: Create Github release
+      - name: Create Github Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "dev"
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: dev-${{ github.run_number}}
           prerelease: true
           title: "[CI#${{ github.run_number}}]${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}"
           files: |
             LICENSE
             build/libs/*.jar
 
-      - name: Publish realease to curseforge
-        if: contains(github.event.head_commit.message, '[publish skip]') == false
+      - name: Update Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: dev-${{ github.run_number}}
+          generate_release_notes: true
+          append_body: false
+
+      - name: Publish release to Curseforge
+        if: contains(github.event.head_commit.message, '[publish skip]') == false || contains(github.event.ref, 'refs/heads/exp')
         uses: Kir-Antipov/mc-publish@v2.1
         with:
           curseforge-id: 478757
@@ -141,9 +151,13 @@ jobs:
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
+          path: |
+            ~/.gradle/caches
+            ./.gradle/loom-caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('*.gradle', 'gradle.properties', '**/*.accesswidener') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
 
       - name: Get short commit sha
         id: get_short_sha
