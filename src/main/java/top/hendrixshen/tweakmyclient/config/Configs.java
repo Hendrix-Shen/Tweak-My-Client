@@ -250,6 +250,10 @@ public class Configs {
 
     @Hotkey()
     @Config(category = ConfigCategory.DISABLE)
+    public static boolean disableRenderEffectBox = false;
+
+    @Hotkey()
+    @Config(category = ConfigCategory.DISABLE)
     public static boolean disableRenderOverlayFire = false;
 
     @Hotkey()
