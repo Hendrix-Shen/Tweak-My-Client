@@ -11,6 +11,7 @@ import top.hendrixshen.magiclib.config.annotation.Numeric;
 import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
 import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.TweakMyClientPredicate;
 import top.hendrixshen.tweakmyclient.event.CallBacks;
 import top.hendrixshen.tweakmyclient.fakeInterface.IMinecraft;
 import top.hendrixshen.tweakmyclient.helper.AutoDropListType;
@@ -29,6 +30,9 @@ public class Configs {
     @Numeric(maxValue = 1200, minValue = 0)
     @Config(category = ConfigCategory.GENERIC)
     public static int autoDropInterval = 0;
+
+    @Config(category = ConfigCategory.GENERIC)
+    public static boolean customBlockHitBoxOverlayLinkedAdapter = true;
 
     @Config(category = ConfigCategory.GENERIC)
     public static String customWindowTitle = "Minecraft {mc_version} with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}";
@@ -117,6 +121,9 @@ public class Configs {
     public static Color4f colorBlockOutside = Color4f.fromColor(StringUtils.getColor("#66000000", 0));
 
     @Config(category = ConfigCategory.COLOR)
+    public static Color4f colorBlockHitBoxOverlayFill = Color4f.fromColor(StringUtils.getColor("#4CFFFF10", 0));
+
+    @Config(category = ConfigCategory.COLOR)
     public static Color4f colorGuiStart = Color4f.fromColor(StringUtils.getColor("#C00F0F0F", 0));
 
     @Config(category = ConfigCategory.COLOR)
@@ -150,6 +157,10 @@ public class Configs {
     @Hotkey()
     @Config(category = ConfigCategory.FEATURE)
     public static boolean featureAutoRespawn = false;
+
+    @Hotkey()
+    @Config(category = ConfigCategory.FEATURE)
+    public static boolean featureCustomBlockHitBoxOverlayFill = false;
 
     @Hotkey()
     @Config(category = ConfigCategory.FEATURE)
@@ -280,6 +291,12 @@ public class Configs {
     @Config(category = ConfigCategory.DEBUG)
     public static boolean debugMode = false;
 
+    @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.DebugMode.class)
+    public static boolean debugExperimentalMode = false;
+
+    @Config(category = ConfigCategory.DEBUG, dependencies = @Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.17")), predicate = TweakMyClientPredicate.ExperimentalMode.class)
+    public static boolean expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock = false;
+
     public static void initCallbacks(ConfigManager cm) {
         // Set callback for all BooleanHotkeyed config.
         /* TODO
@@ -312,6 +329,7 @@ public class Configs {
 
         // Debug config callbacks.
         cm.setValueChangeCallback("debugMode", CallBacks::debugModeCallBack);
+        cm.setValueChangeCallback("debugExperimentalMode", CallBacks::debugExperimentalModeCallBack);
 
         CallBacks.debugModeCallBack(null);
     }

@@ -86,11 +86,15 @@ public class CallBacks {
         return true;
     }
 
-    public static void debugModeCallBack(Option option) {
-        Configurator.setLevel(TweakMyClientReference.getModId(), Level.toLevel((Configs.debugMode ? "DEBUG" : "INFO")));
+    public static void debugExperimentalModeCallBack(Option option) {
         if (option != null) {
             TweakMyClientConfigGui.getInstance().reDraw();
         }
+    }
+
+    public static void debugModeCallBack(Option option) {
+        Configurator.setLevel(TweakMyClientReference.getModId(), Level.toLevel((Configs.debugMode ? "DEBUG" : "INFO")));
+        CallBacks.debugExperimentalModeCallBack(option);
     }
 
     public static boolean syncInventoryCallback(KeyAction keyAction, IKeybind keybind) {

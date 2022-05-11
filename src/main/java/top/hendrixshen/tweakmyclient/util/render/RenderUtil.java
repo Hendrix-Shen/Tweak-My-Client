@@ -1,23 +1,27 @@
 package top.hendrixshen.tweakmyclient.util.render;
 
-//#if MC >= 11600
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-//#if MC >= 11700
-import com.mojang.blaze3d.vertex.VertexFormat;
-//#endif
+import com.mojang.blaze3d.vertex.*;
+import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.Color4f;
+//#if MC >= 11600
 import net.minecraft.client.Minecraft;
+//#endif
 //#if MC >= 11700
 import net.minecraft.client.renderer.GameRenderer;
 //#endif
+//#if MC >= 11600
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.Vec3;
-//#if MC < 11700
-import org.lwjgl.opengl.GL11;
 //#endif
+import net.minecraft.world.phys.AABB;
+//#if MC >= 11600
+import net.minecraft.world.phys.Vec3;
+//#endif
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import top.hendrixshen.magiclib.compat.minecraft.blaze3d.vertex.VertexFormatCompatApi;
+//#if MC < 11700
+//$$ import org.lwjgl.opengl.GL11;
 //#endif
 
 public class RenderUtil {
@@ -100,5 +104,34 @@ public class RenderUtil {
         buffer.vertex(maxX, maxY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
         buffer.vertex(maxX, maxY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
     }
+
     //#endif
+    public static void renderShapeOverlay(VoxelShape voxelShape, double x, double y, double z, Color4f color4f) {
+        //#if MC < 11700
+        //$$ RenderSystem.disableTexture();
+        //#endif
+        RenderSystem.enableBlend();
+        RenderSystem.disableCull();
+        //#if MC >= 11700
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        //#endif
+        Tesselator tesselator = Tesselator.getInstance();
+        BufferBuilder buffer = tesselator.getBuilder();
+        buffer.begin(VertexFormatCompatApi.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+        VoxelShape optimizedVoxelShape = voxelShape.toAabbs().stream()
+                .map(box -> box.inflate(0.005, 0.005, 0.005))
+                .map(Shapes::create)
+                .reduce(Shapes::or)
+                .orElse(Shapes.empty()).optimize();
+        for (AABB aabb : optimizedVoxelShape.toAabbs()) {
+            RenderUtils.drawBoxAllSidesBatchedQuads(aabb.minX + x, aabb.minY + y, aabb.minZ + z,
+                    aabb.maxX + x, aabb.maxY + y, aabb.maxZ + z, color4f, buffer);
+        }
+        tesselator.end();
+        RenderSystem.enableCull();
+        RenderSystem.disableBlend();
+        //#if MC < 11700
+        //$$ RenderSystem.enableTexture();
+        //#endif
+    }
 }
