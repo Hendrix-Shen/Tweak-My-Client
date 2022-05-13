@@ -77,11 +77,11 @@ public class OverlayRenderer {
 
             RenderUtil.renderShapeOverlay(voxelShape, blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z(),
                     Configs.customBlockHitBoxOverlayFillRainbow ? new Color4f(
-                    0.5F + 0.5F * (float)Math.sin(k * Math.PI),
-                    0.5F + 0.5F * (float)Math.sin((k + 4F / 3F) * Math.PI),
-                    0.5F + 0.5F * (float)Math.sin((k + 8F / 3F) * Math.PI),
-                    Configs.colorBlockHitBoxOverlayFill.a
-            ) : Configs.colorBlockHitBoxOverlayFill);
+                            0.5F + 0.5F * (float) Math.sin(k * Math.PI),
+                            0.5F + 0.5F * (float) Math.sin((k + 4F / 3F) * Math.PI),
+                            0.5F + 0.5F * (float) Math.sin((k + 8F / 3F) * Math.PI),
+                            Configs.colorBlockHitBoxOverlayFill.a
+                    ) : Configs.colorBlockHitBoxOverlayFill);
         }
     }
 
@@ -101,14 +101,14 @@ public class OverlayRenderer {
                     if (connectBlock.getValue(DoorBlock.POWERED).equals(blockState.getValue(DoorBlock.POWERED))
                             && connectBlock.getValue(DoorBlock.FACING).equals(blockState.getValue(DoorBlock.FACING))
                             && connectBlock.getValue(DoorBlock.HINGE).equals(connectBlock.getValue(DoorBlock.HINGE))) {
-                        return Shapes.or(shape, connectBlock.getShape(clientLevel, blockPos).move(0, 1,0));
+                        return Shapes.or(shape, connectBlock.getShape(clientLevel, blockPos).move(0, 1, 0));
                     }
                 } else if (clientLevel.getBlockState(blockPos.below(1)).getBlock() == block) {
                     BlockState connectBlock = clientLevel.getBlockState(blockPos.below(1));
                     if (connectBlock.getValue(DoorBlock.POWERED).equals(blockState.getValue(DoorBlock.POWERED))
                             && connectBlock.getValue(DoorBlock.FACING).equals(blockState.getValue(DoorBlock.FACING))
                             && connectBlock.getValue(DoorBlock.HINGE).equals(connectBlock.getValue(DoorBlock.HINGE))) {
-                        return Shapes.or(shape, connectBlock.getShape(clientLevel, blockPos).move(0, -1,0));
+                        return Shapes.or(shape, connectBlock.getShape(clientLevel, blockPos).move(0, -1, 0));
                     }
                 }
             } else if (blockState.getBlock() instanceof BedBlock) {

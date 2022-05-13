@@ -1,6 +1,5 @@
 package top.hendrixshen.tweakmyclient.util;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
@@ -43,15 +42,18 @@ public class AutoReconnectUtil {
             try {
                 // AuthMe 2.2.0
                 screen = (Screen) Class.forName("me.axieum.mcmod.authme.impl.gui.AuthMethodScreen").getDeclaredConstructor(Screen.class).newInstance(parent);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                     NoSuchMethodException | ClassNotFoundException e) {
                 try {
                     // AuthMe 2.1.0
                     screen = (Screen) Class.forName("me.axieum.mcmod.authme.impl.AuthMe").getDeclaredConstructor().newInstance(); // 2.1.0
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException ex) {
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                         NoSuchMethodException | ClassNotFoundException ex) {
                     try {
                         // AuthMe for mc 114
                         screen = (Screen) Class.forName("me.axieum.mcmod.authme.gui.AuthScreen").getDeclaredConstructor(Screen.class).newInstance(parent);
-                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException exc) {
+                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                             NoSuchMethodException | ClassNotFoundException exc) {
                         TweakMyClient.getLogger().error("Can't invoke Authme Screen");
                     }
                 }
@@ -68,7 +70,8 @@ public class AutoReconnectUtil {
 
             try {
                 screen = (Screen) Class.forName("the_fireplace.ias.gui.GuiAccountSelector").getDeclaredConstructor(Screen.class).newInstance(parent);
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     InvocationTargetException e) {
                 TweakMyClient.getLogger().error("Can't invoke In-Game Account Switcher Screen");
             }
 
@@ -84,11 +87,13 @@ public class AutoReconnectUtil {
             try {
                 // For MC 1.17
                 screen = (Screen) Class.forName("com.sintinium.oauthfabric.gui.profile.ProfileSelectionScreen").getDeclaredConstructor().newInstance();
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     InvocationTargetException e) {
                 try {
                     // For MC 1.16 & 1.18
                     screen = (Screen) Class.forName("com.sintinium.oauth.oauthfabric.gui.LoginTypeScreen").getDeclaredConstructor(Screen.class).newInstance(parent);
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException ex) {
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                         NoSuchMethodException | InvocationTargetException ex) {
                     TweakMyClient.getLogger().error("Can't invoke OAuth Screen");
                 }
             }
@@ -104,7 +109,8 @@ public class AutoReconnectUtil {
 
             try {
                 screen = (Screen) Class.forName("technicianlp.reauth.gui.AuthScreen").getDeclaredConstructor(Screen.class).newInstance(parent);
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     InvocationTargetException e) {
                 TweakMyClient.getLogger().error("Can't invoke Reauth Screen");
             }
 
@@ -176,15 +182,15 @@ public class AutoReconnectUtil {
             AutoReconnectUtil.modHashMap.forEach(
                     (modId, screen) -> {
                         ((IScreen) current).tmc$addButton(new Button(backButtonX + offsetX.intValue(),
-                                        48 + backButtonY,
-                                        buttonWidth,
-                                        20,
-                                        //#if MC >= 11600
-                                        new TextComponent(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
-                                        //#else
-                                        //$$ StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId)),
-                                        //#endif
-                                        b -> TweakMyClient.getMinecraftClient().setScreen(screen)));
+                                48 + backButtonY,
+                                buttonWidth,
+                                20,
+                                //#if MC >= 11600
+                                new TextComponent(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
+                                //#else
+                                //$$ StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId)),
+                                //#endif
+                                b -> TweakMyClient.getMinecraftClient().setScreen(screen)));
                         offsetX.getAndAdd(buttonWidth + 4);
                     }
             );

@@ -1,7 +1,5 @@
 package top.hendrixshen.tweakmyclient.event;
 
-import fi.dy.masa.malilib.config.options.ConfigStringList;
-import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
 import net.minecraft.client.Minecraft;
@@ -23,11 +21,8 @@ import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientConfigGui;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.helper.ListCache;
-import top.hendrixshen.tweakmyclient.helper.TargetBlockPositionPrintMode;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 import top.hendrixshen.tweakmyclient.util.InventoryUtil;
-import top.hendrixshen.tweakmyclient.util.StringUtil;
 
 public class CallBacks {
     public static boolean getTargetBlockPositionCallback(KeyAction keyAction, IKeybind keybind) {
