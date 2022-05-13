@@ -118,6 +118,7 @@ public class RenderUtil {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder buffer = tesselator.getBuilder();
         buffer.begin(VertexFormatCompatApi.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+
         VoxelShape optimizedVoxelShape = voxelShape.toAabbs().stream()
                 .map(box -> box.inflate(0.005, 0.005, 0.005))
                 .map(Shapes::create)

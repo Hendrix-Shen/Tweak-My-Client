@@ -32,6 +32,13 @@ public class Configs {
     public static int autoDropInterval = 0;
 
     @Config(category = ConfigCategory.GENERIC)
+    public static boolean customBlockHitBoxOverlayFillRainbow = true;
+
+    @Numeric(maxValue = 10, minValue = 1)
+    @Config(category = ConfigCategory.GENERIC)
+    public static int customBlockHitBoxOverlayFillRainbowSpeed = 4;
+
+    @Config(category = ConfigCategory.GENERIC)
     public static boolean customBlockHitBoxOverlayLinkedAdapter = true;
 
     @Config(category = ConfigCategory.GENERIC)

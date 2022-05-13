@@ -1,8 +1,6 @@
 package top.hendrixshen.tweakmyclient.util.render;
 
-//#if MC >= 11600
 import fi.dy.masa.malilib.util.Color4f;
-//#endif
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 //#if MC >= 11600
@@ -74,7 +72,16 @@ public class OverlayRenderer {
             if (Configs.customBlockHitBoxOverlayLinkedAdapter) {
                 voxelShape = linkedBlockAdapter(clientLevel, blockState, blockPos, voxelShape);
             }
-            RenderUtil.renderShapeOverlay(voxelShape, blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z(), Configs.colorBlockHitBoxOverlayFill);
+
+            float k = System.currentTimeMillis() % (500 * Configs.customBlockHitBoxOverlayFillRainbowSpeed) / (250F * Configs.customBlockHitBoxOverlayFillRainbowSpeed);
+
+            RenderUtil.renderShapeOverlay(voxelShape, blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z(),
+                    Configs.customBlockHitBoxOverlayFillRainbow ? new Color4f(
+                    0.5F + 0.5F * (float)Math.sin(k * Math.PI),
+                    0.5F + 0.5F * (float)Math.sin((k + 4F / 3F) * Math.PI),
+                    0.5F + 0.5F * (float)Math.sin((k + 8F / 3F) * Math.PI),
+                    Configs.colorBlockHitBoxOverlayFill.a
+            ) : Configs.colorBlockHitBoxOverlayFill);
         }
     }
 
