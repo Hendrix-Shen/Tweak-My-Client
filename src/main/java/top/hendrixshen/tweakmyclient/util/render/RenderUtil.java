@@ -56,57 +56,12 @@ public class RenderUtil {
         //$$ bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
         //#endif
 
-        drawBoundingBoxLinesX(bufferbuilder, minX, minY, minZ, maxX, maxY, maxZ, colorX);
-        drawBoundingBoxLinesY(bufferbuilder, minX, minY, minZ, maxX, maxY, maxZ, colorY);
-        drawBoundingBoxLinesZ(bufferbuilder, minX, minY, minZ, maxX, maxY, maxZ, colorZ);
+        RenderUtils.drawBoxAllEdgesBatchedLines(minX, minY, minZ, maxX, maxY, maxZ, colorX, bufferbuilder);
 
         tesselator.end();
     }
-
-    private static void drawBoundingBoxLinesX(BufferBuilder buffer, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f color) {
-        buffer.vertex(minX, minY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(maxX, minY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-
-        buffer.vertex(minX, maxY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(maxX, maxY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-
-        buffer.vertex(minX, minY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(maxX, minY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-
-        buffer.vertex(minX, maxY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(maxX, maxY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-    }
-
-    private static void drawBoundingBoxLinesY(BufferBuilder buffer, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f color) {
-        buffer.vertex(minX, minY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(minX, maxY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-
-        buffer.vertex(maxX, minY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(maxX, maxY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-
-        buffer.vertex(minX, minY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(minX, maxY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-
-        buffer.vertex(maxX, minY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(maxX, maxY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-    }
-
-    private static void drawBoundingBoxLinesZ(BufferBuilder buffer, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f color) {
-        buffer.vertex(minX, minY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(minX, minY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-
-        buffer.vertex(maxX, minY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(maxX, minY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-
-        buffer.vertex(minX, maxY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(minX, maxY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-
-        buffer.vertex(maxX, maxY, minZ).color(color.r, color.g, color.b, color.a).endVertex();
-        buffer.vertex(maxX, maxY, maxZ).color(color.r, color.g, color.b, color.a).endVertex();
-    }
-
     //#endif
-    public static void renderShapeOverlay(VoxelShape voxelShape, double x, double y, double z, Color4f color4f) {
+    public static void renderShapeOverlay(VoxelShape voxelShape, float expand, double x, double y, double z, Color4f color4f) {
         //#if MC < 11700
         //$$ RenderSystem.disableTexture();
         //#endif
@@ -120,17 +75,55 @@ public class RenderUtil {
         buffer.begin(VertexFormatCompatApi.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
 
         VoxelShape optimizedVoxelShape = voxelShape.toAabbs().stream()
-                .map(box -> box.inflate(0.005, 0.005, 0.005))
+                .map(box -> box.inflate(expand, expand, expand))
                 .map(Shapes::create)
                 .reduce(Shapes::or)
                 .orElse(Shapes.empty()).optimize();
-        for (AABB aabb : optimizedVoxelShape.toAabbs()) {
-            RenderUtils.drawBoxAllSidesBatchedQuads(aabb.minX + x, aabb.minY + y, aabb.minZ + z,
-                    aabb.maxX + x, aabb.maxY + y, aabb.maxZ + z, color4f, buffer);
-        }
+        optimizedVoxelShape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
+                RenderUtils.drawBoxAllSidesBatchedQuads(minX + x, minY + y, minZ + z,
+                maxX + x, maxY + y, maxZ + z, color4f, buffer));
+
         tesselator.end();
         RenderSystem.enableCull();
         RenderSystem.disableBlend();
+        //#if MC < 11700
+        //$$ RenderSystem.enableTexture();
+        //#endif
+    }
+
+    public static void renderShapeOutline(VoxelShape voxelShape, float expand, float lineWidth, double x, double y, double z, Color4f color4f) {
+        //#if MC < 11700
+        //$$ RenderSystem.disableTexture();
+        //#endif
+        RenderSystem.enableBlend();
+        RenderSystem.disableCull();
+        //#if MC >= 11700
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        //#endif
+        Tesselator tesselator = Tesselator.getInstance();
+        BufferBuilder buffer = tesselator.getBuilder();
+        //#if MC >= 11700
+        buffer.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
+        //#else
+        //$$ buffer.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
+        //#endif
+
+        RenderSystem.lineWidth(lineWidth);
+
+        VoxelShape optimizedVoxelShape = voxelShape.toAabbs().stream()
+                .map(box -> box.inflate(expand, expand, expand))
+                .map(Shapes::create)
+                .reduce(Shapes::or)
+                .orElse(Shapes.empty()).optimize();
+        optimizedVoxelShape.forAllEdges((minX, minY, minZ, maxX, maxY, maxZ) -> {
+            buffer.vertex(minX + x, minY + y, minZ + z).color(color4f.r, color4f.g, color4f.b, color4f.a).endVertex();
+            buffer.vertex(maxX + x, minY + y, minZ + z).color(color4f.r, color4f.g, color4f.b, color4f.a).endVertex();
+        });
+
+        tesselator.end();
+        RenderSystem.enableCull();
+        RenderSystem.disableBlend();
+
         //#if MC < 11700
         //$$ RenderSystem.enableTexture();
         //#endif

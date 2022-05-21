@@ -37,7 +37,7 @@ public class RenderHandler implements IRenderer {
             OverlayRenderer.getInstance().renderOpenWater(minecraft);
         }
         //#endif
-        if (Configs.featureCustomBlockHitBoxOverlayFill) {
+        if (Configs.featureCustomBlockHitBoxOverlayFill || Configs.featureCustomBlockHitBoxOverlayOutline) {
             OverlayRenderer.getInstance().renderBlockOverlay(minecraft);
         }
     }

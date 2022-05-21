@@ -32,14 +32,21 @@ public class Configs {
     public static int autoDropInterval = 0;
 
     @Config(category = ConfigCategory.GENERIC)
-    public static boolean customBlockHitBoxOverlayFillRainbow = true;
+    public static boolean customBlockHitBoxOverlayFillRainbow = false;
 
-    @Numeric(maxValue = 10, minValue = 1)
+    @Numeric(maxValue = 100, minValue = 1)
     @Config(category = ConfigCategory.GENERIC)
-    public static int customBlockHitBoxOverlayFillRainbowSpeed = 4;
+    public static int customBlockHitBoxOverlayFillRainbowSpeed = 80;
 
     @Config(category = ConfigCategory.GENERIC)
     public static boolean customBlockHitBoxOverlayLinkedAdapter = true;
+
+    @Config(category = ConfigCategory.GENERIC)
+    public static boolean customBlockHitBoxOverlayOutlineRainbow = false;
+
+    @Numeric(maxValue = 100, minValue = 1)
+    @Config(category = ConfigCategory.GENERIC)
+    public static int customBlockHitBoxOverlayOutlineRainbowSpeed = 80;
 
     @Config(category = ConfigCategory.GENERIC)
     public static String customWindowTitle = "Minecraft {mc_version} with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}";
@@ -125,10 +132,10 @@ public class Configs {
 
     // Color configs
     @Config(category = ConfigCategory.COLOR)
-    public static Color4f colorBlockOutside = Color4f.fromColor(StringUtils.getColor("#66000000", 0));
+    public static Color4f colorBlockHitBoxOverlayOutline = Color4f.fromColor(StringUtils.getColor("#66000000", 0));
 
     @Config(category = ConfigCategory.COLOR)
-    public static Color4f colorBlockHitBoxOverlayFill = Color4f.fromColor(StringUtils.getColor("#4CFFFF10", 0));
+    public static Color4f colorBlockHitBoxOverlayFill = Color4f.fromColor(StringUtils.getColor("#2CFFFF10", 0));
 
     @Config(category = ConfigCategory.COLOR)
     public static Color4f colorGuiStart = Color4f.fromColor(StringUtils.getColor("#C00F0F0F", 0));
@@ -171,7 +178,7 @@ public class Configs {
 
     @Hotkey()
     @Config(category = ConfigCategory.FEATURE)
-    public static boolean featureCustomBlockOutsideColor = false;
+    public static boolean featureCustomBlockHitBoxOverlayOutline = false;
 
     @Hotkey()
     @Config(category = ConfigCategory.FEATURE)
