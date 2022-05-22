@@ -1,7 +1,7 @@
 package top.hendrixshen.tweakmyclient.helper;
 
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
-import fi.dy.masa.malilib.util.StringUtils;
+import top.hendrixshen.tweakmyclient.util.StringUtil;
 
 public enum AutoDropListType implements IConfigOptionListEntry {
     BLACKLIST("blackList"),
@@ -20,7 +20,7 @@ public enum AutoDropListType implements IConfigOptionListEntry {
 
     @Override
     public String getDisplayName() {
-        return StringUtils.translate(String.format("tweakmyclient.label.autoDropListType.%s", this.name));
+        return StringUtil.tr(String.format("label.autoDropListType.%s", this.name));
     }
 
     @Override

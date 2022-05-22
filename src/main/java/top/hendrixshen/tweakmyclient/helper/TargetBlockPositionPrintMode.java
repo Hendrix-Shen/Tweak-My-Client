@@ -1,7 +1,7 @@
 package top.hendrixshen.tweakmyclient.helper;
 
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
-import fi.dy.masa.malilib.util.StringUtils;
+import top.hendrixshen.tweakmyclient.util.StringUtil;
 
 public enum TargetBlockPositionPrintMode implements IConfigOptionListEntry {
     PUBLIC("public"),
@@ -20,7 +20,7 @@ public enum TargetBlockPositionPrintMode implements IConfigOptionListEntry {
 
     @Override
     public String getDisplayName() {
-        return StringUtils.translate(String.format("tweakmyclient.label.targetBlockPositionPrintMode.%s", this.name));
+        return StringUtil.tr(String.format("label.targetBlockPositionPrintMode.%s", this.name));
     }
 
     @Override
