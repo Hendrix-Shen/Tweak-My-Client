@@ -13,11 +13,9 @@ import net.minecraft.client.renderer.GameRenderer;
 //#if MC >= 11600
 import net.minecraft.core.BlockPos;
 //#endif
-import net.minecraft.world.phys.AABB;
 //#if MC >= 11600
 import net.minecraft.world.phys.Vec3;
 //#endif
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import top.hendrixshen.magiclib.compat.minecraft.blaze3d.vertex.VertexFormatCompatApi;
 //#if MC < 11700
@@ -26,7 +24,7 @@ import top.hendrixshen.magiclib.compat.minecraft.blaze3d.vertex.VertexFormatComp
 
 public class RenderUtil {
     //#if MC >= 11600
-    public static void renderAreaOutline(BlockPos pos1, BlockPos pos2, float lineWidth, Color4f colorX, Color4f colorY, Color4f colorZ, Minecraft minecraft) {
+    public static void renderAreaOutline(BlockPos pos1, BlockPos pos2, float lineWidth, Color4f colorX, Minecraft minecraft) {
         RenderSystem.lineWidth(lineWidth);
 
         Vec3 cameraPos = minecraft.gameRenderer.getMainCamera().getPosition();
@@ -41,10 +39,10 @@ public class RenderUtil {
         double maxY = Math.max(pos1.getY(), pos2.getY()) - dy + 1;
         double maxZ = Math.max(pos1.getZ(), pos2.getZ()) - dz + 1;
 
-        drawBoundingBoxEdges(minX, minY, minZ, maxX, maxY, maxZ, colorX, colorY, colorZ);
+        drawBoundingBoxEdges(minX, minY, minZ, maxX, maxY, maxZ, colorX);
     }
 
-    private static void drawBoundingBoxEdges(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f colorX, Color4f colorY, Color4f colorZ) {
+    private static void drawBoundingBoxEdges(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, Color4f color) {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tesselator.getBuilder();
 
@@ -56,12 +54,13 @@ public class RenderUtil {
         //$$ bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
         //#endif
 
-        RenderUtils.drawBoxAllEdgesBatchedLines(minX, minY, minZ, maxX, maxY, maxZ, colorX, bufferbuilder);
+        RenderUtils.drawBoxAllEdgesBatchedLines(minX, minY, minZ, maxX, maxY, maxZ, color, bufferbuilder);
 
         tesselator.end();
     }
     //#endif
-    public static void renderShapeOverlay(VoxelShape voxelShape, float expand, double x, double y, double z, Color4f color4f) {
+    public static void renderShapeOverlay(VoxelShape voxelShape,
+                                          double x, double y, double z, Color4f color4f) {
         //#if MC < 11700
         //$$ RenderSystem.disableTexture();
         //#endif
@@ -74,12 +73,7 @@ public class RenderUtil {
         BufferBuilder buffer = tesselator.getBuilder();
         buffer.begin(VertexFormatCompatApi.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
 
-        VoxelShape optimizedVoxelShape = voxelShape.toAabbs().stream()
-                .map(box -> box.inflate(expand, expand, expand))
-                .map(Shapes::create)
-                .reduce(Shapes::or)
-                .orElse(Shapes.empty()).optimize();
-        optimizedVoxelShape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
+        voxelShape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
                 RenderUtils.drawBoxAllSidesBatchedQuads(minX + x, minY + y, minZ + z,
                 maxX + x, maxY + y, maxZ + z, color4f, buffer));
 
@@ -91,7 +85,7 @@ public class RenderUtil {
         //#endif
     }
 
-    public static void renderShapeOutline(VoxelShape voxelShape, float expand, float lineWidth, double x, double y, double z, Color4f color4f) {
+    public static void renderShapeOutline(VoxelShape voxelShape, float lineWidth, double x, double y, double z, Color4f color4f) {
         //#if MC < 11700
         //$$ RenderSystem.disableTexture();
         //#endif
@@ -110,14 +104,9 @@ public class RenderUtil {
 
         RenderSystem.lineWidth(lineWidth);
 
-        VoxelShape optimizedVoxelShape = voxelShape.toAabbs().stream()
-                .map(box -> box.inflate(expand, expand, expand))
-                .map(Shapes::create)
-                .reduce(Shapes::or)
-                .orElse(Shapes.empty()).optimize();
-        optimizedVoxelShape.forAllEdges((minX, minY, minZ, maxX, maxY, maxZ) -> {
+        voxelShape.forAllEdges((minX, minY, minZ, maxX, maxY, maxZ) -> {
             buffer.vertex(minX + x, minY + y, minZ + z).color(color4f.r, color4f.g, color4f.b, color4f.a).endVertex();
-            buffer.vertex(maxX + x, minY + y, minZ + z).color(color4f.r, color4f.g, color4f.b, color4f.a).endVertex();
+            buffer.vertex(maxX + x, maxY + y, maxZ + z).color(color4f.r, color4f.g, color4f.b, color4f.a).endVertex();
         });
 
         tesselator.end();

@@ -21,6 +21,7 @@ import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientConfigGui;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.helper.BreakAnimationMode;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 import top.hendrixshen.tweakmyclient.util.InventoryUtil;
 
@@ -82,14 +83,12 @@ public class CallBacks {
     }
 
     public static void debugExperimentalModeCallBack(Option option) {
-        if (option != null) {
-            TweakMyClientConfigGui.getInstance().reDraw();
-        }
+        reDrawConfigGui(option);
     }
 
     public static void debugModeCallBack(Option option) {
         Configurator.setLevel(TweakMyClientReference.getModId(), Level.toLevel((Configs.debugMode ? "DEBUG" : "INFO")));
-        CallBacks.debugExperimentalModeCallBack(option);
+        reDrawConfigGui(option);
     }
 
     public static boolean syncInventoryCallback(KeyAction keyAction, IKeybind keybind) {
@@ -122,6 +121,20 @@ public class CallBacks {
         }
     }
 
+    public static void featureCustomBlockHitBoxOverlayFillCallBack(Option option) {
+        if (!(Configs.featureCustomBlockHitBoxOverlayFill && Configs.featureCustomBlockHitBoxOverlayOutline)) {
+            TweakMyClientReference.getConfigHandler().configManager.setValue("breakAnimationMode", BreakAnimationMode.NONE);
+            reDrawConfigGui(option);
+        }
+    }
+
+    public static void featureCustomBlockHitBoxOverlayOutlineCallBack(Option option) {
+        if (!(Configs.featureCustomBlockHitBoxOverlayFill && Configs.featureCustomBlockHitBoxOverlayOutline)) {
+            TweakMyClientReference.getConfigHandler().configManager.setValue("breakAnimationMode", BreakAnimationMode.NONE);
+            reDrawConfigGui(option);
+        }
+    }
+
     public static void featureCustomWindowTitleCallback(Option option) {
         if (Configs.featureCustomWindowTitle) {
             CustomWindowUtil.rebuildCache(CustomWindowUtil.TitleType.TITLE);
@@ -137,5 +150,11 @@ public class CallBacks {
         tweakMyClientConfigGui.setParentGui(TweakMyClient.getMinecraftClient().screen);
         TweakMyClient.getMinecraftClient().setScreen(tweakMyClientConfigGui);
         return true;
+    }
+
+    private static void reDrawConfigGui(Option option) {
+        if (option != null) {
+            TweakMyClientConfigGui.getInstance().reDraw();
+        }
     }
 }

@@ -18,4 +18,11 @@ public class TweakMyClientPredicate {
             return Configs.debugExperimentalMode;
         }
     }
+
+    public static class AllowBreakAnimation implements OptionDependencyPredicate {
+        @Override
+        public boolean test(Option option) {
+            return Configs.featureCustomBlockHitBoxOverlayFill && Configs.featureCustomBlockHitBoxOverlayOutline;
+        }
+    }
 }

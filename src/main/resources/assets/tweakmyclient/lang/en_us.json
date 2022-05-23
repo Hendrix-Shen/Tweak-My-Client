@@ -103,8 +103,12 @@
 
     "tweakmyclient.config.generic.autoDropInterval.name": "autoDropInterval",
     "tweakmyclient.config.generic.autoDropInterval.comment": "How many ticks per interval to perform auto drop.",
+    "tweakmyclient.config.generic.breakAnimationMode.name": "breakAnimationMode",
+    "tweakmyclient.config.generic.breakAnimationMode.comment": "For customBlockHitBoxOverlay digging animations, it is highly recommended to enable customBlockHitBoxOverlayDisableDepthTest.\nDown - As the excavation progresses, the size of the boxes of customBlockHitBoxOverlay slowly decreases from top to bottom.\nNone - No animation.\nShrink - As the excavation proceeds, the size of the boxes of customBlockHitBoxOverlay slowly shrink from the outside inwards. This option needs to be enabled for customBlockHitBoxOverlayDisableDepthTest to work properly",
     "tweakmyclient.config.generic.autoReconnectTimer.name": "autoReconnectTimer",
     "tweakmyclient.config.generic.autoReconnectTimer.comment": "How many seconds to wait for auto reconnection.",
+    "tweakmyclient.config.generic.customBlockHitBoxOverlayDisableDepthTest.name": "customBlockHitBoxOverlayDisableDepthTest",
+    "tweakmyclient.config.generic.customBlockHitBoxOverlayDisableDepthTest.comment": "Disable the depth test when rendering blockHitBoxOverlayFill and blockHitBoxOverlayOutline, which will not operate on occlusion relations. The general experience is better when breakAnimationMode is not None.",
     "tweakmyclient.config.generic.customBlockHitBoxOverlayFillRainbow.name": "customBlockHitBoxOverlayFillRainbow",
     "tweakmyclient.config.generic.customBlockHitBoxOverlayFillRainbow.comment": "featureCustomBlockHitBoxOverlayFill will enable the rainbow color change, using the alpha provided by colorBlockHitBoxOverlayFill.",
     "tweakmyclient.config.generic.customBlockHitBoxOverlayFillRainbowSpeed.name": "customBlockHitBoxOverlayFillRainbowSpeed",
@@ -175,6 +179,9 @@
 
     "tweakmyclient.label.autoDropListType.blackList": "Black List",
     "tweakmyclient.label.autoDropListType.whiteList": "White List",
+    "tweakmyclient.label.breakAnimationMode.down": "Down",
+    "tweakmyclient.label.breakAnimationMode.none": "None",
+    "tweakmyclient.label.breakAnimationMode.shrink": "Shrink",
     "tweakmyclient.label.enderPortalRenderMode.actual": "Actual",
     "tweakmyclient.label.enderPortalRenderMode.full": "Full",
     "tweakmyclient.label.enderPortalRenderMode.legacy": "Legacy",

@@ -15,6 +15,7 @@ import top.hendrixshen.tweakmyclient.TweakMyClientPredicate;
 import top.hendrixshen.tweakmyclient.event.CallBacks;
 import top.hendrixshen.tweakmyclient.fakeInterface.IMinecraft;
 import top.hendrixshen.tweakmyclient.helper.AutoDropListType;
+import top.hendrixshen.tweakmyclient.helper.BreakAnimationMode;
 import top.hendrixshen.tweakmyclient.helper.EnderPortalRenderMode;
 import top.hendrixshen.tweakmyclient.helper.TargetBlockPositionPrintMode;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
@@ -30,6 +31,12 @@ public class Configs {
     @Numeric(maxValue = 1200, minValue = 0)
     @Config(category = ConfigCategory.GENERIC)
     public static int autoDropInterval = 0;
+
+    @Config(category = ConfigCategory.GENERIC, predicate = TweakMyClientPredicate.AllowBreakAnimation.class)
+    public static BreakAnimationMode breakAnimationMode = BreakAnimationMode.NONE;
+
+    @Config(category = ConfigCategory.GENERIC)
+    public static boolean customBlockHitBoxOverlayDisableDepthTest = false;
 
     @Config(category = ConfigCategory.GENERIC)
     public static boolean customBlockHitBoxOverlayFillRainbow = false;
@@ -335,6 +342,8 @@ public class Configs {
         cm.setValueChangeCallback("customWindowTitleWithActivity", CallBacks::featureCustomWindowTitleCallback);
 
         // Feature config callbacks. customWindowTitleWithActivity
+        cm.setValueChangeCallback("featureCustomBlockHitBoxOverlayFill", CallBacks::featureCustomBlockHitBoxOverlayFillCallBack);
+        cm.setValueChangeCallback("featureCustomBlockHitBoxOverlayOutline", CallBacks::featureCustomBlockHitBoxOverlayOutlineCallBack);
         cm.setValueChangeCallback("featureCustomWindowIcon", option -> CustomWindowUtil.updateIcon(((IMinecraft) TweakMyClient.getMinecraftClient()).tmc$getWindow()));
         cm.setValueChangeCallback("featureCustomWindowTitle", CallBacks::featureCustomWindowTitleCallback);
 
@@ -345,6 +354,9 @@ public class Configs {
         cm.setValueChangeCallback("debugMode", CallBacks::debugModeCallBack);
         cm.setValueChangeCallback("debugExperimentalMode", CallBacks::debugExperimentalModeCallBack);
 
+        // Init
+        CallBacks.featureCustomBlockHitBoxOverlayFillCallBack(null);
+        CallBacks.featureCustomBlockHitBoxOverlayOutlineCallBack(null);
         CallBacks.debugModeCallBack(null);
     }
 }

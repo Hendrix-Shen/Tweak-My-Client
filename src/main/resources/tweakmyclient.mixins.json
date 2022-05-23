@@ -4,6 +4,7 @@
   "package": "top.hendrixshen.tweakmyclient.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "accessor.MultiPlayerGameModeAccessor",
     "disable.disableAttackEntity.MixinMinecraft",
     "disable.disableClientBlockEvents.MixinClientPacketListener",
     "disable.disableClientEntityRendering.MixinEntityRenderDispatcher",
@@ -32,7 +33,7 @@
     "feature.featureAutoReconnect.MixinMinecraft",
     "feature.featureAutoReconnect.MixinScreen",
     "feature.featureAutoRespawn.MixinDeathScreen",
-    "feature.featureCustomBlockOutsideColor.MixinLevelRenderer",
+    "feature.featureCustomBlockHitBoxOverlayOutline.MixinLevelRenderer",
     "feature.featureCustomGuiBackgroundColor.MixinScreen",
     "feature.featureCustomSidebarBackgroundColor.MixinGui",
     "feature.featureCustomWindowIcon.MixinMain",
