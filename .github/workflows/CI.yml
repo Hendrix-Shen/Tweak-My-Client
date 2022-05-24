@@ -73,21 +73,16 @@ jobs:
           name: ${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
           path: fabricWrapper/build/libs/
 
-      - name: Create Github Release
-        uses: marvinpinto/action-automatic-releases@v1.2.1
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: dev-${{ github.run_number}}
-          prerelease: true
-          title: "[CI#${{ github.run_number}}]${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}"
-          files: |
-            LICENSE
-            fabricWrapper/build/libs/*.jar
-
       - name: Update Github Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: dev-${{ github.run_number}}
+          prerelease: true
+          files: |
+            LICENSE
+            fabricWrapper/build/libs/*.jar
+          name: "[CI#${{ github.run_number}}]${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}"
+          tag_name: dev-${{ github.run_number }}
+          target_commitish: ${{ github.event.ref }}
           generate_release_notes: true
 
       - name: Publish release to Curseforge
