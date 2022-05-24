@@ -58,6 +58,7 @@ public class RenderUtil {
 
         tesselator.end();
     }
+
     //#endif
     public static void renderShapeOverlay(VoxelShape voxelShape,
                                           double x, double y, double z, Color4f color4f) {
@@ -75,7 +76,7 @@ public class RenderUtil {
 
         voxelShape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
                 RenderUtils.drawBoxAllSidesBatchedQuads(minX + x, minY + y, minZ + z,
-                maxX + x, maxY + y, maxZ + z, color4f, buffer));
+                        maxX + x, maxY + y, maxZ + z, color4f, buffer));
 
         tesselator.end();
         RenderSystem.enableCull();

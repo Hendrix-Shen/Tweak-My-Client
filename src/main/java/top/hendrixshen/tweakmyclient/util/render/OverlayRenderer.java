@@ -81,7 +81,7 @@ public class OverlayRenderer {
                     case DOWN:
                         voxelShape = voxelShape.toAabbs().stream()
                                 .map(box -> box.inflate(0.003, 0.003 - box.getYsize() * destroyProgress / 2, 0.003)
-                                        .move(0, - box.getYsize() * destroyProgress / 2,0))
+                                        .move(0, -box.getYsize() * destroyProgress / 2, 0))
                                 .map(Shapes::create)
                                 .reduce(Shapes::or)
                                 .orElse(Shapes.empty()).optimize();
@@ -98,7 +98,7 @@ public class OverlayRenderer {
                     case NONE:
                     default:
                         voxelShape = voxelShape.toAabbs().stream()
-                                .map(box -> box.inflate(0.003, 0.003 , 0.003))
+                                .map(box -> box.inflate(0.003, 0.003, 0.003))
                                 .map(Shapes::create)
                                 .reduce(Shapes::or)
                                 .orElse(Shapes.empty()).optimize();
