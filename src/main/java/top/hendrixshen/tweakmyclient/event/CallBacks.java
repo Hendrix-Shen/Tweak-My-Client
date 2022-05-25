@@ -137,8 +137,12 @@ public class CallBacks {
 
     public static void featureCustomWindowTitleCallback(Option option) {
         if (Configs.featureCustomWindowTitle) {
+            //#if MC >= 11500
             CustomWindowUtil.rebuildCache(CustomWindowUtil.TitleType.TITLE);
             CustomWindowUtil.rebuildCache(CustomWindowUtil.TitleType.TITLE_WITH_ACTIVITY);
+            //#else
+            //$$ CustomWindowUtil.rebuildCache();
+            //#endif
             CustomWindowUtil.updateTitle();
         } else {
             CustomWindowUtil.reSetTitle();

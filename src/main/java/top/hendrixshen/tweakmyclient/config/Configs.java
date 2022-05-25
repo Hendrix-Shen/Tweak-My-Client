@@ -58,7 +58,7 @@ public class Configs {
     @Config(category = ConfigCategory.GENERIC)
     public static String customWindowTitle = "Minecraft {mc_version} with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}";
 
-    @Config(category = ConfigCategory.GENERIC)
+    @Config(category = ConfigCategory.GENERIC, dependencies = @Dependencies(not = @Dependency(value = "minecraft", versionPredicate = "<1.15")))
     public static String customWindowTitleWithActivity = "Minecraft {mc_version} ({mc_activity}) with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}";
 
     @Numeric(maxValue = 24000, minValue = 0)

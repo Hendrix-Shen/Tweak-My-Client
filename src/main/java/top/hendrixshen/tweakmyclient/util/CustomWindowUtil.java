@@ -28,7 +28,9 @@ public class CustomWindowUtil {
     public static final HashMap<String, String> PLACEHOLDER_STATIC_MAP = Maps.newHashMap();
     public static final Pattern MOD_PATTERN = Pattern.compile("(?<=(\\{fabric_mod_ver:)).*?(?=(}))");
     private static String TITLE_CACHE;
+    //#if MC >= 11500
     private static String TITLE_CACHE_WITH_ACTIVITY;
+    //#endif
 
     public static final Minecraft mc = TweakMyClient.getMinecraftClient();
 
@@ -45,8 +47,12 @@ public class CustomWindowUtil {
         CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{tmc_version}", TweakMyClientReference.getModVersion());
         CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{tmc_version_type}", TweakMyClientReference.getModVersionType());
         if (Configs.featureCustomWindowTitle) {
+            //#if MC >= 11500
             CustomWindowUtil.rebuildCache(TitleType.TITLE);
             CustomWindowUtil.rebuildCache(TitleType.TITLE_WITH_ACTIVITY);
+            //#else
+            //$$ CustomWindowUtil.rebuildCache();
+            //#endif
         }
     }
 
@@ -58,9 +64,14 @@ public class CustomWindowUtil {
     }
 
     public static String getWindowTitle() {
+        //#if MC >= 11500
         return CustomWindowUtil.replacePlaceholders(PLACEHOLDER_MAP, (hasActivity() ? TITLE_CACHE_WITH_ACTIVITY : TITLE_CACHE));
+        //#else
+        //$$ return CustomWindowUtil.replacePlaceholders(PLACEHOLDER_MAP,  TITLE_CACHE);
+        //#endif
     }
 
+    //#if MC >= 11500
     public static String getActivity() {
         if (mc.getSingleplayerServer() != null && !mc.getSingleplayerServer().isPublished()) {
             return I18n.get("title.singleplayer");
@@ -78,17 +89,21 @@ public class CustomWindowUtil {
         return clientPacketListener != null && clientPacketListener.getConnection().isConnected();
     }
 
+    //#endif
     public static void updatePlaceholders() {
         // Maybe changed by other mods.
         CustomWindowUtil.PLACEHOLDER_MAP.put("{mc_username}", TweakMyClient.getMinecraftClient().getUser().getName());
+        //#if MC >= 11500
         // Activity data.
         CustomWindowUtil.PLACEHOLDER_MAP.put("{mc_activity}", hasActivity() ? getActivity() : "Null");
+        //#endif
     }
 
     public static void updateFPS(int fps) {
         CustomWindowUtil.PLACEHOLDER_MAP.put("{mc_fps}", String.valueOf(fps));
     }
 
+    //#if MC >= 11500
     public static void rebuildCache(TitleType type) {
         if (type == TitleType.TITLE) {
             TITLE_CACHE = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.customWindowTitle);
@@ -98,6 +113,12 @@ public class CustomWindowUtil {
             TITLE_CACHE_WITH_ACTIVITY = CustomWindowUtil.replaceModVersion(TITLE_CACHE_WITH_ACTIVITY);
         }
     }
+    //#else
+    //$$ public static void rebuildCache() {
+    //$$     TITLE_CACHE = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.customWindowTitle);
+    //$$     TITLE_CACHE = CustomWindowUtil.replaceModVersion(TITLE_CACHE);
+    //$$ }
+    //#endif
 
     public static String replaceModVersion(String str) {
         Matcher matcher = MOD_PATTERN.matcher(str);
@@ -109,10 +130,12 @@ public class CustomWindowUtil {
         return str;
     }
 
+    //#if MC >= 11500
     public enum TitleType {
         TITLE,
         TITLE_WITH_ACTIVITY
     }
+    //#endif
 
     public static void reSetTitle() {
         //#if MC >= 11500
