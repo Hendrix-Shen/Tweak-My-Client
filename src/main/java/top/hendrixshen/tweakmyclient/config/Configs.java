@@ -55,11 +55,11 @@ public class Configs {
     @Config(category = ConfigCategory.GENERIC)
     public static int customBlockHitBoxOverlayOutlineRainbowSpeed = 80;
 
-    @Config(category = ConfigCategory.GENERIC)
-    public static String customWindowTitle = "Minecraft {mc_version} with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}";
-
     @Config(category = ConfigCategory.GENERIC, dependencies = @Dependencies(not = @Dependency(value = "minecraft", versionPredicate = "<1.15")))
-    public static String customWindowTitleWithActivity = "Minecraft {mc_version} ({mc_activity}) with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}";
+    public static boolean customWindowTitleEnableActivity = true;
+
+    @Config(category = ConfigCategory.GENERIC)
+    public static boolean customWindowTitleRandomly = false;
 
     @Numeric(maxValue = 24000, minValue = 0)
     @Config(category = ConfigCategory.GENERIC)
@@ -124,6 +124,12 @@ public class Configs {
 
     @Config(category = ConfigCategory.LIST)
     public static ArrayList<String> listAutoDropWhiteList = Lists.newArrayList("minecraft:stone", "minecraft:dirt", "minecraft:cobblestone", "minecraft:gravel", "minecraft:rotten_flesh");
+
+    @Config(category = ConfigCategory.LIST)
+    public static ArrayList<String> listCustomWindowTitle = Lists.newArrayList("Minecraft {mc_version} with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}");
+
+    @Config(category = ConfigCategory.LIST, dependencies = @Dependencies(not = @Dependency(value = "minecraft", versionPredicate = "<1.15"), predicate = TweakMyClientPredicate.CustomWindowTitleEnableActivity.class))
+    public static ArrayList<String> listCustomWindowTitleWithActivity = Lists.newArrayList("Minecraft {mc_version} ({mc_activity}) with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}");
 
     @Config(category = ConfigCategory.LIST)
     public static ArrayList<String> listDisableAttackEntity = Lists.newArrayList("player");
@@ -338,10 +344,14 @@ public class Configs {
         syncBlocks.getKeybind().setCallback(CallBacks::syncBlocksCallback);
         syncBlocks.getKeybind().setCallback(CallBacks::syncBlocksCallback);
 
-        cm.setValueChangeCallback("customWindowTitle", CallBacks::featureCustomWindowTitleCallback);
-        cm.setValueChangeCallback("customWindowTitleWithActivity", CallBacks::featureCustomWindowTitleCallback);
+        cm.setValueChangeCallback("customWindowTitleEnableActivity", CallBacks::customWindowTitleEnableActivityCallback);
+        cm.setValueChangeCallback("customWindowTitleRandomly", CallBacks::featureCustomWindowTitleCallback);
 
-        // Feature config callbacks. customWindowTitleWithActivity
+        // List config callbacks.
+        cm.setValueChangeCallback("listCustomWindowTitle", CallBacks::featureCustomWindowTitleCallback);
+        cm.setValueChangeCallback("listCustomWindowTitleWithActivity", CallBacks::featureCustomWindowTitleCallback);
+
+        // Feature config callbacks.
         cm.setValueChangeCallback("featureCustomBlockHitBoxOverlayFill", CallBacks::featureCustomBlockHitBoxOverlayFillCallBack);
         cm.setValueChangeCallback("featureCustomBlockHitBoxOverlayOutline", CallBacks::featureCustomBlockHitBoxOverlayOutlineCallBack);
         cm.setValueChangeCallback("featureCustomWindowIcon", option -> CustomWindowUtil.updateIcon(((IMinecraft) TweakMyClient.getMinecraftClient()).tmc$getWindow()));

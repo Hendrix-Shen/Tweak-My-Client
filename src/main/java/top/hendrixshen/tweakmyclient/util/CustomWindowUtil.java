@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,7 +32,7 @@ public class CustomWindowUtil {
     //#if MC >= 11500
     private static String TITLE_CACHE_WITH_ACTIVITY;
     //#endif
-
+    private static final Random RANDOM = new Random();
     public static final Minecraft mc = TweakMyClient.getMinecraftClient();
 
     // These data should not be changed
@@ -86,7 +87,7 @@ public class CustomWindowUtil {
 
     public static boolean hasActivity() {
         ClientPacketListener clientPacketListener = mc.getConnection();
-        return clientPacketListener != null && clientPacketListener.getConnection().isConnected();
+        return Configs.customWindowTitleEnableActivity && clientPacketListener != null && clientPacketListener.getConnection().isConnected();
     }
 
     //#endif
@@ -106,17 +107,32 @@ public class CustomWindowUtil {
     //#if MC >= 11500
     public static void rebuildCache(TitleType type) {
         if (type == TitleType.TITLE) {
-            TITLE_CACHE = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.customWindowTitle);
-            TITLE_CACHE = CustomWindowUtil.replaceModVersion(TITLE_CACHE);
+            int size = Configs.listCustomWindowTitle.size();
+            if (size > 0) {
+                CustomWindowUtil.TITLE_CACHE = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.listCustomWindowTitle.get(Configs.customWindowTitleRandomly ? RANDOM.nextInt(size) : 0));
+                CustomWindowUtil.TITLE_CACHE = CustomWindowUtil.replaceModVersion(CustomWindowUtil.TITLE_CACHE);
+            } else {
+                CustomWindowUtil.TITLE_CACHE = "";
+            }
         } else if (type == TitleType.TITLE_WITH_ACTIVITY) {
-            TITLE_CACHE_WITH_ACTIVITY = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.customWindowTitleWithActivity);
-            TITLE_CACHE_WITH_ACTIVITY = CustomWindowUtil.replaceModVersion(TITLE_CACHE_WITH_ACTIVITY);
+            int size = Configs.listCustomWindowTitleWithActivity.size();
+            if (size > 0) {
+                CustomWindowUtil.TITLE_CACHE_WITH_ACTIVITY = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP,Configs.listCustomWindowTitleWithActivity.get(Configs.customWindowTitleRandomly ? RANDOM.nextInt(size) : 0));
+                CustomWindowUtil.TITLE_CACHE_WITH_ACTIVITY = CustomWindowUtil.replaceModVersion(CustomWindowUtil.TITLE_CACHE_WITH_ACTIVITY);
+            } else {
+                CustomWindowUtil.TITLE_CACHE_WITH_ACTIVITY = "";
+            }
         }
     }
     //#else
     //$$ public static void rebuildCache() {
-    //$$     TITLE_CACHE = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.customWindowTitle);
-    //$$     TITLE_CACHE = CustomWindowUtil.replaceModVersion(TITLE_CACHE);
+    //$$     int size = Configs.listCustomWindowTitle.size();
+    //$$     if (size > 0) {
+    //$$         CustomWindowUtil.TITLE_CACHE = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.listCustomWindowTitle.get(Configs.customWindowTitleRandomly ? RANDOM.nextInt(size) : 0));
+    //$$         CustomWindowUtil.TITLE_CACHE = CustomWindowUtil.replaceModVersion(CustomWindowUtil.TITLE_CACHE);
+    //$$     } else {
+    //$$         CustomWindowUtil.TITLE_CACHE = "";
+    //$$     }
     //$$ }
     //#endif
 

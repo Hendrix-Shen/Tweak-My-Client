@@ -143,7 +143,6 @@ public class CallBacks {
             //#else
             //$$ CustomWindowUtil.rebuildCache();
             //#endif
-            CustomWindowUtil.updateTitle();
         } else {
             CustomWindowUtil.reSetTitle();
         }
@@ -160,5 +159,10 @@ public class CallBacks {
         if (option != null) {
             TweakMyClientConfigGui.getInstance().reDraw();
         }
+    }
+
+    public static void customWindowTitleEnableActivityCallback(Option option) {
+        CallBacks.featureCustomWindowTitleCallback(option);
+        CallBacks.reDrawConfigGui(option);
     }
 }
