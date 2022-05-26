@@ -165,6 +165,8 @@
     "tweakmyclient.config.list.listItemGlowingBlacklist.name": "listItemGlowingBlacklist",
     "tweakmyclient.config.list.listItemGlowingBlacklist.comment": "Disable items glowing list.\nAll items in this list will not be glowed.",
 
+    "tweakmyclient.config.patch.chunkEdgeLagFix.name": "chunkEdgeLagFix",
+    "tweakmyclient.config.patch.chunkEdgeLagFix.comment": "Disable the light update queue when unloading chunks, this will reduce the lag when crossing chunk borders at some times.",
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.name": "disableLitematicaEasyPlaceFailTip",
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "Disable easyPlace failure that annoying prompt window.\nNote: Takes effect only when litematica is loaded.",
     "tweakmyclient.config.patch.endPortalRendererFix.name": "endPortalRendererFix",

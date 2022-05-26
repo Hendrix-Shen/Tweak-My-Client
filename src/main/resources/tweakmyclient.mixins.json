@@ -45,6 +45,7 @@
     "feature.featureLowHealthWarning.MixinLocalPlayer",
     "feature.featureOpenWaterHelper.MixinFishingHook",
     "feature.featureUnfocusedCPU.MixinGameRenderer",
+    "patch.chunkEdgeLagFix.MixinClientPacketListener",
     "patch.disableLitematicaEasyPlaceFailTip.litematica.MixinWorldUtils",
     "patch.endPortalRendererFix.MixinTheEndPortalBlockEntity",
     "patch.endPortalRendererFix.MixinTheEndPortalRenderer",

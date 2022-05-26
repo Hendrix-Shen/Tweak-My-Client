@@ -165,6 +165,8 @@
     "tweakmyclient.config.list.listItemGlowingBlacklist.name": "物品发光黑名单",
     "tweakmyclient.config.list.listItemGlowingBlacklist.comment": "禁用发光物品列表.\n所有在此列表内的物品将不会被发光效果装饰.",
 
+    "tweakmyclient.config.patch.chunkEdgeLagFix.name": "区块边界卡顿修复",
+    "tweakmyclient.config.patch.chunkEdgeLagFix.comment": "禁用卸载区块时的光照更新队列, 这将缓解某些时候跨越区块边界时的卡顿.",
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.name": "禁用投影轻松放置失败提示",
     "tweakmyclient.config.patch.disableLitematicaEasyPlaceFailTip.comment": "禁用轻松放置失败时那烦人的提示窗.\n注意: 仅当 litematica 加载时生效.",
     "tweakmyclient.config.patch.endPortalRendererFix.name": "末路之地传送门渲染修复",
