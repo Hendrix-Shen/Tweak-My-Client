@@ -21,7 +21,7 @@ The default hotkey to open the in-game config GUI is **T + C**.
 |--------------------------|----------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | Auth Me                  | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
 | In-Game Account Switcher | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
-| MagicLib                 | Required | \>=0.3.25 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
+| MagicLib                 | Required | \>=0.5.27 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
 | MaliLib                  | Required | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
 | Litematica               | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
 | ReAuth (Fabric)          | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
