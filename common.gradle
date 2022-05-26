@@ -42,6 +42,12 @@ dependencies {
 loom {
     runConfigs.all {
         property("mixin.debug.export", "true")
+        programArgs([
+                "--width",
+                "1280",
+                "--height",
+                "720",
+        ])
     }
 
     runClient {
