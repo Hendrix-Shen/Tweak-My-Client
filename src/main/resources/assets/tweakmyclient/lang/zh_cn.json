@@ -69,6 +69,8 @@
     "tweakmyclient.config.disable.disableRenderToast.comment": "禁用 toast 提醒消息渲染.",
     "tweakmyclient.config.disable.disableSlowdown.name": "禁用减速",
     "tweakmyclient.config.disable.disableSlowdown.comment": "取消蜂蜜块, 灵魂沙和使用物品时的减速效果.",
+    "tweakmyclient.config.disable.disableSwimming.name": "禁用游泳",
+    "tweakmyclient.config.disable.disableSwimming.comment": "禁用在水下疾跑时进入游泳状态.",
 
     "tweakmyclient.config.feature.featureAutoDrop.name": "自动丢弃",
     "tweakmyclient.config.feature.featureAutoDrop.comment": "丢掉不想要的东西.",

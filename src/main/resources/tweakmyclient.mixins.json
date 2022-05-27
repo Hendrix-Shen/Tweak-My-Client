@@ -27,6 +27,7 @@
     "disable.disableSlowdown.MixinSoulsandBlock",
     "disable.disableSlowdown.MixinWebBlock",
     "disable.disableSlowdown.tweakeroo.MixinSlimeBlock",
+    "disable.disableSwimming.MixinPlayer",
     "feature.featureAutoClimb.MixinLocalPlayer",
     "feature.featureAutoDrop.MixinLocalPlayer",
     "feature.featureAutoReconnect.MixinDisconnectedScreen",

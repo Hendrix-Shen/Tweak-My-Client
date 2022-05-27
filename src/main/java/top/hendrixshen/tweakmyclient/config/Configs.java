@@ -317,6 +317,10 @@ public class Configs {
     @Config(category = ConfigCategory.DISABLE)
     public static boolean disableSlowdown = false;
 
+    @Hotkey()
+    @Config(category = ConfigCategory.DISABLE)
+    public static boolean disableSwimming = false;
+
     // Debug config
     @Config(category = ConfigCategory.DEBUG)
     public static boolean debugMode = false;

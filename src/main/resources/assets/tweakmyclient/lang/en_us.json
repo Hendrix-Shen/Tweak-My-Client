@@ -69,6 +69,8 @@
     "tweakmyclient.config.disable.disableRenderToast.comment": "Disable toast rendering.",
     "tweakmyclient.config.disable.disableSlowdown.name": "disableSlowdown",
     "tweakmyclient.config.disable.disableSlowdown.comment": "Cancels slowness effects caused by honey, soul sand and using items.",
+    "tweakmyclient.config.disable.disableSwimming.name": "disableSwimming",
+    "tweakmyclient.config.disable.disableSwimming.comment": "Disables swimming while sprinting underwater.",
 
     "tweakmyclient.config.feature.featureAutoClimb.name": "featureAutoClimb",
     "tweakmyclient.config.feature.featureAutoClimb.comment": "When you are approaching the ladder / vine and raises your head, you will automatically climb.",
