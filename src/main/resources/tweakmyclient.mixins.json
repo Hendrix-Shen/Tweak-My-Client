@@ -48,6 +48,7 @@
     "feature.featureUnfocusedCPU.MixinGameRenderer",
     "patch.chunkEdgeLagFix.MixinClientPacketListener",
     "patch.disableLitematicaEasyPlaceFailTip.litematica.MixinWorldUtils",
+    "patch.disableResourcePackCompatCheck.MixinPackCompatibility",
     "patch.endPortalRendererFix.MixinTheEndPortalBlockEntity",
     "patch.endPortalRendererFix.MixinTheEndPortalRenderer",
     "patch.forceDebugInfoDetailed.MixinPlayer",

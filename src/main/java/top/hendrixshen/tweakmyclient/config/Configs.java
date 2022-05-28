@@ -110,6 +110,9 @@ public class Configs {
     public static boolean disableLitematicaEasyPlaceFailTip = false;
 
     @Config(category = ConfigCategory.PATCH)
+    public static boolean disableResourcePackCompatCheck = false;
+
+    @Config(category = ConfigCategory.PATCH)
     public static boolean endPortalRendererFix = false;
 
     @Config(category = ConfigCategory.PATCH)
