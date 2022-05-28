@@ -2,8 +2,11 @@
   "required": true,
   "minVersion": "0.8",
   "package": "top.hendrixshen.tweakmyclient.mixin",
+  "plugin": "top.hendrixshen.tweakmyclient.TweakMyClientMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+  ],
+  "client": [
     "accessor.MultiPlayerGameModeAccessor",
     "disable.disableAttackEntity.MixinMinecraft",
     "disable.disableClientBlockEvents.MixinClientPacketListener",
@@ -54,8 +57,6 @@
     "patch.endPortalRendererFix.MixinTheEndPortalRenderer",
     "patch.forceDebugInfoDetailed.MixinPlayer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem"
-  ],
-  "client": [
   ],
   "injectors": {
     "defaultRequire": 1
