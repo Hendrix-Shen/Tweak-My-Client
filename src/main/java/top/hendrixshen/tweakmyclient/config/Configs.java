@@ -109,6 +109,9 @@ public class Configs {
     @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency(value = "litematica"), not = @Dependency(value = "masa_gadget_mod", versionPredicate = ">=2.0.6")))
     public static boolean disableLitematicaEasyPlaceFailTip = false;
 
+    @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency(value = "litematica")))
+    public static boolean disableLitematicaSchematicVersionCheck = false;
+
     @Config(category = ConfigCategory.PATCH)
     public static boolean disableResourcePackCompatCheck = false;
 
