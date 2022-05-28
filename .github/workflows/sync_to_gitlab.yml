@@ -1,0 +1,16 @@
+name: Sync to GitLab
+
+on: [push]
+
+jobs:
+  sync:
+    if: ${{ github.repository_owner == 'Hendrix-Shen' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the sources
+        uses: actions/checkout@v1
+      - name: Sync to GitLab
+        uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url: git@gitlab.com:Hendrix-Shen/Tweak-My-Client.git
+          ssh_private_key: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}

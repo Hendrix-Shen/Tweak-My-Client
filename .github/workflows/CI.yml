@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'push' && !startsWith(github.event.ref, 'refs/tags/') }}
+    if: ${{ github.event_name == 'push' && !startsWith(github.event.ref, 'refs/tags/') && contains(github.event.head_commit.message, '[build skip]') == false }}
     strategy:
       matrix:
         java: [ 17 ]
@@ -73,7 +73,8 @@ jobs:
           name: ${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
           path: fabricWrapper/build/libs/
 
-      - name: Update Github Release
+      - name: Create Github Release
+        if: contains(github.event.head_commit.message, '[publish skip]') == false && contains(github.event.ref, 'refs/heads/exp') == false
         uses: softprops/action-gh-release@v1
         with:
           prerelease: true
