@@ -119,6 +119,9 @@ public class Configs {
     public static boolean endPortalRendererFix = false;
 
     @Config(category = ConfigCategory.PATCH)
+    public static boolean litematicaSchematicWAILACompat = false;
+
+    @Config(category = ConfigCategory.PATCH)
     public static boolean forceDebugInfoDetailed = false;
 
     @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.16")))

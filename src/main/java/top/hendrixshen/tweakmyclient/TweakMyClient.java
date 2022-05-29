@@ -5,15 +5,17 @@ import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import top.hendrixshen.tweakmyclient.config.ConfigHandler;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.event.RenderHandler;
 
 public class TweakMyClient implements ClientModInitializer {
     private static final Logger logger = LogManager.getLogger(TweakMyClientReference.getModId());
+    @NotNull
     private static final Minecraft minecraftClient = Minecraft.getInstance();
 
-    public static Minecraft getMinecraftClient() {
+    public static @NotNull Minecraft getMinecraftClient() {
         return minecraftClient;
     }
 
