@@ -5,9 +5,6 @@
   "plugin": "top.hendrixshen.tweakmyclient.TweakMyClientMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "patch.litematicaSchematicWAILACompat.MixinClientTickHandler",
-    "patch.litematicaSchematicWAILACompat.MixinLocalPlayer",
-    "patch.litematicaSchematicWAILACompat.MixinTickHandler"
   ],
   "client": [
     "accessor.MultiPlayerGameModeAccessor",
@@ -59,7 +56,10 @@
     "patch.endPortalRendererFix.MixinTheEndPortalBlockEntity",
     "patch.endPortalRendererFix.MixinTheEndPortalRenderer",
     "patch.forceDebugInfoDetailed.MixinPlayer",
-    "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem"
+    "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem",
+    "patch.litematicaSchematicWAILACompat.MixinClientTickHandler",
+    "patch.litematicaSchematicWAILACompat.MixinLocalPlayer",
+    "patch.litematicaSchematicWAILACompat.MixinTickHandler"
   ],
   "injectors": {
     "defaultRequire": 1
