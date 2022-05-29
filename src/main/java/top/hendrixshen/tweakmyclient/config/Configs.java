@@ -119,13 +119,13 @@ public class Configs {
     public static boolean endPortalRendererFix = false;
 
     @Config(category = ConfigCategory.PATCH)
-    public static boolean litematicaSchematicWAILACompat = false;
-
-    @Config(category = ConfigCategory.PATCH)
     public static boolean forceDebugInfoDetailed = false;
 
     @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.16")))
     public static boolean forcePistonWithoutAffectByTool = false;
+
+    @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = {@Dependency(value = "litematica"), @Dependency(value = "wthit")}))
+    public static boolean litematicaSchematicWAILACompat = false;
 
     // List configs
     @Config(category = ConfigCategory.LIST)
