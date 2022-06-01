@@ -182,7 +182,7 @@
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "强制活塞不受镐子影响",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "镐子将不再作为活塞的有效开采工具.",
     "tweakmyclient.config.patch.litematicaSchematicWAILACompat.name": "投影蓝图WAILA兼容",
-    "tweakmyclient.config.patch.litematicaSchematicWAILACompat.comment": "使 WAILA 兼容展示投影蓝图.\n对于1.16及更高版本, 支持WTHIT.",
+    "tweakmyclient.config.patch.litematicaSchematicWAILACompat.comment": "使 WAILA 兼容展示投影蓝图.\n对于 1.16 及以上版本, 支持 WTHIT.\n对于 1.15 及以下版本, 支持 Hwyla.",
 
     "tweakmyclient.config.debug.debugMode.name": "调试模式",
     "tweakmyclient.config.debug.debugMode.comment": "启用调试模式.",

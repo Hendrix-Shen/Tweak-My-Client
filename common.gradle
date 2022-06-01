@@ -43,6 +43,10 @@ dependencies {
         }
     }
 
+    if (mcVersion < 11600) {
+        modImplementation("curse.maven:hwyla-253449:${project.hwyla_version}")
+    }
+
     runtimeOnly(project(path: ":fabricWrapper"))
 }
 

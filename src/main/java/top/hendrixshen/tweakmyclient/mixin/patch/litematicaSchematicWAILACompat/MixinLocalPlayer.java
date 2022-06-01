@@ -5,9 +5,16 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
+//#if MC < 11600
+//$$ import top.hendrixshen.tweakmyclient.util.HwylaUtil;
+//#else
 import top.hendrixshen.tweakmyclient.util.WthitUtil;
+//#endif
 
+@Dependencies(or = {@Dependency(value = "waila"), @Dependency(value = "wthit")})
 @Mixin(LocalPlayer.class)
 public abstract class MixinLocalPlayer {
     @Inject(
@@ -17,10 +24,12 @@ public abstract class MixinLocalPlayer {
             )
     )
     private void onTick(CallbackInfo ci) {
-        //#if MC >= 11600
         if (Configs.litematicaSchematicWAILACompat) {
+            //#if MC >= 11600
             WthitUtil.tick();
+            //#else
+            //$$ HwylaUtil.tick();
+            //#endif
         }
-        //#endif
     }
 }

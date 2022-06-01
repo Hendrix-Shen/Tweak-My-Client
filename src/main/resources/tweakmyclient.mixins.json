@@ -59,6 +59,7 @@
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem",
     "patch.litematicaSchematicWAILACompat.MixinClientTickHandler",
     "patch.litematicaSchematicWAILACompat.MixinLocalPlayer",
+    "patch.litematicaSchematicWAILACompat.MixinOverlayRenderer",
     "patch.litematicaSchematicWAILACompat.MixinTickHandler"
   ],
   "injectors": {

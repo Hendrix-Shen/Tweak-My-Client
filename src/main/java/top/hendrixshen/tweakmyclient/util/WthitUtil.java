@@ -164,7 +164,7 @@ public class WthitUtil {
                         }
                         //#endif
 
-                        BlockState state = Objects.requireNonNull(worldSchematic).getBlockState(traceWrapper.getBlockHitResult().getBlockPos());
+                        BlockState state = worldSchematic.getBlockState(traceWrapper.getBlockHitResult().getBlockPos());
                         //#if MC >= 11700
                         if (state == IBlockComponentProvider.EMPTY_BLOCK_STATE) {
                             return;
