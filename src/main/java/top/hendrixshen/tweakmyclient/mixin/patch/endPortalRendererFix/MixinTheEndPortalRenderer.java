@@ -188,7 +188,7 @@ public abstract class MixinTheEndPortalRenderer {
     //$$     float k = this.getOffset();
     //$$     boolean bl = false;
     //$$     GameRenderer gameRenderer = Minecraft.getInstance().gameRenderer;
-
+    //$$
     //$$     for (int l = 0; l < j; ++l) {
     //$$         GlStateManager.pushMatrix();
     //$$         float m = 2.0F / (float) (18 - l);
@@ -198,18 +198,18 @@ public abstract class MixinTheEndPortalRenderer {
     //$$             GlStateManager.enableBlend();
     //$$             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
     //$$         }
-
+    //$$
     //$$         if (l >= 1) {
     //$$             this.bindTexture(END_PORTAL_LOCATION);
     //$$             bl = true;
     //$$             gameRenderer.resetFogColor(true);
     //$$         }
-
+    //$$
     //$$         if (l == 1) {
     //$$             GlStateManager.enableBlend();
     //$$             GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
     //$$         }
-
+    //$$
     //$$         GlStateManager.texGenMode(GlStateManager.TexGen.S, 9216);
     //$$         GlStateManager.texGenMode(GlStateManager.TexGen.T, 9216);
     //$$         GlStateManager.texGenMode(GlStateManager.TexGen.R, 9216);

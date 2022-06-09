@@ -176,11 +176,11 @@ public class CustomWindowUtil {
             InputStream icon32x;
             if (Configs.featureCustomWindowIcon) {
                 //#if MC >= 11900
-                //$$ icon16x = mc.getResourceManager().open(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_16x16.png"));
-                //$$ icon32x = mc.getResourceManager().open(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_32x32.png"));
+                icon16x = mc.getResourceManager().open(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_16x16.png"));
+                icon32x = mc.getResourceManager().open(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_32x32.png"));
                 //#else
-                icon16x = mc.getResourceManager().getResource(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_16x16.png")).getInputStream();
-                icon32x = mc.getResourceManager().getResource(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_32x32.png")).getInputStream();
+                //$$ icon16x = mc.getResourceManager().getResource(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_16x16.png")).getInputStream();
+                //$$ icon32x = mc.getResourceManager().getResource(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_32x32.png")).getInputStream();
                 //#endif
             } else {
                 icon16x = mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, new ResourceLocation("icons/icon_16x16.png"));

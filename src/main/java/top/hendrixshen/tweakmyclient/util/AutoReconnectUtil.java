@@ -8,7 +8,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.resolver.ServerAddress;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
@@ -144,7 +144,7 @@ public class AutoReconnectUtil {
     }
 
     public static String getTranslationKey(Component component) {
-        return component instanceof TranslatableComponent ? ((TranslatableComponent) component).getKey() : "";
+        return component instanceof TranslatableContents ? ((TranslatableContents) component).getKey() : "";
     }
 
     public void initDisconnectedScreen(Screen current, Screen parent, int width, int height, int textHeight, Component reason) {
