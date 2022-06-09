@@ -47,7 +47,6 @@ import net.minecraft.client.player.LocalPlayer;
 //#if MC < 11800
 //$$ import net.minecraft.network.chat.Component;
 //#endif
-import net.minecraft.network.chat.TranslatableComponent;
 //#if MC < 11700
 //$$ import net.minecraft.world.item.ItemStack;
 //#endif
@@ -57,6 +56,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
+import top.hendrixshen.magiclib.language.I18n;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 
 import java.lang.reflect.Field;
@@ -73,9 +74,9 @@ public class WthitUtil {
     //$$ private static final List<Component> TOOLTIP = new TaggableList<>(TaggedText::new);
     //#endif
     //#if MC >= 11800
-    private static final Line SNEAK_DETAIL = (new Line(null)).with((new TranslatableComponent("tooltip.waila.sneak_for_details")).withStyle(ChatFormatting.ITALIC));
+    private static final Line SNEAK_DETAIL = (new Line(null)).with((ComponentCompatApi.literal(I18n.get("tooltip.waila.sneak_for_details")).withStyle(ChatFormatting.ITALIC)));
     //#else if MC >= 11600
-    //$$ private static final Component SNEAK_DETAIL = (new TranslatableComponent("tooltip.waila.sneak_for_details")).withStyle(ChatFormatting.ITALIC);
+    //$$ private static final Component SNEAK_DETAIL = ComponentCompatApi.literal(I18n.get("tooltip.waila.sneak_for_details")).withStyle(ChatFormatting.ITALIC);
     //#endif
     private static final Minecraft minecraft = TweakMyClient.getMinecraftClient();
     private static Field shouldRender;

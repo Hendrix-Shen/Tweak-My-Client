@@ -12,7 +12,7 @@
 
     "tweakmyclient.config.color.colorBlockHitBoxOverlayFill.name": "方块碰撞箱覆盖填充颜色",
     "tweakmyclient.config.color.colorBlockHitBoxOverlayFill.comment": "自定义方块碰撞箱的覆盖层填充颜色.",
-    "tweakmyclient.config.color.colorBlockHitBoxOverlayOutline.name": "方块碰撞箱覆盖轮廓颜色.",
+    "tweakmyclient.config.color.colorBlockHitBoxOverlayOutline.name": "方块碰撞箱覆盖轮廓颜色",
     "tweakmyclient.config.color.colorBlockHitBoxOverlayOutline.comment": "自定义方块碰撞箱的覆盖层轮廓颜色.",
     "tweakmyclient.config.color.colorGuiStart.name": "界面渐变背景起始颜色",
     "tweakmyclient.config.color.colorGuiStart.comment": "自定义界面渐变起始颜色.",

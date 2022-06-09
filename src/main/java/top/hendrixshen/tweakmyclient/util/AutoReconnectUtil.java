@@ -8,8 +8,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.resolver.ServerAddress;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.config.Configs;
@@ -160,9 +160,9 @@ public class AutoReconnectUtil {
 
         //#if MC >= 11600
         ((IScreen) current).tmc$addButton(new Button(backButtonX, backButtonY + 24, 98, 20,
-                new TextComponent(StringUtil.tr("message.autoReconnect.static")), button -> AutoReconnectUtil.reconnect(parent)));
+                ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")), button -> AutoReconnectUtil.reconnect(parent)));
         AutoReconnectUtil.autoReconnectButton = ((IScreen) current).tmc$addButton(new Button(backButtonX + 102, backButtonY + 24, 98, 20,
-                new TextComponent(StringUtil.tr("message.autoReconnect.toggle")), AutoReconnectUtil::onPressAutoReconnect));
+                ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")), AutoReconnectUtil::onPressAutoReconnect));
         //#else
         //$$ ((IScreen) current).tmc$addButton(new Button(backButtonX, backButtonY + 24, 98, 20,
         //$$         StringUtil.tr("message.autoReconnect.static"), button -> AutoReconnectUtil.reconnect(parent)));
@@ -186,7 +186,7 @@ public class AutoReconnectUtil {
                                 buttonWidth,
                                 20,
                                 //#if MC >= 11600
-                                new TextComponent(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
+                                ComponentCompatApi.literal(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
                                 //#else
                                 //$$ StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId)),
                                 //#endif
@@ -208,7 +208,7 @@ public class AutoReconnectUtil {
     public static void tickAutoReconnectButton(Screen parent) {
         if (!Configs.featureAutoReconnect) {
             //#if MC >= 11600
-            AutoReconnectUtil.autoReconnectButton.setMessage(new TextComponent(StringUtil.tr("message.autoReconnect.toggle")));
+            AutoReconnectUtil.autoReconnectButton.setMessage(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")));
             //#else
             //$$ AutoReconnectUtil.autoReconnectButton.setMessage(StringUtil.tr("message.autoReconnect.toggle"));
             //#endif
@@ -216,7 +216,7 @@ public class AutoReconnectUtil {
         }
 
         //#if MC >= 11600
-        AutoReconnectUtil.autoReconnectButton.setMessage(new TextComponent(StringUtil.tr("message.autoReconnect.timer", (int) Math.ceil(AutoReconnectUtil.ReconnectTimer / 20.0))));
+        AutoReconnectUtil.autoReconnectButton.setMessage(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.timer", (int) Math.ceil(AutoReconnectUtil.ReconnectTimer / 20.0))));
         //#else
         //$$ AutoReconnectUtil.autoReconnectButton.setMessage(StringUtil.tr("message.autoReconnect.timer", (int) Math.ceil(AutoReconnectUtil.ReconnectTimer / 20.0)));
         //#endif
