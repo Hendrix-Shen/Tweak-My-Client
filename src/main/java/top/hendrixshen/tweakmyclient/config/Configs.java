@@ -103,7 +103,7 @@ public class Configs {
     public static TargetBlockPositionPrintMode targetBlockPositionPrintMode = TargetBlockPositionPrintMode.PRIVATE;
 
     // Patch configs
-    @Config(category = ConfigCategory.PATCH)
+    @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(not = @Dependency(value = "forgetmechunk")))
     public static boolean chunkEdgeLagFix = false;
 
     @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency(value = "litematica"), not = @Dependency(value = "masa_gadget_mod", versionPredicate = ">=2.0.6")))

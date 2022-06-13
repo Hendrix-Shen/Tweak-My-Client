@@ -17,8 +17,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.Redirect;
 //#endif
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
+@Dependencies(not = @Dependency(value = "forgetmechunk"))
 @Mixin(ClientPacketListener.class)
 public class MixinClientPacketListener {
     //#if MC >= 11800
