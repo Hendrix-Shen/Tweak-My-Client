@@ -24,14 +24,12 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             )
     )
     private void onAiStep(CallbackInfo ci) {
-        //#if MC >= 11700
-        if (Configs.featureAutoClimb && this.onClimbable() && this.getXRot() <= -50f && this.isCrouching()) {
-        //#elseif MC >= 11600
-        //$$ if (Configs.featureAutoClimb && this.onClimbable() && this.xRot <= -50f && this.isCrouching()) {
+        //#if MC >= 11600
+        if (Configs.featureAutoClimb && this.onClimbable() && this.getXRotCompat() <= -50f && !this.isCrouching()) {
         //#elseif MC >= 11500
-        //$$ if (Configs.featureAutoClimb && this.onLadder() && this.xRot <= -50f && this.isCrouching()) {
+        //$$ if (Configs.featureAutoClimb && this.onLadder() && this.getXRotCompat() <= -50f && !this.isCrouching()) {
         //#else
-        //$$ if (Configs.featureAutoClimb && this.onLadder() && this.xRot <= -50f && this.isVisuallySneaking()) {
+        //$$ if (Configs.featureAutoClimb && this.onLadder() && this.getXRotCompat() <= -50f && !this.isVisuallySneaking()) {
         //#endif
             Vec3 vec3 = this.getDeltaMovement();
             this.setDeltaMovement(vec3.x, 0.1176D, vec3.z);
