@@ -33,7 +33,7 @@ dependencies {
 
     modImplementation("top.hendrixshen:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
         //If you want to use runClient task, you should remove this exclude setting.
-        //exclude(group: "net.fabricmc.fabric-api", module: "fabric-api")
+        exclude(group: "net.fabricmc.fabric-api", module: "fabric-api")
     }
     if (mcVersion >= 11900) {
         modCompileOnly("curse.maven:litematica-308892:${project.litematica_version}")
