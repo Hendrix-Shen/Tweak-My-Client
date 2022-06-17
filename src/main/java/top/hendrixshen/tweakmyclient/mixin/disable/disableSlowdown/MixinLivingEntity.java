@@ -1,7 +1,10 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -9,7 +12,11 @@ import org.spongepowered.asm.mixin.injection.Slice;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Mixin(LivingEntity.class)
-public class MixinLivingEntity {
+public abstract class MixinLivingEntity extends Entity {
+    public MixinLivingEntity(EntityType<?> entityType, Level level) {
+        super(entityType, level);
+    }
+
     @ModifyVariable(
             method = "travel",
             at = @At(
@@ -38,7 +45,7 @@ public class MixinLivingEntity {
             ordinal = 0
     )
     private float onGetFriction(float f) {
-        if (Configs.disableSlowdown && (Object) this instanceof LocalPlayer && f > 0.6F) {
+        if (Configs.disableSlowdown && (Object) this instanceof LocalPlayer && !this.isInWater() && f > 0.6F) {
             return 0.6F;
         }
         return f;
