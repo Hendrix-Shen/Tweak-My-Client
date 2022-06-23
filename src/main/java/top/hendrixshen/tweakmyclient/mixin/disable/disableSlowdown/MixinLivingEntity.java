@@ -27,8 +27,6 @@ public abstract class MixinLivingEntity extends Entity {
                             value = "INVOKE",
                             //#if MC >= 11600
                             target = "Lnet/minecraft/world/entity/LivingEntity;getBlockPosBelowThatAffectsMyMovement()Lnet/minecraft/core/BlockPos;"
-                            //#elseif MC >= 11500
-                            //$$ target = "Lnet/minecraft/world/entity/LivingEntity;getBlockPosBelowThatAffectsMyMovement()Lnet/minecraft/core/BlockPos;"
                             //#else
                             //$$ target = "Lnet/minecraft/world/entity/LivingEntity;getBoundingBox()Lnet/minecraft/world/phys/AABB;"
                             //#endif
