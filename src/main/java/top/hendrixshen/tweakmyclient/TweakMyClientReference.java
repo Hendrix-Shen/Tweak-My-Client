@@ -8,10 +8,6 @@ import top.hendrixshen.tweakmyclient.util.VersionParser;
 
 public class TweakMyClientReference {
     private static final String MOD_ID = "tweakmyclient";
-    private static final String MOD_NAME = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getName();
-    private static final String MOD_VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
-    private static final String MOD_VERSION_TYPE = VersionParser.getVersionType(MOD_VERSION);
-
     //#if MC > 11802
     private static final String CURRENT_MOD_ID = String.format("%s-1_19", MOD_ID);
     //#elseif MC > 11701
@@ -25,6 +21,9 @@ public class TweakMyClientReference {
     //#else
     //$$ private static final String CURRENT_MOD_ID = String.format("%s-1_14_4", MOD_ID);
     //#endif
+    private static final String MOD_NAME = FabricLoader.getInstance().getModContainer(CURRENT_MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getName();
+    private static final String MOD_VERSION = FabricLoader.getInstance().getModContainer(CURRENT_MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
+    private static final String MOD_VERSION_TYPE = VersionParser.getVersionType(MOD_VERSION);
 
     private static final int CONFIG_VERSION = 1;
     private static final ConfigManager CONFIG_MANAGER = ConfigManager.get(MOD_ID);
