@@ -13,6 +13,7 @@
     "disable.disableClientEntityRendering.MixinEntityRenderDispatcher",
     "disable.disableClientEntityUpdates.MixinLevel",
     "disable.disableCrystalBeams.MixinEndCrystalRenderer",
+    "disable.disableCrystalBeams.MixinEnderDragonRenderer",
     "disable.disableFovAffectedBySpeed.MixinGameRenderer",
     "disable.disableGuiShadowLayer.MixinScreen",
     "disable.disableItemGlowing.MixinItemStack",

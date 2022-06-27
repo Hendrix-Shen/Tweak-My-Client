@@ -14,10 +14,7 @@ import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientPredicate;
 import top.hendrixshen.tweakmyclient.event.CallBacks;
 import top.hendrixshen.tweakmyclient.fakeInterface.IMinecraft;
-import top.hendrixshen.tweakmyclient.helper.AutoDropListType;
-import top.hendrixshen.tweakmyclient.helper.BreakAnimationMode;
-import top.hendrixshen.tweakmyclient.helper.EnderPortalRenderMode;
-import top.hendrixshen.tweakmyclient.helper.TargetBlockPositionPrintMode;
+import top.hendrixshen.tweakmyclient.helper.*;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
 import java.util.ArrayList;
@@ -34,6 +31,9 @@ public class Configs {
 
     @Config(category = ConfigCategory.GENERIC, predicate = TweakMyClientPredicate.AllowBreakAnimation.class)
     public static BreakAnimationMode breakAnimationMode = BreakAnimationMode.NONE;
+
+    @Config(category = ConfigCategory.GENERIC)
+    public static CrystalBeamsDisableMode crystalBeamsDisableMode = CrystalBeamsDisableMode.ALL;
 
     @Config(category = ConfigCategory.GENERIC)
     public static boolean customBlockHitBoxOverlayDisableDepthTest = false;
@@ -244,10 +244,6 @@ public class Configs {
     // Disable configs
     @Hotkey()
     @Config(category = ConfigCategory.DISABLE)
-    public static boolean disableCrystalBeams = false;
-
-    @Hotkey()
-    @Config(category = ConfigCategory.DISABLE)
     public static boolean disableAttackEntity = false;
 
     @Hotkey()
@@ -285,6 +281,10 @@ public class Configs {
     @Hotkey()
     @Config(category = ConfigCategory.DISABLE)
     public static boolean disableClientEntityZombieVillagerRendering = false;
+
+    @Hotkey()
+    @Config(category = ConfigCategory.DISABLE)
+    public static boolean disableCrystalBeams = false;
 
     @Hotkey()
     @Config(category = ConfigCategory.DISABLE)
