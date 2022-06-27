@@ -27,6 +27,8 @@
     "tweakmyclient.config.color.colorWaterShallow.name": "潜水域颜色",
     "tweakmyclient.config.color.colorWaterShallow.comment": "开阔水域助手潜水域轮廓颜色.",
 
+    "tweakmyclient.config.disable.disableCrystalBeams.name": "禁用水晶光柱",
+    "tweakmyclient.config.disable.disableCrystalBeams.comment": "关闭客户端侧末影水晶光柱渲染.",
     "tweakmyclient.config.disable.disableAttackEntity.name": "禁用实体攻击",
     "tweakmyclient.config.disable.disableAttackEntity.comment": "禁用攻击在列表中的实体.",
     "tweakmyclient.config.disable.disableClientBlockEvents.name": "禁用客户端侧方块事件",

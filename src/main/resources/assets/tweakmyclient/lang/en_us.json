@@ -27,6 +27,8 @@
     "tweakmyclient.config.color.colorWaterShallow.name": "colorWaterShallow",
     "tweakmyclient.config.color.colorWaterShallow.comment": "openWaterHelper open shallow outline color.",
 
+    "tweakmyclient.config.disable.disableCrystalBeams.name": "disableCrystalBeams",
+    "tweakmyclient.config.disable.disableCrystalBeams.comment": "Disable rendering of EndCrystal Beams on client.",
     "tweakmyclient.config.disable.disableAttackEntity.name": "disableAttackEntity",
     "tweakmyclient.config.disable.disableAttackEntity.comment": "Disable attacks on entities in the list.",
     "tweakmyclient.config.disable.disableClientBlockEvents.name": "disableClientBlockEvents",

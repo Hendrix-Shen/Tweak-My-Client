@@ -244,6 +244,10 @@ public class Configs {
     // Disable configs
     @Hotkey()
     @Config(category = ConfigCategory.DISABLE)
+    public static boolean disableCrystalBeams = false;
+
+    @Hotkey()
+    @Config(category = ConfigCategory.DISABLE)
     public static boolean disableAttackEntity = false;
 
     @Hotkey()

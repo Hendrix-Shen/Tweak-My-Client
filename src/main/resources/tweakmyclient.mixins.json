@@ -12,6 +12,7 @@
     "disable.disableClientBlockEvents.MixinClientPacketListener",
     "disable.disableClientEntityRendering.MixinEntityRenderDispatcher",
     "disable.disableClientEntityUpdates.MixinLevel",
+    "disable.disableCrystalBeams.MixinEndCrystalRenderer",
     "disable.disableFovAffectedBySpeed.MixinGameRenderer",
     "disable.disableGuiShadowLayer.MixinScreen",
     "disable.disableItemGlowing.MixinItemStack",
