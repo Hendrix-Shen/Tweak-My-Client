@@ -57,20 +57,50 @@ dependencies {
 loom {
     runConfigs.all {
         property("mixin.debug.export", "true")
+    }
+
+    runConfigs.client {
         programArgs([
                 "--width",
                 "1280",
                 "--height",
                 "720",
         ])
+        runDir("run/client")
+    }
+
+    runConfigs.server {
+        runDir("run/server")
     }
 
     runClient {
         defaultCharacterEncoding("UTF-8")
+        if (!new File("${projectDir}/run/client/options.txt").exists()) {
+            new File("${projectDir}/run/client").mkdirs()
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("${projectDir}/run/client/options.txt"))
+            bufferedWriter.write("autoJump:false\n")
+            bufferedWriter.write("enableVsync:false\n")
+            bufferedWriter.write("forceUnicodeFont:true\n")
+            bufferedWriter.write("fov:1.0\n")
+            bufferedWriter.write("gamma:16.0\n")
+            bufferedWriter.write("guiScale:2\n")
+            bufferedWriter.write("lang:zh_CN\n")
+            bufferedWriter.write("maxFps:260\n")
+            bufferedWriter.write("renderDistance:10\n")
+            bufferedWriter.write("soundCategory_master:0.0")
+            bufferedWriter.close()
+        }
     }
 
     runServer {
         defaultCharacterEncoding("UTF-8")
+        // Auto agree EULA
+        if (!new File("${projectDir}/run/server/eula.txt").exists()) {
+            new File("${projectDir}/run/server").mkdirs()
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("${projectDir}/run/server/eula.txt"))
+            bufferedWriter.write("eula=true")
+            bufferedWriter.close()
+        }
     }
 }
 
