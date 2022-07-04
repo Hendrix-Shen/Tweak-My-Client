@@ -172,7 +172,7 @@ public class AutoReconnectUtil {
 
         AutoReconnectUtil.reAuthenticateButtonOffsetY = 0;
 
-        if (reason == null || AutoReconnectUtil.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
+        if (reason == null || AutoReconnectUtil.getTranslationKey(reason).startsWith("disconnect.loginFailed") && AutoReconnectUtil.compatReAuthenticateMods > 0) {
             // Auto disable autoReconnect
             TweakMyClientReference.getConfigHandler().configManager.setValue("featureAutoReconnect", false);
 
