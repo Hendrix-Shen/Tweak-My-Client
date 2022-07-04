@@ -21,7 +21,7 @@ body:
     attributes:
       label: Tweak My Client Version
       description: |
-        The version of MagicLib you are running?
+        The version of Tweak My Client you are running?
     validations:
       required: true
   - type: textarea
@@ -52,7 +52,7 @@ body:
     attributes:
       label: Log
       description: |
-        Please provide your log here if you can.
+        Please provide your log here if you can. Pastebin is recommended.
         **Note: If this field is not filled in, it may result in the issue being closed directly.**
   - type: checkboxes
     id: latest_build_tested
