@@ -1,71 +1,72 @@
 package top.hendrixshen.tweakmyclient.util;
 
 //#if MC >= 11600
-import fi.dy.masa.litematica.util.RayTraceUtils;
-import fi.dy.masa.litematica.world.SchematicWorldHandler;
-import mcp.mobius.waila.Waila;
-//#if MC >= 11800
+//#if MC >= 11900
 import mcp.mobius.waila.access.DataAccessor;
-//#endif
-//#if MC >= 11700
 import mcp.mobius.waila.api.IBlacklistConfig;
 import mcp.mobius.waila.api.IBlockComponentProvider;
-//#endif
-import mcp.mobius.waila.api.TooltipPosition;
-import mcp.mobius.waila.api.WailaConstants;
-//#if MC >= 11700
 import mcp.mobius.waila.config.PluginConfig;
 import mcp.mobius.waila.config.WailaConfig;
-//#else
+import mcp.mobius.waila.gui.hud.ComponentHandler;
+import mcp.mobius.waila.gui.hud.Line;
+import mcp.mobius.waila.gui.hud.Tooltip;
+import mcp.mobius.waila.gui.hud.TooltipRenderer;
+import net.minecraft.world.level.block.entity.BlockEntity;
+//#elseif MC >= 11800
+//$$ import mcp.mobius.waila.access.DataAccessor;
+//$$ import mcp.mobius.waila.api.IBlacklistConfig;
+//$$ import mcp.mobius.waila.api.IBlockComponentProvider;
+//$$ import mcp.mobius.waila.config.PluginConfig;
+//$$ import mcp.mobius.waila.config.WailaConfig;
+//$$ import mcp.mobius.waila.hud.ComponentHandler;
+//$$ import mcp.mobius.waila.hud.Line;
+//$$ import mcp.mobius.waila.hud.Tooltip;
+//$$ import mcp.mobius.waila.hud.TooltipHandler;
+//$$ import net.minecraft.world.level.block.entity.BlockEntity;
+//#elseif MC >= 11700
+//$$ import mcp.mobius.waila.data.DataAccessor;
+//$$ import mcp.mobius.waila.api.IBlacklistConfig;
+//$$ import mcp.mobius.waila.api.IBlockComponentProvider;
+//$$ import mcp.mobius.waila.config.PluginConfig;
+//$$ import mcp.mobius.waila.config.WailaConfig;
+//$$ import mcp.mobius.waila.hud.ComponentHandler;
+//$$ import mcp.mobius.waila.hud.Tooltip;
+//$$ import mcp.mobius.waila.hud.TooltipHandler;
+//$$ import net.minecraft.network.chat.Component;
+//$$ import net.minecraft.world.level.block.entity.BlockEntity;
+//#elseif MC >= 11600
 //$$ import mcp.mobius.waila.api.impl.config.PluginConfig;
 //$$ import mcp.mobius.waila.api.impl.config.WailaConfig;
-//#endif
-//#if MC < 11800
-//#if MC >= 11700
-//$$ import mcp.mobius.waila.data.DataAccessor;
-//#endif
-//#endif
-//#if MC >= 11700
-import mcp.mobius.waila.hud.ComponentHandler;
-//#endif
-//#if MC >= 11800
-import mcp.mobius.waila.hud.Line;
-//#endif
-//#if MC >= 11700
-import mcp.mobius.waila.hud.Tooltip;
-import mcp.mobius.waila.hud.TooltipHandler;
-//#else
 //$$ import mcp.mobius.waila.overlay.ComponentProvider;
 //$$ import mcp.mobius.waila.overlay.DataAccessor;
 //$$ import mcp.mobius.waila.overlay.Tooltip;
 //$$ import mcp.mobius.waila.utils.TaggableList;
 //$$ import mcp.mobius.waila.utils.TaggedText;
+//$$ import net.minecraft.world.item.ItemStack;
+//$$ import net.minecraft.network.chat.Component;
+//$$ import java.util.List;
 //#endif
+import fi.dy.masa.litematica.util.RayTraceUtils;
+import fi.dy.masa.litematica.world.SchematicWorldHandler;
+import mcp.mobius.waila.Waila;
+import mcp.mobius.waila.api.TooltipPosition;
+import mcp.mobius.waila.api.WailaConstants;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-//#if MC < 11800
-//$$ import net.minecraft.network.chat.Component;
-//#endif
-//#if MC < 11700
-//$$ import net.minecraft.world.item.ItemStack;
-//#endif
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
 import top.hendrixshen.magiclib.language.I18n;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 
 import java.lang.reflect.Field;
-//#if MC < 11700
-//$$ import java.util.List;
-//#endif
 import java.util.Objects;
 //#endif
+
 public class WthitUtil {
     //#if MC >= 11600
     //#if MC >= 11700
@@ -79,28 +80,57 @@ public class WthitUtil {
     //$$ private static final Component SNEAK_DETAIL = ComponentCompatApi.literal(I18n.get("tooltip.waila.sneak_for_details")).withStyle(ChatFormatting.ITALIC);
     //#endif
     private static final Minecraft minecraft = TweakMyClient.getMinecraftClient();
-    private static Field shouldRender;
+    //#if MC >= 11900
+    private static Field STATE;
+    //#else
+    //$$ private static Field shouldRender;
+    //#endif
 
     private static boolean disableWthitRender = false;
 
     static {
         try {
-            //#if MC >= 11700
-            shouldRender = Class.forName("mcp.mobius.waila.hud.TooltipHandler").getDeclaredField("shouldRender");
+            //#if MC >= 11900
+            STATE = Class.forName("mcp.mobius.waila.gui.hud.TooltipHandler").getDeclaredField("STATE");
+            STATE.setAccessible(true);
+            //#elseif MC >= 11700
+            //$$ shouldRender = Class.forName("mcp.mobius.waila.hud.TooltipHandler").getDeclaredField("shouldRender");
+            //$$ shouldRender.setAccessible(true);
             //#else
             //$$ shouldRender = Class.forName("mcp.mobius.waila.overlay.Tooltip").getDeclaredField("shouldRender");
+            //$$ shouldRender.setAccessible(true);
             //#endif
-            shouldRender.setAccessible(true);
+
         } catch (NoSuchFieldException | ClassNotFoundException ignore) {
         }
     }
 
-    private static void setShouldRender(boolean shouldRender) {
+    //#if MC >= 11900
+    private static TooltipRenderer.State getState() {
         try {
-            WthitUtil.shouldRender.set(null, shouldRender);
+            return (TooltipRenderer.State) WthitUtil.STATE.get(null);
         } catch (IllegalAccessException ignore) {
+            return null;
         }
     }
+
+    private static void setStateRender(boolean bl) {
+        try {
+            Class<?> clz = Class.forName("mcp.mobius.waila.gui.hud.TooltipHandler$ConfigTooltipRendererState");
+            Field render = clz.getDeclaredField("render");
+            render.setAccessible(true);
+            render.set(WthitUtil.getState(), bl);
+        } catch (ClassNotFoundException | IllegalAccessException | NoSuchFieldException ignore) {
+        }
+    }
+    //#else
+    //$$ private static void setShouldRender(boolean shouldRender) {
+    //$$     try {
+    //$$         WthitUtil.shouldRender.set(null, shouldRender);
+    //$$     } catch (IllegalAccessException ignore) {
+    //$$     }
+    //$$ }
+    //#endif
 
     public static boolean shouldDisableWthitRender() {
         return WthitUtil.disableWthitRender;
@@ -108,7 +138,11 @@ public class WthitUtil {
 
     public static void tick() {
         // Check reflect.
-        if (shouldRender != null) {
+        //#if MC >= 11900
+        if (WthitUtil.STATE != null) {
+        //#else
+        //$$ if (shouldRender != null) {
+        //#endif
             if (minecraft.level != null && minecraft.cameraEntity != null) {
                 RayTraceUtils.RayTraceWrapper traceWrapper = RayTraceUtils.getGenericTrace(minecraft.level, minecraft.cameraEntity, 10.0, true, true, true);
                 Level worldSchematic = SchematicWorldHandler.getSchematicWorld();
@@ -125,8 +159,10 @@ public class WthitUtil {
                         //$$ WailaConfig config = Waila.CONFIG.get();
                         //#endif
                         accessor.set(minecraft.level, localPlayer, traceWrapper.getBlockHitResult(), minecraft.cameraEntity, minecraft.getFrameTime());
-                        //#if MC >= 11700
-                        TooltipHandler.beginBuild();
+                        //#if MC >= 11900
+                        TooltipRenderer.beginBuild(WthitUtil.getState());
+                        //#elseif MC >= 11700
+                        //$$ TooltipHandler.beginBuild();
                         //#else
                         //$$ Tooltip.start();
                         //#endif
@@ -176,7 +212,11 @@ public class WthitUtil {
                         WthitUtil.TOOLTIP.clear();
                         //#if MC >= 11700
                         ComponentHandler.gatherBlock(accessor, WthitUtil.TOOLTIP, TooltipPosition.HEAD);
-                        TooltipHandler.add(WthitUtil.TOOLTIP);
+                        //#if MC >= 11900
+                        TooltipRenderer.add(WthitUtil.TOOLTIP);
+                        //#else
+                        //$$ TooltipHandler.add(WthitUtil.TOOLTIP);
+                        //#endif
                         //#else
                         //$$ ComponentProvider.gatherBlock(accessor, WthitUtil.TOOLTIP, TooltipPosition.HEAD);
                         //$$ Tooltip.addLines(WthitUtil.TOOLTIP);
@@ -194,14 +234,18 @@ public class WthitUtil {
                         //#else
                         //$$ if (Waila.CONFIG.get().getGeneral().shouldShiftForDetails() && !TOOLTIP.isEmpty() && !minecraft.player.isShiftKeyDown()) {
                         //#endif
-                            //#if MC >= 11700
-                            TooltipHandler.add(WthitUtil.SNEAK_DETAIL);
+                            //#if MC >= 11900
+                            TooltipRenderer.add(WthitUtil.SNEAK_DETAIL);
+                            //#elseif MC >= 11700
+                            //$$ TooltipHandler.add(WthitUtil.SNEAK_DETAIL);
                             //#else
                             //$$ Tooltip.addLine(WthitUtil.SNEAK_DETAIL);
                             //#endif
                         } else {
-                            //#if MC >= 11700
-                            TooltipHandler.add(WthitUtil.TOOLTIP);
+                            //#if MC >= 11900
+                            TooltipRenderer.add(WthitUtil.TOOLTIP);
+                            //#elseif MC >= 11700
+                            //$$ TooltipHandler.add(WthitUtil.TOOLTIP);
                             //#else
                             //$$ Tooltip.addLines(WthitUtil.TOOLTIP);
                             //#endif
@@ -210,17 +254,29 @@ public class WthitUtil {
                         WthitUtil.TOOLTIP.clear();
                         //#if MC >= 11700
                         ComponentHandler.gatherBlock(accessor, WthitUtil.TOOLTIP, TooltipPosition.TAIL);
-                        TooltipHandler.add(WthitUtil.TOOLTIP);
+                        //#if MC >= 11900
+                        TooltipRenderer.add(WthitUtil.TOOLTIP);
+                        //#else
+                        //$$ TooltipHandler.add(WthitUtil.TOOLTIP);
+                        //#endif
                         //#else
                         //$$ ComponentProvider.gatherBlock(accessor, WthitUtil.TOOLTIP, TooltipPosition.TAIL);
                         //$$ Tooltip.addLines(WthitUtil.TOOLTIP);
                         //#endif
 
-                        WthitUtil.setShouldRender(true);
+                        //#if MC >= 11900
+                        WthitUtil.setStateRender(true);
+                        //#else
+                        //$$ WthitUtil.setShouldRender(true);
+                        //#endif
 
                         //#if MC >= 11800
                         if (PluginConfig.INSTANCE.getBoolean(WailaConstants.CONFIG_SHOW_ICON)) {
-                            TooltipHandler.setIcon(ComponentHandler.getIcon(Objects.requireNonNull(traceWrapper.getBlockHitResult())));
+                        //#if MC >= 11900
+                            TooltipRenderer.setIcon(ComponentHandler.getIcon(Objects.requireNonNull(traceWrapper.getBlockHitResult())));
+                        //#else
+                        //$$ TooltipHandler.setIcon(ComponentHandler.getIcon(Objects.requireNonNull(traceWrapper.getBlockHitResult())));
+                        //#endif
                         //#elseif MC >= 11700
                         //$$ if (PluginConfig.INSTANCE.getBoolean(WailaConstants.CONFIG_SHOW_ITEM)) {
                         //$$     TooltipHandler.setStack(ComponentHandler.getDisplayItem(Objects.requireNonNull(traceWrapper.getBlockHitResult())));
@@ -229,16 +285,24 @@ public class WthitUtil {
                         //$$     Tooltip.setStack(new ItemStack(state.getBlock()));
                         //#endif
                         }
-                        //#if MC >= 11700
-                        TooltipHandler.endBuild();
+                        //#if MC >= 11900
+                        WthitUtil.setStateRender(true);
+                        TooltipRenderer.endBuild();
+                        //#elseif MC >= 11700
+                        //$$ WthitUtil.setShouldRender(true);
+                        //$$ TooltipHandler.endBuild();
                         //#else
+                        //$$ WthitUtil.setShouldRender(true);
                         //$$ Tooltip.finish();
                         //#endif
-                        WthitUtil.setShouldRender(true);
                     }
                 } else {
                     WthitUtil.disableWthitRender = false;
-                    WthitUtil.setShouldRender(false);
+                    //#if MC >= 11900
+                    WthitUtil.setStateRender(false);
+                    //#else
+                    //$$ WthitUtil.setShouldRender(false);
+                    //#endif
                 }
             }
         }

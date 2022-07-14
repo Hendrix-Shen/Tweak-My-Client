@@ -6,6 +6,8 @@ import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.ConfigHandler;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.event.RenderHandler;
@@ -23,6 +25,17 @@ public class TweakMyClient implements ClientModInitializer {
         return logger;
     }
 
+    @Dependencies(
+            //#if MC >= 11900
+            and = @Dependency(value = "wthit", versionPredicate = ">=5.6.1", optional = true)
+            //#elseif MC >= 11800
+            //$$ and = @Dependency(value = "wthit", versionPredicate = ">=4.11.0", optional = true)
+            //#elseif MC >= 11700
+            //$$ and = @Dependency(value = "wthit", versionPredicate = ">=3.11.3", optional = true)
+            //#elseif MC >= 11600
+            //$$ and = @Dependency(value = "wthit", versionPredicate = ">=2.10.15", optional = true)
+            //#endif
+    )
     @Override
     public void onInitializeClient() {
         ConfigHandler configHandler = TweakMyClientReference.getConfigHandler();
