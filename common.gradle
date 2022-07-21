@@ -41,14 +41,14 @@ dependencies {
         modImplementation("curse.maven:litematica-308892:${project.litematica_version}")
     }
     if (mcVersion >= 11600) {
-        modImplementation("curse.maven:wthit-440979:${project.wthit_version}")
+        modCompileOnly("curse.maven:wthit-440979:${project.wthit_version}")
         if (mcVersion >= 11800) {
-            modImplementation("curse.maven:badpackets-615134:${project.badpackets_version}")
+            modCompileOnly("curse.maven:badpackets-615134:${project.badpackets_version}")
         }
     }
 
     if (mcVersion < 11600) {
-        modImplementation("curse.maven:hwyla-253449:${project.hwyla_version}")
+        modCompileOnly("curse.maven:hwyla-253449:${project.hwyla_version}")
     }
 
     runtimeOnly(project(path: ":fabricWrapper"))

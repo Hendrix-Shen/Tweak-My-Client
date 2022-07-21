@@ -48,7 +48,7 @@ public class MixinOverlayRenderer {
     //$$         ),
     //$$         index = 2
     //$$ )
-    //$$ private static ItemStack pr(ItemStack stack) {
+    //$$ private static ItemStack onrenderOverlay(ItemStack stack) {
     //$$     return HwylaUtil.shouldDisableWthitRender() ? DataAccessor.INSTANCE.stack : stack;
     //$$ }
     //#endif

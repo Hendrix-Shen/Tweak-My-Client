@@ -15,7 +15,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
 import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.util.WthitUtil;
+//#if MC >= 11900
+import top.hendrixshen.tweakmyclient.util.wthit.WthitUtil_1_19;
+//#elseif MC >= 11800
+//$$ import top.hendrixshen.tweakmyclient.util.wthit.WthitUtil_1_18;
+//#else
+//$$ import top.hendrixshen.tweakmyclient.util.wthit.WthitUtil_1_17;
+//#endif
 
 @Dependencies(and = @Dependency(value = "wthit"))
 //#endif
@@ -36,7 +42,14 @@ public class MixinClientTickHandler {
             cancellable = true
     )
     private static void onTick(CallbackInfo ci) {
-        if(Configs.litematicaSchematicWAILACompat && WthitUtil.shouldDisableWthitRender()) {
+        if(Configs.litematicaSchematicWAILACompat &&
+                //#if MC >= 11900
+                WthitUtil_1_19.shouldDisableWthitRender()) {
+                //#elseif MC >= 11800
+                //$$ WthitUtil_1_18.shouldDisableWthitRender()) {
+                //#else
+                //$$ WthitUtil_1_17.shouldDisableWthitRender()) {
+                //#endif
             ci.cancel();
         }
     }
