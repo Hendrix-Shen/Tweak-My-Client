@@ -14,7 +14,7 @@ preprocess {
     def mc116 = createNode("1.16.5", 1_16_05, "mojang")
     def mc117 = createNode("1.17.1", 1_17_01, "mojang")
     def mc118 = createNode("1.18.2", 1_18_02, "mojang")
-    def mc119 = createNode("1.19", 1_19_00, "mojang") // root
+    def mc119 = createNode("1.19.1", 1_19_01, "mojang") // root
 
     mc114.link(mc115, null)
     mc115.link(mc116, null)
@@ -26,24 +26,17 @@ preprocess {
 def ENV = System.getenv()
 String realVersion = "${project.mod_version}"
 
-if (ENV.BUILD_NUMBER) {
-    realVersion += ".${ENV.BUILD_NUMBER}"
-} else {
-    realVersion += ".0"
-}
-
-if (ENV.COMMIT_SHA) {
-    realVersion += "+${ENV.COMMIT_SHA}"
-}
-
-if (ENV.BUILD_TYPE) {
-    if (ENV.BUILD_TYPE == "RELEASE") {
+realVersion += "." + (ENV.BUILD_NUMBER ? "${ENV.BUILD_NUMBER}" : Integer.MAX_VALUE)
+realVersion += ENV.COMMIT_SHA ? "+${ENV.COMMIT_SHA}" : ""
+switch (ENV.BUILD_TYPE) {
+    case "RELEASE":
         realVersion += "-stable"
-    } else if (ENV.BUILD_TYPE == "BETA") {
+        break
+    case "BETA":
         realVersion += "-beta"
-    }
-} else {
-    realVersion += "-dev"
+        break
+    default:
+        realVersion += "-dev"
 }
 
 version = realVersion

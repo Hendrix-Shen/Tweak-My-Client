@@ -40,7 +40,7 @@ public class CallBacks {
                 if (minecraft.player != null) {
                     switch (Configs.targetBlockPositionPrintMode) {
                         case PUBLIC:
-                            minecraft.player.chat(str);
+                            InfoUtil.sendChatMessage(str);
                             break;
                         case PRIVATE:
                             InfoUtil.displayChatMessage(ComponentCompatApi.literal(str));

@@ -1,5 +1,5 @@
 {
-    "tweakmyclient.gui.title": "Tweak My Client - Config - Version: %s (%s)",
+    "tweakmyclient.gui.title": "Tweak My Client Config - Version: %s (%s)",
     "tweakmyclient.gui.button.tab.generic": "Generic",
     "tweakmyclient.gui.button.tab.color": "Color",
     "tweakmyclient.gui.button.tab.debug": "Debug",

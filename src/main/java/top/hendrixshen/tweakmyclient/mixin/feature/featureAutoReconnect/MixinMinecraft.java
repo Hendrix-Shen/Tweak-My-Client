@@ -12,7 +12,7 @@ import top.hendrixshen.tweakmyclient.util.AutoReconnectUtil;
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
     @Inject(
-            method = "setCurrentServer",
+            method = "setCurrentServer*",
             at = @At(
                     "HEAD"
             )

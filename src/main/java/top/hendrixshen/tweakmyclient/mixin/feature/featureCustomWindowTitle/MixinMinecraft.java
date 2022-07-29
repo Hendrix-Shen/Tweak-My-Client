@@ -64,17 +64,27 @@ public abstract class MixinMinecraft {
             slice = @Slice(
                     from = @At(
                             value = "INVOKE",
-                            target = "Lnet/minecraft/Util;getMillis()J"
+                            target = "Lnet/minecraft/Util;getMillis()J",
+                            ordinal = 1
                     ),
                     to = @At(
                             value = "INVOKE",
-                            target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+                            //#if MC >= 11900
+                            target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+                            //#else
+                            //$$ target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+                            //#endif
                             remap = false
                     )
             ),
             at = @At(
                     value = "INVOKE",
-                    target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;"
+                    //#if MC >= 11900
+                    target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+                    //#else
+                    //$$ target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+                    //#endif
+                    remap = false
             )
     )
     private void afterCalculateFPS(boolean bl, CallbackInfo ci) {

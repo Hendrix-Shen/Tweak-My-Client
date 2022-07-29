@@ -31,9 +31,11 @@ dependencies {
     minecraft("com.mojang:minecraft:${project.minecraft_version}")
     mappings(loom.officialMojangMappings())
 
+    def ENV = System.getenv()
     modImplementation("top.hendrixshen:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
-        //If you want to use runClient task, you should remove this exclude setting.
-        exclude(group: "net.fabricmc.fabric-api", module: "fabric-api")
+        if (ENV.BUILD_NUMBER) {
+            exclude(group: "net.fabricmc.fabric-api", module: "fabric-api")
+        }
     }
     if (mcVersion >= 11900) {
         modCompileOnly("curse.maven:litematica-308892:${project.litematica_version}")
@@ -62,9 +64,9 @@ loom {
     runConfigs.client {
         programArgs([
                 "--width",
-                "1280",
+                "1920",
                 "--height",
-                "720",
+                "1080",
         ])
         runDir("run/client")
     }

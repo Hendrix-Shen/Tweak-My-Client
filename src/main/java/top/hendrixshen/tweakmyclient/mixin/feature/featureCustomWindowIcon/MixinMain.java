@@ -19,10 +19,10 @@ import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 //#endif
 public class MixinMain {
     @Inject(
-            //#if MC >= 11500
-            method = "main",
+            //#if MC >= 11900 || MC < 11500
+            method = "run",
             //#else
-            //$$ method = "run",
+            //$$ method = "main",
             //#endif
             at = @At(
                     value = "INVOKE",
@@ -30,18 +30,20 @@ public class MixinMain {
                     target = "Lcom/mojang/blaze3d/systems/RenderSystem;finishInitialization()V"
             ),
             remap = false
-                    //#else
-                    //$$ target = "Lnet/minecraft/client/Minecraft;init()V",
-                    //$$ shift = At.Shift.AFTER
+            //#else
+            //$$         target = "Lnet/minecraft/client/Minecraft;init()V",
+            //$$         shift = At.Shift.AFTER
             //$$ )
             //#endif
     )
-    //#if MC >= 11500
-    private static void finishInitializationRenderSystem(String[] strings, CallbackInfo ci) {
+    //#if MC >= 11900
+    private static void finishInitializationRenderSystem(String[] strings, boolean bl, CallbackInfo ci) {
+    //#elseif MC >= 11500
+    //$$ private static void finishInitializationRenderSystem(String[] strings, CallbackInfo ci) {
         CustomWindowUtil.updateIcon(TweakMyClient.getMinecraftClient().getWindow());
     //#else
     //$$ private void afterInit(CallbackInfo ci) {
-        //$$ CustomWindowUtil.updateIcon(TweakMyClient.getMinecraftClient().window);
+    //$$     CustomWindowUtil.updateIcon(TweakMyClient.getMinecraftClient().window);
     //#endif
     }
 }

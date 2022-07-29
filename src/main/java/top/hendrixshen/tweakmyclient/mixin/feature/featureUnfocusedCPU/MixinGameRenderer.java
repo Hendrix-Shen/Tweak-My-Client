@@ -11,7 +11,11 @@ import top.hendrixshen.tweakmyclient.config.Configs;
 @Mixin(GameRenderer.class)
 public class MixinGameRenderer {
     @Inject(
+            //#if MC >= 11500
             method = "render",
+            //#else
+            //$$ method = "render(FJZ)V",
+            //#endif
             at = @At(
                     "HEAD"
             ),
