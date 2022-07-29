@@ -27,14 +27,20 @@ public class MixinMain {
             at = @At(
                     value = "INVOKE",
             //#if MC >= 11500
-                    target = "Lcom/mojang/blaze3d/systems/RenderSystem;finishInitialization()V"
-            ),
-            remap = false
+                    target = "Lcom/mojang/blaze3d/systems/RenderSystem;finishInitialization()V",
+                    remap = false
+            //#if MC >= 11900
+            )
+            //#else
+            //$$ ),
+            //$$ remap = false
+            //#endif
             //#else
             //$$         target = "Lnet/minecraft/client/Minecraft;init()V",
             //$$         shift = At.Shift.AFTER
             //$$ )
             //#endif
+
     )
     //#if MC >= 11900
     private static void finishInitializationRenderSystem(String[] strings, boolean bl, CallbackInfo ci) {
