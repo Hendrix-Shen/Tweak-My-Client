@@ -21,12 +21,27 @@ The default hotkey to open the in-game config GUI is **T + C**.
 |--------------------------|----------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | Auth Me                  | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
 | In-Game Account Switcher | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
-| MagicLib                 | Required | \>=0.5.27 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
+| MagicLib                 | Required | \>=0.5.33 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
 | MaliLib                  | Required | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
 | Litematica               | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
 | ReAuth (Fabric)          | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
 
 ## Development
+
+### Support
+
+Current main development for Minecraft version: 1.19.1
+
+And use `preprocess` to be compatible with all versions.
+
+**Note: I only accept the following versions of issues, which are the last updates of each MC major version. Please note that this information is time-sensitive and any version of the issue not listed here will be closed**
+
+- Minecraft 1.14.4
+- Minecraft 1.15.2
+- Minecraft 1.16.5
+- Minecraft 1.17.1
+- Minecraft 1.18.2
+- Minecraft 1.19.1
 
 ### Mappings
 
