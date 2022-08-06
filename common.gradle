@@ -37,15 +37,12 @@ dependencies {
             exclude(group: "net.fabricmc.fabric-api", module: "fabric-api")
         }
     }
-    if (mcVersion >= 11900) {
-        modCompileOnly("curse.maven:litematica-308892:${project.litematica_version}")
-    } else {
-        modImplementation("curse.maven:litematica-308892:${project.litematica_version}")
-    }
+    modImplementation("curse.maven:litematica-308892:${project.litematica_version}")
+
     if (mcVersion >= 11600) {
-        modCompileOnly("curse.maven:wthit-440979:${project.wthit_version}")
+        modImplementation("curse.maven:wthit-440979:${project.wthit_version}")
         if (mcVersion >= 11800) {
-            modCompileOnly("curse.maven:badpackets-615134:${project.badpackets_version}")
+            modImplementation("curse.maven:badpackets-615134:${project.badpackets_version}")
         }
     }
 
@@ -122,16 +119,16 @@ processResources {
 
     inputs.property("version", version)
     filesMatching("fabric.mod.json") {
-        expand(["mod_version"         : project.version,
-                "mod_id"              : project.mod_id,
-                "mod_name"            : project.mod_name,
-                "mod_homepage"        : project.mod_homepage,
-                "mod_sources"         : project.mod_sources,
-                "mod_license"         : project.mod_license,
-                "minecraft_dependency": project.minecraft_dependency,
-                "minecraft_version_id": project.minecraft_version.replace(".", "_"),
-                "minecraft_version"   : project.minecraft_version,
-                "magiclib_version"    : project.magiclib_version
+        expand(["mod_version"            : project.version,
+                "mod_id"                 : project.mod_id,
+                "mod_name"               : project.mod_name,
+                "mod_homepage"           : project.mod_homepage,
+                "mod_sources"            : project.mod_sources,
+                "mod_license"            : project.mod_license,
+                "minecraft_dependency"   : project.minecraft_dependency,
+                "minecraft_version_id"   : project.minecraft_version.replace(".", "_"),
+                "minecraft_version"      : project.minecraft_version,
+                "magiclib_dependency"    : project.magiclib_dependency
         ])
     }
     println("assets/${project.mod_id}/lang/*.json")

@@ -9,7 +9,7 @@ import top.hendrixshen.tweakmyclient.util.VersionParser;
 public class TweakMyClientReference {
     private static final String MOD_ID = "tweakmyclient";
     //#if MC > 11802
-    private static final String CURRENT_MOD_ID = String.format("%s-1_19_1", MOD_ID);
+    private static final String CURRENT_MOD_ID = String.format("%s-1_19_2", MOD_ID);
     //#elseif MC > 11701
     //$$ private static final String CURRENT_MOD_ID = String.format("%s-1_18_2", MOD_ID);
     //#elseif MC > 11605

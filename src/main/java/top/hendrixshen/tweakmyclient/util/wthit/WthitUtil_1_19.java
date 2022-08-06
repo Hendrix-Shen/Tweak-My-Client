@@ -97,8 +97,8 @@ public class WthitUtil_1_19 {
         TooltipRenderer.beginBuild(WthitUtil_1_19.getState());
         Block block = accessor.getBlock();
 
-        if (PluginConfig.INSTANCE.getBoolean(WailaConstants.CONFIG_SHOW_BLOCK) ||
-                block instanceof LiquidBlock && !PluginConfig.INSTANCE.getBoolean(WailaConstants.CONFIG_SHOW_FLUID)) {
+        if (!PluginConfig.CLIENT.getBoolean(WailaConstants.CONFIG_SHOW_BLOCK) ||
+                block instanceof LiquidBlock && !PluginConfig.CLIENT.getBoolean(WailaConstants.CONFIG_SHOW_FLUID)) {
             return;
         }
 
@@ -132,7 +132,7 @@ public class WthitUtil_1_19 {
         ComponentHandler.gatherBlock(accessor, WthitUtil_1_19.TOOLTIP, TooltipPosition.TAIL);
         TooltipRenderer.add(WthitUtil_1_19.TOOLTIP);
 
-        if (PluginConfig.INSTANCE.getBoolean(WailaConstants.CONFIG_SHOW_ICON)) {
+        if (PluginConfig.CLIENT.getBoolean(WailaConstants.CONFIG_SHOW_ICON)) {
             TooltipRenderer.setIcon(ComponentHandler.getIcon(Objects.requireNonNull(traceWrapper.getBlockHitResult())));
         }
         WthitUtil_1_19.setStateRender(true);
