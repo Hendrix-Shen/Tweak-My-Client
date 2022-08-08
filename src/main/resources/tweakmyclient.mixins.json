@@ -5,6 +5,8 @@
   "plugin": "top.hendrixshen.tweakmyclient.TweakMyClientMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "accessor.PlayerTabOverlayAccessor",
+    "patch.litematicaSchematicWailaCompat.jade.MixinOverlayRenderer"
   ],
   "client": [
     "accessor.MultiPlayerGameModeAccessor",
@@ -52,7 +54,7 @@
     "feature.featureOpenWaterHelper.MixinFishingHook",
     "feature.featureUnfocusedCPU.MixinGameRenderer",
     "patch.chunkEdgeLagFix.MixinClientPacketListener",
-    "patch.disableLitematicaEasyPlaceFailTip.litematica.MixinWorldUtils",
+    "patch.disableLitematicaEasyPlaceFailTip.MixinWorldUtils",
     "patch.disableLitematicaSchematicVersionCheck.MixinLitematicaSchematic",
     "patch.disableResourcePackCompatCheck.MixinOptions",
     "patch.disableResourcePackCompatCheck.MixinPackCompatibility",
@@ -60,10 +62,10 @@
     "patch.endPortalRendererFix.MixinTheEndPortalRenderer",
     "patch.forceDebugInfoDetailed.MixinPlayer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem",
-    "patch.litematicaSchematicWAILACompat.MixinClientTickHandler",
-    "patch.litematicaSchematicWAILACompat.MixinLocalPlayer",
-    "patch.litematicaSchematicWAILACompat.MixinOverlayRenderer",
-    "patch.litematicaSchematicWAILACompat.MixinTickHandler"
+    "patch.litematicaSchematicWailaCompat.wthit.MixinClientTickHandler",
+    "patch.litematicaSchematicWailaCompat.MixinLocalPlayer",
+    "patch.litematicaSchematicWailaCompat.hwyla.MixinOverlayRenderer",
+    "patch.litematicaSchematicWailaCompat.wthit.MixinTickHandler"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,4 +1,4 @@
-package top.hendrixshen.tweakmyclient.mixin.patch.litematicaSchematicWAILACompat;
+package top.hendrixshen.tweakmyclient.mixin.patch.litematicaSchematicWailaCompat.hwyla;
 
 //#if MC < 11600
 //$$ import mcp.mobius.waila.api.impl.DataAccessor;

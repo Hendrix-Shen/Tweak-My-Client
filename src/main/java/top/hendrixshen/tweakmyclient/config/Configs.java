@@ -124,8 +124,17 @@ public class Configs {
     @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.16")))
     public static boolean forcePistonWithoutAffectByTool = false;
 
-    @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency(value = "litematica"), or = {@Dependency(value = "waila"), @Dependency(value = "wthit")}))
-    public static boolean litematicaSchematicWAILACompat = false;
+    @Config(category = ConfigCategory.PATCH,
+            dependencies = @Dependencies(
+                    and = @Dependency(value = "litematica"),
+                    or = {
+                            @Dependency(value = "jade"),
+                            @Dependency(value = "waila"),
+                            @Dependency(value = "wthit")
+                    }
+            )
+    )
+    public static boolean litematicaSchematicWailaCompat = false;
 
     // List configs
     @Config(category = ConfigCategory.LIST)

@@ -185,8 +185,8 @@
     "tweakmyclient.config.patch.forceDebugInfoDetailed.comment": "Always show full debug information, even if game rule reducedDebugInfo is true.",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "forcePistonWithoutAffectByTool",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "The pickaxe will no longer be used as an effective mining tool for pistons.",
-    "tweakmyclient.config.patch.litematicaSchematicWAILACompat.name": "litematicaSchematicWAILACompat",
-    "tweakmyclient.config.patch.litematicaSchematicWAILACompat.comment": "Make WAILA compatible to show litematica schematic.\nFor 1.16 and above, WTHIT is supported.\nFor 1.15 and below, Hwyla is supported.",
+    "tweakmyclient.config.patch.litematicaSchematicWailaCompat.name": "litematicaSchematicWailaCompat",
+    "tweakmyclient.config.patch.litematicaSchematicWailaCompat.comment": "Make WAILA compatible to show litematica schematic.\n- For 1.18 and above, Jade is supported. (Recommend)\n- For 1.16 and above, Wthit is supported.\n- For 1.15 and below, Hwyla is supported.",
 
     "tweakmyclient.config.debug.debugMode.name": "debugMode",
     "tweakmyclient.config.debug.debugMode.comment": "Enable debug mode.",

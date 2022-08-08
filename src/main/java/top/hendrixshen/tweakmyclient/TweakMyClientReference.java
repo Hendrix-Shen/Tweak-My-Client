@@ -30,9 +30,12 @@ public class TweakMyClientReference {
     private static final ConfigHandler CONFIG_HANDLER = new ConfigHandler(MOD_ID, CONFIG_MANAGER, CONFIG_VERSION);
 
     public static boolean isAuthMeLoaded = FabricUtil.isModLoaded("authme");
+    public static boolean isHwylaLoaded = FabricUtil.isModLoaded("waila");
     public static boolean isInGameAccountSwitcherLoaded = FabricUtil.isModLoaded("ias");
-    public static boolean isReAuthLoaded = FabricUtil.isModLoaded("reauth");
+    public static boolean isJadeLoaded = FabricUtil.isModLoaded("jade");
     public static boolean isOauthLoaded = FabricUtil.isModLoaded("oauth-fabric");
+    public static boolean isReAuthLoaded = FabricUtil.isModLoaded("reauth");
+    public static boolean isWthitLoaded = FabricUtil.isModLoaded("wthit");
 
     public static ConfigHandler getConfigHandler() {
         return CONFIG_HANDLER;

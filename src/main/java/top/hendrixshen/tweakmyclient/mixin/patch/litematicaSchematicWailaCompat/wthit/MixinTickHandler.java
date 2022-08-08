@@ -1,4 +1,4 @@
-package top.hendrixshen.tweakmyclient.mixin.patch.litematicaSchematicWAILACompat;
+package top.hendrixshen.tweakmyclient.mixin.patch.litematicaSchematicWailaCompat.wthit;
 
 //#if MC >= 11600 && MC < 11700
 //$$ import mcp.mobius.waila.overlay.TickHandler;
@@ -30,7 +30,7 @@ public class MixinTickHandler {
     //$$         cancellable = true
     //$$ )
     //$$ private static void onTick(CallbackInfo ci) {
-    //$$     if(Configs.litematicaSchematicWAILACompat && WthitUtil_1_16.shouldDisableWthitRender()) {
+    //$$     if(Configs.litematicaSchematicWailaCompat && WthitUtil_1_16.shouldDisableWthitRender()) {
     //$$         ci.cancel();
     //$$     }
     //$$ }

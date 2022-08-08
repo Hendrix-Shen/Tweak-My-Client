@@ -74,7 +74,7 @@ public class OverlayRenderer {
                     voxelShape = MiscUtil.linkedBlockAdapter(clientLevel, blockState, blockPos, voxelShape);
                 }
 
-                final float destroyProgress = ((MultiPlayerGameModeAccessor) (multiPlayerGameMode)).getDestroyProgress();
+                final float destroyProgress = ((MultiPlayerGameModeAccessor) multiPlayerGameMode).getDestroyProgress();
 
                 // Adjust AABB for break animation.
                 switch (Configs.breakAnimationMode) {
