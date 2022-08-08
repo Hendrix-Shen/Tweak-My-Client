@@ -1,10 +1,6 @@
 package top.hendrixshen.tweakmyclient.util.render;
 
-//#if MC >= 11500
 import com.mojang.blaze3d.systems.RenderSystem;
-//#else
-//$$ import com.mojang.blaze3d.platform.GlStateManager;
-//#endif
 import com.mojang.blaze3d.vertex.*;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.Color4f;
@@ -29,11 +25,7 @@ import top.hendrixshen.magiclib.compat.minecraft.blaze3d.vertex.VertexFormatComp
 public class RenderUtil {
     //#if MC >= 11600
     public static void renderAreaOutline(BlockPos pos1, BlockPos pos2, float lineWidth, Color4f colorX, Minecraft minecraft) {
-        //#if MC >= 11500
         RenderSystem.lineWidth(lineWidth);
-        //#else
-        //$$ GlStateManager.lineWidth(lineWidth);
-        //#endif
 
         Vec3 cameraPos = minecraft.gameRenderer.getMainCamera().getPosition();
         final double dx = cameraPos.x;
@@ -71,19 +63,10 @@ public class RenderUtil {
     public static void renderShapeOverlay(VoxelShape voxelShape,
                                           double x, double y, double z, Color4f color4f) {
         //#if MC < 11700
-        //#if MC >= 11500
         //$$ RenderSystem.disableTexture();
-        //#else
-        //$$ GlStateManager.disableTexture();
         //#endif
-        //#endif
-        //#if MC >= 11500
         RenderSystem.enableBlend();
         RenderSystem.disableCull();
-        //#else
-        //$$ GlStateManager.enableBlend();
-        //$$ GlStateManager.disableCull();
-        //#endif
         //#if MC >= 11700
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
         //#endif
@@ -99,34 +82,18 @@ public class RenderUtil {
         //#if MC >= 11500
         RenderSystem.enableCull();
         RenderSystem.disableBlend();
-        //#else
-        //$$ GlStateManager.enableCull();
-        //$$ GlStateManager.disableBlend();
         //#endif
         //#if MC < 11700
-        //#if MC >= 11500
         //$$ RenderSystem.enableTexture();
-        //#else
-        //$$ GlStateManager.enableTexture();
-        //#endif
         //#endif
     }
 
     public static void renderShapeOutline(VoxelShape voxelShape, float lineWidth, double x, double y, double z, Color4f color4f) {
         //#if MC < 11700
-        //#if MC >= 11500
         //$$ RenderSystem.disableTexture();
-        //#else
-        //$$ GlStateManager.disableTexture();
         //#endif
-        //#endif
-        //#if MC >= 11500
         RenderSystem.enableBlend();
         RenderSystem.disableCull();
-        //#else
-        //$$ GlStateManager.enableBlend();
-        //$$ GlStateManager.disableCull();
-        //#endif
         //#if MC >= 11700
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
         //#endif
@@ -138,11 +105,7 @@ public class RenderUtil {
         //$$ buffer.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
         //#endif
 
-        //#if MC >= 11500
         RenderSystem.lineWidth(lineWidth);
-        //#else
-        //$$ GlStateManager.lineWidth(lineWidth);
-        //#endif
 
         voxelShape.forAllEdges((minX, minY, minZ, maxX, maxY, maxZ) -> {
             buffer.vertex(minX + x, minY + y, minZ + z).color(color4f.r, color4f.g, color4f.b, color4f.a).endVertex();
@@ -150,20 +113,11 @@ public class RenderUtil {
         });
 
         tesselator.end();
-        //#if MC >= 11500
         RenderSystem.enableCull();
         RenderSystem.disableBlend();
-        //#else
-        //$$ GlStateManager.enableCull();
-        //$$ GlStateManager.disableBlend();
-        //#endif
 
         //#if MC < 11700
-        //#if MC >= 11500
         //$$ RenderSystem.enableTexture();
-        //#else
-        //$$ GlStateManager.enableTexture();
-        //#endif
         //#endif
     }
 }

@@ -1,10 +1,6 @@
 package top.hendrixshen.tweakmyclient.util.render;
 
-//#if MC >= 11500
 import com.mojang.blaze3d.systems.RenderSystem;
-//#else
-//$$ import com.mojang.blaze3d.platform.GlStateManager;
-//#endif
 import fi.dy.masa.malilib.util.Color4f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -112,11 +108,7 @@ public class OverlayRenderer {
                     float k = System.currentTimeMillis() % (100 * (101 - Configs.customBlockHitBoxOverlayFillRainbowSpeed)) / (50F * (101 - Configs.customBlockHitBoxOverlayFillRainbowSpeed));
 
                     if (Configs.customBlockHitBoxOverlayDisableDepthTest) {
-                        //#if MC >= 11500
                         RenderSystem.disableDepthTest();
-                        //#else
-                        //$$ GlStateManager.disableDepthTest();
-                        //#endif
                     }
 
                     RenderUtil.renderShapeOverlay(voxelShape,
@@ -129,11 +121,7 @@ public class OverlayRenderer {
                             ) : Configs.colorBlockHitBoxOverlayFill);
 
                     if (Configs.customBlockHitBoxOverlayDisableDepthTest) {
-                        //#if MC >= 11500
                         RenderSystem.enableDepthTest();
-                        //#else
-                        //$$ GlStateManager.enableDepthTest();
-                        //#endif
                     }
                 }
 
@@ -141,11 +129,7 @@ public class OverlayRenderer {
                     float k = System.currentTimeMillis() % (100 * (101 - Configs.customBlockHitBoxOverlayOutlineRainbowSpeed)) / (50F * (101 - Configs.customBlockHitBoxOverlayOutlineRainbowSpeed));
 
                     if (Configs.customBlockHitBoxOverlayDisableDepthTest) {
-                        //#if MC >= 11500
                         RenderSystem.disableDepthTest();
-                        //#else
-                        //$$ GlStateManager.disableDepthTest();
-                        //#endif
                     }
 
                     RenderUtil.renderShapeOutline(voxelShape,
@@ -158,11 +142,7 @@ public class OverlayRenderer {
                                     Configs.colorBlockHitBoxOverlayOutline.a
                             ) : Configs.colorBlockHitBoxOverlayOutline);
                     if (Configs.customBlockHitBoxOverlayDisableDepthTest) {
-                        //#if MC >= 11500
                         RenderSystem.enableDepthTest();
-                        //#else
-                        //$$ GlStateManager.enableDepthTest();
-                        //#endif
                     }
                 }
             }
