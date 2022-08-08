@@ -9,6 +9,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.TweakMyClientPredicate;
+import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.util.AutoReconnectUtil;
 
 @Mixin(value = DisconnectedScreen.class, priority = 900)
@@ -43,5 +46,14 @@ public class MixinDisconnectedScreen extends Screen {
     @Override
     public void tick() {
         AutoReconnectUtil.tickAutoReconnectButton(this.parent);
+    }
+
+    @Override
+    public void renderDirtBackground(int i) {
+        if (Configs.expXibao && TweakMyClientPredicate.xibaoLang.contains(TweakMyClient.getMinecraftClient().options.languageCode)) {
+            AutoReconnectUtil.renderXibao(this);
+            return;
+        }
+        super.renderDirtBackground(i);
     }
 }

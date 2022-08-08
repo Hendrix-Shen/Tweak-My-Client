@@ -194,6 +194,8 @@
     "tweakmyclient.config.debug.debugExperimentalMode.comment": "Enable experimental functions.",
     "tweakmyclient.config.debug.expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock.name": "§eexpCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock",
     "tweakmyclient.config.debug.expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock.comment": "Experimental functions.",
+    "tweakmyclient.config.debug.expXibao.name": "§eexpXibao",
+    "tweakmyclient.config.debug.expXibao.comment": "Experimental functions.",
 
     "tweakmyclient.label.autoDropListType.blackList": "Black List",
     "tweakmyclient.label.autoDropListType.whiteList": "White List",

@@ -1,14 +1,19 @@
 package top.hendrixshen.tweakmyclient.util;
 
 import com.google.common.collect.Maps;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.resolver.ServerAddress;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.resources.ResourceLocation;
+import top.hendrixshen.magiclib.compat.minecraft.blaze3d.vertex.VertexFormatCompatApi;
 import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
@@ -20,6 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AutoReconnectUtil {
+    private static final ResourceLocation resourceLocation = new ResourceLocation(TweakMyClientReference.getModId(), "gui/disconnect/xibao.png");
     public static int ReconnectTimer;
     public static int reAuthenticateButtonOffsetY;
     private static boolean initialized = false;
@@ -34,6 +40,28 @@ public class AutoReconnectUtil {
     private static int compatReAuthenticateMods = 0;
 
     private static final LinkedHashMap<String, Screen> modHashMap = Maps.newLinkedHashMap();
+
+    //#if MC < 11700
+    //$$ @SuppressWarnings("deprecation")
+    //#endif
+    public static void renderXibao(Screen screen) {
+        Tesselator tesselator = Tesselator.getInstance();
+        BufferBuilder bufferbuilder = tesselator.getBuilder();
+        //#if MC > 11605
+        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+        RenderSystem.setShaderTexture(0, AutoReconnectUtil.resourceLocation);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        //#else
+        //$$ TweakMyClient.getMinecraftClient().getTextureManager().bind(AutoReconnectUtil.resourceLocation);
+        //$$ RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        //#endif
+        bufferbuilder.begin(VertexFormatCompatApi.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+        bufferbuilder.vertex(0.0D, screen.height, 0.0D).uv(0F, 1F).color(255, 255, 255, 255).endVertex();
+        bufferbuilder.vertex(screen.width, screen.height, 0.0D).uv(1F, 1F).color(255, 255, 255, 255).endVertex();
+        bufferbuilder.vertex(screen.width, 0.0D, 0.0D).uv(1F, 0F).color(255, 255, 255, 255).endVertex();
+        bufferbuilder.vertex(0.0D, 0.0D, 0.0D).uv(0F, 0F).color(255, 255, 255, 255).endVertex();
+        tesselator.end();
+    }
 
     private void init(Screen parent) {
         if (TweakMyClientReference.isAuthMeLoaded) {

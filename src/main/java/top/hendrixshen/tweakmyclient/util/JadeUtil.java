@@ -26,7 +26,6 @@ import snownee.jade.impl.WailaCommonRegistration;
 import snownee.jade.overlay.DatapackBlockManager;
 import snownee.jade.overlay.OverlayRenderer;
 import snownee.jade.overlay.TooltipRenderer;
-import snownee.jade.overlay.WailaTickHandler;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.mixin.accessor.PlayerTabOverlayAccessor;
 //#endif

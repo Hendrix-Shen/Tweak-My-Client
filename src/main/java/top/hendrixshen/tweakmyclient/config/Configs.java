@@ -353,6 +353,9 @@ public class Configs {
     @Config(category = ConfigCategory.DEBUG, dependencies = @Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.17")), predicate = TweakMyClientPredicate.ExperimentalMode.class)
     public static boolean expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock = false;
 
+    @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.ExpXibao.class)
+    public static boolean expXibao = false;
+
     public static void initCallbacks(ConfigManager cm) {
         // Set callback for all BooleanHotkeyed config.
         /* TODO
