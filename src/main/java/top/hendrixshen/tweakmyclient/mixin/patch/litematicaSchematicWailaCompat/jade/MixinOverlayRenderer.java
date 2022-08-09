@@ -27,6 +27,7 @@ public class MixinOverlayRenderer {
             at = @At(
                     value = "HEAD"
             ),
+            remap = true,
             cancellable = true
     )
     private static void onRenderOverlay(PoseStack poseStack, CallbackInfo ci) {

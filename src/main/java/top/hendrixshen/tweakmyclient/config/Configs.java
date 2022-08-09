@@ -126,11 +126,11 @@ public class Configs {
 
     @Config(category = ConfigCategory.PATCH,
             dependencies = @Dependencies(
-                    and = @Dependency(value = "litematica"),
+                    and = @Dependency("litematica"),
                     or = {
-                            @Dependency(value = "jade"),
-                            @Dependency(value = "waila"),
-                            @Dependency(value = "wthit")
+                            @Dependency("jade"),
+                            @Dependency("waila"),
+                            @Dependency("wthit")
                     }
             )
     )
