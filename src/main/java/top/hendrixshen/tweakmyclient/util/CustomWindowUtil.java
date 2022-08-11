@@ -34,6 +34,8 @@ public class CustomWindowUtil {
     //#endif
     private static final Random RANDOM = new Random();
     public static final Minecraft mc = TweakMyClient.getMinecraftClient();
+    private static final ResourceLocation icon16 = new ResourceLocation(TweakMyClientReference.getModId(), "texture/icon/icon_16x16.png");
+    private static final ResourceLocation icon32 = new ResourceLocation(TweakMyClientReference.getModId(), "texture/icon/icon_32x32.png");
 
     // These data should not be changed
     static {
@@ -176,11 +178,11 @@ public class CustomWindowUtil {
             InputStream icon32x;
             if (Configs.featureCustomWindowIcon) {
                 //#if MC >= 11900
-                icon16x = mc.getResourceManager().open(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_16x16.png"));
-                icon32x = mc.getResourceManager().open(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_32x32.png"));
+                icon16x = mc.getResourceManager().open(CustomWindowUtil.icon16);
+                icon32x = mc.getResourceManager().open(CustomWindowUtil.icon32);
                 //#else
-                //$$ icon16x = mc.getResourceManager().getResource(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_16x16.png")).getInputStream();
-                //$$ icon32x = mc.getResourceManager().getResource(new ResourceLocation(TweakMyClientReference.getModId(), "icons/icon_32x32.png")).getInputStream();
+                //$$ icon16x = mc.getResourceManager().getResource(CustomWindowUtil.icon16).getInputStream();
+                //$$ icon32x = mc.getResourceManager().getResource(CustomWindowUtil.icon32).getInputStream();
                 //#endif
             } else {
                 icon16x = mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, new ResourceLocation("icons/icon_16x16.png"));

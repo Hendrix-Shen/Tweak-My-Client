@@ -386,7 +386,7 @@ public class Configs {
         // Feature config callbacks.
         cm.setValueChangeCallback("featureCustomBlockHitBoxOverlayFill", CallBacks::featureCustomBlockHitBoxOverlayFillCallBack);
         cm.setValueChangeCallback("featureCustomBlockHitBoxOverlayOutline", CallBacks::featureCustomBlockHitBoxOverlayOutlineCallBack);
-        cm.setValueChangeCallback("featureCustomWindowIcon", option -> CustomWindowUtil.updateIcon(((IMinecraft) TweakMyClient.getMinecraftClient()).tmc$getWindow()));
+        cm.setValueChangeCallback("featureCustomWindowIcon", option -> CustomWindowUtil.updateIcon(TweakMyClient.getMinecraftClient().getWindowCompat()));
         cm.setValueChangeCallback("featureCustomWindowTitle", CallBacks::featureCustomWindowTitleCallback);
 
         // Disable config callbacks.

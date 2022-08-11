@@ -25,7 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AutoReconnectUtil {
-    private static final ResourceLocation resourceLocation = new ResourceLocation(TweakMyClientReference.getModId(), "gui/disconnect/xibao.png");
+    private static final ResourceLocation resourceLocation = new ResourceLocation(TweakMyClientReference.getModId(), "texture/gui/xibao.png");
     public static int ReconnectTimer;
     public static int reAuthenticateButtonOffsetY;
     private static boolean initialized = false;
