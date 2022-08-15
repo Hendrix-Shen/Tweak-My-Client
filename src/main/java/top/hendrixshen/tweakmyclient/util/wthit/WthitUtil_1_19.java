@@ -92,7 +92,7 @@ public class WthitUtil_1_19 {
         WthitUtil_1_19.disableWthitRender = true;
         DataAccessor accessor = DataAccessor.INSTANCE;
         WailaConfig.General config = Waila.CONFIG.get().getGeneral();
-        accessor.set(minecraft.level, localPlayer, traceWrapper.getBlockHitResult(),
+        accessor.set(worldSchematic, localPlayer, traceWrapper.getBlockHitResult(),
                 minecraft.cameraEntity, minecraft.getFrameTime());
         TooltipRenderer.beginBuild(WthitUtil_1_19.getState());
         Block block = accessor.getBlock();

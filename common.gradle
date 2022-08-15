@@ -40,7 +40,7 @@ dependencies {
     modImplementation("curse.maven:litematica-308892:${project.litematica_version}")
 
     if (mcVersion >= 11800) {
-        modImplementation("curse.maven:jade-324717:${project.jade_version}")
+        modCompileOnly("curse.maven:jade-324717:${project.jade_version}")
     }
 
     if (mcVersion >= 11600) {

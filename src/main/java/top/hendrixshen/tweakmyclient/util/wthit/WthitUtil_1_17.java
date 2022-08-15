@@ -81,7 +81,7 @@ public class WthitUtil_1_17 {
     //$$
     //$$     WthitUtil_1_17.disableWthitRender = true;
     //$$     DataAccessor accessor = DataAccessor.INSTANCE;
-    //$$     accessor.set(minecraft.level, localPlayer, traceWrapper.getBlockHitResult(),
+    //$$     accessor.set(worldSchematic, localPlayer, traceWrapper.getBlockHitResult(),
     //$$             minecraft.cameraEntity, minecraft.getFrameTime());
     //$$     TooltipHandler.beginBuild();
     //$$     Block block = accessor.getBlock();
