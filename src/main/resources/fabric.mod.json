@@ -29,7 +29,8 @@
     ]
   },
   "mixins": [
-    "${mod_id}.mixins.json"
+    "${mod_id}.mixins.json",
+    "${mod_id}-compat-wurst.mixins.json"
   ],
   "depends": {
     "minecraft": "${minecraft_dependency}",

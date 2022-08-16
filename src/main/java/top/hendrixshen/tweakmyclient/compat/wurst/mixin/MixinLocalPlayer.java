@@ -1,4 +1,4 @@
-package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
+package top.hendrixshen.tweakmyclient.compat.wurst.mixin;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.EntityType;
@@ -11,9 +11,13 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
 import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.util.mixin.MixinType;
+import top.hendrixshen.tweakmyclient.util.mixin.annotation.MagicAttack;
+import top.hendrixshen.tweakmyclient.util.mixin.annotation.MagicInterruption;
 
-@Dependencies(not = @Dependency(value = "wurst"))
-@Mixin(LocalPlayer.class)
+@MagicInterruption(targets = "net.wurstclient.mixin.ClientPlayerEntityMixin")
+@Dependencies(and = @Dependency(value = "wurst"))
+@Mixin(value = LocalPlayer.class, priority = 1100)
 public abstract class MixinLocalPlayer extends LivingEntity {
     @Shadow
     private boolean startedUsingItem;
@@ -22,15 +26,14 @@ public abstract class MixinLocalPlayer extends LivingEntity {
         super(entityType, level);
     }
 
-    @Redirect(
-            method = "aiStep",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/player/LocalPlayer;isUsingItem ()Z",
-                    ordinal = 0
-            )
+    @MagicAttack(
+            type = MixinType.REDIRECT,
+            name = "wurstIsUsingItem",
+            owner = "class_1309",
+            method = "method_6007",
+            desc = "()V"
     )
-    private boolean getUsingItemState(LocalPlayer instance) {
+    private boolean tmc$getUsingItemState(LocalPlayer instance) {
         if (Configs.disableSlowdown) {
             return false;
         }

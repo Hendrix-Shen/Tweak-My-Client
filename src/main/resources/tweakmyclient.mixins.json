@@ -5,11 +5,10 @@
   "plugin": "top.hendrixshen.tweakmyclient.TweakMyClientMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "accessor.PlayerTabOverlayAccessor",
-    "patch.litematicaSchematicWailaCompat.jade.MixinOverlayRenderer"
   ],
   "client": [
     "accessor.MultiPlayerGameModeAccessor",
+    "accessor.PlayerTabOverlayAccessor",
     "disable.disableAttackEntity.MixinMinecraft",
     "disable.disableClientBlockEvents.MixinClientPacketListener",
     "disable.disableClientEntityRendering.MixinEntityRenderDispatcher",
@@ -65,6 +64,7 @@
     "patch.litematicaSchematicWailaCompat.wthit.MixinClientTickHandler",
     "patch.litematicaSchematicWailaCompat.MixinLocalPlayer",
     "patch.litematicaSchematicWailaCompat.hwyla.MixinOverlayRenderer",
+    "patch.litematicaSchematicWailaCompat.jade.MixinOverlayRenderer",
     "patch.litematicaSchematicWailaCompat.wthit.MixinTickHandler"
   ],
   "injectors": {
