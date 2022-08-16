@@ -19,18 +19,21 @@
 
 | 依赖                       | 类型  | 版本        | 下载                                                                                                                                                 |
 |--------------------------|-----|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Auth Me                  | 兼容  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
-| In-Game Account Switcher | 兼容  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
-| MagicLib                 | 必须  | \>=0.5.33 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
+| Auth Me                  | 可选  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
+| Hwyla                    | 可选  | 最新        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/hwyla)                                                                                   |
+| In-Game Account Switcher | 可选  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
+| Jade                     | 可选  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jade)                                                                                    |
+| MagicLib                 | 必须  | \>=0.5.37 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
 | MaliLib                  | 必须  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
-| Litematica               | 兼容  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
-| ReAuth (Fabric)          | 兼容  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
+| Litematica               | 可选  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
+| ReAuth (Fabric)          | 可选  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
+| WTHIT                    | 可选  | 最新        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/wthit)                                                                                   |
 
 ## 开发
 
 ### 支持
 
-当前主开发版本：1.19.1
+当前主开发版本：1.19.2
 
 并且使用 `预处理` 来兼容各版本。
 

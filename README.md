@@ -19,12 +19,15 @@ The default hotkey to open the in-game config GUI is **T + C**.
 
 | Dependency               | Type     | Version   | Download                                                                                                                                           |
 |--------------------------|----------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Auth Me                  | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
-| In-Game Account Switcher | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
-| MagicLib                 | Required | \>=0.5.33 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
+| Auth Me                  | Optional | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
+| Hwyla                    | Optional | Latest    | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/hwyla)                                                                                   |
+| In-Game Account Switcher | Optional | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
+| Jade                     | Optional | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jade)                                                                                    |
+| MagicLib                 | Required | \>=0.5.37 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
 | MaliLib                  | Required | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
-| Litematica               | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
-| ReAuth (Fabric)          | Compat   | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
+| Litematica               | Optional | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
+| ReAuth (Fabric)          | Optional | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
+| WTHIT                    | Optional | Latest    | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/wthit)                                                                                   |
 
 ## Development
 
