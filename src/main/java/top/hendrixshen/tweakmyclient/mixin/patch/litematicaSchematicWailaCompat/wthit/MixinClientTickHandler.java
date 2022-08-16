@@ -1,6 +1,6 @@
 package top.hendrixshen.tweakmyclient.mixin.patch.litematicaSchematicWailaCompat.wthit;
 
-//#if MC >= 11900
+//#if MC >= 11800
 import mcp.mobius.waila.gui.hud.TooltipHandler;
 //#elseif MC >= 11700
 //$$ import mcp.mobius.waila.hud.ClientTickHandler;
@@ -25,7 +25,7 @@ import top.hendrixshen.tweakmyclient.util.wthit.WthitUtil_1_19;
 
 @Dependencies(and = @Dependency(value = "wthit"))
 //#endif
-//#if MC >= 11900
+//#if MC >= 11800
 @Mixin(value = TooltipHandler.class, remap = false)
 //#elseif MC >= 11700
 //$$ @Mixin(value = ClientTickHandler.class, remap = false)

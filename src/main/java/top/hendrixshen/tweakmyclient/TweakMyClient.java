@@ -27,9 +27,9 @@ public class TweakMyClient implements ClientModInitializer {
 
     @Dependencies(
             //#if MC >= 11900
-            and = @Dependency(value = "wthit", versionPredicate = ">=5.9.0", optional = true)
+            and = @Dependency(value = "wthit", versionPredicate = ">=5.10.0", optional = true)
             //#elseif MC >= 11800
-            //$$ and = @Dependency(value = "wthit", versionPredicate = ">=4.11.0", optional = true)
+            //$$ and = @Dependency(value = "wthit", versionPredicate = ">=4.12.0", optional = true)
             //#elseif MC >= 11700
             //$$ and = @Dependency(value = "wthit", versionPredicate = ">=3.11.3", optional = true)
             //#elseif MC >= 11600

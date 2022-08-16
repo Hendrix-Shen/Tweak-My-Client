@@ -1,21 +1,20 @@
 package top.hendrixshen.tweakmyclient.util.wthit;
 
 //#if MC >= 11800 && MC < 11900
-//$$ import mcp.mobius.waila.access.DataAccessor;
-//$$ import mcp.mobius.waila.api.IBlacklistConfig;
-//$$ import mcp.mobius.waila.api.IBlockComponentProvider;
-//$$ import mcp.mobius.waila.config.PluginConfig;
-//$$ import mcp.mobius.waila.config.WailaConfig;
-//$$ import mcp.mobius.waila.hud.ComponentHandler;
-//$$ import mcp.mobius.waila.hud.Line;
-//$$ import mcp.mobius.waila.hud.Tooltip;
-//$$ import mcp.mobius.waila.hud.TooltipHandler;
-//$$ import net.minecraft.world.level.block.entity.BlockEntity;
 //$$ import fi.dy.masa.litematica.util.RayTraceUtils;
 //$$ import fi.dy.masa.litematica.world.SchematicWorldHandler;
 //$$ import mcp.mobius.waila.Waila;
+//$$ import mcp.mobius.waila.access.DataAccessor;
+//$$ import mcp.mobius.waila.api.IBlacklistConfig;
+//$$ import mcp.mobius.waila.api.IBlockComponentProvider;
 //$$ import mcp.mobius.waila.api.TooltipPosition;
 //$$ import mcp.mobius.waila.api.WailaConstants;
+//$$ import mcp.mobius.waila.config.PluginConfig;
+//$$ import mcp.mobius.waila.config.WailaConfig;
+//$$ import mcp.mobius.waila.gui.hud.ComponentHandler;
+//$$ import mcp.mobius.waila.gui.hud.Line;
+//$$ import mcp.mobius.waila.gui.hud.Tooltip;
+//$$ import mcp.mobius.waila.gui.hud.TooltipRenderer;
 //$$ import net.minecraft.ChatFormatting;
 //$$ import net.minecraft.client.Minecraft;
 //$$ import net.minecraft.client.player.LocalPlayer;
@@ -23,6 +22,7 @@ package top.hendrixshen.tweakmyclient.util.wthit;
 //$$ import net.minecraft.world.level.block.Block;
 //$$ import net.minecraft.world.level.block.Blocks;
 //$$ import net.minecraft.world.level.block.LiquidBlock;
+//$$ import net.minecraft.world.level.block.entity.BlockEntity;
 //$$ import net.minecraft.world.level.block.state.BlockState;
 //$$ import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
 //$$ import top.hendrixshen.magiclib.language.I18n;
@@ -37,21 +37,32 @@ public class WthitUtil_1_18 {
     //$$ private static final Tooltip TOOLTIP = new Tooltip();
     //$$ private static final Line SNEAK_DETAIL = (new Line(null)).with((ComponentCompatApi.literal(I18n.get("tooltip.waila.sneak_for_details")).withStyle(ChatFormatting.ITALIC)));
     //$$ private static final Minecraft minecraft = TweakMyClient.getMinecraftClient();
-    //$$ private static Field shouldRender;
+    //$$ private static Field STATE;
     //$$ private static boolean disableWthitRender = false;
     //$$
     //$$ static {
     //$$     try {
-    //$$         shouldRender = Class.forName("mcp.mobius.waila.hud.TooltipHandler").getDeclaredField("shouldRender");
-    //$$         shouldRender.setAccessible(true);
+    //$$         STATE = Class.forName("mcp.mobius.waila.gui.hud.TooltipHandler").getDeclaredField("STATE");
+    //$$         STATE.setAccessible(true);
     //$$     } catch (NoSuchFieldException | ClassNotFoundException ignore) {
     //$$     }
     //$$ }
     //$$
-    //$$ private static void setShouldRender(boolean shouldRender) {
+    //$$ private static TooltipRenderer.State getState() {
     //$$     try {
-    //$$         WthitUtil_1_18.shouldRender.set(null, shouldRender);
+    //$$         return (TooltipRenderer.State) WthitUtil_1_18.STATE.get(null);
     //$$     } catch (IllegalAccessException ignore) {
+    //$$         return null;
+    //$$     }
+    //$$ }
+    //$$
+    //$$ private static void setStateRender(boolean bl) {
+    //$$     try {
+    //$$         Class<?> clz = Class.forName("mcp.mobius.waila.gui.hud.TooltipHandler$ConfigTooltipRendererState");
+    //$$         Field render = clz.getDeclaredField("render");
+    //$$         render.setAccessible(true);
+    //$$         render.set(WthitUtil_1_18.getState(), bl);
+    //$$     } catch (ClassNotFoundException | IllegalAccessException | NoSuchFieldException ignore) {
     //$$     }
     //$$ }
     //$$
@@ -61,8 +72,8 @@ public class WthitUtil_1_18 {
     //$$
     //$$ public static void tick() {
     //$$     WthitUtil_1_18.disableWthitRender = false;
-    //$$     WthitUtil_1_18.setShouldRender(false);
-    //$$     if (WthitUtil_1_18.shouldRender == null || minecraft.level == null || minecraft.cameraEntity == null) {
+    //$$     WthitUtil_1_18.setStateRender(false);
+    //$$     if (WthitUtil_1_18.STATE == null || minecraft.level == null || minecraft.cameraEntity == null) {
     //$$         return;
     //$$     }
     //$$
@@ -84,11 +95,11 @@ public class WthitUtil_1_18 {
     //$$     WailaConfig.General config = Waila.CONFIG.get().getGeneral();
     //$$     accessor.set(worldSchematic, localPlayer, traceWrapper.getBlockHitResult(),
     //$$             minecraft.cameraEntity, minecraft.getFrameTime());
-    //$$     TooltipHandler.beginBuild();
+    //$$     TooltipRenderer.beginBuild(WthitUtil_1_18.getState());
     //$$     Block block = accessor.getBlock();
     //$$
-    //$$     if (!PluginConfig.INSTANCE.getBoolean(WailaConstants.CONFIG_SHOW_BLOCK) ||
-    //$$             block instanceof LiquidBlock && !PluginConfig.INSTANCE.getBoolean(WailaConstants.CONFIG_SHOW_FLUID)) {
+    //$$     if (!PluginConfig.CLIENT.getBoolean(WailaConstants.CONFIG_SHOW_BLOCK) ||
+    //$$             block instanceof LiquidBlock && !PluginConfig.CLIENT.getBoolean(WailaConstants.CONFIG_SHOW_FLUID)) {
     //$$        return;
     //$$     }
     //$$
@@ -109,25 +120,25 @@ public class WthitUtil_1_18 {
     //$$     accessor.setState(state);
     //$$     WthitUtil_1_18.TOOLTIP.clear();
     //$$     ComponentHandler.gatherBlock(accessor, WthitUtil_1_18.TOOLTIP, TooltipPosition.HEAD);
-    //$$     TooltipHandler.add(WthitUtil_1_18.TOOLTIP);
+    //$$     TooltipRenderer.add(WthitUtil_1_18.TOOLTIP);
     //$$     WthitUtil_1_18.TOOLTIP.clear();
     //$$     ComponentHandler.gatherBlock(accessor, WthitUtil_1_18.TOOLTIP, TooltipPosition.BODY);
     //$$     if (config.isShiftForDetails() && !WthitUtil_1_18.TOOLTIP.isEmpty() && !minecraft.player.isShiftKeyDown()) {
-    //$$         TooltipHandler.add(WthitUtil_1_18.SNEAK_DETAIL);
+    //$$         TooltipRenderer.add(WthitUtil_1_18.SNEAK_DETAIL);
     //$$     } else {
-    //$$         TooltipHandler.add(WthitUtil_1_18.TOOLTIP);
+    //$$         TooltipRenderer.add(WthitUtil_1_18.TOOLTIP);
     //$$     }
     //$$
     //$$     WthitUtil_1_18.TOOLTIP.clear();
     //$$     ComponentHandler.gatherBlock(accessor, WthitUtil_1_18.TOOLTIP, TooltipPosition.TAIL);
-    //$$     TooltipHandler.add(WthitUtil_1_18.TOOLTIP);
-    //$$     WthitUtil_1_18.setShouldRender(true);
+    //$$     TooltipRenderer.add(WthitUtil_1_18.TOOLTIP);
+    //$$     WthitUtil_1_18.setStateRender(true);
     //$$
-    //$$     if (PluginConfig.INSTANCE.getBoolean(WailaConstants.CONFIG_SHOW_ICON)) {
-    //$$         TooltipHandler.setIcon(ComponentHandler.getIcon(Objects.requireNonNull(traceWrapper.getBlockHitResult())));
+    //$$     if (PluginConfig.CLIENT.getBoolean(WailaConstants.CONFIG_SHOW_ICON)) {
+    //$$         TooltipRenderer.setIcon(ComponentHandler.getIcon(Objects.requireNonNull(traceWrapper.getBlockHitResult())));
     //$$     }
-    //$$     WthitUtil_1_18.setShouldRender(true);
-    //$$     TooltipHandler.endBuild();
+    //$$     WthitUtil_1_18.setStateRender(true);
+    //$$     TooltipRenderer.endBuild();
     //$$ }
     //#endif
 }
