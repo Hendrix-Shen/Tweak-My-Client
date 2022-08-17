@@ -38,6 +38,14 @@ public abstract class MixinProblemScreen extends Screen {
     //#else
     //$$ public void renderBackground(int i) {
     //#endif
-        AutoReconnectUtil.renderXibao(this);
+        if (Configs.expXiBao) {
+            AutoReconnectUtil.renderXibao(this);
+        } else {
+            //#if MC > 11502
+            super.renderBackground(poseStack, i);
+            //#else
+            //$$ super.renderBackground(i);
+            //#endif
+        }
     }
 }
