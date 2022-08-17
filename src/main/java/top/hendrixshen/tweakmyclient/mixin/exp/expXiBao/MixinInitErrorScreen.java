@@ -9,7 +9,7 @@ import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Dependencies(and = @Dependency("notenoughcrashes"))
-@Mixin(value = InitErrorScreen.class, remap = false)
+@Mixin(value = InitErrorScreen.class)
 public class MixinInitErrorScreen {
     @ModifyArg(
             method = "render",

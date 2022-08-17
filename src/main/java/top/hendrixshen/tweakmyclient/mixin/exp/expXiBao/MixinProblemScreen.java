@@ -14,7 +14,7 @@ import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.util.AutoReconnectUtil;
 
 @Dependencies(and = @Dependency("notenoughcrashes"))
-@Mixin(value = ProblemScreen.class, remap = false)
+@Mixin(value = ProblemScreen.class)
 public abstract class MixinProblemScreen extends Screen {
     protected MixinProblemScreen(Component component) {
         super(component);

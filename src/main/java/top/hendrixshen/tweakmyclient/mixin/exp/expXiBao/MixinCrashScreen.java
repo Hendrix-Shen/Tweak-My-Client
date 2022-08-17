@@ -12,7 +12,7 @@ import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Dependencies(and = @Dependency("notenoughcrashes"))
-@Mixin(value = CrashScreen.class, remap = false)
+@Mixin(value = CrashScreen.class)
 public abstract class MixinCrashScreen extends ProblemScreen {
     protected MixinCrashScreen(CrashReport report) {
         super(report);
