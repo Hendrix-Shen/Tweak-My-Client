@@ -1,7 +1,6 @@
 package top.hendrixshen.tweakmyclient;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import top.hendrixshen.magiclib.config.Option;
 import top.hendrixshen.magiclib.dependency.annotation.OptionDependencyPredicate;
 import top.hendrixshen.tweakmyclient.config.Configs;
@@ -39,7 +38,7 @@ public class TweakMyClientPredicate {
         }
     }
 
-    public static class ExpXibao implements OptionDependencyPredicate {
+    public static class ExpXiBao implements OptionDependencyPredicate {
         @Override
         public boolean test(Option option) {
             return Configs.debugExperimentalMode && Configs.debugMode &&

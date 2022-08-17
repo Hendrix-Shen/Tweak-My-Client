@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.options.ConfigHotkey;
 import fi.dy.masa.malilib.util.Color4f;
 import fi.dy.masa.malilib.util.StringUtils;
+import sun.misc.Unsafe;
 import top.hendrixshen.magiclib.config.ConfigManager;
 import top.hendrixshen.magiclib.config.annotation.Config;
 import top.hendrixshen.magiclib.config.annotation.Hotkey;
@@ -13,7 +14,6 @@ import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientPredicate;
 import top.hendrixshen.tweakmyclient.event.CallBacks;
-import top.hendrixshen.tweakmyclient.fakeInterface.IMinecraft;
 import top.hendrixshen.tweakmyclient.helper.*;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
@@ -353,8 +353,16 @@ public class Configs {
     @Config(category = ConfigCategory.DEBUG, dependencies = @Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.17")), predicate = TweakMyClientPredicate.ExperimentalMode.class)
     public static boolean expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock = false;
 
-    @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.ExpXibao.class)
-    public static boolean expXibao = false;
+    @Hotkey
+    @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.ExperimentalMode.class)
+    public static ConfigHotkey expNullPointerExceptionTest;
+
+    @Hotkey
+    @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.ExperimentalMode.class)
+    public static ConfigHotkey expUnsafeIllegalAllocateTest;
+
+    @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.ExpXiBao.class)
+    public static boolean expXiBao = false;
 
     public static void initCallbacks(ConfigManager cm) {
         // Set callback for all BooleanHotkeyed config.
@@ -393,6 +401,8 @@ public class Configs {
         cm.setValueChangeCallback("disableRenderToast", CallBacks::disableRenderToastCallback);
 
         // Debug config callbacks.
+        expNullPointerExceptionTest.getKeybind().setCallback(CallBacks::expNullPointerExceptionTestCallback);
+        expUnsafeIllegalAllocateTest.getKeybind().setCallback(CallBacks::expUnsafeIllegalAllocateTestCallback);
         cm.setValueChangeCallback("debugMode", CallBacks::debugModeCallBack);
         cm.setValueChangeCallback("debugExperimentalMode", CallBacks::debugExperimentalModeCallBack);
 

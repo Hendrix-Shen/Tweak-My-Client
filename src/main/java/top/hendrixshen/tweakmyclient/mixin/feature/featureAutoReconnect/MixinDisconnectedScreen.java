@@ -50,7 +50,7 @@ public class MixinDisconnectedScreen extends Screen {
 
     @Override
     public void renderDirtBackground(int i) {
-        if (Configs.expXibao && TweakMyClientPredicate.xibaoLang.contains(TweakMyClient.getMinecraftClient().options.languageCode)) {
+        if (Configs.expXiBao && TweakMyClientPredicate.xibaoLang.contains(TweakMyClient.getMinecraftClient().options.languageCode)) {
             AutoReconnectUtil.renderXibao(this);
             return;
         }

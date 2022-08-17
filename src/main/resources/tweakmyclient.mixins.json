@@ -34,6 +34,9 @@
     "disable.disableSlowdown.MixinWebBlock",
     "disable.disableSlowdown.tweakeroo.MixinSlimeBlock",
     "disable.disableSwimming.MixinPlayer",
+    "exp.expXiBao.MixinCrashScreen",
+    "exp.expXiBao.MixinInitErrorScreen",
+    "exp.expXiBao.MixinProblemScreen",
     "feature.featureAutoClimb.MixinLocalPlayer",
     "feature.featureAutoDrop.MixinLocalPlayer",
     "feature.featureAutoReconnect.MixinDisconnectedScreen",
@@ -61,10 +64,10 @@
     "patch.endPortalRendererFix.MixinTheEndPortalRenderer",
     "patch.forceDebugInfoDetailed.MixinPlayer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem",
-    "patch.litematicaSchematicWailaCompat.wthit.MixinClientTickHandler",
     "patch.litematicaSchematicWailaCompat.MixinLocalPlayer",
     "patch.litematicaSchematicWailaCompat.hwyla.MixinOverlayRenderer",
     "patch.litematicaSchematicWailaCompat.jade.MixinOverlayRenderer",
+    "patch.litematicaSchematicWailaCompat.wthit.MixinClientTickHandler",
     "patch.litematicaSchematicWailaCompat.wthit.MixinTickHandler"
   ],
   "injectors": {

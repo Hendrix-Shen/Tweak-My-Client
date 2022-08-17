@@ -13,6 +13,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.config.Configurator;
+import sun.misc.Unsafe;
 import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
 import top.hendrixshen.magiclib.config.Option;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
@@ -24,7 +25,22 @@ import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 import top.hendrixshen.tweakmyclient.util.InfoUtil;
 import top.hendrixshen.tweakmyclient.util.InventoryUtil;
 
+import java.lang.reflect.Field;
+
 public class CallBacks {
+    private static Unsafe UNSAFE = null;
+
+    static {
+        try {
+            Class<?> unsafe = Class.forName("sun.misc.Unsafe");
+            Field field = unsafe.getDeclaredField("theUnsafe");
+            field.setAccessible(true);
+            CallBacks.UNSAFE = (Unsafe) field.get(null);
+        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
+            TweakMyClient.getLogger().error("Cannot access unsafe class, disabled some feature!");
+        }
+    }
+
     public static boolean getTargetBlockPositionCallback(KeyAction keyAction, IKeybind keybind) {
         Minecraft minecraft = TweakMyClient.getMinecraftClient();
         Entity cameraEntity = minecraft.cameraEntity;
@@ -159,5 +175,19 @@ public class CallBacks {
     public static void customWindowTitleEnableActivityCallback(Option option) {
         CallBacks.featureCustomWindowTitleCallback(option);
         CallBacks.reDrawConfigGui(option);
+    }
+
+    public static boolean expNullPointerExceptionTestCallback(KeyAction keyAction, IKeybind iKeybind) {
+        if (Configs.debugMode && Configs.debugExperimentalMode) {
+            throw new NullPointerException("Test NullPointerException!");
+        }
+        return true;
+    }
+
+    public static boolean expUnsafeIllegalAllocateTestCallback(KeyAction keyAction, IKeybind iKeybind) {
+        if (Configs.debugMode && Configs.debugExperimentalMode && CallBacks.UNSAFE != null) {
+            CallBacks.UNSAFE.putAddress(0, 0);
+        }
+        return true;
     }
 }
