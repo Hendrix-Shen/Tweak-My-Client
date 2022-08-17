@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.options.ConfigHotkey;
 import fi.dy.masa.malilib.util.Color4f;
 import fi.dy.masa.malilib.util.StringUtils;
-import sun.misc.Unsafe;
 import top.hendrixshen.magiclib.config.ConfigManager;
 import top.hendrixshen.magiclib.config.annotation.Config;
 import top.hendrixshen.magiclib.config.annotation.Hotkey;
@@ -359,7 +358,7 @@ public class Configs {
 
     @Hotkey
     @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.ExperimentalMode.class)
-    public static ConfigHotkey expUnsafeIllegalAllocateTest;
+    public static ConfigHotkey expUnsafeIllegalPutTest;
 
     @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.ExpXiBao.class)
     public static boolean expXiBao = false;
@@ -402,7 +401,7 @@ public class Configs {
 
         // Debug config callbacks.
         expNullPointerExceptionTest.getKeybind().setCallback(CallBacks::expNullPointerExceptionTestCallback);
-        expUnsafeIllegalAllocateTest.getKeybind().setCallback(CallBacks::expUnsafeIllegalAllocateTestCallback);
+        expUnsafeIllegalPutTest.getKeybind().setCallback(CallBacks::expUnsafeIllegalAllocateTestCallback);
         cm.setValueChangeCallback("debugMode", CallBacks::debugModeCallBack);
         cm.setValueChangeCallback("debugExperimentalMode", CallBacks::debugExperimentalModeCallBack);
 

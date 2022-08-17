@@ -196,8 +196,8 @@
     "tweakmyclient.config.debug.expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock.comment": "实验性功能.",
     "tweakmyclient.config.debug.expNullPointerExceptionTest.name": "§e实验性NullPointerException测试",
     "tweakmyclient.config.debug.expNullPointerExceptionTest.comment": "实验性功能.",
-    "tweakmyclient.config.debug.expUnsafeIllegalAllocateTest.name": "§e实验性Unsafe非法申请测试",
-    "tweakmyclient.config.debug.expUnsafeIllegalAllocateTest.comment": "实验性功能.",
+    "tweakmyclient.config.debug.expUnsafeIllegalPutTest.name": "§e实验性Unsafe非法写入测试",
+    "tweakmyclient.config.debug.expUnsafeIllegalPutTest.comment": "实验性功能.",
     "tweakmyclient.config.debug.expXiBao.name": "§e喜报",
     "tweakmyclient.config.debug.expXiBao.comment": "实验性功能.",
 

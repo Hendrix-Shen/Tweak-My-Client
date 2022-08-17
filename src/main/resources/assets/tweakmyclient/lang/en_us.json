@@ -196,8 +196,8 @@
     "tweakmyclient.config.debug.expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock.comment": "Experimental functions.",
     "tweakmyclient.config.debug.expNullPointerExceptionTest.name": "§eexpNullPointerExceptionTest",
     "tweakmyclient.config.debug.expNullPointerExceptionTest.comment": "Experimental functions.",
-    "tweakmyclient.config.debug.expUnsafeIllegalAllocateTest.name": "§eexpUnsafeIllegalAllocateTest",
-    "tweakmyclient.config.debug.expUnsafeIllegalAllocateTest.comment": "Experimental functions.",
+    "tweakmyclient.config.debug.expUnsafeIllegalPutTest.name": "§eexpUnsafeIllegalPutTest",
+    "tweakmyclient.config.debug.expUnsafeIllegalPutTest.comment": "Experimental functions.",
     "tweakmyclient.config.debug.expXiBao.name": "§eexpXiBao",
     "tweakmyclient.config.debug.expXiBao.comment": "Experimental functions.",
 
