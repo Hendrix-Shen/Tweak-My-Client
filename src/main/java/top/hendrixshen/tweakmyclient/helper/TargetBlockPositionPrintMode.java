@@ -3,7 +3,7 @@ package top.hendrixshen.tweakmyclient.helper;
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import top.hendrixshen.tweakmyclient.util.StringUtil;
 
-public enum TargetBlockPositionPrintMode implements IConfigOptionListEntry {
+public enum TargetBlockPositionPrintMode implements ConfigOptionListEntryApi {
     PUBLIC("public"),
     PRIVATE("private");
 
@@ -25,27 +25,16 @@ public enum TargetBlockPositionPrintMode implements IConfigOptionListEntry {
 
     @Override
     public IConfigOptionListEntry cycle(boolean forward) {
-        int id = this.ordinal();
-
-        if (forward) {
-            if (++id >= values().length) {
-                id = 0;
-            }
-        } else {
-            if (--id < 0) {
-                id = values().length - 1;
-            }
-        }
-        return values()[id % values().length];
+        return ConfigOptionListEntryHelper.cycle(forward, this.ordinal(), TargetBlockPositionPrintMode.values());
     }
 
     @Override
     public IConfigOptionListEntry fromString(String value) {
-        for (TargetBlockPositionPrintMode mode : TargetBlockPositionPrintMode.values()) {
-            if (mode.name.equalsIgnoreCase(value)) {
-                return mode;
-            }
-        }
-        return TargetBlockPositionPrintMode.PRIVATE;
+        return ConfigOptionListEntryHelper.fromString(value, TargetBlockPositionPrintMode.PRIVATE, TargetBlockPositionPrintMode.values());
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }

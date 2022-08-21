@@ -3,7 +3,7 @@ package top.hendrixshen.tweakmyclient.helper;
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import top.hendrixshen.tweakmyclient.util.StringUtil;
 
-public enum BreakAnimationMode implements IConfigOptionListEntry {
+public enum BreakAnimationMode implements ConfigOptionListEntryApi {
     DOWN("down"),
     NONE("none"),
     SHRINK("shrink");
@@ -26,27 +26,16 @@ public enum BreakAnimationMode implements IConfigOptionListEntry {
 
     @Override
     public IConfigOptionListEntry cycle(boolean forward) {
-        int id = this.ordinal();
-
-        if (forward) {
-            if (++id >= values().length) {
-                id = 0;
-            }
-        } else {
-            if (--id < 0) {
-                id = values().length - 1;
-            }
-        }
-        return values()[id % values().length];
+        return ConfigOptionListEntryHelper.cycle(forward, this.ordinal(), BreakAnimationMode.values());
     }
 
     @Override
     public IConfigOptionListEntry fromString(String value) {
-        for (BreakAnimationMode mode : BreakAnimationMode.values()) {
-            if (mode.name.equalsIgnoreCase(value)) {
-                return mode;
-            }
-        }
-        return BreakAnimationMode.NONE;
+        return ConfigOptionListEntryHelper.fromString(value, BreakAnimationMode.NONE, BreakAnimationMode.values());
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }

@@ -1,9 +1,8 @@
 package top.hendrixshen.tweakmyclient.helper;
 
-import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import top.hendrixshen.tweakmyclient.util.StringUtil;
 
-public enum AutoDropListType implements IConfigOptionListEntry {
+public enum AutoDropListType implements ConfigOptionListEntryApi {
     BLACKLIST("blackList"),
     WHITELIST("whiteList");
 
@@ -24,28 +23,17 @@ public enum AutoDropListType implements IConfigOptionListEntry {
     }
 
     @Override
-    public IConfigOptionListEntry cycle(boolean forward) {
-        int id = this.ordinal();
-
-        if (forward) {
-            if (++id >= values().length) {
-                id = 0;
-            }
-        } else {
-            if (--id < 0) {
-                id = values().length - 1;
-            }
-        }
-        return values()[id % values().length];
+    public ConfigOptionListEntryApi cycle(boolean forward) {
+        return ConfigOptionListEntryHelper.cycle(forward, this.ordinal(), AutoDropListType.values());
     }
 
     @Override
-    public IConfigOptionListEntry fromString(String value) {
-        for (AutoDropListType mode : AutoDropListType.values()) {
-            if (mode.name.equalsIgnoreCase(value)) {
-                return mode;
-            }
-        }
-        return AutoDropListType.WHITELIST;
+    public ConfigOptionListEntryApi fromString(String value) {
+        return ConfigOptionListEntryHelper.fromString(value, AutoDropListType.WHITELIST, AutoDropListType.values());
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }
