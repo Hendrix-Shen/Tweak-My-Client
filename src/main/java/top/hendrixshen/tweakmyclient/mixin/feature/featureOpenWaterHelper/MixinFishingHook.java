@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import top.hendrixshen.tweakmyclient.fakeInterface.IFishingHookEntity;
 
 @Mixin(FishingHook.class)
-public class MixinFishingHook implements IFishingHookEntity {
+public abstract class MixinFishingHook implements IFishingHookEntity {
 //#else
 //$$ @Mixin(Minecraft.class)
 //$$ public class MixinFishingHook {
@@ -20,12 +20,9 @@ public class MixinFishingHook implements IFishingHookEntity {
     //#if MC >= 11600
     @Override
     public boolean checkOpenWaterAround(BlockPos pos) {
-        return calculateOpenWater(pos);
+        return this.calculateOpenWater(pos);
     }
 
-    @Shadow
-    private boolean calculateOpenWater(BlockPos pos) {
-        return false;
-    }
+    @Shadow protected abstract boolean calculateOpenWater(BlockPos blockPos);
     //#endif
 }
