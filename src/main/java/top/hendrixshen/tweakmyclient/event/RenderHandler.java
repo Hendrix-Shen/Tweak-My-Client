@@ -1,5 +1,6 @@
 package top.hendrixshen.tweakmyclient.event;
 
+import com.google.common.collect.Lists;
 //#if MC >= 11500
 import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
@@ -7,21 +8,24 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Matrix4f;
 //#endif
 import fi.dy.masa.malilib.interfaces.IRenderer;
-import net.minecraft.client.Minecraft;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
-import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.util.render.OverlayRenderer;
+
+import java.util.List;
 
 public class RenderHandler implements IRenderer {
     private static final RenderHandler INSTANCE = new RenderHandler();
-    private final Minecraft minecraft;
-
-    public RenderHandler() {
-        this.minecraft = TweakMyClient.getMinecraftClient();
-    }
+    private final List<top.hendrixshen.tweakmyclient.util.render.IRenderer> worldLastRenderer = Lists.newArrayList();
 
     public static RenderHandler getInstance() {
         return INSTANCE;
+    }
+
+    public void registerWorldLastRenderer(top.hendrixshen.tweakmyclient.util.render.IRenderer renderer) {
+        if (this.worldLastRenderer.contains(renderer)) {
+            TweakMyClient.getLogger().warn("Renderer {} has been registered!", renderer);
+            return;
+        }
+        this.worldLastRenderer.add(renderer);
     }
 
     @Override
@@ -32,13 +36,10 @@ public class RenderHandler implements IRenderer {
     //#else
     //$$ public void onRenderWorldLast(float partialTicks) {
     //#endif
-        //#if MC >= 11600
-        if (Configs.featureOpenWaterHelper) {
-            OverlayRenderer.getInstance().renderOpenWater(minecraft);
-        }
-        //#endif
-        if (Configs.featureCustomBlockHitBoxOverlayFill || Configs.featureCustomBlockHitBoxOverlayOutline) {
-            OverlayRenderer.getInstance().renderBlockOverlay(minecraft);
+        for (top.hendrixshen.tweakmyclient.util.render.IRenderer renderer : this.worldLastRenderer) {
+            if (renderer.shouldRender()) {
+                renderer.render();
+            }
         }
     }
 }

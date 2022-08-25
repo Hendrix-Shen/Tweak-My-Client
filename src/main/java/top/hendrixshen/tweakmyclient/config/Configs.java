@@ -146,6 +146,15 @@ public class Configs {
     public static ArrayList<String> listAutoDropWhiteList = Lists.newArrayList("minecraft:stone", "minecraft:dirt", "minecraft:cobblestone", "minecraft:gravel", "minecraft:rotten_flesh");
 
     @Config(category = ConfigCategory.LIST)
+    public static ArrayList<String> listBreakingRestrictionBoxBlacklist = Lists.newArrayList("-1 -1 -1 1 1 1");
+
+    @Config(category = ConfigCategory.LIST)
+    public static BreakingRestrictionBoxType listBreakingRestrictionBoxType = BreakingRestrictionBoxType.WHITELIST;
+
+    @Config(category = ConfigCategory.LIST)
+    public static ArrayList<String> listBreakingRestrictionBoxWhitelist = Lists.newArrayList("-1 -1 -1 1 1 1");
+
+    @Config(category = ConfigCategory.LIST)
     public static ArrayList<String> listCustomWindowTitle = Lists.newArrayList("Minecraft {mc_version} with TweakMyClient {tmc_version} | Player {mc_username} | FPS: {mc_fps}");
 
     @Config(category = ConfigCategory.LIST, dependencies = @Dependencies(not = @Dependency(value = "minecraft", versionPredicate = "<1.15"), predicate = TweakMyClientPredicate.CustomWindowTitleEnableActivity.class))
@@ -169,6 +178,12 @@ public class Configs {
 
     @Config(category = ConfigCategory.COLOR)
     public static Color4f colorBlockHitBoxOverlayFill = Color4f.fromColor(StringUtils.getColor("#2CFFFF10", 0));
+
+    @Config(category = ConfigCategory.COLOR)
+    public static Color4f colorBreakingRestrictionBoxBlacklistMode = Color4f.fromColor(StringUtils.getColor("#7FFF0000", 0));
+
+    @Config(category = ConfigCategory.COLOR)
+    public static Color4f colorBreakingRestrictionBoxWhitelistMode = Color4f.fromColor(StringUtils.getColor("#7F00FF00", 0));
 
     @Config(category = ConfigCategory.COLOR)
     public static Color4f colorGuiStart = Color4f.fromColor(StringUtils.getColor("#C00F0F0F", 0));
@@ -204,6 +219,10 @@ public class Configs {
     @Hotkey()
     @Config(category = ConfigCategory.FEATURE)
     public static boolean featureAutoRespawn = false;
+
+    @Hotkey()
+    @Config(category = ConfigCategory.FEATURE)
+    public static boolean featureBreakingRestrictionBox = false;
 
     @Hotkey()
     @Config(category = ConfigCategory.FEATURE)

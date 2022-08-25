@@ -11,6 +11,11 @@ import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.ConfigHandler;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.event.RenderHandler;
+import top.hendrixshen.tweakmyclient.util.render.CustomBlockHitBoxRenderer;
+//#if MC >= 11600
+import top.hendrixshen.tweakmyclient.util.render.OpenWaterHelperRenderer;
+//#endif
+import top.hendrixshen.tweakmyclient.util.render.RestrictionBoxRenderer;
 
 public class TweakMyClient implements ClientModInitializer {
     private static final Logger logger = LogManager.getLogger(TweakMyClientReference.getModId());
@@ -43,6 +48,11 @@ public class TweakMyClient implements ClientModInitializer {
         ConfigHandler.register(configHandler);
         Configs.initCallbacks(configHandler.configManager);
         RenderEventHandler.getInstance().registerWorldLastRenderer(RenderHandler.getInstance());
+        RenderHandler.getInstance().registerWorldLastRenderer(CustomBlockHitBoxRenderer.getInstance());
+        //#if MC >= 11600
+        RenderHandler.getInstance().registerWorldLastRenderer(OpenWaterHelperRenderer.getInstance());
+        //#endif
+        RenderHandler.getInstance().registerWorldLastRenderer(RestrictionBoxRenderer.getInstance());
 
         logger.info("[{}]: Mod initialized - Version: {} ({})", TweakMyClientReference.getModName(), TweakMyClientReference.getModVersion(), TweakMyClientReference.getModVersionType());
     }

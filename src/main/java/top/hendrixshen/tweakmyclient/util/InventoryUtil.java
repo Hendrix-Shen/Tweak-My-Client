@@ -16,7 +16,7 @@ import net.minecraft.world.item.Items;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.helper.AutoDropListType;
-import top.hendrixshen.tweakmyclient.helper.ListCache;
+import top.hendrixshen.tweakmyclient.helper.Cache;
 
 public class InventoryUtil {
     public static void doDrop() {
@@ -45,13 +45,13 @@ public class InventoryUtil {
                 AutoDropListType mode = Configs.listAutoDropType;
                 switch (mode) {
                     case BLACKLIST:
-                        if (!ListCache.itemAutoDropBlackList.contains(stack.getItem())) {
+                        if (!Cache.getInstance().getAutoDropBlackList().contains(stack.getItem())) {
                             //handleInventoryMouseClick(MultiPlayerGameMode interactionManager, int containerId, int slot, int button, ClickType clickType, Player player)
                             interactionManager.handleInventoryMouseClick(0, slot, 1, ClickType.THROW, localPlayer);
                         }
                         break;
                     case WHITELIST:
-                        if (ListCache.itemAutoDropWhiteList.contains(stack.getItem())) {
+                        if (Cache.getInstance().getAutoDropWhiteList().contains(stack.getItem())) {
                             interactionManager.handleInventoryMouseClick(0, slot, 1, ClickType.THROW, localPlayer);
                         }
                         break;

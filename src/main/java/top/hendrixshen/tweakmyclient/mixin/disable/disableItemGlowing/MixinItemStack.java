@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.helper.ListCache;
+import top.hendrixshen.tweakmyclient.helper.Cache;
 
 @Mixin(ItemStack.class)
 public abstract class MixinItemStack {
@@ -31,7 +31,7 @@ public abstract class MixinItemStack {
         if (Configs.disableItemGlowing) {
             String itemStackID = Registry.ITEM.getKey(this.getItem()).toString();
             String itemStackName = this.getDisplayName().getString();
-            if (ListCache.itemGlowingBlacklist.contains(this.getItem()) ||
+            if (Cache.getInstance().getItemGlowingBlackList().contains(this.getItem()) ||
                     Configs.listItemGlowingBlacklist.stream().anyMatch((s -> itemStackID.contains(s) || itemStackName.contains(s)))) {
                 cir.setReturnValue(false);
             }

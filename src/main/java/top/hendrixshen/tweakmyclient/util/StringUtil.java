@@ -9,15 +9,18 @@ import net.minecraft.core.Registry;
 //#endif
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import top.hendrixshen.magiclib.language.I18n;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
+import top.hendrixshen.tweakmyclient.helper.AreaBox;
 
 import java.util.HashSet;
 import java.util.List;
 
 public class StringUtil {
-    public static HashSet<Item> getItemStackSets(List<String> items) {
+    public static @NotNull HashSet<Item> getItemStackSets(@NotNull List<String> items) {
         HashSet<Item> itemStackSet = new HashSet<>();
         for (String str : items) {
             ItemStack stack = StringUtil.toItemStack(str);
@@ -52,8 +55,33 @@ public class StringUtil {
         } catch (CommandSyntaxException e) {
             TweakMyClient.getLogger().debug("Invalid item '{}'", string);
         }
-
         return ItemStack.EMPTY;
+    }
+
+    public static @NotNull HashSet<AreaBox> getAreaBoxSets(@NotNull List<String> poses) {
+        HashSet<AreaBox> areaBoxes = new HashSet<>();
+        for (String str : poses) {
+            AreaBox areaBox = StringUtil.toAreaBox(str);
+
+            if (areaBox != null) {
+                areaBoxes.add(areaBox);
+            }
+        }
+        return areaBoxes;
+    }
+
+    @Nullable
+    public static AreaBox toAreaBox(@NotNull String string) {
+        String[] split = string.split(" ");
+        if (split.length == 6) {
+            try {
+                return new AreaBox(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]),
+                        Integer.parseInt(split[3]), Integer.parseInt(split[4]), Integer.parseInt(split[5]));
+            } catch (NumberFormatException e) {
+                TweakMyClient.getLogger().debug("Invalid area '{}'", string);
+            }
+        }
+        return null;
     }
 
     public static String tr(String key, Object... objects) {

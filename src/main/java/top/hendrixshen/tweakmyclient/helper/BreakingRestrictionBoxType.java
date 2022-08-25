@@ -2,13 +2,13 @@ package top.hendrixshen.tweakmyclient.helper;
 
 import top.hendrixshen.tweakmyclient.util.StringUtil;
 
-public enum AutoDropListType implements ConfigOptionListEntryApi {
+public enum BreakingRestrictionBoxType implements ConfigOptionListEntryApi {
     BLACKLIST("blackList"),
     WHITELIST("whiteList");
 
     private final String name;
 
-    AutoDropListType(String name) {
+    BreakingRestrictionBoxType(String name) {
         this.name = name;
     }
 
@@ -24,12 +24,12 @@ public enum AutoDropListType implements ConfigOptionListEntryApi {
 
     @Override
     public ConfigOptionListEntryApi cycle(boolean forward) {
-        return ConfigOptionListEntryHelper.cycle(forward, this.ordinal(), AutoDropListType.values());
+        return ConfigOptionListEntryHelper.cycle(forward, this.ordinal(), BreakingRestrictionBoxType.values());
     }
 
     @Override
     public ConfigOptionListEntryApi fromString(String value) {
-        return ConfigOptionListEntryHelper.fromString(value, AutoDropListType.WHITELIST, AutoDropListType.values());
+        return ConfigOptionListEntryHelper.fromString(value, BreakingRestrictionBoxType.WHITELIST, BreakingRestrictionBoxType.values());
     }
 
     @Override
