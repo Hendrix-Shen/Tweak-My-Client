@@ -13,11 +13,10 @@ import top.hendrixshen.tweakmyclient.util.InventoryUtil;
 
 @Mixin(LocalPlayer.class)
 public abstract class MixinLocalPlayer extends LivingEntity {
+    private int autoDropTimer;
     protected MixinLocalPlayer(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
     }
-
-    private int autoDropTimer;
 
     @Inject(
             method = "tick",

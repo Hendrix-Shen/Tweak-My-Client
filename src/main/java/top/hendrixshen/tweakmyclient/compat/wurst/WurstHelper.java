@@ -32,7 +32,7 @@ public class WurstHelper {
             try {
                 return (boolean) WurstHelper.isNoSlowdownHackInstance.invoke(WurstHelper.noSlowdownHackInstance);
             } catch (IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }
         return false;

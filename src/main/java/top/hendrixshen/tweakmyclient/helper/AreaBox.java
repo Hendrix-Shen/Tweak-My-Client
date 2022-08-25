@@ -1,6 +1,5 @@
 package top.hendrixshen.tweakmyclient.helper;
 
-import fi.dy.masa.malilib.util.IntBoundingBox;
 import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
