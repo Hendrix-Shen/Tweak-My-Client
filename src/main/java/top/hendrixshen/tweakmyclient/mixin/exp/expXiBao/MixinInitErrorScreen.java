@@ -15,9 +15,19 @@ public class MixinInitErrorScreen {
             method = "render",
             at = @At(
                     value = "INVOKE",
+                    //#if MC > 11605
                     target = "Lfudge/notenoughcrashes/gui/InitErrorScreen;drawCenteredString(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V"
+                    //#elseif MC > 11502
+                    //$$ target = "Lfudge/notenoughcrashes/gui/InitErrorScreen;drawCenteredString(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V"
+                    //#else
+                    //$$ target = "Lfudge/notenoughcrashes/gui/InitErrorScreen;drawCenteredString(Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V"
+                    //#endif
             ),
+            //#if MC > 11502
             index = 4
+            //#else
+            //$$ index = 3
+            //#endif
     )
     private int offsetTitle(int value) {
         return Configs.expXiBao ? value + 25 : value;
@@ -27,9 +37,17 @@ public class MixinInitErrorScreen {
             method = "render",
             at = @At(
                     value = "INVOKE",
+                    //#if MC > 11502
                     target = "Lfudge/notenoughcrashes/gui/InitErrorScreen;drawString(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V"
+                    //#else
+                    //$$ target = "Lfudge/notenoughcrashes/gui/InitErrorScreen;drawString(Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V"
+                    //#endif
             ),
+            //#if MC > 11502
             index = 4
+            //#else
+            //$$ index = 3
+            //#endif
     )
     private int offsetContent(int value) {
         return Configs.expXiBao ? value + 15 : value;
@@ -39,9 +57,17 @@ public class MixinInitErrorScreen {
             method = "render",
             at = @At(
                     value = "INVOKE",
+                    //#if MC > 11502
                     target = "Lfudge/notenoughcrashes/gui/InitErrorScreen;drawFileNameString(Lcom/mojang/blaze3d/vertex/PoseStack;I)V"
+                    //#else
+                    //$$ target = "Lfudge/notenoughcrashes/gui/InitErrorScreen;drawFileNameString(I)V"
+                    //#endif
             ),
+            //#if MC > 11502
             index = 1
+            //#else
+            //$$ index = 0
+            //#endif
     )
     private int offsetFileName(int value) {
         return Configs.expXiBao ? value + 15 : value;
