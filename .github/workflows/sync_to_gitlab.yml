@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the sources
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Sync to GitLab
         uses: pixta-dev/repository-mirroring-action@v1
         with:
