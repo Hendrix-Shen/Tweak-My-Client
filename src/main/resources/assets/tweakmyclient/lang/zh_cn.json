@@ -199,6 +199,8 @@
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "镐子将不再作为活塞的有效开采工具.",
     "tweakmyclient.config.patch.litematicaSchematicWailaCompat.name": "投影蓝图Waila兼容",
     "tweakmyclient.config.patch.litematicaSchematicWailaCompat.comment": "使 Waila 兼容展示投影蓝图.\n- 对于 1.18 及以上版本, 支持 Jade. (推荐)\n- 对于 1.16 及以上版本, 支持 Wthit.\n- 对于 1.15 及以下版本, 支持 Hwyla.",
+    "tweakmyclient.config.patch.notEnoughCrashesBlueScreenOfDeath.name": "NotEnoughCrashes蓝屏模拟",
+    "tweakmyclient.config.patch.notEnoughCrashesBlueScreenOfDeath.comment": "NotEnoughCrashes 拦截崩溃时，模拟Windows蓝屏死机界面.",
 
     "tweakmyclient.config.debug.debugMode.name": "调试模式",
     "tweakmyclient.config.debug.debugMode.comment": "启用调试模式.",

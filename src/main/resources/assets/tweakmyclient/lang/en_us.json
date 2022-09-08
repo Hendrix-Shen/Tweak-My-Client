@@ -199,6 +199,8 @@
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "The pickaxe will no longer be used as an effective mining tool for pistons.",
     "tweakmyclient.config.patch.litematicaSchematicWailaCompat.name": "litematicaSchematicWailaCompat",
     "tweakmyclient.config.patch.litematicaSchematicWailaCompat.comment": "Make WAILA compatible to show litematica schematic.\n- For 1.18 and above, Jade is supported. (Recommend)\n- For 1.16 and above, Wthit is supported.\n- For 1.15 and below, Hwyla is supported.",
+    "tweakmyclient.config.patch.notEnoughCrashesBlueScreenOfDeath.name": "notEnoughCrashesBlueScreenOfDeath",
+    "tweakmyclient.config.patch.notEnoughCrashesBlueScreenOfDeath.comment": "Simulate Windows blue screen of death when Not Enough Crashes intercept game crashes.",
 
     "tweakmyclient.config.debug.debugMode.name": "debugMode",
     "tweakmyclient.config.debug.debugMode.comment": "Enable debug mode.",

@@ -5,9 +5,9 @@
   "plugin": "top.hendrixshen.tweakmyclient.TweakMyClientMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "patch.notEnoughCrashesBlueScreenOfDeath.MixinInGameCatcher"
   ],
   "client": [
-    "feature.featureBreakingRestriction.MixinMultiPlayerGameMode",
     "accessor.MultiPlayerGameModeAccessor",
     "accessor.PlayerTabOverlayAccessor",
     "disable.disableAttackEntity.MixinMinecraft",
@@ -35,15 +35,13 @@
     "disable.disableSlowdown.MixinWebBlock",
     "disable.disableSlowdown.tweakeroo.MixinSlimeBlock",
     "disable.disableSwimming.MixinPlayer",
-    "exp.expXiBao.MixinCrashScreen",
-    "exp.expXiBao.MixinInitErrorScreen",
-    "exp.expXiBao.MixinProblemScreen",
     "feature.featureAutoClimb.MixinLocalPlayer",
     "feature.featureAutoDrop.MixinLocalPlayer",
     "feature.featureAutoReconnect.MixinDisconnectedScreen",
     "feature.featureAutoReconnect.MixinMinecraft",
     "feature.featureAutoReconnect.MixinScreen",
     "feature.featureAutoRespawn.MixinDeathScreen",
+    "feature.featureBreakingRestriction.MixinMultiPlayerGameMode",
     "feature.featureCustomBlockHitBoxOverlayOutline.MixinLevelRenderer",
     "feature.featureCustomGuiBackgroundColor.MixinScreen",
     "feature.featureCustomSidebarBackgroundColor.MixinGui",
