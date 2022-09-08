@@ -398,9 +398,8 @@ public class Configs {
         getTargetBlockPosition.getKeybind().setCallback(CallBacks::getTargetBlockPositionCallback);
         openConfigGui.getKeybind().setCallback(CallBacks::openConfigGuiCallback);
         memoryCleaner.getKeybind().setCallback(CallBacks::memoryCleanerCallback);
+        syncBlocks.getKeybind().setCallback(CallBacks::syncBlocksCallback);
         syncInventory.getKeybind().setCallback(CallBacks::syncInventoryCallback);
-        syncBlocks.getKeybind().setCallback(CallBacks::syncBlocksCallback);
-        syncBlocks.getKeybind().setCallback(CallBacks::syncBlocksCallback);
 
         cm.setValueChangeCallback("customWindowTitleEnableActivity", CallBacks::customWindowTitleEnableActivityCallback);
         cm.setValueChangeCallback("customWindowTitleRandomly", CallBacks::featureCustomWindowTitleCallback);

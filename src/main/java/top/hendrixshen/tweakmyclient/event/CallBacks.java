@@ -110,8 +110,9 @@ public class CallBacks {
     public static boolean syncBlocksCallback(KeyAction keyAction, IKeybind keybind) {
         Minecraft minecraftClient = TweakMyClient.getMinecraftClient();
         ClientPacketListener clientPlayNetworkHandler = minecraftClient.getConnection();
-        assert minecraftClient.player != null;
-        assert clientPlayNetworkHandler != null;
+        if (minecraftClient.player == null || clientPlayNetworkHandler == null) {
+            return true;
+        }
         BlockPos blockPos = minecraftClient.player.blockPosition();
         int x = blockPos.getX();
         int y = blockPos.getY();
