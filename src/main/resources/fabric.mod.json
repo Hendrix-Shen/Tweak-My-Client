@@ -30,6 +30,7 @@
   },
   "mixins": [
     "${mod_id}.mixins.json",
+    "${mod_id}-compat-meteor.mixins.json",
     "${mod_id}-compat-wurst.mixins.json"
   ],
   "depends": {

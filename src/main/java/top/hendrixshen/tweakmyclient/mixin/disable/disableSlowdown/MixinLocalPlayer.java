@@ -12,7 +12,12 @@ import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
 import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
-@Dependencies(not = @Dependency(value = "wurst"))
+@Dependencies(
+        not = {
+                @Dependency(value = "meteor-client"),
+                @Dependency(value = "wurst")
+        }
+)
 @Mixin(LocalPlayer.class)
 public abstract class MixinLocalPlayer extends LivingEntity {
     @Shadow
