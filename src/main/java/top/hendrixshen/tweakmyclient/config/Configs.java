@@ -20,13 +20,13 @@ import java.util.ArrayList;
 
 public class Configs {
     // Generic configs
-    @Numeric(maxValue = 60, minValue = 0)
-    @Config(category = ConfigCategory.GENERIC)
-    public static int autoReconnectTimer = 5;
-
     @Numeric(maxValue = 1200, minValue = 0)
     @Config(category = ConfigCategory.GENERIC)
     public static int autoDropInterval = 0;
+
+    @Numeric(maxValue = 60, minValue = 0)
+    @Config(category = ConfigCategory.GENERIC)
+    public static int autoReconnectTimer = 5;
 
     @Config(category = ConfigCategory.GENERIC, predicate = TweakMyClientPredicate.AllowBreakAnimation.class)
     public static BreakAnimationMode breakAnimationMode = BreakAnimationMode.NONE;
@@ -222,6 +222,10 @@ public class Configs {
     @Hotkey()
     @Config(category = ConfigCategory.FEATURE)
     public static boolean featureAutoRespawn = false;
+
+    @Hotkey()
+    @Config(category = ConfigCategory.FEATURE)
+    public static boolean featureAutoTotem = false;
 
     @Hotkey()
     @Config(category = ConfigCategory.FEATURE)

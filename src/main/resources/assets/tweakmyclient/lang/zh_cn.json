@@ -86,6 +86,8 @@
     "tweakmyclient.config.feature.featureAutoReconnect.comment": "从服务器断开连接时自动重新连接服务器.\n适配 AuthMe, OAuth, ReAuth 和 In-Game Account Switcher 会话验证",
     "tweakmyclient.config.feature.featureAutoRespawn.name": "自动重生",
     "tweakmyclient.config.feature.featureAutoRespawn.comment": "死亡时自动重生.",
+    "tweakmyclient.config.feature.featureAutoTotem.name": "自动移动不死图腾",
+    "tweakmyclient.config.feature.featureAutoTotem.comment": "自动将背包中的不死图腾移动至副手.\n注: 快捷栏中的不死图腾不会被移动.",
     "tweakmyclient.config.feature.featureBreakingRestrictionBox.name": "挖掘约束盒模式",
     "tweakmyclient.config.feature.featureBreakingRestrictionBox.comment": "启用盒模式挖掘约束.",
     "tweakmyclient.config.feature.featureCustomBlockHitBoxOverlayFill.name": "自定义方块碰撞箱覆盖填充",

@@ -86,6 +86,8 @@
     "tweakmyclient.config.feature.featureAutoReconnect.comment": "Automatically reconnects when you disconnect from the server.\nAdaptive AuthMe, OAuth, ReAuth and In-Game Account Switcher session validation.",
     "tweakmyclient.config.feature.featureAutoRespawn.name": "featureAutoRespawn",
     "tweakmyclient.config.feature.featureAutoRespawn.comment": "Automatically respawns you whenever you die.",
+    "tweakmyclient.config.feature.featureAutoTotem.name": "featureAutoTotem",
+    "tweakmyclient.config.feature.featureAutoTotem.comment": "Automatically moves totems of undying to your off-hand.\nNote: totems of undying in the hot bar will not be moved",
     "tweakmyclient.config.feature.featureBreakingRestrictionBox.name": "featureBreakingRestrictionBox",
     "tweakmyclient.config.feature.featureBreakingRestrictionBox.comment": "Enables the Breaking Restriction box mode.",
     "tweakmyclient.config.feature.featureCustomBlockHitBoxOverlayFill.name": "featureCustomBlockHitBoxOverlayFill",
