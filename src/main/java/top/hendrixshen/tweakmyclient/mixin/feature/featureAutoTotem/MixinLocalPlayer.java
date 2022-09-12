@@ -39,7 +39,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
             }
 
             Inventory inv = mc.player.getInventory();
-            for (int slot = 0; slot < 37; slot++) {
+            for (int slot = 9; slot < 45; slot++) {
                 if (inv.getItem(slot).isCompat(Items.TOTEM_OF_UNDYING)) {
                     MultiPlayerGameMode multiPlayerGameMode = mc.gameMode;
                     boolean isOffhandEmpty = mc.player.getOffhandItem().isEmpty();
