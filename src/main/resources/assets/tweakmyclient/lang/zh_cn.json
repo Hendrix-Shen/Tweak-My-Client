@@ -99,7 +99,7 @@
     "tweakmyclient.config.feature.featureCustomSidebarBackgroundColor.name": "自定义计分板背景颜色",
     "tweakmyclient.config.feature.featureCustomSidebarBackgroundColor.comment": "启用计分板背景色覆写.",
     "tweakmyclient.config.feature.featureCustomWindowIcon.name": "自定义窗口图标",
-    "tweakmyclient.config.feature.featureCustomWindowIcon.comment": "启用窗口图标覆写.\n你可以通过以下资源包命名空间文件来自定义图标:\ntweakmyclient:icons/icon_16x16.png\ntweakmyclient:icons/icon_32x32.png\n注意: 你必须重新加载资源包才能应用文件更改",
+    "tweakmyclient.config.feature.featureCustomWindowIcon.comment": "启用窗口图标覆写.\n你可以通过以下资源包命名空间文件来自定义图标:\ntweakmyclient:texture/icon/icon_16x16.png\ntweakmyclient:texture/icon/icon_32x32.png\n注意: 你必须重新加载资源包才能应用文件更改",
     "tweakmyclient.config.feature.featureCustomWindowTitle.name": "自定义窗口标题",
     "tweakmyclient.config.feature.featureCustomWindowTitle.comment": "启用窗口标题覆写.",
     "tweakmyclient.config.feature.featureGlobalEventListener.name": "全局事件监听",
