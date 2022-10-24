@@ -19,7 +19,12 @@ import org.spongepowered.asm.mixin.Mixin;
 //$$ import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 //$$ import top.hendrixshen.tweakmyclient.util.HwylaUtil;
 //$$
-//$$ @Dependencies(and = @Dependency(value = "waila"))
+//$$ @Dependencies(
+//$$         and = {
+//$$                 @Dependency("waila"),
+//$$                 @Dependency("litematica")
+//$$         }
+//$$ )
 //$$ @Mixin(value = OverlayRenderer.class, remap = false)
 //#else
 @Mixin(Minecraft.class)

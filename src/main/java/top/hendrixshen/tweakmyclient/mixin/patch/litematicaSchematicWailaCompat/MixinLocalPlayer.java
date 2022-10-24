@@ -26,10 +26,11 @@ import top.hendrixshen.tweakmyclient.util.wthit.WthitUtil_1_19;
 
 @Dependencies(
         or = {
-                @Dependency(value = "jade"),
-                @Dependency(value = "waila"),
-                @Dependency(value = "wthit")
-        }
+                @Dependency("jade"),
+                @Dependency("waila"),
+                @Dependency("wthit")
+        },
+        and = @Dependency("litematica")
 )
 @Mixin(LocalPlayer.class)
 public abstract class MixinLocalPlayer {

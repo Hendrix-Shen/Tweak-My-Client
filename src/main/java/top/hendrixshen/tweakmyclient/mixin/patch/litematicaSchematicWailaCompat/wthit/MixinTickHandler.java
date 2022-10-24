@@ -15,7 +15,12 @@ import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 
 //#if MC >= 11600 && MC < 11700
-//$$ @Dependencies(and = @Dependency(value = "wthit"))
+//$$ @Dependencies(
+//$$         and = {
+//$$                 @Dependency("wthit"),
+//$$                 @Dependency("litematica")
+//$$         }
+//$$ )
 //$$ @Mixin(value = TickHandler.class,remap = false)
 //#else
 @Mixin(Minecraft.class)

@@ -23,7 +23,12 @@ import top.hendrixshen.tweakmyclient.util.wthit.WthitUtil_1_19;
 //$$ import top.hendrixshen.tweakmyclient.util.wthit.WthitUtil_1_17;
 //#endif
 
-@Dependencies(and = @Dependency(value = "wthit"))
+@Dependencies(
+        and = {
+                @Dependency("wthit"),
+                @Dependency("litematica")
+        }
+)
 //#endif
 //#if MC >= 11800
 @Mixin(value = TooltipHandler.class, remap = false)

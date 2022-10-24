@@ -15,7 +15,12 @@ import top.hendrixshen.tweakmyclient.util.JadeUtil;
 //#endif
 
 //#if MC >= 11802
-@Dependencies(and = @Dependency("jade"))
+@Dependencies(
+        and = {
+                @Dependency("jade"),
+                @Dependency("litematica")
+        }
+)
 @Mixin(value = OverlayRenderer.class, remap = false)
 //#else
 //$$ @Mixin(Minecraft.class)
