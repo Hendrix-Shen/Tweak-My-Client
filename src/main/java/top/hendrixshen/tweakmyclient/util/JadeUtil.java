@@ -26,6 +26,9 @@ import snownee.jade.impl.WailaCommonRegistration;
 import snownee.jade.overlay.DatapackBlockManager;
 import snownee.jade.overlay.OverlayRenderer;
 import snownee.jade.overlay.TooltipRenderer;
+//#if MC > 11802
+import snownee.jade.util.ClientPlatformProxy;
+//#endif
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.mixin.accessor.PlayerTabOverlayAccessor;
 //#endif
@@ -40,7 +43,9 @@ public class JadeUtil {
         return JadeUtil.disableJadeRender;
     }
 
-    @SuppressWarnings("deprecation")
+    //#if MC < 11900
+    //$$ @SuppressWarnings("deprecation")
+    //#endif
     public static void tick() {
         JadeUtil.disableJadeRender = false;
         IWailaConfig.IConfigGeneral config = Jade.CONFIG.get().getGeneral();
@@ -97,13 +102,20 @@ public class JadeUtil {
             return;
         }
 
-        boolean showDetails = localPlayer.isCrouching();
+        //#if MC < 11900
+        //$$ boolean showDetails = localPlayer.isCrouching();
+        //#endif
         if (accessor.isServerConnected()) {
             boolean request = accessor.shouldRequestData();
             if (ObjectDataCenter.isTimeElapsed(ObjectDataCenter.rateLimiter)) {
                 ObjectDataCenter.resetTimer();
-                if (request)
-                    accessor._requestData(showDetails);
+                if (request) {
+                    //#if MC > 11802
+                    accessor._requestData();
+                    //#else
+                    //$$ accessor._requestData(showDetails);
+                    //#endif
+                }
             }
             if (request && ObjectDataCenter.getServerData() == null) {
                 JadeUtil.tooltipRenderer = null;
@@ -111,15 +123,13 @@ public class JadeUtil {
             }
         }
 
-        if (config.getDisplayMode() == IWailaConfig.DisplayMode.LITE && !showDetails) {
+        //#if MC > 11802
+        if (config.getDisplayMode() == IWailaConfig.DisplayMode.LITE && !ClientPlatformProxy.isShowDetailsPressed()) {
+        //#else
+        //$$ if (config.getDisplayMode() == IWailaConfig.DisplayMode.LITE && !showDetails) {
+        //#endif
             Tooltip dummyTooltip = new Tooltip();
-            accessor._gatherComponents($ -> {
-                if (Math.abs(WailaCommonRegistration.INSTANCE.priorities.get($)) > 5000) {
-                    return tooltip;
-                } else {
-                    return dummyTooltip;
-                }
-            });
+            accessor._gatherComponents($ -> Math.abs(WailaCommonRegistration.INSTANCE.priorities.get($)) > 5000 ? tooltip : dummyTooltip);
             if (!dummyTooltip.isEmpty()) {
                 tooltip.sneakyDetails = true;
             }

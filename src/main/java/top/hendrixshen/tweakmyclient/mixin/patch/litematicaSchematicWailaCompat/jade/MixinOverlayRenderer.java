@@ -28,7 +28,11 @@ import top.hendrixshen.tweakmyclient.util.JadeUtil;
 public class MixinOverlayRenderer {
     //#if MC >= 11802
     @Inject(
-            method = "renderOverlay(Lcom/mojang/blaze3d/vertex/PoseStack;)V",
+            //#if MC >= 11902
+            method = "renderOverlay478757",
+            //#else
+            //$$ method = "renderOverlay(Lcom/mojang/blaze3d/vertex/PoseStack;)V",
+            //#endif
             at = @At(
                     value = "HEAD"
             ),
