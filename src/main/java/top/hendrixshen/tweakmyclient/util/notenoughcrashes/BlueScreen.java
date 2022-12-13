@@ -6,7 +6,7 @@ import fi.dy.masa.malilib.util.Color4f;
 import fi.dy.masa.malilib.util.StringUtils;
 import fudge.notenoughcrashes.gui.ProblemScreen;
 //#if MC > 11502
-import com.mojang.math.Matrix4f;
+import org.joml.Matrix4f;
 import fudge.notenoughcrashes.platform.CommonModMetadata;
 import fudge.notenoughcrashes.stacktrace.ModIdentifier;
 //#else

@@ -38,7 +38,7 @@ public abstract class MixinMinecraft implements IMinecraft {
     }
 
     private void updateIcon() {
-        CustomWindowUtil.updateIcon(this.window);
+        CustomWindowUtil.updateIcon();
     }
 
     @Override

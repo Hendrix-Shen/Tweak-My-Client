@@ -6,7 +6,11 @@ import net.minecraft.client.renderer.culling.Frustum;
 //$$ import net.minecraft.client.renderer.culling.Culler;
 //#endif
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.core.Registry;
+//#if MC >= 11903
+import net.minecraft.core.registries.BuiltInRegistries;
+//#else
+//$$ import net.minecraft.core.Registry;
+//#endif
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -31,7 +35,11 @@ public abstract class MixinEntityRenderDispatcher {
     //$$ private void onShouldRender(Entity entity, Culler culler, double d, double e, double f, CallbackInfoReturnable<Boolean> cir) {
     //#endif
         if (Configs.disableClientEntityInListRendering) {
-            String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
+            //#if MC >= 11903
+            String entityID = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
+            //#else
+            //$$ String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
+            //#endif
             String entityName = entity.getName().getString();
             if (Configs.listDisableClientEntityRendering.stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s)) && !(entity instanceof Player)) {
                 cir.cancel();

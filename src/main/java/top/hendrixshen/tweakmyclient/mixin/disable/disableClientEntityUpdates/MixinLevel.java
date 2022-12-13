@@ -1,6 +1,10 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableClientEntityUpdates;
 
-import net.minecraft.core.Registry;
+//#if MC >= 11903
+import net.minecraft.core.registries.BuiltInRegistries;
+//#else
+//$$ import net.minecraft.core.Registry;
+//#endif
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -24,7 +28,11 @@ public class MixinLevel {
     )
     private void onGuardEntityTick(Consumer<Entity> consumer, Entity entity, CallbackInfo ci) {
         if (Configs.disableClientEntityInListUpdates) {
-            String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
+            //#if MC >= 11903
+            String entityID = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
+            //#else
+            //$$ String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
+            //#endif
             String entityName = entity.getName().getString();
             if (Configs.listDisableClientEntityUpdates.stream().anyMatch(s -> entityID.contains(s) ||
                     entityName.contains(s)) && !(entity instanceof Player)) {

@@ -1,6 +1,10 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableItemGlowing;
 
-import net.minecraft.core.Registry;
+//#if MC >= 11903
+import net.minecraft.core.registries.BuiltInRegistries;
+//#else
+//$$ import net.minecraft.core.Registry;
+//#endif
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +33,11 @@ public abstract class MixinItemStack {
     )
     private void isFoil(CallbackInfoReturnable<Boolean> cir) {
         if (Configs.disableItemGlowing) {
-            String itemStackID = Registry.ITEM.getKey(this.getItem()).toString();
+            //#if MC >= 11903
+            String itemStackID = BuiltInRegistries.ITEM.getKey(this.getItem()).toString();
+            //#else
+            //$$ String itemStackID = Registry.ITEM.getKey(this.getItem()).toString();
+            //#endif
             String itemStackName = this.getDisplayName().getString();
             if (Cache.getInstance().getItemGlowingBlackList().contains(this.getItem()) ||
                     Configs.listItemGlowingBlacklist.stream().anyMatch((s -> itemStackID.contains(s) || itemStackName.contains(s)))) {

@@ -2,7 +2,11 @@ package top.hendrixshen.tweakmyclient.mixin.disable.disableAttackEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.Registry;
+//#if MC >= 11903
+import net.minecraft.core.registries.BuiltInRegistries;
+//#else
+//$$ import net.minecraft.core.Registry;
+//#endif
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.EntityHitResult;
@@ -44,7 +48,11 @@ public class MixinMinecraft {
     //#endif
         if (this.hitResult != null && this.player != null) {
             Entity entity = ((EntityHitResult) hitResult).getEntity();
-            String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
+            //#if MC >= 11903
+            String entityID = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
+            //#else
+            //$$ String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
+            //#endif
             String entityName = entity.getName().getString();
             if (Configs.disableAttackEntity && Configs.listDisableAttackEntity.stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s))) {
                 player.swing(InteractionHand.MAIN_HAND);

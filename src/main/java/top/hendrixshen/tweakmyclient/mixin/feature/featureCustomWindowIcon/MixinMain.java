@@ -46,10 +46,10 @@ public class MixinMain {
     private static void finishInitializationRenderSystem(String[] strings, boolean bl, CallbackInfo ci) {
     //#elseif MC >= 11500
     //$$ private static void finishInitializationRenderSystem(String[] strings, CallbackInfo ci) {
-        CustomWindowUtil.updateIcon(TweakMyClient.getMinecraftClient().getWindow());
+        CustomWindowUtil.updateIcon();
     //#else
     //$$ private void afterInit(CallbackInfo ci) {
-    //$$     CustomWindowUtil.updateIcon(TweakMyClient.getMinecraftClient().window);
+    //$$     CustomWindowUtil.updateIcon();
     //#endif
     }
 }

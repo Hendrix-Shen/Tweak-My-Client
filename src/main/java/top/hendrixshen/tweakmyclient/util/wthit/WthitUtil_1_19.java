@@ -33,9 +33,9 @@ import java.util.Objects;
 //#endif
 
 public class WthitUtil_1_19 {
-    //#if MC >= 11900
+    //#if MC >= 11903
     private static final Tooltip TOOLTIP = new Tooltip();
-    private static final Line SNEAK_DETAIL = (new Line(null)).with((ComponentCompatApi.literal(I18n.get("tooltip.waila.sneak_for_details")).withStyle(ChatFormatting.ITALIC)));
+    private static final Line SNEAK_DETAIL = (new Line(null)).with(ComponentCompatApi.literal(I18n.get("tooltip.waila.sneak_for_details")).withStyle(ChatFormatting.ITALIC));
     private static final Minecraft minecraft = TweakMyClient.getMinecraftClient();
     private static Field STATE;
     private static boolean disableWthitRender = false;

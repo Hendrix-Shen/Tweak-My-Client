@@ -186,11 +186,15 @@ public class AutoReconnectUtil {
         int backButtonX = width / 2 - 100;
         int backButtonY = Math.min(height / 2 + textHeight / 2 + 9, height - 30);
 
-        //#if MC >= 11600
-        ((IScreen) current).tmc$addButton(new Button(backButtonX, backButtonY + 24, 98, 20,
-                ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")), button -> AutoReconnectUtil.reconnect(parent)));
-        AutoReconnectUtil.autoReconnectButton = ((IScreen) current).tmc$addButton(new Button(backButtonX + 102, backButtonY + 24, 98, 20,
-                ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")), AutoReconnectUtil::onPressAutoReconnect));
+        //#if MC >= 11903
+        AutoReconnectUtil.autoReconnectButton = ((IScreen) current).tmc$addButton(
+                Button.builder(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")),
+                button -> AutoReconnectUtil.reconnect(parent)).pos(backButtonX, backButtonY + 24).size(98, 20).build());
+        //#elseif MC >= 11600
+        //$$ ((IScreen) current).tmc$addButton(new Button(backButtonX, backButtonY + 24, 98, 20,
+        //$$         ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")), button -> AutoReconnectUtil.reconnect(parent)));
+        //$$ AutoReconnectUtil.autoReconnectButton = ((IScreen) current).tmc$addButton(new Button(backButtonX + 102, backButtonY + 24, 98, 20,
+        //$$         ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")), AutoReconnectUtil::onPressAutoReconnect));
         //#else
         //$$ ((IScreen) current).tmc$addButton(new Button(backButtonX, backButtonY + 24, 98, 20,
         //$$         StringUtil.tr("message.autoReconnect.static"), button -> AutoReconnectUtil.reconnect(parent)));
@@ -209,17 +213,25 @@ public class AutoReconnectUtil {
 
             AutoReconnectUtil.modHashMap.forEach(
                     (modId, screen) -> {
-                        ((IScreen) current).tmc$addButton(new Button(backButtonX + offsetX.intValue(),
-                                48 + backButtonY,
-                                buttonWidth,
-                                20,
-                                //#if MC >= 11600
-                                ComponentCompatApi.literal(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
-                                //#else
-                                //$$ StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId)),
-                                //#endif
-                                b -> TweakMyClient.getMinecraftClient().setScreen(screen)));
-                        offsetX.getAndAdd(buttonWidth + 4);
+                        //#if MC >= 11903
+                        ((IScreen) current).tmc$addButton(
+                                Button.builder(ComponentCompatApi.literal(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
+                                button -> TweakMyClient.getMinecraftClient().setScreen(screen))
+                                .pos(backButtonX + offsetX.intValue(), 48 + backButtonY)
+                                .size(buttonWidth, 20).build());
+                        //#else
+                        //$$ ((IScreen) current).tmc$addButton(new Button(backButtonX + offsetX.intValue(),
+                        //$$         48 + backButtonY,
+                        //$$         buttonWidth,
+                        //$$         20,
+                        //#if MC >= 11600
+                        //$$         ComponentCompatApi.literal(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
+                        //#else
+                        //$$         StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId)),
+                        //#endif
+                        //$$         b -> TweakMyClient.getMinecraftClient().setScreen(screen)));
+                        //$$ offsetX.getAndAdd(buttonWidth + 4);
+                        //#endif
                     }
             );
         }

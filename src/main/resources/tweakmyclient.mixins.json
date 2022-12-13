@@ -36,6 +36,7 @@
     "disable.disableSwimming.MixinPlayer",
     "feature.featureAutoClimb.MixinLocalPlayer",
     "feature.featureAutoDrop.MixinLocalPlayer",
+    "feature.featureAutoReconnect.MixinConnectScreen",
     "feature.featureAutoReconnect.MixinDisconnectedScreen",
     "feature.featureAutoReconnect.MixinMinecraft",
     "feature.featureAutoReconnect.MixinScreen",
