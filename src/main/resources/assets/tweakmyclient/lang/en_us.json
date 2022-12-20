@@ -237,7 +237,7 @@
     "tweakmyclient.message.autoReconnect.authenticate.oauth": "OAuth",
     "tweakmyclient.message.autoReconnect.authenticate.reauth": "ReAuth",
     "tweakmyclient.message.autoReconnect.static": "Reconnect",
-    "tweakmyclient.message.autoReconnect.timer": "Toggle AutoReconnect (%d)",
+    "tweakmyclient.message.autoReconnect.timer": "Toggle AutoReconnect (%.1f)",
     "tweakmyclient.message.autoReconnect.toggle": "Toggle AutoReconnect",
     "tweakmyclient.message.globalEventListener.enderDragonDeath": "§e[GlobalEvent]§f: Ender Dragon Defeated at [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.globalEventListener.endPortalSpawn": "§e[GlobalEvent]§f: End Portal Activated at  [x: %d, y: %d, z: %d]",

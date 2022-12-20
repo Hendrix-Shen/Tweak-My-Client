@@ -237,7 +237,7 @@
     "tweakmyclient.message.autoReconnect.authenticate.oauth": "OAuth",
     "tweakmyclient.message.autoReconnect.authenticate.reauth": "ReAuth",
     "tweakmyclient.message.autoReconnect.static": "重新连接",
-    "tweakmyclient.message.autoReconnect.timer": "切换自动重连 (%d)",
+    "tweakmyclient.message.autoReconnect.timer": "切换自动重连 (%.1f)",
     "tweakmyclient.message.autoReconnect.toggle": "切换自动重连",
     "tweakmyclient.message.globalEventListener.enderDragonDeath": "§e[全局事件]§f: 末影龙已被击败, 坐标 [x: %d, y: %d, z: %d]",
     "tweakmyclient.message.globalEventListener.endPortalSpawn": "§e[全局事件]§f: 末影传送门已被激活, 坐标  [x: %d, y: %d, z: %d]",

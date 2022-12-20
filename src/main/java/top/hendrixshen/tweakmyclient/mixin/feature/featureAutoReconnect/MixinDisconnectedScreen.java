@@ -14,7 +14,7 @@ import top.hendrixshen.tweakmyclient.TweakMyClientPredicate;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.util.AutoReconnectUtil;
 
-@Mixin(value = DisconnectedScreen.class, priority = 900)
+@Mixin(value = DisconnectedScreen.class, priority = 1100)
 public class MixinDisconnectedScreen extends Screen {
     @Shadow
     @Final

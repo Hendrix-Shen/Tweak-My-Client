@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class AutoReconnectUtil {
     private static final ResourceLocation resourceLocation = new ResourceLocation(TweakMyClientReference.getModId(), "texture/gui/xibao.png");
-    public static int ReconnectTimer;
+    public static double ReconnectTimer;
     public static int reAuthenticateButtonOffsetY;
     private static boolean initialized = false;
     private static ServerData lastServer;
@@ -187,9 +187,12 @@ public class AutoReconnectUtil {
         int backButtonY = Math.min(height / 2 + textHeight / 2 + 9, height - 30);
 
         //#if MC >= 11903
-        AutoReconnectUtil.autoReconnectButton = ((IScreen) current).tmc$addButton(
-                Button.builder(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")),
+        ((IScreen) current).tmc$addButton(Button.builder(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")),
                 button -> AutoReconnectUtil.reconnect(parent)).pos(backButtonX, backButtonY + 24).size(98, 20).build());
+
+        AutoReconnectUtil.autoReconnectButton = ((IScreen) current).tmc$addButton(
+                Button.builder(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")),
+                        AutoReconnectUtil::onPressAutoReconnect).pos(backButtonX + 102, backButtonY + 24).size(98, 20).build());
         //#elseif MC >= 11600
         //$$ ((IScreen) current).tmc$addButton(new Button(backButtonX, backButtonY + 24, 98, 20,
         //$$         ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")), button -> AutoReconnectUtil.reconnect(parent)));
@@ -256,9 +259,9 @@ public class AutoReconnectUtil {
         }
 
         //#if MC >= 11600
-        AutoReconnectUtil.autoReconnectButton.setMessage(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.timer", (int) Math.ceil(AutoReconnectUtil.ReconnectTimer / 20.0))));
+        AutoReconnectUtil.autoReconnectButton.setMessage(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.timer", AutoReconnectUtil.ReconnectTimer / 20.0)));
         //#else
-        //$$ AutoReconnectUtil.autoReconnectButton.setMessage(StringUtil.tr("message.autoReconnect.timer", (int) Math.ceil(AutoReconnectUtil.ReconnectTimer / 20.0)));
+        //$$ AutoReconnectUtil.autoReconnectButton.setMessage(StringUtil.tr("message.autoReconnect.timer", AutoReconnectUtil.ReconnectTimer / 20.0));
         //#endif
 
         if (AutoReconnectUtil.ReconnectTimer > 0) {
