@@ -13,10 +13,13 @@ import top.hendrixshen.tweakmyclient.TweakMyClient;
 import java.util.List;
 
 public class RenderHandler implements IRenderer {
-    private static final RenderHandler INSTANCE = new RenderHandler();
+    private static RenderHandler INSTANCE;
     private final List<top.hendrixshen.tweakmyclient.util.render.IRenderer> worldLastRenderer = Lists.newArrayList();
 
     public static RenderHandler getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new RenderHandler();
+        }
         return INSTANCE;
     }
 

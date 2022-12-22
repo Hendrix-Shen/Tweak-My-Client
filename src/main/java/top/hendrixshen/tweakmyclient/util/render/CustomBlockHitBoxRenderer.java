@@ -19,10 +19,13 @@ import top.hendrixshen.tweakmyclient.mixin.accessor.MultiPlayerGameModeAccessor;
 import top.hendrixshen.tweakmyclient.util.MiscUtil;
 
 public class CustomBlockHitBoxRenderer implements IRenderer {
-    private static final CustomBlockHitBoxRenderer INSTANCE = new CustomBlockHitBoxRenderer();
+    private static CustomBlockHitBoxRenderer INSTANCE;
 
     public static CustomBlockHitBoxRenderer getInstance() {
-        return CustomBlockHitBoxRenderer.INSTANCE;
+        if (INSTANCE == null) {
+            INSTANCE = new CustomBlockHitBoxRenderer();
+        }
+        return INSTANCE;
     }
 
     @Override

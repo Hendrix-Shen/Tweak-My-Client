@@ -8,7 +8,7 @@ import top.hendrixshen.tweakmyclient.util.StringUtil;
 import java.util.HashSet;
 
 public class Cache {
-    private static final Cache INSTANCE = new Cache();
+    private static Cache INSTANCE;
     private final HashSet<Item> autoDropBlackList = new HashSet<>();
     private final HashSet<Item> autoDropWhiteList = new HashSet<>();
 
@@ -19,7 +19,10 @@ public class Cache {
     private final HashSet<Item> itemGlowingBlackList = new HashSet<>();
 
     public static Cache getInstance() {
-        return Cache.INSTANCE;
+        if (INSTANCE == null) {
+            INSTANCE = new Cache();
+        }
+        return INSTANCE;
     }
 
     public void cacheAutoDropBlackList() {

@@ -8,10 +8,13 @@ import top.hendrixshen.tweakmyclient.helper.AreaBox;
 import top.hendrixshen.tweakmyclient.helper.Cache;
 
 public class RestrictionBoxRenderer implements IRenderer {
-    private static final RestrictionBoxRenderer INSTANCE = new RestrictionBoxRenderer();
+    private static RestrictionBoxRenderer INSTANCE;
 
     public static RestrictionBoxRenderer getInstance() {
-        return RestrictionBoxRenderer.INSTANCE;
+        if (INSTANCE == null) {
+            INSTANCE = new RestrictionBoxRenderer();
+        }
+        return INSTANCE;
     }
 
     @Override

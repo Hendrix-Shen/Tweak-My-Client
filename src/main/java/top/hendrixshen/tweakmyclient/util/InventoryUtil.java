@@ -65,14 +65,13 @@ public class InventoryUtil {
         LocalPlayer localPlayer = minecraft.player;
         ClientPacketListener clientPacketListener = minecraft.getConnection();
         if (localPlayer != null && clientPacketListener != null) {
-            //short playerNextActionId = localPlayer.containerMenu.backup(localPlayer.inventory);
             ItemStack itemStack = new ItemStack(Items.BEDROCK);
             //#if MC >= 11700
             Int2ObjectOpenHashMap<ItemStack> int2ObjectMap = new Int2ObjectOpenHashMap<>();
             clientPacketListener.send(new ServerboundContainerClickPacket(0, 0, 0, 0, ClickType.QUICK_MOVE, itemStack, int2ObjectMap));
             //#else
-            //$$short playerNextActionId = localPlayer.containerMenu.backup(localPlayer.inventory);
-            //$$clientPacketListener.send(new ServerboundContainerClickPacket(0, 0, 0, ClickType.QUICK_MOVE, itemStack, playerNextActionId));
+            //$$ short playerNextActionId = localPlayer.containerMenu.backup(localPlayer.inventory);
+            //$$ clientPacketListener.send(new ServerboundContainerClickPacket(0, 0, 0, ClickType.QUICK_MOVE, itemStack, playerNextActionId));
             //#endif
         }
     }

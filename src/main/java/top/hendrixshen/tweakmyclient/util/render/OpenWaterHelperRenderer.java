@@ -13,10 +13,13 @@ import top.hendrixshen.tweakmyclient.helper.AreaBox;
 //#endif
 
 public class OpenWaterHelperRenderer implements IRenderer {
-    private static final OpenWaterHelperRenderer INSTANCE = new OpenWaterHelperRenderer();
+    private static OpenWaterHelperRenderer INSTANCE;
 
     public static OpenWaterHelperRenderer getInstance() {
-        return OpenWaterHelperRenderer.INSTANCE;
+        if (INSTANCE == null) {
+            INSTANCE = new OpenWaterHelperRenderer();
+        }
+        return INSTANCE;
     }
 
     @Override

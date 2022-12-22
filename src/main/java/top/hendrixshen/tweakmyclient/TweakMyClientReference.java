@@ -1,5 +1,6 @@
 package top.hendrixshen.tweakmyclient;
 
+import lombok.Getter;
 import net.fabricmc.loader.api.FabricLoader;
 import top.hendrixshen.magiclib.config.ConfigManager;
 import top.hendrixshen.magiclib.util.FabricUtil;
