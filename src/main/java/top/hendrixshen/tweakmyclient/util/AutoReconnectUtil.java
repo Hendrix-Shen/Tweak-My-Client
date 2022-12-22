@@ -1,5 +1,6 @@
 package top.hendrixshen.tweakmyclient.util;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
@@ -15,13 +16,14 @@ import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import top.hendrixshen.magiclib.compat.minecraft.blaze3d.vertex.VertexFormatCompatApi;
 import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
+import top.hendrixshen.magiclib.util.ReflectUtil;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.fakeInterface.IScreen;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AutoReconnectUtil {
@@ -31,13 +33,19 @@ public class AutoReconnectUtil {
     private static boolean initialized = false;
     private static ServerData lastServer;
     private static Button autoReconnectButton;
+    //#if MC >= 11903
+    private static final List<Component> reAuthMessages = Lists.newArrayList(
+            ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.insufficientPrivileges")).plainCopy(),
+            ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.invalidSession")).plainCopy(),
+            ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.serversUnavailable")).plainCopy(),
+            ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.userBanned")).plainCopy());
+    //#endif
+
     private final static AutoReconnectUtil INSTANCE = new AutoReconnectUtil();
 
     public static AutoReconnectUtil getInstance() {
         return AutoReconnectUtil.INSTANCE;
     }
-
-    private static int compatReAuthenticateMods = 0;
 
     private static final LinkedHashMap<String, Screen> modHashMap = Maps.newLinkedHashMap();
 
@@ -68,28 +76,21 @@ public class AutoReconnectUtil {
             Screen screen = null;
 
             try {
-                // AuthMe 2.2.0
-                screen = (Screen) Class.forName("me.axieum.mcmod.authme.impl.gui.AuthMethodScreen").getDeclaredConstructor(Screen.class).newInstance(parent);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                     NoSuchMethodException | ClassNotFoundException e) {
+                screen = (Screen) ReflectUtil.newInstance("me.axieum.mcmod.authme.impl.gui.AuthMethodScreen", new Class[]{Screen.class}, parent);
+            } catch (RuntimeException e) {
                 try {
-                    // AuthMe 2.1.0
-                    screen = (Screen) Class.forName("me.axieum.mcmod.authme.impl.AuthMe").getDeclaredConstructor().newInstance(); // 2.1.0
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                         NoSuchMethodException | ClassNotFoundException ex) {
+                    screen = (Screen) ReflectUtil.newInstance("me.axieum.mcmod.authme.impl.AuthMe", 0, (Object) null);
+                } catch (RuntimeException ex) {
                     try {
-                        // AuthMe for mc 114
-                        screen = (Screen) Class.forName("me.axieum.mcmod.authme.gui.AuthScreen").getDeclaredConstructor(Screen.class).newInstance(parent);
-                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                             NoSuchMethodException | ClassNotFoundException exc) {
-                        TweakMyClient.getLogger().error("Can't invoke Authme Screen");
+                        screen = (Screen) ReflectUtil.newInstance("me.axieum.mcmod.authme.gui.AuthScreen", new Class[]{Screen.class}, parent);
+                    } catch (RuntimeException exc) {
+                        TweakMyClient.getLogger().error("Can't invoke AuthMe Screen");
                     }
                 }
             }
 
             if (screen != null) {
                 AutoReconnectUtil.modHashMap.put("authme", screen);
-                AutoReconnectUtil.compatReAuthenticateMods++;
             }
         }
 
@@ -97,38 +98,36 @@ public class AutoReconnectUtil {
             Screen screen = null;
 
             try {
-                screen = (Screen) Class.forName("the_fireplace.ias.gui.GuiAccountSelector").getDeclaredConstructor(Screen.class).newInstance(parent);
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException |
-                     InvocationTargetException e) {
-                TweakMyClient.getLogger().error("Can't invoke In-Game Account Switcher Screen");
+                screen = (Screen) ReflectUtil.newInstance("the_fireplace.ias.gui.GuiAccountSelector", new Class[]{Screen.class}, parent);
+            } catch (RuntimeException e) {
+                try {
+                    screen = (Screen) ReflectUtil.newInstance("the_fireplace.ias.gui.AccountListScreen", new Class[]{Screen.class}, parent);
+                } catch (RuntimeException ex) {
+                    TweakMyClient.getLogger().error("Can't invoke In-Game Account Switcher Screen");
+                }
             }
 
             if (screen != null) {
                 AutoReconnectUtil.modHashMap.put("ias", screen);
-                AutoReconnectUtil.compatReAuthenticateMods++;
             }
         }
 
-        if (TweakMyClientReference.isOauthLoaded) {
+        if (TweakMyClientReference.isOAuthLoaded) {
             Screen screen = null;
 
             try {
                 // For MC 1.17
-                screen = (Screen) Class.forName("com.sintinium.oauthfabric.gui.profile.ProfileSelectionScreen").getDeclaredConstructor().newInstance();
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException |
-                     InvocationTargetException e) {
+                screen = (Screen) ReflectUtil.newInstance("com.sintinium.oauthfabric.gui.profile.ProfileSelectionScreen", 0, (Object) null);
+            } catch (RuntimeException e) {
                 try {
-                    // For MC 1.16 & 1.18
-                    screen = (Screen) Class.forName("com.sintinium.oauth.oauthfabric.gui.LoginTypeScreen").getDeclaredConstructor(Screen.class).newInstance(parent);
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                         NoSuchMethodException | InvocationTargetException ex) {
+                    screen = (Screen) ReflectUtil.newInstance("com.sintinium.oauth.oauthfabric.gui.LoginTypeScreen", new Class[]{Screen.class}, parent);
+                } catch (RuntimeException ex) {
                     TweakMyClient.getLogger().error("Can't invoke OAuth Screen");
                 }
             }
 
             if (screen != null) {
                 AutoReconnectUtil.modHashMap.put("oauth", screen);
-                AutoReconnectUtil.compatReAuthenticateMods++;
             }
         }
 
@@ -136,15 +135,13 @@ public class AutoReconnectUtil {
             Screen screen = null;
 
             try {
-                screen = (Screen) Class.forName("technicianlp.reauth.gui.AuthScreen").getDeclaredConstructor(Screen.class).newInstance(parent);
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException |
-                     InvocationTargetException e) {
+                screen = (Screen) ReflectUtil.newInstance("technicianlp.reauth.gui.AuthScreen", new Class[]{Screen.class}, parent);
+            } catch (RuntimeException e) {
                 TweakMyClient.getLogger().error("Can't invoke Reauth Screen");
             }
 
             if (screen != null) {
                 AutoReconnectUtil.modHashMap.put("reauth", screen);
-                AutoReconnectUtil.compatReAuthenticateMods++;
             }
         }
 
@@ -187,9 +184,14 @@ public class AutoReconnectUtil {
         int backButtonY = Math.min(height / 2 + textHeight / 2 + 9, height - 30);
 
         //#if MC >= 11903
-        AutoReconnectUtil.autoReconnectButton = ((IScreen) current).tmc$addButton(
+        ((IScreen) current).tmc$addButton(
                 Button.builder(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")),
-                button -> AutoReconnectUtil.reconnect(parent)).pos(backButtonX, backButtonY + 24).size(98, 20).build());
+                        button -> AutoReconnectUtil.reconnect(parent)).pos(backButtonX, backButtonY + 24).size(98, 20).build());
+
+        AutoReconnectUtil.autoReconnectButton = ((IScreen) current).tmc$addButton(
+                Button.builder(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")),
+                        AutoReconnectUtil::onPressAutoReconnect).pos(backButtonX + 102, backButtonY + 24).size(98, 20).build());
+
         //#elseif MC >= 11600
         //$$ ((IScreen) current).tmc$addButton(new Button(backButtonX, backButtonY + 24, 98, 20,
         //$$         ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")), button -> AutoReconnectUtil.reconnect(parent)));
@@ -204,12 +206,21 @@ public class AutoReconnectUtil {
 
         AutoReconnectUtil.reAuthenticateButtonOffsetY = 0;
 
-        if (reason == null || AutoReconnectUtil.getTranslationKey(reason).startsWith("disconnect.loginFailed") && AutoReconnectUtil.compatReAuthenticateMods > 0) {
+
+        //#if MC >= 11903
+        if (reason == null || AutoReconnectUtil.reAuthMessages.stream().anyMatch(component -> component.getString().equals(reason.getString()))) {
+        //#else
+        //$$ if (reason == null || AutoReconnectUtil.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
+        //#endif
             // Auto disable autoReconnect
             TweakMyClientReference.getConfigHandler().configManager.setValue("featureAutoReconnect", false);
 
+            if (AutoReconnectUtil.modHashMap.size() < 1) {
+                return;
+            }
+
             AtomicInteger offsetX = new AtomicInteger();
-            int buttonWidth = (200 - 4 * (AutoReconnectUtil.compatReAuthenticateMods - 1)) / AutoReconnectUtil.compatReAuthenticateMods;
+            int buttonWidth = (200 - 4 * (AutoReconnectUtil.modHashMap.size() - 1)) / AutoReconnectUtil.modHashMap.size();
 
             AutoReconnectUtil.modHashMap.forEach(
                     (modId, screen) -> {

@@ -33,7 +33,7 @@ public class TweakMyClientReference {
     public static boolean isHwylaLoaded = FabricUtil.isModLoaded("waila");
     public static boolean isInGameAccountSwitcherLoaded = FabricUtil.isModLoaded("ias");
     public static boolean isJadeLoaded = FabricUtil.isModLoaded("jade");
-    public static boolean isOauthLoaded = FabricUtil.isModLoaded("oauth-fabric");
+    public static boolean isOAuthLoaded = FabricUtil.isModLoaded("oauth-fabric");
     public static boolean isReAuthLoaded = FabricUtil.isModLoaded("reauth");
     public static boolean isWthitLoaded = FabricUtil.isModLoaded("wthit");
 

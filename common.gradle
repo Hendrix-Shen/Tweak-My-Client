@@ -1,6 +1,6 @@
 apply(plugin: "maven-publish")
 apply(plugin: "fabric-loom")
-apply(plugin: "io.github.juuxel.loom-quiltflower")
+// apply(plugin: "io.github.juuxel.loom-quiltflower")
 apply(plugin: "com.replaymod.preprocess")
 
 int mcVersion = 1
@@ -30,6 +30,11 @@ repositories {
 dependencies {
     minecraft("com.mojang:minecraft:${project.minecraft_version}")
     mappings(loom.officialMojangMappings())
+
+    modCompileOnly("org.projectlombok:lombok:${project.lombok_version}")
+    annotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
+    testCompileOnly("org.projectlombok:lombok:${project.lombok_version}")
+    testAnnotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
 
     def ENV = System.getenv()
     modImplementation("top.hendrixshen:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
