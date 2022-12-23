@@ -28,7 +28,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
 
     @MagicAttack(
             type = MixinType.REDIRECT,
-            name = "wurstIsUsingItem",
+            name = "redirectUsingItem",
             owner = "class_1309",
             method = "method_6007",
             desc = "()V"
