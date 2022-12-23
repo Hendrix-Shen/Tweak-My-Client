@@ -15,25 +15,25 @@
 
 打开游戏内配置界面的默认热键是 **T + C**。
 
-## 依赖项 (施工中)
+## 依赖项
 
-| 依赖                       | 类型  | 版本        | 下载                                                                                                                                                 |
-|--------------------------|-----|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Auth Me                  | 可选  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
-| Hwyla                    | 可选  | 最新        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/hwyla)                                                                                   |
-| In-Game Account Switcher | 可选  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
-| Jade                     | 可选  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jade)                                                                                    |
-| MagicLib                 | 必须  | \>=0.5.37 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
-| MaliLib                  | 必须  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
-| Litematica               | 可选  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
-| ReAuth (Fabric)          | 可选  | 任意        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
-| WTHIT                    | 可选  | 最新        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/wthit)                                                                                   |
+| 依赖                       | 类型  | 版本         | 下载                                                                                                                                                 |
+|--------------------------|-----|------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Auth Me                  | 可选  | 任意         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
+| Hwyla                    | 可选  | 最新         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/hwyla)                                                                                   |
+| In-Game Account Switcher | 可选  | 任意         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
+| Jade                     | 可选  | 最新         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jade)                                                                                    |
+| MagicLib                 | 必须  | \>=0.6.194 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
+| MaliLib                  | 必须  | 任意         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
+| Litematica               | 可选  | 任意         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
+| ReAuth (Fabric)          | 可选  | 任意         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
+| WTHIT                    | 可选  | 最新         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/wthit)                                                                                   |
 
 ## 开发
 
 ### 支持
 
-当前主开发版本：1.19.2
+当前主开发版本：1.19.3
 
 并且使用 `预处理` 来兼容各版本。
 
@@ -52,4 +52,4 @@
 
 ## 许可
 
-此项目在 GPLv3许可证 下可用。 从中学习，并将其融入到您自己的项目中。
+此项目在 LGPLv3许可证 下可用。 从中学习，并将其融入到您自己的项目中。

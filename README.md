@@ -15,25 +15,25 @@
 
 The default hotkey to open the in-game config GUI is **T + C**.
 
-## Dependencies (WIP)
+## Dependencies
 
-| Dependency               | Type     | Version   | Download                                                                                                                                           |
-|--------------------------|----------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Auth Me                  | Optional | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
-| Hwyla                    | Optional | Latest    | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/hwyla)                                                                                   |
-| In-Game Account Switcher | Optional | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
-| Jade                     | Optional | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jade)                                                                                    |
-| MagicLib                 | Required | \>=0.5.37 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
-| MaliLib                  | Required | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
-| Litematica               | Optional | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
-| ReAuth (Fabric)          | Optional | Any       | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
-| WTHIT                    | Optional | Latest    | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/wthit)                                                                                   |
+| Dependency               | Type     | Version    | Download                                                                                                                                           |
+|--------------------------|----------|------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Auth Me                  | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
+| Hwyla                    | Optional | Latest     | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/hwyla)                                                                                   |
+| In-Game Account Switcher | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
+| Jade                     | Optional | Latest     | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jade)                                                                                    |
+| MagicLib                 | Required | \>=0.6.194 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
+| MaliLib                  | Required | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
+| Litematica               | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
+| ReAuth (Fabric)          | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
+| WTHIT                    | Optional | Latest     | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/wthit)                                                                                   |
 
 ## Development
 
 ### Support
 
-Current main development for Minecraft version: 1.19.2
+Current main development for Minecraft version: 1.19.3
 
 And use `preprocess` to be compatible with all versions.
 
@@ -52,4 +52,4 @@ I am using the **Mojang official** mappings to de-obfuscate Minecraft and insert
 
 ## License
 
-This project is available under the GPLv3 license. Feel free to learn from it and incorporate it in your own projects.
+This project is available under the LGPLv3 license. Feel free to learn from it and incorporate it in your own projects.
