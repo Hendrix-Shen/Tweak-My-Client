@@ -13,6 +13,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.lwjgl.opengl.GL11;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.mixin.accessor.MultiPlayerGameModeAccessor;
@@ -56,7 +57,7 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
         switch (Configs.breakAnimationMode) {
             case DOWN:
                 voxelShape = voxelShape.toAabbs().stream()
-                        .map(box -> box.inflate(0.003, 0.003 - box.getYsize() * destroyProgress / 2, 0.003)
+                        .map(box -> box.inflate(0, - box.getYsize() * destroyProgress / 2, 0)
                                 .move(0, -box.getYsize() * destroyProgress / 2, 0))
                         .map(Shapes::create)
                         .reduce(Shapes::or)
@@ -64,9 +65,9 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
                 break;
             case SHRINK:
                 voxelShape = voxelShape.toAabbs().stream()
-                        .map(box -> box.inflate(0.003 - box.getXsize() * destroyProgress / 2,
-                                0.003 - box.getYsize() * destroyProgress / 2,
-                                0.003 - box.getZsize() * destroyProgress / 2))
+                        .map(box -> box.inflate(box.getXsize() * destroyProgress / 2,
+                                box.getYsize() * destroyProgress / 2,
+                                box.getZsize() * destroyProgress / 2))
                         .map(Shapes::create)
                         .reduce(Shapes::or)
                         .orElse(Shapes.empty()).optimize();
@@ -74,7 +75,6 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
             case NONE:
             default:
                 voxelShape = voxelShape.toAabbs().stream()
-                        .map(box -> box.inflate(0.003, 0.003, 0.003))
                         .map(Shapes::create)
                         .reduce(Shapes::or)
                         .orElse(Shapes.empty()).optimize();
@@ -88,6 +88,8 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
                 RenderSystem.disableDepthTest();
             }
 
+            GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
+            GL11.glPolygonOffset(-1.0F, -1.0F);
             RenderUtil.renderShapeOverlay(voxelShape,
                     blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z(),
                     Configs.customBlockHitBoxOverlayFillRainbow ? new Color4f(
@@ -96,6 +98,7 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
                             0.5F + 0.5F * (float) Math.sin((k + 8F / 3F) * Math.PI),
                             Configs.colorBlockHitBoxOverlayFill.a
                     ) : Configs.colorBlockHitBoxOverlayFill);
+            GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
 
             if (Configs.customBlockHitBoxOverlayDisableDepthTest) {
                 RenderSystem.enableDepthTest();
@@ -109,6 +112,8 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
                 RenderSystem.disableDepthTest();
             }
 
+            GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
+            GL11.glPolygonOffset(-1.0F, -1.0F);
             RenderUtil.renderShapeOutline(voxelShape,
                     blockPos.getX() - vec3.x(), blockPos.getY() - vec3.y(), blockPos.getZ() - vec3.z(),
                     Configs.customBlockHitBoxOverlayOutlineRainbow ? new Color4f(
@@ -120,6 +125,7 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
             if (Configs.customBlockHitBoxOverlayDisableDepthTest) {
                 RenderSystem.enableDepthTest();
             }
+            GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
         }
     }
 
