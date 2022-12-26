@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.config.Configs;
 
 import java.util.List;
 // Disable remove incompatible resource pack.
@@ -23,8 +24,11 @@ public class MixinOptions {
             )
     )
     private Object on(Object o) {
-        this.incompatibleResourcePacks.add((String) o);
-        TweakMyClient.getLogger().warn("Prevented the removal of incompatible resource pack {} from options", o);
+        if (Configs.disableResourcePackCompatCheck) {
+            this.incompatibleResourcePacks.add((String) o);
+            TweakMyClient.getLogger().warn("Prevented the removal of incompatible resource pack {} from options", o);
+            return o;
+        }
         return o;
     }
 }
