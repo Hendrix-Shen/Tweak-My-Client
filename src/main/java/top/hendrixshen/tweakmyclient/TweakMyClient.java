@@ -26,9 +26,9 @@ public class TweakMyClient implements ClientModInitializer {
     private static final Minecraft minecraftClient = Minecraft.getInstance();
 
     @Dependencies(
-            //#if MC >= 11900
+            //#if MC >= 11903
             and = {
-                    @Dependency(value = "jade", versionPredicate = ">=8.6.0", optional = true),
+                    @Dependency(value = "jade", versionPredicate = ">=9.3.1", optional = true),
                     @Dependency(value = "wthit", versionPredicate = ">=5.10.0", optional = true)
             }
             //#elseif MC >= 11800

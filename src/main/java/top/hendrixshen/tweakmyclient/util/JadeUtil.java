@@ -86,7 +86,11 @@ public class JadeUtil {
 
         Accessor<?> originalAccessor = accessor;
 
-        for (JadeRayTraceCallback callback : WailaClientRegistration.INSTANCE.rayTraceCallbacks) {
+        //#if MC >= 11903
+        for (JadeRayTraceCallback callback : WailaClientRegistration.INSTANCE.rayTraceCallback.callbacks()) {
+        //#else
+        //$$ for (JadeRayTraceCallback callback : WailaClientRegistration.INSTANCE.rayTraceCallbacks) {
+        //#endif
             accessor = callback.onRayTrace(traceWrapper.getBlockHitResult(), accessor, originalAccessor);
         }
 
@@ -129,7 +133,11 @@ public class JadeUtil {
         //$$ if (config.getDisplayMode() == IWailaConfig.DisplayMode.LITE && !showDetails) {
         //#endif
             Tooltip dummyTooltip = new Tooltip();
-            accessor._gatherComponents($ -> Math.abs(WailaCommonRegistration.INSTANCE.priorities.get($)) > 5000 ? tooltip : dummyTooltip);
+            //#if MC >= 11903
+            accessor._gatherComponents($ -> Math.abs(WailaCommonRegistration.INSTANCE.priorities.byValue($)) > 5000 ? tooltip : dummyTooltip);
+            //#else
+            //$$ accessor._gatherComponents($ -> Math.abs(WailaCommonRegistration.INSTANCE.priorities.get($)) > 5000 ? tooltip : dummyTooltip);
+            //#endif
             if (!dummyTooltip.isEmpty()) {
                 tooltip.sneakyDetails = true;
             }
@@ -137,7 +145,11 @@ public class JadeUtil {
             accessor._gatherComponents($ -> tooltip);
         }
 
-        for (JadeTooltipCollectedCallback callback : WailaClientRegistration.INSTANCE.tooltipCollectedCallbacks) {
+        //#if MC >= 11903
+        for (JadeTooltipCollectedCallback callback : WailaClientRegistration.INSTANCE.tooltipCollectedCallback.callbacks()) {
+        //#else
+        //$$ for (JadeTooltipCollectedCallback callback : WailaClientRegistration.INSTANCE.tooltipCollectedCallbacks) {
+        //#endif
             callback.onTooltipCollected(tooltip, accessor);
         }
         JadeUtil.disableJadeRender = true;
