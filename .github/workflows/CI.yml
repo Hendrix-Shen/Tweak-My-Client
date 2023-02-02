@@ -19,16 +19,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout the sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up JDK ${{ matrix.java }}
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.java }}
 
       - name: Cache Gradle packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -41,43 +41,32 @@ jobs:
         id: get_short_sha
         run: |
           short_sha=$(echo ${GITHUB_SHA} | cut -c1-7)
-          echo "::set-output name=short_sha::$short_sha"
+          echo "short_sha=$short_sha" >> $GITHUB_OUTPUT
 
-      - name: Read Properties mod_name
-        id: mod_name
-        uses: christian-draeger/read-properties@1.0.1
+      - name: Read Properties mod info
+        id: mod_info
+        uses: christian-draeger/read-properties@1.1.1
         with:
           path: gradle.properties
-          property: mod_name
-
-      - name: Read Properties mod_version
-        id: mod_version
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: mod_version
+          properties: "mod_name mod_version"
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Preprocess resources
         env:
-          COMMIT_SHA: ${{ steps.get_short_sha.outputs.short_sha }}
           BUILD_TYPE: "BETA"
-          BUILD_NUMBER: ${{ github.run_number}}
         run: ./gradlew preprocessResources
 
       - name: Build with Gradle
         env:
-          COMMIT_SHA: ${{ steps.get_short_sha.outputs.short_sha }}
           BUILD_TYPE: "BETA"
-          BUILD_NUMBER: ${{ github.run_number}}
         run: ./gradlew build
 
       - name: Upload assets to GitHub Action
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
+          name: ${{ steps.mod_info.outputs.mod_name }} ${{ steps.mod_info.outputs.mod_version }}.${{ github.run_number }}+${{ steps.get_short_sha.outputs.short_sha }}
           path: |
             LICENSE
             fabricWrapper/build/libs/*.jar
@@ -92,14 +81,14 @@ jobs:
             LICENSE
             fabricWrapper/build/libs/*.jar
             fabricWrapper/build/tmp/submods/META-INF/jars/*.jar
-          name: "[CI#${{ github.run_number}}]${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}"
+          name: "[CI#${{ github.run_number}}]${{ steps.mod_info.outputs.mod_name }} ${{ steps.mod_info.outputs.mod_version }}.${{ github.run_number }}+${{ steps.get_short_sha.outputs.short_sha }}"
           tag_name: dev-${{ github.run_number }}
           target_commitish: ${{ github.event.ref }}
           generate_release_notes: true
 
       - name: Publish release to Curseforge
         if: contains(github.event.head_commit.message, '[publish skip]') == false && contains(github.event.ref, 'refs/heads/exp') == false
-        uses: Kir-Antipov/mc-publish@v2.1
+        uses: Kir-Antipov/mc-publish@v3.2
         with:
           curseforge-id: 478757
           curseforge-token: ${{ secrets.CF_API_TOKEN }}
@@ -107,7 +96,7 @@ jobs:
           files-secondary: fabricWrapper/build/tmp/submods/META-INF/jars/!(*-@(dev|sources)).jar
 
           name: ''
-          version: ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
+          version: ${{ steps.mod_info.outputs.mod_version }}.${{ github.run_number }}+${{ steps.get_short_sha.outputs.short_sha }}
           version-type: alpha
 
           changelog: |
@@ -149,16 +138,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout the sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up JDK ${{ matrix.java }}
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.java }}
 
       - name: Cache Gradle packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -173,41 +162,30 @@ jobs:
           short_sha=$(echo ${GITHUB_SHA} | cut -c1-7)
           echo "::set-output name=short_sha::$short_sha"
 
-      - name: Read Properties mod_name
-        id: mod_name
-        uses: christian-draeger/read-properties@1.0.1
+      - name: Read Properties mod info
+        id: mod_info
+        uses: christian-draeger/read-properties@1.1.1
         with:
           path: gradle.properties
-          property: mod_name
-
-      - name: Read Properties mod_version
-        id: mod_version
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: gradle.properties
-          property: mod_version
+          properties: "mod_name mod_version"
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Preprocess resources
         env:
-          COMMIT_SHA: ${{ steps.get_short_sha.outputs.short_sha }}
           BUILD_TYPE: "RELEASE"
-          BUILD_NUMBER: ${{ github.run_number}}
         run: ./gradlew preprocessResources
 
       - name: Build with Gradle
         env:
-          COMMIT_SHA: ${{ steps.get_short_sha.outputs.short_sha }}
           BUILD_TYPE: "RELEASE"
-          BUILD_NUMBER: ${{ github.run_number}}
         run: ./gradlew build
 
       - name: Upload assets to GitHub Action
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.mod_name.outputs.value }} ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
+          name: ${{ steps.mod_info.outputs.mod_name }} ${{ steps.mod_info.outputs.mod_version }}.${{ github.run_number }}+${{ steps.get_short_sha.outputs.short_sha }}
           path: |
             LICENSE
             fabricWrapper/build/libs/*.jar
@@ -223,7 +201,7 @@ jobs:
           tag_name: ${{ github.event.ref }}
 
       - name: Publish to curseforge
-        uses: Kir-Antipov/mc-publish@v2.1
+        uses: Kir-Antipov/mc-publish@v3.2
         with:
           curseforge-id: 478757
           curseforge-token: ${{ secrets.CF_API_TOKEN }}
@@ -232,7 +210,7 @@ jobs:
           files-secondary: fabricWrapper/build/tmp/submods/META-INF/jars/!(*-@(dev|sources)).jar
 
           name: ''
-          version: ${{ steps.mod_version.outputs.value }}.${{ github.run_number}}+${{ steps.get_short_sha.outputs.short_sha }}
+          version: ${{ steps.mod_info.outputs.mod_version }}.${{ github.run_number }}+${{ steps.get_short_sha.outputs.short_sha }}
           version-type: 'release'
 
           changelog: ${{ github.event.release.body }}
@@ -272,10 +250,10 @@ jobs:
 
     steps:
       - name: Checkout the sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up JDK ${{ matrix.java }}
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: ${{ matrix.java }}

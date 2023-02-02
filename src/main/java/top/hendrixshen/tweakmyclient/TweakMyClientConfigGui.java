@@ -14,7 +14,7 @@ public class TweakMyClientConfigGui extends ConfigGui {
 
     public static TweakMyClientConfigGui getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new TweakMyClientConfigGui(TweakMyClientReference.getModId(), ConfigCategory.GENERIC, TweakMyClientReference.getConfigHandler().configManager);
+            INSTANCE = new TweakMyClientConfigGui(TweakMyClientReference.getModIdentifier(), ConfigCategory.GENERIC, TweakMyClientReference.getConfigHandler().configManager);
         }
         return INSTANCE;
     }

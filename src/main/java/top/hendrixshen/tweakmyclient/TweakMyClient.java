@@ -20,7 +20,7 @@ import top.hendrixshen.tweakmyclient.util.render.RestrictionBoxRenderer;
 
 public class TweakMyClient implements ClientModInitializer {
     @Getter
-    private static final Logger logger = LogManager.getLogger(TweakMyClientReference.getModId());
+    private static final Logger logger = LogManager.getLogger(TweakMyClientReference.getModIdentifier());
     @Getter
     @NotNull
     private static final Minecraft minecraftClient = Minecraft.getInstance();

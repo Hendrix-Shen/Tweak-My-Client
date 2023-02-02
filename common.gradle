@@ -1,6 +1,7 @@
 apply(plugin: "maven-publish")
 apply(plugin: "fabric-loom")
-// apply(plugin: "io.github.juuxel.loom-quiltflower")
+apply(plugin: "io.github.juuxel.loom-quiltflower")
+apply(plugin: "net.kyori.blossom")
 apply(plugin: "com.replaymod.preprocess")
 
 int mcVersion = 1
@@ -28,21 +29,22 @@ repositories {
 }
 
 dependencies {
+    // Development environment
     minecraft("com.mojang:minecraft:${project.minecraft_version}")
     mappings(loom.officialMojangMappings())
 
+    // Annotation processor
     modCompileOnly("org.projectlombok:lombok:${project.lombok_version}")
     annotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
-    testCompileOnly("org.projectlombok:lombok:${project.lombok_version}")
-    testAnnotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
 
+    // Dependency
     def ENV = System.getenv()
     modImplementation("top.hendrixshen:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
         if (ENV.BUILD_NUMBER) {
             exclude(group: "net.fabricmc.fabric-api", module: "fabric-api")
         }
     }
-    modImplementation("curse.maven:litematica-308892:${project.litematica_version}")
+    modCompileOnly("curse.maven:litematica-308892:${project.litematica_version}")
     modCompileOnly("curse.maven:not-enough-crashes-353890:${project.not_enough_crashes_version}")
 
     if (mcVersion >= 11600) {
@@ -60,9 +62,11 @@ dependencies {
 
 loom {
     runConfigs.all {
+        // Dump modified classes automatically.
         property("mixin.debug.export", "true")
     }
 
+    // We need large window.
     runConfigs.client {
         programArgs([
                 "--width",
@@ -79,6 +83,7 @@ loom {
 
     runClient {
         defaultCharacterEncoding("UTF-8")
+        // Set client language to zh_cn
         if (!new File("${projectDir}/run/client/options.txt").exists()) {
             new File("${projectDir}/run/client").mkdirs()
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("${projectDir}/run/client/options.txt"))
@@ -87,8 +92,8 @@ loom {
             bufferedWriter.write("forceUnicodeFont:true\n")
             bufferedWriter.write("fov:1.0\n")
             bufferedWriter.write("gamma:16.0\n")
-            bufferedWriter.write("guiScale:2\n")
-            bufferedWriter.write("lang:zh_CN\n")
+            bufferedWriter.write("guiScale:3\n")
+            bufferedWriter.write("lang:${Locale.getDefault().toString()}\n")
             bufferedWriter.write("maxFps:260\n")
             bufferedWriter.write("renderDistance:10\n")
             bufferedWriter.write("soundCategory_master:0.0")
@@ -112,17 +117,17 @@ remapJar {
     remapperIsolation = true
 }
 
-if (mcVersion > 11701) {
-    sourceCompatibility = JavaVersion.VERSION_16
-    targetCompatibility = JavaVersion.VERSION_16
-} else {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
 
-archivesBaseName = project.archives_base_name + "-" + project.minecraft_version
-version = project.parent.version
-group = project.maven_group
+setArchivesBaseName("${project.archives_base_name}-${project.minecraft_version}")
+setVersion(project.parent.version)
+setGroup(project.maven_group)
+if (mcVersion > 11701) {
+    setSourceCompatibility(JavaVersion.VERSION_16)
+    setTargetCompatibility(JavaVersion.VERSION_16)
+} else {
+    setSourceCompatibility(JavaVersion.VERSION_1_8)
+    setTargetCompatibility(JavaVersion.VERSION_1_8)
+}
 
 processResources {
     outputs.upToDateWhen { false }
@@ -150,7 +155,12 @@ processResources {
     }
 }
 
-tasks.withType(JavaCompile) {
+blossom {
+    replaceToken("\${mod_id}", project.mod_id)
+    replaceToken("\${minecraft_version_id}", project.minecraft_version.replace(".", "_"))
+}
+
+tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
 }
 
@@ -165,8 +175,7 @@ jar {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = "${project.mod_id}-${project.minecraft_version.replace(".", "_")}"
-            version = project.version
+            artifactId("${project.mod_id}-${project.minecraft_version.replace(".", "_")}")
             from(components.java)
         }
     }

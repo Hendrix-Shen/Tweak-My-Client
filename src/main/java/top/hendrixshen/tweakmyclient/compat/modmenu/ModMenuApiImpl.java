@@ -16,6 +16,6 @@ public class ModMenuApiImpl implements ModMenuCompatApi {
 
     @Override
     public String getModIdCompat() {
-        return TweakMyClientReference.getCurrentModId();
+        return TweakMyClientReference.getCurrentModIdentifier();
     }
 }

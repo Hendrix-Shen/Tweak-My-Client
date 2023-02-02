@@ -87,6 +87,6 @@ public class StringUtil {
     }
 
     public static String tr(String key, Object... objects) {
-        return I18n.get(String.format("%s.%s", TweakMyClientReference.getModId(), key), objects);
+        return I18n.get(String.format("%s.%s", TweakMyClientReference.getModIdentifier(), key), objects);
     }
 }

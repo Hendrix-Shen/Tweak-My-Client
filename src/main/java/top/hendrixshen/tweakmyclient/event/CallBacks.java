@@ -98,7 +98,7 @@ public class CallBacks {
     }
 
     public static void debugModeCallBack(Option option) {
-        Configurator.setLevel(TweakMyClientReference.getModId(), Level.toLevel((Configs.debugMode ? "DEBUG" : "INFO")));
+        Configurator.setLevel(TweakMyClientReference.getModIdentifier(), Configs.debugMode ? Level.DEBUG : Level.INFO);
         reDrawConfigGui(option);
     }
 

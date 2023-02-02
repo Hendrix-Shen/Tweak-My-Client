@@ -39,8 +39,8 @@ public class CustomWindowUtil {
     //#endif
     private static final Random RANDOM = new Random();
     public static final Minecraft mc = TweakMyClient.getMinecraftClient();
-    private static final ResourceLocation icon16 = new ResourceLocation(TweakMyClientReference.getModId(), "texture/icon/icon_16x16.png");
-    private static final ResourceLocation icon32 = new ResourceLocation(TweakMyClientReference.getModId(), "texture/icon/icon_32x32.png");
+    private static final ResourceLocation icon16 = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_16x16.png");
+    private static final ResourceLocation icon32 = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_32x32.png");
 
     // These data should not be changed
     static {
