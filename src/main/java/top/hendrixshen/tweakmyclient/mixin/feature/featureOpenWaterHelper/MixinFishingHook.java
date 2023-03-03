@@ -9,7 +9,7 @@ import net.minecraft.world.entity.projectile.FishingHook;
 import org.spongepowered.asm.mixin.Mixin;
 //#if MC >= 11600
 import org.spongepowered.asm.mixin.Shadow;
-import top.hendrixshen.tweakmyclient.fakeInterface.IFishingHookEntity;
+import top.hendrixshen.tweakmyclient.interfaces.IFishingHookEntity;
 
 @Mixin(FishingHook.class)
 public abstract class MixinFishingHook implements IFishingHookEntity {

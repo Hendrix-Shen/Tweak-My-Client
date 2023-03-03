@@ -10,7 +10,6 @@ import top.hendrixshen.magiclib.config.annotation.Hotkey;
 import top.hendrixshen.magiclib.config.annotation.Numeric;
 import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
 import top.hendrixshen.magiclib.dependency.annotation.Dependency;
-import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientPredicate;
 import top.hendrixshen.tweakmyclient.event.CallBacks;
 import top.hendrixshen.tweakmyclient.helper.*;
@@ -24,9 +23,15 @@ public class Configs {
     @Config(category = ConfigCategory.GENERIC)
     public static int autoDropInterval = 0;
 
+    @Config(category = ConfigCategory.GENERIC)
+    public static boolean autoReconnect = false;
+
+    @Config(category = ConfigCategory.GENERIC)
+    public static boolean compatReconnectButtons = false;
+
     @Numeric(maxValue = 60, minValue = 0)
     @Config(category = ConfigCategory.GENERIC)
-    public static int autoReconnectTimer = 5;
+    public static double autoReconnectTimer = 5;
 
     @Config(category = ConfigCategory.GENERIC, predicate = TweakMyClientPredicate.AllowBreakAnimation.class)
     public static BreakAnimationMode breakAnimationMode = BreakAnimationMode.NONE;
@@ -217,7 +222,7 @@ public class Configs {
 
     @Hotkey()
     @Config(category = ConfigCategory.FEATURE)
-    public static boolean featureAutoReconnect = false;
+    public static boolean featureReconnectButtons = false;
 
     @Hotkey()
     @Config(category = ConfigCategory.FEATURE)

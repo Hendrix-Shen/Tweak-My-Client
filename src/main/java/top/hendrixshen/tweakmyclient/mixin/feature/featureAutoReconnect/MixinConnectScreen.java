@@ -28,7 +28,7 @@ public class MixinConnectScreen {
             )
     )
     private static void onStartConnecting(Screen screen, Minecraft minecraft, ServerAddress serverAddress, ServerData serverData, CallbackInfo ci) {
-        AutoReconnectUtil.ReconnectTimer = Configs.autoReconnectTimer * 20;
+        AutoReconnectUtil.reconnectTimer = Configs.autoReconnectTimer * 20;
         if (serverData != null) {
             AutoReconnectUtil.setLastServer(serverData);
         }

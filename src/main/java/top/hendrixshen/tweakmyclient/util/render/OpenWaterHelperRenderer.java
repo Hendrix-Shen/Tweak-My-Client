@@ -8,7 +8,7 @@ import net.minecraft.world.entity.projectile.FishingHook;
 import org.lwjgl.opengl.GL11;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.fakeInterface.IFishingHookEntity;
+import top.hendrixshen.tweakmyclient.interfaces.IFishingHookEntity;
 import top.hendrixshen.tweakmyclient.helper.AreaBox;
 //#endif
 

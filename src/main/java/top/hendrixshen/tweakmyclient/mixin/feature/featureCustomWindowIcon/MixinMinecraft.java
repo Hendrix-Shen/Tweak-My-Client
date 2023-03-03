@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.tweakmyclient.fakeInterface.IMinecraft;
+import top.hendrixshen.tweakmyclient.interfaces.IMinecraft;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
 import java.util.concurrent.CompletableFuture;

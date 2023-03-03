@@ -1,4 +1,4 @@
-package top.hendrixshen.tweakmyclient.fakeInterface;
+package top.hendrixshen.tweakmyclient.interfaces;
 
 import com.mojang.blaze3d.platform.Window;
 

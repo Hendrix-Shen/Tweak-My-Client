@@ -20,7 +20,7 @@ import top.hendrixshen.magiclib.util.ReflectUtil;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.fakeInterface.IScreen;
+import top.hendrixshen.tweakmyclient.interfaces.IScreen;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class AutoReconnectUtil {
     private static final ResourceLocation resourceLocation = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/gui/xibao.png");
-    public static int ReconnectTimer;
+    public static double reconnectTimer;
     public static int reAuthenticateButtonOffsetY;
     private static boolean initialized = false;
     private static ServerData lastServer;
@@ -177,8 +177,8 @@ public class AutoReconnectUtil {
             this.init(parent);
         }
 
-        if (Configs.featureAutoReconnect) {
-            AutoReconnectUtil.ReconnectTimer = Configs.autoReconnectTimer * 20;
+        if (Configs.autoReconnect) {
+            AutoReconnectUtil.reconnectTimer = Configs.autoReconnectTimer * 20;
         }
         int backButtonX = width / 2 - 100;
         int backButtonY = Math.min(height / 2 + textHeight / 2 + 9, height - 30);
@@ -249,15 +249,15 @@ public class AutoReconnectUtil {
     }
 
     private static void onPressAutoReconnect(Button button) {
-        TweakMyClientReference.getConfigHandler().configManager.setValue("featureAutoReconnect", !Configs.featureAutoReconnect);
+        TweakMyClientReference.getConfigHandler().configManager.setValue("featureAutoReconnect", !Configs.autoReconnect);
 
-        if (Configs.featureAutoReconnect) {
-            AutoReconnectUtil.ReconnectTimer = Configs.autoReconnectTimer * 20;
+        if (Configs.autoReconnect) {
+            AutoReconnectUtil.reconnectTimer = Configs.autoReconnectTimer * 20;
         }
     }
 
     public static void tickAutoReconnectButton(Screen parent) {
-        if (!Configs.featureAutoReconnect) {
+        if (!Configs.autoReconnect) {
             //#if MC >= 11600
             AutoReconnectUtil.autoReconnectButton.setMessage(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")));
             //#else
@@ -267,13 +267,13 @@ public class AutoReconnectUtil {
         }
 
         //#if MC >= 11600
-        AutoReconnectUtil.autoReconnectButton.setMessage(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.timer", (int) Math.ceil(AutoReconnectUtil.ReconnectTimer / 20.0))));
+        AutoReconnectUtil.autoReconnectButton.setMessage(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.timer", (int) Math.ceil(AutoReconnectUtil.reconnectTimer / 20.0))));
         //#else
         //$$ AutoReconnectUtil.autoReconnectButton.setMessage(StringUtil.tr("message.autoReconnect.timer", (int) Math.ceil(AutoReconnectUtil.ReconnectTimer / 20.0)));
         //#endif
 
-        if (AutoReconnectUtil.ReconnectTimer > 0) {
-            AutoReconnectUtil.ReconnectTimer--;
+        if (AutoReconnectUtil.reconnectTimer > 0) {
+            AutoReconnectUtil.reconnectTimer--;
             return;
         }
 
