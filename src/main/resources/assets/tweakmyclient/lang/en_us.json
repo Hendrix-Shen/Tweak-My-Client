@@ -117,8 +117,6 @@
     "tweakmyclient.config.generic.autoDropInterval.comment": "How many ticks per interval to perform auto drop.",
     "tweakmyclient.config.generic.autoReconnect.name": "autoReconnect",
     "tweakmyclient.config.generic.autoReconnect.comment": "Automatically reconnects when you disconnect from the server.\nAdaptive AuthMe, OAuth, ReAuth and In-Game Account Switcher session validation.",
-    "tweakmyclient.config.generic.compatReconnectButtons.name": "compatReconnectButtons",
-    "tweakmyclient.config.generic.compatReconnectButtons.comment": "More compatible reconnect buttons.",
     "tweakmyclient.config.generic.autoReconnectTimer.name": "autoReconnectTimer",
     "tweakmyclient.config.generic.autoReconnectTimer.comment": "How many seconds to wait for auto reconnection.",
     "tweakmyclient.config.generic.breakAnimationMode.name": "breakAnimationMode",

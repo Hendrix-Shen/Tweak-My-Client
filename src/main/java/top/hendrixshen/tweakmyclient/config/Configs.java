@@ -26,9 +26,6 @@ public class Configs {
     @Config(category = ConfigCategory.GENERIC)
     public static boolean autoReconnect = false;
 
-    @Config(category = ConfigCategory.GENERIC)
-    public static boolean compatReconnectButtons = false;
-
     @Numeric(maxValue = 60, minValue = 0)
     @Config(category = ConfigCategory.GENERIC)
     public static double autoReconnectTimer = 5;

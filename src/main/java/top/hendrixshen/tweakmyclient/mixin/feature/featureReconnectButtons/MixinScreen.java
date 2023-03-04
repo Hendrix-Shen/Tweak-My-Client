@@ -1,4 +1,4 @@
-package top.hendrixshen.tweakmyclient.mixin.feature.featureAutoReconnect;
+package top.hendrixshen.tweakmyclient.mixin.feature.featureReconnectButtons;
 
 //#if MC < 11700
 //$$ import net.minecraft.client.gui.components.AbstractWidget;
@@ -47,8 +47,8 @@ public abstract class MixinScreen implements IScreen {
             )
     )
     private void onTick(CallbackInfo ci) {
-        if (((Object) this) instanceof IAutoReconnectScreen screen) {
-            AutoReconnectUtil.tickAutoReconnectButton(screen.getParent());
+        if (this instanceof IAutoReconnectScreen) {
+            AutoReconnectUtil.tickAutoReconnectButton(((IAutoReconnectScreen) this).getParent());
         }
     }
 
@@ -59,9 +59,9 @@ public abstract class MixinScreen implements IScreen {
             )
     )
     private void renderDirtBackground(int i, CallbackInfo ci) {
-        if (((Object) this) instanceof DisconnectedScreen screen) {
+        if (((Object) this) instanceof DisconnectedScreen) {
             if (Configs.expXiBao && TweakMyClientPredicate.xibaoLang.contains(TweakMyClient.getMinecraftClient().options.languageCode)) {
-                AutoReconnectUtil.renderXibao(screen);
+                AutoReconnectUtil.renderXibao(((Screen) (Object) this));
             }
         }
     }

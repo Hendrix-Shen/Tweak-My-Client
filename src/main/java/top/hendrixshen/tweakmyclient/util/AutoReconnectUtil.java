@@ -267,9 +267,9 @@ public class AutoReconnectUtil {
         }
 
         //#if MC >= 11600
-        AutoReconnectUtil.autoReconnectButton.setMessage(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.timer", (int) Math.ceil(AutoReconnectUtil.reconnectTimer / 20.0))));
+        AutoReconnectUtil.autoReconnectButton.setMessage(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.timer", AutoReconnectUtil.reconnectTimer / 20.0)));
         //#else
-        //$$ AutoReconnectUtil.autoReconnectButton.setMessage(StringUtil.tr("message.autoReconnect.timer", (int) Math.ceil(AutoReconnectUtil.ReconnectTimer / 20.0)));
+        //$$ AutoReconnectUtil.autoReconnectButton.setMessage(StringUtil.tr("message.autoReconnect.timer", AutoReconnectUtil.reconnectTimer / 20.0));
         //#endif
 
         if (AutoReconnectUtil.reconnectTimer > 0) {

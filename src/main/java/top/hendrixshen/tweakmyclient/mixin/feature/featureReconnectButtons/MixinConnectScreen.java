@@ -1,4 +1,4 @@
-package top.hendrixshen.tweakmyclient.mixin.feature.featureAutoReconnect;
+package top.hendrixshen.tweakmyclient.mixin.feature.featureReconnectButtons;
 
 //#if MC >= 11903
 import net.minecraft.client.Minecraft;

@@ -1,4 +1,4 @@
-package top.hendrixshen.tweakmyclient.mixin.feature.featureAutoReconnect;
+package top.hendrixshen.tweakmyclient.mixin.feature.featureReconnectButtons;
 
 import net.minecraft.client.gui.screens.DisconnectedScreen;
 import net.minecraft.client.gui.screens.Screen;
@@ -40,7 +40,7 @@ public class MixinDisconnectedScreen extends Screen implements IAutoReconnectScr
     private void onInitDisconnectedScreen(CallbackInfo ci) {
         if (Configs.featureReconnectButtons) {
             AutoReconnectUtil.getInstance().initDisconnectedScreen(this, this.parent, this.width, this.height, this.textHeight, this.reason);
-            if (Configs.compatReconnectButtons) ci.cancel();
+            ci.cancel();
         }
     }
 
@@ -49,3 +49,4 @@ public class MixinDisconnectedScreen extends Screen implements IAutoReconnectScr
         return parent;
     }
 }
+

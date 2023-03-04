@@ -117,8 +117,6 @@
     "tweakmyclient.config.generic.autoDropInterval.comment": "每隔多少刻执行一次自动丢弃.",
     "tweakmyclient.config.generic.autoReconnect.name": "自动重连",
     "tweakmyclient.config.generic.autoReconnect.comment": "从服务器断开连接时自动重新连接服务器.\n适配 AuthMe, OAuth, ReAuth 和 In-Game Account Switcher 会话验证",
-    "tweakmyclient.config.generic.compatReconnectButtons.name": "兼容性重连按钮",
-    "tweakmyclient.config.generic.compatReconnectButtons.comment": "使重连按钮更兼容.",
     "tweakmyclient.config.generic.autoReconnectTimer.name": "自动重连计时器",
     "tweakmyclient.config.generic.autoReconnectTimer.comment": "等待多少秒后自动重连.",
     "tweakmyclient.config.generic.breakAnimationMode.name": "挖掘动画",
