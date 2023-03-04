@@ -56,12 +56,13 @@ public abstract class MixinScreen implements IScreen {
             method = "renderDirtBackground",
             at = @At(
                     value = "HEAD"
-            )
-    )
+            ),
+            cancellable = true)
     private void renderDirtBackground(int i, CallbackInfo ci) {
-        if (((Object) this) instanceof DisconnectedScreen) {
+        if ((Object) this instanceof DisconnectedScreen) {
             if (Configs.expXiBao && TweakMyClientPredicate.xibaoLang.contains(TweakMyClient.getMinecraftClient().options.languageCode)) {
                 AutoReconnectUtil.renderXibao(((Screen) (Object) this));
+                ci.cancel();
             }
         }
     }

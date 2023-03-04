@@ -249,7 +249,7 @@ public class AutoReconnectUtil {
     }
 
     private static void onPressAutoReconnect(Button button) {
-        TweakMyClientReference.getConfigHandler().configManager.setValue("featureAutoReconnect", !Configs.autoReconnect);
+        TweakMyClientReference.getConfigHandler().configManager.setValue("autoReconnect", !Configs.autoReconnect);
 
         if (Configs.autoReconnect) {
             AutoReconnectUtil.reconnectTimer = Configs.autoReconnectTimer * 20;
