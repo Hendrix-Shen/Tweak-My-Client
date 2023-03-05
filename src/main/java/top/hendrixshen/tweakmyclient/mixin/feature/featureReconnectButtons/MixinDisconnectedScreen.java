@@ -9,6 +9,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.TweakMyClientPredicate;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.interfaces.IAutoReconnectScreen;
 import top.hendrixshen.tweakmyclient.util.AutoReconnectUtil;
@@ -42,6 +44,15 @@ public class MixinDisconnectedScreen extends Screen implements IAutoReconnectScr
             AutoReconnectUtil.getInstance().initDisconnectedScreen(this, this.parent, this.width, this.height, this.textHeight, this.reason);
             ci.cancel();
         }
+    }
+
+    @Override
+    public void renderDirtBackground(int i) {
+        if (Configs.expXiBao && TweakMyClientPredicate.xibaoLang.contains(TweakMyClient.getMinecraftClient().options.languageCode)) {
+            AutoReconnectUtil.renderXibao(this);
+            return;
+        }
+        super.renderDirtBackground(i);
     }
 
     @Override
