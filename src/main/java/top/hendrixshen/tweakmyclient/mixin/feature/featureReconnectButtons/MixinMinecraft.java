@@ -43,13 +43,11 @@ public abstract class MixinMinecraft {
             at = @At(
                     value = "HEAD"
             ),
-            cancellable = true,
             remap = false
     )
     private void onScreenTick(CallbackInfo ci) {
         if (screen instanceof IAutoReconnectScreen) {
             AutoReconnectUtil.tickAutoReconnectButton(((IAutoReconnectScreen) screen).getParent());
-            ci.cancel();
         }
     }
 }
