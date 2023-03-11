@@ -3,7 +3,8 @@ name: CI
 on:
   push:
     branches:
-      - 'dev/**'
+      - "dev/**"
+      - "dev"
   release:
     types:
       - published
