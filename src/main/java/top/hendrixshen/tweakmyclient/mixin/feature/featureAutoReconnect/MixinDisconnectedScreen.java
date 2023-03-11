@@ -3,9 +3,8 @@ package top.hendrixshen.tweakmyclient.mixin.feature.featureAutoReconnect;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.jetbrains.annotations.NotNull;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -38,22 +37,48 @@ public class MixinDisconnectedScreen extends Screen {
             ),
             cancellable = true
     )
-    private void onInitDisconnectedScreen(CallbackInfo ci) {
+    private void onInitDisconnectedScreen(@NotNull CallbackInfo ci) {
         AutoReconnectUtil.getInstance().initDisconnectedScreen(this, this.parent, this.width, this.height, this.textHeight, this.reason);
         ci.cancel();
     }
 
-    @Override
-    public void tick() {
+    @Dynamic
+    @SuppressWarnings({"MixinAnnotationTarget", "UnresolvedMixinReference", "target"})
+    @Inject(
+            method = "tick()V",
+            at = @At(
+                    value = "HEAD"
+            )
+    )
+    private void onTick(CallbackInfo ci) {
         AutoReconnectUtil.tickAutoReconnectButton(this.parent);
     }
 
-    @Override
-    public void renderDirtBackground(int i) {
+    @Dynamic
+    @SuppressWarnings({"MixinAnnotationTarget", "UnresolvedMixinReference", "target"})
+    @Inject(
+            method = "renderDirtBackground(I)V",
+            at = @At(
+                    value = "HEAD"
+            ),
+            cancellable = true
+    )
+    private void onRenderDirtBackground(CallbackInfo ci) {
         if (Configs.expXiBao && TweakMyClientPredicate.xibaoLang.contains(TweakMyClient.getMinecraftClient().options.languageCode)) {
             AutoReconnectUtil.renderXibao(this);
-            return;
+            ci.cancel();
         }
+    }
+
+    @Intrinsic
+    @Override
+    public void tick() {
+        super.tick();
+    }
+
+    @Intrinsic
+    @Override
+    public void renderDirtBackground(int i) {
         super.renderDirtBackground(i);
     }
 }
