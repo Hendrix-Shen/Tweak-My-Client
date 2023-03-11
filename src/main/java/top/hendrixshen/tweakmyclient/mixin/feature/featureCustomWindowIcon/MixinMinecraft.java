@@ -10,13 +10,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.tweakmyclient.fakeInterface.IMinecraft;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
 import java.util.concurrent.CompletableFuture;
 
 @Mixin(Minecraft.class)
-public abstract class MixinMinecraft implements IMinecraft {
+public abstract class MixinMinecraft {
     //#if MC >= 11500
     @Final
     //#endif
@@ -39,10 +38,5 @@ public abstract class MixinMinecraft implements IMinecraft {
 
     private void updateIcon() {
         CustomWindowUtil.updateIcon();
-    }
-
-    @Override
-    public Window tmc$getWindow() {
-        return this.window;
     }
 }

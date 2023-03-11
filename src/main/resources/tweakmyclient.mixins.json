@@ -4,9 +4,8 @@
   "package": "top.hendrixshen.tweakmyclient.mixin",
   "plugin": "top.hendrixshen.tweakmyclient.TweakMyClientMixinPlugin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  ],
   "client": [
+    "accessor.FishingHookAccessor",
     "accessor.MultiPlayerGameModeAccessor",
     "accessor.PlayerTabOverlayAccessor",
     "disable.disableAttackEntity.MixinMinecraft",
@@ -39,7 +38,6 @@
     "feature.featureAutoReconnect.MixinConnectScreen",
     "feature.featureAutoReconnect.MixinDisconnectedScreen",
     "feature.featureAutoReconnect.MixinMinecraft",
-    "feature.featureAutoReconnect.MixinScreen",
     "feature.featureAutoRespawn.MixinDeathScreen",
     "feature.featureAutoTotem.MixinLocalPlayer",
     "feature.featureBreakingRestriction.MixinMultiPlayerGameMode",
@@ -53,7 +51,6 @@
     "feature.featureDaylightOverride.MixinLevel",
     "feature.featureGlobalEventListener.MixinLevelRenderer",
     "feature.featureLowHealthWarning.MixinLocalPlayer",
-    "feature.featureOpenWaterHelper.MixinFishingHook",
     "feature.featureUnfocusedCPU.MixinGameRenderer",
     "patch.chunkEdgeLagFix.MixinClientPacketListener",
     "patch.disableLitematicaEasyPlaceFailTip.MixinWorldUtils",

@@ -14,13 +14,14 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import top.hendrixshen.magiclib.compat.minecraft.blaze3d.vertex.VertexFormatCompatApi;
+import top.hendrixshen.magiclib.compat.minecraft.client.gui.components.ButtonCompatApi;
 import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
 import top.hendrixshen.magiclib.util.ReflectUtil;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.fakeInterface.IScreen;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -52,7 +53,7 @@ public class AutoReconnectUtil {
     //#if MC < 11700
     //$$ @SuppressWarnings("deprecation")
     //#endif
-    public static void renderXibao(Screen screen) {
+    public static void renderXibao(@NotNull Screen screen) {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tesselator.getBuilder();
         //#if MC > 11605
@@ -168,9 +169,11 @@ public class AutoReconnectUtil {
         }
     }
 
-    public static String getTranslationKey(Component component) {
-        return component instanceof TranslatableContents ? ((TranslatableContents) component).getKey() : "";
-    }
+    //#if MC <= 11902
+    //$$ public static @NotNull String getTranslationKey(Component component) {
+    //$$     return component instanceof TranslatableContents ? ((TranslatableContents) component).getKey() : "";
+    //$$ }
+    //#endif
 
     public void initDisconnectedScreen(Screen current, Screen parent, int width, int height, int textHeight, Component reason) {
         if (!AutoReconnectUtil.initialized) {
@@ -183,29 +186,13 @@ public class AutoReconnectUtil {
         int backButtonX = width / 2 - 100;
         int backButtonY = Math.min(height / 2 + textHeight / 2 + 9, height - 30);
 
-        //#if MC >= 11903
-        ((IScreen) current).tmc$addButton(
-                Button.builder(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")),
+        current.addRenderableWidgetCompat(
+                ButtonCompatApi.builder(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")),
                         button -> AutoReconnectUtil.reconnect(parent)).pos(backButtonX, backButtonY + 24).size(98, 20).build());
-
-        AutoReconnectUtil.autoReconnectButton = ((IScreen) current).tmc$addButton(
-                Button.builder(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")),
-                        AutoReconnectUtil::onPressAutoReconnect).pos(backButtonX + 102, backButtonY + 24).size(98, 20).build());
-
-        //#elseif MC >= 11600
-        //$$ ((IScreen) current).tmc$addButton(new Button(backButtonX, backButtonY + 24, 98, 20,
-        //$$         ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")), button -> AutoReconnectUtil.reconnect(parent)));
-        //$$ AutoReconnectUtil.autoReconnectButton = ((IScreen) current).tmc$addButton(new Button(backButtonX + 102, backButtonY + 24, 98, 20,
-        //$$         ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")), AutoReconnectUtil::onPressAutoReconnect));
-        //#else
-        //$$ ((IScreen) current).tmc$addButton(new Button(backButtonX, backButtonY + 24, 98, 20,
-        //$$         StringUtil.tr("message.autoReconnect.static"), button -> AutoReconnectUtil.reconnect(parent)));
-        //$$ AutoReconnectUtil.autoReconnectButton = ((IScreen) current).tmc$addButton(new Button(backButtonX + 102, backButtonY + 24, 98, 20,
-        //$$         StringUtil.tr("message.autoReconnect.toggle"), AutoReconnectUtil::onPressAutoReconnect));
-        //#endif
-
+        AutoReconnectUtil.autoReconnectButton = ButtonCompatApi.builder(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")),
+                        AutoReconnectUtil::onPressAutoReconnect).pos(backButtonX + 102, backButtonY + 24).size(98, 20).build();
+        current.addRenderableWidgetCompat(AutoReconnectUtil.autoReconnectButton);
         AutoReconnectUtil.reAuthenticateButtonOffsetY = 0;
-
 
         //#if MC >= 11903
         if (reason == null || AutoReconnectUtil.reAuthMessages.stream().anyMatch(component -> component.getString().equals(reason.getString()))) {
@@ -221,29 +208,12 @@ public class AutoReconnectUtil {
 
             AtomicInteger offsetX = new AtomicInteger();
             int buttonWidth = (200 - 4 * (AutoReconnectUtil.modHashMap.size() - 1)) / AutoReconnectUtil.modHashMap.size();
-
-            AutoReconnectUtil.modHashMap.forEach(
-                    (modId, screen) -> {
-                        //#if MC >= 11903
-                        ((IScreen) current).tmc$addButton(
-                                Button.builder(ComponentCompatApi.literal(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
-                                button -> TweakMyClient.getMinecraftClient().setScreen(screen))
-                                .pos(backButtonX + offsetX.intValue(), 48 + backButtonY)
-                                .size(buttonWidth, 20).build());
-                        //#else
-                        //$$ ((IScreen) current).tmc$addButton(new Button(backButtonX + offsetX.intValue(),
-                        //$$         48 + backButtonY,
-                        //$$         buttonWidth,
-                        //$$         20,
-                        //#if MC >= 11600
-                        //$$         ComponentCompatApi.literal(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
-                        //#else
-                        //$$         StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId)),
-                        //#endif
-                        //$$         b -> TweakMyClient.getMinecraftClient().setScreen(screen)));
-                        //$$ offsetX.getAndAdd(buttonWidth + 4);
-                        //#endif
-                    }
+            AutoReconnectUtil.modHashMap.forEach((modId, screen) ->
+                    current.addRenderableWidgetCompat(ButtonCompatApi.builder(
+                            ComponentCompatApi.literal(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
+                                    button -> TweakMyClient.getMinecraftClient().setScreen(screen))
+                            .pos(backButtonX + offsetX.intValue(), 48 + backButtonY)
+                            .size(buttonWidth, 20).build())
             );
         }
     }

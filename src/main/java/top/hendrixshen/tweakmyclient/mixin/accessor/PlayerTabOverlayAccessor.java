@@ -6,6 +6,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(PlayerTabOverlay.class)
 public interface PlayerTabOverlayAccessor {
-    @Accessor()
+    @Accessor
     boolean getVisible();
 }

@@ -8,8 +8,8 @@ import net.minecraft.world.entity.projectile.FishingHook;
 import org.lwjgl.opengl.GL11;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.fakeInterface.IFishingHookEntity;
 import top.hendrixshen.tweakmyclient.helper.AreaBox;
+import top.hendrixshen.tweakmyclient.mixin.accessor.FishingHookAccessor;
 //#endif
 
 public class OpenWaterHelperRenderer implements IRenderer {
@@ -29,7 +29,7 @@ public class OpenWaterHelperRenderer implements IRenderer {
         FishingHook fishHook = TweakMyClient.getMinecraftClient().player.fishing;
         assert fishHook != null;
         BlockPos fishHookPos = fishHook.blockPosition();
-        Color4f color = ((IFishingHookEntity) fishHook).checkOpenWaterAround(fishHook.blockPosition()) ? Configs.colorWaterOpen : Configs.colorWaterShallow;
+        Color4f color = ((FishingHookAccessor) fishHook).invokeCalculateOpenWater(fishHook.blockPosition()) ? Configs.colorWaterOpen : Configs.colorWaterShallow;
         AreaBox areaBox = new AreaBox(fishHookPos.getX() - 2, fishHookPos.getY() - 3, fishHookPos.getZ() - 2,
                 fishHookPos.getX() + 2, fishHookPos.getY(), fishHookPos.getZ() + 2);
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
