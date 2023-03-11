@@ -7,20 +7,18 @@ apply(plugin: "com.replaymod.preprocess")
 int mcVersion = 1
 
 preprocess {
-    mcVersion = vars.get()["MC"]
+    mcVersion = (int) vars.get()["MC"]
     tabIndentation = false
 }
 
 repositories {
     maven {
+        name("CurseForge Maven")
         url("https://www.cursemaven.com")
     }
 
     maven {
-        url("https://api.modrinth.com/maven")
-    }
-
-    maven {
+        name("Nyan Maven")
         url("https://maven.hendrixshen.top")
     }
 
@@ -61,53 +59,57 @@ dependencies {
 }
 
 loom {
-    runConfigs.all {
-        // Dump modified classes automatically.
-        property("mixin.debug.export", "true")
+    runConfigs {
+        configureEach {
+            // Dump modified classes automatically.
+            property("mixin.debug.export", "true")
+        }
+
+        // We need large window.
+        client {
+            programArgs([
+                    "--width",
+                    "1920",
+                    "--height",
+                    "1080",
+            ])
+            runDir("run/client")
+        }
+
+        server {
+            runDir("run/server")
+        }
     }
 
-    // We need large window.
-    runConfigs.client {
-        programArgs([
-                "--width",
-                "1920",
-                "--height",
-                "1080",
-        ])
-        runDir("run/client")
-    }
-
-    runConfigs.server {
-        runDir("run/server")
-    }
-
+    // Setup client default settings.
     runClient {
         defaultCharacterEncoding("UTF-8")
         // Set client language to zh_cn
         if (!new File("${projectDir}/run/client/options.txt").exists()) {
             new File("${projectDir}/run/client").mkdirs()
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("${projectDir}/run/client/options.txt"))
-            bufferedWriter.write("autoJump:false\n")
-            bufferedWriter.write("enableVsync:false\n")
-            bufferedWriter.write("forceUnicodeFont:true\n")
-            bufferedWriter.write("fov:1.0\n")
-            bufferedWriter.write("gamma:16.0\n")
-            bufferedWriter.write("guiScale:3\n")
-            bufferedWriter.write("lang:${Locale.getDefault().toString()}\n")
-            bufferedWriter.write("maxFps:260\n")
-            bufferedWriter.write("renderDistance:10\n")
-            bufferedWriter.write("soundCategory_master:0.0")
+            bufferedWriter.writeLine("autoJump:false")
+            bufferedWriter.writeLine("enableVsync:false")
+            bufferedWriter.writeLine("forceUnicodeFont:true")
+            bufferedWriter.writeLine("fov:1.0")
+            bufferedWriter.writeLine("gamma:16.0")
+            bufferedWriter.writeLine("guiScale:3")
+            bufferedWriter.writeLine("lang:${Locale.getDefault().toString()}")
+            bufferedWriter.writeLine("maxFps:260")
+            bufferedWriter.writeLine("renderDistance:10")
+            bufferedWriter.writeLine("soundCategory_master:0.0")
             bufferedWriter.close()
         }
     }
 
+    // Setup server default settings.
     runServer {
         defaultCharacterEncoding("UTF-8")
-        // Auto agree EULA
+        // Agree eula before server init.
         if (!new File("${projectDir}/run/server/eula.txt").exists()) {
             new File("${projectDir}/run/server").mkdirs()
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("${projectDir}/run/server/eula.txt"))
-            bufferedWriter.write("eula=true")
+            bufferedWriter.writeLine("eula=true")
             bufferedWriter.close()
         }
     }
@@ -130,34 +132,29 @@ if (mcVersion > 11701) {
 }
 
 processResources {
-    outputs.upToDateWhen { false }
-
-    inputs.property("version", version)
     filesMatching("fabric.mod.json") {
-        expand(["mod_version"            : project.version,
-                "mod_id"                 : project.mod_id,
-                "mod_name"               : project.mod_name,
-                "mod_homepage"           : project.mod_homepage,
-                "mod_sources"            : project.mod_sources,
-                "mod_license"            : project.mod_license,
-                "minecraft_dependency"   : project.minecraft_dependency,
-                "minecraft_version_id"   : project.minecraft_version.replace(".", "_"),
-                "minecraft_version"      : project.minecraft_version,
-                "magiclib_dependency"    : project.magiclib_dependency
-        ])
-    }
-    println("assets/${project.mod_id}/lang/*.json")
-    filesMatching("assets/${project.mod_id}/lang/*.json") {
-        expand([
-                "mod_id"  : project.mod_id,
-                "mod_name": project.mod_name,
+        filter { line ->
+            line.trim().startsWith("//") ? "" : line
+        }
+
+        expand(["mod_version"         : project.version,
+                "mod_id"              : project.mod_id,
+                "mod_name"            : project.mod_name,
+                "mod_homepage"        : project.mod_homepage,
+                "mod_sources"         : project.mod_sources,
+                "mod_license"         : project.mod_license,
+                "minecraft_dependency": project.minecraft_dependency,
+                "minecraft_version_id": project.minecraft_version.replace(".", "_"),
+                "minecraft_version"   : project.minecraft_version,
+                "magiclib_dependency" : project.magiclib_dependency
         ])
     }
 }
 
 blossom {
-    replaceToken("\${mod_id}", project.mod_id)
-    replaceToken("\${minecraft_version_id}", project.minecraft_version.replace(".", "_"))
+    replaceToken("@MOD_IDENTIFIER@"            , project.mod_id)
+    replaceToken("@MOD_NAME@"                  , project.mod_name)
+    replaceToken("@MINECRAFT_VERSION_IDENTIFY@", project.minecraft_version.replace(".", "_"))
 }
 
 tasks.withType(JavaCompile).configureEach {

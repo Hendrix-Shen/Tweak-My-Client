@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+        mavenLocal()
         maven {
             name("Fabric")
             url("https://maven.fabricmc.net")
@@ -8,17 +9,16 @@ pluginManagement {
             name("Jitpack")
             url("https://jitpack.io")
         }
+        maven {
+            name("Nyan Maven")
+            url("https://maven.hendrixshen.top")
+        }
+        maven {
+            name("Cotton")
+            url("https://server.bbkr.space/artifactory/libs-release")
+        }
         mavenCentral()
         gradlePluginPortal()
-    }
-    resolutionStrategy {
-        eachPlugin {
-            switch (requested.id.id) {
-                case "com.replaymod.preprocess": {
-                    useModule("com.github.Fallen-Breath:preprocessor:${requested.version}")
-                }
-            }
-        }
     }
 }
 

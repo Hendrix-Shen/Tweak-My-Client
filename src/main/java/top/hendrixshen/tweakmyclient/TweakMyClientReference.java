@@ -9,21 +9,23 @@ import top.hendrixshen.tweakmyclient.util.VersionParser;
 
 public class TweakMyClientReference {
     @Getter
-    private static final String modIdentifier = "${mod_id}";
+    private static final String modIdentifier = "@MOD_IDENTIFIER@";
     @Getter
-    private static final String currentModIdentifier = "${mod_id}-${minecraft_version_id}";
+    private static final String modIdentifierCurrent = "@MOD_IDENTIFIER@-@MINECRAFT_VERSION_IDENTIFY@";
     @Getter
-    private static final String modName = FabricLoader.getInstance().getModContainer(currentModIdentifier).orElseThrow(RuntimeException::new).getMetadata().getName();
+    private static final String modName = "@MOD_NAME@";
     @Getter
-    private static final String modVersion = FabricLoader.getInstance().getModContainer(currentModIdentifier).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
+    private static final String modNameCurrent = FabricLoader.getInstance().getModContainer(modIdentifierCurrent).orElseThrow(RuntimeException::new).getMetadata().getName();
+    @Getter
+    private static final String modVersion = FabricLoader.getInstance().getModContainer(modIdentifierCurrent).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
     @Getter
     private static final String modVersionType = VersionParser.getVersionType(modVersion);
 
-    private static final int CONFIG_VERSION = 1;
+    private static final int configVersion = 1;
     @Getter
     private static final ConfigManager configManager = ConfigManager.get(modIdentifier);
     @Getter
-    private static final ConfigHandler configHandler = new ConfigHandler(modIdentifier, configManager, CONFIG_VERSION);
+    private static final ConfigHandler configHandler = new ConfigHandler(modIdentifier, configManager, configVersion);
 
     public static boolean isAuthMeLoaded = FabricUtil.isModLoaded("authme");
     public static boolean isHwylaLoaded = FabricUtil.isModLoaded("waila");
