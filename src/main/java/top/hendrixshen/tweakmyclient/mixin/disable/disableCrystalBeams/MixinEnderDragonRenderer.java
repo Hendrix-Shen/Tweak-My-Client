@@ -56,8 +56,8 @@ public abstract class MixinEnderDragonRenderer extends EntityRenderer<EnderDrago
             if (Configs.crystalBeamsDisableMode == CrystalBeamsDisableMode.FIXED) {
                 return;
             }
-            //#if MC >= 11500
 
+            //#if MC >= 11500
             poseStack.popPose();
             super.render(enderDragon, f, g, poseStack, multiBufferSource, i);
 

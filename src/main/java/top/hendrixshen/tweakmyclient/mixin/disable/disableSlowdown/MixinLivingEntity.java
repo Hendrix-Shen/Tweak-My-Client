@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Slice;
 import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.util.MiscUtil;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity extends Entity {
@@ -17,6 +18,7 @@ public abstract class MixinLivingEntity extends Entity {
         super(entityType, level);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @ModifyVariable(
             method = "travel",
             at = @At(
@@ -43,7 +45,7 @@ public abstract class MixinLivingEntity extends Entity {
             ordinal = 0
     )
     private float onGetFriction(float f) {
-        if (Configs.disableSlowdown && (Object) this instanceof LocalPlayer && !this.isInWater() && f > 0.6F) {
+        if (Configs.disableSlowdown && MiscUtil.cast(this) instanceof LocalPlayer && !this.isInWater() && f > 0.6F) {
             return 0.6F;
         }
         return f;

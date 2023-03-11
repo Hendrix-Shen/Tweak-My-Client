@@ -34,7 +34,7 @@ public abstract class MixinGui {
             cancellable = true
     )
     private void onRenderPowderSnowOverlay(ResourceLocation resourceLocation, float f, CallbackInfo ci) {
-        if (Configs.disableRenderOverlayPowderSnow && resourceLocation == POWDER_SNOW_OUTLINE_LOCATION) {
+        if (Configs.disableRenderOverlayPowderSnow && resourceLocation.equals(POWDER_SNOW_OUTLINE_LOCATION)) {
             ci.cancel();
         }
     }

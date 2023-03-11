@@ -41,10 +41,10 @@ public class MixinMinecraft {
             ),
             cancellable = true
     )
-    //#if MC >= 11800
+    //#if MC > 11701
     private void onStartAttack(CallbackInfoReturnable<Boolean> cir) {
     //#else
-    //$$ private void onStartAttack(CallbackInfo cir) {
+    //$$ private void onStartAttack(CallbackInfo ci) {
     //#endif
         if (this.hitResult != null && this.player != null) {
             Entity entity = ((EntityHitResult) hitResult).getEntity();
@@ -56,7 +56,11 @@ public class MixinMinecraft {
             String entityName = entity.getName().getString();
             if (Configs.disableAttackEntity && Configs.listDisableAttackEntity.stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s))) {
                 player.swing(InteractionHand.MAIN_HAND);
-                cir.cancel();
+                //#if MC > 11701
+                cir.setReturnValue(false);
+                //#else
+                //$$ ci.cancel();
+                //#endif
             }
         }
     }

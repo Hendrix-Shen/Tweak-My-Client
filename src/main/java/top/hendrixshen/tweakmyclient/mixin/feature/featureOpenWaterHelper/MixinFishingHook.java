@@ -23,6 +23,7 @@ public abstract class MixinFishingHook implements IFishingHookEntity {
         return this.calculateOpenWater(pos);
     }
 
-    @Shadow protected abstract boolean calculateOpenWater(BlockPos blockPos);
+    @Shadow
+    protected abstract boolean calculateOpenWater(BlockPos blockPos);
     //#endif
 }

@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#endif
 import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.util.MiscUtil;
 
 @Mixin(Entity.class)
 public class MixinEntity {
@@ -37,6 +38,7 @@ public class MixinEntity {
     }
 
     //#if MC >= 11500
+    @SuppressWarnings("ConstantConditions")
     @Inject(
             method = "getBlockSpeedFactor",
             at = @At(
@@ -46,7 +48,7 @@ public class MixinEntity {
             cancellable = true
     )
     private void onGetBlockSpeedFactor(CallbackInfoReturnable<Float> cir) {
-        if (Configs.disableSlowdown && (Object) this instanceof LocalPlayer && cir.getReturnValueF() < 1.0F) {
+        if (Configs.disableSlowdown && MiscUtil.cast(this) instanceof LocalPlayer && cir.getReturnValueF() < 1.0F) {
             cir.setReturnValue(1.0F);
         }
     }

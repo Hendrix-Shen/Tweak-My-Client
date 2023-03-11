@@ -42,14 +42,14 @@ public abstract class MixinEntityRenderDispatcher {
             //#endif
             String entityName = entity.getName().getString();
             if (Configs.listDisableClientEntityRendering.stream().anyMatch(s -> entityID.contains(s) || entityName.contains(s)) && !(entity instanceof Player)) {
-                cir.cancel();
+                cir.setReturnValue(false);
             }
         }
 
         if ((Configs.disableClientEntityTNTUpdates && entity.getType() == EntityType.TNT)
                 || (Configs.disableClientEntityWitherUpdates && entity.getType() == EntityType.WITHER)
                 || (Configs.disableClientEntityZombieVillagerUpdates && entity.getType() == EntityType.ZOMBIE_VILLAGER)) {
-            cir.cancel();
+            cir.setReturnValue(false);
         }
     }
 }

@@ -13,7 +13,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
-public class MiscUtil {
+public class MiscUtil extends top.hendrixshen.magiclib.util.MiscUtil {
     public static VoxelShape linkedBlockAdapter(ClientLevel clientLevel, BlockState blockState, BlockPos blockPos, VoxelShape shape) {
         try {
             if (blockState.getBlock() instanceof ChestBlock) {
