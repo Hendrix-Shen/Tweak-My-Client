@@ -58,4 +58,4 @@ int getVersionPatch(List paths) {
     return latestCommits.size()
 }
 
-setVersion("${project.mod_version}.${project.getBuildNumber()}+${project.getVersionGit([])}-${project.getVersionType()}")
+setVersion("${project.mod_version}.${project.getVersionPatch([])}+${project.getVersionGit([])}-${project.getVersionType()}")
