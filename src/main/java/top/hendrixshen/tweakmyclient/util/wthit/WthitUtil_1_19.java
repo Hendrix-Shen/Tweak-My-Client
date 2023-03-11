@@ -1,6 +1,6 @@
 package top.hendrixshen.tweakmyclient.util.wthit;
 
-//#if MC >= 119000
+//#if MC > 11802
 import mcp.mobius.waila.access.DataAccessor;
 import mcp.mobius.waila.api.IBlacklistConfig;
 import mcp.mobius.waila.api.IBlockComponentProvider;
@@ -24,6 +24,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
 import top.hendrixshen.magiclib.language.I18n;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
@@ -33,7 +35,7 @@ import java.util.Objects;
 //#endif
 
 public class WthitUtil_1_19 {
-    //#if MC >= 11903
+    //#if MC > 11802
     private static final Tooltip TOOLTIP = new Tooltip();
     private static final Line SNEAK_DETAIL = (new Line(null)).with(ComponentCompatApi.literal(I18n.get("tooltip.waila.sneak_for_details")).withStyle(ChatFormatting.ITALIC));
     private static final Minecraft minecraft = TweakMyClient.getMinecraftClient();
@@ -48,7 +50,8 @@ public class WthitUtil_1_19 {
         }
     }
 
-    private static TooltipRenderer.State getState() {
+    @Contract(pure = true)
+    private static TooltipRenderer.@Nullable State getState() {
         try {
             return (TooltipRenderer.State) WthitUtil_1_19.STATE.get(null);
         } catch (IllegalAccessException ignore) {

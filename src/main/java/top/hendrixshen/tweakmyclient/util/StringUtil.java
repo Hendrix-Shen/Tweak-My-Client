@@ -3,9 +3,6 @@ package top.hendrixshen.tweakmyclient.util;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.arguments.item.ItemParser;
-//#if MC >= 11903
-import net.minecraft.core.registries.BuiltInRegistries;
-//#endif
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -17,6 +14,13 @@ import top.hendrixshen.tweakmyclient.helper.AreaBox;
 
 import java.util.HashSet;
 import java.util.List;
+
+//#if MC > 11902
+import net.minecraft.core.registries.BuiltInRegistries;
+//#elseif MC > 11802
+//$$ import net.minecraft.core.HolderLookup;
+//$$ import net.minecraft.core.Registry;
+//#endif
 
 public class StringUtil {
     public static @NotNull HashSet<Item> getItemStackSets(@NotNull List<String> items) {

@@ -86,7 +86,7 @@ public class JadeUtil {
 
         Accessor<?> originalAccessor = accessor;
 
-        //#if MC >= 11903
+        //#if MC >= 11902
         for (JadeRayTraceCallback callback : WailaClientRegistration.INSTANCE.rayTraceCallback.callbacks()) {
         //#else
         //$$ for (JadeRayTraceCallback callback : WailaClientRegistration.INSTANCE.rayTraceCallbacks) {
@@ -133,7 +133,7 @@ public class JadeUtil {
         //$$ if (config.getDisplayMode() == IWailaConfig.DisplayMode.LITE && !showDetails) {
         //#endif
             Tooltip dummyTooltip = new Tooltip();
-            //#if MC >= 11903
+            //#if MC >= 11902
             accessor._gatherComponents($ -> Math.abs(WailaCommonRegistration.INSTANCE.priorities.byValue($)) > 5000 ? tooltip : dummyTooltip);
             //#else
             //$$ accessor._gatherComponents($ -> Math.abs(WailaCommonRegistration.INSTANCE.priorities.get($)) > 5000 ? tooltip : dummyTooltip);
@@ -145,7 +145,7 @@ public class JadeUtil {
             accessor._gatherComponents($ -> tooltip);
         }
 
-        //#if MC >= 11903
+        //#if MC >= 11902
         for (JadeTooltipCollectedCallback callback : WailaClientRegistration.INSTANCE.tooltipCollectedCallback.callbacks()) {
         //#else
         //$$ for (JadeTooltipCollectedCallback callback : WailaClientRegistration.INSTANCE.tooltipCollectedCallbacks) {

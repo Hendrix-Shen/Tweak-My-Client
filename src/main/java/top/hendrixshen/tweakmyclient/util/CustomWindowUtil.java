@@ -214,8 +214,13 @@ public class CustomWindowUtil {
         //$$     InputStream icon16x;
         //$$     InputStream icon32x;
         //$$     if (Configs.featureCustomWindowIcon) {
+        //#if MC > 11802
+        //$$         icon16x = mc.getResourceManager().getResource(CustomWindowUtil.icon16).get().open();
+        //$$         icon32x = mc.getResourceManager().getResource(CustomWindowUtil.icon32).get().open();
+        //#else
         //$$         icon16x = mc.getResourceManager().getResource(CustomWindowUtil.icon16).getInputStream();
         //$$         icon32x = mc.getResourceManager().getResource(CustomWindowUtil.icon32).getInputStream();
+        //#endif
         //$$     } else {
         //$$         icon16x = mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, new ResourceLocation("icons/icon_16x16.png"));
         //$$         icon32x = mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, new ResourceLocation("icons/icon_32x32.png"));
