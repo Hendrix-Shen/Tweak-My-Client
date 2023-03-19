@@ -1,7 +1,7 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
-//#if MC >= 11500
-import net.minecraft.client.Minecraft;
+//#if MC > 11404
+import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
 //#else
 //$$ import net.minecraft.client.player.LocalPlayer;
 //$$ import net.minecraft.core.BlockPos;
@@ -9,17 +9,18 @@ import net.minecraft.client.Minecraft;
 //$$ import net.minecraft.world.level.Level;
 //$$ import net.minecraft.world.level.block.SoulsandBlock;
 //$$ import net.minecraft.world.level.block.state.BlockState;
-//#endif
-import org.spongepowered.asm.mixin.Mixin;
-//#if MC < 11500
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import top.hendrixshen.tweakmyclient.config.Configs;
-//$$
-//$$ @Mixin(SoulsandBlock.class)
+//#endif
+
+import org.spongepowered.asm.mixin.Mixin;
+
+//#if MC > 11404
+@Mixin(DummyClass.class)
 //#else
-@Mixin(Minecraft.class)
+//$$ @Mixin(SoulsandBlock.class)
 //#endif
 public class MixinSoulsandBlock {
     //#if MC < 11500

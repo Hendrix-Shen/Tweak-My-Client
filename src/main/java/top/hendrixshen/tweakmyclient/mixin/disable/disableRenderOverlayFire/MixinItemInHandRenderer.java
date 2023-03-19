@@ -1,20 +1,19 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableRenderOverlayFire;
 
-//#if MC >= 11500
-import net.minecraft.client.Minecraft;
+import org.spongepowered.asm.mixin.Mixin;
+
+//#if MC > 11404
+import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
 //#else
 //$$ import net.minecraft.client.renderer.ItemInHandRenderer;
-//#endif
-import org.spongepowered.asm.mixin.Mixin;
-//#if MC < 11500
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import top.hendrixshen.tweakmyclient.config.Configs;
 //#endif
 
-//#if MC >= 11500
-@Mixin(Minecraft.class)
+//#if MC > 11404
+@Mixin(DummyClass.class)
 //#else
 //$$ @Mixin(ItemInHandRenderer.class)
 //#endif

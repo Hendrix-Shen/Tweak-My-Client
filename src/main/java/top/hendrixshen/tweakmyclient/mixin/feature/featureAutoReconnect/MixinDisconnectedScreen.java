@@ -13,6 +13,10 @@ import top.hendrixshen.tweakmyclient.TweakMyClientPredicate;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.util.AutoReconnectUtil;
 
+//#if MC > 11903
+import com.mojang.blaze3d.vertex.PoseStack;
+//#endif
+
 @Mixin(value = DisconnectedScreen.class, priority = 900)
 public class MixinDisconnectedScreen extends Screen {
     @Shadow
@@ -78,7 +82,12 @@ public class MixinDisconnectedScreen extends Screen {
 
     @Intrinsic
     @Override
-    public void renderDirtBackground(int i) {
-        super.renderDirtBackground(i);
+    //#if MC > 11903
+    public void renderDirtBackground(@NotNull PoseStack poseStack) {
+        super.renderDirtBackground(poseStack);
+    //#else
+    //$$ public void renderDirtBackground(int i) {
+    //$$     super.renderDirtBackground(i);
+    //#endif
     }
 }

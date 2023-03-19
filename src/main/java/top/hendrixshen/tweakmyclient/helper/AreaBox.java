@@ -1,8 +1,12 @@
 package top.hendrixshen.tweakmyclient.helper;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
+@ToString
+@EqualsAndHashCode
 public class AreaBox {
     private final int minX;
     private final int minY;
@@ -75,45 +79,5 @@ public class AreaBox {
 
     public int getZSize() {
         return this.maxZ - this.minZ;
-    }
-
-    @Override
-    public int hashCode() {
-        int prime = 31;
-        int result = 1;
-        result = prime * result + this.maxX;
-        result = prime * result + this.maxY;
-        result = prime * result + this.maxZ;
-        result = prime * result + this.minX;
-        result = prime * result + this.minY;
-        return prime * result + this.minZ;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        } else if (obj instanceof AreaBox) {
-            AreaBox areaBox = (AreaBox) obj;
-            if (areaBox.minX != this.minX) {
-                return false;
-            } else if (areaBox.minY != this.minY) {
-                return false;
-            } else if (areaBox.minZ != this.minZ) {
-                return false;
-            } else if (areaBox.maxX != this.maxX) {
-                return false;
-            } else if (areaBox.maxY != this.maxY) {
-                return false;
-            } else {
-                return areaBox.maxZ == this.maxZ;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "AreaBox[" + this.minX + ", " + this.minY + ", " + this.minZ + "] -> [" + this.maxX + ", " + this.maxY + ", " + this.maxZ + "]";
     }
 }

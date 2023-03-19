@@ -1,6 +1,6 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableRenderEffectBox;
 
-//#if MC >= 11600
+//#if MC > 11502
 import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 import net.minecraft.client.gui.Gui;
@@ -19,7 +19,7 @@ public class MixinGui {
             ),
             cancellable = true
     )
-    //#if MC >= 11600
+    //#if MC > 11502
     private void onRender(PoseStack poseStack, CallbackInfo ci) {
     //#else
     //$$ private void onRender(CallbackInfo ci) {

@@ -1,6 +1,6 @@
 package top.hendrixshen.tweakmyclient.util.wthit;
 
-//#if MC >= 11600 && MC < 11700
+//#if MC > 11502 && MC < 11700
 //$$ import mcp.mobius.waila.api.impl.config.PluginConfig;
 //$$ import mcp.mobius.waila.api.impl.config.WailaConfig;
 //$$ import mcp.mobius.waila.overlay.ComponentProvider;
@@ -24,8 +24,8 @@ package top.hendrixshen.tweakmyclient.util.wthit;
 //$$ import net.minecraft.world.level.block.Blocks;
 //$$ import net.minecraft.world.level.block.LiquidBlock;
 //$$ import net.minecraft.world.level.block.state.BlockState;
-//$$ import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
-//$$ import top.hendrixshen.magiclib.language.I18n;
+//$$ import top.hendrixshen.magiclib.compat.minecraft.api.network.chat.ComponentCompatApi;
+//$$ import top.hendrixshen.magiclib.language.api.I18n;
 //$$ import top.hendrixshen.tweakmyclient.TweakMyClient;
 //$$
 //$$ import java.lang.reflect.Field;
@@ -33,7 +33,7 @@ package top.hendrixshen.tweakmyclient.util.wthit;
 //#endif
 
 public class WthitUtil_1_16 {
-    //#if MC >= 11600 && MC < 11700
+    //#if MC > 11502 && MC < 11700
     //$$ private static final List<Component> TOOLTIP = new TaggableList<>(TaggedText::new);
     //$$ private static final Component SNEAK_DETAIL = ComponentCompatApi.literal(I18n.get("tooltip.waila.sneak_for_details")).withStyle(ChatFormatting.ITALIC);
     //$$ private static final Minecraft minecraft = TweakMyClient.getMinecraftClient();
@@ -62,6 +62,7 @@ public class WthitUtil_1_16 {
     //$$ public static void tick() {
     //$$     WthitUtil_1_16.disableWthitRender = false;
     //$$     WthitUtil_1_16.setShouldRender(false);
+    //$$
     //$$     if (WthitUtil_1_16.shouldRender == null || minecraft.level == null || minecraft.cameraEntity == null) {
     //$$         return;
     //$$     }
@@ -69,12 +70,14 @@ public class WthitUtil_1_16 {
     //$$     RayTraceUtils.RayTraceWrapper traceWrapper = RayTraceUtils.getGenericTrace(minecraft.level,
     //$$             minecraft.cameraEntity, 10.0, true, true, true);
     //$$     Level worldSchematic = SchematicWorldHandler.getSchematicWorld();
+    //$$
     //$$     if (traceWrapper == null || traceWrapper.getBlockHitResult() == null || worldSchematic == null ||
     //$$             worldSchematic.getBlockState(traceWrapper.getBlockHitResult().getBlockPos()).is(Blocks.AIR)) {
     //$$         return;
     //$$     }
     //$$
     //$$     LocalPlayer localPlayer = minecraft.player;
+    //$$
     //$$     if (localPlayer == null) {
     //$$         return;
     //$$     }
@@ -99,6 +102,7 @@ public class WthitUtil_1_16 {
     //$$     Tooltip.addLines(WthitUtil_1_16.TOOLTIP);
     //$$     WthitUtil_1_16.TOOLTIP.clear();
     //$$     ComponentProvider.gatherBlock(accessor, WthitUtil_1_16.TOOLTIP, TooltipPosition.BODY);
+    //$$
     //$$     if (Waila.CONFIG.get().getGeneral().shouldShiftForDetails() && !TOOLTIP.isEmpty() &&
     //$$             !minecraft.player.isShiftKeyDown()) {
     //$$         Tooltip.addLine(WthitUtil_1_16.SNEAK_DETAIL);

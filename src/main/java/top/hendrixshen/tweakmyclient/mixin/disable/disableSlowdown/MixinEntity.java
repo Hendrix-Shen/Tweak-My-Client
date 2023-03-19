@@ -8,16 +8,15 @@ import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-//#if MC >= 11500
-import org.spongepowered.asm.mixin.injection.Inject;
-//#endif
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-//#if MC >= 11500
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#endif
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.util.MiscUtil;
+
+//#if MC > 11404
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#endif
 
 @Mixin(Entity.class)
 public class MixinEntity {
@@ -37,7 +36,7 @@ public class MixinEntity {
         return Configs.disableSlowdown && instance instanceof LocalPlayer ? Vec3.ZERO : this.stuckSpeedMultiplier;
     }
 
-    //#if MC >= 11500
+    //#if MC > 11404
     @SuppressWarnings("ConstantConditions")
     @Inject(
             method = "getBlockSpeedFactor",

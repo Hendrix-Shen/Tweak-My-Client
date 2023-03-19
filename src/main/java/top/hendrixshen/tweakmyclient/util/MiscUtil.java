@@ -20,13 +20,16 @@ public class MiscUtil extends top.hendrixshen.magiclib.util.MiscUtil {
                 Block block = blockState.getBlock();
                 Direction direction = ChestBlock.getConnectedDirection(blockState);
                 BlockState connectBlock = clientLevel.getBlockState(blockPos.relative(direction, 1));
+
                 if (connectBlock.getBlock() == block && blockPos.relative(direction, 1).relative(ChestBlock.getConnectedDirection(connectBlock)).equals(blockPos)) {
                     return Shapes.or(shape, connectBlock.getShape(clientLevel, blockPos).move(direction.getStepX(), direction.getStepY(), direction.getStepZ()));
                 }
             } else if (blockState.getBlock() instanceof DoorBlock) {
                 Block block = blockState.getBlock();
+
                 if (clientLevel.getBlockState(blockPos.above(1)).getBlock() == block) {
                     BlockState connectBlock = clientLevel.getBlockState(blockPos.above(1));
+
                     if (connectBlock.getValue(DoorBlock.POWERED).equals(blockState.getValue(DoorBlock.POWERED))
                             && connectBlock.getValue(DoorBlock.FACING).equals(blockState.getValue(DoorBlock.FACING))
                             && connectBlock.getValue(DoorBlock.HINGE).equals(connectBlock.getValue(DoorBlock.HINGE))) {
@@ -34,6 +37,7 @@ public class MiscUtil extends top.hendrixshen.magiclib.util.MiscUtil {
                     }
                 } else if (clientLevel.getBlockState(blockPos.below(1)).getBlock() == block) {
                     BlockState connectBlock = clientLevel.getBlockState(blockPos.below(1));
+
                     if (connectBlock.getValue(DoorBlock.POWERED).equals(blockState.getValue(DoorBlock.POWERED))
                             && connectBlock.getValue(DoorBlock.FACING).equals(blockState.getValue(DoorBlock.FACING))
                             && connectBlock.getValue(DoorBlock.HINGE).equals(connectBlock.getValue(DoorBlock.HINGE))) {
@@ -44,13 +48,16 @@ public class MiscUtil extends top.hendrixshen.magiclib.util.MiscUtil {
                 Block block = blockState.getBlock();
                 Direction direction = blockState.getValue(HorizontalDirectionalBlock.FACING);
                 BlockState connectBlock = clientLevel.getBlockState(blockPos.relative(direction));
+
                 if (blockState.getValue(BedBlock.PART).equals(BedPart.FOOT)
                         && connectBlock.getBlock() == block
                         && connectBlock.getValue(BedBlock.PART).equals(BedPart.HEAD)) {
                     return Shapes.or(shape, connectBlock.getShape(clientLevel, blockPos).move(direction.getStepX(), direction.getStepY(), direction.getStepZ()));
                 }
+
                 connectBlock = clientLevel.getBlockState(blockPos.relative(direction.getOpposite()));
                 direction = direction.getOpposite();
+
                 if (blockState.getValue(BedBlock.PART).equals(BedPart.HEAD)
                         && connectBlock.getBlock() == block
                         && connectBlock.getValue(BedBlock.PART).equals(BedPart.FOOT)) {
@@ -60,6 +67,7 @@ public class MiscUtil extends top.hendrixshen.magiclib.util.MiscUtil {
                 Block block = blockState.getBlock();
                 Direction direction = blockState.getValue(DirectionalBlock.FACING);
                 BlockState connectBlock = clientLevel.getBlockState(blockPos.relative(direction));
+
                 if (connectBlock.getValue(PistonHeadBlock.TYPE).equals(block == Blocks.PISTON ? PistonType.DEFAULT : PistonType.STICKY)
                         && direction.equals(connectBlock.getValue(DirectionalBlock.FACING))) {
                     return Shapes.or(shape, connectBlock.getShape(clientLevel, blockPos).move(direction.getStepX(), direction.getStepY(), direction.getStepZ()));
@@ -67,14 +75,15 @@ public class MiscUtil extends top.hendrixshen.magiclib.util.MiscUtil {
             } else if (blockState.getBlock() instanceof PistonHeadBlock) {
                 Direction direction = blockState.getValue(DirectionalBlock.FACING);
                 BlockState connectBlock = clientLevel.getBlockState(blockPos.relative(direction.getOpposite()));
+
                 if (connectBlock.getBlock() instanceof PistonBaseBlock && direction == connectBlock.getValue(DirectionalBlock.FACING) && connectBlock.getValue(PistonBaseBlock.EXTENDED)) {
                     return Shapes.or(shape, connectBlock.getShape(clientLevel, blockPos.relative(direction.getOpposite())).move(direction.getOpposite().getStepX(), direction.getOpposite().getStepY(), direction.getOpposite().getStepZ()));
                 }
             //#if MC >= 11700
             } else if (blockState.getBlock() instanceof PointedDripstoneBlock && Configs.expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock) {
                 Direction direction = blockState.getValue(PointedDripstoneBlock.TIP_DIRECTION);
-
                 BlockPos connectBlockPos = blockPos.above();
+
                 while (true) {
                     BlockState connectBlock = clientLevel.getBlockState(connectBlockPos);
                     if (connectBlock.getBlock() instanceof PointedDripstoneBlock && connectBlock.getValue(PointedDripstoneBlock.TIP_DIRECTION).equals(direction)) {
@@ -86,8 +95,10 @@ public class MiscUtil extends top.hendrixshen.magiclib.util.MiscUtil {
                 }
 
                 connectBlockPos = blockPos.below();
+
                 while (true) {
                     BlockState connectBlock = clientLevel.getBlockState(connectBlockPos);
+
                     if (connectBlock.getBlock() instanceof PointedDripstoneBlock && connectBlock.getValue(PointedDripstoneBlock.TIP_DIRECTION).equals(direction)) {
                         shape = Shapes.or(shape, connectBlock.getShape(clientLevel, connectBlockPos).move(0, connectBlockPos.getY() - blockPos.getY(), 0));
                         connectBlockPos = connectBlockPos.below();
@@ -101,6 +112,7 @@ public class MiscUtil extends top.hendrixshen.magiclib.util.MiscUtil {
             }
         } catch (Exception ignore) {
         }
+
         return shape;
     }
 }

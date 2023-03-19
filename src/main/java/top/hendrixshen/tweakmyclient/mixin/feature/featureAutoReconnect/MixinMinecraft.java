@@ -1,11 +1,9 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.featureAutoReconnect;
 
 import net.minecraft.client.Minecraft;
-//#if MC <= 11802
-//$$ import net.minecraft.client.multiplayer.ServerData;
-//#endif
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC <= 11802
+//#if MC < 11900
+//$$ import net.minecraft.client.multiplayer.ServerData;
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -15,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
-    //#if MC <= 11802
+    //#if MC < 11900
     //$$ @Inject(
     //$$         method = "setCurrentServer",
     //$$         at = @At(
@@ -24,6 +22,7 @@ public abstract class MixinMinecraft {
     //$$ )
     //$$ private void setCurrentServerEntry(ServerData serverData, CallbackInfo ci) {
     //$$     AutoReconnectUtil.ReconnectTimer = Configs.autoReconnectTimer * 20;
+    //$$
     //$$     if (serverData != null) {
     //$$         AutoReconnectUtil.setLastServer(serverData);
     //$$     }

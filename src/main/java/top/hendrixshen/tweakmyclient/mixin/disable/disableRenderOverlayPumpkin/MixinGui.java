@@ -10,6 +10,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
+//#if MC > 11903
+import com.mojang.blaze3d.vertex.PoseStack;
+//#endif
+
 @Mixin(Gui.class)
 public abstract class MixinGui {
     @Shadow
@@ -27,13 +31,15 @@ public abstract class MixinGui {
             ),
             cancellable = true
     )
-    //#if MC > 11700
-    private void onRenderTextureOverlay(ResourceLocation resourceLocation, float f, CallbackInfo ci) {
+    //#if MC > 11903
+    private void onRenderTextureOverlay(PoseStack poseStack, ResourceLocation resourceLocation, float f, CallbackInfo ci) {
+    //#elseif MC > 11700
+    //$$ private void onRenderTextureOverlay(ResourceLocation resourceLocation, float f, CallbackInfo ci) {
         if (Configs.disableRenderOverlayPumpkin && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {
     //#else
     //$$ private void onRenderPumpkinOverlay(CallbackInfo ci) {
-        //$$ if (Configs.disableRenderOverlayPumpkin) {
-        //#endif
+    //$$ if (Configs.disableRenderOverlayPumpkin) {
+    //#endif
             ci.cancel();
         }
     }

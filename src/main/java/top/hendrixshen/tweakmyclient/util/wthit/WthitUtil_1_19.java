@@ -26,8 +26,8 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
-import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
-import top.hendrixshen.magiclib.language.I18n;
+import top.hendrixshen.magiclib.compat.minecraft.api.network.chat.ComponentCompatApi;
+import top.hendrixshen.magiclib.language.api.I18n;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 
 import java.lang.reflect.Field;
@@ -76,18 +76,21 @@ public class WthitUtil_1_19 {
     public static void tick() {
         WthitUtil_1_19.disableWthitRender = false;
         WthitUtil_1_19.setStateRender(false);
+
         if (WthitUtil_1_19.STATE == null || minecraft.level == null || minecraft.cameraEntity == null) {
             return;
         }
 
         RayTraceUtils.RayTraceWrapper traceWrapper = RayTraceUtils.getGenericTrace(minecraft.level, minecraft.cameraEntity, 10.0, true, true, true);
         Level worldSchematic = SchematicWorldHandler.getSchematicWorld();
+
         if (traceWrapper == null || traceWrapper.getBlockHitResult() == null || worldSchematic == null ||
                 worldSchematic.getBlockState(traceWrapper.getBlockHitResult().getBlockPos()).is(Blocks.AIR)) {
             return;
         }
 
         LocalPlayer localPlayer = minecraft.player;
+
         if (localPlayer == null) {
             return;
         }
@@ -110,11 +113,13 @@ public class WthitUtil_1_19 {
         }
 
         BlockEntity blockEntity = accessor.getBlockEntity();
+
         if (blockEntity != null && IBlacklistConfig.get().contains(blockEntity)) {
             return;
         }
 
         BlockState state = worldSchematic.getBlockState(traceWrapper.getBlockHitResult().getBlockPos());
+
         if (state == IBlockComponentProvider.EMPTY_BLOCK_STATE) {
             return;
         }
@@ -125,6 +130,7 @@ public class WthitUtil_1_19 {
         TooltipRenderer.add(WthitUtil_1_19.TOOLTIP);
         WthitUtil_1_19.TOOLTIP.clear();
         ComponentHandler.gatherBlock(accessor, WthitUtil_1_19.TOOLTIP, TooltipPosition.BODY);
+
         if (config.isShiftForDetails() && !WthitUtil_1_19.TOOLTIP.isEmpty() && !minecraft.player.isShiftKeyDown()) {
             TooltipRenderer.add(WthitUtil_1_19.SNEAK_DETAIL);
         } else {
@@ -138,6 +144,7 @@ public class WthitUtil_1_19 {
         if (PluginConfig.CLIENT.getBoolean(WailaConstants.CONFIG_SHOW_ICON)) {
             TooltipRenderer.setIcon(ComponentHandler.getIcon(Objects.requireNonNull(traceWrapper.getBlockHitResult())));
         }
+
         WthitUtil_1_19.setStateRender(true);
         TooltipRenderer.endBuild();
     }

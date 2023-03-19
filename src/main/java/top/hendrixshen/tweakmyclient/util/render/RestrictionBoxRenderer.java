@@ -1,6 +1,7 @@
 package top.hendrixshen.tweakmyclient.util.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import lombok.Getter;
 import org.lwjgl.opengl.GL11;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.config.Configs;
@@ -8,14 +9,8 @@ import top.hendrixshen.tweakmyclient.helper.AreaBox;
 import top.hendrixshen.tweakmyclient.helper.Cache;
 
 public class RestrictionBoxRenderer implements IRenderer {
-    private static RestrictionBoxRenderer INSTANCE;
-
-    public static RestrictionBoxRenderer getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new RestrictionBoxRenderer();
-        }
-        return INSTANCE;
-    }
+    @Getter(lazy = true)
+    private static final RestrictionBoxRenderer instance = new RestrictionBoxRenderer();
 
     @Override
     public void render() {

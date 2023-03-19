@@ -1,6 +1,7 @@
 package top.hendrixshen.tweakmyclient.util.render;
 
-//#if MC >= 11600
+import lombok.Getter;
+//#if MC > 11502
 import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.malilib.util.Color4f;
 import net.minecraft.core.BlockPos;
@@ -13,18 +14,12 @@ import top.hendrixshen.tweakmyclient.mixin.accessor.FishingHookAccessor;
 //#endif
 
 public class OpenWaterHelperRenderer implements IRenderer {
-    private static OpenWaterHelperRenderer INSTANCE;
-
-    public static OpenWaterHelperRenderer getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new OpenWaterHelperRenderer();
-        }
-        return INSTANCE;
-    }
+    @Getter(lazy = true)
+    private static final OpenWaterHelperRenderer instance = new OpenWaterHelperRenderer();
 
     @Override
     public void render() {
-        //#if MC >= 11600
+        //#if MC > 11502
         assert TweakMyClient.getMinecraftClient().player != null;
         FishingHook fishHook = TweakMyClient.getMinecraftClient().player.fishing;
         assert fishHook != null;
@@ -42,7 +37,7 @@ public class OpenWaterHelperRenderer implements IRenderer {
 
     @Override
     public boolean shouldRender() {
-        //#if MC >= 11600
+        //#if MC > 11502
         return Configs.featureOpenWaterHelper && TweakMyClient.getMinecraftClient().player != null &&
                 TweakMyClient.getMinecraftClient().player.fishing != null;
         //#else

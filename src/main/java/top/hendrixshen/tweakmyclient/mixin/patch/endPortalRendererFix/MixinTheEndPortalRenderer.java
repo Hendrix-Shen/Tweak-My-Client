@@ -1,58 +1,47 @@
 package top.hendrixshen.tweakmyclient.mixin.patch.endPortalRendererFix;
 
-//#if MC < 11500
-//$$ import com.mojang.blaze3d.platform.GlStateManager;
-//$$ import com.mojang.blaze3d.vertex.BufferBuilder;
-//$$ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-//$$ import com.mojang.blaze3d.vertex.Tesselator;
-//#else
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import org.joml.Matrix4f;
-//#endif
-//#if MC < 11500
-//$$ import net.minecraft.Util;
-//$$ import net.minecraft.client.Minecraft;
-//$$ import net.minecraft.client.renderer.GameRenderer;
-//$$ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-//#endif
 import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.core.Direction;
-//#if MC < 11500
-//$$ import net.minecraft.resources.ResourceLocation;
-//#endif
 import net.minecraft.world.level.block.entity.TheEndPortalBlockEntity;
-//#if MC < 11500
-//$$ import org.spongepowered.asm.mixin.Final;
-//#endif
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC < 11500
-//$$ import org.spongepowered.asm.mixin.Overwrite;
-//#endif
 import org.spongepowered.asm.mixin.Shadow;
-//#if MC >= 11500
+import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.helper.EnderPortalRenderMode;
+
+
+//#if MC > 11404
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-//#endif
-import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.helper.EnderPortalRenderMode;
-
-//#if MC < 11500
+//#else
+//$$ import com.mojang.blaze3d.platform.GlStateManager;
+//$$ import com.mojang.blaze3d.vertex.BufferBuilder;
+//$$ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+//$$ import com.mojang.blaze3d.vertex.Tesselator;
+//$$ import net.minecraft.Util;
+//$$ import net.minecraft.client.Minecraft;
+//$$ import net.minecraft.client.renderer.GameRenderer;
+//$$ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+//$$ import net.minecraft.resources.ResourceLocation;
+//$$ import org.spongepowered.asm.mixin.Final;
+//$$ import org.spongepowered.asm.mixin.Overwrite;
 //$$ import java.nio.FloatBuffer;
 //$$ import java.util.Random;
 //#endif
 
 @Mixin(TheEndPortalRenderer.class)
-//#if MC >= 11500
+//#if MC > 11404
 public abstract class MixinTheEndPortalRenderer {
 //#else
 //$$ public abstract class MixinTheEndPortalRenderer extends BlockEntityRenderer<TheEndPortalBlockEntity> {
 //#endif
-    //#if MC >= 11700
+    //#if MC > 11605
     @Shadow
     protected abstract void renderFace(TheEndPortalBlockEntity theEndPortalBlockEntity, Matrix4f matrix4f, VertexConsumer vertexConsumer, float f, float g, float h, float i, float j, float k, float l, float m, Direction direction);
-    //#elseif MC >= 11500
+    //#elseif MC > 11404
     //$$ @Shadow
     //$$ protected abstract void renderFace(TheEndPortalBlockEntity theEndPortalBlockEntity, Matrix4f matrix4f, VertexConsumer vertexConsumer, float f, float g, float h, float i, float j, float k, float l, float m, float n, float o, float p, Direction direction);
     //#else
@@ -96,14 +85,14 @@ public abstract class MixinTheEndPortalRenderer {
     //$$ }
     //#endif
 
-    //#if MC >= 11500
+    //#if MC > 11404
     @Inject(
             method = "renderCube",
             at = @At(
                     value = "INVOKE",
-                    //#if MC >= 11903
+                    //#if MC > 11902
                     target = "Lnet/minecraft/client/renderer/blockentity/TheEndPortalRenderer;renderFace(Lnet/minecraft/world/level/block/entity/TheEndPortalBlockEntity;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFFFFFLnet/minecraft/core/Direction;)V",
-                    //#elseif MC >= 11700
+                    //#elseif MC > 11605
                     //$$ target = "Lnet/minecraft/client/renderer/blockentity/TheEndPortalRenderer;renderFace(Lnet/minecraft/world/level/block/entity/TheEndPortalBlockEntity;Lcom/mojang/math/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFFFFFLnet/minecraft/core/Direction;)V",
                     //#else
                     //$$ target = "Lnet/minecraft/client/renderer/blockentity/TheEndPortalRenderer;renderFace(Lnet/minecraft/world/level/block/entity/TheEndPortalBlockEntity;Lcom/mojang/math/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFFFFFFFFLnet/minecraft/core/Direction;)V",
@@ -114,7 +103,8 @@ public abstract class MixinTheEndPortalRenderer {
             cancellable = true
     )
     //#endif
-    //#if MC >= 11700
+
+    //#if MC > 11605
     private void onRenderCube(TheEndPortalBlockEntity theEndPortalBlockEntity, Matrix4f matrix4f, VertexConsumer vertexConsumer, CallbackInfo ci, float f, float g) {
         if (Configs.endPortalRendererFix && Configs.enderPortalRenderMode != EnderPortalRenderMode.MODERN) {
             if (Configs.enderPortalRenderMode == EnderPortalRenderMode.ACTUAL) {
@@ -145,7 +135,7 @@ public abstract class MixinTheEndPortalRenderer {
             ci.cancel();
         }
     }
-    //#elseif MC >= 11500
+    //#elseif MC > 11404
     //$$ private void onRenderCube(TheEndPortalBlockEntity theEndPortalBlockEntity, float f, float g, Matrix4f matrix4f, VertexConsumer vertexConsumer, CallbackInfo ci, float h, float i, float j) {
     //$$     if (Configs.enderPortalRenderMode == EnderPortalRenderMode.ACTUAL) {
     //$$        // Rendering the ender portal using its hit box.

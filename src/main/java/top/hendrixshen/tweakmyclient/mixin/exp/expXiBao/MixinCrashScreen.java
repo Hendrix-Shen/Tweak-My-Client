@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.annotation.Dependency;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
 @Dependencies(and = @Dependency("notenoughcrashes"))

@@ -1,32 +1,32 @@
 package top.hendrixshen.tweakmyclient.mixin.patch.litematicaSchematicWailaCompat.wthit;
 
-//#if MC >= 11600 && MC < 11700
+import org.spongepowered.asm.mixin.Mixin;
+import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+
+//#if MC > 11502 && MC < 11700
 //$$ import mcp.mobius.waila.overlay.TickHandler;
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//$$ import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
-//$$ import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 //$$ import top.hendrixshen.tweakmyclient.config.Configs;
 //$$ import top.hendrixshen.tweakmyclient.util.wthit.WthitUtil_1_16;
-//#else
-import net.minecraft.client.Minecraft;
 //#endif
-import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC >= 11600 && MC < 11700
-//$$ @Dependencies(
-//$$         and = {
-//$$                 @Dependency("wthit"),
-//$$                 @Dependency("litematica")
-//$$         }
-//$$ )
-//$$ @Mixin(value = TickHandler.class,remap = false)
+@Dependencies(
+        and = {
+                @Dependency("wthit"),
+                @Dependency("litematica")
+        }
+)
+//#if MC < 11600 || MC > 11605
+@Mixin(DummyClass.class)
 //#else
-@Mixin(Minecraft.class)
+//$$ @Mixin(value = TickHandler.class,remap = false)
 //#endif
 public class MixinTickHandler {
-    //#if MC >= 11600 && MC < 11700
+    //#if MC > 11502 && MC < 11700
     //$$ @Inject(
     //$$         method = "tickClient",
     //$$         at = @At(

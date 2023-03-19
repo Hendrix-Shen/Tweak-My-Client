@@ -14,15 +14,15 @@ import net.minecraft.world.phys.HitResult;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.config.Configurator;
 import sun.misc.Unsafe;
-import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
-import top.hendrixshen.magiclib.config.Option;
+import top.hendrixshen.magiclib.compat.minecraft.api.network.chat.ComponentCompatApi;
+import top.hendrixshen.magiclib.malilib.impl.ConfigOption;
+import top.hendrixshen.magiclib.util.InfoUtil;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientConfigGui;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.helper.BreakAnimationMode;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
-import top.hendrixshen.tweakmyclient.util.InfoUtil;
 import top.hendrixshen.tweakmyclient.util.InventoryUtil;
 
 import java.lang.reflect.Field;
@@ -37,7 +37,7 @@ public class CallBacks {
             field.setAccessible(true);
             CallBacks.UNSAFE = (Unsafe) field.get(null);
         } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
-            TweakMyClient.getLogger().error("Cannot access unsafe class, disabled some feature!");
+            TweakMyClientReference.getLogger().error("Cannot access unsafe class, disabled some feature!");
         }
     }
 
@@ -45,18 +45,21 @@ public class CallBacks {
         Minecraft minecraft = TweakMyClient.getMinecraftClient();
         Entity cameraEntity = minecraft.cameraEntity;
         MultiPlayerGameMode multiPlayerGameMode = minecraft.gameMode;
+
         if (cameraEntity != null && multiPlayerGameMode != null) {
             HitResult hitResult = cameraEntity.pick(Configs.targetBlockMaxTraceDistance, minecraft.getFrameTime(), false);
+
             if (hitResult.getType() == HitResult.Type.BLOCK) {
                 BlockPos blockPos = ((BlockHitResult) hitResult).getBlockPos();
                 String str = Configs.targetBlockPositionFormat;
                 str = str.replace("{X}", String.format("%d", blockPos.getX()));
                 str = str.replace("{Y}", String.format("%d", blockPos.getY()));
                 str = str.replace("{Z}", String.format("%d", blockPos.getZ()));
+
                 if (minecraft.player != null) {
                     switch (Configs.targetBlockPositionPrintMode) {
                         case PUBLIC:
-                            InfoUtil.sendChatMessage(str);
+                            InfoUtil.sendChat(str);
                             break;
                         case PRIVATE:
                             InfoUtil.displayChatMessage(ComponentCompatApi.literal(str));
@@ -70,22 +73,21 @@ public class CallBacks {
 
     public static boolean memoryCleanerCallback(KeyAction keyAction, IKeybind keybind) {
         class CleanerThread implements Runnable {
-            public CleanerThread() {
-            }
-
             @Override
             public void run() {
-                TweakMyClient.getLogger().info(String.format("[%s]: Memory cleaner thread started!", TweakMyClientReference.getModName()));
+                TweakMyClientReference.getLogger().info(String.format("[%s]: Memory cleaner thread started!", TweakMyClientReference.getModName()));
                 System.gc();
+
                 try {
                     Thread.sleep(1000L);
-                } catch (InterruptedException interruptedException) {
-                    // ignored
+                } catch (InterruptedException ignore) {
                 }
+
                 System.gc();
-                TweakMyClient.getLogger().info(String.format("[%s]: Memory cleaner thread finished!", TweakMyClientReference.getModName()));
+                TweakMyClientReference.getLogger().info(String.format("[%s]: Memory cleaner thread finished!", TweakMyClientReference.getModName()));
             }
         }
+
         Runnable runnable = new CleanerThread();
         Thread gcThread = new Thread(runnable, "MemoryCleaner GC Thread");
         gcThread.setDaemon(true);
@@ -93,11 +95,11 @@ public class CallBacks {
         return true;
     }
 
-    public static void debugExperimentalModeCallBack(Option option) {
+    public static void debugExperimentalModeCallBack(ConfigOption option) {
         reDrawConfigGui(option);
     }
 
-    public static void debugModeCallBack(Option option) {
+    public static void debugModeCallBack(ConfigOption option) {
         Configurator.setLevel(TweakMyClientReference.getModIdentifier(), Configs.debugMode ? Level.DEBUG : Level.INFO);
         reDrawConfigGui(option);
     }
@@ -110,13 +112,16 @@ public class CallBacks {
     public static boolean syncBlocksCallback(KeyAction keyAction, IKeybind keybind) {
         Minecraft minecraftClient = TweakMyClient.getMinecraftClient();
         ClientPacketListener clientPlayNetworkHandler = minecraftClient.getConnection();
+
         if (minecraftClient.player == null || clientPlayNetworkHandler == null) {
             return true;
         }
+
         BlockPos blockPos = minecraftClient.player.blockPosition();
         int x = blockPos.getX();
         int y = blockPos.getY();
         int z = blockPos.getZ();
+
         for (int i = -3; i <= 3; i++) {
             for (int j = -3; j <= 3; j++) {
                 for (int k = -3; k <= 3; k++) {
@@ -124,30 +129,31 @@ public class CallBacks {
                 }
             }
         }
+
         return true;
     }
 
-    public static void disableRenderToastCallback(Option option) {
+    public static void disableRenderToastCallback(ConfigOption option) {
         if (Configs.disableRenderToast) {
             TweakMyClient.getMinecraftClient().getToasts().clear();
         }
     }
 
-    public static void featureCustomBlockHitBoxOverlayFillCallBack(Option option) {
+    public static void featureCustomBlockHitBoxOverlayFillCallBack(ConfigOption option) {
         if (!(Configs.featureCustomBlockHitBoxOverlayFill && Configs.featureCustomBlockHitBoxOverlayOutline)) {
             TweakMyClientReference.getConfigHandler().configManager.setValue("breakAnimationMode", BreakAnimationMode.NONE);
             reDrawConfigGui(option);
         }
     }
 
-    public static void featureCustomBlockHitBoxOverlayOutlineCallBack(Option option) {
+    public static void featureCustomBlockHitBoxOverlayOutlineCallBack(ConfigOption option) {
         if (!(Configs.featureCustomBlockHitBoxOverlayFill && Configs.featureCustomBlockHitBoxOverlayOutline)) {
             TweakMyClientReference.getConfigHandler().configManager.setValue("breakAnimationMode", BreakAnimationMode.NONE);
             reDrawConfigGui(option);
         }
     }
 
-    public static void featureCustomWindowTitleCallback(Option option) {
+    public static void featureCustomWindowTitleCallback(ConfigOption option) {
         if (Configs.featureCustomWindowTitle) {
             //#if MC >= 11500
             CustomWindowUtil.rebuildCache(CustomWindowUtil.TitleType.TITLE);
@@ -167,13 +173,13 @@ public class CallBacks {
         return true;
     }
 
-    private static void reDrawConfigGui(Option option) {
+    private static void reDrawConfigGui(ConfigOption option) {
         if (option != null) {
             TweakMyClientConfigGui.getInstance().reDraw();
         }
     }
 
-    public static void customWindowTitleEnableActivityCallback(Option option) {
+    public static void customWindowTitleEnableActivityCallback(ConfigOption option) {
         CallBacks.featureCustomWindowTitleCallback(option);
         CallBacks.reDrawConfigGui(option);
     }
@@ -182,6 +188,7 @@ public class CallBacks {
         if (Configs.debugMode && Configs.debugExperimentalMode) {
             throw new NullPointerException("Test NullPointerException!");
         }
+
         return true;
     }
 
@@ -189,6 +196,7 @@ public class CallBacks {
         if (Configs.debugMode && Configs.debugExperimentalMode && CallBacks.UNSAFE != null) {
             CallBacks.UNSAFE.putAddress(0, 0);
         }
+
         return true;
     }
 }

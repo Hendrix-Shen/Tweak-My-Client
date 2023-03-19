@@ -16,7 +16,7 @@ public abstract class MixinMinecraft {
     @Shadow
     private static int fps;
 
-    //#if MC >= 11500
+    //#if MC > 11404
     @Inject(
             method = "createTitle",
             at = @At(
@@ -69,7 +69,7 @@ public abstract class MixinMinecraft {
                     ),
                     to = @At(
                             value = "INVOKE",
-                            //#if MC >= 11900
+                            //#if MC > 11802
                             target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
                             //#else
                             //$$ target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
@@ -79,7 +79,7 @@ public abstract class MixinMinecraft {
             ),
             at = @At(
                     value = "INVOKE",
-                    //#if MC >= 11900
+                    //#if MC > 11802
                     target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
                     //#else
                     //$$ target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",

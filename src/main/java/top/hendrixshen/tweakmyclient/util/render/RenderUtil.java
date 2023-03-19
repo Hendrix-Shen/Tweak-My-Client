@@ -4,17 +4,17 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.Color4f;
-//#if MC >= 11700
-import net.minecraft.client.renderer.GameRenderer;
-//#endif
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-import top.hendrixshen.magiclib.compat.minecraft.blaze3d.vertex.VertexFormatCompatApi;
+import top.hendrixshen.magiclib.compat.minecraft.api.blaze3d.vertex.VertexFormatCompatApi;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.helper.AreaBox;
-//#if MC < 11700
+
+//#if MC > 11605
+import net.minecraft.client.renderer.GameRenderer;
+//#else
 //$$ import org.lwjgl.opengl.GL11;
 //#endif
 
@@ -110,7 +110,6 @@ public class RenderUtil {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder buffer = tesselator.getBuilder();
         buffer.begin(VertexFormatCompatApi.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-
         voxelShape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
                 RenderUtils.drawBoxAllSidesBatchedQuads(minX + x, minY + y, minZ + z,
                         maxX + x, maxY + y, maxZ + z, color, buffer));
@@ -150,7 +149,6 @@ public class RenderUtil {
         tesselator.end();
         RenderSystem.enableCull();
         RenderSystem.disableBlend();
-
         //#if MC < 11700
         //$$ RenderSystem.enableTexture();
         //#endif

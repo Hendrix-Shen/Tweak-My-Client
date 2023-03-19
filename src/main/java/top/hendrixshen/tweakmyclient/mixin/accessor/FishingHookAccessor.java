@@ -7,13 +7,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.projectile.FishingHook;
 import org.spongepowered.asm.mixin.gen.Invoker;
 //#else
-//$$ import net.minecraft.client.Minecraft;
+//$$ import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
 //#endif
 
 //#if MC > 11502
 @Mixin(FishingHook.class)
 //#else
-//$$ @Mixin(Minecraft.class)
+//$$ @Mixin(DummyClass.class)
 //#endif
 public interface FishingHookAccessor {
     //#if MC > 11502

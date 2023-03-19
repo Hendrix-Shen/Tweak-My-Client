@@ -27,7 +27,7 @@ public abstract class MixinLivingEntity extends Entity {
             slice = @Slice(
                     from = @At(
                             value = "INVOKE",
-                            //#if MC >= 11500
+                            //#if MC > 11404
                             target = "Lnet/minecraft/world/entity/LivingEntity;getBlockPosBelowThatAffectsMyMovement()Lnet/minecraft/core/BlockPos;"
                             //#else
                             //$$ target = "Lnet/minecraft/world/entity/LivingEntity;getBoundingBox()Lnet/minecraft/world/phys/AABB;"
@@ -35,7 +35,7 @@ public abstract class MixinLivingEntity extends Entity {
                     ),
                     to = @At(
                             value = "INVOKE",
-                            //#if MC >= 11600
+                            //#if MC > 11502
                             target = "Lnet/minecraft/world/entity/LivingEntity;handleRelativeFrictionAndCalculateMovement(Lnet/minecraft/world/phys/Vec3;F)Lnet/minecraft/world/phys/Vec3;"
                             //#else
                             //$$ target = "Lnet/minecraft/world/entity/LivingEntity;getFrictionInfluencedSpeed(F)F"
@@ -48,6 +48,7 @@ public abstract class MixinLivingEntity extends Entity {
         if (Configs.disableSlowdown && MiscUtil.cast(this) instanceof LocalPlayer && !this.isInWater() && f > 0.6F) {
             return 0.6F;
         }
+
         return f;
     }
 }

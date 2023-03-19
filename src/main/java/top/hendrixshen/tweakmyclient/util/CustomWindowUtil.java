@@ -10,18 +10,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
-//#if MC >= 11903
-import net.minecraft.server.packs.resources.IoSupplier;
-//#endif
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
-//#if MC < 11903
-//$$ import java.io.IOException;
-//#endif
 import java.io.*;
 import java.util.HashMap;
 import java.util.Optional;
@@ -29,12 +23,22 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//#if MC > 11902
+import net.minecraft.server.packs.resources.IoSupplier;
+//#else
+//$$ import java.io.IOException;
+//#endif
+
+//#if MC < 11903
+//$$ import net.minecraft.server.packs.PackType;
+//#endif
+
 public class CustomWindowUtil {
     public static final HashMap<String, String> PLACEHOLDER_MAP = Maps.newHashMap();
     public static final HashMap<String, String> PLACEHOLDER_STATIC_MAP = Maps.newHashMap();
     public static final Pattern MOD_PATTERN = Pattern.compile("(?<=(\\{fabric_mod_ver:)).*?(?=(}))");
     private static String TITLE_CACHE;
-    //#if MC >= 11500
+    //#if MC > 11404
     private static String TITLE_CACHE_WITH_ACTIVITY;
     //#endif
     private static final Random RANDOM = new Random();
@@ -46,7 +50,7 @@ public class CustomWindowUtil {
     static {
         CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{fabric_loader_version}", FabricLoaderImpl.VERSION);
         CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{fabric_loader_asm_version}", String.valueOf(FabricLoaderImpl.ASM_VERSION));
-        //#if MC >= 11600
+        //#if MC > 11502
         CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{mc_protocol_version}", Integer.toString(SharedConstants.getProtocolVersion()));
         //#else
         //$$ CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{mc_protocol_version}", Integer.toString(SharedConstants.getCurrentVersion().getProtocolVersion()));
@@ -54,8 +58,9 @@ public class CustomWindowUtil {
         CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{mc_version}", SharedConstants.getCurrentVersion().getName());
         CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{tmc_version}", TweakMyClientReference.getModVersion());
         CustomWindowUtil.PLACEHOLDER_STATIC_MAP.put("{tmc_version_type}", TweakMyClientReference.getModVersionType());
+
         if (Configs.featureCustomWindowTitle) {
-            //#if MC >= 11500
+            //#if MC > 11404
             CustomWindowUtil.rebuildCache(TitleType.TITLE);
             CustomWindowUtil.rebuildCache(TitleType.TITLE_WITH_ACTIVITY);
             //#else
@@ -64,10 +69,11 @@ public class CustomWindowUtil {
         }
     }
 
-    public static String replacePlaceholders(HashMap<String, String> map, String str) {
+    public static String replacePlaceholders(@NotNull HashMap<String, String> map, String str) {
         for (String key : map.keySet()) {
             str = str.replace(key, map.getOrDefault(key, "Null"));
         }
+
         return str;
     }
 
@@ -80,7 +86,7 @@ public class CustomWindowUtil {
     }
 
     //#if MC >= 11500
-    public static String getActivity() {
+    public static @NotNull String getActivity() {
         if (mc.getSingleplayerServer() != null && !mc.getSingleplayerServer().isPublished()) {
             return I18n.get("title.singleplayer");
         } else if (mc.isConnectedToRealms()) {
@@ -101,7 +107,7 @@ public class CustomWindowUtil {
     public static void updatePlaceholders() {
         // Maybe changed by other mods.
         CustomWindowUtil.PLACEHOLDER_MAP.put("{mc_username}", TweakMyClient.getMinecraftClient().getUser().getName());
-        //#if MC >= 11500
+        //#if MC > 11404
         // Activity data.
         CustomWindowUtil.PLACEHOLDER_MAP.put("{mc_activity}", hasActivity() ? getActivity() : "Null");
         //#endif
@@ -115,6 +121,7 @@ public class CustomWindowUtil {
     public static void rebuildCache(TitleType type) {
         if (type == TitleType.TITLE) {
             int size = Configs.listCustomWindowTitle.size();
+
             if (size > 0) {
                 CustomWindowUtil.TITLE_CACHE = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.listCustomWindowTitle.get(Configs.customWindowTitleRandomly ? RANDOM.nextInt(size) : 0));
                 CustomWindowUtil.TITLE_CACHE = CustomWindowUtil.replaceModVersion(CustomWindowUtil.TITLE_CACHE);
@@ -123,6 +130,7 @@ public class CustomWindowUtil {
             }
         } else if (type == TitleType.TITLE_WITH_ACTIVITY) {
             int size = Configs.listCustomWindowTitleWithActivity.size();
+
             if (size > 0) {
                 CustomWindowUtil.TITLE_CACHE_WITH_ACTIVITY = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP,Configs.listCustomWindowTitleWithActivity.get(Configs.customWindowTitleRandomly ? RANDOM.nextInt(size) : 0));
                 CustomWindowUtil.TITLE_CACHE_WITH_ACTIVITY = CustomWindowUtil.replaceModVersion(CustomWindowUtil.TITLE_CACHE_WITH_ACTIVITY);
@@ -134,6 +142,7 @@ public class CustomWindowUtil {
     //#else
     //$$ public static void rebuildCache() {
     //$$     int size = Configs.listCustomWindowTitle.size();
+    //$$
     //$$     if (size > 0) {
     //$$         CustomWindowUtil.TITLE_CACHE = CustomWindowUtil.replacePlaceholders(PLACEHOLDER_STATIC_MAP, Configs.listCustomWindowTitle.get(Configs.customWindowTitleRandomly ? RANDOM.nextInt(size) : 0));
     //$$         CustomWindowUtil.TITLE_CACHE = CustomWindowUtil.replaceModVersion(CustomWindowUtil.TITLE_CACHE);
@@ -145,11 +154,13 @@ public class CustomWindowUtil {
 
     public static String replaceModVersion(String str) {
         Matcher matcher = MOD_PATTERN.matcher(str);
+
         while (matcher.find()) {
             String group = matcher.group();
             Optional<ModContainer> container = FabricLoader.getInstance().getModContainer(group);
             str = str.replace(String.format("{fabric_mod_ver:%s}", group), container.isPresent() ? container.get().getMetadata().getVersion().getFriendlyString() : "Null");
         }
+
         return str;
     }
 
@@ -161,7 +172,7 @@ public class CustomWindowUtil {
     //#endif
 
     public static void reSetTitle() {
-        //#if MC >= 11500
+        //#if MC > 11404
         GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().getWindow().getWindow(), "Minecraft " + SharedConstants.getCurrentVersion().getName());
         //#else
         //$$ GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().window.getWindow(), "Minecraft " + SharedConstants.getCurrentVersion().getName());
@@ -170,7 +181,7 @@ public class CustomWindowUtil {
 
     public static void updateTitle() {
         updatePlaceholders();
-        //#if MC >= 11500
+        //#if MC > 11404
         GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().getWindow().getWindow(), CustomWindowUtil.getWindowTitle());
         //#else
         //$$ GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().window.getWindow(), CustomWindowUtil.getWindowTitle());
@@ -179,16 +190,20 @@ public class CustomWindowUtil {
 
     public static void updateIcon() {
         Window window = TweakMyClient.getMinecraftClient().getWindowCompat();
-        //#if MC >= 11903
+        //#if MC > 11902
         IoSupplier<InputStream> icon16x;
         IoSupplier<InputStream> icon32x;
+
         if (Configs.featureCustomWindowIcon) {
             File data = new File("./tmc_data");
+
             if (!data.exists()) {
                 data.mkdirs();
             }
+
             File i16x = new File(data.getPath(), "i16");
             File i32x = new File(data.getPath(), "i32");
+
             try {
                 FileOutputStream i16os = new FileOutputStream(i16x);
                 FileOutputStream i32os = new FileOutputStream(i32x);
@@ -204,10 +219,11 @@ public class CustomWindowUtil {
             icon16x = mc.getVanillaPackResources().getRootResource("icons", "icon_16x16.png");
             icon32x = mc.getVanillaPackResources().getRootResource("icons", "icon_32x32.png");
         }
+
         if (icon16x != null && icon32x != null) {
             window.setIcon(icon16x, icon32x);
         } else {
-            TweakMyClient.getLogger().error("Couldn't set icon");
+            TweakMyClientReference.getLogger().error("Couldn't set icon");
         }
         //#else
         //$$ try {
@@ -225,9 +241,10 @@ public class CustomWindowUtil {
         //$$         icon16x = mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, new ResourceLocation("icons/icon_16x16.png"));
         //$$         icon32x = mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, new ResourceLocation("icons/icon_32x32.png"));
         //$$     }
+        //$$
         //$$     window.setIcon(icon16x, icon32x);
         //$$ } catch (IOException e) {
-        //$$     TweakMyClient.getLogger().error("Couldn't set icon", e);
+        //$$     TweakMyClientReference.getLogger().error("Couldn't set icon", e);
         //$$ }
         //#endif
     }

@@ -2,10 +2,12 @@ package top.hendrixshen.tweakmyclient;
 
 import lombok.Getter;
 import net.fabricmc.loader.api.FabricLoader;
-import top.hendrixshen.magiclib.config.ConfigManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import top.hendrixshen.magiclib.malilib.impl.ConfigManager;
 import top.hendrixshen.magiclib.util.FabricUtil;
+import top.hendrixshen.magiclib.util.StringUtil;
 import top.hendrixshen.tweakmyclient.config.ConfigHandler;
-import top.hendrixshen.tweakmyclient.util.VersionParser;
 
 public class TweakMyClientReference {
     @Getter
@@ -19,7 +21,9 @@ public class TweakMyClientReference {
     @Getter
     private static final String modVersion = FabricLoader.getInstance().getModContainer(modIdentifierCurrent).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
     @Getter
-    private static final String modVersionType = VersionParser.getVersionType(modVersion);
+    private static final String modVersionType = StringUtil.getVersionType(modVersion);
+    @Getter
+    private static final Logger logger = LogManager.getLogger(TweakMyClientReference.getModIdentifier());
 
     private static final int configVersion = 1;
     @Getter

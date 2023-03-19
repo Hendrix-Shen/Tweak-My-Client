@@ -8,6 +8,8 @@ package top.hendrixshen.tweakmyclient.compat;
 
 import com.google.common.collect.Lists;
 import net.fabricmc.tinyremapper.IMappingProvider.Member;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.*;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -59,12 +61,14 @@ public class CompatMixinPlugin extends TweakMyClientMixinPlugin {
         List<String> tekitaiTarget = Annotations.getValue(magicInterruption, "targets", true);
 
         ArrayList<String> tekitaiClasses = Lists.newArrayList();
+
         for (Class<?> cls : tekitaiClass) {
             String s = cls.getName();
             if (!tekitaiClasses.contains(s)) {
                 tekitaiClasses.add(s);
             }
         }
+
         for (String s : tekitaiTarget) {
             if (!tekitaiClasses.contains(s)) {
                 tekitaiClasses.add(s);
@@ -78,11 +82,9 @@ public class CompatMixinPlugin extends TweakMyClientMixinPlugin {
         }
 
         // Magic releasing.
-
         this.tsuihoTarget(targetClass, tekitaiMethod, magicAttackMethodNode, magicAttack);
-
         // Magic Harvesting.
-        targetClass.visibleAnnotations.removeIf(annotationNode -> annotationNode.desc.equals("Ltop/catowncraft/carpettctcaddition/util/mixin/annotation/MagicInterruption;"));
+        targetClass.visibleAnnotations.removeIf(annotationNode -> annotationNode.desc.equals("Ltop/hendrixshen/tweakmyclient/util/mixin/annotation/MagicInterruption;"));
     }
 
     /**
@@ -92,10 +94,11 @@ public class CompatMixinPlugin extends TweakMyClientMixinPlugin {
      * @param tekitaiTarget Enemy's class.
      * @return Enemy's MethodNode.
      */
-    private MethodNode findTekitaiMethod(ClassNode targetClass, AnnotationNode magicAttack, ArrayList<String> tekitaiTarget) {
+    private @Nullable MethodNode findTekitaiMethod(@NotNull ClassNode targetClass, AnnotationNode magicAttack, ArrayList<String> tekitaiTarget) {
         List<MixinType> type = Annotations.getValue(magicAttack, "type", true, MixinType.class);
         String name = Annotations.getValue(magicAttack, "name");
         int priority = Annotations.getValue(magicAttack, "priority", 1000);
+
         for (MethodNode methodNode : targetClass.methods) {
             if (!(methodNode.name.contains(type.get(0).getPrefix()) && methodNode.name.contains(name))) {
                 continue;
@@ -109,12 +112,14 @@ public class CompatMixinPlugin extends TweakMyClientMixinPlugin {
             }
 
             int targetPriority = Annotations.getValue(annotationNode, "priority");
+
             if (priority != targetPriority) {
                 continue;
             }
 
             return methodNode;
         }
+
         return null;
     }
 
@@ -125,7 +130,7 @@ public class CompatMixinPlugin extends TweakMyClientMixinPlugin {
      * @param magicAttackMethodNode Spell casting MethodNode.
      * @param magicAttack Magical attacking AnnotationNode.
      */
-    private void tsuihoTarget(ClassNode targetClass, MethodNode tekitaiMethodNode, MethodNode magicAttackMethodNode, AnnotationNode magicAttack) {
+    private void tsuihoTarget(@NotNull ClassNode targetClass, MethodNode tekitaiMethodNode, MethodNode magicAttackMethodNode, AnnotationNode magicAttack) {
         String method = Annotations.getValue(magicAttack, "method");
         String owner = Annotations.getValue(magicAttack, "owner");
         String desc = Annotations.getValue(magicAttack, "desc");
@@ -176,6 +181,7 @@ public class CompatMixinPlugin extends TweakMyClientMixinPlugin {
                         targetClass.methods.remove(tekitaiMethodNode);
                     }
                 }
+
                 break;
             }
         }

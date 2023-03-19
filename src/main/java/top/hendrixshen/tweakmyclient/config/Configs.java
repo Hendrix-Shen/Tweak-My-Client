@@ -4,14 +4,15 @@ import com.google.common.collect.Lists;
 import fi.dy.masa.malilib.config.options.ConfigHotkey;
 import fi.dy.masa.malilib.util.Color4f;
 import fi.dy.masa.malilib.util.StringUtils;
-import top.hendrixshen.magiclib.config.ConfigManager;
-import top.hendrixshen.magiclib.config.annotation.Config;
-import top.hendrixshen.magiclib.config.annotation.Hotkey;
-import top.hendrixshen.magiclib.config.annotation.Numeric;
-import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.annotation.Dependency;
-import top.hendrixshen.tweakmyclient.TweakMyClient;
+import org.jetbrains.annotations.NotNull;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+import top.hendrixshen.magiclib.malilib.api.annotation.Config;
+import top.hendrixshen.magiclib.malilib.api.annotation.Hotkey;
+import top.hendrixshen.magiclib.malilib.api.annotation.Numeric;
+import top.hendrixshen.magiclib.malilib.impl.ConfigManager;
 import top.hendrixshen.tweakmyclient.TweakMyClientPredicate;
+import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.event.CallBacks;
 import top.hendrixshen.tweakmyclient.helper.*;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
@@ -96,7 +97,7 @@ public class Configs {
     public static int targetBlockMaxTraceDistance = 100;
 
     @Config(category = ConfigCategory.GENERIC)
-    public static String targetBlockPositionFormat = "I'm looking at [x: {X},y: {Y}, z: {Z}]";
+    public static String targetBlockPositionFormat = "I'm looking at [x: {X}, y: {Y}, z: {Z}]";
 
     @Config(category = ConfigCategory.GENERIC)
     public static TargetBlockPositionPrintMode targetBlockPositionPrintMode = TargetBlockPositionPrintMode.PRIVATE;
@@ -389,7 +390,14 @@ public class Configs {
     @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.ExpXiBao.class)
     public static boolean expXiBao = false;
 
-    public static void initCallbacks(ConfigManager cm) {
+    public static void init() {
+        ConfigHandler configHandler = TweakMyClientReference.getConfigHandler();
+        configHandler.configManager.parseConfigClass(Configs.class);
+        ConfigHandler.register(configHandler);
+        Configs.initCallbacks(configHandler.configManager);
+    }
+
+    public static void initCallbacks(@NotNull ConfigManager cm) {
         // Set callback for all BooleanHotkeyed config.
         /* TODO
         Legacy MagicLib impl

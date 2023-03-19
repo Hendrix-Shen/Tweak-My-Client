@@ -1,33 +1,32 @@
 package top.hendrixshen.tweakmyclient.mixin.patch.litematicaSchematicWailaCompat.hwyla;
 
-//#if MC < 11600
+import org.spongepowered.asm.mixin.Mixin;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+
+//#if MC > 11502
+import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+//#else
+//$$ import net.minecraft.world.item.ItemStack;
 //$$ import mcp.mobius.waila.api.impl.DataAccessor;
 //$$ import mcp.mobius.waila.overlay.OverlayRenderer;
-//#else
-import net.minecraft.client.Minecraft;
-//#endif
-//#if MC < 11600
-//$$ import net.minecraft.world.item.ItemStack;
-//#endif
-import org.spongepowered.asm.mixin.Mixin;
-//#if MC < 11600
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.ModifyArg;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//$$ import top.hendrixshen.magiclib.dependency.annotation.Dependencies;
-//$$ import top.hendrixshen.magiclib.dependency.annotation.Dependency;
 //$$ import top.hendrixshen.tweakmyclient.util.HwylaUtil;
-//$$
-//$$ @Dependencies(
-//$$         and = {
-//$$                 @Dependency("waila"),
-//$$                 @Dependency("litematica")
-//$$         }
-//$$ )
-//$$ @Mixin(value = OverlayRenderer.class, remap = false)
+//#endif
+
+@Dependencies(
+        and = {
+                @Dependency("waila"),
+                @Dependency("litematica")
+        }
+)
+//#if MC > 11502
+@Mixin(DummyClass.class)
 //#else
-@Mixin(Minecraft.class)
+//$$ @Mixin(value = OverlayRenderer.class, remap = false)
 //#endif
 public class MixinOverlayRenderer {
     //#if MC < 11600

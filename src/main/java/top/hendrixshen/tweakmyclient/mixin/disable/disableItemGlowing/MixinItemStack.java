@@ -1,10 +1,5 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableItemGlowing;
 
-//#if MC >= 11903
-import net.minecraft.core.registries.BuiltInRegistries;
-//#else
-//$$ import net.minecraft.core.Registry;
-//#endif
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +10,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.helper.Cache;
+
+//#if MC > 11902
+import net.minecraft.core.registries.BuiltInRegistries;
+//#else
+//$$ import net.minecraft.core.Registry;
+//#endif
 
 @Mixin(ItemStack.class)
 public abstract class MixinItemStack {
@@ -33,7 +34,7 @@ public abstract class MixinItemStack {
     )
     private void isFoil(CallbackInfoReturnable<Boolean> cir) {
         if (Configs.disableItemGlowing) {
-            //#if MC >= 11903
+            //#if MC > 11902
             String itemStackID = BuiltInRegistries.ITEM.getKey(this.getItem()).toString();
             //#else
             //$$ String itemStackID = Registry.ITEM.getKey(this.getItem()).toString();

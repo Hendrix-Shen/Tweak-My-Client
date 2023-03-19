@@ -5,6 +5,14 @@ import com.mojang.blaze3d.vertex.*;
 import fi.dy.masa.malilib.util.Color4f;
 import fi.dy.masa.malilib.util.StringUtils;
 import fudge.notenoughcrashes.gui.ProblemScreen;
+import net.minecraft.CrashReport;
+import net.minecraft.client.gui.screens.TitleScreen;
+import org.jetbrains.annotations.NotNull;
+import top.hendrixshen.tweakmyclient.TweakMyClient;
+
+import java.util.Locale;
+import java.util.Set;
+
 //#if MC > 11502
 import org.joml.Matrix4f;
 import fudge.notenoughcrashes.platform.CommonModMetadata;
@@ -13,18 +21,12 @@ import fudge.notenoughcrashes.stacktrace.ModIdentifier;
 //$$ import fudge.notenoughcrashes.patches.PatchedCrashReport;
 //$$ import net.fabricmc.loader.api.metadata.ModMetadata;
 //#endif
-import net.minecraft.CrashReport;
-import net.minecraft.client.gui.screens.TitleScreen;
+
 //#if MC > 11605
 import net.minecraft.client.renderer.GameRenderer;
 //#else
 //$$ import org.lwjgl.opengl.GL11;
 //#endif
-import org.jetbrains.annotations.NotNull;
-import top.hendrixshen.tweakmyclient.TweakMyClient;
-
-import java.util.Locale;
-import java.util.Set;
 
 public class BlueScreen extends ProblemScreen {
     private static final Color4f WIN_XP = Color4f.fromColor(StringUtils.getColor("#FF000888", 0));
@@ -63,6 +65,7 @@ public class BlueScreen extends ProblemScreen {
         this.drawString(poseStack, String.format("*** STOP:%s", this.getErrorCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
         boolean stackFirst = true;
+
         for (String string : this.crashreport.getExceptionMessage().split("\n")) {
             if (stackFirst) {
                 this.drawString(poseStack, String.format("*** Stacktrace: %s", string.replaceAll("\r", "")
@@ -72,6 +75,7 @@ public class BlueScreen extends ProblemScreen {
                 this.drawString(poseStack, string.replaceAll("\r", "")
                         .replaceAll("\t", "    "), 5, y, 0.5F, BlueScreen.FONT.intValue);
             }
+
             y += 10;
         }
     //#else
@@ -95,6 +99,7 @@ public class BlueScreen extends ProblemScreen {
     //$$     this.drawString(String.format("*** STOP:%s", this.getErrorCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
     //$$     boolean stackFirst = true;
+    //$$
     //$$     for (String string : this.crashreport.getExceptionMessage().split("\n")) {
     //$$         if (stackFirst) {
     //$$             this.drawString(String.format("*** Stacktrace: %s", string.replaceAll("\r", "")
@@ -104,24 +109,33 @@ public class BlueScreen extends ProblemScreen {
     //$$             this.drawString(string.replaceAll("\r", "")
     //$$                     .replaceAll("\t", "    "), 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$         }
+    //$$
     //$$         y += 10;
     //$$     }
     //#endif
     }
 
     //#if MC > 11605
-    private void fillGradient(@NotNull PoseStack poseStack, int startX, int startY, int stopX, int stopY, Color4f color) {
-        RenderSystem.disableTexture();
+    private void fillGradient(@NotNull PoseStack poseStack, int startX, int startY, int stopX, int stopY, @NotNull Color4f color) {
+        //#if MC < 11904
+        //$$ RenderSystem.disableTexture();
+        //#endif
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferBuilder = tesselator.getBuilder();
         bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-        this.fillGradient(poseStack.last().pose(), bufferBuilder, startX, startY, stopX, stopY, color, this.getBlitOffset());
+        //#if MC > 11903
+        fillGradient(poseStack, startX, startY, stopX, stopY, color.intValue, 0);
+        //#else
+        //$$ this.fillGradient(poseStack.last().pose(), bufferBuilder, startX, startY, stopX, stopY, color, this.getBlitOffset());
+        //#endif
         tesselator.end();
         RenderSystem.disableBlend();
-        RenderSystem.enableTexture();
+        //#if MC < 11904
+        //$$ RenderSystem.enableTexture();
+        //#endif
     //#elseif MC > 11502
     //$$ private void fillGradient(@NotNull PoseStack poseStack, int startX, int startY, int stopX, int stopY, Color4f color) {
     //$$     RenderSystem.disableTexture();
@@ -208,6 +222,7 @@ public class BlueScreen extends ProblemScreen {
         //#endif
         if (!suspectedMods.isEmpty()) {
             StringBuilder builder = new StringBuilder();
+
             //#if MC > 11502
             for (CommonModMetadata suspectedMod : suspectedMods) {
                 builder.append(suspectedMod.name());
@@ -217,6 +232,7 @@ public class BlueScreen extends ProblemScreen {
             //#endif
                 builder.append(", ");
             }
+
             return builder.substring(0, builder.length() - 2);
         }
         return "";
@@ -231,12 +247,14 @@ public class BlueScreen extends ProblemScreen {
 
         for (char c : className.toCharArray()) {
             String s = String.valueOf(c);
+
             if (s.toUpperCase(Locale.ROOT).equals(s)) {
                 if (firstFound) {
                     builder.append("_");
                 } else {
                     firstFound = true;
                 }
+
                 builder.append(s);
             } else if (s.equals("$")) {
                 builder.append("_");
@@ -244,6 +262,7 @@ public class BlueScreen extends ProblemScreen {
                 builder.append(s.toUpperCase(Locale.ROOT));
             }
         }
+
         return builder.toString();
     }
 
@@ -261,6 +280,7 @@ public class BlueScreen extends ProblemScreen {
         if (key == 256) {
             TweakMyClient.getMinecraftClient().setScreen(new TitleScreen());
         }
+
         return super.keyPressed(key, oldkey, mods);
     }
 }

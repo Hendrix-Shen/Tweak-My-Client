@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
@@ -39,4 +40,18 @@ public abstract class MixinMinecraft {
     private void updateIcon() {
         CustomWindowUtil.updateIcon();
     }
+
+    //#if MC < 11500
+    //$$ @Inject(
+    //$$         method = "run",
+    //$$         at = @At(
+    //$$                 value = "INVOKE",
+    //$$                 target = "Lnet/minecraft/client/Minecraft;init()V",
+    //$$                 shift = At.Shift.AFTER
+    //$$         )
+    //$$ )
+    //$$ private void afterInit(CallbackInfo ci) {
+    //$$     CustomWindowUtil.updateIcon();
+    //$$ }
+    //#endif
 }

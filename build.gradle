@@ -16,46 +16,67 @@ preprocess {
     def mc1181 = createNode("1.18.2", 1_18_02, "mojang")
     def mc1192 = createNode("1.19.2", 1_19_02, "mojang")
     def mc1193 = createNode("1.19.3", 1_19_03, "mojang")
+    def mc1194 = createNode("1.19.4", 1_19_04, "mojang")
 
     mc1144.link(mc1152, null)
     mc1152.link(mc1165, null)
-    mc1165.link(mc1171, null)
-    mc1171.link(mc1181, null)
-    mc1181.link(mc1192, null)
+    mc1165.link(mc1171, file("versions/mapping-1.16.5-1.17.1.txt"))
+    mc1171.link(mc1181, file("versions/mapping-1.17.1-1.18.2.txt"))
+    mc1181.link(mc1192, file("versions/mapping-1.18.2-1.19.2.txt"))
     mc1192.link(mc1193, file("versions/mapping-1.19.2-1.19.3.txt"))
+    mc1193.link(mc1194, null)
 }
 
-String getVersionGit(List paths) {
-    if (grgit == null) {
-        return "nogit"
+ext {
+    env = System.getenv()
+
+    getVersionGit = { List paths ->
+        if (grgit == null) {
+            return "nogit"
+        }
+
+        List latestCommits = paths.isEmpty() ? grgit.log(maxCommits: 1) : grgit.log(paths: paths, maxCommits: 1)
+        return latestCommits.isEmpty() ? "uncommited" : "${latestCommits.get(0).id.substring(0, 7)}"
     }
-    List latestCommits = paths.isEmpty() ? grgit.log(maxCommits: 1) : grgit.log(paths: paths, maxCommits: 1)
-    return latestCommits.isEmpty() ? "uncommited" : "${latestCommits.get(0).id.substring(0, 7)}"
-}
 
-String getBuildNumber() {
-    Map<String, String> ENV = System.getenv()
-    return ENV.GITHUB_RUN_NUMBER ? ENV.GITHUB_RUN_NUMBER : Integer.MAX_VALUE
-}
-
-String getVersionType() {
-    Map<String, String> ENV = System.getenv()
-    switch (ENV.BUILD_TYPE) {
-        case "RELEASE":
-            return "stable"
-        case "BETA":
-            return "beta"
-        default:
-            return "dev"
+    getBuildNumber = {
+        return ext.env.GITHUB_RUN_NUMBER ? ext.env.GITHUB_RUN_NUMBER : Integer.MAX_VALUE
     }
-}
 
-int getVersionPatch(List paths) {
-    if (grgit == null) {
-        return 0
+    getVersionType = {
+        switch (ext.env.BUILD_TYPE) {
+            case "RELEASE":
+                return "stable"
+            case "BETA":
+                return "beta"
+            default:
+                return "dev"
+        }
     }
-    List latestCommits = paths.isEmpty() ? grgit.log() : grgit.log(paths: paths)
-    return latestCommits.size()
+
+    getVersionPatch = { List paths ->
+        if (grgit == null) {
+            return 0
+        }
+
+        List latestCommits = paths.isEmpty() ? grgit.log() : grgit.log(paths: paths)
+        return latestCommits.size()
+    }
+
+    getMavenArtifactVersion = {
+        return ext.getVersionType() == "stable" ? "${project.mod_version}.${ext.getVersionPatch([])}" : project.version
+    }
 }
 
 setVersion("${project.mod_version}.${project.getVersionPatch([])}+${project.getVersionGit([])}-${project.getVersionType()}")
+
+tasks.register("cleanPreprocessSources") {
+    it.group("${project.mod_id}")
+
+    doFirst {
+        subprojects {
+            def path = project.projectDir.toPath().resolve("build/preprocessed")
+            path.toFile().deleteDir()
+        }
+    }
+}

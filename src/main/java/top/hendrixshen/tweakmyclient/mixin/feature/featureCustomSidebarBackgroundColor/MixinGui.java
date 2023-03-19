@@ -13,7 +13,7 @@ public abstract class MixinGui {
             method = "displayScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
-                    //#if MC >= 11600
+                    //#if MC > 11502
                     target = "Lnet/minecraft/client/gui/Gui;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V",
                     //#else
                     //$$ target = "Lnet/minecraft/client/gui/Gui;fill(IIIII)V",
@@ -23,7 +23,7 @@ public abstract class MixinGui {
     )
     private void changeSidebarTitleBackgroundColor(Args args) {
         if (Configs.featureCustomSidebarBackgroundColor) {
-            //#if MC >= 11600
+            //#if MC > 11502
             args.set(5, Configs.colorSidebarTitle.intValue);
             //#else
             //$$ args.set(4, Configs.colorSidebarTitle.intValue);
@@ -35,7 +35,7 @@ public abstract class MixinGui {
             method = "displayScoreboardSidebar",
             at = @At(
                     value = "INVOKE",
-                    //#if MC >= 11600
+                    //#if MC > 11502
                     target = "Lnet/minecraft/client/gui/Gui;fill(Lcom/mojang/blaze3d/vertex/PoseStack;IIIII)V",
                     //#else
                     //$$ target = "Lnet/minecraft/client/gui/Gui;fill(IIIII)V",
@@ -67,7 +67,7 @@ public abstract class MixinGui {
     )
     private void changeSidebarContentBackgroundColor_2(Args args) {
         if (Configs.featureCustomSidebarBackgroundColor) {
-            //#if MC >= 11600
+            //#if MC > 11502
             args.set(5, Configs.colorSidebarContent.intValue);
             //#else
             //$$ args.set(4, Configs.colorSidebarContent.intValue);

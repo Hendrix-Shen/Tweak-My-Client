@@ -20,7 +20,7 @@ public class MixinTheEndPortalBlockEntity {
     )
     private void shouldRenderFace(Direction direction, CallbackInfoReturnable<Boolean> cir) {
         if (Configs.endPortalRendererFix) {
-            //#if MC >= 11700
+            //#if MC > 11605
             if (Configs.enderPortalRenderMode == EnderPortalRenderMode.LEGACY) {
                 cir.setReturnValue(direction == Direction.UP);
             } else if (Configs.enderPortalRenderMode != EnderPortalRenderMode.MODERN) {

@@ -12,12 +12,11 @@ import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.resolver.ServerAddress;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import top.hendrixshen.magiclib.compat.minecraft.blaze3d.vertex.VertexFormatCompatApi;
-import top.hendrixshen.magiclib.compat.minecraft.client.gui.components.ButtonCompatApi;
-import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
+import top.hendrixshen.magiclib.compat.minecraft.api.blaze3d.vertex.VertexFormatCompatApi;
+import top.hendrixshen.magiclib.compat.minecraft.api.client.gui.components.ButtonCompatApi;
+import top.hendrixshen.magiclib.compat.minecraft.api.network.chat.ComponentCompatApi;
 import top.hendrixshen.magiclib.util.ReflectUtil;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
@@ -25,7 +24,10 @@ import top.hendrixshen.tweakmyclient.config.Configs;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+
+//#if MC < 11903
+//$$ import net.minecraft.network.chat.contents.TranslatableContents;
+//#endif
 
 public class AutoReconnectUtil {
     private static final ResourceLocation resourceLocation = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/gui/xibao.png");
@@ -34,7 +36,7 @@ public class AutoReconnectUtil {
     private static boolean initialized = false;
     private static ServerData lastServer;
     private static Button autoReconnectButton;
-    //#if MC >= 11903
+    //#if MC > 11902
     private static final List<Component> reAuthMessages = Lists.newArrayList(
             ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.insufficientPrivileges")).plainCopy(),
             ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.invalidSession")).plainCopy(),
@@ -77,15 +79,15 @@ public class AutoReconnectUtil {
             Screen screen = null;
 
             try {
-                screen = (Screen) ReflectUtil.newInstance("me.axieum.mcmod.authme.impl.gui.AuthMethodScreen", new Class[]{Screen.class}, parent);
+                screen = (Screen) ReflectUtil.newInstance("me.axieum.mcmod.authme.impl.gui.AuthMethodScreen", new Class[]{Screen.class}, parent).orElseThrow(RuntimeException::new);
             } catch (RuntimeException e) {
                 try {
-                    screen = (Screen) ReflectUtil.newInstance("me.axieum.mcmod.authme.impl.AuthMe", 0, (Object) null);
+                    screen = (Screen) ReflectUtil.newInstance("me.axieum.mcmod.authme.impl.AuthMe", 0, (Object) null).orElseThrow(RuntimeException::new);
                 } catch (RuntimeException ex) {
                     try {
-                        screen = (Screen) ReflectUtil.newInstance("me.axieum.mcmod.authme.gui.AuthScreen", new Class[]{Screen.class}, parent);
+                        screen = (Screen) ReflectUtil.newInstance("me.axieum.mcmod.authme.gui.AuthScreen", new Class[]{Screen.class}, parent).orElseThrow(RuntimeException::new);
                     } catch (RuntimeException exc) {
-                        TweakMyClient.getLogger().error("Can't invoke AuthMe Screen");
+                        TweakMyClientReference.getLogger().error("Can't invoke AuthMe Screen");
                     }
                 }
             }
@@ -99,12 +101,12 @@ public class AutoReconnectUtil {
             Screen screen = null;
 
             try {
-                screen = (Screen) ReflectUtil.newInstance("the_fireplace.ias.gui.GuiAccountSelector", new Class[]{Screen.class}, parent);
+                screen = (Screen) ReflectUtil.newInstance("the_fireplace.ias.gui.GuiAccountSelector", new Class[]{Screen.class}, parent).orElseThrow(RuntimeException::new);
             } catch (RuntimeException e) {
                 try {
-                    screen = (Screen) ReflectUtil.newInstance("the_fireplace.ias.gui.AccountListScreen", new Class[]{Screen.class}, parent);
+                    screen = (Screen) ReflectUtil.newInstance("the_fireplace.ias.gui.AccountListScreen", new Class[]{Screen.class}, parent).orElseThrow(RuntimeException::new);
                 } catch (RuntimeException ex) {
-                    TweakMyClient.getLogger().error("Can't invoke In-Game Account Switcher Screen");
+                    TweakMyClientReference.getLogger().error("Can't invoke In-Game Account Switcher Screen");
                 }
             }
 
@@ -118,12 +120,12 @@ public class AutoReconnectUtil {
 
             try {
                 // For MC 1.17
-                screen = (Screen) ReflectUtil.newInstance("com.sintinium.oauthfabric.gui.profile.ProfileSelectionScreen", 0, (Object) null);
+                screen = (Screen) ReflectUtil.newInstance("com.sintinium.oauthfabric.gui.profile.ProfileSelectionScreen", 0, (Object) null).orElseThrow(RuntimeException::new);
             } catch (RuntimeException e) {
                 try {
-                    screen = (Screen) ReflectUtil.newInstance("com.sintinium.oauth.oauthfabric.gui.LoginTypeScreen", new Class[]{Screen.class}, parent);
+                    screen = (Screen) ReflectUtil.newInstance("com.sintinium.oauth.oauthfabric.gui.LoginTypeScreen", new Class[]{Screen.class}, parent).orElseThrow(RuntimeException::new);
                 } catch (RuntimeException ex) {
-                    TweakMyClient.getLogger().error("Can't invoke OAuth Screen");
+                    TweakMyClientReference.getLogger().error("Can't invoke OAuth Screen");
                 }
             }
 
@@ -136,9 +138,9 @@ public class AutoReconnectUtil {
             Screen screen = null;
 
             try {
-                screen = (Screen) ReflectUtil.newInstance("technicianlp.reauth.gui.AuthScreen", new Class[]{Screen.class}, parent);
+                screen = (Screen) ReflectUtil.newInstance("technicianlp.reauth.gui.AuthScreen", new Class[]{Screen.class}, parent).orElseThrow(RuntimeException::new);
             } catch (RuntimeException e) {
-                TweakMyClient.getLogger().error("Can't invoke Reauth Screen");
+                TweakMyClientReference.getLogger().error("Can't invoke Reauth Screen");
             }
 
             if (screen != null) {
@@ -160,8 +162,9 @@ public class AutoReconnectUtil {
     public static void reconnect(Screen screen) {
         Minecraft minecraft = TweakMyClient.getMinecraftClient();
         ServerData serverInfo = AutoReconnectUtil.getLastServer();
+
         if (AutoReconnectUtil.lastServer != null) {
-            //#if MC >= 11700
+            //#if MC > 11605
             ConnectScreen.startConnecting(screen, minecraft, ServerAddress.parseString(serverInfo.ip), serverInfo);
             //#else
             //$$ minecraft.setScreen(new ConnectScreen(screen, minecraft, serverInfo));
@@ -169,7 +172,7 @@ public class AutoReconnectUtil {
         }
     }
 
-    //#if MC <= 11902
+    //#if MC < 11903
     //$$ public static @NotNull String getTranslationKey(Component component) {
     //$$     return component instanceof TranslatableContents ? ((TranslatableContents) component).getKey() : "";
     //$$ }
@@ -183,9 +186,9 @@ public class AutoReconnectUtil {
         if (Configs.featureAutoReconnect) {
             AutoReconnectUtil.ReconnectTimer = Configs.autoReconnectTimer * 20;
         }
+
         int backButtonX = width / 2 - 100;
         int backButtonY = Math.min(height / 2 + textHeight / 2 + 9, height - 30);
-
         current.addRenderableWidgetCompat(
                 ButtonCompatApi.builder(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.static")),
                         button -> AutoReconnectUtil.reconnect(parent)).pos(backButtonX, backButtonY + 24).size(98, 20).build());
@@ -194,7 +197,7 @@ public class AutoReconnectUtil {
         current.addRenderableWidgetCompat(AutoReconnectUtil.autoReconnectButton);
         AutoReconnectUtil.reAuthenticateButtonOffsetY = 0;
 
-        //#if MC >= 11903
+        //#if MC > 11902
         if (reason == null || AutoReconnectUtil.reAuthMessages.stream().anyMatch(component -> component.getString().equals(reason.getString()))) {
         //#else
         //$$ if (reason == null || AutoReconnectUtil.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
@@ -206,15 +209,17 @@ public class AutoReconnectUtil {
                 return;
             }
 
-            AtomicInteger offsetX = new AtomicInteger();
+            int offsetX = 0;
             int buttonWidth = (200 - 4 * (AutoReconnectUtil.modHashMap.size() - 1)) / AutoReconnectUtil.modHashMap.size();
-            AutoReconnectUtil.modHashMap.forEach((modId, screen) ->
-                    current.addRenderableWidgetCompat(ButtonCompatApi.builder(
-                            ComponentCompatApi.literal(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
-                                    button -> TweakMyClient.getMinecraftClient().setScreen(screen))
-                            .pos(backButtonX + offsetX.intValue(), 48 + backButtonY)
-                            .size(buttonWidth, 20).build())
-            );
+
+            for (String modId : AutoReconnectUtil.modHashMap.keySet()) {
+                current.addRenderableWidgetCompat(ButtonCompatApi.builder(
+                                ComponentCompatApi.literal(StringUtil.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
+                                button -> TweakMyClient.getMinecraftClient().setScreen(AutoReconnectUtil.modHashMap.get(modId)))
+                        .pos(backButtonX + offsetX, 48 + backButtonY)
+                        .size(buttonWidth, 20).build());
+                offsetX += buttonWidth + 4;
+            }
         }
     }
 
@@ -228,7 +233,7 @@ public class AutoReconnectUtil {
 
     public static void tickAutoReconnectButton(Screen parent) {
         if (!Configs.featureAutoReconnect) {
-            //#if MC >= 11600
+            //#if MC > 11502
             AutoReconnectUtil.autoReconnectButton.setMessage(ComponentCompatApi.literal(StringUtil.tr("message.autoReconnect.toggle")));
             //#else
             //$$ AutoReconnectUtil.autoReconnectButton.setMessage(StringUtil.tr("message.autoReconnect.toggle"));

@@ -7,11 +7,13 @@ apply(plugin: "com.replaymod.preprocess")
 int mcVersion = 1
 
 preprocess {
-    mcVersion = (int) vars.get()["MC"]
-    tabIndentation = false
+    mcVersion = vars.get().get("MC")
+    tabIndentation.set(false)
 }
 
 repositories {
+    mavenLocal()
+
     maven {
         name("CurseForge Maven")
         url("https://www.cursemaven.com")
@@ -23,8 +25,18 @@ repositories {
     }
 
     mavenCentral()
-    mavenLocal()
 }
+
+// Module, Property prefix, Resolve condition, Transitive dependencies.
+def compileOnlyDependencies = [
+        ["curse.maven:litematica-308892"        , "litematica"        , mcVersion < 11904, false],
+        ["curse.maven:not-enough-crashes-353890", "not_enough_crashes", true             , false],
+        ["curse.maven:wthit-440979"             , "wthit"             , mcVersion > 11502, false],
+        ["curse.maven:badpackets-615134"        , "badpackets"        , mcVersion > 11701, false],
+        ["curse.maven:jade-324717"              , "jade"              , mcVersion > 11701, false],
+        ["curse.maven:hwyla-253449"             , "hwyla"             , mcVersion < 11600, false],
+        ["fi.dy.masa:litematica"                , "litematica"        , mcVersion > 11903, false]
+]
 
 dependencies {
     // Development environment
@@ -36,47 +48,80 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
 
     // Dependency
-    def ENV = System.getenv()
     modImplementation("top.hendrixshen:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
-        if (ENV.BUILD_NUMBER) {
+        if (project.env.BUILD_NUMBER) {
             exclude(group: "net.fabricmc.fabric-api", module: "fabric-api")
         }
-    }
-    modCompileOnly("curse.maven:litematica-308892:${project.litematica_version}")
-    modCompileOnly("curse.maven:not-enough-crashes-353890:${project.not_enough_crashes_version}")
 
-    if (mcVersion >= 11600) {
-        modCompileOnly("curse.maven:wthit-440979:${project.wthit_version}")
-        if (mcVersion >= 11800) {
-            modCompileOnly("curse.maven:badpackets-615134:${project.badpackets_version}")
-            modCompileOnly("curse.maven:jade-324717:${project.jade_version}")
+        exclude(group: "curse.maven", module: "carpet-349239")
+    }
+
+    // Compile only library.
+    compileOnlyDependencies.forEach {item ->
+        String dependencyNotation = item[0]
+        String propertyPrefix = item[1]
+        boolean shouldResolve = item[2]
+        boolean shouldTransitive = item[3]
+
+        if (shouldResolve) {
+            modCompileOnly("${dependencyNotation}:${project.property("${propertyPrefix}_version")}") {
+                transitive(shouldTransitive)
+            }
         }
-    } else {
-        modCompileOnly("curse.maven:hwyla-253449:${project.hwyla_version}")
     }
 
     runtimeOnly(project(path: ":fabricWrapper"))
 }
 
-loom {
-    runConfigs {
-        configureEach {
-            // Dump modified classes automatically.
-            property("mixin.debug.export", "true")
-        }
+archivesBaseName("${project.mod_archives_base_name}-${project.minecraft_version}")
+group(project.mod_maven_group)
 
-        // We need large window.
-        client {
-            programArgs([
-                    "--width",
-                    "1920",
-                    "--height",
-                    "1080",
-            ])
+if (mcVersion > 11701) {
+    sourceCompatibility(JavaVersion.VERSION_16)
+    targetCompatibility(JavaVersion.VERSION_16)
+} else {
+    sourceCompatibility(JavaVersion.VERSION_1_8)
+    targetCompatibility(JavaVersion.VERSION_1_8)
+}
+
+version(project.parent.version)
+
+loom {
+    interfaceInjection {
+        enableDependencyInterfaceInjection.set(true)
+    }
+
+    runConfigs.configureEach {
+        // Dump modified classes automatically.
+        property("mixin.debug.export", "true")
+    }
+
+    runConfigs.named("client") {
+        programArgs([
+                "--width",
+                "1920",
+                "--height",
+                "1080",
+        ])
+        runDir("run/client")
+    }
+
+    runConfigs.named("server") {
+        runDir("run/server")
+    }
+
+    runs {
+        mixinAuditClient {
+            inherit(client)
+            vmArgs("-Dmagiclib.mixin_audit=true")
+            ideConfigGenerated(false)
             runDir("run/client")
         }
 
-        server {
+        mixinAuditServer {
+            inherit(server)
+            vmArgs("-Dmagiclib.mixin_audit=true")
+            ideConfigGenerated(false)
             runDir("run/server")
         }
     }
@@ -84,7 +129,7 @@ loom {
     // Setup client default settings.
     runClient {
         defaultCharacterEncoding("UTF-8")
-        // Set client language to zh_cn
+
         if (!new File("${projectDir}/run/client/options.txt").exists()) {
             new File("${projectDir}/run/client").mkdirs()
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("${projectDir}/run/client/options.txt"))
@@ -105,6 +150,7 @@ loom {
     // Setup server default settings.
     runServer {
         defaultCharacterEncoding("UTF-8")
+
         // Agree eula before server init.
         if (!new File("${projectDir}/run/server/eula.txt").exists()) {
             new File("${projectDir}/run/server").mkdirs()
@@ -115,38 +161,40 @@ loom {
     }
 }
 
-remapJar {
-    remapperIsolation = true
+tasks.findAll { it.name in [
+        "runClient", "runServer",
+        "runMixinAuditClient", "runMixinAuditServer",
+        "preprocessCode", "preprocessResources",
+        "preprocessTestCode", "preprocessTestResources"] }.forEach {
+    it.group("${project.mod_id}")
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.encoding("UTF-8")
+}
 
-setArchivesBaseName("${project.archives_base_name}-${project.minecraft_version}")
-setVersion(project.parent.version)
-setGroup(project.maven_group)
-if (mcVersion > 11701) {
-    setSourceCompatibility(JavaVersion.VERSION_16)
-    setTargetCompatibility(JavaVersion.VERSION_16)
-} else {
-    setSourceCompatibility(JavaVersion.VERSION_1_8)
-    setTargetCompatibility(JavaVersion.VERSION_1_8)
+remapJar {
+    remapperIsolation.set(true)
 }
 
 processResources {
     filesMatching("fabric.mod.json") {
         filter { line ->
-            line.trim().startsWith("//") ? "" : line
+            line.trim().startsWith("//") ? null : line
         }
 
-        expand(["mod_version"         : project.version,
-                "mod_id"              : project.mod_id,
-                "mod_name"            : project.mod_name,
-                "mod_homepage"        : project.mod_homepage,
-                "mod_sources"         : project.mod_sources,
-                "mod_license"         : project.mod_license,
+        expand([
+                "magiclib_dependency" : project.magiclib_dependency,
                 "minecraft_dependency": project.minecraft_dependency,
                 "minecraft_version_id": project.minecraft_version.replace(".", "_"),
                 "minecraft_version"   : project.minecraft_version,
-                "magiclib_dependency" : project.magiclib_dependency
+                "mod_description"     : project.mod_description,
+                "mod_homepage"        : project.mod_homepage,
+                "mod_id"              : project.mod_id,
+                "mod_license"         : project.mod_license,
+                "mod_name"            : project.mod_name,
+                "mod_sources"         : project.mod_sources,
+                "mod_version"         : project.version
         ])
     }
 }
@@ -157,28 +205,26 @@ blossom {
     replaceToken("@MINECRAFT_VERSION_IDENTIFY@", project.minecraft_version.replace(".", "_"))
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = "UTF-8"
-}
-
 java {
     withSourcesJar()
 }
 
 jar {
-    from("../../LICENSE")
+    from("${rootDir}/LICENSE")
 }
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        create("mavenJava", MavenPublication) {
             artifactId("${project.mod_id}-${project.minecraft_version.replace(".", "_")}")
+            version("${rootProject.getMavenArtifactVersion()}")
             from(components.java)
         }
     }
 
     repositories {
         mavenLocal()
+
         maven {
             url("$rootDir/publish")
         }

@@ -7,10 +7,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
+import top.hendrixshen.magiclib.compat.minecraft.api.network.chat.ComponentCompatApi;
+import top.hendrixshen.magiclib.util.InfoUtil;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.util.InfoUtil;
 import top.hendrixshen.tweakmyclient.util.StringUtil;
 
 @Mixin(LevelRenderer.class)
@@ -24,6 +24,7 @@ public abstract class MixinLevelRenderer {
     private void onProcessGlobalEvent(int eventId, BlockPos pos, int i, CallbackInfo ci) {
         if (Configs.featureGlobalEventListener) {
             LocalPlayer player = TweakMyClient.getMinecraftClient().player;
+
             if (player != null) {
                 if (eventId == 1023) { // SoundEvents.ENTITY_WITHER_SPAWN
                     InfoUtil.displayChatMessage(ComponentCompatApi.literal(StringUtil.tr("message.globalEventListener.witherSpawn", pos.getX(), pos.getY(), pos.getZ())));

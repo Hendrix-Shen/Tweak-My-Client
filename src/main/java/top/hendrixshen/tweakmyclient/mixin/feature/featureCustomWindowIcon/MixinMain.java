@@ -1,55 +1,43 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.featureCustomWindowIcon;
 
-//#if MC < 11500
-//$$ import net.minecraft.client.Minecraft;
-//#else
-import net.minecraft.client.main.Main;
-//#endif
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
-//#if MC >= 11500
+//#if MC > 11404
+import net.minecraft.client.main.Main;
+//#else
+//$$ import net.minecraft.client.Minecraft;
+//#endif
+
+//#if MC > 11404
 @Mixin(Main.class)
 //#else
 //$$ @Mixin(Minecraft.class)
 //#endif
 public class MixinMain {
+    //#if MC > 11404
     @Inject(
-            //#if MC >= 11900 || MC < 11500
-            method = "run",
+            //#if MC > 11903 || MC < 11900
+            method = "main",
+            remap = false,
             //#else
-            //$$ method = "main",
+            //$$ method = "run",
             //#endif
             at = @At(
                     value = "INVOKE",
-            //#if MC >= 11500
                     target = "Lcom/mojang/blaze3d/systems/RenderSystem;finishInitialization()V",
                     remap = false
-            //#if MC >= 11900
             )
-            //#else
-            //$$ ),
-            //$$ remap = false
-            //#endif
-            //#else
-            //$$         target = "Lnet/minecraft/client/Minecraft;init()V",
-            //$$         shift = At.Shift.AFTER
-            //$$ )
-            //#endif
-
     )
-    //#if MC >= 11900
-    private static void finishInitializationRenderSystem(String[] strings, boolean bl, CallbackInfo ci) {
-    //#elseif MC >= 11500
-    //$$ private static void finishInitializationRenderSystem(String[] strings, CallbackInfo ci) {
-        CustomWindowUtil.updateIcon();
+    //#if MC > 11903 || MC < 11900
+    private static void finishInitializationRenderSystem(String[] strings, CallbackInfo ci) {
     //#else
-    //$$ private void afterInit(CallbackInfo ci) {
-    //$$     CustomWindowUtil.updateIcon();
+    //$$ private static void finishInitializationRenderSystem(String[] strings, boolean bl, CallbackInfo ci) {
     //#endif
+        CustomWindowUtil.updateIcon();
     }
+    //#endif
 }

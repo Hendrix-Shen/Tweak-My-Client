@@ -46,7 +46,9 @@ public class MixinMultiPlayerGameMode {
         if (!Configs.featureBreakingRestrictionBox) {
             return false;
         }
+
         BreakingRestrictionBoxType mode = Configs.listBreakingRestrictionBoxType;
+
         switch (mode) {
             case BLACKLIST:
                 return this.tmc$inAreas(Cache.getInstance().getBreakingRestrictionBoxBlacklist(), pos);

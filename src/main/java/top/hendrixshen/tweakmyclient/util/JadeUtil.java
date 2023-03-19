@@ -1,6 +1,6 @@
 package top.hendrixshen.tweakmyclient.util;
 
-//#if MC >= 11800
+//#if MC > 11701
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.vertex.PoseStack;
 import fi.dy.masa.litematica.util.RayTraceUtils;
@@ -34,7 +34,7 @@ import top.hendrixshen.tweakmyclient.mixin.accessor.PlayerTabOverlayAccessor;
 //#endif
 
 public class JadeUtil {
-    //#if MC >= 11800
+    //#if MC > 11701
     private static TooltipRenderer tooltipRenderer = null;
     private static boolean disableJadeRender = false;
     private static final Minecraft minecraft = TweakMyClient.getMinecraftClient();
@@ -57,6 +57,7 @@ public class JadeUtil {
 
         RayTraceUtils.RayTraceWrapper traceWrapper = RayTraceUtils.getGenericTrace(minecraft.level, minecraft.cameraEntity, 10.0, true, true, true);
         Level worldSchematic = SchematicWorldHandler.getSchematicWorld();
+
         if (traceWrapper == null || traceWrapper.getBlockHitResult() == null || worldSchematic == null ||
                 worldSchematic.getBlockState(traceWrapper.getBlockHitResult().getBlockPos()).is(Blocks.AIR)) {
             JadeUtil.tooltipRenderer = null;
@@ -64,6 +65,7 @@ public class JadeUtil {
         }
 
         LocalPlayer localPlayer = minecraft.player;
+
         if (localPlayer == null) {
             JadeUtil.tooltipRenderer = null;
             return;
@@ -109,10 +111,13 @@ public class JadeUtil {
         //#if MC < 11900
         //$$ boolean showDetails = localPlayer.isCrouching();
         //#endif
+
         if (accessor.isServerConnected()) {
             boolean request = accessor.shouldRequestData();
+
             if (ObjectDataCenter.isTimeElapsed(ObjectDataCenter.rateLimiter)) {
                 ObjectDataCenter.resetTimer();
+
                 if (request) {
                     //#if MC > 11802
                     accessor._requestData();
@@ -121,6 +126,7 @@ public class JadeUtil {
                     //#endif
                 }
             }
+
             if (request && ObjectDataCenter.getServerData() == null) {
                 JadeUtil.tooltipRenderer = null;
                 return;
@@ -138,6 +144,7 @@ public class JadeUtil {
             //#else
             //$$ accessor._gatherComponents($ -> Math.abs(WailaCommonRegistration.INSTANCE.priorities.get($)) > 5000 ? tooltip : dummyTooltip);
             //#endif
+
             if (!dummyTooltip.isEmpty()) {
                 tooltip.sneakyDetails = true;
             }
@@ -152,6 +159,7 @@ public class JadeUtil {
         //#endif
             callback.onTooltipCollected(tooltip, accessor);
         }
+
         JadeUtil.disableJadeRender = true;
         JadeUtil.tooltipRenderer = new TooltipRenderer(tooltip, true);
     }
@@ -174,6 +182,7 @@ public class JadeUtil {
                 double y = minecraft.mouseHandler.ypos() * window.getGuiScaledHeight() / window.getScreenHeight();
                 x += position.getWidth() * overlay.tryFlip(overlay.getAnchorX());
                 y += position.getHeight() * overlay.getAnchorY();
+
                 if (position.contains((int) x, (int) y)) {
                     return;
                 }

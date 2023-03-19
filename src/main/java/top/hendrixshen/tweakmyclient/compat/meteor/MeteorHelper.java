@@ -1,5 +1,8 @@
 package top.hendrixshen.tweakmyclient.compat.meteor;
 
+import top.hendrixshen.tweakmyclient.TweakMyClient;
+import top.hendrixshen.tweakmyclient.TweakMyClientReference;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -20,7 +23,7 @@ public class MeteorHelper {
             MeteorHelper.isNoSlowMethod = noSlowClass.getDeclaredMethod("items");
             MeteorHelper.isNoSlowMethod.setAccessible(true);
         } catch (ClassNotFoundException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
+            TweakMyClientReference.getLogger().throwing(e);
         }
     }
 
@@ -29,7 +32,7 @@ public class MeteorHelper {
             try {
                 return (boolean) MeteorHelper.isNoSlowMethod.invoke(MeteorHelper.noSlowInstance);
             } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
+                TweakMyClientReference.getLogger().throwing(e);
             }
         }
         return false;

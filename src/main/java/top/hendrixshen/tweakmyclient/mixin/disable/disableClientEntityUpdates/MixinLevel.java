@@ -1,10 +1,5 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableClientEntityUpdates;
 
-//#if MC >= 11903
-import net.minecraft.core.registries.BuiltInRegistries;
-//#else
-//$$ import net.minecraft.core.Registry;
-//#endif
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -17,6 +12,12 @@ import top.hendrixshen.tweakmyclient.config.Configs;
 
 import java.util.function.Consumer;
 
+//#if MC > 11902
+import net.minecraft.core.registries.BuiltInRegistries;
+//#else
+//$$ import net.minecraft.core.Registry;
+//#endif
+
 @Mixin(Level.class)
 public class MixinLevel {
     @Inject(
@@ -28,21 +29,22 @@ public class MixinLevel {
     )
     private void onGuardEntityTick(Consumer<Entity> consumer, Entity entity, CallbackInfo ci) {
         if (Configs.disableClientEntityInListUpdates) {
-            //#if MC >= 11903
+            //#if MC > 11902
             String entityID = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
             //#else
             //$$ String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
             //#endif
             String entityName = entity.getName().getString();
+
             if (Configs.listDisableClientEntityUpdates.stream().anyMatch(s -> entityID.contains(s) ||
                     entityName.contains(s)) && !(entity instanceof Player)) {
                 ci.cancel();
             }
         }
+
         if ((Configs.disableClientEntityTNTRendering && entity.getType() == EntityType.TNT) ||
                 (Configs.disableClientEntityWitherRendering && entity.getType() == EntityType.WITHER) ||
-                (Configs.disableClientEntityZombieVillagerRendering && entity.getType() == EntityType.ZOMBIE_VILLAGER)
-        ) {
+                (Configs.disableClientEntityZombieVillagerRendering && entity.getType() == EntityType.ZOMBIE_VILLAGER)) {
             ci.cancel();
         }
     }

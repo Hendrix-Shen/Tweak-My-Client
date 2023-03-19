@@ -26,6 +26,7 @@ package top.hendrixshen.tweakmyclient.util;
 //$$ import java.lang.reflect.Method;
 //$$ import java.util.List;
 //#endif
+
 public class HwylaUtil {
     //#if MC < 11600
     //$$ private static final Minecraft minecraft = TweakMyClient.getMinecraftClient();
@@ -62,8 +63,10 @@ public class HwylaUtil {
     //$$         if (minecraft.level != null && minecraft.cameraEntity != null) {
     //$$             RayTraceUtils.RayTraceWrapper traceWrapper = RayTraceUtils.getGenericTrace(minecraft.level, minecraft.cameraEntity, 10.0, true);
     //$$             Level worldSchematic = SchematicWorldHandler.getSchematicWorld();
+    //$$
     //$$             if (traceWrapper != null && traceWrapper.getBlockHitResult() != null && worldSchematic != null && !worldSchematic.getBlockState(traceWrapper.getBlockHitResult().getBlockPos()).is(Blocks.AIR)) {
     //$$                 LocalPlayer localPlayer = minecraft.player;
+    //$$
     //$$                 if (localPlayer != null) {
     //$$                     HwylaUtil.disableWthitRender = true;
     //$$                     List<Component> currentTip = new TaggableList<>(TaggedTextComponent::new);
@@ -85,7 +88,6 @@ public class HwylaUtil {
     //$$
     //$$                     HwylaUtil.combinePositions(minecraft.player, currentTip, currentTipHead, currentTipBody, currentTipTail);
     //$$                     HwylaUtil.tooltip = new Tooltip(currentTip, !targetStack.isEmpty());
-    //$$
     //$$                 }
     //$$             } else {
     //$$                 HwylaUtil.disableWthitRender = false;

@@ -1,6 +1,6 @@
 package top.hendrixshen.tweakmyclient.util.wthit;
 
-//#if MC >= 11700 && MC < 11800
+//#if MC > 11605 && MC < 11800
 //$$ import mcp.mobius.waila.data.DataAccessor;
 //$$ import mcp.mobius.waila.api.IBlacklistConfig;
 //$$ import mcp.mobius.waila.api.IBlockComponentProvider;
@@ -23,8 +23,8 @@ package top.hendrixshen.tweakmyclient.util.wthit;
 //$$ import net.minecraft.world.level.block.Blocks;
 //$$ import net.minecraft.world.level.block.LiquidBlock;
 //$$ import net.minecraft.world.level.block.state.BlockState;
-//$$ import top.hendrixshen.magiclib.compat.minecraft.network.chat.ComponentCompatApi;
-//$$ import top.hendrixshen.magiclib.language.I18n;
+//$$ import top.hendrixshen.magiclib.compat.minecraft.api.network.chat.ComponentCompatApi;
+//$$ import top.hendrixshen.magiclib.language.api.I18n;
 //$$ import top.hendrixshen.tweakmyclient.TweakMyClient;
 //$$
 //$$ import java.lang.reflect.Field;
@@ -32,7 +32,7 @@ package top.hendrixshen.tweakmyclient.util.wthit;
 //#endif
 
 public class WthitUtil_1_17 {
-    //#if MC >= 11700 && MC < 11800
+    //#if MC > 11605 && MC < 11800
     //$$ private static final Tooltip TOOLTIP = new Tooltip();
     //$$ private static final Component SNEAK_DETAIL = ComponentCompatApi.literal(I18n.get("tooltip.waila.sneak_for_details")).withStyle(ChatFormatting.ITALIC);
     //$$ private static final Minecraft minecraft = TweakMyClient.getMinecraftClient();
@@ -62,6 +62,7 @@ public class WthitUtil_1_17 {
     //$$ public static void tick() {
     //$$     WthitUtil_1_17.disableWthitRender = false;
     //$$     WthitUtil_1_17.setShouldRender(false);
+    //$$
     //$$     if (WthitUtil_1_17.shouldRender == null || minecraft.level == null || minecraft.cameraEntity == null) {
     //$$         return;
     //$$     }
@@ -69,12 +70,14 @@ public class WthitUtil_1_17 {
     //$$     RayTraceUtils.RayTraceWrapper traceWrapper = RayTraceUtils.getGenericTrace(minecraft.level,
     //$$             minecraft.cameraEntity, 10.0, true, true, true);
     //$$     Level worldSchematic = SchematicWorldHandler.getSchematicWorld();
+    //$$
     //$$     if (traceWrapper == null || traceWrapper.getBlockHitResult() == null || worldSchematic == null ||
     //$$             worldSchematic.getBlockState(traceWrapper.getBlockHitResult().getBlockPos()).is(Blocks.AIR)) {
     //$$         return;
     //$$     }
     //$$
     //$$     LocalPlayer localPlayer = minecraft.player;
+    //$$
     //$$     if (localPlayer == null) {
     //$$         return;
     //$$     }
@@ -96,11 +99,13 @@ public class WthitUtil_1_17 {
     //$$     }
     //$$
     //$$     BlockEntity blockEntity = accessor.getBlockEntity();
+    //$$
     //$$     if (blockEntity != null && IBlacklistConfig.get().contains(blockEntity)) {
     //$$         return;
     //$$     }
     //$$
     //$$     BlockState state = worldSchematic.getBlockState(traceWrapper.getBlockHitResult().getBlockPos());
+    //$$
     //$$     if (state == IBlockComponentProvider.EMPTY_BLOCK_STATE) {
     //$$         return;
     //$$     }
@@ -111,6 +116,7 @@ public class WthitUtil_1_17 {
     //$$     TooltipHandler.add(WthitUtil_1_17.TOOLTIP);
     //$$     WthitUtil_1_17.TOOLTIP.clear();
     //$$     ComponentHandler.gatherBlock(accessor, WthitUtil_1_17.TOOLTIP, TooltipPosition.BODY);
+    //$$
     //$$     if (Waila.config.get().getGeneral().isShiftForDetails() && !TOOLTIP.isEmpty() && !minecraft.player.isShiftKeyDown()) {
     //$$         TooltipHandler.add(WthitUtil_1_17.SNEAK_DETAIL);
     //$$     } else {
@@ -124,6 +130,7 @@ public class WthitUtil_1_17 {
     //$$     if (PluginConfig.INSTANCE.getBoolean(WailaConstants.CONFIG_SHOW_ITEM)) {
     //$$         TooltipHandler.setStack(ComponentHandler.getDisplayItem(Objects.requireNonNull(traceWrapper.getBlockHitResult())));
     //$$     }
+    //$$
     //$$     WthitUtil_1_17.setShouldRender(true);
     //$$     TooltipHandler.endBuild();
     //$$ }

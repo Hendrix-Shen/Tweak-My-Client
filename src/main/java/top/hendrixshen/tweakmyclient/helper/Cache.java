@@ -1,6 +1,7 @@
 package top.hendrixshen.tweakmyclient.helper;
 
 import fi.dy.masa.malilib.util.Color4f;
+import lombok.Getter;
 import net.minecraft.world.item.Item;
 import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.util.StringUtil;
@@ -8,22 +9,15 @@ import top.hendrixshen.tweakmyclient.util.StringUtil;
 import java.util.HashSet;
 
 public class Cache {
-    private static Cache INSTANCE;
+    @Getter(lazy = true)
+    private static final Cache instance = new Cache();
     private final HashSet<Item> autoDropBlackList = new HashSet<>();
     private final HashSet<Item> autoDropWhiteList = new HashSet<>();
-
     private Color4f breakingRestrictionBoxBlacklistModeOutlineColor;
     private Color4f breakingRestrictionBoxWhitelistModeOutlineColor;
     private final HashSet<AreaBox> breakingRestrictionBoxBlacklist = new HashSet<>();
     private final HashSet<AreaBox> breakingRestrictionBoxWhiteList = new HashSet<>();
     private final HashSet<Item> itemGlowingBlackList = new HashSet<>();
-
-    public static Cache getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new Cache();
-        }
-        return INSTANCE;
-    }
 
     public void cacheAutoDropBlackList() {
         this.autoDropBlackList.clear();

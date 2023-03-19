@@ -33,21 +33,25 @@ public abstract class MixinLocalPlayer extends LivingEntity {
     private void onTick(CallbackInfo ci) {
         if (Configs.featureAutoTotem) {
             Minecraft mc = TweakMyClient.getMinecraftClient();
+
             if (mc.player == null || mc.player.getOffhandItem().isCompat(Items.TOTEM_OF_UNDYING) || mc.gameMode == null ||
                     mc.screen instanceof AbstractContainerScreen && !(mc.screen instanceof InventoryScreen)) {
                 return;
             }
 
             Inventory inv = mc.player.getInventory();
+
             for (int slot = 9; slot < 45; slot++) {
                 if (inv.getItem(slot).isCompat(Items.TOTEM_OF_UNDYING)) {
                     MultiPlayerGameMode multiPlayerGameMode = mc.gameMode;
                     boolean isOffhandEmpty = mc.player.getOffhandItem().isEmpty();
                     multiPlayerGameMode.handleInventoryMouseClick(0, slot, 0, ClickType.PICKUP, mc.player);
                     multiPlayerGameMode.handleInventoryMouseClick(0, 45, 0, ClickType.PICKUP, mc.player);
+
                     if (!isOffhandEmpty) {
                         multiPlayerGameMode.handleInventoryMouseClick(0, slot, 0, ClickType.PICKUP, mc.player);
                     }
+
                     break;
                 }
             }

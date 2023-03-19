@@ -1,23 +1,25 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.featureDaylightOverride;
 
-//#if MC < 11500
-//$$ import net.minecraft.client.Minecraft;
-//#else
-import net.minecraft.world.level.Level;
-//#endif
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC >= 11500
+
+//#if MC > 11404
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.tweakmyclient.config.Configs;
 
+import top.hendrixshen.tweakmyclient.config.Configs;
+//#else
+//$$ import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+//#endif
+
+//#if MC > 11404
 @Mixin(Level.class)
 //#else
-//$$ @Mixin(Minecraft.class)
+//$$ @Mixin(DummyClass.class)
 //#endif
 public class MixinLevel {
-    //#if MC >= 11500
+    //#if MC > 11404
     @Inject(
             method = "getDayTime",
             at = @At(

@@ -2,6 +2,7 @@ package top.hendrixshen.tweakmyclient.util.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.malilib.util.Color4f;
+import lombok.Getter;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
@@ -20,18 +21,13 @@ import top.hendrixshen.tweakmyclient.mixin.accessor.MultiPlayerGameModeAccessor;
 import top.hendrixshen.tweakmyclient.util.MiscUtil;
 
 public class CustomBlockHitBoxRenderer implements IRenderer {
-    private static CustomBlockHitBoxRenderer INSTANCE;
-
-    public static CustomBlockHitBoxRenderer getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new CustomBlockHitBoxRenderer();
-        }
-        return INSTANCE;
-    }
+    @Getter(lazy = true)
+    private static final CustomBlockHitBoxRenderer instance = new CustomBlockHitBoxRenderer();
 
     @Override
     public void render() {
         HitResult hitResult = TweakMyClient.getMinecraftClient().hitResult;
+
         if (!(hitResult instanceof BlockHitResult)) {
             return;
         }
@@ -39,6 +35,7 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
         ClientLevel clientLevel = TweakMyClient.getMinecraftClient().level;
         Entity cameraEntity = TweakMyClient.getMinecraftClient().cameraEntity;
         MultiPlayerGameMode multiPlayerGameMode = TweakMyClient.getMinecraftClient().gameMode;
+
         if (clientLevel == null || cameraEntity == null || multiPlayerGameMode == null) {
             return;
         }
@@ -54,6 +51,7 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
 
         // Adjust AABB for break animation.
         final float destroyProgress = ((MultiPlayerGameModeAccessor) multiPlayerGameMode).getDestroyProgress();
+
         switch (Configs.breakAnimationMode) {
             case DOWN:
                 voxelShape = voxelShape.toAabbs().stream()
@@ -81,6 +79,7 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
         }
 
         Vec3 vec3 = TweakMyClient.getMinecraftClient().gameRenderer.getMainCamera().getPosition();
+
         if (Configs.featureCustomBlockHitBoxOverlayFill) {
             float k = System.currentTimeMillis() % (100 * (101 - Configs.customBlockHitBoxOverlayFillRainbowSpeed)) / (50F * (101 - Configs.customBlockHitBoxOverlayFillRainbowSpeed));
 
@@ -122,6 +121,7 @@ public class CustomBlockHitBoxRenderer implements IRenderer {
                             0.5F + 0.5F * (float) Math.sin((k + 6F / 3F) * Math.PI),
                             Configs.colorBlockHitBoxOverlayOutline.a
                     ) : Configs.colorBlockHitBoxOverlayOutline);
+
             if (Configs.customBlockHitBoxOverlayDisableDepthTest) {
                 RenderSystem.enableDepthTest();
             }
