@@ -54,6 +54,10 @@ processResources {
         jars.add(["file": "META-INF/jars/${project.mod_archives_base_name}-${it.minecraft_version}-${project.version}.jar"])
     })
 
+    from("${rootDir}/icon.png") {
+        into("assets/${project.mod_id}")
+    }
+
     filesMatching("fabric.mod.json") {
         expand([
                 "magiclib_dependency": project.magiclib_dependency,

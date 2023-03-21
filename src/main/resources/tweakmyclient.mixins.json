@@ -61,11 +61,6 @@
     "patch.endPortalRendererFix.MixinTheEndPortalRenderer",
     "patch.forceDebugInfoDetailed.MixinPlayer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem",
-    "patch.litematicaSchematicWailaCompat.MixinLocalPlayer",
-    "patch.litematicaSchematicWailaCompat.hwyla.MixinOverlayRenderer",
-    "patch.litematicaSchematicWailaCompat.jade.MixinOverlayRenderer",
-    "patch.litematicaSchematicWailaCompat.wthit.MixinClientTickHandler",
-    "patch.litematicaSchematicWailaCompat.wthit.MixinTickHandler",
     "patch.notEnoughCrashesBlueScreenOfDeath.MixinInGameCatcher"
   ],
   "injectors": {

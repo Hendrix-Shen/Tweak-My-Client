@@ -31,10 +31,6 @@ repositories {
 def compileOnlyDependencies = [
         ["curse.maven:litematica-308892"        , "litematica"        , mcVersion < 11904, false],
         ["curse.maven:not-enough-crashes-353890", "not_enough_crashes", true             , false],
-        ["curse.maven:wthit-440979"             , "wthit"             , mcVersion > 11502, false],
-        ["curse.maven:badpackets-615134"        , "badpackets"        , mcVersion > 11701, false],
-        ["curse.maven:jade-324717"              , "jade"              , mcVersion > 11701, false],
-        ["curse.maven:hwyla-253449"             , "hwyla"             , mcVersion < 11600, false],
         ["fi.dy.masa:litematica"                , "litematica"        , mcVersion > 11903, false]
 ]
 
@@ -178,6 +174,10 @@ remapJar {
 }
 
 processResources {
+    from("${rootDir}/icon.png") {
+        into("assets/${project.mod_id}")
+    }
+
     filesMatching("fabric.mod.json") {
         filter { line ->
             line.trim().startsWith("//") ? null : line

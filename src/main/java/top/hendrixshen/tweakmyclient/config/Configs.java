@@ -124,18 +124,6 @@ public class Configs {
     @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.16")))
     public static boolean forcePistonWithoutAffectByTool = false;
 
-    @Config(category = ConfigCategory.PATCH,
-            dependencies = @Dependencies(
-                    and = @Dependency("litematica"),
-                    or = {
-                            @Dependency("jade"),
-                            @Dependency("waila"),
-                            @Dependency("wthit")
-                    }
-            )
-    )
-    public static boolean litematicaSchematicWailaCompat = false;
-
     @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency("notenoughcrashes")))
     public static boolean notEnoughCrashesBlueScreenOfDeath = false;
 
