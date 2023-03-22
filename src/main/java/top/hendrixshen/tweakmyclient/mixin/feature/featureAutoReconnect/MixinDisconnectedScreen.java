@@ -61,7 +61,11 @@ public class MixinDisconnectedScreen extends Screen {
     @Dynamic
     @SuppressWarnings({"MixinAnnotationTarget", "UnresolvedMixinReference", "target"})
     @Inject(
-            method = "renderDirtBackground(I)V",
+            //#if MC > 11903
+            method = "renderDirtBackground(Lcom/mojang/blaze3d/vertex/PoseStack;)V",
+            //#else
+            //$$ method = "renderDirtBackground(I)V",
+            //#endif
             at = @At(
                     value = "HEAD"
             ),
