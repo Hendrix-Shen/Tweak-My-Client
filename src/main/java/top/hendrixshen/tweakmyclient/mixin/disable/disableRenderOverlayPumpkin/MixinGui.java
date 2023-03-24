@@ -33,12 +33,13 @@ public abstract class MixinGui {
     )
     //#if MC > 11903
     private void onRenderTextureOverlay(PoseStack poseStack, ResourceLocation resourceLocation, float f, CallbackInfo ci) {
+        if (Configs.disableRenderOverlayPumpkin && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {
     //#elseif MC > 11700
     //$$ private void onRenderTextureOverlay(ResourceLocation resourceLocation, float f, CallbackInfo ci) {
-        if (Configs.disableRenderOverlayPumpkin && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {
+    //$$     if (Configs.disableRenderOverlayPumpkin && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {
     //#else
     //$$ private void onRenderPumpkinOverlay(CallbackInfo ci) {
-    //$$ if (Configs.disableRenderOverlayPumpkin) {
+    //$$     if (Configs.disableRenderOverlayPumpkin) {
     //#endif
             ci.cancel();
         }
