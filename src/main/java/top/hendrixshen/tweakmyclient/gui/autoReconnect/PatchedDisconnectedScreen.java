@@ -107,11 +107,6 @@ public class PatchedDisconnectedScreen extends Screen {
     }
 
     //#if MC > 11904
-    //$$ // @Override
-    //$$ // protected void repositionElements() {
-    //$$ //     FrameLayout.centerInRectangle(this.layout, this.getRectangle());
-    //$$ // }
-    //$$
     //$$ @Override
     //$$ public @NotNull Component getNarrationMessage() {
     //$$     return CommonComponents.joinForNarration(this.title, this.reason);

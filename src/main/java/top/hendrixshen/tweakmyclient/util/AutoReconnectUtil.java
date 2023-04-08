@@ -1,13 +1,11 @@
 package top.hendrixshen.tweakmyclient.util;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ServerData;
@@ -18,16 +16,10 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import top.hendrixshen.magiclib.compat.minecraft.api.blaze3d.vertex.VertexFormatCompatApi;
 import top.hendrixshen.magiclib.compat.minecraft.api.network.chat.ComponentCompatApi;
-import top.hendrixshen.magiclib.util.ReflectUtil;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-
-//#if MC > 11904
-//$$ import net.minecraft.client.gui.layouts.GridLayout;
-//#endif
 
 //#if MC < 11903
 //$$ import net.minecraft.network.chat.contents.TranslatableContents;
