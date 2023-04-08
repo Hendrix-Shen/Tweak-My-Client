@@ -39,6 +39,6 @@ public class MixinOptions {
         // without doing any configuration checks, because at this point Malilib
         // has not yet loaded the configuration file.
         set.add(pack.getId());
-        TweakMyClientReference.getLogger().warn("Prevented the removal of incompatible resource pack {} from options", iterator);
+        TweakMyClientReference.getLogger().warn("Prevented the removal of incompatible resource pack {} from options", string);
     }
 }
