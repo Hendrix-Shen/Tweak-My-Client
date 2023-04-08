@@ -1,6 +1,8 @@
-apply(plugin: "maven-publish")
+import net.fabricmc.loom.util.OperatingSystem
+
 apply(plugin: "fabric-loom")
 apply(plugin: "io.github.juuxel.loom-quiltflower")
+apply(plugin: "maven-publish")
 apply(plugin: "net.kyori.blossom")
 apply(plugin: "com.replaymod.preprocess")
 
@@ -27,6 +29,21 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    register("productionRuntimeClient") {configuration ->
+        configurations.findAll { it.name in [
+                "minecraftLibraries",
+                "loaderLibraries",
+                "minecraftRuntimeOnlyLibraries"
+        ]}.forEach { Configuration superConfigurations ->
+            configuration.extendsFrom(superConfigurations)
+        }
+    }
+
+    register("productionRuntimeServer")
+    register("productionRuntimeMods")
+}
+
 // Module, Property prefix, Resolve condition, Transitive dependencies.
 def compileOnlyDependencies = [
         ["curse.maven:litematica-308892"        , "litematica"        , mcVersion < 12000, false],
@@ -45,7 +62,7 @@ dependencies {
 
     // Dependency
     modImplementation("top.hendrixshen:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
-        if (project.env.BUILD_NUMBER) {
+        if (project.environmentMap.BUILD_NUMBER) {
             exclude(group: "net.fabricmc.fabric-api", module: "fabric-api")
         }
 
@@ -157,12 +174,73 @@ loom {
     }
 }
 
-tasks.findAll { it.name in [
-        "runClient", "runServer",
-        "runMixinAuditClient", "runMixinAuditServer",
-        "preprocessCode", "preprocessResources",
-        "preprocessTestCode", "preprocessTestResources"] }.forEach {
-    it.group("${project.mod_id}")
+tasks.register("serverPropertiesJar", Jar) {
+    File propsFile = file("build/tmp/install.properties")
+
+    doFirst {
+        if (propsFile.exists()) {
+            propsFile.delete()
+        }
+
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(propsFile))
+        bufferedWriter.writeLine("fabric-loader-version=${project.fabric_loader_version}")
+        bufferedWriter.writeLine("game-version=${project.minecraft_version}")
+        bufferedWriter.close()
+    }
+
+    archiveFileName.set("server-properties.jar")
+    destinationDirectory.set(file("build/tmp"))
+    from(propsFile)
+}
+
+tasks.register("runProductionClient", JavaExec) {
+    dependsOn(tasks.remapJar)
+    classpath.from(configurations.productionRuntimeClient)
+    mainClass.set("net.fabricmc.loader.impl.launch.knot.KnotClient")
+    workingDir(file("run/client"))
+
+    doFirst {
+        classpath.from(loom.minecraftProvider.minecraftClientJar)
+        args(
+                "--assetIndex", loom.minecraftProvider.versionInfo.assetIndex().fabricId(loom.minecraftProvider.minecraftVersion()),
+                "--assetsDir", file("${loom.files.userCache}/assets").absolutePath,
+                "--gameDir", workingDir.absolutePath,
+                "--width", "1920",
+                "--height", "1080"
+        )
+        jvmArgs("-Dmixin.debug.export=true")
+        jvmArgs("-Dfabric.addMods=${configurations.productionRuntimeMods.files.join(File.pathSeparator)}${File.pathSeparator}${tasks.remapJar.archiveFile.get().asFile.absolutePath}")
+
+        if (OperatingSystem.CURRENT_OS == OperatingSystem.MAC_OS) {
+            jvmArgs("-XstartOnFirstThread")
+        }
+    }
+}
+
+tasks.register("runProductionServer", JavaExec) {
+    dependsOn(tasks.remapJar)
+    classpath.from(configurations.productionRuntimeServer, tasks.named("serverPropertiesJar"))
+    mainClass.set("net.fabricmc.installer.ServerLauncher")
+    workingDir(file("run/server"))
+
+    doFirst {
+        args("nogui")
+        jvmArgs("-Dmixin.debug.export=true")
+        jvmArgs("-Dfabric.addMods=${configurations.productionRuntimeMods.files.join(File.pathSeparator)}${File.pathSeparator}${tasks.remapJar.archiveFile.get().asFile.absolutePath}")
+    }
+}
+
+["serverPropertiesJar",
+ "runClient"          , "runServer",
+ "runMixinAuditClient", "runMixinAuditServer",
+ "runProductionClient", "runProductionServer",
+ "preprocessCode"     , "preprocessResources",
+ "preprocessTestCode" , "preprocessTestResources"].forEach {
+    if (tasks.getNames().contains(it)) {
+        tasks.named(it) {
+            it.group("${mod_id}")
+        }
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -174,6 +252,8 @@ remapJar {
 }
 
 processResources {
+    from("${rootDir}/LICENSE")
+
     from("${rootDir}/icon.png") {
         into("assets/${project.mod_id}")
     }
@@ -209,13 +289,9 @@ java {
     withSourcesJar()
 }
 
-jar {
-    from("${rootDir}/LICENSE")
-}
-
 publishing {
     publications {
-        create("mavenJava", MavenPublication) {
+        register("mavenJava", MavenPublication) {
             artifactId("${project.mod_id}-${project.minecraft_version.replace(".", "_")}")
             version("${rootProject.getMavenArtifactVersion()}")
             from(components.java)

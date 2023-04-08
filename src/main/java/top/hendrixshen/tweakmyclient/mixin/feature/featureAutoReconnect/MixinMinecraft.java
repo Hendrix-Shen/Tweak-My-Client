@@ -21,11 +21,7 @@ public abstract class MixinMinecraft {
     //$$         )
     //$$ )
     //$$ private void setCurrentServerEntry(ServerData serverData, CallbackInfo ci) {
-    //$$     AutoReconnectUtil.ReconnectTimer = Configs.autoReconnectTimer * 20;
-    //$$
-    //$$     if (serverData != null) {
-    //$$         AutoReconnectUtil.setLastServer(serverData);
-    //$$     }
+    //$$     AutoReconnectUtil.setLastServer(serverData);
     //$$ }
     //#endif
 }
