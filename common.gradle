@@ -69,6 +69,8 @@ dependencies {
         exclude(group: "curse.maven", module: "carpet-349239")
     }
 
+    productionRuntimeMods("top.hendrixshen:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}")
+
     // Compile only library.
     compileOnlyDependencies.forEach {item ->
         String dependencyNotation = item[0]
@@ -82,6 +84,12 @@ dependencies {
             }
         }
     }
+
+    // ProductionRuntime Environment
+    productionRuntimeClient("net.fabricmc:fabric-loader:${project.fabric_loader_version}")
+    productionRuntimeClient("net.fabricmc:intermediary:${project.minecraft_version}")
+
+    productionRuntimeServer("net.fabricmc:fabric-installer:${project.fabric_installer_version}:server")
 
     runtimeOnly(project(path: ":fabricWrapper"))
 }
