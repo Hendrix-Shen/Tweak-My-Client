@@ -16,14 +16,15 @@ import top.hendrixshen.tweakmyclient.util.StringUtil;
 import java.util.LinkedHashMap;
 
 //#if MC > 11904
-//$$ import net.minecraft.client.gui.layouts.FrameLayout;
 //$$ import net.minecraft.network.chat.CommonComponents;
 //$$ import org.jetbrains.annotations.NotNull;
 //#endif
 
 //#if MC > 11502
-import net.minecraft.client.gui.GuiComponent;
+//#if MC < 12000
 import com.mojang.blaze3d.vertex.PoseStack;
+//#endif
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.MultiLineLabel;
 //#else
 //$$ import net.minecraft.client.resources.language.I18n;
@@ -114,7 +115,18 @@ public class PatchedDisconnectedScreen extends Screen {
     //#endif
 
     @Override
-    //#if MC > 11502
+    //#if MC > 11904
+    //$$ public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+    //$$     if (Configs.expXiBao) {
+    //$$         AutoReconnectUtil.renderXibao(this);
+    //$$     } else {
+    //$$         this.renderBackground(guiGraphics);
+    //$$     }
+    //$$
+    //$$     guiGraphics.drawCenteredString(this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
+    //$$     this.message.renderCentered(guiGraphics, this.width / 2, this.height / 2 - this.textHeight / 2);
+    //$$     super.render(guiGraphics, mouseX, mouseY, delta);
+    //#elseif MC > 11502
     public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
         if (Configs.expXiBao) {
             AutoReconnectUtil.renderXibao(this);

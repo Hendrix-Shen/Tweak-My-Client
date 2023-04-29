@@ -29,7 +29,7 @@ preprocess {
 }
 
 ext {
-    environmentMap = System.getenv()
+    envMap = System.getenv()
 
     getVersionGit = { List paths ->
         if (grgit == null) {
@@ -41,11 +41,11 @@ ext {
     }
 
     getBuildNumber = {
-        return ext.environmentMap.GITHUB_RUN_NUMBER ? ext.environmentMap.GITHUB_RUN_NUMBER : Integer.MAX_VALUE
+        return ext.envMap.GITHUB_RUN_NUMBER ? ext.envMap.GITHUB_RUN_NUMBER : Integer.MAX_VALUE
     }
 
     getVersionType = {
-        switch (ext.environmentMap.BUILD_TYPE) {
+        switch (ext.envMap.BUILD_TYPE) {
             case "RELEASE":
                 return "stable"
             case "BETA":

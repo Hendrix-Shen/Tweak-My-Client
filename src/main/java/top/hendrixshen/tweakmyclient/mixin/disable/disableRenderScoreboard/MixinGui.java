@@ -8,7 +8,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
-//#if MC > 11502
+//#if MC > 11904
+//$$ import net.minecraft.client.gui.GuiGraphics;
+//#elseif MC > 11502
 import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
@@ -21,7 +23,9 @@ public abstract class MixinGui {
             ),
             cancellable = true
     )
-    //#if MC > 11502
+    //#if MC > 11904
+    //$$ private void onRenderScoreboardSidebar(GuiGraphics guiGraphics, Objective objective, CallbackInfo ci) {
+    //#elseif MC > 11502
     private void onRenderScoreboardSidebar(PoseStack poseStack, Objective objective, CallbackInfo ci) {
     //#else
     //$$ private void onRenderScoreboardSidebar(Objective objective, CallbackInfo ci) {

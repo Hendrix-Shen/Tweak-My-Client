@@ -8,7 +8,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
-//#if MC > 11502
+//#if MC > 11904
+//$$ import net.minecraft.client.gui.GuiGraphics;
+//#elseif MC > 11502
 import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
@@ -24,7 +26,9 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             //#endif
             at = @At(
                     value = "INVOKE",
-                    //#if MC > 11502
+                    //#if MC > 11904
+                    //$$ target = "Lnet/minecraft/client/gui/GuiGraphics;fillGradient(IIIIII)V"
+                    //#elseif MC > 11502
                     target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V"
                     //#else
                     //$$ target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(IIIIII)V"
@@ -33,6 +37,8 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             cancellable = true
     )
     //#if MC > 11904
+    //$$ private void onFillGradient(GuiGraphics guiGraphics, CallbackInfo ci) {
+    //#elseif MC > 11903
     private void onFillGradient(PoseStack poseStack, CallbackInfo ci) {
     //#elseif MC > 11502
     //$$ private void onFillGradient(PoseStack poseStack, int i, CallbackInfo ci) {

@@ -85,7 +85,7 @@ public class CustomWindowUtil {
         //#endif
     }
 
-    //#if MC >= 11500
+    //#if MC > 11404
     public static @NotNull String getActivity() {
         if (mc.getSingleplayerServer() != null && !mc.getSingleplayerServer().isPublished()) {
             return I18n.get("title.singleplayer");
@@ -117,7 +117,7 @@ public class CustomWindowUtil {
         CustomWindowUtil.PLACEHOLDER_MAP.put("{mc_fps}", String.valueOf(fps));
     }
 
-    //#if MC >= 11500
+    //#if MC > 11404
     public static void rebuildCache(TitleType type) {
         if (type == TitleType.TITLE) {
             int size = Configs.listCustomWindowTitle.size();
@@ -190,7 +190,9 @@ public class CustomWindowUtil {
 
     public static void updateIcon() {
         Window window = TweakMyClient.getMinecraftClient().getWindowCompat();
-        //#if MC > 11902
+        //#if MC > 11904
+        // TODO: 1.20
+        //#elseif MC > 11902
         IoSupplier<InputStream> icon16x;
         IoSupplier<InputStream> icon32x;
 

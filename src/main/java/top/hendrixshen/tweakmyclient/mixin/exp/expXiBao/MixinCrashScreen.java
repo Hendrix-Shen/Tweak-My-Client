@@ -18,6 +18,8 @@ public abstract class MixinCrashScreen extends ProblemScreen {
         super(report);
     }
 
+    //#if MC < 12000
+    // TODO: 1.20
     @ModifyArg(
             method = "render",
             at = @At(
@@ -50,4 +52,5 @@ public abstract class MixinCrashScreen extends ProblemScreen {
     private int offsetContent(int value) {
         return Configs.expXiBao ? value + 15 : value;
     }
+    //#endif
 }

@@ -3,7 +3,9 @@ package top.hendrixshen.tweakmyclient.mixin.disable.disableRenderOverlayPowderSn
 import org.spongepowered.asm.mixin.Mixin;
 
 //#if MC > 11605
-//#if MC > 11903
+//#if MC > 11904
+//$$ import net.minecraft.client.gui.GuiGraphics;
+//#elseif MC > 11503
 import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 import net.minecraft.client.gui.Gui;
@@ -36,7 +38,9 @@ public abstract class MixinGui {
             ),
             cancellable = true
     )
-    //#if MC > 11903
+    //#if MC > 11904
+    //$$ private void onRenderPowderSnowOverlay(GuiGraphics guiGraphics, ResourceLocation resourceLocation, float f, CallbackInfo ci) {
+    //#elseif MC > 11903
     private void onRenderPowderSnowOverlay(PoseStack poseStack, ResourceLocation resourceLocation, float f, CallbackInfo ci) {
     //#else
     //$$ private void onRenderPowderSnowOverlay(ResourceLocation resourceLocation, float f, CallbackInfo ci) {

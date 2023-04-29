@@ -1,7 +1,11 @@
 package top.hendrixshen.tweakmyclient.mixin.patch.chunkEdgeLagFix;
 
-import net.minecraft.client.multiplayer.ClientPacketListener;
 import org.spongepowered.asm.mixin.Mixin;
+
+//#if MC > 11904
+//$$ import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+//#else
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
@@ -16,10 +20,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import net.minecraft.world.level.lighting.LevelLightEngine;
 //$$ import org.spongepowered.asm.mixin.injection.Redirect;
 //#endif
+//#endif
 
+//#if MC > 11904
+//$$ @Mixin(DummyClass.class)
+//#else
 @Dependencies(not = @Dependency(value = "forgetmechunk"))
 @Mixin(ClientPacketListener.class)
+//#endif
 public class MixinClientPacketListener {
+    //#if MC < 12000
     //#if MC > 11701
     @Inject(
             method = "handleForgetLevelChunk",
@@ -47,5 +57,6 @@ public class MixinClientPacketListener {
     //$$          instance.updateSectionStatus(sectionPos, bl);
     //$$     }
     //$$ }
+    //#endif
     //#endif
 }

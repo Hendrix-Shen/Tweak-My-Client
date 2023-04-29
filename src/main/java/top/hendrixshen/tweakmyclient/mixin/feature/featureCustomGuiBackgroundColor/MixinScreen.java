@@ -33,7 +33,9 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             //#endif
             at = @At(
                     value = "INVOKE",
-                    //#if MC > 11404
+                    //#if MC > 11904
+                    //$$ target = "Lnet/minecraft/client/gui/GuiGraphics;fillGradient(IIIIII)V"
+                    //#elseif MC > 11404
                     target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V"
                     //#else
                     //$$ target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(IIIIII)V"
@@ -42,7 +44,7 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
     )
     private void onFillGradient(Args args) {
         if (Configs.featureCustomGuiBackgroundColor) {
-            //#if MC > 11502
+            //#if MC > 11502 && MC < 12000
             args.set(5, Configs.colorGuiStart.intValue);
             args.set(6, Configs.colorGuiStop.intValue);
             //#else

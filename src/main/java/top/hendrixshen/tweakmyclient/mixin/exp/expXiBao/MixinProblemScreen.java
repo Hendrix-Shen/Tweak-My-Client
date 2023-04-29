@@ -23,6 +23,8 @@ public abstract class MixinProblemScreen extends Screen {
         super(component);
     }
 
+    //#if MC < 12000
+    // TODO: 1.20
     @ModifyArg(
             method = "addSuspectedModsWidget",
             at = @At(
@@ -55,4 +57,5 @@ public abstract class MixinProblemScreen extends Screen {
             //#endif
         }
     }
+    //#endif
 }

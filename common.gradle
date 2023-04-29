@@ -17,13 +17,26 @@ repositories {
     mavenLocal()
 
     maven {
-        name("CurseForge Maven")
+        name("Curse Maven")
         url("https://www.cursemaven.com")
+
+        content {
+            includeGroup("curse.maven")
+        }
     }
 
     maven {
         name("Nyan Maven")
         url("https://maven.hendrixshen.top")
+    }
+
+    maven {
+        name("Modrinth Maven")
+        url("https://api.modrinth.com/maven")
+
+        content {
+            includeGroup("maven.modrinth")
+        }
     }
 
     mavenCentral()
@@ -62,7 +75,7 @@ dependencies {
 
     // Dependency
     modImplementation("top.hendrixshen:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
-        if (project.environmentMap.BUILD_NUMBER) {
+        if (project.envMap.BUILD_NUMBER) {
             exclude(group: "net.fabricmc.fabric-api", module: "fabric-api")
         }
 

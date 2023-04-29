@@ -11,6 +11,8 @@ import top.hendrixshen.tweakmyclient.config.Configs;
 @Dependencies(and = @Dependency("notenoughcrashes"))
 @Mixin(value = InitErrorScreen.class)
 public class MixinInitErrorScreen {
+    //#if MC < 12000
+    // TODO: 1.20
     @ModifyArg(
             method = "render",
             at = @At(
@@ -72,4 +74,5 @@ public class MixinInitErrorScreen {
     private int offsetFileName(int value) {
         return Configs.expXiBao ? value + 15 : value;
     }
+    //#endif
 }

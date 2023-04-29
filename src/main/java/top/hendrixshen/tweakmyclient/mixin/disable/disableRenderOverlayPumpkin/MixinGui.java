@@ -10,7 +10,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
-//#if MC > 11903
+//#if MC > 11904
+//$$ import net.minecraft.client.gui.GuiGraphics;
+//#elseif MC > 11903
 import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
@@ -31,7 +33,10 @@ public abstract class MixinGui {
             ),
             cancellable = true
     )
-    //#if MC > 11903
+    //#if MC > 11904
+    //$$ private void onRenderTextureOverlay(GuiGraphics guiGraphics, ResourceLocation resourceLocation, float f, CallbackInfo ci) {
+    //$$     if (Configs.disableRenderOverlayPumpkin && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {
+    //#elseif MC > 11903
     private void onRenderTextureOverlay(PoseStack poseStack, ResourceLocation resourceLocation, float f, CallbackInfo ci) {
         if (Configs.disableRenderOverlayPumpkin && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {
     //#elseif MC > 11700
