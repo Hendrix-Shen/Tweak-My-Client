@@ -1,7 +1,6 @@
 package top.hendrixshen.tweakmyclient.util;
 
 import com.google.common.collect.Maps;
-import com.mojang.blaze3d.platform.Window;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
@@ -9,29 +8,15 @@ import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
-import java.io.*;
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-//#if MC > 11902
-import net.minecraft.server.packs.resources.IoSupplier;
-//#else
-//$$ import java.io.IOException;
-//#endif
-
-//#if MC < 11903
-//$$ import net.minecraft.server.packs.PackType;
-//#endif
 
 public class CustomWindowUtil {
     public static final HashMap<String, String> PLACEHOLDER_MAP = Maps.newHashMap();
@@ -43,8 +28,6 @@ public class CustomWindowUtil {
     //#endif
     private static final Random RANDOM = new Random();
     public static final Minecraft mc = TweakMyClient.getMinecraftClient();
-    private static final ResourceLocation icon16 = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_16x16.png");
-    private static final ResourceLocation icon32 = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_32x32.png");
 
     // These data should not be changed
     static {
@@ -78,7 +61,7 @@ public class CustomWindowUtil {
     }
 
     public static String getWindowTitle() {
-        //#if MC >= 11500
+        //#if MC > 11404
         return CustomWindowUtil.replacePlaceholders(PLACEHOLDER_MAP, (hasActivity() ? TITLE_CACHE_WITH_ACTIVITY : TITLE_CACHE));
         //#else
         //$$ return CustomWindowUtil.replacePlaceholders(PLACEHOLDER_MAP,  TITLE_CACHE);
@@ -102,8 +85,8 @@ public class CustomWindowUtil {
         ClientPacketListener clientPacketListener = mc.getConnection();
         return Configs.customWindowTitleEnableActivity && clientPacketListener != null && clientPacketListener.getConnection().isConnected();
     }
-
     //#endif
+
     public static void updatePlaceholders() {
         // Maybe changed by other mods.
         CustomWindowUtil.PLACEHOLDER_MAP.put("{mc_username}", TweakMyClient.getMinecraftClient().getUser().getName());
@@ -164,7 +147,7 @@ public class CustomWindowUtil {
         return str;
     }
 
-    //#if MC >= 11500
+    //#if MC > 11404
     public enum TitleType {
         TITLE,
         TITLE_WITH_ACTIVITY
@@ -172,82 +155,11 @@ public class CustomWindowUtil {
     //#endif
 
     public static void reSetTitle() {
-        //#if MC > 11404
-        GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().getWindow().getWindow(), "Minecraft " + SharedConstants.getCurrentVersion().getName());
-        //#else
-        //$$ GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().window.getWindow(), "Minecraft " + SharedConstants.getCurrentVersion().getName());
-        //#endif
+        GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().getWindowCompat().getWindow(), "Minecraft " + SharedConstants.getCurrentVersion().getName());
     }
 
     public static void updateTitle() {
         updatePlaceholders();
-        //#if MC > 11404
-        GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().getWindow().getWindow(), CustomWindowUtil.getWindowTitle());
-        //#else
-        //$$ GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().window.getWindow(), CustomWindowUtil.getWindowTitle());
-        //#endif
-    }
-
-    public static void updateIcon() {
-        Window window = TweakMyClient.getMinecraftClient().getWindowCompat();
-        //#if MC > 11904
-        // TODO: 1.20
-        //#elseif MC > 11902
-        IoSupplier<InputStream> icon16x;
-        IoSupplier<InputStream> icon32x;
-
-        if (Configs.featureCustomWindowIcon) {
-            File data = new File("./tmc_data");
-
-            if (!data.exists()) {
-                data.mkdirs();
-            }
-
-            File i16x = new File(data.getPath(), "i16");
-            File i32x = new File(data.getPath(), "i32");
-
-            try {
-                FileOutputStream i16os = new FileOutputStream(i16x);
-                FileOutputStream i32os = new FileOutputStream(i32x);
-                i16os.write(mc.getResourceManager().open(CustomWindowUtil.icon16).readAllBytes());
-                i32os.write(mc.getResourceManager().open(CustomWindowUtil.icon32).readAllBytes());
-                icon16x = IoSupplier.create(i16x.toPath());
-                icon32x = IoSupplier.create(i32x.toPath());
-            } catch (IOException e) {
-                icon16x = null;
-                icon32x = null;
-            }
-        } else {
-            icon16x = mc.getVanillaPackResources().getRootResource("icons", "icon_16x16.png");
-            icon32x = mc.getVanillaPackResources().getRootResource("icons", "icon_32x32.png");
-        }
-
-        if (icon16x != null && icon32x != null) {
-            window.setIcon(icon16x, icon32x);
-        } else {
-            TweakMyClientReference.getLogger().error("Couldn't set icon");
-        }
-        //#else
-        //$$ try {
-        //$$     InputStream icon16x;
-        //$$     InputStream icon32x;
-        //$$     if (Configs.featureCustomWindowIcon) {
-        //#if MC > 11802
-        //$$         icon16x = mc.getResourceManager().getResource(CustomWindowUtil.icon16).get().open();
-        //$$         icon32x = mc.getResourceManager().getResource(CustomWindowUtil.icon32).get().open();
-        //#else
-        //$$         icon16x = mc.getResourceManager().getResource(CustomWindowUtil.icon16).getInputStream();
-        //$$         icon32x = mc.getResourceManager().getResource(CustomWindowUtil.icon32).getInputStream();
-        //#endif
-        //$$     } else {
-        //$$         icon16x = mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, new ResourceLocation("icons/icon_16x16.png"));
-        //$$         icon32x = mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, new ResourceLocation("icons/icon_32x32.png"));
-        //$$     }
-        //$$
-        //$$     window.setIcon(icon16x, icon32x);
-        //$$ } catch (IOException e) {
-        //$$     TweakMyClientReference.getLogger().error("Couldn't set icon", e);
-        //$$ }
-        //#endif
+        GLFW.glfwSetWindowTitle(TweakMyClient.getMinecraftClient().getWindowCompat().getWindow(), CustomWindowUtil.getWindowTitle());
     }
 }

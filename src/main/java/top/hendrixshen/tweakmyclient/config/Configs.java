@@ -16,6 +16,7 @@ import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.event.CallBacks;
 import top.hendrixshen.tweakmyclient.helper.*;
 import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
+import top.hendrixshen.tweakmyclient.util.IconUtil;
 
 import java.util.ArrayList;
 
@@ -416,7 +417,7 @@ public class Configs {
         // Feature config callbacks.
         cm.setValueChangeCallback("featureCustomBlockHitBoxOverlayFill", CallBacks::featureCustomBlockHitBoxOverlayFillCallBack);
         cm.setValueChangeCallback("featureCustomBlockHitBoxOverlayOutline", CallBacks::featureCustomBlockHitBoxOverlayOutlineCallBack);
-        cm.setValueChangeCallback("featureCustomWindowIcon", option -> CustomWindowUtil.updateIcon());
+        cm.setValueChangeCallback("featureCustomWindowIcon", option -> IconUtil.updateIcon());
         cm.setValueChangeCallback("featureCustomWindowTitle", CallBacks::featureCustomWindowTitleCallback);
 
         // Disable config callbacks.

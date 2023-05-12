@@ -4,10 +4,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 
 //#if MC > 11404
 import net.minecraft.client.main.Main;
+import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.util.IconUtil;
 //#else
 //$$ import net.minecraft.client.Minecraft;
 //#endif
@@ -37,7 +38,9 @@ public class MixinMain {
     //#else
     //$$ private static void finishInitializationRenderSystem(String[] strings, boolean bl, CallbackInfo ci) {
     //#endif
-        CustomWindowUtil.updateIcon();
+        if (Configs.featureCustomWindowIcon) {
+            IconUtil.updateIcon();
+        }
     }
     //#endif
 }
