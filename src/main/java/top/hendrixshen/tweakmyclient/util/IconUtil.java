@@ -37,7 +37,11 @@ public class IconUtil {
     //#if MC > 11902
     private static final String[] VANILLA_STABLE_16X = new String[]{"icons", "icon_16x16.png"};
     private static final String[] VANILLA_STABLE_32X = new String[]{"icons", "icon_32x32.png"};
+    //#if MC > 11904
     private static final String[] VANILLA_STABLE_48X = new String[]{"icons", "icon_48x48.png"};
+    private static final String[] VANILLA_STABLE_128X = new String[]{"icons", "icon_128x128.png"};
+    private static final String[] VANILLA_STABLE_256X = new String[]{"icons", "icon_256x256.png"};
+    //#endif
     //#else
     //$$ private static final ResourceLocation VANILLA_STABLE_16X = new ResourceLocation("icons/icon_16x16.png");
     //$$ private static final ResourceLocation VANILLA_STABLE_32X = new ResourceLocation("icons/icon_32x32.png");
@@ -45,6 +49,8 @@ public class IconUtil {
     private static final ResourceLocation TMC_STABLE_16X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_16x16.png");
     private static final ResourceLocation TMC_STABLE_32X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_32x32.png");
     private static final ResourceLocation TMC_STABLE_48X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_48x48.png");
+    private static final ResourceLocation TMC_STABLE_128X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_128x128.png");
+    private static final ResourceLocation TMC_STABLE_256X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_256x256.png");
 
     private static void setIcon(ArrayList<InputStream> inputStreams) throws IOException {
         //#if MC > 11701
@@ -91,6 +97,7 @@ public class IconUtil {
         return nativeImage.getPixelsRGBA();
         //#else
         //$$ NativeImageAccessor accessor = MiscUtil.cast(nativeImage);
+        //$$
         //$$ if (accessor.getFormat() != NativeImage.Format.RGBA) {// 232
         //$$     throw new IllegalArgumentException(String.format(Locale.ROOT, "getPixelsRGBA only works on RGBA images; have %s", accessor.getFormat()));
         //$$ } else {
@@ -104,9 +111,8 @@ public class IconUtil {
 
     public static void updateIcon() {
         // TODO: 1.20 support.
-        //#if MC < 12000
         Minecraft mc = TweakMyClient.getMinecraftClient();
-        ArrayList<InputStream> inputStreams = new ArrayList<>(3);
+        ArrayList<InputStream> inputStreams = new ArrayList<>(5);
 
         try {
             if (Configs.featureCustomWindowIcon) {
@@ -114,9 +120,14 @@ public class IconUtil {
                 inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_16X).orElseThrow(RuntimeException::new).open());
                 inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_32X).orElseThrow(RuntimeException::new).open());
                 inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_48X).orElseThrow(RuntimeException::new).open());
+                inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_128X).orElseThrow(RuntimeException::new).open());
+                inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_256X).orElseThrow(RuntimeException::new).open());
                 //#else
                 //$$ inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_16X).getInputStream());
                 //$$ inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_32X).getInputStream());
+                //$$ inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_48X).getInputStream());
+                //$$ inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_128X).getInputStream());
+                //$$ inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_256X).getInputStream());
                 //#endif
             } else {
                 //#if MC > 11902
@@ -132,6 +143,5 @@ public class IconUtil {
         } catch (IOException | NullPointerException e) {
             TweakMyClientReference.getLogger().error("Couldn't set icon");
         }
-        //#endif
     }
 }
