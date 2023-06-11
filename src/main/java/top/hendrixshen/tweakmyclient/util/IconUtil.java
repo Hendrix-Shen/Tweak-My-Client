@@ -1,7 +1,9 @@
 package top.hendrixshen.tweakmyclient.util;
 
+import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Contract;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 //#if MC < 11903
@@ -38,9 +41,14 @@ public class IconUtil {
     private static final String[] VANILLA_STABLE_16X = new String[]{"icons", "icon_16x16.png"};
     private static final String[] VANILLA_STABLE_32X = new String[]{"icons", "icon_32x32.png"};
     //#if MC > 11904
-    private static final String[] VANILLA_STABLE_48X = new String[]{"icons", "icon_48x48.png"};
-    private static final String[] VANILLA_STABLE_128X = new String[]{"icons", "icon_128x128.png"};
-    private static final String[] VANILLA_STABLE_256X = new String[]{"icons", "icon_256x256.png"};
+    //$$ private static final String[] VANILLA_STABLE_48X = new String[]{"icons", "icon_48x48.png"};
+    //$$ private static final String[] VANILLA_STABLE_128X = new String[]{"icons", "icon_128x128.png"};
+    //$$ private static final String[] VANILLA_STABLE_256X = new String[]{"icons", "icon_256x256.png"};
+    //$$ private static final String[] VANILLA_SNAPSHOT_16X = new String[]{"icons", "snapshot", "icon_16x16.png"};
+    //$$ private static final String[] VANILLA_SNAPSHOT_32X = new String[]{"icons", "snapshot", "icon_32x32.png"};
+    //$$ private static final String[] VANILLA_SNAPSHOT_48X = new String[]{"icons", "snapshot", "icon_48x48.png"};
+    //$$ private static final String[] VANILLA_SNAPSHOT_128X = new String[]{"icons", "snapshot", "icon_128x128.png"};
+    //$$ private static final String[] VANILLA_SNAPSHOT_256X = new String[]{"icons", "snapshot", "icon_256x256.png"};
     //#endif
     //#else
     //$$ private static final ResourceLocation VANILLA_STABLE_16X = new ResourceLocation("icons/icon_16x16.png");
@@ -51,6 +59,11 @@ public class IconUtil {
     private static final ResourceLocation TMC_STABLE_48X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_48x48.png");
     private static final ResourceLocation TMC_STABLE_128X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_128x128.png");
     private static final ResourceLocation TMC_STABLE_256X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_256x256.png");
+    private static final ResourceLocation TMC_SNAPSHOT_16X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_snapshot_16x16.png");
+    private static final ResourceLocation TMC_SNAPSHOT_32X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_snapshot_32x32.png");
+    private static final ResourceLocation TMC_SNAPSHOT_48X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_snapshot_48x48.png");
+    private static final ResourceLocation TMC_SNAPSHOT_128X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_snapshot_128x128.png");
+    private static final ResourceLocation TMC_SNAPSHOT_256X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_snapshot_256x256.png");
 
     private static void setIcon(ArrayList<InputStream> inputStreams) throws IOException {
         //#if MC > 11701
@@ -110,27 +123,32 @@ public class IconUtil {
     }
 
     public static void updateIcon() {
-        // TODO: 1.20 support.
         Minecraft mc = TweakMyClient.getMinecraftClient();
         ArrayList<InputStream> inputStreams = new ArrayList<>(5);
 
         try {
             if (Configs.featureCustomWindowIcon) {
                 //#if MC > 11802
-                inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_16X).orElseThrow(RuntimeException::new).open());
-                inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_32X).orElseThrow(RuntimeException::new).open());
-                inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_48X).orElseThrow(RuntimeException::new).open());
-                inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_128X).orElseThrow(RuntimeException::new).open());
-                inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_256X).orElseThrow(RuntimeException::new).open());
+                inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_16X : IconUtil.TMC_SNAPSHOT_16X).orElseThrow(RuntimeException::new).open());
+                inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_32X : IconUtil.TMC_SNAPSHOT_32X).orElseThrow(RuntimeException::new).open());
+                inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_48X : IconUtil.TMC_SNAPSHOT_48X).orElseThrow(RuntimeException::new).open());
+                inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_128X : IconUtil.TMC_SNAPSHOT_128X).orElseThrow(RuntimeException::new).open());
+                inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_256X : IconUtil.TMC_SNAPSHOT_256X).orElseThrow(RuntimeException::new).open());
                 //#else
-                //$$ inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_16X).getInputStream());
-                //$$ inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_32X).getInputStream());
-                //$$ inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_48X).getInputStream());
-                //$$ inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_128X).getInputStream());
-                //$$ inputStreams.add(mc.getResourceManager().getResource(IconUtil.TMC_STABLE_256X).getInputStream());
+                //$$ inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_16X : IconUtil.TMC_SNAPSHOT_16X).getInputStream());
+                //$$ inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_32X : IconUtil.TMC_SNAPSHOT_32X).getInputStream());
+                //$$ inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_48X : IconUtil.TMC_SNAPSHOT_48X).getInputStream());
+                //$$ inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_128X : IconUtil.TMC_SNAPSHOT_128X).getInputStream());
+                //$$ inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_256X : IconUtil.TMC_SNAPSHOT_256X).getInputStream());
                 //#endif
             } else {
-                //#if MC > 11902
+                //#if MC > 11904
+                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_16X : IconUtil.VANILLA_SNAPSHOT_16X)).get());
+                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_32X : IconUtil.VANILLA_SNAPSHOT_32X)).get());
+                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_48X : IconUtil.VANILLA_SNAPSHOT_48X)).get());
+                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_128X : IconUtil.VANILLA_SNAPSHOT_128X)).get());
+                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_256X : IconUtil.VANILLA_SNAPSHOT_256X)).get());
+                //#elseif MC > 11902
                 inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_16X)).get());
                 inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_32X)).get());
                 //#else
