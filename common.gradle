@@ -59,9 +59,9 @@ configurations {
 
 // Module, Property prefix, Resolve condition, Transitive dependencies.
 def compileOnlyDependencies = [
-        ["curse.maven:litematica-308892"        , "litematica"        , mcVersion < 12000, false],
-        ["curse.maven:not-enough-crashes-353890", "not_enough_crashes", true             , false],
-        ["fi.dy.masa:litematica"                , "litematica"        , mcVersion > 11904, false]
+        ["curse.maven:litematica-308892"                 , "litematica"        , mcVersion < 12000, false],
+        ["curse.maven:not-enough-crashes-353890"         , "not_enough_crashes", true             , false],
+        ["fi.dy.masa.litematica:litematica-fabric-1.20.0", "litematica"        , mcVersion > 11904, false]
 ]
 
 dependencies {
