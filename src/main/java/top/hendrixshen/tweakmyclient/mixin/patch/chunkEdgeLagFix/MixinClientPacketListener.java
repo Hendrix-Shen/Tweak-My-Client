@@ -3,18 +3,18 @@ package top.hendrixshen.tweakmyclient.mixin.patch.chunkEdgeLagFix;
 import org.spongepowered.asm.mixin.Mixin;
 
 //#if MC > 11904
-//$$ import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
 //#else
-import net.minecraft.client.multiplayer.ClientPacketListener;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
-import top.hendrixshen.tweakmyclient.config.Configs;
-
+//$$ import net.minecraft.client.multiplayer.ClientPacketListener;
+//$$ import org.spongepowered.asm.mixin.injection.At;
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//$$ import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
+//$$ import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+//$$ import top.hendrixshen.tweakmyclient.config.Configs;
+//$$
 //#if MC > 11701
-import net.minecraft.network.protocol.game.ClientboundForgetLevelChunkPacket;
-import org.spongepowered.asm.mixin.injection.Inject;
+//$$ import net.minecraft.network.protocol.game.ClientboundForgetLevelChunkPacket;
+//$$ import org.spongepowered.asm.mixin.injection.Inject;
 //#else
 //$$ import net.minecraft.core.SectionPos;
 //$$ import net.minecraft.world.level.lighting.LevelLightEngine;
@@ -23,27 +23,27 @@ import org.spongepowered.asm.mixin.injection.Inject;
 //#endif
 
 //#if MC > 11904
-//$$ @Mixin(DummyClass.class)
+@Mixin(DummyClass.class)
 //#else
-@Dependencies(not = @Dependency(value = "forgetmechunk"))
-@Mixin(ClientPacketListener.class)
+//$$ @Dependencies(not = @Dependency(value = "forgetmechunk"))
+//$$ @Mixin(ClientPacketListener.class)
 //#endif
 public class MixinClientPacketListener {
     //#if MC < 12000
     //#if MC > 11701
-    @Inject(
-            method = "handleForgetLevelChunk",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;queueLightUpdate(Lnet/minecraft/network/protocol/game/ClientboundForgetLevelChunkPacket;)V"
-            ),
-            cancellable = true
-    )
-    private void chunkEdgeLagFix(ClientboundForgetLevelChunkPacket clientboundForgetLevelChunkPacket, CallbackInfo ci) {
-        if (Configs.chunkEdgeLagFix) {
-            ci.cancel();
-        }
-    }
+    //$$ @Inject(
+    //$$         method = "handleForgetLevelChunk",
+    //$$         at = @At(
+    //$$                 value = "INVOKE",
+    //$$                 target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;queueLightUpdate(Lnet/minecraft/network/protocol/game/ClientboundForgetLevelChunkPacket;)V"
+    //$$         ),
+    //$$         cancellable = true
+    //$$ )
+    //$$ private void chunkEdgeLagFix(ClientboundForgetLevelChunkPacket clientboundForgetLevelChunkPacket, CallbackInfo ci) {
+    //$$     if (Configs.chunkEdgeLagFix) {
+    //$$         ci.cancel();
+    //$$     }
+    //$$ }
     //#else
     //$$ @Redirect(
     //$$         method = "handleForgetLevelChunk",

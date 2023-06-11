@@ -68,9 +68,9 @@ public class AutoReconnectUtil {
 
         if (AutoReconnectUtil.lastServer != null) {
             //#if MC > 11904
-            //$$ ConnectScreen.startConnecting(screen, minecraft, ServerAddress.parseString(serverInfo.ip), serverInfo, AutoReconnectUtil.isLastQuickPlay);
+            ConnectScreen.startConnecting(screen, minecraft, ServerAddress.parseString(serverInfo.ip), serverInfo, AutoReconnectUtil.isLastQuickPlay);
             //#elseif MC > 11605
-            ConnectScreen.startConnecting(screen, minecraft, ServerAddress.parseString(serverInfo.ip), serverInfo);
+            //$$ ConnectScreen.startConnecting(screen, minecraft, ServerAddress.parseString(serverInfo.ip), serverInfo);
             //#else
             //$$ minecraft.setScreen(new ConnectScreen(screen, minecraft, serverInfo));
             //#endif

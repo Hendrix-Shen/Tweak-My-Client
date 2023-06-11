@@ -19,38 +19,38 @@ public abstract class MixinCrashScreen extends ProblemScreen {
     }
 
     //#if MC < 12000
-    // TODO: 1.20
-    @ModifyArg(
-            method = "render",
-            at = @At(
-                    value = "INVOKE",
+    //$$ // TODO: 1.20
+    //$$ @ModifyArg(
+    //$$         method = "render",
+    //$$         at = @At(
+    //$$                 value = "INVOKE",
                     //#if MC > 11605
-                    target = "Lfudge/notenoughcrashes/gui/CrashScreen;drawCenteredString(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V"
+                    //$$ target = "Lfudge/notenoughcrashes/gui/CrashScreen;drawCenteredString(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V"
                     //#elseif MC > 11502
                     //$$ target = "Lfudge/notenoughcrashes/gui/CrashScreen;drawCenteredString(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V"
                     //#else
                     //$$ target = "Lfudge/notenoughcrashes/gui/CrashScreen;drawCenteredString(Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V"
                     //#endif
-            ),
+    //$$         ),
             //#if MC > 11502
-            index = 4
+            //$$ index = 4
             //#else
             //$$ index = 3
             //#endif
-    )
-    private int offsetTitle(int value) {
-        return Configs.expXiBao ? value + 25 : value;
-    }
-
-    @ModifyVariable(
-            method = "render",
-            at = @At(
-                    value = "STORE"
-            ),
-            ordinal = 4
-    )
-    private int offsetContent(int value) {
-        return Configs.expXiBao ? value + 15 : value;
-    }
+    //$$ )
+    //$$ private int offsetTitle(int value) {
+    //$$     return Configs.expXiBao ? value + 25 : value;
+    //$$ }
+    //$$
+    //$$ @ModifyVariable(
+    //$$         method = "render",
+    //$$         at = @At(
+    //$$                 value = "STORE"
+    //$$         ),
+    //$$         ordinal = 4
+    //$$ )
+    //$$ private int offsetContent(int value) {
+    //$$     return Configs.expXiBao ? value + 15 : value;
+    //$$ }
     //#endif
 }

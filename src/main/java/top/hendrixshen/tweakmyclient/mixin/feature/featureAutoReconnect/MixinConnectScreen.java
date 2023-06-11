@@ -31,10 +31,10 @@ public class MixinConnectScreen {
             )
     )
     //#if MC > 11904
-    //$$ private static void onStartConnecting(Screen screen, Minecraft minecraft, ServerAddress serverAddress, ServerData serverData, boolean bl, CallbackInfo ci) {
-    //$$     AutoReconnectUtil.setLastQuickPlay(bl);
+    private static void onStartConnecting(Screen screen, Minecraft minecraft, ServerAddress serverAddress, ServerData serverData, boolean bl, CallbackInfo ci) {
+        AutoReconnectUtil.setLastQuickPlay(bl);
     //#else
-    private static void onStartConnecting(Screen screen, Minecraft minecraft, ServerAddress serverAddress, ServerData serverData, CallbackInfo ci) {
+    //$$ private static void onStartConnecting(Screen screen, Minecraft minecraft, ServerAddress serverAddress, ServerData serverData, CallbackInfo ci) {
     //#endif
         AutoReconnectUtil.setLastServer(serverData);
     }

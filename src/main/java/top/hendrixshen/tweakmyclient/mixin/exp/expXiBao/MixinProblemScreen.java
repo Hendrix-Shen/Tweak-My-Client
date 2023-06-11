@@ -24,38 +24,38 @@ public abstract class MixinProblemScreen extends Screen {
     }
 
     //#if MC < 12000
-    // TODO: 1.20
-    @ModifyArg(
-            method = "addSuspectedModsWidget",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lfudge/notenoughcrashes/gui/util/TextWidget;<init>(Lnet/minecraft/network/chat/Component;ILnet/minecraft/client/gui/Font;II)V"
-            ),
-            index = 4
-    )
-    private int offsetSuspectedMods(int value) {
-        return Configs.expXiBao ? value + 15 : value;
-    }
-
-    @Override
+    //$$ // TODO: 1.20
+    //$$ @ModifyArg(
+    //$$         method = "addSuspectedModsWidget",
+    //$$         at = @At(
+    //$$                 value = "INVOKE",
+    //$$                 target = "Lfudge/notenoughcrashes/gui/util/TextWidget;<init>(Lnet/minecraft/network/chat/Component;ILnet/minecraft/client/gui/Font;II)V"
+    //$$         ),
+    //$$         index = 4
+    //$$ )
+    //$$ private int offsetSuspectedMods(int value) {
+    //$$     return Configs.expXiBao ? value + 15 : value;
+    //$$ }
+    //$$
+    //$$ @Override
     //#if MC > 11903
-    public void renderBackground(@NotNull PoseStack poseStack) {
+    //$$ public void renderBackground(@NotNull PoseStack poseStack) {
     //#elseif MC > 11502
     //$$ public void renderBackground(@NotNull PoseStack poseStack, int i) {
     //#else
     //$$ public void renderBackground(int i) {
     //#endif
-        if (Configs.expXiBao) {
-            AutoReconnectUtil.renderXibao(this);
-        } else {
+    //$$     if (Configs.expXiBao) {
+    //$$         AutoReconnectUtil.renderXibao(this);
+    //$$     } else {
             //#if MC > 11903
-            super.renderBackground(poseStack);
+            //$$ super.renderBackground(poseStack);
             //#elseif MC > 11502
             //$$ super.renderBackground(poseStack, i);
             //#else
             //$$ super.renderBackground(i);
             //#endif
-        }
-    }
+    //$$     }
+    //$$ }
     //#endif
 }

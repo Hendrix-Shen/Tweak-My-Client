@@ -8,9 +8,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
 //#if MC > 11904
-//$$ import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC > 11502
-import com.mojang.blaze3d.vertex.PoseStack;
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 @Mixin(Gui.class)
@@ -23,9 +23,9 @@ public class MixinGui {
             cancellable = true
     )
     //#if MC > 11904
-    //$$ private void onRender(GuiGraphics guiGraphics, CallbackInfo ci) {
+    private void onRender(GuiGraphics guiGraphics, CallbackInfo ci) {
     //#elseif MC > 11502
-    private void onRender(PoseStack poseStack, CallbackInfo ci) {
+    //$$ private void onRender(PoseStack poseStack, CallbackInfo ci) {
     //#else
     //$$ private void onRender(CallbackInfo ci) {
     //#endif

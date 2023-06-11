@@ -33,9 +33,9 @@ public class MixinDisconnectedScreen extends Screen {
             cancellable = true
     )
     //#if MC > 11904
-    //$$ private void onInitDisconnectedScreen(@NotNull CallbackInfo ci) {
-    //#else
     private void onInitDisconnectedScreen(@NotNull CallbackInfo ci) {
+    //#else
+    //$$ private void onInitDisconnectedScreen(@NotNull CallbackInfo ci) {
     //#endif
         TweakMyClient.getMinecraftClient().setScreen(new PatchedDisconnectedScreen(this.parent, this.title, this.reason));
         ci.cancel();

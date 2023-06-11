@@ -41,14 +41,14 @@ public class IconUtil {
     private static final String[] VANILLA_STABLE_16X = new String[]{"icons", "icon_16x16.png"};
     private static final String[] VANILLA_STABLE_32X = new String[]{"icons", "icon_32x32.png"};
     //#if MC > 11904
-    //$$ private static final String[] VANILLA_STABLE_48X = new String[]{"icons", "icon_48x48.png"};
-    //$$ private static final String[] VANILLA_STABLE_128X = new String[]{"icons", "icon_128x128.png"};
-    //$$ private static final String[] VANILLA_STABLE_256X = new String[]{"icons", "icon_256x256.png"};
-    //$$ private static final String[] VANILLA_SNAPSHOT_16X = new String[]{"icons", "snapshot", "icon_16x16.png"};
-    //$$ private static final String[] VANILLA_SNAPSHOT_32X = new String[]{"icons", "snapshot", "icon_32x32.png"};
-    //$$ private static final String[] VANILLA_SNAPSHOT_48X = new String[]{"icons", "snapshot", "icon_48x48.png"};
-    //$$ private static final String[] VANILLA_SNAPSHOT_128X = new String[]{"icons", "snapshot", "icon_128x128.png"};
-    //$$ private static final String[] VANILLA_SNAPSHOT_256X = new String[]{"icons", "snapshot", "icon_256x256.png"};
+    private static final String[] VANILLA_STABLE_48X = new String[]{"icons", "icon_48x48.png"};
+    private static final String[] VANILLA_STABLE_128X = new String[]{"icons", "icon_128x128.png"};
+    private static final String[] VANILLA_STABLE_256X = new String[]{"icons", "icon_256x256.png"};
+    private static final String[] VANILLA_SNAPSHOT_16X = new String[]{"icons", "snapshot", "icon_16x16.png"};
+    private static final String[] VANILLA_SNAPSHOT_32X = new String[]{"icons", "snapshot", "icon_32x32.png"};
+    private static final String[] VANILLA_SNAPSHOT_48X = new String[]{"icons", "snapshot", "icon_48x48.png"};
+    private static final String[] VANILLA_SNAPSHOT_128X = new String[]{"icons", "snapshot", "icon_128x128.png"};
+    private static final String[] VANILLA_SNAPSHOT_256X = new String[]{"icons", "snapshot", "icon_256x256.png"};
     //#endif
     //#else
     //$$ private static final ResourceLocation VANILLA_STABLE_16X = new ResourceLocation("icons/icon_16x16.png");
@@ -143,14 +143,14 @@ public class IconUtil {
                 //#endif
             } else {
                 //#if MC > 11904
-                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_16X : IconUtil.VANILLA_SNAPSHOT_16X)).get());
-                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_32X : IconUtil.VANILLA_SNAPSHOT_32X)).get());
-                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_48X : IconUtil.VANILLA_SNAPSHOT_48X)).get());
-                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_128X : IconUtil.VANILLA_SNAPSHOT_128X)).get());
-                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_256X : IconUtil.VANILLA_SNAPSHOT_256X)).get());
+                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_16X : IconUtil.VANILLA_SNAPSHOT_16X)).get());
+                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_32X : IconUtil.VANILLA_SNAPSHOT_32X)).get());
+                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_48X : IconUtil.VANILLA_SNAPSHOT_48X)).get());
+                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_128X : IconUtil.VANILLA_SNAPSHOT_128X)).get());
+                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_256X : IconUtil.VANILLA_SNAPSHOT_256X)).get());
                 //#elseif MC > 11902
-                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_16X)).get());
-                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_32X)).get());
+                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_16X)).get());
+                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_32X)).get());
                 //#else
                 //$$ inputStreams.add(mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, IconUtil.VANILLA_STABLE_16X));
                 //$$ inputStreams.add(mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, IconUtil.VANILLA_STABLE_32X));

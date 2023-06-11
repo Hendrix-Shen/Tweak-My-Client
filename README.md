@@ -15,13 +15,17 @@
 
 The default hotkey to open the in-game config GUI is **T + C**.
 
+❗Before reporting a problem, be sure to try the latest [beta version](https://github.com/Hendrix-Shen/Tweak-My-Client/releases) to check if the problem still exists.
+
+♻️Note: Minecraft 1.20 requires the use of a third-party port [Malilib](https://github.com/Nyan-Work/malilib/releases/tag/1.20).
+
 ## Dependencies
 
 | Dependency               | Type     | Version    | Download                                                                                                                                           |
 |--------------------------|----------|------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | Auth Me                  | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
 | In-Game Account Switcher | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
-| MagicLib                 | Required | \>=0.7.293 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
+| MagicLib                 | Required | \>=0.7.336 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
 | MaliLib                  | Required | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
 | Litematica               | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
 | ReAuth (Fabric)          | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |

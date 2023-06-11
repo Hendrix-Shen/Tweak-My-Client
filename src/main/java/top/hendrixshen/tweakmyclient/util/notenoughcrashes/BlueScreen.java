@@ -6,7 +6,7 @@ import fi.dy.masa.malilib.util.Color4f;
 import fi.dy.masa.malilib.util.StringUtils;
 import fudge.notenoughcrashes.gui.ProblemScreen;
 import net.minecraft.CrashReport;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.TitleScreen;
 import org.jetbrains.annotations.NotNull;
 import top.hendrixshen.tweakmyclient.TweakMyClient;
@@ -15,7 +15,7 @@ import java.util.Locale;
 import java.util.Set;
 
 //#if MC > 11904
-//$$ import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphics;
 //#endif
 
 //#if MC > 11502
@@ -50,73 +50,73 @@ public class BlueScreen extends ProblemScreen {
 
     @Override
     //#if MC > 11904
-    //$$ public void render(GuiGraphics guiGraphics, int i, int j, float f) {
-    //$$     guiGraphics.fillGradient(0, 0, this.width, this.height, BlueScreen.WIN_XP.intValue, BlueScreen.WIN_XP.intValue);
-    //$$     int y = 10;
-    //$$     this.drawString(guiGraphics, "A problem has been detected and Minecraft not shut down to damage to your computer.", 5, y, 0.5F, BlueScreen.FONT.intValue);
-    //$$     y += 20;
-    //$$     this.drawString(guiGraphics, String.format("The problem seems to caused by the following mods:%s", this.getSuspectedMods()), 5, y, 0.5F, BlueScreen.FONT.intValue);
-    //$$     y += 20;
-    //$$     this.drawString(guiGraphics, this.toErrorStyle(), 5, y, 0.5F, BlueScreen.FONT.intValue);
-    //$$     y += 20;
-    //$$     this.drawString(guiGraphics, "If this is the first time you've seen this Stop error screen, continue your game. If this screen appears again,follow these steps:", 5, y, 0.5F, BlueScreen.FONT.intValue);
-    //$$     y += 20;
-    //$$     this.drawString(guiGraphics, "Check to make sure any new mods is properly installed. If this a new installation, ask the mod author for mod update you might need.", 5, y, 0.5F, BlueScreen.FONT.intValue);
-    //$$     y += 20;
-    //$$     this.drawString(guiGraphics, "If problem continue,disable or remove any newly installed mods.", 5, y, 0.5F, BlueScreen.FONT.intValue);
-    //$$     y += 20;
-    //$$     this.drawString(guiGraphics, "Technical information:", 5, y, 0.5F, BlueScreen.FONT.intValue);
-    //$$     y += 20;
-    //$$     this.drawString(guiGraphics, String.format("*** STOP:%s", this.getErrorCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
-    //$$     y += 20;
-    //$$     boolean stackFirst = true;
-    //$$
-    //$$     for (String string : this.crashreport.getExceptionMessage().split("\n")) {
-    //$$         if (stackFirst) {
-    //$$             this.drawString(guiGraphics, String.format("*** Stacktrace: %s", string.replaceAll("\r", "")
-    //$$                     .replaceAll("\t", "    ")), 5, y, 0.5F, BlueScreen.FONT.intValue);
-    //$$             stackFirst = false;
-    //$$         } else {
-    //$$             this.drawString(guiGraphics, string.replaceAll("\r", "")
-    //$$                     .replaceAll("\t", "    "), 5, y, 0.5F, BlueScreen.FONT.intValue);
-    //$$         }
-    //$$
-    //$$         y += 10;
-    //$$     }
-    //#elseif MC > 11502
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
-        this.fillGradient(poseStack, 0, 0, this.width, this.height, BlueScreen.WIN_XP);
+    public void render(GuiGraphics guiGraphics, int i, int j, float f) {
+        guiGraphics.fillGradient(0, 0, this.width, this.height, BlueScreen.WIN_XP.intValue, BlueScreen.WIN_XP.intValue);
         int y = 10;
-        this.drawString(poseStack, "A problem has been detected and Minecraft not shut down to damage to your computer.", 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, "A problem has been detected and Minecraft not shut down to damage to your computer.", 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
-        this.drawString(poseStack, String.format("The problem seems to caused by the following mods:%s", this.getSuspectedMods()), 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, String.format("The problem seems to caused by the following mods:%s", this.getSuspectedMods()), 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
-        this.drawString(poseStack, this.toErrorStyle(), 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, this.toErrorStyle(), 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
-        this.drawString(poseStack, "If this is the first time you've seen this Stop error screen, continue your game. If this screen appears again,follow these steps:", 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, "If this is the first time you've seen this Stop error screen, continue your game. If this screen appears again,follow these steps:", 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
-        this.drawString(poseStack, "Check to make sure any new mods is properly installed. If this a new installation, ask the mod author for mod update you might need.", 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, "Check to make sure any new mods is properly installed. If this a new installation, ask the mod author for mod update you might need.", 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
-        this.drawString(poseStack, "If problem continue,disable or remove any newly installed mods.", 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, "If problem continue,disable or remove any newly installed mods.", 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
-        this.drawString(poseStack, "Technical information:", 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, "Technical information:", 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
-        this.drawString(poseStack, String.format("*** STOP:%s", this.getErrorCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, String.format("*** STOP:%s", this.getErrorCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
         boolean stackFirst = true;
 
         for (String string : this.crashreport.getExceptionMessage().split("\n")) {
             if (stackFirst) {
-                this.drawString(poseStack, String.format("*** Stacktrace: %s", string.replaceAll("\r", "")
+                this.drawString(guiGraphics, String.format("*** Stacktrace: %s", string.replaceAll("\r", "")
                         .replaceAll("\t", "    ")), 5, y, 0.5F, BlueScreen.FONT.intValue);
                 stackFirst = false;
             } else {
-                this.drawString(poseStack, string.replaceAll("\r", "")
+                this.drawString(guiGraphics, string.replaceAll("\r", "")
                         .replaceAll("\t", "    "), 5, y, 0.5F, BlueScreen.FONT.intValue);
             }
 
             y += 10;
         }
+    //#elseif MC > 11502
+    //$$ public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
+    //$$     this.fillGradient(poseStack, 0, 0, this.width, this.height, BlueScreen.WIN_XP);
+    //$$     int y = 10;
+    //$$     this.drawString(poseStack, "A problem has been detected and Minecraft not shut down to damage to your computer.", 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     y += 20;
+    //$$     this.drawString(poseStack, String.format("The problem seems to caused by the following mods:%s", this.getSuspectedMods()), 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     y += 20;
+    //$$     this.drawString(poseStack, this.toErrorStyle(), 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     y += 20;
+    //$$     this.drawString(poseStack, "If this is the first time you've seen this Stop error screen, continue your game. If this screen appears again,follow these steps:", 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     y += 20;
+    //$$     this.drawString(poseStack, "Check to make sure any new mods is properly installed. If this a new installation, ask the mod author for mod update you might need.", 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     y += 20;
+    //$$     this.drawString(poseStack, "If problem continue,disable or remove any newly installed mods.", 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     y += 20;
+    //$$     this.drawString(poseStack, "Technical information:", 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     y += 20;
+    //$$     this.drawString(poseStack, String.format("*** STOP:%s", this.getErrorCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     y += 20;
+    //$$     boolean stackFirst = true;
+    //$$
+    //$$     for (String string : this.crashreport.getExceptionMessage().split("\n")) {
+    //$$         if (stackFirst) {
+    //$$             this.drawString(poseStack, String.format("*** Stacktrace: %s", string.replaceAll("\r", "")
+    //$$                     .replaceAll("\t", "    ")), 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$             stackFirst = false;
+    //$$         } else {
+    //$$             this.drawString(poseStack, string.replaceAll("\r", "")
+    //$$                     .replaceAll("\t", "    "), 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$         }
+    //$$
+    //$$         y += 10;
+    //$$     }
     //#else
     //$$ public void render(int mouseX, int mouseY, float delta) {
     //$$     this.fillGradient(0, 0, this.width, this.height, BlueScreen.WIN_XP);
@@ -156,23 +156,23 @@ public class BlueScreen extends ProblemScreen {
 
     //#if MC < 12000
     //#if MC > 11605
-    private void fillGradient(@NotNull PoseStack poseStack, int startX, int startY, int stopX, int stopY, @NotNull Color4f color) {
+    //$$ private void fillGradient(@NotNull PoseStack poseStack, int startX, int startY, int stopX, int stopY, @NotNull Color4f color) {
         //#if MC < 11904
         //$$ RenderSystem.disableTexture();
         //#endif
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
-        Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder bufferBuilder = tesselator.getBuilder();
-        bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+    //$$     RenderSystem.enableBlend();
+    //$$     RenderSystem.defaultBlendFunc();
+    //$$     RenderSystem.setShader(GameRenderer::getPositionColorShader);
+    //$$     Tesselator tesselator = Tesselator.getInstance();
+    //$$     BufferBuilder bufferBuilder = tesselator.getBuilder();
+    //$$     bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
         //#if MC > 11903
-        GuiComponent.fillGradient(poseStack, startX, startY, stopX, stopY, color.intValue, color.intValue);
+        //$$ GuiComponent.fillGradient(poseStack, startX, startY, stopX, stopY, color.intValue, color.intValue);
         //#else
         //$$ this.fillGradient(poseStack.last().pose(), bufferBuilder, startX, startY, stopX, stopY, color, this.getBlitOffset());
         //#endif
-        tesselator.end();
-        RenderSystem.disableBlend();
+    //$$     tesselator.end();
+    //$$     RenderSystem.disableBlend();
         //#if MC < 11904
         //$$ RenderSystem.enableTexture();
         //#endif
@@ -213,7 +213,7 @@ public class BlueScreen extends ProblemScreen {
     //$$     RenderSystem.enableAlphaTest();
     //$$     RenderSystem.enableTexture();
     //#endif
-    }
+    //$$ }
     //#endif
 
     //#if MC < 11904
@@ -234,20 +234,20 @@ public class BlueScreen extends ProblemScreen {
     //#endif
 
     //#if MC > 11904
-    //$$ private void drawString(GuiGraphics guiGraphics, String string, int x, int y, float scale, int color) {
-    //$$     guiGraphics.pose().pushPose();
-    //$$     guiGraphics.pose().scale(scale, scale,1.0F);
-    //$$     guiGraphics.drawString(this.font, string, x, y, color, false);
-    //$$     guiGraphics.pose().popPose();
+    private void drawString(GuiGraphics guiGraphics, String string, int x, int y, float scale, int color) {
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(scale, scale,1.0F);
+        guiGraphics.drawString(this.font, string, x, y, color, false);
+        guiGraphics.pose().popPose();
     //#elseif MC > 11605
-    private void drawString(PoseStack poseStack, String string, int x, int y, float scale, int color) {
-        PoseStack globalStack = RenderSystem.getModelViewStack();
-        globalStack.pushPose();
-        globalStack.scale(scale, scale,1.0F);
-        RenderSystem.applyModelViewMatrix();
-        this.font.draw(poseStack, string, x, y, color);
-        globalStack.popPose();
-        RenderSystem.applyModelViewMatrix();
+    //$$ private void drawString(PoseStack poseStack, String string, int x, int y, float scale, int color) {
+    //$$     PoseStack globalStack = RenderSystem.getModelViewStack();
+    //$$     globalStack.pushPose();
+    //$$     globalStack.scale(scale, scale,1.0F);
+    //$$     RenderSystem.applyModelViewMatrix();
+    //$$     this.font.draw(poseStack, string, x, y, color);
+    //$$     globalStack.popPose();
+    //$$     RenderSystem.applyModelViewMatrix();
     //#elseif MC > 11502
     //$$ private void drawString(PoseStack poseStack, String string, int x, int y, float scale, int color) {
     //$$     RenderSystem.pushMatrix();
