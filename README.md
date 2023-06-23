@@ -34,7 +34,7 @@ The default hotkey to open the in-game config GUI is **T + C**.
 
 ### Support
 
-Current main development for Minecraft version: 1.19.4
+Current main development for Minecraft version: 1.20.1
 
 And use `preprocess` to be compatible with all versions.
 
@@ -48,6 +48,7 @@ And use `preprocess` to be compatible with all versions.
 - Minecraft 1.19.2
 - Minecraft 1.19.3
 - Minecraft 1.19.4
+- Minecraft 1.20.1
 
 ### Mappings
 

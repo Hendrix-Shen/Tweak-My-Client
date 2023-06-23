@@ -24,7 +24,7 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
      * 6 – colorEnd
      */
     @ModifyArgs(
-            //#if MC > 11904
+            //#if MC > 11903
             method = "renderBackground",
             //#elseif MC > 11502
             //$$ method = "renderBackground(Lcom/mojang/blaze3d/vertex/PoseStack;I)V",
