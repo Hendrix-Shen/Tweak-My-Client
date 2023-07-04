@@ -26,11 +26,6 @@ repositories {
     }
 
     maven {
-        name("Nyan Maven")
-        url("https://maven.hendrixshen.top")
-    }
-
-    maven {
         name("Modrinth Maven")
         url("https://api.modrinth.com/maven")
 
@@ -47,7 +42,7 @@ configurations {
         configurations.findAll { it.name in [
                 "minecraftLibraries",
                 "loaderLibraries",
-                "minecraftRuntimeOnlyLibraries"
+                "minecraftRuntimeLibraries"
         ]}.forEach { Configuration superConfigurations ->
             configuration.extendsFrom(superConfigurations)
         }
@@ -73,12 +68,12 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
 
     // Dependency
-    modImplementation("top.hendrixshen:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
+    modImplementation("top.hendrixshen.magiclib:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
         if (project.isCIEnvironment()) {
             exclude(group: "net.fabricmc.fabric-api", module: "fabric-api")
         }
 
-        exclude(group: "curse.maven", module: "carpet-349239")
+        exclude(group: "carpet", module: "fabric-carpet")
     }
 
     productionRuntimeMods("top.hendrixshen:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}")
@@ -106,18 +101,12 @@ dependencies {
     runtimeOnly(project(path: ":fabricWrapper"))
 }
 
-archivesBaseName("${project.mod_archives_base_name}-${project.minecraft_version}")
 group(project.mod_maven_group)
-
-if (mcVersion > 11701) {
-    sourceCompatibility(JavaVersion.VERSION_16)
-    targetCompatibility(JavaVersion.VERSION_16)
-} else {
-    sourceCompatibility(JavaVersion.VERSION_1_8)
-    targetCompatibility(JavaVersion.VERSION_1_8)
-}
-
 version(project.parent.version)
+
+base {
+    archivesBaseName("${project.mod_archives_base_name}-${project.minecraft_version}")
+}
 
 loom {
     interfaceInjection {
@@ -309,6 +298,14 @@ blossom {
 }
 
 java {
+    if (mcVersion > 11701) {
+        sourceCompatibility(JavaVersion.VERSION_16)
+        targetCompatibility(JavaVersion.VERSION_16)
+    } else {
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
+    }
+
     withSourcesJar()
 }
 

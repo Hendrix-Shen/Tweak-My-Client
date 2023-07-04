@@ -5,11 +5,12 @@ plugins {
     id("maven-publish")
 }
 
-archivesBaseName("${project.mod_archives_base_name}-all")
 group(project.mod_maven_group)
-sourceCompatibility(JavaVersion.VERSION_1_8)
-targetCompatibility(JavaVersion.VERSION_1_8)
 version(project.parent.version)
+
+base {
+    archivesBaseName("${project.mod_archives_base_name}-all")
+}
 
 def fabric_subprojects = project.parent.subprojects.findAll({
     it.name != "fabricWrapper"
@@ -74,6 +75,11 @@ processResources {
                 "sub_jars"            : new JsonBuilder(jars).toPrettyString(),
         ])
     }
+}
+
+java {
+    sourceCompatibility(JavaVersion.VERSION_1_8)
+    targetCompatibility(JavaVersion.VERSION_1_8)
 }
 
 publishing {

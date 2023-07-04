@@ -17,8 +17,6 @@
 
 ❗在报告问题前，请务必尝试最新[测试版](https://github.com/Hendrix-Shen/Tweak-My-Client/releases)，检查问题是否依然存在。
 
-♻注意: Minecraft 1.20 需要使用第三方的 [Malilib](https://github.com/Nyan-Work/malilib/releases/tag/1.20)。
-
 ## 依赖项
 
 | 依赖                       | 类型  | 版本         | 下载                                                                                                                                                 |

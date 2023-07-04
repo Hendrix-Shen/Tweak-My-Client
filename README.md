@@ -17,8 +17,6 @@ The default hotkey to open the in-game config GUI is **T + C**.
 
 ❗Before reporting a problem, be sure to try the latest [beta version](https://github.com/Hendrix-Shen/Tweak-My-Client/releases) to check if the problem still exists.
 
-♻️Note: Minecraft 1.20 requires the use of a third-party port [Malilib](https://github.com/Nyan-Work/malilib/releases/tag/1.20).
-
 ## Dependencies
 
 | Dependency               | Type     | Version    | Download                                                                                                                                           |

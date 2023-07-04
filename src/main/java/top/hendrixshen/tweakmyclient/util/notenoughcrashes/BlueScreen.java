@@ -1,7 +1,5 @@
 package top.hendrixshen.tweakmyclient.util.notenoughcrashes;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
 import fi.dy.masa.malilib.util.Color4f;
 import fi.dy.masa.malilib.util.StringUtils;
 import fudge.notenoughcrashes.gui.ProblemScreen;
@@ -14,23 +12,25 @@ import top.hendrixshen.tweakmyclient.TweakMyClient;
 import java.util.Locale;
 import java.util.Set;
 
-//#if MC > 11904
-import net.minecraft.client.gui.GuiGraphics;
+//#if MC < 12000
+//#if MC > 11605
+import net.minecraft.client.renderer.GameRenderer;
+//#else
+//$$ import org.lwjgl.opengl.GL11;
+//#endif
+//#if MC > 11502
+//$$ import org.joml.Matrix4f;
+//#endif
+//$$ import com.mojang.blaze3d.systems.RenderSystem;
+//$$ import com.mojang.blaze3d.vertex.*;
 //#endif
 
 //#if MC > 11502
-import org.joml.Matrix4f;
 import fudge.notenoughcrashes.platform.CommonModMetadata;
 import fudge.notenoughcrashes.stacktrace.ModIdentifier;
 //#else
 //$$ import fudge.notenoughcrashes.patches.PatchedCrashReport;
 //$$ import net.fabricmc.loader.api.metadata.ModMetadata;
-//#endif
-
-//#if MC > 11605
-import net.minecraft.client.renderer.GameRenderer;
-//#else
-//$$ import org.lwjgl.opengl.GL11;
 //#endif
 
 public class BlueScreen extends ProblemScreen {
@@ -55,19 +55,19 @@ public class BlueScreen extends ProblemScreen {
         int y = 10;
         this.drawString(guiGraphics, "A problem has been detected and Minecraft not shut down to damage to your computer.", 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
-        this.drawString(guiGraphics, String.format("The problem seems to caused by the following mods:%s", this.getSuspectedMods()), 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, String.format("The problem seems to caused by the following mods: %s", this.getSuspectedMods()), 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
         this.drawString(guiGraphics, this.toErrorStyle(), 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
-        this.drawString(guiGraphics, "If this is the first time you've seen this Stop error screen, continue your game. If this screen appears again,follow these steps:", 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, "If this is the first time you've seen this Stop error screen, continue your game. If this screen appears again, follow these steps:", 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
         this.drawString(guiGraphics, "Check to make sure any new mods is properly installed. If this a new installation, ask the mod author for mod update you might need.", 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
-        this.drawString(guiGraphics, "If problem continue,disable or remove any newly installed mods.", 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, "If problem continue, disable or remove any newly installed mods.", 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
         this.drawString(guiGraphics, "Technical information:", 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
-        this.drawString(guiGraphics, String.format("*** STOP:%s", this.getErrorCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
+        this.drawString(guiGraphics, String.format("*** STOP: %s", this.getStopCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
         y += 20;
         boolean stackFirst = true;
 
@@ -89,19 +89,19 @@ public class BlueScreen extends ProblemScreen {
     //$$     int y = 10;
     //$$     this.drawString(poseStack, "A problem has been detected and Minecraft not shut down to damage to your computer.", 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
-    //$$     this.drawString(poseStack, String.format("The problem seems to caused by the following mods:%s", this.getSuspectedMods()), 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     this.drawString(poseStack, String.format("The problem seems to caused by the following mods: %s", this.getSuspectedMods()), 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
     //$$     this.drawString(poseStack, this.toErrorStyle(), 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
-    //$$     this.drawString(poseStack, "If this is the first time you've seen this Stop error screen, continue your game. If this screen appears again,follow these steps:", 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     this.drawString(poseStack, "If this is the first time you've seen this Stop error screen, continue your game. If this screen appears again, follow these steps:", 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
     //$$     this.drawString(poseStack, "Check to make sure any new mods is properly installed. If this a new installation, ask the mod author for mod update you might need.", 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
-    //$$     this.drawString(poseStack, "If problem continue,disable or remove any newly installed mods.", 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     this.drawString(poseStack, "If problem continue, disable or remove any newly installed mods.", 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
     //$$     this.drawString(poseStack, "Technical information:", 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
-    //$$     this.drawString(poseStack, String.format("*** STOP:%s", this.getErrorCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     this.drawString(poseStack, String.format("*** STOP: %s", this.getStopCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
     //$$     boolean stackFirst = true;
     //$$
@@ -123,19 +123,19 @@ public class BlueScreen extends ProblemScreen {
     //$$     int y = 15;
     //$$     this.drawString("A problem has been detected and Minecraft not shut down to damage to your computer.", 20, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
-    //$$     this.drawString(String.format("The problem seems to caused by the following mods:%s", this.getSuspectedMods()), 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     this.drawString(String.format("The problem seems to caused by the following mods: %s", this.getSuspectedMods()), 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
     //$$     this.drawString(this.toErrorStyle(), 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
-    //$$     this.drawString("If this is the first time you've seen this Stop error screen, continue your game. If this screen appears again,follow these steps:", 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     this.drawString("If this is the first time you've seen this Stop error screen, continue your game. If this screen appears again, follow these steps:", 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
     //$$     this.drawString("Check to make sure any new mods is properly installed. If this a new installation, ask the mod author for mod update you might need.", 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
-    //$$     this.drawString("If problem continue,disable or remove any newly installed mods.", 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     this.drawString("If problem continue, disable or remove any newly installed mods.", 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
     //$$     this.drawString("Technical information:", 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
-    //$$     this.drawString(String.format("*** STOP:%s", this.getErrorCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
+    //$$     this.drawString(String.format("*** STOP: %s", this.getStopCode()), 5, y, 0.5F, BlueScreen.FONT.intValue);
     //$$     y += 20;
     //$$     boolean stackFirst = true;
     //$$
@@ -315,7 +315,7 @@ public class BlueScreen extends ProblemScreen {
         return builder.toString();
     }
 
-    private String getErrorCode() {
+    private String getStopCode() {
         return String.format("0x%08X (0x%08X,0x%08X,0x%08X,0x%08X)",
                 this.toErrorStyle().hashCode(),
                 this.getSuspectedMods().hashCode(),
