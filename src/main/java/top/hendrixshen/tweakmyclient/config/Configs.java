@@ -15,7 +15,6 @@ import top.hendrixshen.tweakmyclient.TweakMyClientPredicate;
 import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import top.hendrixshen.tweakmyclient.event.CallBacks;
 import top.hendrixshen.tweakmyclient.helper.*;
-import top.hendrixshen.tweakmyclient.util.CustomWindowUtil;
 import top.hendrixshen.tweakmyclient.util.IconUtil;
 
 import java.util.ArrayList;
@@ -117,7 +116,7 @@ public class Configs {
     public static boolean disableLitematicaSchematicVersionCheck = false;
 
     @Config(category = ConfigCategory.PATCH)
-    public static boolean disableResourcePackCompatCheck = false;
+    public static boolean disableResourcePackIncompatibleTip = false;
 
     @Config(category = ConfigCategory.PATCH)
     public static boolean endPortalRendererFix = false;

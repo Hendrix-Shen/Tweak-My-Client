@@ -56,7 +56,7 @@
     "patch.chunkEdgeLagFix.MixinClientPacketListener",
     "patch.disableLitematicaEasyPlaceFailTip.MixinWorldUtils",
     "patch.disableLitematicaSchematicVersionCheck.MixinLitematicaSchematic",
-    "patch.disableResourcePackCompatCheck.MixinPackCompatibility",
+    "patch.disableResourcePackIncompatibleTip.MixinTransferableSelectionList",
     "patch.endPortalRendererFix.MixinTheEndPortalBlockEntity",
     "patch.endPortalRendererFix.MixinTheEndPortalRenderer",
     "patch.forceDebugInfoDetailed.MixinPlayer",
