@@ -378,9 +378,7 @@ public class Configs {
     @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.ExperimentalMode.class)
     public static ConfigHotkey expUnsafeIllegalPutTest;
 
-    // TODO: 1.20
-    @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.ExpXiBao.class,
-            dependencies = @Dependencies(not = @Dependency(value = "minecraft", versionPredicate = ">1.19.4")))
+    @Config(category = ConfigCategory.DEBUG, predicate = TweakMyClientPredicate.ExpXiBao.class)
     public static boolean expXiBao = false;
 
     public static void init() {
