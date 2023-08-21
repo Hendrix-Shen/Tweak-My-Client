@@ -1,7 +1,7 @@
 import net.fabricmc.loom.util.Platform
 
 apply(plugin: "fabric-loom")
-apply(plugin: "io.github.juuxel.loom-quiltflower")
+apply(plugin: "io.github.juuxel.loom-vineflower")
 apply(plugin: "maven-publish")
 apply(plugin: "net.kyori.blossom")
 apply(plugin: "com.replaymod.preprocess")
