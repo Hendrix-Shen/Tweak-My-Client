@@ -34,6 +34,15 @@ repositories {
         }
     }
 
+    maven {
+        name("Jitpack Maven")
+        url("https://jitpack.io")
+
+        content {
+            includeGroup("com.github.Nyan-Work")
+        }
+    }
+
     mavenCentral()
 }
 
@@ -54,8 +63,9 @@ configurations {
 
 // Module, Property prefix, Resolve condition, Transitive dependencies.
 def compileOnlyDependencies = [
-        ["curse.maven:litematica-308892"                 , "litematica"        , true, false],
-        ["curse.maven:not-enough-crashes-353890"         , "not_enough_crashes", true, false],
+        ["curse.maven:litematica-308892"        , "litematica"        , mcVersion < 12002, false],
+        ["com.github.Nyan-Work:litematica"      , "litematica"        , mcVersion > 12001, false],
+        ["curse.maven:not-enough-crashes-353890", "not_enough_crashes", true             , false],
 ]
 
 dependencies {

@@ -26,7 +26,9 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             //#endif
             at = @At(
                     value = "INVOKE",
-                    //#if MC > 11904
+                    //#if MC > 12001
+                    //$$ target = "Lnet/minecraft/client/gui/screens/Screen;renderTransparentBackground(Lnet/minecraft/client/gui/GuiGraphics;)V"
+                    //#elseif MC > 11904
                     target = "Lnet/minecraft/client/gui/GuiGraphics;fillGradient(IIIIII)V"
                     //#elseif MC > 11502
                     //$$ target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V"
@@ -36,15 +38,23 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             ),
             cancellable = true
     )
-    //#if MC > 11904
-    private void onFillGradient(GuiGraphics guiGraphics, CallbackInfo ci) {
-    //#elseif MC > 11903
-    //$$ private void onFillGradient(PoseStack poseStack, CallbackInfo ci) {
-    //#elseif MC > 11502
-    //$$ private void onFillGradient(PoseStack poseStack, int i, CallbackInfo ci) {
-    //#else
-    //$$ private void onFillGradient(int i, CallbackInfo ci) {
-    //#endif
+    // private void onFillGradient(GuiGraphics guiGraphics, int i, int j, float f, CallbackInfo ci) {
+    private void onFillGradient(
+            //#if MC > 11904
+            GuiGraphics guiGraphics,
+            //#elseif MC > 11502
+            //$$ PoseStack poseStack,
+            //#endif
+            //#if MC > 12001
+            //$$ int i,
+            //$$ int j,
+            //$$ float f,
+            //#endif
+            //#if MC < 11904
+            //$$ int i,
+            //#endif
+            CallbackInfo ci
+    ) {
         if (Configs.disableGuiShadowLayer) {
             ci.cancel();
         }

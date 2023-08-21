@@ -72,7 +72,13 @@ public class CustomWindowUtil {
     public static @NotNull String getActivity() {
         if (mc.getSingleplayerServer() != null && !mc.getSingleplayerServer().isPublished()) {
             return I18n.get("title.singleplayer");
-        } else if (mc.isConnectedToRealms()) {
+        } else if (
+                //#if MC > 12001
+                //$$ mc.getCurrentServer() != null && mc.getCurrentServer().isRealm()
+                //#else
+                mc.isConnectedToRealms()
+                //#endif
+        ) {
             return I18n.get("title.multiplayer.realms");
         } else if (mc.getSingleplayerServer() == null && (mc.getCurrentServer() == null || !mc.getCurrentServer().isLan())) {
             return I18n.get("title.multiplayer.other");

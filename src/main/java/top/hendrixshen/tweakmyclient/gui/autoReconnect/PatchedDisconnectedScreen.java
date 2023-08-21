@@ -120,7 +120,13 @@ public class PatchedDisconnectedScreen extends Screen {
         if (Configs.expXiBao) {
             AutoReconnectUtil.renderXibao(this);
         } else {
-            this.renderBackground(guiGraphics);
+            this.renderBackground(
+                    //#if MC > 12001
+                    //$$ guiGraphics, mouseX, mouseY, delta
+                    //#else
+                    guiGraphics
+                    //#endif
+            );
         }
 
         guiGraphics.drawCenteredString(this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
