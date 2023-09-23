@@ -23,7 +23,7 @@ The default hotkey to open the in-game config GUI is **T + C**.
 |--------------------------|----------|------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | Auth Me                  | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
 | In-Game Account Switcher | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
-| MagicLib                 | Required | \>=0.7.336 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
+| MagicLib                 | Required | \>=0.7.387 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
 | MaliLib                  | Required | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
 | Litematica               | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
 | ReAuth (Fabric)          | Optional | Any        | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
@@ -43,10 +43,11 @@ And use `preprocess` to be compatible with all versions.
 - Minecraft 1.16.5
 - Minecraft 1.17.1
 - Minecraft 1.18.2
-- Minecraft 1.19.2
-- Minecraft 1.19.3
+- Minecraft 1.19.2 (Ending support soon)
+- Minecraft 1.19.3 (Ending support soon)
 - Minecraft 1.19.4
-- Minecraft 1.20.1
+- Minecraft 1.20.1 (Ending support soon)
+- Minecraft 1.20.2
 
 ### Mappings
 

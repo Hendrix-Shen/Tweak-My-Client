@@ -23,7 +23,7 @@
 |--------------------------|-----|------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | Auth Me                  | 可选  | 任意         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/auth-me) &#124; [Github](https://github.com/axieum/authme)                               |
 | In-Game Account Switcher | 可选  | 任意         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/in-game-account-switcher)                                                                |
-| MagicLib                 | 必须  | \>=0.7.336 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
+| MagicLib                 | 必须  | \>=0.7.387 | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magiclib) &#124; [Github](https://github.com/Hendrix-Shen/MagicLib)                      |
 | MaliLib                  | 必须  | 任意         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/malilib) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=malilib)       |
 | Litematica               | 可选  | 任意         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/litematica) &#124; [Masa WebSite](https://masa.dy.fi/mcmods/client_mods/?mod=litematica) |
 | ReAuth (Fabric)          | 可选  | 任意         | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/reauth-fabric)                                                                           |
@@ -43,10 +43,11 @@
 - Minecraft 1.16.5
 - Minecraft 1.17.1
 - Minecraft 1.18.2
-- Minecraft 1.19.2
-- Minecraft 1.19.3
+- Minecraft 1.19.2 (即将终止支持)
+- Minecraft 1.19.3 (即将终止支持)
 - Minecraft 1.19.4
-- Minecraft 1.20.1
+- Minecraft 1.20.1 (即将终止支持)
+- Minecraft 1.20.2
 
 ### 混淆映射表
 
