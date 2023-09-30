@@ -72,11 +72,6 @@ public class IconUtil {
         //$$ RenderSystem.assertThread(RenderSystem::isInInitPhase);
         //#endif
 
-        if (Minecraft.ON_OSX) {
-            // TODO: MAC_OS support, Low Priority because I'm lazy，meow~
-            return;
-        }
-
         ArrayList<ByteBuffer> byteBuffers = new ArrayList<>(inputStreams.size());
 
         try (MemoryStack memoryStack = MemoryStack.stackPush()) {
@@ -128,26 +123,18 @@ public class IconUtil {
 
         try {
             if (Configs.featureCustomWindowIcon) {
-                //#if MC > 11802
-                inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_16X : IconUtil.TMC_SNAPSHOT_16X).orElseThrow(RuntimeException::new).open());
-                inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_32X : IconUtil.TMC_SNAPSHOT_32X).orElseThrow(RuntimeException::new).open());
-                inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_48X : IconUtil.TMC_SNAPSHOT_48X).orElseThrow(RuntimeException::new).open());
-                inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_128X : IconUtil.TMC_SNAPSHOT_128X).orElseThrow(RuntimeException::new).open());
-                inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_256X : IconUtil.TMC_SNAPSHOT_256X).orElseThrow(RuntimeException::new).open());
-                //#else
-                //$$ inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_16X : IconUtil.TMC_SNAPSHOT_16X).getInputStream());
-                //$$ inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_32X : IconUtil.TMC_SNAPSHOT_32X).getInputStream());
-                //$$ inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_48X : IconUtil.TMC_SNAPSHOT_48X).getInputStream());
-                //$$ inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_128X : IconUtil.TMC_SNAPSHOT_128X).getInputStream());
-                //$$ inputStreams.add(mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.TMC_STABLE_256X : IconUtil.TMC_SNAPSHOT_256X).getInputStream());
-                //#endif
+                IconUtil.pushResource(inputStreams, TMC_STABLE_16X, TMC_SNAPSHOT_16X);
+                IconUtil.pushResource(inputStreams, TMC_STABLE_32X, TMC_SNAPSHOT_32X);
+                IconUtil.pushResource(inputStreams, TMC_STABLE_48X, TMC_SNAPSHOT_48X);
+                IconUtil.pushResource(inputStreams, TMC_STABLE_128X, TMC_SNAPSHOT_128X);
+                IconUtil.pushResource(inputStreams, TMC_STABLE_256X, TMC_SNAPSHOT_256X);
             } else {
                 //#if MC > 11904
-                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_16X : IconUtil.VANILLA_SNAPSHOT_16X)).get());
-                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_32X : IconUtil.VANILLA_SNAPSHOT_32X)).get());
-                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_48X : IconUtil.VANILLA_SNAPSHOT_48X)).get());
-                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_128X : IconUtil.VANILLA_SNAPSHOT_128X)).get());
-                inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(SharedConstants.getCurrentVersion().isStable() ? IconUtil.VANILLA_STABLE_256X : IconUtil.VANILLA_SNAPSHOT_256X)).get());
+                IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_16X, IconUtil.VANILLA_SNAPSHOT_16X);
+                IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_32X, IconUtil.VANILLA_SNAPSHOT_32X);
+                IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_48X, IconUtil.VANILLA_SNAPSHOT_48X);
+                IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_128X, IconUtil.VANILLA_SNAPSHOT_128X);
+                IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_256X, IconUtil.VANILLA_SNAPSHOT_256X);
                 //#elseif MC > 11902
                 //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_16X)).get());
                 //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_32X)).get());
@@ -162,4 +149,26 @@ public class IconUtil {
             TweakMyClientReference.getLogger().error("Couldn't set icon");
         }
     }
+
+    private static void pushResource(@NotNull ArrayList<InputStream> list, ResourceLocation stable,
+                                     ResourceLocation snapshot) throws IOException {
+        Minecraft mc = TweakMyClient.getMinecraftClient();
+        list.add(
+                mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? stable : snapshot)
+                //#if MC > 11802
+                .orElseThrow(RuntimeException::new).open()
+                //#else
+                //$$ .getInputStream()
+                //#endif
+        );
+    }
+
+    //#if MC > 11904
+    private static void pushVanillaResource(@NotNull ArrayList<InputStream> list, String[] stable,
+                                            String[] snapshot) throws IOException {
+        Minecraft mc = TweakMyClient.getMinecraftClient();
+        list.add(Objects.requireNonNull(mc.getVanillaPackResources()
+                .getRootResource(SharedConstants.getCurrentVersion().isStable() ? stable : snapshot)).get());
+    }
+    //#endif
 }
