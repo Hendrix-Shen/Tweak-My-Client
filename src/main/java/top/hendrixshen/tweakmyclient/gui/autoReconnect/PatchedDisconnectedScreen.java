@@ -122,9 +122,9 @@ public class PatchedDisconnectedScreen extends Screen {
         } else {
             this.renderBackground(
                     //#if MC > 12001
-                    //$$ guiGraphics, mouseX, mouseY, delta
+                    guiGraphics, mouseX, mouseY, delta
                     //#else
-                    guiGraphics
+                    //$$ guiGraphics
                     //#endif
             );
         }

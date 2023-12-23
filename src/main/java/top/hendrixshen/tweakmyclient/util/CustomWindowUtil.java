@@ -74,9 +74,9 @@ public class CustomWindowUtil {
             return I18n.get("title.singleplayer");
         } else if (
                 //#if MC > 12001
-                //$$ mc.getCurrentServer() != null && mc.getCurrentServer().isRealm()
+                mc.getCurrentServer() != null && mc.getCurrentServer().isRealm()
                 //#else
-                mc.isConnectedToRealms()
+                //$$ mc.isConnectedToRealms()
                 //#endif
         ) {
             return I18n.get("title.multiplayer.realms");

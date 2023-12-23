@@ -27,9 +27,9 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             at = @At(
                     value = "INVOKE",
                     //#if MC > 12001
-                    //$$ target = "Lnet/minecraft/client/gui/screens/Screen;renderTransparentBackground(Lnet/minecraft/client/gui/GuiGraphics;)V"
+                    target = "Lnet/minecraft/client/gui/screens/Screen;renderTransparentBackground(Lnet/minecraft/client/gui/GuiGraphics;)V"
                     //#elseif MC > 11904
-                    target = "Lnet/minecraft/client/gui/GuiGraphics;fillGradient(IIIIII)V"
+                    //$$ target = "Lnet/minecraft/client/gui/GuiGraphics;fillGradient(IIIIII)V"
                     //#elseif MC > 11502
                     //$$ target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V"
                     //#else
@@ -46,9 +46,9 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             //$$ PoseStack poseStack,
             //#endif
             //#if MC > 12001
-            //$$ int i,
-            //$$ int j,
-            //$$ float f,
+            int i,
+            int j,
+            float f,
             //#endif
             //#if MC < 11904
             //$$ int i,

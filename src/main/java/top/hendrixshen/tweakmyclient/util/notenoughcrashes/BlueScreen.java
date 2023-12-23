@@ -14,7 +14,7 @@ import java.util.Set;
 
 //#if MC < 12000
 //#if MC > 11605
-import net.minecraft.client.renderer.GameRenderer;
+//$$ import net.minecraft.client.renderer.GameRenderer;
 //#else
 //$$ import org.lwjgl.opengl.GL11;
 //#endif
