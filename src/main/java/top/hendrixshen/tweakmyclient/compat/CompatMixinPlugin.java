@@ -7,7 +7,6 @@
 package top.hendrixshen.tweakmyclient.compat;
 
 import com.google.common.collect.Lists;
-import net.fabricmc.tinyremapper.IMappingProvider.Member;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.objectweb.asm.Opcodes;
@@ -16,6 +15,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import org.spongepowered.asm.mixin.transformer.meta.MixinMerged;
 import org.spongepowered.asm.util.Annotations;
 import top.hendrixshen.tweakmyclient.TweakMyClientMixinPlugin;
+import top.hendrixshen.tweakmyclient.util.Member;
 import top.hendrixshen.tweakmyclient.util.RemapUtil;
 import top.hendrixshen.tweakmyclient.util.mixin.MixinType;
 import top.hendrixshen.tweakmyclient.util.mixin.annotation.MagicAttack;
