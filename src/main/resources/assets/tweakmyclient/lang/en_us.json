@@ -199,6 +199,8 @@
     "tweakmyclient.config.patch.forceDebugInfoDetailed.comment": "Always show full debug information, even if game rule reducedDebugInfo is true.",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "forcePistonWithoutAffectByTool",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "The pickaxe will no longer be used as an effective mining tool for pistons.",
+    "tweakmyclient.config.patch.legacyCarpetHandshake.name": "legacyCarpetHandshake",
+    "tweakmyclient.config.patch.legacyCarpetHandshake.comment": "Handshake protocol compatible with Carpet 1.1.112 and below.",
     "tweakmyclient.config.patch.litematicaSchematicWailaCompat.name": "litematicaSchematicWailaCompat",
     "tweakmyclient.config.patch.litematicaSchematicWailaCompat.comment": "Make WAILA compatible to show litematica schematic.\n- For 1.18 and above, Jade is supported. (Recommend)\n- For 1.16 and above, Wthit is supported.\n- For 1.15 and below, Hwyla is supported.",
     "tweakmyclient.config.patch.notEnoughCrashesBlueScreenOfDeath.name": "notEnoughCrashesBlueScreenOfDeath",

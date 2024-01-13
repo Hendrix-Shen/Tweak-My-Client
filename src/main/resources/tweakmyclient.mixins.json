@@ -61,6 +61,8 @@
     "patch.endPortalRendererFix.MixinTheEndPortalRenderer",
     "patch.forceDebugInfoDetailed.MixinPlayer",
     "patch.forcePistonWithoutAffectByTool.MixinMiningToolItem",
+    "patch.legacyCarpetHandshake.MixinClientboundCustomPayloadPacket",
+    "patch.legacyCarpetHandshake.MixinClientPacketListener",
     "patch.notEnoughCrashesBlueScreenOfDeath.MixinInGameCatcher"
   ],
   "injectors": {

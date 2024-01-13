@@ -199,6 +199,8 @@
     "tweakmyclient.config.patch.forceDebugInfoDetailed.comment": "始终展示完整调试信息, 即使游戏规则 reducedDebugInfo 为true.",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.name": "强制活塞不受镐子影响",
     "tweakmyclient.config.patch.forcePistonWithoutAffectByTool.comment": "镐子将不再作为活塞的有效开采工具.",
+    "tweakmyclient.config.patch.legacyCarpetHandshake.name": "旧版 Carpet 握手协议",
+    "tweakmyclient.config.patch.legacyCarpetHandshake.comment": "兼容 Carpet 1.1.112 及以下版本的握手协议.",
     "tweakmyclient.config.patch.litematicaSchematicWailaCompat.name": "投影蓝图Waila兼容",
     "tweakmyclient.config.patch.litematicaSchematicWailaCompat.comment": "使 Waila 兼容展示投影蓝图.\n- 对于 1.18 及以上版本, 支持 Jade. (推荐)\n- 对于 1.16 及以上版本, 支持 Wthit.\n- 对于 1.15 及以下版本, 支持 Hwyla.",
     "tweakmyclient.config.patch.notEnoughCrashesBlueScreenOfDeath.name": "NotEnoughCrashes蓝屏模拟",

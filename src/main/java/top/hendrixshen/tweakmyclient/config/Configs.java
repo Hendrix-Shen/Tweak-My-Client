@@ -127,6 +127,12 @@ public class Configs {
     @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.16")))
     public static boolean forcePistonWithoutAffectByTool = false;
 
+    @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = {
+            @Dependency(value = "carpet", versionPredicate = ">1.4.113"),
+            @Dependency(value = "minecraft", versionPredicate = ">1.20.1")
+    }))
+    public static boolean legacyCarpetHandshake = false;
+
     @Config(category = ConfigCategory.PATCH, dependencies = @Dependencies(and = @Dependency("notenoughcrashes")))
     public static boolean notEnoughCrashesBlueScreenOfDeath = false;
 
