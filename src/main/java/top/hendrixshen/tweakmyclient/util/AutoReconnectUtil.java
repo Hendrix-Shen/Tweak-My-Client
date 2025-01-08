@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ServerData;
-import net.minecraft.client.multiplayer.resolver.ServerAddress;
+import net.minecraft.client.multiplayer.ServerAddress;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -22,7 +22,7 @@ import top.hendrixshen.tweakmyclient.TweakMyClientReference;
 import java.util.List;
 
 //#if MC < 11903
-//$$ import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.TranslatableComponent;
 //#endif
 
 public class AutoReconnectUtil {
@@ -33,26 +33,26 @@ public class AutoReconnectUtil {
     @Setter
     private static boolean isLastQuickPlay = false;
     //#if MC > 11902
-    public static final List<Component> RE_AUTH_MESSAGES = Lists.newArrayList(
-            ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.insufficientPrivileges")).plainCopy(),
-            ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.invalidSession")).plainCopy(),
-            ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.serversUnavailable")).plainCopy(),
-            ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.userBanned")).plainCopy());
+    //$$ public static final List<Component> RE_AUTH_MESSAGES = Lists.newArrayList(
+    //$$         ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.insufficientPrivileges")).plainCopy(),
+    //$$         ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.invalidSession")).plainCopy(),
+    //$$         ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.serversUnavailable")).plainCopy(),
+    //$$         ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.userBanned")).plainCopy());
     //#endif
 
     //#if MC < 11700
-    //$$ @SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation")
     //#endif
     public static void renderXibao(@NotNull Screen screen) {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tesselator.getBuilder();
         //#if MC > 11605
-        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
-        RenderSystem.setShaderTexture(0, AutoReconnectUtil.XI_BAO_LOCATION);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        //$$ RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+        //$$ RenderSystem.setShaderTexture(0, AutoReconnectUtil.XI_BAO_LOCATION);
+        //$$ RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         //#else
-        //$$ TweakMyClient.getMinecraftClient().getTextureManager().bind(AutoReconnectUtil.XI_BAO_LOCATION);
-        //$$ RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        TweakMyClient.getMinecraftClient().getTextureManager().bind(AutoReconnectUtil.XI_BAO_LOCATION);
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         //#endif
         bufferbuilder.begin(VertexFormatCompatApi.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
         bufferbuilder.vertex(0.0D, screen.height, 0.0D).uv(0F, 1F).color(255, 255, 255, 255).endVertex();
@@ -68,18 +68,18 @@ public class AutoReconnectUtil {
 
         if (AutoReconnectUtil.lastServer != null) {
             //#if MC > 11904
-            ConnectScreen.startConnecting(screen, minecraft, ServerAddress.parseString(serverInfo.ip), serverInfo, AutoReconnectUtil.isLastQuickPlay);
+            //$$ ConnectScreen.startConnecting(screen, minecraft, ServerAddress.parseString(serverInfo.ip), serverInfo, AutoReconnectUtil.isLastQuickPlay);
             //#elseif MC > 11605
             //$$ ConnectScreen.startConnecting(screen, minecraft, ServerAddress.parseString(serverInfo.ip), serverInfo);
             //#else
-            //$$ minecraft.setScreen(new ConnectScreen(screen, minecraft, serverInfo));
+            minecraft.setScreen(new ConnectScreen(screen, minecraft, serverInfo));
             //#endif
         }
     }
 
     //#if MC < 11903
-    //$$ public static @NotNull String getTranslationKey(Component component) {
-    //$$     return component instanceof TranslatableContents ? ((TranslatableContents) component).getKey() : "";
-    //$$ }
+    public static @NotNull String getTranslationKey(Component component) {
+        return component instanceof TranslatableComponent ? ((TranslatableComponent) component).getKey() : "";
+    }
     //#endif
 }

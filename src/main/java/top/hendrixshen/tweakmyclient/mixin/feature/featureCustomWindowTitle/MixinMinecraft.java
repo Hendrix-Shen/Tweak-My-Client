@@ -70,9 +70,9 @@ public abstract class MixinMinecraft {
                     to = @At(
                             value = "INVOKE",
                             //#if MC > 11802
-                            target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+                            //$$ target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
                             //#else
-                            //$$ target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+                            target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
                             //#endif
                             remap = false
                     )
@@ -80,9 +80,9 @@ public abstract class MixinMinecraft {
             at = @At(
                     value = "INVOKE",
                     //#if MC > 11802
-                    target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+                    //$$ target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
                     //#else
-                    //$$ target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
+                    target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
                     //#endif
                     remap = false
             )

@@ -169,9 +169,9 @@ public class CallBacks {
     public static boolean openConfigGuiCallback(KeyAction keyAction, IKeybind keybind) {
         TweakMyClientConfigGui tweakMyClientConfigGui = TweakMyClientConfigGui.getInstance();
         //#if MC > 11903
-        tweakMyClientConfigGui.setParent(TweakMyClient.getMinecraftClient().screen);
+        //$$ tweakMyClientConfigGui.setParent(TweakMyClient.getMinecraftClient().screen);
         //#else
-        //$$ tweakMyClientConfigGui.setParentGui(TweakMyClient.getMinecraftClient().screen);
+        tweakMyClientConfigGui.setParentGui(TweakMyClient.getMinecraftClient().screen);
         //#endif
         TweakMyClient.getMinecraftClient().setScreen(tweakMyClientConfigGui);
         return true;

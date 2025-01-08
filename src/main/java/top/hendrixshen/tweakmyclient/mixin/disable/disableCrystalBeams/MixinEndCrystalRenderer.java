@@ -16,19 +16,19 @@ import net.minecraft.client.renderer.MultiBufferSource;
 //#endif
 
 //#if MC > 11605
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
+//$$ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 //#else
-//$$ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 //#endif
 
 @Mixin(EndCrystalRenderer.class)
 public abstract class MixinEndCrystalRenderer extends EntityRenderer<EndCrystal> {
     //#if MC > 11605
-    protected MixinEndCrystalRenderer(EntityRendererProvider.Context context) {
-        super(context);
+    //$$ protected MixinEndCrystalRenderer(EntityRendererProvider.Context context) {
+    //$$     super(context);
     //#else
-    //$$ protected MixinEndCrystalRenderer(EntityRenderDispatcher entityRenderDispatcher) {
-    //$$ super(entityRenderDispatcher);
+    protected MixinEndCrystalRenderer(EntityRenderDispatcher entityRenderDispatcher) {
+    super(entityRenderDispatcher);
     //#endif
     }
 

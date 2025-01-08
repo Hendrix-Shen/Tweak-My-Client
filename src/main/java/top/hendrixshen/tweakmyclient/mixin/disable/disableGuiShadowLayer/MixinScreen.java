@@ -9,29 +9,29 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.config.Configs;
 
 //#if MC > 11904
-import net.minecraft.client.gui.GuiGraphics;
+//$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC > 11502
-//$$ import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 @Mixin(Screen.class)
 public abstract class MixinScreen extends AbstractContainerEventHandler {
     @Inject(
             //#if MC > 11903
-            method = "renderBackground",
+            //$$ method = "renderBackground",
             //#elseif MC > 11502
-            //$$ method = "renderBackground(Lcom/mojang/blaze3d/vertex/PoseStack;I)V",
+            method = "renderBackground(Lcom/mojang/blaze3d/vertex/PoseStack;I)V",
             //#else
             //$$ method = "renderBackground(I)V",
             //#endif
             at = @At(
                     value = "INVOKE",
                     //#if MC > 12001
-                    target = "Lnet/minecraft/client/gui/screens/Screen;renderTransparentBackground(Lnet/minecraft/client/gui/GuiGraphics;)V"
+                    //$$ target = "Lnet/minecraft/client/gui/screens/Screen;renderTransparentBackground(Lnet/minecraft/client/gui/GuiGraphics;)V"
                     //#elseif MC > 11904
                     //$$ target = "Lnet/minecraft/client/gui/GuiGraphics;fillGradient(IIIIII)V"
                     //#elseif MC > 11502
-                    //$$ target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V"
+                    target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V"
                     //#else
                     //$$ target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(IIIIII)V"
                     //#endif
@@ -41,17 +41,17 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
     // private void onFillGradient(GuiGraphics guiGraphics, int i, int j, float f, CallbackInfo ci) {
     private void onFillGradient(
             //#if MC > 11904
-            GuiGraphics guiGraphics,
+            //$$ GuiGraphics guiGraphics,
             //#elseif MC > 11502
-            //$$ PoseStack poseStack,
+            PoseStack poseStack,
             //#endif
             //#if MC > 12001
-            int i,
-            int j,
-            float f,
+            //$$ int i,
+            //$$ int j,
+            //$$ float f,
             //#endif
             //#if MC < 11904
-            //$$ int i,
+            int i,
             //#endif
             CallbackInfo ci
     ) {

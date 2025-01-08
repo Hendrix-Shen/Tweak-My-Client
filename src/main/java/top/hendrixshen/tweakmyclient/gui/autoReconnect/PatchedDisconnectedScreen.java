@@ -16,15 +16,15 @@ import top.hendrixshen.tweakmyclient.util.StringUtil;
 import java.util.LinkedHashMap;
 
 //#if MC > 11904
-import net.minecraft.network.chat.CommonComponents;
-import org.jetbrains.annotations.NotNull;
+//$$ import net.minecraft.network.chat.CommonComponents;
+//$$ import org.jetbrains.annotations.NotNull;
 //#endif
 
 //#if MC > 11502
 //#if MC < 12000
-//$$ import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.MultiLineLabel;
 //#else
 //$$ import net.minecraft.client.resources.language.I18n;
@@ -82,9 +82,9 @@ public class PatchedDisconnectedScreen extends Screen {
         this.addRenderableWidgetCompat(this.autoReconnectButton);
 
         //#if MC > 11902
-        if (this.reason == null || AutoReconnectUtil.RE_AUTH_MESSAGES.stream().anyMatch(component -> component.getString().equals(this.reason.getString()))) {
+        //$$ if (this.reason == null || AutoReconnectUtil.RE_AUTH_MESSAGES.stream().anyMatch(component -> component.getString().equals(this.reason.getString()))) {
             //#else
-            //$$ if (reason == null || AutoReconnectUtil.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
+            if (reason == null || AutoReconnectUtil.getTranslationKey(reason).startsWith("disconnect.loginFailed")) {
             //#endif
             // Auto disable autoReconnect
             TweakMyClientReference.getConfigHandler().configManager.setValue("featureAutoReconnect", false);
@@ -108,41 +108,41 @@ public class PatchedDisconnectedScreen extends Screen {
     }
 
     //#if MC > 11904
-    @Override
-    public @NotNull Component getNarrationMessage() {
-        return CommonComponents.joinForNarration(this.title, this.reason);
-    }
+    //$$ @Override
+    //$$ public @NotNull Component getNarrationMessage() {
+    //$$     return CommonComponents.joinForNarration(this.title, this.reason);
+    //$$ }
     //#endif
 
     @Override
     //#if MC > 11904
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        if (Configs.expXiBao) {
-            AutoReconnectUtil.renderXibao(this);
-        } else {
-            this.renderBackground(
-                    //#if MC > 12001
-                    guiGraphics, mouseX, mouseY, delta
-                    //#else
-                    //$$ guiGraphics
-                    //#endif
-            );
-        }
-
-        guiGraphics.drawCenteredString(this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
-        this.message.renderCentered(guiGraphics, this.width / 2, this.height / 2 - this.textHeight / 2);
-        super.render(guiGraphics, mouseX, mouseY, delta);
-    //#elseif MC > 11502
-    //$$ public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
+    //$$ public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
     //$$     if (Configs.expXiBao) {
     //$$         AutoReconnectUtil.renderXibao(this);
     //$$     } else {
-    //$$         this.renderBackground(poseStack);
+    //$$         this.renderBackground(
+                    //#if MC > 12001
+                    //$$ guiGraphics, mouseX, mouseY, delta
+                    //#else
+                    //$$ guiGraphics
+                    //#endif
+    //$$         );
     //$$     }
     //$$
-    //$$     GuiComponent.drawCenteredString(poseStack, this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
-    //$$     this.message.renderCentered(poseStack, this.width / 2, this.height / 2 - this.textHeight / 2);
-    //$$     super.render(poseStack, mouseX, mouseY, delta);
+    //$$     guiGraphics.drawCenteredString(this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
+    //$$     this.message.renderCentered(guiGraphics, this.width / 2, this.height / 2 - this.textHeight / 2);
+    //$$     super.render(guiGraphics, mouseX, mouseY, delta);
+    //#elseif MC > 11502
+    public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
+        if (Configs.expXiBao) {
+            AutoReconnectUtil.renderXibao(this);
+        } else {
+            this.renderBackground(poseStack);
+        }
+
+        GuiComponent.drawCenteredString(poseStack, this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
+        this.message.renderCentered(poseStack, this.width / 2, this.height / 2 - this.textHeight / 2);
+        super.render(poseStack, mouseX, mouseY, delta);
     //#else
     //$$ public void render(int mouseX, int mouseY, float delta) {
     //$$     if (Configs.expXiBao) {

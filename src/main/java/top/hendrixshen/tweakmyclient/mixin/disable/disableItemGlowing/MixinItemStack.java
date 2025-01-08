@@ -12,9 +12,9 @@ import top.hendrixshen.tweakmyclient.config.Configs;
 import top.hendrixshen.tweakmyclient.helper.Cache;
 
 //#if MC > 11902
-import net.minecraft.core.registries.BuiltInRegistries;
+//$$ import net.minecraft.core.registries.BuiltInRegistries;
 //#else
-//$$ import net.minecraft.core.Registry;
+import net.minecraft.core.Registry;
 //#endif
 
 @Mixin(ItemStack.class)
@@ -35,9 +35,9 @@ public abstract class MixinItemStack {
     private void isFoil(CallbackInfoReturnable<Boolean> cir) {
         if (Configs.disableItemGlowing) {
             //#if MC > 11902
-            String itemStackID = BuiltInRegistries.ITEM.getKey(this.getItem()).toString();
+            //$$ String itemStackID = BuiltInRegistries.ITEM.getKey(this.getItem()).toString();
             //#else
-            //$$ String itemStackID = Registry.ITEM.getKey(this.getItem()).toString();
+            String itemStackID = Registry.ITEM.getKey(this.getItem()).toString();
             //#endif
             String itemStackName = this.getDisplayName().getString();
             if (Cache.getInstance().getItemGlowingBlackList().contains(this.getItem()) ||

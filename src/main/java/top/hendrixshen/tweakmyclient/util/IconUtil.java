@@ -24,35 +24,35 @@ import java.util.List;
 import java.util.Objects;
 
 //#if MC < 11903
-//$$ import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.PackType;
 //#endif
 
 //#if MC < 11904
-//$$ import org.jetbrains.annotations.Nullable;
-//$$ import top.hendrixshen.tweakmyclient.TweakMyClientReference;
-//$$ import top.hendrixshen.tweakmyclient.mixin.accessor.NativeImageAccessor;
-//$$ import java.nio.IntBuffer;
-//$$ import java.util.Locale;
+import org.jetbrains.annotations.Nullable;
+import top.hendrixshen.tweakmyclient.TweakMyClientReference;
+import top.hendrixshen.tweakmyclient.mixin.accessor.NativeImageAccessor;
+import java.nio.IntBuffer;
+import java.util.Locale;
 //#endif
 
 // Steal from Minecraft Vanilla
 public class IconUtil {
     //#if MC > 11902
-    private static final String[] VANILLA_STABLE_16X = new String[]{"icons", "icon_16x16.png"};
-    private static final String[] VANILLA_STABLE_32X = new String[]{"icons", "icon_32x32.png"};
+    //$$ private static final String[] VANILLA_STABLE_16X = new String[]{"icons", "icon_16x16.png"};
+    //$$ private static final String[] VANILLA_STABLE_32X = new String[]{"icons", "icon_32x32.png"};
     //#if MC > 11904
-    private static final String[] VANILLA_STABLE_48X = new String[]{"icons", "icon_48x48.png"};
-    private static final String[] VANILLA_STABLE_128X = new String[]{"icons", "icon_128x128.png"};
-    private static final String[] VANILLA_STABLE_256X = new String[]{"icons", "icon_256x256.png"};
-    private static final String[] VANILLA_SNAPSHOT_16X = new String[]{"icons", "snapshot", "icon_16x16.png"};
-    private static final String[] VANILLA_SNAPSHOT_32X = new String[]{"icons", "snapshot", "icon_32x32.png"};
-    private static final String[] VANILLA_SNAPSHOT_48X = new String[]{"icons", "snapshot", "icon_48x48.png"};
-    private static final String[] VANILLA_SNAPSHOT_128X = new String[]{"icons", "snapshot", "icon_128x128.png"};
-    private static final String[] VANILLA_SNAPSHOT_256X = new String[]{"icons", "snapshot", "icon_256x256.png"};
+    //$$ private static final String[] VANILLA_STABLE_48X = new String[]{"icons", "icon_48x48.png"};
+    //$$ private static final String[] VANILLA_STABLE_128X = new String[]{"icons", "icon_128x128.png"};
+    //$$ private static final String[] VANILLA_STABLE_256X = new String[]{"icons", "icon_256x256.png"};
+    //$$ private static final String[] VANILLA_SNAPSHOT_16X = new String[]{"icons", "snapshot", "icon_16x16.png"};
+    //$$ private static final String[] VANILLA_SNAPSHOT_32X = new String[]{"icons", "snapshot", "icon_32x32.png"};
+    //$$ private static final String[] VANILLA_SNAPSHOT_48X = new String[]{"icons", "snapshot", "icon_48x48.png"};
+    //$$ private static final String[] VANILLA_SNAPSHOT_128X = new String[]{"icons", "snapshot", "icon_128x128.png"};
+    //$$ private static final String[] VANILLA_SNAPSHOT_256X = new String[]{"icons", "snapshot", "icon_256x256.png"};
     //#endif
     //#else
-    //$$ private static final ResourceLocation VANILLA_STABLE_16X = new ResourceLocation("icons/icon_16x16.png");
-    //$$ private static final ResourceLocation VANILLA_STABLE_32X = new ResourceLocation("icons/icon_32x32.png");
+    private static final ResourceLocation VANILLA_STABLE_16X = new ResourceLocation("icons/icon_16x16.png");
+    private static final ResourceLocation VANILLA_STABLE_32X = new ResourceLocation("icons/icon_32x32.png");
     //#endif
     private static final ResourceLocation TMC_STABLE_16X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_16x16.png");
     private static final ResourceLocation TMC_STABLE_32X = new ResourceLocation(TweakMyClientReference.getModIdentifier(), "texture/icon/icon_32x32.png");
@@ -67,18 +67,18 @@ public class IconUtil {
 
     private static void setIcon(ArrayList<InputStream> inputStreams) throws IOException {
         //#if MC > 11701
-        RenderSystem.assertInInitPhase();
+        //$$ RenderSystem.assertInInitPhase();
         //#elseif MC > 11404
-        //$$ RenderSystem.assertThread(RenderSystem::isInInitPhase);
+        RenderSystem.assertThread(RenderSystem::isInInitPhase);
         //#endif
 
         ArrayList<ByteBuffer> byteBuffers = new ArrayList<>(inputStreams.size());
 
         try (MemoryStack memoryStack = MemoryStack.stackPush()) {
             //#if MC > 11802
-            GLFWImage.Buffer buffer = GLFWImage.malloc(inputStreams.size(), memoryStack);
+            //$$ GLFWImage.Buffer buffer = GLFWImage.malloc(inputStreams.size(), memoryStack);
             //#else
-            //$$ GLFWImage.Buffer buffer = GLFWImage.mallocStack(inputStreams.size(), memoryStack);
+            GLFWImage.Buffer buffer = GLFWImage.mallocStack(inputStreams.size(), memoryStack);
             //#endif
 
             for (int i = 0; i < inputStreams.size(); i++) {
@@ -102,18 +102,18 @@ public class IconUtil {
     @Contract("_ -> new")
     private static int @NotNull [] getPixelsRGBA(@NotNull NativeImage nativeImage) {
         //#if MC > 11903
-        return nativeImage.getPixelsRGBA();
+        //$$ return nativeImage.getPixelsRGBA();
         //#else
-        //$$ NativeImageAccessor accessor = MiscUtil.cast(nativeImage);
-        //$$
-        //$$ if (accessor.getFormat() != NativeImage.Format.RGBA) {// 232
-        //$$     throw new IllegalArgumentException(String.format(Locale.ROOT, "getPixelsRGBA only works on RGBA images; have %s", accessor.getFormat()));
-        //$$ } else {
-        //$$     accessor.invokeCheckAllocated();
-        //$$     int[] is = new int[nativeImage.getWidth() * nativeImage.getHeight()];
-        //$$     MemoryUtil.memIntBuffer(accessor.getPixels(), nativeImage.getWidth() * nativeImage.getHeight()).get(is);
-        //$$     return is;
-        //$$ }
+        NativeImageAccessor accessor = MiscUtil.cast(nativeImage);
+
+        if (accessor.getFormat() != NativeImage.Format.RGBA) {// 232
+            throw new IllegalArgumentException(String.format(Locale.ROOT, "getPixelsRGBA only works on RGBA images; have %s", accessor.getFormat()));
+        } else {
+            accessor.invokeCheckAllocated();
+            int[] is = new int[nativeImage.getWidth() * nativeImage.getHeight()];
+            MemoryUtil.memIntBuffer(accessor.getPixels(), nativeImage.getWidth() * nativeImage.getHeight()).get(is);
+            return is;
+        }
         //#endif
     }
 
@@ -130,17 +130,17 @@ public class IconUtil {
                 IconUtil.pushResource(inputStreams, TMC_STABLE_256X, TMC_SNAPSHOT_256X);
             } else {
                 //#if MC > 11904
-                IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_16X, IconUtil.VANILLA_SNAPSHOT_16X);
-                IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_32X, IconUtil.VANILLA_SNAPSHOT_32X);
-                IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_48X, IconUtil.VANILLA_SNAPSHOT_48X);
-                IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_128X, IconUtil.VANILLA_SNAPSHOT_128X);
-                IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_256X, IconUtil.VANILLA_SNAPSHOT_256X);
+                //$$ IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_16X, IconUtil.VANILLA_SNAPSHOT_16X);
+                //$$ IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_32X, IconUtil.VANILLA_SNAPSHOT_32X);
+                //$$ IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_48X, IconUtil.VANILLA_SNAPSHOT_48X);
+                //$$ IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_128X, IconUtil.VANILLA_SNAPSHOT_128X);
+                //$$ IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_256X, IconUtil.VANILLA_SNAPSHOT_256X);
                 //#elseif MC > 11902
                 //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_16X)).get());
                 //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_32X)).get());
                 //#else
-                //$$ inputStreams.add(mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, IconUtil.VANILLA_STABLE_16X));
-                //$$ inputStreams.add(mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, IconUtil.VANILLA_STABLE_32X));
+                inputStreams.add(mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, IconUtil.VANILLA_STABLE_16X));
+                inputStreams.add(mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, IconUtil.VANILLA_STABLE_32X));
                 //#endif
             }
 
@@ -156,19 +156,19 @@ public class IconUtil {
         list.add(
                 mc.getResourceManager().getResource(SharedConstants.getCurrentVersion().isStable() ? stable : snapshot)
                 //#if MC > 11802
-                .orElseThrow(RuntimeException::new).open()
+                //$$ .orElseThrow(RuntimeException::new).open()
                 //#else
-                //$$ .getInputStream()
+                .getInputStream()
                 //#endif
         );
     }
 
     //#if MC > 11904
-    private static void pushVanillaResource(@NotNull ArrayList<InputStream> list, String[] stable,
-                                            String[] snapshot) throws IOException {
-        Minecraft mc = TweakMyClient.getMinecraftClient();
-        list.add(Objects.requireNonNull(mc.getVanillaPackResources()
-                .getRootResource(SharedConstants.getCurrentVersion().isStable() ? stable : snapshot)).get());
-    }
+    //$$ private static void pushVanillaResource(@NotNull ArrayList<InputStream> list, String[] stable,
+    //$$                                         String[] snapshot) throws IOException {
+    //$$     Minecraft mc = TweakMyClient.getMinecraftClient();
+    //$$     list.add(Objects.requireNonNull(mc.getVanillaPackResources()
+    //$$             .getRootResource(SharedConstants.getCurrentVersion().isStable() ? stable : snapshot)).get());
+    //$$ }
     //#endif
 }

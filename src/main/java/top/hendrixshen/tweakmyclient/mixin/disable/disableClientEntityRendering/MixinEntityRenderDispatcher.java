@@ -17,9 +17,9 @@ import net.minecraft.client.renderer.culling.Frustum;
 //#endif
 
 //#if MC > 11902
-import net.minecraft.core.registries.BuiltInRegistries;
+//$$ import net.minecraft.core.registries.BuiltInRegistries;
 //#else
-//$$ import net.minecraft.core.Registry;
+import net.minecraft.core.Registry;
 //#endif
 
 @Mixin(EntityRenderDispatcher.class)
@@ -38,9 +38,9 @@ public abstract class MixinEntityRenderDispatcher {
     //#endif
         if (Configs.disableClientEntityInListRendering) {
             //#if MC > 11902
-            String entityID = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
+            //$$ String entityID = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
             //#else
-            //$$ String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
+            String entityID = Registry.ENTITY_TYPE.getKey(entity.getType()).toString();
             //#endif
             String entityName = entity.getName().getString();
 

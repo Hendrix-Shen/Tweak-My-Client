@@ -30,9 +30,9 @@ public class MixinSlimeBlock extends Block {
             cancellable = true
     )
     //#if MC > 11605
-    private void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity, CallbackInfo ci) {
+    //$$ private void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity, CallbackInfo ci) {
     //#else
-    //$$ private void stepOn(Level level, BlockPos blockPos, Entity entity, CallbackInfo ci) {
+    private void stepOn(Level level, BlockPos blockPos, Entity entity, CallbackInfo ci) {
     //#endif
         if (Configs.disableSlowdown && entity instanceof LocalPlayer) {
             ci.cancel();

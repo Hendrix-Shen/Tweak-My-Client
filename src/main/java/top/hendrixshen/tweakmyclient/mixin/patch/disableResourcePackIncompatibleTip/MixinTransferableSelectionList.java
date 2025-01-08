@@ -22,9 +22,9 @@ public class MixinTransferableSelectionList {
 
     @Redirect(
             //#if MC > 11903
-            method = "handlePackSelection",
+            //$$ method = "handlePackSelection",
             //#else
-            //$$ method = "mouseClicked",
+            method = "mouseClicked",
             //#endif
             at = @At(
                     value = "INVOKE",

@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 
 //#if MC > 11902
-import net.minecraft.core.registries.BuiltInRegistries;
+//$$ import net.minecraft.core.registries.BuiltInRegistries;
 //#elseif MC > 11802
 //$$ import net.minecraft.core.HolderLookup;
 //$$ import net.minecraft.core.Registry;
@@ -39,23 +39,23 @@ public class StringUtil extends top.hendrixshen.magiclib.util.StringUtil {
     public static ItemStack toItemStack(String string) {
         try {
             //#if MC > 11902
-            ItemParser.ItemResult result = ItemParser.parseForItem(BuiltInRegistries.ITEM.asLookup(), new StringReader(string));
-            Item item = result.item().value();
+            //$$ ItemParser.ItemResult result = ItemParser.parseForItem(BuiltInRegistries.ITEM.asLookup(), new StringReader(string));
+            //$$ Item item = result.item().value();
             //#elseif MC > 11802
             //$$ ItemParser.ItemResult result = ItemParser.parseForItem(new HolderLookup.RegistryLookup<>(Registry.ITEM), new StringReader(string));
             //$$ Item item = result.item().value();
             //#else
-            //$$ ItemParser reader = new ItemParser(new StringReader(string), true);
-            //$$ reader.parse();
-            //$$ Item item = reader.getItem();
+            ItemParser reader = new ItemParser(new StringReader(string), true);
+            reader.parse();
+            Item item = reader.getItem();
             //#endif
 
             if (item != null) {
                 ItemStack stack = new ItemStack(item);
                 //#if MC >= 11900
-                stack.setTag(result.nbt());
+                //$$ stack.setTag(result.nbt());
                 //#else
-                //$$ stack.setTag(reader.getNbt());
+                stack.setTag(reader.getNbt());
                 //#endif
                 return stack;
             }

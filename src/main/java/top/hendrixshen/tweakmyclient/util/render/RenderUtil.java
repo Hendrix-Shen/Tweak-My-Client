@@ -13,9 +13,9 @@ import top.hendrixshen.tweakmyclient.TweakMyClient;
 import top.hendrixshen.tweakmyclient.helper.AreaBox;
 
 //#if MC > 11605
-import net.minecraft.client.renderer.GameRenderer;
+//$$ import net.minecraft.client.renderer.GameRenderer;
 //#else
-//$$ import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL11;
 //#endif
 
 public class RenderUtil {
@@ -68,10 +68,10 @@ public class RenderUtil {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tesselator.getBuilder();
         //#if MC > 11700
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
-        bufferbuilder.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
+        //$$ RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        //$$ bufferbuilder.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
         //#else
-        //$$ bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
+        bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
         //#endif
         RenderUtils.drawBoxAllEdgesBatchedLines(minX, minY, minZ, maxX, maxY, maxZ, color, bufferbuilder);
         tesselator.end();
@@ -82,9 +82,9 @@ public class RenderUtil {
         RenderSystem.enableBlend();
         RenderSystem.disableCull();
         //#if MC >= 11700
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        //$$ RenderSystem.setShader(GameRenderer::getPositionColorShader);
         //#else
-        //$$ RenderSystem.disableTexture();
+        RenderSystem.disableTexture();
         //#endif
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferBuilder = tesselator.getBuilder();
@@ -94,18 +94,18 @@ public class RenderUtil {
         RenderSystem.disableBlend();
         RenderSystem.enableCull();
         //#if MC < 11700
-        //$$ RenderSystem.enableTexture();
+        RenderSystem.enableTexture();
         //#endif
     }
 
     public static void renderShapeOverlay(@NotNull VoxelShape voxelShape, double x, double y, double z, Color4f color) {
         //#if MC < 11700
-        //$$ RenderSystem.disableTexture();
+        RenderSystem.disableTexture();
         //#endif
         RenderSystem.enableBlend();
         RenderSystem.disableCull();
         //#if MC >= 11700
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        //$$ RenderSystem.setShader(GameRenderer::getPositionColorShader);
         //#endif
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder buffer = tesselator.getBuilder();
@@ -120,25 +120,25 @@ public class RenderUtil {
         RenderSystem.disableBlend();
         //#endif
         //#if MC < 11700
-        //$$ RenderSystem.enableTexture();
+        RenderSystem.enableTexture();
         //#endif
     }
 
     public static void renderShapeOutline(@NotNull VoxelShape voxelShape, double x, double y, double z, Color4f color) {
         //#if MC < 11700
-        //$$ RenderSystem.disableTexture();
+        RenderSystem.disableTexture();
         //#endif
         RenderSystem.enableBlend();
         RenderSystem.disableCull();
         //#if MC >= 11700
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        //$$ RenderSystem.setShader(GameRenderer::getPositionColorShader);
         //#endif
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder buffer = tesselator.getBuilder();
         //#if MC >= 11700
-        buffer.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
+        //$$ buffer.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
         //#else
-        //$$ buffer.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
+        buffer.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
         //#endif
 
         voxelShape.forAllEdges((minX, minY, minZ, maxX, maxY, maxZ) -> {
@@ -150,7 +150,7 @@ public class RenderUtil {
         RenderSystem.enableCull();
         RenderSystem.disableBlend();
         //#if MC < 11700
-        //$$ RenderSystem.enableTexture();
+        RenderSystem.enableTexture();
         //#endif
     }
 }

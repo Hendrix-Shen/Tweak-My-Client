@@ -16,19 +16,19 @@ import net.minecraft.client.renderer.MultiBufferSource;
 //#endif
 
 //#if MC > 11605
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
+//$$ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 //#else
-//$$ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 //#endif
 
 @Mixin(EnderDragonRenderer.class)
 public abstract class MixinEnderDragonRenderer extends EntityRenderer<EnderDragon> {
     //#if MC > 11605
-    protected MixinEnderDragonRenderer(EntityRendererProvider.Context context) {
-        super(context);
+    //$$ protected MixinEnderDragonRenderer(EntityRendererProvider.Context context) {
+    //$$     super(context);
         //#else
-        //$$ protected MixinEnderDragonRenderer(EntityRenderDispatcher entityRenderDispatcher) {
-        //$$ super(entityRenderDispatcher);
+        protected MixinEnderDragonRenderer(EntityRenderDispatcher entityRenderDispatcher) {
+        super(entityRenderDispatcher);
         //#endif
     }
 

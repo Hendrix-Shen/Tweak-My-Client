@@ -21,13 +21,13 @@ public class MixinTheEndPortalBlockEntity {
     private void shouldRenderFace(Direction direction, CallbackInfoReturnable<Boolean> cir) {
         if (Configs.endPortalRendererFix) {
             //#if MC > 11605
-            if (Configs.enderPortalRenderMode == EnderPortalRenderMode.LEGACY) {
-                cir.setReturnValue(direction == Direction.UP);
-            } else if (Configs.enderPortalRenderMode != EnderPortalRenderMode.MODERN) {
+            //$$ if (Configs.enderPortalRenderMode == EnderPortalRenderMode.LEGACY) {
+            //$$     cir.setReturnValue(direction == Direction.UP);
+            //$$ } else if (Configs.enderPortalRenderMode != EnderPortalRenderMode.MODERN) {
             //#else
-            //$$ if (Configs.enderPortalRenderMode == EnderPortalRenderMode.MODERN) {
-            //$$     cir.setReturnValue(direction.getAxis() == Direction.Axis.Y);
-            //$$ } else if (Configs.enderPortalRenderMode != EnderPortalRenderMode.LEGACY) {
+            if (Configs.enderPortalRenderMode == EnderPortalRenderMode.MODERN) {
+                cir.setReturnValue(direction.getAxis() == Direction.Axis.Y);
+            } else if (Configs.enderPortalRenderMode != EnderPortalRenderMode.LEGACY) {
             //#endif
                 cir.setReturnValue(true);
             }

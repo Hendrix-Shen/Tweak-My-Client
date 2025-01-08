@@ -10,9 +10,9 @@ public class ModMenuApiImpl implements ModMenuCompatApi {
         return (screen) -> {
             TweakMyClientConfigGui gui = TweakMyClientConfigGui.getInstance();
             //#if MC > 11903
-            gui.setParent(screen);
+            //$$ gui.setParent(screen);
             //#else
-            //$$ gui.setParentGui(screen);
+            gui.setParentGui(screen);
             //#endif
             return gui;
         };

@@ -16,7 +16,7 @@ import top.hendrixshen.tweakmyclient.helper.AutoDropListType;
 import top.hendrixshen.tweakmyclient.helper.Cache;
 
 //#if MC > 11605
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+//$$ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 //#endif
 
 public class InventoryUtil {
@@ -43,9 +43,9 @@ public class InventoryUtil {
                 }
 
                 //#if MC > 11605
-                ItemStack stack = localPlayer.getInventory().getItem(adjustedSlot);
+                //$$ ItemStack stack = localPlayer.getInventory().getItem(adjustedSlot);
                 //#else
-                //$$ ItemStack stack = localPlayer.inventory.getItem(adjustedSlot);
+                ItemStack stack = localPlayer.inventory.getItem(adjustedSlot);
                 //#endif
 
                 if (stack.isEmpty()) {
@@ -79,11 +79,11 @@ public class InventoryUtil {
         if (localPlayer != null && clientPacketListener != null) {
             ItemStack itemStack = new ItemStack(Items.BEDROCK);
             //#if MC > 11605
-            Int2ObjectOpenHashMap<ItemStack> int2ObjectMap = new Int2ObjectOpenHashMap<>();
-            clientPacketListener.send(new ServerboundContainerClickPacket(0, 0, 0, 0, ClickType.QUICK_MOVE, itemStack, int2ObjectMap));
+            //$$ Int2ObjectOpenHashMap<ItemStack> int2ObjectMap = new Int2ObjectOpenHashMap<>();
+            //$$ clientPacketListener.send(new ServerboundContainerClickPacket(0, 0, 0, 0, ClickType.QUICK_MOVE, itemStack, int2ObjectMap));
             //#else
-            //$$ short playerNextActionId = localPlayer.containerMenu.backup(localPlayer.inventory);
-            //$$ clientPacketListener.send(new ServerboundContainerClickPacket(0, 0, 0, ClickType.QUICK_MOVE, itemStack, playerNextActionId));
+            short playerNextActionId = localPlayer.containerMenu.backup(localPlayer.inventory);
+            clientPacketListener.send(new ServerboundContainerClickPacket(0, 0, 0, ClickType.QUICK_MOVE, itemStack, playerNextActionId));
             //#endif
         }
     }

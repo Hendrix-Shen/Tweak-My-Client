@@ -15,7 +15,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 //#if MC > 11502
-import org.joml.Matrix4f;
+import com.mojang.math.Matrix4f;
 import top.hendrixshen.tweakmyclient.util.render.OpenWaterHelperRenderer;
 //#endif
 
@@ -44,9 +44,9 @@ public class RenderHandler implements IRenderer {
 
     @Override
     //#if MC > 11605
-    public void onRenderWorldLast(PoseStack poseStack, Matrix4f matrix4f) {
+    //$$ public void onRenderWorldLast(PoseStack poseStack, Matrix4f matrix4f) {
     //#elseif MC > 11404
-    //$$ public void onRenderWorldLast(float partialTicks, PoseStack poseStack) {
+    public void onRenderWorldLast(float partialTicks, PoseStack poseStack) {
     //#else
     //$$ public void onRenderWorldLast(float partialTicks) {
     //#endif
