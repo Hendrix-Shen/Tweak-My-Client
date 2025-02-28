@@ -1,7 +1,7 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
 //#if MC > 11404
-import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+import top.hendrixshen.magiclib.api.preprocess.DummyClass;
 //#else
 //$$ import net.minecraft.client.player.LocalPlayer;
 //$$ import net.minecraft.core.BlockPos;

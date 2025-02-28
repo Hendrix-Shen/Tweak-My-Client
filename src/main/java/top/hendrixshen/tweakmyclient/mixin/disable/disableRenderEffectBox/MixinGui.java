@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.game.Configs;
 
 //#if MC > 11904
 //$$ import net.minecraft.client.gui.GuiGraphics;
@@ -14,22 +14,17 @@ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
 @Mixin(Gui.class)
-public class MixinGui {
-    @Inject(
-            method = "renderEffects",
-            at = @At(
-                    value = "HEAD"
-            ),
-            cancellable = true
-    )
-    //#if MC > 11904
-    //$$ private void onRender(GuiGraphics guiGraphics, CallbackInfo ci) {
-    //#elseif MC > 11502
-    private void onRender(PoseStack poseStack, CallbackInfo ci) {
-    //#else
-    //$$ private void onRender(CallbackInfo ci) {
-    //#endif
-        if (Configs.disableRenderEffectBox) {
+public abstract class MixinGui {
+    @Inject(method = "renderEffects", at = @At("HEAD"), cancellable = true)
+    private void onRender(
+            //#if MC > 11904
+            //$$ GuiGraphics guiGraphics,
+            //#elseif MC > 11502
+            PoseStack poseStack,
+            //#endif
+            CallbackInfo ci
+    ) {
+        if (Configs.disableEffectBoxRender.getBooleanValue()) {
             ci.cancel();
         }
     }

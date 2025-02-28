@@ -1,5 +1,6 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -8,12 +9,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
-import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
+import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Dependencies(
-        not = {
+        conflict = {
                 @Dependency(value = "meteor-client"),
                 @Dependency(value = "wurst")
         }
@@ -27,7 +28,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
         super(entityType, level);
     }
 
-    @Redirect(
+    @ModifyExpressionValue(
             method = "aiStep",
             at = @At(
                     value = "INVOKE",
@@ -35,10 +36,11 @@ public abstract class MixinLocalPlayer extends LivingEntity {
                     ordinal = 0
             )
     )
-    private boolean getUsingItemState(LocalPlayer instance) {
-        if (Configs.disableSlowdown) {
+    private boolean getUsingItemState(boolean original) {
+        if (Configs.disableSlowdown.getBooleanValue()) {
             return false;
         }
-        return this.startedUsingItem;
+
+        return original;
     }
 }

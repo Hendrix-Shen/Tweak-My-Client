@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.game.Configs;
 
 //#if MC > 11904
 //$$ import net.minecraft.client.gui.GuiGraphics;
@@ -16,21 +16,17 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 @Mixin(Gui.class)
 public abstract class MixinGui {
-    @Inject(
-            method = "displayScoreboardSidebar",
-            at = @At(
-                    value = "HEAD"
-            ),
-            cancellable = true
-    )
-    //#if MC > 11904
-    //$$ private void onRenderScoreboardSidebar(GuiGraphics guiGraphics, Objective objective, CallbackInfo ci) {
-    //#elseif MC > 11502
-    private void onRenderScoreboardSidebar(PoseStack poseStack, Objective objective, CallbackInfo ci) {
-    //#else
-    //$$ private void onRenderScoreboardSidebar(Objective objective, CallbackInfo ci) {
-    //#endif
-        if (Configs.disableRenderScoreboard) {
+    @Inject(method = "displayScoreboardSidebar", at = @At("HEAD"), cancellable = true)
+    private void onRenderScoreboardSidebar(
+            //#if MC > 11904
+            //$$ GuiGraphics guiGraphics,
+            //#elseif MC > 11502
+            PoseStack poseStack,
+            //#endif
+            Objective objective,
+            CallbackInfo ci
+    ) {
+        if (Configs.disableScoreboardRender.getBooleanValue()) {
             ci.cancel();
         }
     }

@@ -9,11 +9,11 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
-import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
+import top.hendrixshen.tweakmyclient.game.Configs;
 
-@Dependencies(and = @Dependency(value = "litematica"))
+@Dependencies(require = @Dependency(value = "litematica"))
 @Mixin(LitematicaSchematic.class)
 public abstract class MixinLitematicaSchematic {
     @Shadow(remap = false)
@@ -33,7 +33,7 @@ public abstract class MixinLitematicaSchematic {
             cancellable = true
     )
     private void ignoreVersionCheck(CompoundTag nbt, CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.disableLitematicaSchematicVersionCheck) {
+        if (Configs.disableLitematicaSchematicVersionCheck.getBooleanValue()) {
             this.metadata.readFromNBT(nbt.getCompound("Metadata"));
             this.readSubRegionsFromNBT(nbt.getCompound("Regions"), nbt.getInt("Version"), nbt.getInt("MinecraftDataVersion"));
             cir.setReturnValue(true);

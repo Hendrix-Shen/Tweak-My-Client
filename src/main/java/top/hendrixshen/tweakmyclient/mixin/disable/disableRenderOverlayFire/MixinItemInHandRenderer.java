@@ -3,7 +3,7 @@ package top.hendrixshen.tweakmyclient.mixin.disable.disableRenderOverlayFire;
 import org.spongepowered.asm.mixin.Mixin;
 
 //#if MC > 11404
-import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+import top.hendrixshen.magiclib.api.preprocess.DummyClass;
 //#else
 //$$ import net.minecraft.client.renderer.ItemInHandRenderer;
 //$$ import org.spongepowered.asm.mixin.injection.At;

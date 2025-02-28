@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(WebBlock.class)
 public class MixinWebBlock {
@@ -23,7 +23,7 @@ public class MixinWebBlock {
             cancellable = true
     )
     private void onWalkInCobWebBlock(BlockState blockState, Level level, BlockPos blockPos, Entity entity, CallbackInfo ci) {
-        if ((Configs.disableSlowdown) && entity instanceof LocalPlayer) {
+        if ((Configs.disableSlowdown.getBooleanValue()) && entity instanceof LocalPlayer) {
             ci.cancel();
         }
     }

@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Slice;
-import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.util.MiscUtil;
+import top.hendrixshen.magiclib.util.MiscUtil;
+import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity extends Entity {
@@ -45,7 +45,7 @@ public abstract class MixinLivingEntity extends Entity {
             ordinal = 0
     )
     private float onGetFriction(float f) {
-        if (Configs.disableSlowdown && MiscUtil.cast(this) instanceof LocalPlayer && !this.isInWater() && f > 0.6F) {
+        if (Configs.disableSlowdown.getBooleanValue() && MiscUtil.cast(this) instanceof LocalPlayer && !this.isInWater() && f > 0.6F) {
             return 0.6F;
         }
 

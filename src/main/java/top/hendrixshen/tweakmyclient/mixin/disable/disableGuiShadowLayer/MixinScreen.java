@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.game.Configs;
 
 //#if MC > 11904
 //$$ import net.minecraft.client.gui.GuiGraphics;
@@ -38,7 +38,6 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             ),
             cancellable = true
     )
-    // private void onFillGradient(GuiGraphics guiGraphics, int i, int j, float f, CallbackInfo ci) {
     private void onFillGradient(
             //#if MC > 11904
             //$$ GuiGraphics guiGraphics,
@@ -46,16 +45,16 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             PoseStack poseStack,
             //#endif
             //#if MC > 12001
-            //$$ int i,
-            //$$ int j,
-            //$$ float f,
+            //$$ int mouseX,
+            //$$ int mouseY,
+            //$$ float partialTick,
             //#endif
             //#if MC < 11904
-            int i,
+            int vOffset,
             //#endif
             CallbackInfo ci
     ) {
-        if (Configs.disableGuiShadowLayer) {
+        if (Configs.disableGuiShadowLayer.getBooleanValue()) {
             ci.cancel();
         }
     }

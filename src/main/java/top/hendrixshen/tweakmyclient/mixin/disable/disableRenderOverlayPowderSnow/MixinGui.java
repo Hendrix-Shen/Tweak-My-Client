@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Mixin;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import top.hendrixshen.tweakmyclient.config.Configs;
 //#else
-import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
+import top.hendrixshen.magiclib.api.preprocess.DummyClass;
 //#endif
 
 //#if MC > 11605

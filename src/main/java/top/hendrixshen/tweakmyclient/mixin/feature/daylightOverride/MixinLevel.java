@@ -1,0 +1,24 @@
+package top.hendrixshen.tweakmyclient.mixin.feature.daylightOverride;
+
+import net.minecraft.world.level.Level;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import top.hendrixshen.tweakmyclient.game.Configs;
+
+@Mixin(Level.class)
+public abstract class MixinLevel {
+    @Inject(
+            method = "getDayTime",
+            at = @At(
+                    value = "RETURN"
+            ),
+            cancellable = true
+    )
+    private void onGetTimeOfDay(CallbackInfoReturnable<Long> cir) {
+        if (Configs.daylightOverride.getBooleanValue()) {
+            cir.setReturnValue((long) Configs.daylightOverrideTime.getIntegerValue());
+        }
+    }
+}

@@ -5,19 +5,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(Player.class)
-public class MixinPlayer {
-    @Inject(
-            method = "isReducedDebugInfo",
-            at = @At(
-                    value = "HEAD"
-            ),
-            cancellable = true
-    )
+public abstract class MixinPlayer {
+    @Inject(method = "isReducedDebugInfo", at = @At("HEAD"), cancellable = true)
     private void isReducedDebugInfo(CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.forceDebugInfoDetailed) {
+        if (Configs.forceDebugInfoDetailed.getBooleanValue()) {
             cir.setReturnValue(false);
         }
     }

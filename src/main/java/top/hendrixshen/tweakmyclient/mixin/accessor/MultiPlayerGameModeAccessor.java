@@ -6,6 +6,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(MultiPlayerGameMode.class)
 public interface MultiPlayerGameModeAccessor {
-    @Accessor
-    float getDestroyProgress();
+    @Accessor("destroyProgress")
+    float tmc$getDestroyProgress();
 }

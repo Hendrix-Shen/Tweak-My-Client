@@ -7,12 +7,12 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(NativeImage.class)
 public interface NativeImageAccessor {
-    @Accessor
-    long getPixels();
+    @Accessor("pixels")
+    long tmc$getPixels();
 
-    @Accessor
-    NativeImage.Format getFormat();
+    @Accessor("format")
+    NativeImage.Format tmc$getFormat();
 
-    @Invoker
-    void invokeCheckAllocated();
+    @Invoker("checkAllocated")
+    void tmc$invokeCheckAllocated();
 }
