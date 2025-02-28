@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "id": "${mod_id}",
-  "version": "${mod_version}",
-  "icon": "assets/${mod_id}/icon.png",
   "name": "${mod_name}",
   "description": "${mod_description}",
+  "icon": "assets/${mod_id}/icon.png",
+  "version": "${mod_version}",
   "authors": [
     {
       "name": "Hendrix_Shen",
@@ -12,6 +12,8 @@
         "homepage": "https://github.com/Hendrix-Shen"
       }
     }
+  ],
+  "contributors": [
   ],
   "contact": {
     "homepage": "${mod_homepage}",

@@ -5,6 +5,7 @@ import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
+import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.player.PlayerCompat;
 
 public class BlockRefresher {
     public static void refresh() {
@@ -15,7 +16,8 @@ public class BlockRefresher {
             return;
         }
 
-        BlockPos blockPos = mc.player.blockPosition();
+        PlayerCompat playerCompat = PlayerCompat.of(mc.player);
+        BlockPos blockPos = playerCompat.getBlockPosition();
         int x = blockPos.getX();
         int y = blockPos.getY();
         int z = blockPos.getZ();

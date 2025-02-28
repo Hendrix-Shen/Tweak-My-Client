@@ -33,7 +33,7 @@ public abstract class MixinScreen {
                     value = "INVOKE",
                     //#if MC > 11904
                     //$$ target = "Lnet/minecraft/client/gui/GuiGraphics;fillGradient(IIIIII)V"
-                    //#elseif MC > 11404
+                    //#elseif MC > 11502
                     target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V"
                     //#else
                     //$$ target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(IIIIII)V"
@@ -43,7 +43,7 @@ public abstract class MixinScreen {
     private void onFillGradient(Args args) {
         if (Configs.customGuiBackgroundColor.getBooleanValue()) {
             args.set(
-                    //#if MC > 11502 && MC < 12000
+                    //#if 12000 > MC && MC > 11404
                     5,
                     //#else
                     //$$ 6,
@@ -51,7 +51,7 @@ public abstract class MixinScreen {
                     Configs.customGuiBackgroundStartColor.getIntegerValue()
             );
             args.set(
-                    //#if MC > 11502 && MC < 12000
+                    //#if 12000 > MC && MC > 11404
                     4,
                     //#else
                     //$$ 5,

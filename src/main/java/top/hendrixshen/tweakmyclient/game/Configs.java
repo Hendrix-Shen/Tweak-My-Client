@@ -429,7 +429,9 @@ public class Configs {
         MagicLib.getInstance().getEventManager().register(LocalPlayerListener.class, AutoTotemHandler.getInstance());
         MagicLib.getInstance().getEventManager().register(MinecraftListener.class, CustomWindowTitleHandler.getInstance());
         MagicLib.getInstance().getEventManager().register(RenderLevelListener.class, RestrictionBoxRenderer.getInstance());
+        //#if MC > 11502
         MagicLib.getInstance().getEventManager().register(RenderLevelListener.class, OpenWaterHelperRenderer.getInstance());
+        //#endif
         MagicLib.getInstance().getEventManager().register(RenderLevelListener.class, CustomBlockHitBoxRenderer.getInstance());
 
         /*

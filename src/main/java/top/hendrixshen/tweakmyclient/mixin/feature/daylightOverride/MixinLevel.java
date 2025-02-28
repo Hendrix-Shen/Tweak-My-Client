@@ -9,13 +9,7 @@ import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(Level.class)
 public abstract class MixinLevel {
-    @Inject(
-            method = "getDayTime",
-            at = @At(
-                    value = "RETURN"
-            ),
-            cancellable = true
-    )
+    @Inject(method = "getDayTime", at = @At("RETURN"), cancellable = true)
     private void onGetTimeOfDay(CallbackInfoReturnable<Long> cir) {
         if (Configs.daylightOverride.getBooleanValue()) {
             cir.setReturnValue((long) Configs.daylightOverrideTime.getIntegerValue());

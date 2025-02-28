@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(ToastComponent.class)
-public class MixinToastComponent {
+public abstract class MixinToastComponent {
     @Inject(method = "addToast", at = @At("HEAD"), cancellable = true)
     private void onAddToToastQueue(Toast toast, CallbackInfo ci) {
         if (Configs.disableToastRender.getBooleanValue()) {

@@ -25,9 +25,9 @@ public abstract class MixinEntityRenderDispatcher {
             //#else
             //$$ Culler culler,
             //#endif
-            double d,
-            double e,
-            double f,
+            double camX,
+            double camY,
+            double camZ,
             CallbackInfoReturnable<Boolean> cir
     ) {
         if (!Configs.entityRenderingRestriction.getBooleanValue()

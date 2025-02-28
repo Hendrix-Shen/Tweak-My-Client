@@ -2,10 +2,8 @@ package top.hendrixshen.tweakmyclient.mixin.patch.disableResourcePackIncompatibl
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.gui.screens.packs.TransferableSelectionList;
-import net.minecraft.server.packs.repository.PackCompatibility;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(TransferableSelectionList.PackEntry.class)

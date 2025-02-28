@@ -27,7 +27,7 @@ public abstract class MixinLocalPlayer extends LivingEntity {
                 //#if MC > 11502
                 this.onClimbable() &&
                 //#else
-                //$$ this.onLadder()
+                //$$ this.onLadder() &&
                 //#endif
                 playerCompat.getXRot() <= -50F &&
                 //#if MC > 11404

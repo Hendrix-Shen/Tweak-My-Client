@@ -134,54 +134,66 @@ public class PatchedDisconnectedScreen extends Screen {
     //$$     guiGraphics.drawCenteredString(this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
     //$$     this.message.renderCentered(guiGraphics, this.width / 2, this.height / 2 - this.textHeight / 2);
     //$$     super.render(guiGraphics, mouseX, mouseY, delta);
-    //#elseif MC > 11502
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
-        if (Configs.expXiBao.getBooleanValue()) {
-            AutoReconnectUtil.renderXibao(this);
-        } else {
-            this.renderBackground(poseStack);
-        }
+    //#else
+    public void render(
+            //#if MC > 11502
+            PoseStack poseStack,
+            //#endif
+            int mouseX,
+            int mouseY,
+            float partialTick
+    ) {
+        this.renderBackground(
+                //#if MC > 11502
+                poseStack
+                //#endif
+        );
 
+        //#if MC > 11502
         GuiComponent.drawCenteredString(poseStack, this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
         this.message.renderCentered(poseStack, this.width / 2, this.height / 2 - this.textHeight / 2);
-        super.render(poseStack, mouseX, mouseY, delta);
         //#else
-        //$$ public void render(int mouseX, int mouseY, float delta) {
-        //$$     if (Configs.expXiBao) {
-        //$$         AutoReconnectUtil.renderXibao(this);
-        //$$     } else {
-        //$$         this.renderBackground();
+        //$$ this.drawCenteredString(this.font, this.title.getColoredString(), this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
+        //$$ int k = this.height / 2 - this.textHeight / 2;
+        //$$
+        //$$ if (this.lines != null) {
+        //$$     for(String string : this.lines) {
+        //$$         this.drawCenteredString(this.font, string, this.width / 2, k, 0xFFFFFF);
+        //$$         k += 9;
         //$$     }
-        //$$
-        //$$     this.drawCenteredString(this.font, this.title.getColoredString(), this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
-        //$$     int k = this.height / 2 - this.textHeight / 2;
-        //$$
-        //$$     if (this.lines != null) {
-        //$$         for(String string : this.lines) {
-        //$$             this.drawCenteredString(this.font, string, this.width / 2, k, 0xFFFFFF);
-        //$$             k += 9;
-        //$$         }
-        //$$     }
-        //$$
+        //$$ }
         //#endif
+        super.render(
+                //#if MC > 11502
+                poseStack,
+                //#endif
+                mouseX,
+                mouseY,
+                partialTick
+        );
     }
+    //#endif
 
     @Override
     public void tick() {
         if (!Configs.autoReconnect.getBooleanValue()) {
-            //#if MC > 11502
-            this.autoReconnectButton.setMessage(ComponentCompat.literal(SharedConstants.tr("message.autoReconnect.toggle")));
-            //#else
-            //$$ this.autoReconnectButton.setMessage(StringUtil.tr("message.autoReconnect.toggle"));
-            //#endif
+            this.autoReconnectButton.setMessage(
+                    //#if MC > 11502
+                    ComponentCompat.literal(SharedConstants.tr("message.autoReconnect.toggle"))
+                    //#else
+                    //$$ SharedConstants.tr("message.autoReconnect.toggle")
+                    //#endif
+            );
             return;
         }
 
-        //#if MC > 11502
-        this.autoReconnectButton.setMessage(ComponentCompat.literal(SharedConstants.tr("message.autoReconnect.timer", (int) Math.ceil(this.reconnectTimer / 20.0))));
-        //#else
-        //$$ this.autoReconnectButton.setMessage(StringUtil.tr("message.autoReconnect.timer", (int) Math.ceil(this.reconnectTimer / 20.0)));
-        //#endif
+        this.autoReconnectButton.setMessage(
+                //#if MC > 11502
+                ComponentCompat.literal(SharedConstants.tr("message.autoReconnect.timer"))
+                //#else
+                //$$ SharedConstants.tr("message.autoReconnect.timer")
+                //#endif
+        );
 
         if (this.reconnectTimer > 0) {
             this.reconnectTimer--;

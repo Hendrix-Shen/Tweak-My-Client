@@ -23,39 +23,6 @@ public abstract class MixinMinecraft {
         }
     }
 
-    //#if MC > 11404
-    @Inject(method = "createTitle", at = @At("HEAD"), cancellable = true)
-    private void onCreateTitle(CallbackInfoReturnable<String> cir) {
-    }
-    //#else
-    //$$ @Inject(
-    //$$         method = "run",
-    //$$         at = @At(
-    //$$                 value = "INVOKE",
-    //$$                 target = "Lnet/minecraft/client/Minecraft;init()V",
-    //$$                 shift = At.Shift.AFTER
-    //$$         )
-    //$$ )
-    //$$ private void afterInit(CallbackInfo ci) {
-    //$$     if (Configs.featureCustomWindowTitle) {
-    //$$         CustomWindowUtil.updateTitle();
-    //$$     }
-    //$$ }
-    //#endif
-
-    // @Inject(
-    //         method = "run",
-    //         at = @At(
-    //                 value = "INVOKE",
-    //                 target = "Lnet/minecraft/client/Minecraft;runTick(Z)V"
-    //         )
-    // )
-    // private void onRunTick(CallbackInfo ci) {
-    //     if (Configs.customWindowTitle.getBooleanValue()) {
-    //         CustomWindowTitleHandler.updateTitle();
-    //     }
-    // }
-
     // Expose FPS data
     @Inject(
             method = "runTick",

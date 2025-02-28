@@ -1,7 +1,5 @@
 package top.hendrixshen.tweakmyclient.impl.feature.autoReconnect;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;
@@ -9,10 +7,7 @@ import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import top.hendrixshen.magiclib.api.compat.mojang.blaze3d.vertex.VertexFormatCompat;
-import top.hendrixshen.tweakmyclient.SharedConstants;
 
 //#if MC > 11902
 //$$ import java.util.List;
@@ -21,7 +16,6 @@ import net.minecraft.network.chat.TranslatableComponent;
 //#endif
 
 public class AutoReconnectUtil {
-    private static final ResourceLocation XI_BAO_LOCATION = SharedConstants.id("texture/gui/xibao.png");
     private static final Minecraft mc = Minecraft.getInstance();
     @Getter
     @Setter
@@ -35,28 +29,6 @@ public class AutoReconnectUtil {
     //$$         ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.serversUnavailable")).plainCopy(),
     //$$         ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.userBanned")).plainCopy());
     //#endif
-
-    //#if MC < 11700
-    @SuppressWarnings("deprecation")
-    //#endif
-    public static void renderXibao(@NotNull Screen screen) {
-        Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder bufferbuilder = tesselator.getBuilder();
-        //#if MC > 11605
-        //$$ RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
-        //$$ RenderSystem.setShaderTexture(0, AutoReconnectUtil.XI_BAO_LOCATION);
-        //$$ RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        //#else
-        Minecraft.getInstance().getTextureManager().bind(AutoReconnectUtil.XI_BAO_LOCATION);
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        //#endif
-        bufferbuilder.begin(VertexFormatCompat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-        bufferbuilder.vertex(0.0D, screen.height, 0.0D).uv(0F, 1F).color(255, 255, 255, 255).endVertex();
-        bufferbuilder.vertex(screen.width, screen.height, 0.0D).uv(1F, 1F).color(255, 255, 255, 255).endVertex();
-        bufferbuilder.vertex(screen.width, 0.0D, 0.0D).uv(1F, 0F).color(255, 255, 255, 255).endVertex();
-        bufferbuilder.vertex(0.0D, 0.0D, 0.0D).uv(0F, 0F).color(255, 255, 255, 255).endVertex();
-        tesselator.end();
-    }
 
     public static void reconnect(Screen screen) {
         ServerData serverInfo = AutoReconnectUtil.lastServer;

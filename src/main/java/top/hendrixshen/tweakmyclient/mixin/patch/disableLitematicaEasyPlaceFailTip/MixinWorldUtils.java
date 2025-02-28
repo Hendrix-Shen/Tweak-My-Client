@@ -3,7 +3,6 @@ package top.hendrixshen.tweakmyclient.mixin.patch.disableLitematicaEasyPlaceFail
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import fi.dy.masa.litematica.util.WorldUtils;
 import fi.dy.masa.malilib.gui.Message.MessageType;
-import fi.dy.masa.malilib.util.InfoUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
