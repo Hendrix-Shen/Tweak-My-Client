@@ -12,7 +12,7 @@ import top.hendrixshen.tweakmyclient.game.Configs;
 import top.hendrixshen.tweakmyclient.impl.feature.crystalBeamsRenderRestriction.CrystalBeamsRenderRestrictionMode;
 
 //#if MC > 11605
-//$$ import net.minecraft.client.renderer.entity.EntityRendererProvider.Co;ntext;
+//$$ import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 //#else
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 //#endif

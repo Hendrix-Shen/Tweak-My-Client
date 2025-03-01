@@ -1,6 +1,5 @@
 package top.hendrixshen.tweakmyclient.mixin.patch.chunkEdgeLagFix;
 
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import org.spongepowered.asm.mixin.Mixin;
 
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -12,7 +11,9 @@ import top.hendrixshen.tweakmyclient.game.Configs;
 //#if MC > 11701
 //$$ import net.minecraft.network.protocol.game.ClientboundForgetLevelChunkPacket;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#else
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.core.SectionPos;
 import net.minecraft.world.level.lighting.LevelLightEngine;
 //#endif

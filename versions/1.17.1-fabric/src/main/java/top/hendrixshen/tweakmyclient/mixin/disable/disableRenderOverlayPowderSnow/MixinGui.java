@@ -18,7 +18,6 @@ import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(Gui.class)
 public abstract class MixinGui {
-    //#if MC > 11605
     @Shadow
     @Final
     private static ResourceLocation POWDER_SNOW_OUTLINE_LOCATION;
