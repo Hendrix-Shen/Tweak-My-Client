@@ -117,27 +117,11 @@ public class PatchedDisconnectedScreen extends Screen {
     //#endif
 
     @Override
-    //#if MC > 11904
-    //$$ public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-    //$$     if (Configs.expXiBao) {
-    //$$         AutoReconnectUtil.renderXibao(this);
-    //$$     } else {
-    //$$         this.renderBackground(
-    //#if MC > 12001
-    //$$ guiGraphics, mouseX, mouseY, delta
-    //#else
-    //$$ guiGraphics
-    //#endif
-    //$$         );
-    //$$     }
-    //$$
-    //$$     guiGraphics.drawCenteredString(this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
-    //$$     this.message.renderCentered(guiGraphics, this.width / 2, this.height / 2 - this.textHeight / 2);
-    //$$     super.render(guiGraphics, mouseX, mouseY, delta);
-    //#else
     public void render(
-            //#if MC > 11502
-            PoseStack poseStack,
+            //#if MC > 11904
+            //$$ GuiGraphics guiGraphicsOrPoseStack,
+            //#elseif MC > 11502
+            PoseStack guiGraphicsOrPoseStack,
             //#endif
             int mouseX,
             int mouseY,
@@ -145,13 +129,17 @@ public class PatchedDisconnectedScreen extends Screen {
     ) {
         this.renderBackground(
                 //#if MC > 11502
-                poseStack
+                guiGraphicsOrPoseStack
                 //#endif
         );
 
         //#if MC > 11502
-        GuiComponent.drawCenteredString(poseStack, this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
-        this.message.renderCentered(poseStack, this.width / 2, this.height / 2 - this.textHeight / 2);
+        //#if MC > 11904
+        //$$ guiGraphicsOrPoseStack.drawCenteredString(this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
+        //#else
+        GuiComponent.drawCenteredString(guiGraphicsOrPoseStack, this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
+        //#endif
+        this.message.renderCentered(guiGraphicsOrPoseStack, this.width / 2, this.height / 2 - this.textHeight / 2);
         //#else
         //$$ this.drawCenteredString(this.font, this.title.getColoredString(), this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
         //$$ int k = this.height / 2 - this.textHeight / 2;
@@ -165,14 +153,13 @@ public class PatchedDisconnectedScreen extends Screen {
         //#endif
         super.render(
                 //#if MC > 11502
-                poseStack,
+                guiGraphicsOrPoseStack,
                 //#endif
                 mouseX,
                 mouseY,
                 partialTick
         );
     }
-    //#endif
 
     @Override
     public void tick() {

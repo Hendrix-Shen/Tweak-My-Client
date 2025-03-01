@@ -25,7 +25,7 @@ public abstract class MixinGui {
     @Inject(method = "renderTextureOverlay", at = @At(value = "HEAD"), cancellable = true)
     private void onRenderPowderSnowOverlay(
             //#if MC > 11904
-            //$$ GuiGraphics guiGraphics
+            //$$ GuiGraphics guiGraphics,
             //#elseif MC > 11903
             //$$ PoseStack poseStack,
             //#endif
