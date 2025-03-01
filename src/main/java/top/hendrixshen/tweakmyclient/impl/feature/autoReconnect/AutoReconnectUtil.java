@@ -10,7 +10,9 @@ import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
 //#if MC > 11902
+//$$ import com.google.common.collect.Lists;
 //$$ import java.util.List;
+//$$ import top.hendrixshen.magiclib.api.compat.minecraft.network.chat.ComponentCompat;
 //#else
 import net.minecraft.network.chat.TranslatableComponent;
 //#endif
@@ -28,10 +30,10 @@ public class AutoReconnectUtil {
     private static boolean isLastQuickPlay = false;
     //#if MC > 11902
     //$$ public static final List<Component> RE_AUTH_MESSAGES = Lists.newArrayList(
-    //$$         ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.insufficientPrivileges")).plainCopy(),
-    //$$         ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.invalidSession")).plainCopy(),
-    //$$         ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.serversUnavailable")).plainCopy(),
-    //$$         ComponentCompatApi.translatable("disconnect.loginFailedInfo", ComponentCompatApi.translatable("disconnect.loginFailedInfo.userBanned")).plainCopy());
+    //$$         ComponentCompat.translatable("disconnect.loginFailedInfo", ComponentCompat.translatable("disconnect.loginFailedInfo.insufficientPrivileges")).plainCopy(),
+    //$$         ComponentCompat.translatable("disconnect.loginFailedInfo", ComponentCompat.translatable("disconnect.loginFailedInfo.invalidSession")).plainCopy(),
+    //$$         ComponentCompat.translatable("disconnect.loginFailedInfo", ComponentCompat.translatable("disconnect.loginFailedInfo.serversUnavailable")).plainCopy(),
+    //$$         ComponentCompat.translatable("disconnect.loginFailedInfo", ComponentCompat.translatable("disconnect.loginFailedInfo.userBanned")).plainCopy());
     //#endif
 
     public static void reconnect(Screen screen) {

@@ -10,7 +10,7 @@ import top.hendrixshen.tweakmyclient.impl.feature.autoReconnect.AutoReconnectUti
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
-    @Inject(method = "setCurrentServer", at = @At("HEAD"))
+    @Inject(method = "setCurrentServer(Lnet/minecraft/client/multiplayer/ServerData;)V", at = @At("HEAD"))
     private void setCurrentServerEntry(ServerData serverData, CallbackInfo ci) {
         AutoReconnectUtil.setLastServer(serverData);
     }

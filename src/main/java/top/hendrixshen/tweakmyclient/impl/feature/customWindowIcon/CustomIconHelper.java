@@ -29,6 +29,10 @@ import java.util.function.Function;
 import net.minecraft.server.packs.PackType;
 //#endif
 
+//#if MC > 11902
+//$$ import java.util.Objects;
+//#endif
+
 //#if MC > 11404
 import com.mojang.blaze3d.systems.RenderSystem;
 //#endif
@@ -122,21 +126,21 @@ public class CustomIconHelper {
 
         try {
             if (Configs.customWindowIcon.getBooleanValue()) {
-                CustomIconHelper.pushResource(inputStreams, TMC_STABLE_16X, TMC_SNAPSHOT_16X);
-                CustomIconHelper.pushResource(inputStreams, TMC_STABLE_32X, TMC_SNAPSHOT_32X);
-                CustomIconHelper.pushResource(inputStreams, TMC_STABLE_48X, TMC_SNAPSHOT_48X);
-                CustomIconHelper.pushResource(inputStreams, TMC_STABLE_128X, TMC_SNAPSHOT_128X);
-                CustomIconHelper.pushResource(inputStreams, TMC_STABLE_256X, TMC_SNAPSHOT_256X);
+                CustomIconHelper.pushResource(inputStreams, CustomIconHelper.TMC_STABLE_16X, CustomIconHelper.TMC_SNAPSHOT_16X);
+                CustomIconHelper.pushResource(inputStreams, CustomIconHelper.TMC_STABLE_32X, CustomIconHelper.TMC_SNAPSHOT_32X);
+                CustomIconHelper.pushResource(inputStreams, CustomIconHelper.TMC_STABLE_48X, CustomIconHelper.TMC_SNAPSHOT_48X);
+                CustomIconHelper.pushResource(inputStreams, CustomIconHelper.TMC_STABLE_128X, CustomIconHelper.TMC_SNAPSHOT_128X);
+                CustomIconHelper.pushResource(inputStreams, CustomIconHelper.TMC_STABLE_256X, CustomIconHelper.TMC_SNAPSHOT_256X);
             } else {
                 //#if MC > 11904
-                //$$ IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_16X, IconUtil.VANILLA_SNAPSHOT_16X);
-                //$$ IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_32X, IconUtil.VANILLA_SNAPSHOT_32X);
-                //$$ IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_48X, IconUtil.VANILLA_SNAPSHOT_48X);
-                //$$ IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_128X, IconUtil.VANILLA_SNAPSHOT_128X);
-                //$$ IconUtil.pushVanillaResource(inputStreams, IconUtil.VANILLA_STABLE_256X, IconUtil.VANILLA_SNAPSHOT_256X);
+                //$$ CustomIconHelper.pushVanillaResource(inputStreams, CustomIconHelper.VANILLA_STABLE_16X, CustomIconHelper.VANILLA_SNAPSHOT_16X);
+                //$$ CustomIconHelper.pushVanillaResource(inputStreams, CustomIconHelper.VANILLA_STABLE_32X, CustomIconHelper.VANILLA_SNAPSHOT_32X);
+                //$$ CustomIconHelper.pushVanillaResource(inputStreams, CustomIconHelper.VANILLA_STABLE_48X, CustomIconHelper.VANILLA_SNAPSHOT_48X);
+                //$$ CustomIconHelper.pushVanillaResource(inputStreams, CustomIconHelper.VANILLA_STABLE_128X, CustomIconHelper.VANILLA_SNAPSHOT_128X);
+                //$$ CustomIconHelper.pushVanillaResource(inputStreams, CustomIconHelper.VANILLA_STABLE_256X, CustomIconHelper.VANILLA_SNAPSHOT_256X);
                 //#elseif MC > 11902
-                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_16X)).get());
-                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(IconUtil.VANILLA_STABLE_32X)).get());
+                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(CustomIconHelper.VANILLA_STABLE_16X)).get());
+                //$$ inputStreams.add(Objects.requireNonNull(mc.getVanillaPackResources().getRootResource(CustomIconHelper.VANILLA_STABLE_32X)).get());
                 //#else
                 inputStreams.add(mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, CustomIconHelper.VANILLA_STABLE_16X));
                 inputStreams.add(mc.getClientPackSource().getVanillaPack().getResource(PackType.CLIENT_RESOURCES, CustomIconHelper.VANILLA_STABLE_32X));
