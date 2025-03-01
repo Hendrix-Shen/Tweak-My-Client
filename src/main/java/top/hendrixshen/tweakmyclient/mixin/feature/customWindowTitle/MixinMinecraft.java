@@ -16,12 +16,14 @@ public abstract class MixinMinecraft {
     @Shadow
     private static int fps;
 
+    //#if MC > 11404
     @Inject(method = "updateTitle", at = @At("HEAD"), cancellable = true)
     private void onUpdateTitle(CallbackInfo ci) {
         if (Configs.customWindowTitle.getBooleanValue()) {
             ci.cancel();
         }
     }
+    //#endif
 
     // Expose FPS data
     @Inject(

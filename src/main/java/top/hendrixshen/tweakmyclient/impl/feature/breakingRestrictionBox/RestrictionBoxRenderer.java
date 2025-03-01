@@ -1,6 +1,5 @@
 package top.hendrixshen.tweakmyclient.impl.feature.breakingRestrictionBox;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.malilib.util.Color4f;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +7,7 @@ import net.minecraft.world.level.Level;
 import org.lwjgl.opengl.GL11;
 import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
 import top.hendrixshen.magiclib.api.render.context.RenderContext;
+import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
 import top.hendrixshen.tweakmyclient.game.Configs;
 import top.hendrixshen.tweakmyclient.util.AreaBox;
 import top.hendrixshen.tweakmyclient.impl.config.EitherUsageRestriction.EitherListType;
@@ -48,9 +48,9 @@ public class RestrictionBoxRenderer implements RenderLevelListener {
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
         GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
         GL11.glPolygonOffset(-1.0F, -1.0F);
-        RenderSystem.disableDepthTest();
+        RenderGlobal.disableDepthTest();
         RenderUtil.renderAreaOutline(areaBox, outlineColor);
-        RenderSystem.enableDepthTest();
+        RenderGlobal.enableDepthTest();
         RenderUtil.renderAreaOverlay(areaBox, fillColor);
         GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);

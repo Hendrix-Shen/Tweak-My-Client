@@ -146,7 +146,11 @@ public class CustomWindowTitleHandler implements MinecraftListener {
             this.startTitleChangerThread();
         } else {
             this.stopTitleChangerThread();
+            //#if MC > 11404
             this.mc.updateTitle();
+            //#else
+            //$$ GLFW.glfwSetWindowTitle(MinecraftCompat.getInstance().getWindow().getWindow(), "Minecraft " + SharedConstants.getCurrentVersion().getName());
+            //#endif
         }
     }
 

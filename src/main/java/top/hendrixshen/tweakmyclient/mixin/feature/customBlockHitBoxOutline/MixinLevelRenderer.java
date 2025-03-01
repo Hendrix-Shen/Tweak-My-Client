@@ -34,7 +34,7 @@ public abstract class MixinLevelRenderer {
             //#else
             //$$ Camera camera,
             //$$ HitResult hitResult,
-            //$$ int i
+            //$$ int i,
             //#endif
             CallbackInfo ci
     ) {

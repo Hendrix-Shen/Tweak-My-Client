@@ -11,24 +11,14 @@ import top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix.EnderPortal
 
 @Mixin(TheEndPortalBlockEntity.class)
 public abstract class MixinTheEndPortalBlockEntity {
-    @Inject(
-            method = "shouldRenderFace",
-            at = @At(
-                    value = "HEAD"
-            ),
-            cancellable = true
-    )
+    @Inject(method = "shouldRenderFace", at = @At(value = "HEAD"), cancellable = true)
     private void shouldRenderFace(Direction direction, CallbackInfoReturnable<Boolean> cir) {
         if (Configs.endPortalRendererFix.getBooleanValue()) {
-            //#if MC > 11605
-            //$$ if (Configs.enderPortalRenderMode == EnderPortalRenderMode.LEGACY) {
-            //$$     cir.setReturnValue(direction == Direction.UP);
-            //$$ } else if (Configs.enderPortalRenderMode != EnderPortalRenderMode.MODERN) {
-            //#else
-            if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.MODERN) {
+            if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.LEGACY) {
+                cir.setReturnValue(direction == Direction.UP);
+            } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.MODERN) {
                 cir.setReturnValue(direction.getAxis() == Direction.Axis.Y);
-            } else if (Configs.enderPortalRenderMode.getOptionListValue() != EnderPortalRenderMode.LEGACY) {
-            //#endif
+            } else {
                 cir.setReturnValue(true);
             }
         }

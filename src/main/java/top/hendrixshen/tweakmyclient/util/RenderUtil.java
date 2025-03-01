@@ -1,6 +1,5 @@
 package top.hendrixshen.tweakmyclient.util;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.Color4f;
@@ -15,6 +14,13 @@ import top.hendrixshen.magiclib.api.compat.mojang.blaze3d.vertex.VertexFormatCom
 //$$ import net.minecraft.client.renderer.GameRenderer;
 //#else
 import org.lwjgl.opengl.GL11;
+import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
+//#endif
+
+//#if MC > 11404
+import com.mojang.blaze3d.systems.RenderSystem;
+//#else
+//$$ import com.mojang.blaze3d.platform.GlStateManager;
 //#endif
 
 public class RenderUtil {
@@ -78,33 +84,48 @@ public class RenderUtil {
 
     private static void drawBoundingBoxOverlay(double minX, double minY, double minZ,
                                               double maxX, double maxY, double maxZ, @NotNull Color4f color) {
-        RenderSystem.enableBlend();
+        RenderGlobal.enableBlend();
+        // TODO: Migrate to RenderGlobal.
+        //#if MC > 11404
         RenderSystem.disableCull();
-        //#if MC >= 11700
-        //$$ RenderSystem.setShader(GameRenderer::getPositionColorShader);
         //#else
-        RenderSystem.disableTexture();
+        //$$ GlStateManager.disableCull();
+        //#endif
+        //#if MC >= 11700
+        //$$ RenderGlobal.setShader(GameRenderer::getPositionColorShader);
+        //#else
+        RenderGlobal.disableTexture();
         //#endif
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferBuilder = tesselator.getBuilder();
         bufferBuilder.begin(VertexFormatCompat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
         RenderUtils.drawBoxAllSidesBatchedQuads(minX, minY, minZ, maxX, maxY, maxZ, color, bufferBuilder);
         tesselator.end();
-        RenderSystem.disableBlend();
+        RenderGlobal.disableBlend();
+        // TODO: Migrate to RenderGlobal.
+        //#if MC > 11404
         RenderSystem.enableCull();
+        //#else
+        //$$ GlStateManager.enableCull();
+        //#endif
         //#if MC < 11700
-        RenderSystem.enableTexture();
+        RenderGlobal.enableTexture();
         //#endif
     }
 
     public static void renderShapeOverlay(@NotNull VoxelShape voxelShape, double x, double y, double z, Color4f color) {
         //#if MC < 11700
-        RenderSystem.disableTexture();
+        RenderGlobal.disableTexture();
         //#endif
-        RenderSystem.enableBlend();
+        RenderGlobal.enableBlend();
+        // TODO: Migrate to RenderGlobal.
+        //#if MC > 11404
         RenderSystem.disableCull();
+        //#else
+        //$$ GlStateManager.disableCull();
+        //#endif
         //#if MC >= 11700
-        //$$ RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        //$$ RenderGlobal.setShader(GameRenderer::getPositionColorShader);
         //#endif
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder buffer = tesselator.getBuilder();
@@ -114,23 +135,31 @@ public class RenderUtil {
                         maxX + x, maxY + y, maxZ + z, color, buffer));
 
         tesselator.end();
-        //#if MC >= 11500
+        RenderGlobal.disableBlend();
+        // TODO: Migrate to RenderGlobal.
+        //#if MC > 11404
         RenderSystem.enableCull();
-        RenderSystem.disableBlend();
+        //#else
+        //$$ GlStateManager.enableCull();
         //#endif
         //#if MC < 11700
-        RenderSystem.enableTexture();
+        RenderGlobal.enableTexture();
         //#endif
     }
 
     public static void renderShapeOutline(@NotNull VoxelShape voxelShape, double x, double y, double z, Color4f color) {
         //#if MC < 11700
-        RenderSystem.disableTexture();
+        RenderGlobal.disableTexture();
         //#endif
-        RenderSystem.enableBlend();
+        RenderGlobal.enableBlend();
+        // TODO: Migrate to RenderGlobal.
+        //#if MC > 11404
         RenderSystem.disableCull();
+        //#else
+        //$$ GlStateManager.disableCull();
+        //#endif
         //#if MC >= 11700
-        //$$ RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        //$$ RenderGlobal.setShader(GameRenderer::getPositionColorShader);
         //#endif
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder buffer = tesselator.getBuilder();
@@ -146,10 +175,15 @@ public class RenderUtil {
         });
 
         tesselator.end();
+        // TODO: Migrate to RenderGlobal.
+        //#if MC > 11404
         RenderSystem.enableCull();
-        RenderSystem.disableBlend();
+        //#else
+        //$$ GlStateManager.enableCull();
+        //#endif
+        RenderGlobal.disableBlend();
         //#if MC < 11700
-        RenderSystem.enableTexture();
+        RenderGlobal.enableTexture();
         //#endif
     }
 }

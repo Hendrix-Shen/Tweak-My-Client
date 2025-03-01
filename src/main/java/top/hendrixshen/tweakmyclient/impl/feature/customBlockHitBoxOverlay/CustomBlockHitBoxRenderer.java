@@ -1,6 +1,5 @@
 package top.hendrixshen.tweakmyclient.impl.feature.customBlockHitBoxOverlay;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.malilib.util.Color4f;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +24,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.lwjgl.opengl.GL11;
 import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
 import top.hendrixshen.magiclib.api.render.context.RenderContext;
+import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
 import top.hendrixshen.tweakmyclient.game.Configs;
 import top.hendrixshen.tweakmyclient.mixin.accessor.MultiPlayerGameModeAccessor;
 import top.hendrixshen.tweakmyclient.util.RenderUtil;
@@ -108,7 +108,7 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                     (50F * (101 - Configs.customBlockHitBoxOverlayRainbowSpeed.getIntegerValue()));
 
             if (Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
-                RenderSystem.disableDepthTest();
+                RenderGlobal.disableDepthTest();
             }
 
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
@@ -124,7 +124,7 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
 
             if (Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
-                RenderSystem.enableDepthTest();
+                RenderGlobal.enableDepthTest();
             }
         }
 
@@ -134,7 +134,7 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                     (50F * (101 - Configs.customBlockHitBoxOutlineRainbowSpeed.getIntegerValue()));
 
             if (Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
-                RenderSystem.disableDepthTest();
+                RenderGlobal.disableDepthTest();
             }
 
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
@@ -149,7 +149,7 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                     ) : Configs.customBlockHitBoxOutlineColor.getColor());
 
             if (Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
-                RenderSystem.enableDepthTest();
+                RenderGlobal.enableDepthTest();
             }
 
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);

@@ -1,7 +1,6 @@
 package top.hendrixshen.tweakmyclient.impl.feature.customWindowIcon;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -28,6 +27,10 @@ import java.util.function.Function;
 
 //#if MC < 11903
 import net.minecraft.server.packs.PackType;
+//#endif
+
+//#if MC > 11404
+import com.mojang.blaze3d.systems.RenderSystem;
 //#endif
 
 // Steal from Minecraft Vanilla
