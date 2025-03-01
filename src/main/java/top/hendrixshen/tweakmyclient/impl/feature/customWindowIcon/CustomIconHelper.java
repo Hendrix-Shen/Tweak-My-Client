@@ -11,18 +11,18 @@ import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.magiclib.util.MiscUtil;
+import top.hendrixshen.tweakmyclient.game.Configs;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.function.Function;
 
 //#if MC < 11904
-import top.hendrixshen.tweakmyclient.game.Configs;
 import top.hendrixshen.tweakmyclient.mixin.accessor.NativeImageAccessor;
 
 import java.util.Locale;
-import java.util.function.Function;
 //#endif
 
 //#if MC < 11903
