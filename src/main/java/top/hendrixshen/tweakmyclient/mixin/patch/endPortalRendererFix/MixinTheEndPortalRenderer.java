@@ -132,14 +132,16 @@ public abstract class MixinTheEndPortalRenderer
     )
     private void onRenderCube(
             TheEndPortalBlockEntity blockEntity,
+            //#if MC < 11700
             float offset,
             float factor,
+            //#endif
             Matrix4f matrix4f,
             VertexConsumer consumer,
             CallbackInfo ci,
             //#if MC > 11605
             //$$ @Local(ordinal = 0) float offsetDown,
-            //$$ @Local(ordinal = 1) float offsetUp,
+            //$$ @Local(ordinal = 1) float offsetUp
             //#else
             @Local(ordinal = 2) float colorR,
             @Local(ordinal = 3) float colorG,

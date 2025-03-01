@@ -15,6 +15,10 @@ import org.jetbrains.annotations.NotNull;
 import net.minecraft.network.chat.TranslatableComponent;
 //#endif
 
+//#if MC > 11605
+//$$ import net.minecraft.client.multiplayer.resolver.ServerAddress;
+//#endif
+
 public class AutoReconnectUtil {
     private static final Minecraft mc = Minecraft.getInstance();
     @Getter

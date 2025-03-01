@@ -13,6 +13,12 @@ import top.hendrixshen.tweakmyclient.game.Configs;
 //$$ import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
 
+//#if MC > 11605
+//$$ import net.minecraft.resources.ResourceLocation;
+//$$ import org.spongepowered.asm.mixin.Final;
+//$$ import org.spongepowered.asm.mixin.Shadow;
+//#endif
+
 @Mixin(Gui.class)
 public abstract class MixinGui {
     //#if MC > 11700

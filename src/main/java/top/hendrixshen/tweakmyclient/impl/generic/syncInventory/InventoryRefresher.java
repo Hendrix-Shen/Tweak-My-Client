@@ -8,6 +8,10 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+//#if MC > 11605
+//$$ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+//#endif
+
 public class InventoryRefresher {
     public static void refresh() {
         Minecraft mc = Minecraft.getInstance();

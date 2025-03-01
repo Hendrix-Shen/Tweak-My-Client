@@ -13,6 +13,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
+//#if MC > 11605
+//$$ import net.minecraft.world.level.block.state.BlockState;
+//#endif
+
 //#if MC < 11500
 //$$ import net.minecraft.world.level.BlockGetter;
 //#endif

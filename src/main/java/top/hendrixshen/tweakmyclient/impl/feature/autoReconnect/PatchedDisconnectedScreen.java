@@ -99,8 +99,8 @@ public class PatchedDisconnectedScreen extends Screen {
             int buttonWidth = (200 - 4 * (this.modHashMap.size() - 1)) / this.modHashMap.size();
 
             for (String modId : this.modHashMap.keySet()) {
-                this.addButton(ButtonCompat.builder(
-                                ComponentCompat.literal(SharedConstants.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
+                screen.addButton(ButtonCompat.builder(
+                        ComponentCompat.literal(SharedConstants.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
                                 button -> mc.setScreen(this.modHashMap.get(modId)))
                         .pos(backButtonX + offsetX, 48 + backButtonY)
                         .size(buttonWidth, 20).build());

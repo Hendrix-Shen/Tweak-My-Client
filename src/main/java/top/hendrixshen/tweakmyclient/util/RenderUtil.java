@@ -9,12 +9,12 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import top.hendrixshen.magiclib.api.compat.mojang.blaze3d.vertex.VertexFormatCompat;
+import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
 
 //#if MC > 11605
 //$$ import net.minecraft.client.renderer.GameRenderer;
 //#else
 import org.lwjgl.opengl.GL11;
-import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
 //#endif
 
 //#if MC > 11404

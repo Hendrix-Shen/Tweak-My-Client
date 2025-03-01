@@ -2,6 +2,7 @@
   "versions": [
     "1.14.4-fabric",
     "1.15.2-fabric",
-    "1.16.5-fabric"
+    "1.16.5-fabric",
+    "1.17.1-fabric"
   ]
 }

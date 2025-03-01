@@ -221,36 +221,6 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                 if (connectBlock.getBlock() instanceof PistonBaseBlock && direction == connectBlock.getValue(DirectionalBlock.FACING) && connectBlock.getValue(PistonBaseBlock.EXTENDED)) {
                     return Shapes.or(shape, connectBlock.getShape(clientLevel, blockPos.relative(direction.getOpposite())).move(direction.getOpposite().getStepX(), direction.getOpposite().getStepY(), direction.getOpposite().getStepZ()));
                 }
-                //#if MC >= 11700
-                //$$ } else if (blockState.getBlock() instanceof PointedDripstoneBlock && Configs.expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock) {
-                //$$     Direction direction = blockState.getValue(PointedDripstoneBlock.TIP_DIRECTION);
-                //$$     BlockPos connectBlockPos = blockPos.above();
-                //$$
-                //$$     while (true) {
-                //$$         BlockState connectBlock = clientLevel.getBlockState(connectBlockPos);
-                //$$         if (connectBlock.getBlock() instanceof PointedDripstoneBlock && connectBlock.getValue(PointedDripstoneBlock.TIP_DIRECTION).equals(direction)) {
-                //$$             shape = Shapes.or(shape, connectBlock.getShape(clientLevel, connectBlockPos).move(0, connectBlockPos.getY() - blockPos.getY(), 0));
-                //$$             connectBlockPos = connectBlockPos.above();
-                //$$         } else {
-                //$$             break;
-                //$$         }
-                //$$     }
-                //$$
-                //$$     connectBlockPos = blockPos.below();
-                //$$
-                //$$     while (true) {
-                //$$         BlockState connectBlock = clientLevel.getBlockState(connectBlockPos);
-                //$$
-                //$$         if (connectBlock.getBlock() instanceof PointedDripstoneBlock && connectBlock.getValue(PointedDripstoneBlock.TIP_DIRECTION).equals(direction)) {
-                //$$             shape = Shapes.or(shape, connectBlock.getShape(clientLevel, connectBlockPos).move(0, connectBlockPos.getY() - blockPos.getY(), 0));
-                //$$             connectBlockPos = connectBlockPos.below();
-                //$$         } else {
-                //$$             break;
-                //$$         }
-                //$$     }
-                //$$
-                //$$     return shape;
-                //#endif
             }
         } catch (Exception ignore) {
         }
