@@ -131,6 +131,11 @@ public class PatchedDisconnectedScreen extends Screen {
                 //#if MC > 11502
                 guiGraphicsOrPoseStack
                 //#endif
+                //#if MC > 12001
+                //$$ ,mouseX
+                //$$ ,mouseY
+                //$$ ,partialTick
+                //#endif
         );
 
         //#if MC > 11502
