@@ -33,7 +33,13 @@ public class ItemStackRestriction extends UsageRestriction<ItemStack> {
 
     @Override
     public boolean isAllowed(ItemStack value) {
-        if (value.hasTag()) {
+        if (
+                //#if MC > 12004
+                //$$ value.getComponents().isEmpty()
+                //#else
+                value.hasTag()
+                //#endif
+        ) {
             if (this.type == UsageRestriction.ListType.BLACKLIST) {
                 return this.blackList.isEmpty()
                         || this.blackList.stream().noneMatch(itemStack -> ItemStackRestriction.matchItems(itemStack, value));

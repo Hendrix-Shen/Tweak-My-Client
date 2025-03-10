@@ -355,34 +355,15 @@ public class Configs {
     @Config(category = ConfigCategory.DISABLE)
     public static final MagicConfigBooleanHotkeyed disableToastRender = Configs.cf.newConfigBooleanHotkeyed("disableToastRender", false);
 
-
     @Config(category = ConfigCategory.DEBUG)
     public static final MagicConfigBoolean debugMode = Configs.cf.newConfigBoolean("debugMode", false);
 
     @Config(category = ConfigCategory.DEBUG, debugOnly = true)
     public static final MagicConfigBoolean hideUnavailableConfigs = Configs.cf.newConfigBoolean("hideUnavailableConfigs", true);
 
-    // @Config(category = ConfigCategory.DEBUG)
-    // public static boolean debugExperimentalMode = false;
-    //
-    // @Config(category = ConfigCategory.DEBUG, dependencies = @Dependencies(and = @Dependency(value = "minecraft", versionPredicate = ">=1.17")), predicate = TweakMyClientPredicate.ExperimentalMode.class)
-    // public static boolean expCustomBlockHitBoxOverlayLinkedAdapterSupportPointedDripstoneBlock = false;
-    //
-    // @Hotkey
-    // @Config(category = ConfigCategory.DEBUG)
-    // public static ConfigHotkey expNullPointerExceptionTest;
-    //
-    // @Hotkey
-    // @Config(category = ConfigCategory.DEBUG)
-    // public static ConfigHotkey expUnsafeIllegalPutTest;
-
-    @Config(category = ConfigCategory.DEBUG)
-    public static final MagicConfigBoolean expXiBao = Configs.cf.newConfigBoolean("expXiBao", false);
-
     public static void postDeserialize(MagicConfigHandler configHandler) {
         Configs.autoDropRestriction.setListType((ListType) Configs.autoDropType.getOptionListValue());
         Configs.autoDropRestriction.setListContents(Configs.autoDropBlackList.getStrings(), Configs.autoDropWhiteList.getStrings());
-
         Configs.breakingRestrictionBoxRestriction.setListType((EitherListType) Configs.breakingRestrictionBoxType.getOptionListValue());
         Configs.breakingRestrictionBoxRestriction.setListContents(Configs.breakingRestrictionBoxBlacklist.getVec3iTupleList(), Configs.breakingRestrictionBoxWhitelist.getVec3iTupleList());
         Configs.attackEntityRestrictionList.setListType((ListType) Configs.attackEntityRestrictionType.getOptionListValue());
@@ -394,7 +375,6 @@ public class Configs {
         Configs.itemGlintRestrictionList.setListType((ListType) Configs.itemGlintRestrictionType.getOptionListValue());
         Configs.itemGlintRestrictionList.setListContents(Configs.itemGlintRestrictionBlacklist.getStrings(), Configs.itemGlintRestrictionWhiteList.getStrings());
         RestrictionBoxRenderer.getInstance().updateOutlineColor();
-        // CustomWindowTitleHandler.getInstance().onConfigUpdate();
     }
 
     public static void init() {
@@ -428,39 +408,11 @@ public class Configs {
         MagicLib.getInstance().getEventManager().register(LocalPlayerListener.class, AutoDropHandler.getInstance());
         MagicLib.getInstance().getEventManager().register(LocalPlayerListener.class, AutoTotemHandler.getInstance());
         MagicLib.getInstance().getEventManager().register(MinecraftListener.class, CustomWindowTitleHandler.getInstance());
-        MagicLib.getInstance().getEventManager().register(RenderLevelListener.class, RestrictionBoxRenderer.getInstance());
+        MagicLib.getInstance().getEventManager().register(RenderLevelListener.class, CustomBlockHitBoxRenderer.getInstance());
         //#if MC > 11502
         MagicLib.getInstance().getEventManager().register(RenderLevelListener.class, OpenWaterHelperRenderer.getInstance());
         //#endif
-        MagicLib.getInstance().getEventManager().register(RenderLevelListener.class, CustomBlockHitBoxRenderer.getInstance());
-
-        /*
-        // Generic config callbacks.
-        cm.setValueChangeCallback("customWindowTitleEnableActivity", CallBacks::customWindowTitleEnableActivityCallback);
-        cm.setValueChangeCallback("customWindowTitleRandomly", CallBacks::featureCustomWindowTitleCallback);
-
-        // List config callbacks.
-        cm.setValueChangeCallback("listCustomWindowTitle", CallBacks::featureCustomWindowTitleCallback);
-        cm.setValueChangeCallback("listCustomWindowTitleWithActivity", CallBacks::featureCustomWindowTitleCallback);
-
-        // Feature config callbacks.
-        cm.setValueChangeCallback("featureCustomWindowIcon", option -> IconUtil.updateIcon());
-        cm.setValueChangeCallback("featureCustomWindowTitle", CallBacks::featureCustomWindowTitleCallback);
-
-        // Disable config callbacks.
-        cm.setValueChangeCallback("disableRenderToast", CallBacks::disableRenderToastCallback);
-
-        // Debug config callbacks.
-        expNullPointerExceptionTest.getKeybind().setCallback(CallBacks::expNullPointerExceptionTestCallback);
-        expUnsafeIllegalPutTest.getKeybind().setCallback(CallBacks::expUnsafeIllegalAllocateTestCallback);
-        cm.setValueChangeCallback("debugMode", CallBacks::debugModeCallBack);
-        cm.setValueChangeCallback("debugExperimentalMode", CallBacks::debugExperimentalModeCallBack);
-
-        // Init
-        CallBacks.featureCustomBlockHitBoxOverlayFillCallBack(null);
-        CallBacks.featureCustomBlockHitBoxOverlayOutlineCallBack(null);
-        CallBacks.debugModeCallBack(null);
-        * */
+        MagicLib.getInstance().getEventManager().register(RenderLevelListener.class, RestrictionBoxRenderer.getInstance());
     }
 
     public static class ConfigCategory {
