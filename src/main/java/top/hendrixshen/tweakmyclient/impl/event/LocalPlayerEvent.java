@@ -22,4 +22,19 @@ public class LocalPlayerEvent {
             return LocalPlayerListener.class;
         }
     }
+
+    @AllArgsConstructor
+    public static class LocalPlayerGameJoinEvent implements Event<LocalPlayerListener> {
+        private final LocalPlayer player;
+
+        @Override
+        public void dispatch(List<LocalPlayerListener> list) {
+            list.forEach(listener -> listener.onGameJoin(this.player));
+        }
+
+        @Override
+        public Class<LocalPlayerListener> getListenerType() {
+            return LocalPlayerListener.class;
+        }
+    }
 }

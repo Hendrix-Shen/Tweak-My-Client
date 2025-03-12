@@ -21,6 +21,11 @@ public class AutoTotemHandler implements LocalPlayerListener {
     private static final AutoTotemHandler instance = new AutoTotemHandler();
 
     @Override
+    public void onGameJoin(LocalPlayer localPlayer) {
+
+    }
+
+    @Override
     public void onTick(LocalPlayer localPlayer) {
         if (!Configs.autoTotem.getBooleanValue()) {
             return;

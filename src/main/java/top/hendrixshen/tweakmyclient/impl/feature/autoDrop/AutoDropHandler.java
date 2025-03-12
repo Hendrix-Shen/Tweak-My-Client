@@ -21,6 +21,11 @@ public class AutoDropHandler implements LocalPlayerListener {
     private int autoDropTimer = 0;
 
     @Override
+    public void onGameJoin(LocalPlayer localPlayer) {
+
+    }
+
+    @Override
     public void onTick(LocalPlayer localPlayer) {
         if (!Configs.autoDrop.getBooleanValue()) {
             return;

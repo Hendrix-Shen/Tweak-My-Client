@@ -9,6 +9,11 @@ import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
+//#if MC > 12004
+//$$ import net.minecraft.client.multiplayer.TransferState;
+//$$ import org.jetbrains.annotations.Nullable;
+//#endif
+
 //#if MC > 11902
 //$$ import com.google.common.collect.Lists;
 //$$ import java.util.List;
@@ -26,8 +31,15 @@ public class AutoReconnectUtil {
     @Getter
     @Setter
     private static ServerData lastServer;
-    @Setter
-    private static boolean isLastQuickPlay = false;
+    //#if MC > 11904
+    //$$ @Setter
+    //$$ private static boolean lastQuickPlay = false;
+    //#endif
+    //#if MC > 12004
+    //$$ @Setter
+    //$$ @Nullable
+    //$$ private static TransferState lastTransferState = null;
+    //#endif
     //#if MC > 11902
     //$$ public static final List<Component> RE_AUTH_MESSAGES = Lists.newArrayList(
     //$$         ComponentCompat.translatable("disconnect.loginFailedInfo", ComponentCompat.translatable("disconnect.loginFailedInfo.insufficientPrivileges")).plainCopy(),
@@ -47,7 +59,10 @@ public class AutoReconnectUtil {
             //$$         ServerAddress.parseString(serverInfo.ip),
             //$$         serverInfo
             //#if MC > 11904
-            //$$         , AutoReconnectUtil.isLastQuickPlay
+            //$$         , AutoReconnectUtil.lastQuickPlay
+            //#endif
+            //#if MC > 12004
+            //$$         , AutoReconnectUtil.lastTransferState
             //#endif
             //$$ );
             //#elseif MC > 11605

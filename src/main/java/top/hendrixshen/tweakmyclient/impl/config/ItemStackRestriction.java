@@ -3,6 +3,8 @@ package top.hendrixshen.tweakmyclient.impl.config;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
+import lombok.EqualsAndHashCode;
+import net.minecraft.client.Minecraft;
 import net.minecraft.commands.arguments.item.ItemParser;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -12,18 +14,45 @@ import top.hendrixshen.tweakmyclient.SharedConstants;
 import java.util.List;
 import java.util.Set;
 
-//#if MC > 11902
+//#if MC > 12004
+//$$ import net.minecraft.commands.arguments.item.ItemParser.ItemResult;
+//#elseif MC > 11902
 //$$ import net.minecraft.core.registries.BuiltInRegistries;
 //#elseif MC > 11802
 //$$ import net.minecraft.core.HolderLookup;
 //$$ import net.minecraft.core.Registry;
 //#endif
 
+@EqualsAndHashCode(callSuper = false)
 public class ItemStackRestriction extends UsageRestriction<ItemStack> {
+    private boolean shouldReParse = false;
+    private List<String> namesBlacklist = null;
+    private List<String> namesWhitelist = null;
+
+    public ItemStackRestriction() {
+        super();
+        InGameParserHandler.getInstance().registerItemStackRestriction(this);
+    }
+
+    @Override
+    public void setListContents(List<String> namesBlacklist, List<String> namesWhitelist) {
+        if (Minecraft.getInstance().level == null) {
+            this.shouldReParse = true;
+            this.namesBlacklist = namesBlacklist;
+            this.namesWhitelist = namesWhitelist;
+            return;
+        }
+
+        this.shouldReParse = false;
+        this.namesBlacklist = null;
+        this.namesWhitelist = null;
+        super.setListContents(namesBlacklist, namesWhitelist);
+    }
+
     @Override
     protected void setValuesForList(Set<ItemStack> set, List<String> nbtList) {
         for (String nbt : nbtList) {
-            ItemStack stack = ItemStackRestriction.toItemStack(nbt);
+            ItemStack stack = this.toItemStack(nbt);
 
             if (!stack.isEmpty()) {
                 set.add(stack);
@@ -42,18 +71,24 @@ public class ItemStackRestriction extends UsageRestriction<ItemStack> {
         ) {
             if (this.type == UsageRestriction.ListType.BLACKLIST) {
                 return this.blackList.isEmpty()
-                        || this.blackList.stream().noneMatch(itemStack -> ItemStackRestriction.matchItems(itemStack, value));
+                        || this.blackList.stream().noneMatch(itemStack -> this.matchItems(itemStack, value));
             }
 
             return this.type == UsageRestriction.ListType.NONE ||
-                    this.whiteList.stream().anyMatch(itemStack -> ItemStackRestriction.matchItems(itemStack, value));
+                    this.whiteList.stream().anyMatch(itemStack -> this.matchItems(itemStack, value));
         }
 
         return super.isAllowed(value);
     }
 
-    public static boolean matchItems(ItemStack stackA, ItemStack stackB) {
-        if (stackA.hasTag()) {
+    private boolean matchItems(ItemStack stackA, ItemStack stackB) {
+        if (
+                //#if MC > 12004
+                //$$ stackA.getComponents().isEmpty()
+                //#else
+                stackA.hasTag()
+                //#endif
+        ) {
             return stackA.isDamageableItem()
                     ? ItemStackCompat.isSameItemSameTags(stackA, stackB)
                     : ItemStackCompat.isSameItemSameTagsIgnoreDurability(stackA, stackB);
@@ -62,9 +97,19 @@ public class ItemStackRestriction extends UsageRestriction<ItemStack> {
         return ItemStackCompat.isSame(stackA, stackB);
     }
 
-    public static ItemStack toItemStack(String string) {
+    private ItemStack toItemStack(String string) {
         try {
             //#if MC > 11802
+            //#if MC > 12004
+            //$$ Minecraft mc = Minecraft.getInstance();
+            //$$
+            //$$ if (mc.level == null) {
+            //$$     return ItemStack.EMPTY;
+            //$$ }
+            //$$
+            //$$ ItemParser itemParser = new ItemParser(Minecraft.getInstance().level.registryAccess());
+            //$$ ItemResult result = itemParser.parse(new StringReader(string));
+            //#else
             //$$ ItemParser.ItemResult result = ItemParser.parseForItem(
             //#if MC > 11902
             //$$         BuiltInRegistries.ITEM.asLookup(),
@@ -73,6 +118,7 @@ public class ItemStackRestriction extends UsageRestriction<ItemStack> {
             //#endif
             //$$         new StringReader(string)
             //$$ );
+            //#endif
             //$$ Item item = result.item().value();
             //#else
             ItemParser reader = new ItemParser(new StringReader(string), true);
@@ -80,6 +126,11 @@ public class ItemStackRestriction extends UsageRestriction<ItemStack> {
             Item item = reader.getItem();
             //#endif
 
+            //#if MC > 12004
+            //$$ ItemStack stack = new ItemStack(item);
+            //$$ stack.applyComponents(result.components());
+            //$$ return stack;
+            //#else
             if (item != null) {
                 ItemStack stack = new ItemStack(item);
                 stack.setTag(
@@ -92,10 +143,17 @@ public class ItemStackRestriction extends UsageRestriction<ItemStack> {
 
                 return stack;
             }
+            //#endif
         } catch (CommandSyntaxException e) {
             SharedConstants.getLogger().error("Invalid item '{}'", string);
         }
 
         return ItemStack.EMPTY;
+    }
+
+    public void reParse() {
+        if (this.shouldReParse) {
+            this.setListContents(this.namesBlacklist, this.namesWhitelist);
+        }
     }
 }

@@ -22,6 +22,9 @@ public abstract class MixinGui {
             //#elseif MC > 11502
             PoseStack poseStack,
             //#endif
+            //#if MC > 12004
+            //$$ float partialTick,
+            //#endif
             CallbackInfo ci
     ) {
         if (Configs.disableEffectBoxRender.getBooleanValue()) {
