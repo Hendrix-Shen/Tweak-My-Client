@@ -11,6 +11,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.impl.feature.autoReconnect.PatchedDisconnectedScreen;
 
+//#if MC > 12006
+//$$ import net.minecraft.network.DisconnectionDetails;
+//#endif
+
 @Mixin(value = DisconnectedScreen.class, priority = 900)
 public abstract class MixinDisconnectedScreen extends Screen {
     @Shadow
@@ -19,7 +23,11 @@ public abstract class MixinDisconnectedScreen extends Screen {
 
     @Shadow
     @Final
+    //#if MC > 12006
+    //$$ private DisconnectionDetails details;
+    //#else
     private Component reason;
+    //#endif
 
     protected MixinDisconnectedScreen(Component component) {
         super(component);
@@ -27,7 +35,15 @@ public abstract class MixinDisconnectedScreen extends Screen {
 
     @Inject(method = "init", at = @At("HEAD"), cancellable = true)
     private void onInitDisconnectedScreen(@NotNull CallbackInfo ci) {
-        Minecraft.getInstance().setScreen(new PatchedDisconnectedScreen(this.parent, this.title, this.reason));
+        Minecraft.getInstance().setScreen(new PatchedDisconnectedScreen(
+                this.parent,
+                this.title,
+                //#if MC > 12006
+                //$$ this.details.reason()
+                //#else
+                this.reason
+                //#endif
+        ));
         ci.cancel();
     }
 }

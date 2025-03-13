@@ -20,7 +20,15 @@ public class TargetBlockPositionPrinter {
             return;
         }
 
-        HitResult hitResult = cameraEntity.pick(Configs.getTargetBlockPositionMaxDistance.getIntegerValue(), mc.getFrameTime(), false);
+        HitResult hitResult = cameraEntity.pick(
+                Configs.getTargetBlockPositionMaxDistance.getIntegerValue(),
+                //#if MC > 12006
+                //$$ mc.getTimer().getRealtimeDeltaTicks(),
+                //#else
+                mc.getFrameTime(),
+                //#endif
+                false
+        );
 
         if (hitResult.getType() != HitResult.Type.BLOCK) {
             return;

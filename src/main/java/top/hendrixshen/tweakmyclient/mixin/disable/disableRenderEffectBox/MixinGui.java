@@ -7,6 +7,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
+//#if MC > 12006
+//$$ import net.minecraft.client.DeltaTracker;
+//#endif
+
 //#if MC > 11904
 //$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC > 11502
@@ -22,7 +26,9 @@ public abstract class MixinGui {
             //#elseif MC > 11502
             PoseStack poseStack,
             //#endif
-            //#if MC > 12004
+            //#if MC > 12006
+            //$$ DeltaTracker deltaTracker,
+            //#elseif MC > 12004
             //$$ float partialTick,
             //#endif
             CallbackInfo ci

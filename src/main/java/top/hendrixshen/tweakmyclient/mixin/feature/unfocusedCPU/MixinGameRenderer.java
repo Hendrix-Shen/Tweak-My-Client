@@ -8,6 +8,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
+//#if MC > 12006
+//$$ import net.minecraft.client.DeltaTracker;
+//#endif
+
 @Mixin(GameRenderer.class)
 public class MixinGameRenderer {
     @Inject(
@@ -19,7 +23,16 @@ public class MixinGameRenderer {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void onRenderHead(float tickDelta, long startTime, boolean tick, CallbackInfo ci) {
+    private void onRenderHead(
+            //#if MC > 12006
+            //$$ DeltaTracker deltaTracker,
+            //#else
+            float tickDelta,
+            long startTime,
+            //#endifs
+            boolean tick,
+            CallbackInfo ci
+    ) {
         if (Configs.unfocusedCPU.getBooleanValue() && !Minecraft.getInstance().isWindowActive()) {
             ci.cancel();
         }

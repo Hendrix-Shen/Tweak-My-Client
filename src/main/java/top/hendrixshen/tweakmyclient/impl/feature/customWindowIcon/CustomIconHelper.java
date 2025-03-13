@@ -70,10 +70,12 @@ public class CustomIconHelper {
     private static final ResourceLocation TMC_SNAPSHOT_256X = CustomIconHelper.tmcResourceMaker.apply("texture/icon/icon_snapshot_256x256.png");
 
     private static void setIcon(ArrayList<InputStream> inputStreams) throws IOException {
+        //#if MC < 12100
         //#if MC > 11701
         //$$ RenderSystem.assertInInitPhase();
         //#elseif MC > 11404
         RenderSystem.assertThread(RenderSystem::isInInitPhase);
+        //#endif
         //#endif
 
         ArrayList<ByteBuffer> byteBuffers = new ArrayList<>(inputStreams.size());

@@ -71,15 +71,28 @@ public class RenderUtil {
     private static void drawBoundingBoxEdges(double minX, double minY, double minZ,
                                              double maxX, double maxY, double maxZ, @NotNull Color4f color) {
         Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder bufferbuilder = tesselator.getBuilder();
+        //#if MC > 12006
+        //$$ BufferBuilder buffer = tesselator.begin(VertexFormatCompat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
+        //#else
+        BufferBuilder buffer = tesselator.getBuilder();
+        buffer.begin(VertexFormatCompat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
+        //#endif
         //#if MC > 11700
         //$$ RenderSystem.setShader(GameRenderer::getPositionColorShader);
-        //$$ bufferbuilder.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
-        //#else
-        bufferbuilder.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
         //#endif
-        RenderUtils.drawBoxAllEdgesBatchedLines(minX, minY, minZ, maxX, maxY, maxZ, color, bufferbuilder);
+        RenderUtils.drawBoxAllEdgesBatchedLines(
+                //#if MC > 12006
+                //$$ (float) minX, (float) minY, (float) minZ,
+                //$$ (float) maxX, (float) maxY, (float) maxZ,
+                //#else
+                minX, minY, minZ, maxX, maxY, maxZ,
+                //#endif
+                color, buffer);
+        //#if MC > 12006
+        //$$ RenderUtil.end(buffer);
+        //#else
         tesselator.end();
+        //#endif
     }
 
     private static void drawBoundingBoxOverlay(double minX, double minY, double minZ,
@@ -91,16 +104,31 @@ public class RenderUtil {
         //#else
         //$$ GlStateManager.disableCull();
         //#endif
-        //#if MC >= 11700
+        //#if MC > 11605
         //$$ RenderGlobal.setShader(GameRenderer::getPositionColorShader);
         //#else
         RenderGlobal.disableTexture();
         //#endif
         Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder bufferBuilder = tesselator.getBuilder();
-        bufferBuilder.begin(VertexFormatCompat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-        RenderUtils.drawBoxAllSidesBatchedQuads(minX, minY, minZ, maxX, maxY, maxZ, color, bufferBuilder);
+        //#if MC > 12006
+        //$$ BufferBuilder buffer = tesselator.begin(VertexFormatCompat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+        //#else
+        BufferBuilder buffer = tesselator.getBuilder();
+        buffer.begin(VertexFormatCompat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+        //#endif
+        RenderUtils.drawBoxAllSidesBatchedQuads(
+                //#if MC > 12006
+                //$$ (float) minX, (float) minY, (float) minZ,
+                //$$ (float) maxX, (float) maxY, (float) maxZ,
+                //#else
+                minX, minY, minZ, maxX, maxY, maxZ,
+                //#endif
+                color, buffer);
+        //#if MC > 12006
+        //$$ RenderUtil.end(buffer);
+        //#else
         tesselator.end();
+        //#endif
         RenderGlobal.disableBlend();
         // TODO: Migrate to RenderGlobal.
         //#if MC > 11404
@@ -124,17 +152,31 @@ public class RenderUtil {
         //#else
         //$$ GlStateManager.disableCull();
         //#endif
-        //#if MC >= 11700
+        //#if MC > 11605
         //$$ RenderGlobal.setShader(GameRenderer::getPositionColorShader);
         //#endif
         Tesselator tesselator = Tesselator.getInstance();
+        //#if MC > 12006
+        //$$ BufferBuilder buffer = tesselator.begin(VertexFormatCompat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+        //#else
         BufferBuilder buffer = tesselator.getBuilder();
         buffer.begin(VertexFormatCompat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+        //#endif
         voxelShape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
-                RenderUtils.drawBoxAllSidesBatchedQuads(minX + x, minY + y, minZ + z,
-                        maxX + x, maxY + y, maxZ + z, color, buffer));
-
+                RenderUtils.drawBoxAllSidesBatchedQuads(
+                        //#if MC > 12006
+                        //$$ (float) (minX + x), (float) (minY + y), (float) (minZ + z),
+                        //$$ (float) (maxX + x), (float) (maxY + y), (float) (maxZ + z),
+                        //#else
+                        minX + x, minY + y, minZ + z,
+                        maxX + x, maxY + y, maxZ + z,
+                        //#endif
+                        color, buffer));
+        //#if MC > 12006
+        //$$ RenderUtil.end(buffer);
+        //#else
         tesselator.end();
+        //#endif
         RenderGlobal.disableBlend();
         // TODO: Migrate to RenderGlobal.
         //#if MC > 11404
@@ -162,19 +204,26 @@ public class RenderUtil {
         //$$ RenderGlobal.setShader(GameRenderer::getPositionColorShader);
         //#endif
         Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder buffer = tesselator.getBuilder();
-        //#if MC >= 11700
-        //$$ buffer.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
+        //#if MC > 12006
+        //$$ BufferBuilder buffer = tesselator.begin(VertexFormatCompat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
         //#else
-        buffer.begin(GL11.GL_LINES, DefaultVertexFormat.POSITION_COLOR);
+        BufferBuilder buffer = tesselator.getBuilder();
+        buffer.begin(VertexFormatCompat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
         //#endif
-
         voxelShape.forAllEdges((minX, minY, minZ, maxX, maxY, maxZ) -> {
+            //#if MC > 12006
+            //$$ buffer.addVertex((float) (minX + x), (float) (minY + y), (float) (minZ + z)).setColor(color.r, color.g, color.b, color.a);
+            //$$ buffer.addVertex((float) (maxX + x), (float) (maxY + y), (float) (maxZ + z)).setColor(color.r, color.g, color.b, color.a);
+            //#else
             buffer.vertex(minX + x, minY + y, minZ + z).color(color.r, color.g, color.b, color.a).endVertex();
             buffer.vertex(maxX + x, maxY + y, maxZ + z).color(color.r, color.g, color.b, color.a).endVertex();
+            //#endif
         });
-
+        //#if MC > 12006
+        //$$ RenderUtil.end(buffer);
+        //#else
         tesselator.end();
+        //#endif
         // TODO: Migrate to RenderGlobal.
         //#if MC > 11404
         RenderSystem.enableCull();
@@ -186,4 +235,13 @@ public class RenderUtil {
         RenderGlobal.enableTexture();
         //#endif
     }
+
+    //#if MC > 12006
+    //$$ private static void end(BufferBuilder builder) {
+    //$$     try (MeshData meshData = builder.buildOrThrow()) {
+    //$$         BufferUploader.drawWithShader(meshData);
+    //$$     } catch (Exception ignore) {
+    //$$     }
+    //$$ }
+    //#endif
 }
