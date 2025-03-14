@@ -7,6 +7,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
+//#if MC > 12101
+//$$ import top.hendrixshen.magiclib.api.compat.minecraft.resources.ResourceLocationCompat;
+//#endif
+
 //#if MC > 11904
 //$$ import net.minecraft.client.gui.GuiGraphics;
 //#elseif MC > 11903
@@ -21,7 +25,7 @@ import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(Gui.class)
 public abstract class MixinGui {
-    //#if MC > 11700
+    //#if 12102 > MC && MC > 11700
     //$$ @Shadow
     //$$ @Final
     //$$ private static ResourceLocation PUMPKIN_BLUR_LOCATION;
@@ -50,7 +54,13 @@ public abstract class MixinGui {
     ) {
         if (Configs.disablePumpkinOverlayRender.getBooleanValue()
                 //#if MC > 11700
-                //$$ && resourceLocation.equals(MixinGui.PUMPKIN_BLUR_LOCATION)
+                //$$ && resourceLocation.equals(
+                //#if MC > 12101
+                //$$         ResourceLocationCompat.withDefaultNamespace("misc/pumpkinblur")
+                //#else
+                //$$         MixinGui.PUMPKIN_BLUR_LOCATION
+                //#endif
+                //$$ )
                 //#endif
         ) {
             ci.cancel();

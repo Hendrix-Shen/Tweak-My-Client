@@ -77,7 +77,7 @@ public class RenderUtil {
         BufferBuilder buffer = tesselator.getBuilder();
         buffer.begin(VertexFormatCompat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
         //#endif
-        //#if MC > 11700
+        //#if 12102 > MC && MC > 11605
         //$$ RenderSystem.setShader(GameRenderer::getPositionColorShader);
         //#endif
         RenderUtils.drawBoxAllEdgesBatchedLines(
@@ -104,9 +104,10 @@ public class RenderUtil {
         //#else
         //$$ GlStateManager.disableCull();
         //#endif
-        //#if MC > 11605
+        //#if 12102 > MC && MC > 11605
         //$$ RenderGlobal.setShader(GameRenderer::getPositionColorShader);
-        //#else
+        //#endif
+        //#if MC < 11700
         RenderGlobal.disableTexture();
         //#endif
         Tesselator tesselator = Tesselator.getInstance();
@@ -152,7 +153,7 @@ public class RenderUtil {
         //#else
         //$$ GlStateManager.disableCull();
         //#endif
-        //#if MC > 11605
+        //#if 12102 > MC && MC > 11605
         //$$ RenderGlobal.setShader(GameRenderer::getPositionColorShader);
         //#endif
         Tesselator tesselator = Tesselator.getInstance();
@@ -200,7 +201,7 @@ public class RenderUtil {
         //#else
         //$$ GlStateManager.disableCull();
         //#endif
-        //#if MC >= 11700
+        //#if 12102 > MC && MC > 11605
         //$$ RenderGlobal.setShader(GameRenderer::getPositionColorShader);
         //#endif
         Tesselator tesselator = Tesselator.getInstance();

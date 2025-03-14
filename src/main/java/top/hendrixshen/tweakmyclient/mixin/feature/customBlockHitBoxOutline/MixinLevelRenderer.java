@@ -26,11 +26,14 @@ public abstract class MixinLevelRenderer {
             PoseStack poseStack,
             VertexConsumer vertexConsumer,
             Entity entity,
-            double d,
-            double e,
-            double f,
+            double camX,
+            double camY,
+            double camZ,
             BlockPos blockPos,
             BlockState blockState,
+            //#if MC > 12102
+            //$$ int color,
+            //#endif
             //#else
             //$$ Camera camera,
             //$$ HitResult hitResult,

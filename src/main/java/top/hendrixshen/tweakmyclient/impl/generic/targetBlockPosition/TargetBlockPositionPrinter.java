@@ -22,7 +22,9 @@ public class TargetBlockPositionPrinter {
 
         HitResult hitResult = cameraEntity.pick(
                 Configs.getTargetBlockPositionMaxDistance.getIntegerValue(),
-                //#if MC > 12006
+                //#if MC > 12101
+                //$$ mc.getDeltaTracker().getRealtimeDeltaTicks(),
+                //#elseif MC > 12006
                 //$$ mc.getTimer().getRealtimeDeltaTicks(),
                 //#else
                 mc.getFrameTime(),

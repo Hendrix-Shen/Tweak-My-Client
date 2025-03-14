@@ -10,7 +10,7 @@ import top.hendrixshen.tweakmyclient.game.Configs;
 @Mixin(Gui.class)
 public abstract class MixinGui {
     @ModifyArgs(
-            //#if MC > 12002
+            //#if 12102 > MC && MC > 12002
             //$$ method = "method_55440",
             //#else
             method = "displayScoreboardSidebar",
@@ -45,7 +45,7 @@ public abstract class MixinGui {
     }
 
     @ModifyArgs(
-            //#if MC > 12002
+            //#if 12102 > MC && MC > 12002
             //$$ method = "method_55440",
             //#else
             method = "displayScoreboardSidebar",

@@ -48,6 +48,7 @@
     "feature.daylightOverride.MixinClientLevelClientLevelData",
     "feature.daylightOverride.MixinLevel",
     "feature.entityRenderingRestriction.MixinEntityRenderDispatcher",
+    "feature.globalEventListener.MixinLevelEventHandler",
     "feature.globalEventListener.MixinLevelRenderer",
     "feature.lowHealthWarning.MixinLocalPlayer",
     "feature.unfocusedCPU.MixinGameRenderer",

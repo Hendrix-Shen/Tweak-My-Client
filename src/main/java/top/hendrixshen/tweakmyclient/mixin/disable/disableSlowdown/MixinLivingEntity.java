@@ -18,12 +18,21 @@ public abstract class MixinLivingEntity extends Entity {
         super(entityType, level);
     }
 
+    //#if MC > 12101
+    //$$ @SuppressWarnings("ConstantConditions")
+    //$$ @ModifyVariable(method = "travelInAir", at = @At(value = "STORE"), ordinal = 0)
+    //$$ private float modifyFriction(float friction) {
+    //$$     if (Configs.disableSlowdown.getBooleanValue() && MiscUtil.cast(this) instanceof LocalPlayer && friction > 0.6F) {
+    //$$         return 0.6F;
+    //$$     }
+    //$$
+    //$$     return friction;
+    //$$ }
+    //#else
     @SuppressWarnings("ConstantConditions")
     @ModifyVariable(
             method = "travel",
-            at = @At(
-                    value = "STORE"
-            ),
+            at = @At("STORE"),
             slice = @Slice(
                     from = @At(
                             value = "INVOKE",
@@ -44,11 +53,12 @@ public abstract class MixinLivingEntity extends Entity {
             ),
             ordinal = 0
     )
-    private float onGetFriction(float f) {
-        if (Configs.disableSlowdown.getBooleanValue() && MiscUtil.cast(this) instanceof LocalPlayer && !this.isInWater() && f > 0.6F) {
+    private float modifyFriction(float friction) {
+        if (Configs.disableSlowdown.getBooleanValue() && MiscUtil.cast(this) instanceof LocalPlayer && !this.isInWater() && friction > 0.6F) {
             return 0.6F;
         }
 
-        return f;
+        return friction;
     }
+    //#endif
 }
