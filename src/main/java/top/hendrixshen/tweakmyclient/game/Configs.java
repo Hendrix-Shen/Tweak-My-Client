@@ -308,7 +308,7 @@ public class Configs {
     public static final MagicConfigBoolean disableResourcePackIncompatibleTip = Configs.cf.newConfigBoolean("disableResourcePackIncompatibleTip", false);
 
     @Config(category = ConfigCategory.PATCH)
-    public static final MagicConfigBoolean endPortalRendererFix = Configs.cf.newConfigBoolean("endPortalRendererFix", false);
+    public static final MagicConfigBoolean enderPortalRendererFix = Configs.cf.newConfigBoolean("enderPortalRendererFix", false);
 
     @Config(category = ConfigCategory.PATCH)
     public static final MagicConfigOptionList enderPortalRenderMode = Configs.cf.newConfigOptionList("enderPortalRenderMode", EnderPortalRenderMode.DEFAULT);

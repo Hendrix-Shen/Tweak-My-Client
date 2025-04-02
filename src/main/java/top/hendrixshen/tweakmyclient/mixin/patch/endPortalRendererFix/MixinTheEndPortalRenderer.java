@@ -148,7 +148,7 @@ public abstract class MixinTheEndPortalRenderer
             @Local(ordinal = 4) float colorB
             //#endif
     ) {
-        if (!Configs.endPortalRendererFix.getBooleanValue()) {
+        if (!Configs.enderPortalRendererFix.getBooleanValue()) {
             return;
         }
 
@@ -227,7 +227,7 @@ public abstract class MixinTheEndPortalRenderer
     //#else
     //$$ @WrapMethod(method = "render(Lnet/minecraft/world/level/block/entity/TheEndPortalBlockEntity;DDDFI)V")
     //$$ private void patchRender(TheEndPortalBlockEntity entity, double camX, double camY, double camZ, float partialTicks, int packedLight, Operation<Void> original) {
-    //$$     if (!Configs.endPortalRendererFix.getBooleanValue()) {
+    //$$     if (!Configs.enderPortalRendererFix.getBooleanValue()) {
     //$$         original.call(entity, camX, camY, camZ, partialTicks, packedLight);
     //$$     }
     //$$

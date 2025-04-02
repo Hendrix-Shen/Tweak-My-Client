@@ -54,12 +54,12 @@ tweak_my_client:
         comment: A hotkey to open the in-game TweakMyClient Config GUI.
       syncBlocks:
         name: syncBlocks
-        comment: |
+        comment: |-
           Try to send mining abort packets to server in order to
           get the correct blocks data from the server.
       syncInventory:
         name: syncInventory
-        comment: |
+        comment: |-
           Try to send fake data in order to
           get the correct player inventory data from the server.
       # ================================ Features ================================
@@ -221,7 +221,7 @@ tweak_my_client:
           Customize your gui background color.
           Screen background color is a linear gradient transitioning
           vertically from @config#customGuiBackgroundStartColor@ to @config#customGuiBackgroundStopColor@ from top to bottom.
-          See also: config @config#disableGuiBackground@.
+          See also: config @config#disableGuiShadowLayer@.
       customGuiBackgroundStartColor:
         name: customGuiBackgroundStartColor
         comment: Gradient start color for @config#customGuiBackgroundColor@.
@@ -375,12 +375,12 @@ tweak_my_client:
           Note: Simply bypassing the version check to load the resource pack
           does §cNOT§r change the fact that it is inherently incompatible,
           so do so at your own risk!
-      endPortalRendererFix:
+      enderPortalRendererFix:
         name: endPortalRendererFix
         comment: Fix End Portal Renderer
       enderPortalRenderMode:
         name: enderPortalRenderMode
-        comment: |
+        comment: |-
           Render mode for @config#enderPortalRenderMode@.
           The available modes are as follows:
           Actual - Rendering the ender portal using its hit box.

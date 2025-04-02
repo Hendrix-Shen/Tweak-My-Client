@@ -54,18 +54,18 @@ tweak_my_client:
         comment: 打开TweakMyClient配置界面的快捷键.
       syncBlocks:
         name: 同步方块
-        comment: |
+        comment: |-
           尝试发送挖掘中断数据以便于
           从服务器获得正确的方块数据.
       syncInventory:
         name: 同步背包
-        comment: |
+        comment: |-
           尝试发送虚假数据以便于
           从服务器获取正确的背包数据.
       # ================================ Features ================================
       attackEntityRestriction:
         name: 攻击实体约束
-        comment: 不允洗你攻击任何实体.
+        comment: 不允许你攻击任何实体.
       attackEntityRestrictionBlacklist:
         name: 攻击实体约束-黑名单
         comment: 触发@config#attackEntityRestriction@时不允许你攻击的实体.
@@ -172,7 +172,7 @@ tweak_my_client:
           收缩 - 随着挖掘的进行, 命中箱将展示自外而内缓慢收缩的动画.
       customBlockHitBoxLinkedAdapter:
         name: 自定义方块命中箱连接体方块适配
-        comment: |
+        comment: |-
           尝试调整多方块结构的尺寸, 
           例如命中大箱子时渲染的是整个大箱子.
           注意: 这个配置并非总是有效.
@@ -221,7 +221,7 @@ tweak_my_client:
           自定义你的界面背景颜色.
           界面背景颜色为自上而下垂直
           由@config#customGuiBackgroundStartColor@过渡到@config#customGuiBackgroundStopColor@的线性渐变.
-          另见: 配置 @config#disableGuiBackground@.
+          另见: 配置 @config#disableGuiShadowLayer@.
       customGuiBackgroundStartColor:
         name: 自定义界面背景颜色-渐变起始颜色
         comment: 触发@config#customGuiBackgroundStartColor@时的渐变起始颜色.
@@ -375,13 +375,13 @@ tweak_my_client:
           注意: 仅仅是绕过版本检查来加载资源包,
           并§c不能§r改变它本身不兼容的事实,
           所以请自行承担风险.
-      endPortalRendererFix:
-        name: 末路之地渲染器修复
+      enderPortalRendererFix:
+        name: 末路之地传送门渲染器修复
         comment: 修复末路之地传送门渲染问题
       enderPortalRenderMode:
-        name: 末路之地渲染器修复-渲染模式
-        comment: |
-          触发@config#enderPortalRenderMode时的渲染模式.
+        name: 末路之地传送门渲染器修复-渲染模式
+        comment: |-
+          触发@config#enderPortalRenderMode@时的渲染模式.
           可用的模式如下:
           实际的 - 渲染末路之地传送门使用其自身碰撞箱.
           完整的 - 渲染末路之地传送门为一个完整的方块.

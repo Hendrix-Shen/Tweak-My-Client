@@ -13,7 +13,7 @@ import top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix.EnderPortal
 public abstract class MixinTheEndPortalBlockEntity {
     @Inject(method = "shouldRenderFace", at = @At(value = "HEAD"), cancellable = true)
     private void shouldRenderFace(Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.endPortalRendererFix.getBooleanValue()) {
+        if (Configs.enderPortalRendererFix.getBooleanValue()) {
             if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.LEGACY) {
                 cir.setReturnValue(direction == Direction.UP);
             } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.MODERN) {
