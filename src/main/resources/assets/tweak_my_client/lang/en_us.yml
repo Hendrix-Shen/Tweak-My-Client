@@ -3,8 +3,6 @@ tweak_my_client:
     category:
       all:
         name: All
-      color:
-        name: Color
       debug:
         name: Debug
       disable:
@@ -13,13 +11,14 @@ tweak_my_client:
         name: Feature
       generic:
         name: Generic
-      list:
-        name: List
       patch:
         name: Patch
     gui:
       title:
         .: 'TweakMyClient - Version: %1$s (%2$s)'
+      either_list_type:
+        BLACKLIST: Blacklist
+        WHITELIST: Whitelist
     option:
       # ================================ Generics ================================
       getTargetBlockPosition:
@@ -38,6 +37,9 @@ tweak_my_client:
         comment: |- 
           Print mode for @config#getTargetBlockPosition@
           See also: config @config#getTargetBlockPositionMessage@.
+        value:
+          PUBLIC: Public
+          PRIVATE: Private
       memoryCleaner:
         name: memoryCleaner
         comment: |-
@@ -163,6 +165,10 @@ tweak_my_client:
           Fixed only - Only render beams with ender crystals pointing to fixed coordinates.
           None - No restriction.
           Tracking only - Only render beams with Ender Dragon pointing to ender crystal.
+        value:
+          FIXED_ONLY: Fixed only
+          NONE: None
+          TRACKING_ONLY: Tracking only
       customBlockHitBoxBreakAnimation:
         name: customBlockHitBoxBreakAnimation
         comment: |-
@@ -170,6 +176,10 @@ tweak_my_client:
           Down - As the excavation progresses, hit box will display a slow top-down shrinking animation.
           None - No animation.
           Shrink - As the excavation proceeds, hit box will display a slow shrinking from outside to inside animation.
+        value:
+          DOWN: Down
+          NONE: None
+          SHRINK: Shrink
       customBlockHitBoxLinkedAdapter:
         name: customBlockHitBoxLinkedAdapter
         comment: |-
@@ -375,18 +385,23 @@ tweak_my_client:
           Note: Simply bypassing the version check to load the resource pack
           does §cNOT§r change the fact that it is inherently incompatible,
           so do so at your own risk!
-      enderPortalRendererFix:
+      endPortalRendererFix:
         name: endPortalRendererFix
         comment: Fix End Portal Renderer
-      enderPortalRenderMode:
-        name: enderPortalRenderMode
+      endPortalRenderMode:
+        name: endPortalRenderMode
         comment: |-
-          Render mode for @config#enderPortalRenderMode@.
+          Render mode for @config#endPortalRenderMode@.
           The available modes are as follows:
           Actual - Rendering the ender portal using its hit box.
           Full - Rendering the ender portal as a full block.
           Legacy - Rendering the ender portal with Minecraft 21w13a below.
           Modern - Rendering the ender portal with Minecraft 21w13a and above.
+        value:
+          ACTUAL: Actual
+          FULL: Full
+          LEGACY: Legacy
+          MODERN: Modern
       forceDebugInfoDetailed:
         name: forceDebugInfoDetailed
         comment: |- 
@@ -432,3 +447,35 @@ tweak_my_client:
       disableToastRender:
         name: disableToastRender
         comment: No longer render toast.
+      # ================================ Debug ================================
+      debugMode:
+        name: debugMode
+        comment: |-
+          Debug mode of TweakMyClient
+          When enabled, debug parameter configs and configs not satisfied dependencies will be displayed
+          and debugging related functions will be enabled.
+      hideUnavailableConfigs:
+        name: hideAvailableConfigs
+        comment: Hide configs which are unavailable due to dependency relations unsatisfied in the config GUI.
+      resetConfigStatistic:
+        name: resetConfigStatistic
+        comment: Reset statistics of configs of TweakMyClient.
+  feature:
+    autoReconnect:
+      gui:
+        button:
+          reconnect: Reconnect
+          switcherss:
+            disabled: "AutoReconnect(§cDisabled§r)"
+            timer: "AutoReconnect(§a%d§rs)"
+          authenticate:
+            authme: Auth Me
+            ias: IAS
+            oauth: OAuth
+            reauth: ReAuth
+    globalEventListener:
+      message:
+        prefix: "§e[GlobalEvent]§r: "
+        end_portal_spawn: "End Portal Activated at  [x: %d, y: %d, z: %d]"
+        ender_dragon_death: "Ender Dragon Defeated at [x: %d, y: %d, z: %d]"
+        wither_spawn: "Wither Spawned at [x: %d, y: %d, z: %d]"

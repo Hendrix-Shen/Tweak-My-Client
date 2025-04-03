@@ -1,5 +1,7 @@
 package top.hendrixshen.tweakmyclient.impl.feature.globalEventListener;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
@@ -18,12 +20,29 @@ public class GlobalEventListener {
             }
 
             if (eventId == 1023) { // SoundEvents.ENTITY_WITHER_SPAWN
-                InfoUtil.displayChatMessage(ComponentCompat.literalCompat(SharedConstants.tr("message.globalEventListener.witherSpawn", pos.getX(), pos.getY(), pos.getZ())));
+                GlobalEventListener.displayGlobalEvent(GlobalEventType.WITHER_SPAWN, pos);
             } else if (eventId == 1038) { // SoundEvents.BLOCK_END_PORTAL_SPAWN
-                InfoUtil.displayChatMessage(ComponentCompat.literalCompat(SharedConstants.tr("message.globalEventListener.endPortalSpawn", pos.getX(), pos.getY(), pos.getZ())));
+                GlobalEventListener.displayGlobalEvent(GlobalEventType.END_PORTAL_SPAWN, pos);
             } else if (eventId == 1028) { // SoundEvents.ENTITY_ENDER_DRAGON_DEATH
-                InfoUtil.displayChatMessage(ComponentCompat.literalCompat(SharedConstants.tr("message.globalEventListener.enderDragonDeath", pos.getX(), pos.getY(), pos.getZ())));
+                GlobalEventListener.displayGlobalEvent(GlobalEventType.ENDER_DRAGON_DEATH, pos);
             }
         }
+    }
+
+    private static void displayGlobalEvent(GlobalEventType event, BlockPos pos) {
+        InfoUtil.displayChatMessage(ComponentCompat.literalCompat(
+                SharedConstants.tr("feature.globalEventListener.message.prefix"))
+                .append(ComponentCompat.literalCompat(SharedConstants.tr("feature.globalEventListener.message."
+                        .concat(event.getKey()), pos.getX(), pos.getY(), pos.getZ()))));
+    }
+
+    @Getter
+    @AllArgsConstructor
+    private enum GlobalEventType {
+        END_PORTAL_SPAWN("end_portal_spawn"),
+        ENDER_DRAGON_DEATH("ender_dragon_death"),
+        WITHER_SPAWN("wither_spawn");
+
+        private final String key;
     }
 }

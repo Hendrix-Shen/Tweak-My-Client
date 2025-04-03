@@ -7,16 +7,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.tweakmyclient.game.Configs;
-import top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix.EnderPortalRenderMode;
+import top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix.EndPortalRenderMode;
 
 @Mixin(TheEndPortalBlockEntity.class)
 public abstract class MixinTheEndPortalBlockEntity {
     @Inject(method = "shouldRenderFace", at = @At(value = "HEAD"), cancellable = true)
     private void shouldRenderFace(Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.enderPortalRendererFix.getBooleanValue()) {
-            if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.LEGACY) {
+        if (Configs.endPortalRendererFix.getBooleanValue()) {
+            if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.LEGACY) {
                 cir.setReturnValue(direction == Direction.UP);
-            } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.MODERN) {
+            } else if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.MODERN) {
                 cir.setReturnValue(direction.getAxis() == Direction.Axis.Y);
             } else {
                 cir.setReturnValue(true);

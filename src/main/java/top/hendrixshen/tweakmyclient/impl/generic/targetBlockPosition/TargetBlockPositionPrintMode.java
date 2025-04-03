@@ -22,6 +22,6 @@ public enum TargetBlockPositionPrintMode implements EnumOptionEntry {
 
     @Override
     public String getTranslationPrefix() {
-        return SharedConstants.getModIdentifier().concat("label.targetBlockPositionPrintMode");
+        return SharedConstants.getModIdentifier().concat(".config.option.getTargetBlockPositionMessageMode");
     }
 }

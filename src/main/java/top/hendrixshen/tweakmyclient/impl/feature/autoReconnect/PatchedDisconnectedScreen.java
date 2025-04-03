@@ -68,12 +68,12 @@ public class PatchedDisconnectedScreen extends Screen {
                 .bounds(backButtonX, backButtonY, 200, 20)
                 .build();
         Button staticButton = ButtonCompat.builder(
-                        ComponentCompat.literal(SharedConstants.tr("message.autoReconnect.static")),
+                        ComponentCompat.literal(SharedConstants.tr("feature.autoReconnect.gui.button.reconnect")),
                         button -> AutoReconnectUtil.reconnect(this.parent))
                 .bounds(backButtonX, backButtonY + 24, 98, 20)
                 .build();
         this.autoReconnectButton = ButtonCompat.builder(
-                        ComponentCompat.literal(SharedConstants.tr("message.autoReconnect.toggle")),
+                        ComponentCompat.literal(SharedConstants.tr("feature.autoReconnect.gui.button.switcher.disabled")),
                         this::onPressAutoReconnect)
                 .bounds(backButtonX + 102, backButtonY + 24, 98, 20)
                 .build();
@@ -100,7 +100,7 @@ public class PatchedDisconnectedScreen extends Screen {
 
             for (String modId : this.modHashMap.keySet()) {
                 screen.addButton(ButtonCompat.builder(
-                        ComponentCompat.literal(SharedConstants.tr(String.format("message.autoReconnect.authenticate.%s", modId))),
+                        ComponentCompat.literal(SharedConstants.tr(String.format("feature.autoReconnect.gui.button.authenticate.%s", modId))),
                                 button -> mc.setScreen(this.modHashMap.get(modId)))
                         .pos(backButtonX + offsetX, 48 + backButtonY)
                         .size(buttonWidth, 20).build());
@@ -171,9 +171,9 @@ public class PatchedDisconnectedScreen extends Screen {
         if (!Configs.autoReconnect.getBooleanValue()) {
             this.autoReconnectButton.setMessage(
                     //#if MC > 11502
-                    ComponentCompat.literal(SharedConstants.tr("message.autoReconnect.toggle"))
+                    ComponentCompat.literal(SharedConstants.tr("feature.autoReconnect.gui.button.switcher.disabled"))
                     //#else
-                    //$$ SharedConstants.tr("message.autoReconnect.toggle")
+                    //$$ SharedConstants.tr("feature.autoReconnect.gui.button.switcher.disabled")
                     //#endif
             );
             return;
@@ -181,9 +181,9 @@ public class PatchedDisconnectedScreen extends Screen {
 
         this.autoReconnectButton.setMessage(
                 //#if MC > 11502
-                ComponentCompat.literal(SharedConstants.tr("message.autoReconnect.timer"))
+                ComponentCompat.literal(SharedConstants.tr("feature.autoReconnect.gui.button.switcher.timer"))
                 //#else
-                //$$ SharedConstants.tr("message.autoReconnect.timer")
+                //$$ SharedConstants.tr("feature.autoReconnect.gui.button.switcher.timer")
                 //#endif
         );
 

@@ -3,27 +3,27 @@ package top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix;
 import top.hendrixshen.magiclib.api.malilib.config.option.EnumOptionEntry;
 import top.hendrixshen.tweakmyclient.SharedConstants;
 
-public enum EnderPortalRenderMode implements EnumOptionEntry {
+public enum EndPortalRenderMode implements EnumOptionEntry {
     ACTUAL,
     FULL,
     LEGACY,
     MODERN
     ;
 
-    public static final EnderPortalRenderMode DEFAULT = EnderPortalRenderMode.LEGACY;
+    public static final EndPortalRenderMode DEFAULT = EndPortalRenderMode.LEGACY;
 
     @Override
     public EnumOptionEntry[] getAllValues() {
-        return EnderPortalRenderMode.values();
+        return EndPortalRenderMode.values();
     }
 
     @Override
     public EnumOptionEntry getDefault() {
-        return EnderPortalRenderMode.DEFAULT;
+        return EndPortalRenderMode.DEFAULT;
     }
 
     @Override
     public String getTranslationPrefix() {
-        return SharedConstants.getModIdentifier().concat("label.enderPortalRenderMode");
+        return SharedConstants.getModIdentifier().concat(".config.option.endPortalRenderMode");
     }
 }

@@ -12,8 +12,10 @@ import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 import top.hendrixshen.magiclib.api.event.minecraft.MinecraftListener;
 import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
 import top.hendrixshen.magiclib.api.malilib.annotation.Config;
+import top.hendrixshen.magiclib.api.malilib.annotation.Statistic;
 import top.hendrixshen.magiclib.api.malilib.config.MagicConfigManager;
 import top.hendrixshen.magiclib.api.malilib.config.option.ConfigVec3iTupleList.Entry;
+import top.hendrixshen.magiclib.game.malilib.ConfigCategory;
 import top.hendrixshen.magiclib.impl.malilib.config.MagicConfigFactory;
 import top.hendrixshen.magiclib.impl.malilib.config.MagicConfigHandler;
 import top.hendrixshen.magiclib.impl.malilib.config.option.*;
@@ -33,7 +35,7 @@ import top.hendrixshen.tweakmyclient.impl.generic.memoryCleaner.MemoryCleaner;
 import top.hendrixshen.tweakmyclient.impl.generic.syncBlocks.BlockRefresher;
 import top.hendrixshen.tweakmyclient.impl.generic.syncInventory.InventoryRefresher;
 import top.hendrixshen.tweakmyclient.impl.generic.targetBlockPosition.TargetBlockPositionPrinter;
-import top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix.EnderPortalRenderMode;
+import top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix.EndPortalRenderMode;
 import top.hendrixshen.tweakmyclient.impl.generic.targetBlockPosition.TargetBlockPositionPrintMode;
 import top.hendrixshen.tweakmyclient.impl.config.AreaBoxEitherRestriction;
 import top.hendrixshen.tweakmyclient.impl.config.EitherUsageRestriction.EitherListType;
@@ -308,10 +310,10 @@ public class Configs {
     public static final MagicConfigBoolean disableResourcePackIncompatibleTip = Configs.cf.newConfigBoolean("disableResourcePackIncompatibleTip", false);
 
     @Config(category = ConfigCategory.PATCH)
-    public static final MagicConfigBoolean enderPortalRendererFix = Configs.cf.newConfigBoolean("enderPortalRendererFix", false);
+    public static final MagicConfigBoolean endPortalRendererFix = Configs.cf.newConfigBoolean("endPortalRendererFix", false);
 
     @Config(category = ConfigCategory.PATCH)
-    public static final MagicConfigOptionList enderPortalRenderMode = Configs.cf.newConfigOptionList("enderPortalRenderMode", EnderPortalRenderMode.DEFAULT);
+    public static final MagicConfigOptionList endPortalRenderMode = Configs.cf.newConfigOptionList("endPortalRenderMode", EndPortalRenderMode.DEFAULT);
 
     @Config(category = ConfigCategory.PATCH)
     public static final MagicConfigBoolean forceDebugInfoDetailed = Configs.cf.newConfigBoolean("forceDebugInfoDetailed", false);
@@ -361,6 +363,10 @@ public class Configs {
     @Config(category = ConfigCategory.DEBUG, debugOnly = true)
     public static final MagicConfigBoolean hideUnavailableConfigs = Configs.cf.newConfigBoolean("hideUnavailableConfigs", true);
 
+    @Statistic(hotkey = false)
+    @Config(category = ConfigCategory.DEBUG, debugOnly = true)
+    public static final MagicConfigHotkey resetConfigStatistic = Configs.cf.newConfigHotkey("resetConfigStatistic");
+
     public static void postDeserialize(MagicConfigHandler configHandler) {
         Configs.autoDropRestriction.setListType((ListType) Configs.autoDropType.getOptionListValue());
         Configs.autoDropRestriction.setListContents(Configs.autoDropBlackList.getStrings(), Configs.autoDropWhiteList.getStrings());
@@ -403,6 +409,10 @@ public class Configs {
 
         // Debugs
         Configs.debugMode.setValueChangeCallback(redrawConfigGui);
+        Configs.resetConfigStatistic.setCallBack((keyAction, iKeybind) -> {
+            SharedConstants.getConfigManager().getAllContainers().forEach(configContainer -> configContainer.getStatistic().reset());
+            return true;
+        });
 
         // Event listeners
         MagicLib.getInstance().getEventManager().register(LocalPlayerListener.class, AutoDropHandler.getInstance());

@@ -23,6 +23,6 @@ public enum BreakAnimationMode implements EnumOptionEntry {
 
     @Override
     public String getTranslationPrefix() {
-        return SharedConstants.getModIdentifier().concat("label.breakAnimationMode");
+        return SharedConstants.getModIdentifier().concat(".config.option.customBlockHitBoxBreakAnimation");
     }
 }

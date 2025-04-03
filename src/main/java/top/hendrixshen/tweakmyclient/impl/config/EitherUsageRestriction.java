@@ -65,7 +65,7 @@ public abstract class EitherUsageRestriction<ORIGINAL_TYPE, TYPE> {
 
         @Override
         public String getTranslationPrefix() {
-            return SharedConstants.getModIdentifier().concat("label.list_type");
+            return SharedConstants.getModIdentifier().concat(".config.gui.either_list_type");
         }
     }
 }

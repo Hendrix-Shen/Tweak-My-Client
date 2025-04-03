@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.entity.TheEndPortalBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import top.hendrixshen.tweakmyclient.game.Configs;
-import top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix.EnderPortalRenderMode;
+import top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix.EndPortalRenderMode;
 
 //#if MC > 11404
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -148,11 +148,11 @@ public abstract class MixinTheEndPortalRenderer
             @Local(ordinal = 4) float colorB
             //#endif
     ) {
-        if (!Configs.enderPortalRendererFix.getBooleanValue()) {
+        if (!Configs.endPortalRendererFix.getBooleanValue()) {
             return;
         }
 
-        if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.ACTUAL) {
+        if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.ACTUAL) {
             // Rendering the ender portal using its hit box.
             //#if MC > 11605
             //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetDown, offsetUp, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
@@ -169,7 +169,7 @@ public abstract class MixinTheEndPortalRenderer
             this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.DOWN);
             this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offset, offset, 1.0F, 1.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.UP);
             //#endif
-        } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.FULL) {
+        } else if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.FULL) {
             // Rendering the end portal as a full block.
             //#if MC > 11605
             //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
@@ -186,7 +186,7 @@ public abstract class MixinTheEndPortalRenderer
             this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.DOWN);
             this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.UP);
             //#endif
-        } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.LEGACY) {
+        } else if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.LEGACY) {
             // Rendering the end portal with Minecraft 21w13a below.
             //#if MC > 11605
             //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
@@ -203,7 +203,7 @@ public abstract class MixinTheEndPortalRenderer
             this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.DOWN);
             this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offset, offset, 1.0F, 1.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.UP);
             //#endif
-        } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.MODERN) {
+        } else if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.MODERN) {
             // Rendering the end portal with Minecraft 21w13a and above.
             //#if MC > 11605
             //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
@@ -227,7 +227,7 @@ public abstract class MixinTheEndPortalRenderer
     //#else
     //$$ @WrapMethod(method = "render(Lnet/minecraft/world/level/block/entity/TheEndPortalBlockEntity;DDDFI)V")
     //$$ private void patchRender(TheEndPortalBlockEntity entity, double camX, double camY, double camZ, float partialTicks, int packedLight, Operation<Void> original) {
-    //$$     if (!Configs.enderPortalRendererFix.getBooleanValue()) {
+    //$$     if (!Configs.endPortalRendererFix.getBooleanValue()) {
     //$$         original.call(entity, camX, camY, camZ, partialTicks, packedLight);
     //$$     }
     //$$
@@ -291,28 +291,28 @@ public abstract class MixinTheEndPortalRenderer
     //$$         float colorG = (MixinTheEndPortalRenderer.RANDOM.nextFloat() * 0.5F + 0.4F) * factor;
     //$$         float colorB = (MixinTheEndPortalRenderer.RANDOM.nextFloat() * 0.5F + 0.5F) * factor;
     //$$
-    //$$         if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.ACTUAL) {
+    //$$         if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.ACTUAL) {
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY, camY + 0.75F, camZ + 1.0F, camZ + 1.0F, camZ + 1.0F, camZ + 1.0F, colorR, colorG, colorB, Direction.SOUTH);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY + 0.75F, camY, camZ, camZ, camZ, camZ, colorR, colorG, colorB, Direction.NORTH);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX + 1.0F, camX + 1.0F, camY + 0.75, camY, camZ, camZ + 1.0F, camZ + 1.0F, camZ, colorR, colorG, colorB, Direction.EAST);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX, camY, camY + 0.75F, camZ, camZ + 1.0F, camZ + 1.0F, camZ, colorR, colorG, colorB, Direction.WEST);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY, camY, camZ, camZ, camZ + 1.0F, camZ + 1.0F, colorR, colorG, colorB, Direction.DOWN);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY + 0.75F, camY + 0.75, camZ + 1.0F, camZ + 1.0F, camZ, camZ, colorR, colorG, colorB, Direction.UP);
-    //$$         } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.FULL) {
+    //$$         } else if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.FULL) {
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY, camY + 1.0F, camZ + 1.0F, camZ + 1.0F, camZ + 1.0F, camZ + 1.0F, colorR, colorG, colorB, Direction.SOUTH);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY + 1.0F, camY, camZ, camZ, camZ, camZ, colorR, colorG, colorB, Direction.NORTH);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX + 1.0F, camX + 1.0F, camY + 1.0F, camY, camZ, camZ + 1.0F, camZ + 1.0F, camZ, colorR, colorG, colorB, Direction.EAST);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX, camY, camY + 1.0F, camZ, camZ + 1.0F, camZ + 1.0F, camZ, colorR, colorG, colorB, Direction.WEST);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY, camY, camZ, camZ, camZ + 1.0F, camZ + 1.0F, colorR, colorG, colorB, Direction.DOWN);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY + 1.0F, camY + 1.0F, camZ + 1.0F, camZ + 1.0F, camZ, camZ, colorR, colorG, colorB, Direction.UP);
-    //$$         } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.LEGACY) {
+    //$$         } else if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.LEGACY) {
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY, camY + 1.0F, camZ + 1.0F, camZ + 1.0F, camZ + 1.0F, camZ + 1.0F, colorR, colorG, colorB, Direction.SOUTH);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY + 1.0F, camY, camZ, camZ, camZ, camZ, colorR, colorG, colorB, Direction.NORTH);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX + 1.0F, camX + 1.0F, camY + 1.0F, camY, camZ, camZ + 1.0F, camZ + 1.0F, camZ, colorR, colorG, colorB, Direction.EAST);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX, camY, camY + 1.0F, camZ, camZ + 1.0F, camZ + 1.0F, camZ, colorR, colorG, colorB, Direction.WEST);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY, camY, camZ, camZ, camZ + 1.0F, camZ + 1.0F, colorR, colorG, colorB, Direction.DOWN);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY + offset, camY + offset, camZ + 1.0F, camZ + 1.0F, camZ, camZ, colorR, colorG, colorB, Direction.UP);
-    //$$         } else if (Configs.enderPortalRenderMode.getOptionListValue() == EnderPortalRenderMode.MODERN) {
+    //$$         } else if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.MODERN) {
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY, camY + 1.0F, camZ + 1.0F, camZ + 1.0F, camZ + 1.0F, camZ + 1.0F, colorR, colorG, colorB, Direction.SOUTH);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX, camX + 1.0F, camY + 1.0F, camY, camZ, camZ, camZ, camZ, colorR, colorG, colorB, Direction.NORTH);
     //$$             this.magiclib$renderFace(entity, bufferBuilder, camX + 1.0F, camX + 1.0F, camY + 1.0F, camY, camZ, camZ + 1.0F, camZ + 1.0F, camZ, colorR, colorG, colorB, Direction.EAST);
@@ -332,6 +332,7 @@ public abstract class MixinTheEndPortalRenderer
     //$$     GlStateManager.disableTexGen(GlStateManager.TexGen.T);
     //$$     GlStateManager.disableTexGen(GlStateManager.TexGen.R);
     //$$     GlStateManager.enableLighting();
+    //$$
     //$$     if (bl) {
     //$$         gameRenderer.resetFogColor(false);
     //$$     }
