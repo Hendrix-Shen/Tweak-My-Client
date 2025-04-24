@@ -3,14 +3,13 @@ package top.hendrixshen.tweakmyclient.mixin.feature.crystalBeamsRenderRestrictio
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.renderer.entity.EnderDragonRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import top.hendrixshen.tweakmyclient.game.Configs;
-import top.hendrixshen.tweakmyclient.impl.feature.crystalBeamsRenderRestriction.CrystalBeamsRenderRestrictionMode;
+import top.hendrixshen.tweakmyclient.impl.feature.crystalBeamRenderRestriction.CrystalBeamRenderRestrictionMode;
 
 //#if MC > 12101
 //$$ import net.minecraft.client.renderer.entity.state.EnderDragonRenderState;
@@ -77,7 +76,7 @@ public abstract class MixinEnderDragonRenderer extends EntityRenderer<
             EndCrystal original
             //#endif
     ) {
-        if (Configs.crystalBeamsRenderRestriction.getBooleanValue() && !((CrystalBeamsRenderRestrictionMode) Configs.crystalBeamsRenderRestrictionType.getOptionListValue()).isCrystalBeamAllow()) {
+        if (Configs.crystalBeamRenderRestriction.getBooleanValue() && !((CrystalBeamRenderRestrictionMode) Configs.crystalBeamRenderRestrictionType.getOptionListValue()).isCrystalBeamAllow()) {
             return null;
         }
 

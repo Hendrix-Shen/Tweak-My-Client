@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import top.hendrixshen.tweakmyclient.game.Configs;
-import top.hendrixshen.tweakmyclient.impl.feature.crystalBeamsRenderRestriction.CrystalBeamsRenderRestrictionMode;
+import top.hendrixshen.tweakmyclient.impl.feature.crystalBeamRenderRestriction.CrystalBeamRenderRestrictionMode;
 
 //#if MC > 12101
 //$$ import net.minecraft.world.phys.Vec3;
@@ -47,7 +47,7 @@ public abstract class MixinEndCrystalRenderer {
             BlockPos original
             //#endif
     ) {
-        if (Configs.crystalBeamsRenderRestriction.getBooleanValue() && !((CrystalBeamsRenderRestrictionMode) Configs.crystalBeamsRenderRestrictionType.getOptionListValue()).isCrystalBeamAllow()) {
+        if (Configs.crystalBeamRenderRestriction.getBooleanValue() && !((CrystalBeamRenderRestrictionMode) Configs.crystalBeamRenderRestrictionType.getOptionListValue()).isCrystalBeamAllow()) {
             return null;
         }
 

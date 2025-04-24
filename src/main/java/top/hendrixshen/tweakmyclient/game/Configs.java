@@ -13,11 +13,10 @@ import top.hendrixshen.magiclib.api.event.minecraft.MinecraftListener;
 import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
 import top.hendrixshen.magiclib.api.malilib.annotation.Config;
 import top.hendrixshen.magiclib.api.malilib.annotation.Statistic;
+import top.hendrixshen.magiclib.api.malilib.config.MagicConfigHandler;
 import top.hendrixshen.magiclib.api.malilib.config.MagicConfigManager;
 import top.hendrixshen.magiclib.api.malilib.config.option.ConfigVec3iTupleList.Entry;
-import top.hendrixshen.magiclib.game.malilib.ConfigCategory;
 import top.hendrixshen.magiclib.impl.malilib.config.MagicConfigFactory;
-import top.hendrixshen.magiclib.impl.malilib.config.MagicConfigHandler;
 import top.hendrixshen.magiclib.impl.malilib.config.option.*;
 import top.hendrixshen.magiclib.impl.malilib.config.restriction.EntityTypeRestriction;
 import top.hendrixshen.tweakmyclient.SharedConstants;
@@ -26,10 +25,10 @@ import top.hendrixshen.tweakmyclient.impl.feature.autoDrop.AutoDropHandler;
 import top.hendrixshen.tweakmyclient.impl.feature.autoTotem.AutoTotemHandler;
 import top.hendrixshen.tweakmyclient.impl.feature.breakingRestrictionBox.RestrictionBoxRenderer;
 import top.hendrixshen.tweakmyclient.impl.feature.customBlockHitBoxOverlay.BreakAnimationMode;
-import top.hendrixshen.tweakmyclient.impl.feature.crystalBeamsRenderRestriction.CrystalBeamsRenderRestrictionMode;
 import top.hendrixshen.tweakmyclient.impl.feature.customBlockHitBoxOverlay.CustomBlockHitBoxRenderer;
 import top.hendrixshen.tweakmyclient.impl.feature.customWindowIcon.CustomIconHelper;
 import top.hendrixshen.tweakmyclient.impl.feature.customWindowTitle.CustomWindowTitleHandler;
+import top.hendrixshen.tweakmyclient.impl.feature.crystalBeamRenderRestriction.CrystalBeamRenderRestrictionMode;
 import top.hendrixshen.tweakmyclient.impl.feature.openWaterHelper.OpenWaterHelperRenderer;
 import top.hendrixshen.tweakmyclient.impl.generic.memoryCleaner.MemoryCleaner;
 import top.hendrixshen.tweakmyclient.impl.generic.syncBlocks.BlockRefresher;
@@ -153,10 +152,10 @@ public class Configs {
     public static final EntityTypeRestriction clientEntityUpdateRestrictionList = new EntityTypeRestriction();
 
     @Config(category = ConfigCategory.FEATURE)
-    public static final MagicConfigBooleanHotkeyed crystalBeamsRenderRestriction = Configs.cf.newConfigBooleanHotkeyed("crystalBeamsRenderRestriction", false);
+    public static final MagicConfigBooleanHotkeyed crystalBeamRenderRestriction = Configs.cf.newConfigBooleanHotkeyed("crystalBeamRenderRestriction", false);
 
     @Config(category = ConfigCategory.FEATURE)
-    public static final MagicConfigOptionList crystalBeamsRenderRestrictionType = Configs.cf.newConfigOptionList("crystalBeamsRenderRestrictionType", CrystalBeamsRenderRestrictionMode.DEFAULT);
+    public static final MagicConfigOptionList crystalBeamRenderRestrictionType = Configs.cf.newConfigOptionList("crystalBeamRenderRestrictionType", CrystalBeamRenderRestrictionMode.DEFAULT);
 
     @Config(category = ConfigCategory.FEATURE)
     public static final MagicConfigOptionList customBlockHitBoxBreakAnimation = Configs.cf.newConfigOptionList("customBlockHitBoxBreakAnimation", BreakAnimationMode.DEFAULT);
@@ -357,6 +356,7 @@ public class Configs {
     @Config(category = ConfigCategory.DISABLE)
     public static final MagicConfigBooleanHotkeyed disableToastRender = Configs.cf.newConfigBooleanHotkeyed("disableToastRender", false);
 
+    // Debug
     @Config(category = ConfigCategory.DEBUG)
     public static final MagicConfigBoolean debugMode = Configs.cf.newConfigBoolean("debugMode", false);
 
@@ -385,6 +385,7 @@ public class Configs {
 
     public static void init() {
         Configs.cm.parseConfigClass(Configs.class);
+        ConfigMigration.setup();
         SharedConstants.getConfigHandler().setPostDeserializeCallback(Configs::postDeserialize);
 
         // Common callbacks

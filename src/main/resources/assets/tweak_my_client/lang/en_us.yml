@@ -155,17 +155,19 @@ tweak_my_client:
       clientEntityUpdateRestrictionWhitelist:
         name: clientEntityUpdateRestrictionWhitelist
         comment: Entities that will be ticked with @config#clientEntityUpdateRestriction@.
-      crystalBeamsRenderRestriction:
-        name: crystalBeamsRenderRestriction
+      crystalBeamRenderRestriction:
+        name: crystalBeamRenderRestriction
         comment: No longer render the ender crystal beam.
-      crystalBeamsRenderRestrictionType:
-        name: crystalBeamsRenderRestrictionType
+      crystalBeamRenderRestrictionType:
+        name: crystalBeamRenderRestrictionType
         comment: |-
-          Restriction type for @config#crystalBeamsRenderRestriction@.
+          Restriction type for @config#crystalBeamRenderRestriction@.
+          Block - Block all beam rendering.
           Fixed only - Only render beams with ender crystals pointing to fixed coordinates.
           None - No restriction.
           Tracking only - Only render beams with Ender Dragon pointing to ender crystal.
         value:
+          BLOCK: Block
           FIXED_ONLY: Fixed only
           NONE: None
           TRACKING_ONLY: Tracking only

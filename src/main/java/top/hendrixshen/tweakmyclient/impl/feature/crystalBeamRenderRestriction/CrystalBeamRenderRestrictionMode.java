@@ -1,4 +1,4 @@
-package top.hendrixshen.tweakmyclient.impl.feature.crystalBeamsRenderRestriction;
+package top.hendrixshen.tweakmyclient.impl.feature.crystalBeamRenderRestriction;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,25 +7,26 @@ import top.hendrixshen.tweakmyclient.SharedConstants;
 
 @Getter
 @AllArgsConstructor
-public enum CrystalBeamsRenderRestrictionMode implements EnumOptionEntry {
+public enum CrystalBeamRenderRestrictionMode implements EnumOptionEntry {
+    BLOCK(false, false),
     FIXED_ONLY(true, false),
     NONE(true, true),
     TRACKING_ONLY(false, true)
     ;
 
-    public static final CrystalBeamsRenderRestrictionMode DEFAULT = CrystalBeamsRenderRestrictionMode.NONE;
+    public static final CrystalBeamRenderRestrictionMode DEFAULT = CrystalBeamRenderRestrictionMode.NONE;
 
     private final boolean crystalBeamAllow;
     private final boolean enderDragonBeamAllow;
 
     @Override
     public EnumOptionEntry[] getAllValues() {
-        return CrystalBeamsRenderRestrictionMode.values();
+        return CrystalBeamRenderRestrictionMode.values();
     }
 
     @Override
     public EnumOptionEntry getDefault() {
-        return CrystalBeamsRenderRestrictionMode.DEFAULT;
+        return CrystalBeamRenderRestrictionMode.DEFAULT;
     }
 
     @Override
