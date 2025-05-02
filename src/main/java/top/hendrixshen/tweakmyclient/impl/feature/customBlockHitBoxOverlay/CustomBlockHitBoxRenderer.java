@@ -72,8 +72,9 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
 
         // Adjust AABB for break animation.
         final float destroyProgress = ((MultiPlayerGameModeAccessor) multiPlayerGameMode).tmc$getDestroyProgress();
+        BreakAnimationMode breakAnimationMode = (BreakAnimationMode) Configs.customBlockHitBoxBreakAnimation.getOptionListValue();
 
-        switch ((BreakAnimationMode) Configs.customBlockHitBoxBreakAnimation.getOptionListValue()) {
+        switch (breakAnimationMode) {
             case DOWN:
                 voxelShape = voxelShape.toAabbs().stream()
                         .map(box -> box.inflate(0, -box.getYsize() * destroyProgress / 2, 0)
@@ -107,7 +108,7 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                     (100 * (101 - Configs.customBlockHitBoxOverlayRainbowSpeed.getIntegerValue())) /
                     (50F * (101 - Configs.customBlockHitBoxOverlayRainbowSpeed.getIntegerValue()));
 
-            if (Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
+            if (breakAnimationMode.isForceDisableDepthTest() || Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
                 RenderGlobal.disableDepthTest();
             }
 
@@ -123,7 +124,7 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                     ) : Configs.customBlockHitBoxOverlayColor.getColor());
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
 
-            if (Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
+            if (breakAnimationMode.isForceDisableDepthTest() || Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
                 RenderGlobal.enableDepthTest();
             }
         }
@@ -133,7 +134,7 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                     (100 * (101 - Configs.customBlockHitBoxOutlineRainbowSpeed.getIntegerValue())) /
                     (50F * (101 - Configs.customBlockHitBoxOutlineRainbowSpeed.getIntegerValue()));
 
-            if (Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
+            if (breakAnimationMode.isForceDisableDepthTest() || Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
                 RenderGlobal.disableDepthTest();
             }
 
@@ -148,7 +149,7 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                             Configs.customBlockHitBoxOutlineColor.getColor().a
                     ) : Configs.customBlockHitBoxOutlineColor.getColor());
 
-            if (Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
+            if (breakAnimationMode.isForceDisableDepthTest() || Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
                 RenderGlobal.enableDepthTest();
             }
 

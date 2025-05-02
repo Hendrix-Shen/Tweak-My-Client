@@ -189,6 +189,9 @@ tweak_my_client:
           例如命中大箱子时渲染的是整个大箱子.
           注意: 这个配置并非总是有效.
           另见: 配置 @config#customBlockHitBoxOutline@, @config#customBlockHitBoxOverlay@.
+      customBlockHitBoxDepthTest:
+        name: 自定义方块命中箱深度测试
+        comment: 强制为@config#customBlockHitBoxOutline@和@config#customBlockHitBoxOverlay@禁用深度测试.
       customBlockHitBoxOutline:
         name: 自定义方块命中箱边框渲染
         comment: 启用方块命中箱边框渲染.

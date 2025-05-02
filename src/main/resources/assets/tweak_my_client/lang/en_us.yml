@@ -189,6 +189,9 @@ tweak_my_client:
           e.g. hitting a large box renders the whole large box.
           Note: This config does not always work.
           See also: config @config#customBlockHitBoxOutline@, @config#customBlockHitBoxOverlay@.
+      customBlockHitBoxDepthTest:
+        name: customBlockHitBoxDepthTest
+        comment: Force disable depth test for @config#customBlockHitBoxOutline@ and @config#customBlockHitBoxOverlay@.
       customBlockHitBoxOutline:
         name: customBlockHitBoxOutline
         comment: Enable block hitbox outline rendering.
