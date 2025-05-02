@@ -172,6 +172,7 @@ public class ConfigMigration {
             boolean migrated = false;
             migrated |= this.migrantList(jsonObj, "listBreakingRestrictionBoxBlacklist", featureObj, "breakingRestrictionBoxBlacklist");
             migrated |= this.migrantList(jsonObj, "listBreakingRestrictionBoxWhitelist", featureObj, "breakingRestrictionBoxWhitelist");
+            root.add("feature", featureObj);
             return migrated;
         }
 
@@ -216,7 +217,7 @@ public class ConfigMigration {
 
             if (split.length == 6) {
                 try {
-                    new ConfigVec3iTupleList.Entry(
+                    return new ConfigVec3iTupleList.Entry(
                             new Vec3i(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2])),
                             new Vec3i(Integer.parseInt(split[3]), Integer.parseInt(split[4]), Integer.parseInt(split[5])));
                 } catch (NumberFormatException e) {
