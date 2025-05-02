@@ -2,7 +2,6 @@ package top.hendrixshen.tweakmyclient.game;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.malilib.util.JsonUtils;
