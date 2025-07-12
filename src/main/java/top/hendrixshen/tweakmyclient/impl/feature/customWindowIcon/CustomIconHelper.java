@@ -158,11 +158,17 @@ public class CustomIconHelper {
     private static void pushResource(@NotNull ArrayList<InputStream> list, ResourceLocation stable,
                                      ResourceLocation snapshot) throws IOException {
         Minecraft mc = Minecraft.getInstance();
+        boolean isStable = SharedConstants.getCurrentVersion()
+                //#if MC >= 12106
+                //$$ .stable();
+                //#else
+                .isStable();
+                //#endif
         list.add(
                 mc.getResourceManager().getResource(
                         Configs.customWindowIcon.getBooleanValue() ?
                                 ("Public Release".equals(top.hendrixshen.tweakmyclient.SharedConstants.getModVersionType()) ? stable : snapshot) :
-                        (SharedConstants.getCurrentVersion().isStable() ? stable : snapshot))
+                                isStable ? stable : snapshot)
                 //#if MC > 11802
                 //$$ .orElseThrow(RuntimeException::new).open()
                 //#else
@@ -175,8 +181,14 @@ public class CustomIconHelper {
     //$$ private static void pushVanillaResource(@NotNull ArrayList<InputStream> list, String[] stable,
     //$$                                         String[] snapshot) throws IOException {
     //$$     Minecraft mc = Minecraft.getInstance();
+    //$$     boolean isStable = SharedConstants.getCurrentVersion()
+    //$$             //#if MC >= 12106
+    //$$             //$$ .stable();
+    //$$             //#else
+    //$$             .isStable();
+    //$$             //#endif
     //$$     list.add(Objects.requireNonNull(mc.getVanillaPackResources()
-    //$$             .getRootResource(SharedConstants.getCurrentVersion().isStable() ? stable : snapshot)).get());
+    //$$             .getRootResource(isStable ? stable : snapshot)).get());
     //$$ }
     //#endif
 }

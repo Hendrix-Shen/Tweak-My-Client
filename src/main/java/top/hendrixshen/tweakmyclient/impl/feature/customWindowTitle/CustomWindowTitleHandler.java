@@ -36,7 +36,13 @@ public class CustomWindowTitleHandler implements MinecraftListener {
                     //$$ SharedConstants.getCurrentVersion().getProtocolVersion()
                     //#endif
             ))
-            .put("{mc_version}", SharedConstants.getCurrentVersion().getName())
+            .put("{mc_version}", SharedConstants.getCurrentVersion()
+                    //#if MC >= 12106
+                    //$$ .name()
+                    //#else
+                    .getName()
+                    //#endif
+            )
             .put("{tmc_version}", top.hendrixshen.tweakmyclient.SharedConstants.getModVersion())
             .put("{tmc_version_type}", top.hendrixshen.tweakmyclient.SharedConstants.getModVersionType())
             .build();
