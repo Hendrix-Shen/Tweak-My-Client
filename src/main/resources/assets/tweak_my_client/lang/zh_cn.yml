@@ -142,6 +142,11 @@ tweak_my_client:
       breakingRestrictionBoxWhitelistColor:
         name: 挖掘约束区域模式-白名单颜色
         comment: 触发@config#breakingRestrictionBoxWhitelist@时的颜色.
+      breakingRestrictionFlat:
+        name: 挖掘约束平坦模式
+        comment: |-
+          阻止你挖掘脚下的方块,
+          当你按下潜行键可以绕过此限制.
       clientEntityUpdateRestriction:
         name: 客户端实体更新约束
         comment: |-

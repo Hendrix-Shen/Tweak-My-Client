@@ -142,6 +142,11 @@ tweak_my_client:
       breakingRestrictionBoxWhitelistColor:
         name: breakingRestrictionBoxWhitelistColor
         comment: Color for @config#breakingRestrictionBoxWhitelist@.
+      breakingRestrictionFlat:
+        name: breakingRestrictionFlat
+        comment: |-
+          Prevents you from digging under your feet,
+          You can bypass this restriction by pressing the sneak key.
       clientEntityUpdateRestriction:
         name: clientEntityUpdateRestriction
         comment: |-

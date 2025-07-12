@@ -138,6 +138,9 @@ public class Configs {
     public static final AreaBoxEitherRestriction breakingRestrictionBoxRestriction = new AreaBoxEitherRestriction();
 
     @Config(category = ConfigCategory.FEATURE)
+    public static final MagicConfigBooleanHotkeyed breakingRestrictionFlat = Configs.cf.newConfigBooleanHotkeyed("breakingRestrictionFlat", false);
+
+    @Config(category = ConfigCategory.FEATURE)
     public static final MagicConfigBooleanHotkeyed clientEntityUpdateRestriction = Configs.cf.newConfigBooleanHotkeyed("clientEntityUpdateRestriction", false);
 
     @Config(category = ConfigCategory.FEATURE)
