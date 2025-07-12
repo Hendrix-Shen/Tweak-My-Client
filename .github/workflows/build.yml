@@ -1,0 +1,74 @@
+name: _step.build
+on:
+  workflow_call:
+    inputs:
+      build_publish:
+        type: boolean
+        default: false
+        required: false
+      build_version_type:
+        type: string
+        default: 'DEV'
+        required: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout the sources
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 21
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/master' && github.ref != 'refs/heads/dev' }}
+      - name: Build and publish with gradle
+        if: ${{ inputs.build_publish == true }}
+        run: |
+          ./gradlew build publish -x test --stacktrace
+        env:
+          BUILD_TYPE: ${{ inputs.build_version_type }}
+          NYAN_MAVEN_PASSWORD: ${{ secrets.NYAN_MAVEN_PASSWORD }}
+          NYAN_MAVEN_USERNAME: ${{ secrets.NYAN_MAVEN_USERNAME }}
+          SIGNING_PGP_KEY: ${{ secrets.SIGNING_PGP_KEY }}
+      - name: Build and publishToMavenLocal with gradle
+        if: ${{ inputs.build_publish == false }}
+        run: |
+          ./gradlew build publishToMavenLocal -x test --stacktrace
+        env:
+          BUILD_TYPE: ${{ inputs.build_version_type }}
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            */**/build/libs/
+            */**/build/tmp/submods/
+      - name: Upload MavenLocal
+        uses: actions/upload-artifact@v4
+        with:
+          name: Maven Local
+          path: ~/.m2/repository/com/plusls/
+  summary:
+    runs-on: ubuntu-24.04
+    needs:
+      - build
+    steps:
+      - name: Checkout the sources
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: build-artifacts
+      - name: Make build summary
+        run: |
+          pip install jproperties
+          python .github/workflows/scripts/summary.py
