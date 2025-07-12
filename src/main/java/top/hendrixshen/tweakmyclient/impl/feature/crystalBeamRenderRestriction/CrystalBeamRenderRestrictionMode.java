@@ -31,6 +31,6 @@ public enum CrystalBeamRenderRestrictionMode implements EnumOptionEntry {
 
     @Override
     public String getTranslationPrefix() {
-        return SharedConstants.getModIdentifier().concat(".config.option.crystalBeamsRenderRestrictionType");
+        return SharedConstants.getModIdentifier().concat(".config.option.crystalBeamRenderRestrictionType");
     }
 }

@@ -1,6 +1,5 @@
 package top.hendrixshen.tweakmyclient.impl.feature.customBlockHitBoxOverlay;
 
-import fi.dy.masa.malilib.util.Color4f;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import net.minecraft.client.Minecraft;
@@ -9,7 +8,6 @@ import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.piston.PistonHeadBlock;
@@ -23,11 +21,17 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.lwjgl.opengl.GL11;
 import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
-import top.hendrixshen.magiclib.api.render.context.RenderContext;
+import top.hendrixshen.magiclib.api.render.context.LevelRenderContext;
 import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
 import top.hendrixshen.tweakmyclient.game.Configs;
 import top.hendrixshen.tweakmyclient.mixin.accessor.MultiPlayerGameModeAccessor;
 import top.hendrixshen.tweakmyclient.util.RenderUtil;
+
+//#if MC >= 12105
+//$$ import fi.dy.masa.malilib.util.data.Color4f;
+//#else
+import fi.dy.masa.malilib.util.Color4f;
+//#endif
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class CustomBlockHitBoxRenderer implements RenderLevelListener {
@@ -35,11 +39,12 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
     private static final CustomBlockHitBoxRenderer instance = new CustomBlockHitBoxRenderer();
 
     @Override
-    public void preRenderLevel(Level level, RenderContext renderContext, float partialTicks) {
+    public void preRenderLevel(ClientLevel level, LevelRenderContext renderContext) {
+        // NO-OP
     }
 
     @Override
-    public void postRenderLevel(Level level, RenderContext renderContext, float partialTicks) {
+    public void postRenderLevel(ClientLevel level, LevelRenderContext renderContext) {
         boolean shouldRenderFill = Configs.customBlockHitBoxOverlay.getBooleanValue();
         boolean shouldRenderOutline = Configs.customBlockHitBoxOutline.getBooleanValue();
 
@@ -54,20 +59,19 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
         }
 
         BlockHitResult hitResult = (BlockHitResult) mc.hitResult;
-        ClientLevel clientLevel = (ClientLevel) level;
         Entity cameraEntity = mc.cameraEntity;
         MultiPlayerGameMode multiPlayerGameMode = mc.gameMode;
 
-        if (clientLevel == null || cameraEntity == null || multiPlayerGameMode == null) {
+        if (level == null || cameraEntity == null || multiPlayerGameMode == null) {
             return;
         }
 
         BlockPos blockPos = hitResult.getBlockPos();
-        BlockState blockState = clientLevel.getBlockState(blockPos);
-        VoxelShape voxelShape = blockState.getShape(clientLevel, hitResult.getBlockPos(), CollisionContext.of(cameraEntity));
+        BlockState blockState = level.getBlockState(blockPos);
+        VoxelShape voxelShape = blockState.getShape(level, hitResult.getBlockPos(), CollisionContext.of(cameraEntity));
 
         if (Configs.customBlockHitBoxLinkedAdapter.getBooleanValue()) {
-            voxelShape = CustomBlockHitBoxRenderer.linkedBlockAdapter(clientLevel, blockState, blockPos, voxelShape);
+            voxelShape = CustomBlockHitBoxRenderer.linkedBlockAdapter(level, blockState, blockPos, voxelShape);
         }
 
         // Adjust AABB for break animation.
@@ -78,7 +82,7 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
             case DOWN:
                 voxelShape = voxelShape.toAabbs().stream()
                         .map(box -> box.inflate(0, -box.getYsize() * destroyProgress / 2, 0)
-                                        .move(0, -box.getYsize() * destroyProgress / 2, 0))
+                                .move(0, -box.getYsize() * destroyProgress / 2, 0))
                         .map(Shapes::create)
                         .reduce(Shapes::or)
                         .orElse(Shapes.empty()).optimize();
@@ -108,10 +112,6 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                     (100 * (101 - Configs.customBlockHitBoxOverlayRainbowSpeed.getIntegerValue())) /
                     (50F * (101 - Configs.customBlockHitBoxOverlayRainbowSpeed.getIntegerValue()));
 
-            if (breakAnimationMode.isForceDisableDepthTest() || Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
-                RenderGlobal.disableDepthTest();
-            }
-
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
             GL11.glPolygonOffset(-1.0F, -1.0F);
             RenderUtil.renderShapeOverlay(voxelShape,
@@ -121,22 +121,16 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                             0.5F + 0.5F * (float) Math.sin((k + 4F / 3F) * Math.PI),
                             0.5F + 0.5F * (float) Math.sin((k + 8F / 3F) * Math.PI),
                             Configs.customBlockHitBoxOverlayColor.getColor().a
-                    ) : Configs.customBlockHitBoxOverlayColor.getColor());
+                    ) : Configs.customBlockHitBoxOverlayColor.getColor(),
+                    !(breakAnimationMode.isForceDisableDepthTest() && Configs.customBlockHitBoxDepthTest.getBooleanValue())
+            );
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
-
-            if (breakAnimationMode.isForceDisableDepthTest() || Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
-                RenderGlobal.enableDepthTest();
-            }
         }
 
         if (Configs.customBlockHitBoxOutline.getBooleanValue()) {
             float k = System.currentTimeMillis() %
                     (100 * (101 - Configs.customBlockHitBoxOutlineRainbowSpeed.getIntegerValue())) /
                     (50F * (101 - Configs.customBlockHitBoxOutlineRainbowSpeed.getIntegerValue()));
-
-            if (breakAnimationMode.isForceDisableDepthTest() || Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
-                RenderGlobal.disableDepthTest();
-            }
 
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
             GL11.glPolygonOffset(-1.0F, -1.0F);
@@ -147,11 +141,9 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                             0.5F + 0.5F * (float) Math.sin((k + 2F / 3F) * Math.PI),
                             0.5F + 0.5F * (float) Math.sin((k + 6F / 3F) * Math.PI),
                             Configs.customBlockHitBoxOutlineColor.getColor().a
-                    ) : Configs.customBlockHitBoxOutlineColor.getColor());
-
-            if (breakAnimationMode.isForceDisableDepthTest() || Configs.customBlockHitBoxDepthTest.getBooleanValue()) {
-                RenderGlobal.enableDepthTest();
-            }
+                    ) : Configs.customBlockHitBoxOutlineColor.getColor(),
+                    !(breakAnimationMode.isForceDisableDepthTest() && Configs.customBlockHitBoxDepthTest.getBooleanValue())
+            );
 
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
         }

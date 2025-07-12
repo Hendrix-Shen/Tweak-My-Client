@@ -17,8 +17,9 @@ tweak_my_client:
       title:
         .: "TweakMyClient - 版本: %1$s (%2$s)"
       either_list_type:
-        BLACKLIST: 黑名单
-        WHITELIST: 白名单
+        value:
+          BLACKLIST: 黑名单
+          WHITELIST: 白名单
     option:
       # ================================ 通用 ================================
       getTargetBlockPosition:

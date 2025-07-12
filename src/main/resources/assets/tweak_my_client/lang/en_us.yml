@@ -17,8 +17,9 @@ tweak_my_client:
       title:
         .: 'TweakMyClient - Version: %1$s (%2$s)'
       either_list_type:
-        BLACKLIST: Blacklist
-        WHITELIST: Whitelist
+        value:
+          BLACKLIST: Blacklist
+          WHITELIST: Whitelist
     option:
       # ================================ Generics ================================
       getTargetBlockPosition:

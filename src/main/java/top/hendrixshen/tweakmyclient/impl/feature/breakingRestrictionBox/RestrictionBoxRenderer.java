@@ -1,17 +1,21 @@
 package top.hendrixshen.tweakmyclient.impl.feature.breakingRestrictionBox;
 
-import fi.dy.masa.malilib.util.Color4f;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.minecraft.world.level.Level;
+import net.minecraft.client.multiplayer.ClientLevel;
 import org.lwjgl.opengl.GL11;
 import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
-import top.hendrixshen.magiclib.api.render.context.RenderContext;
-import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
+import top.hendrixshen.magiclib.api.render.context.LevelRenderContext;
 import top.hendrixshen.tweakmyclient.game.Configs;
 import top.hendrixshen.tweakmyclient.util.AreaBox;
 import top.hendrixshen.tweakmyclient.impl.config.EitherUsageRestriction.EitherListType;
 import top.hendrixshen.tweakmyclient.util.RenderUtil;
+
+//#if MC >= 12105
+//$$ import fi.dy.masa.malilib.util.data.Color4f;
+//#else
+import fi.dy.masa.malilib.util.Color4f;
+//#endif
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class RestrictionBoxRenderer implements RenderLevelListener {
@@ -21,26 +25,22 @@ public class RestrictionBoxRenderer implements RenderLevelListener {
     private Color4f whitelistOutlineColor = Color4f.ZERO;
 
     @Override
-    public void preRenderLevel(Level level, RenderContext renderContext, float partialTicks) {
+    public void preRenderLevel(ClientLevel level, LevelRenderContext renderContext) {
+        // NO-OP
     }
 
     @Override
-    public void postRenderLevel(Level level, RenderContext renderContext, float partialTicks) {
+    public void postRenderLevel(ClientLevel level, LevelRenderContext renderContext) {
         if (!Configs.breakingRestrictionBox.getBooleanValue()) {
             return;
         }
 
-        switch ((EitherListType) Configs.breakingRestrictionBoxType.getOptionListValue()) {
-            case BLACKLIST:
-                for (AreaBox areaBox : Configs.breakingRestrictionBoxRestriction.getListForType(EitherListType.WHITELIST)) {
-                    this.renderAreaBox(areaBox, this.blacklistOutlineColor, Configs.breakingRestrictionBoxBlacklistColor.getColor());
-                }
-                break;
-            case WHITELIST:
-                for (AreaBox areaBox : Configs.breakingRestrictionBoxRestriction.getListForType(EitherListType.WHITELIST)) {
-                    this.renderAreaBox(areaBox, this.whitelistOutlineColor, Configs.breakingRestrictionBoxWhitelistColor.getColor());
-                }
-                break;
+        EitherListType type = (EitherListType) Configs.breakingRestrictionBoxType.getOptionListValue();
+        Color4f outlineColor = type == EitherListType.BLACKLIST ? this.blacklistOutlineColor : this.whitelistOutlineColor;
+        Color4f overlayColor = type == EitherListType.BLACKLIST ? Configs.breakingRestrictionBoxBlacklistColor.getColor() : Configs.breakingRestrictionBoxWhitelistColor.getColor();
+
+        for (AreaBox areaBox : Configs.breakingRestrictionBoxRestriction.getListForType(type)) {
+            this.renderAreaBox(areaBox, outlineColor, overlayColor);
         }
     }
 
@@ -48,10 +48,8 @@ public class RestrictionBoxRenderer implements RenderLevelListener {
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
         GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
         GL11.glPolygonOffset(-1.0F, -1.0F);
-        RenderGlobal.disableDepthTest();
-        RenderUtil.renderAreaOutline(areaBox, outlineColor);
-        RenderGlobal.enableDepthTest();
-        RenderUtil.renderAreaOverlay(areaBox, fillColor);
+        RenderUtil.renderAreaOutline(areaBox, outlineColor, false);
+        RenderUtil.renderAreaOverlay(areaBox, fillColor, true);
         GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
     }

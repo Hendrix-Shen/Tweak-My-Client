@@ -16,9 +16,9 @@ public class AreaBoxEitherRestriction extends EitherUsageRestriction<Entry, Area
     public boolean isAllowed(BlockPos blockPos) {
         switch (this.listType) {
             case BLACKLIST:
-                return this.blackList.stream().noneMatch(areaBox -> areaBox.contains(blockPos));
+                return this.blackList.stream().anyMatch(areaBox -> areaBox.contains(blockPos));
             case WHITELIST:
-                return this.whiteList.stream().anyMatch(areaBox -> areaBox.contains(blockPos));
+                return this.whiteList.stream().noneMatch(areaBox -> areaBox.contains(blockPos));
             default:
                 throw new IllegalStateException();
         }

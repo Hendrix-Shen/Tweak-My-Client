@@ -31,15 +31,15 @@ public abstract class MixinMain {
             //#endif
             at = @At(
                     value = "INVOKE",
+                    //#if MC >= 12105
+                    //$$ target = "Lcom/mojang/blaze3d/systems/RenderSystem;initRenderThread()V",
+                    //#else
                     target = "Lcom/mojang/blaze3d/systems/RenderSystem;finishInitialization()V",
+                    //#endif
                     remap = false
             )
     )
-    //#if MC > 11903 || MC < 11900
-    private static void finishInitializationRenderSystem(String[] strings, CallbackInfo ci) {
-    //#else
-    //$$ private static void finishInitializationRenderSystem(String[] strings, boolean bl, CallbackInfo ci) {
-    //#endif
+    private static void finishInitializationRenderSystem(CallbackInfo ci) {
         if (Configs.customWindowIcon.getBooleanValue()) {
             CustomIconHelper.updateIcon();
         }
