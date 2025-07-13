@@ -205,7 +205,7 @@ public class PatchedDisconnectedScreen extends Screen {
 
         this.autoReconnectButton.setMessage(
                 //#if MC > 11502
-                ComponentCompat.literal(SharedConstants.tr("feature.autoReconnect.gui.button.switcher.timer"))
+                ComponentCompat.literal(SharedConstants.tr("feature.autoReconnect.gui.button.switcher.timer", this.reconnectTimer))
                 //#else
                 //$$ SharedConstants.tr("feature.autoReconnect.gui.button.switcher.timer")
                 //#endif
