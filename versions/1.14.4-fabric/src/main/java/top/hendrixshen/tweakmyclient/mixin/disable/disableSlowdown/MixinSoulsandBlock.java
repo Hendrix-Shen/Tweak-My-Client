@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(SoulsandBlock.class)
-public class MixinSoulsandBlock {
+public abstract class MixinSoulsandBlock {
     @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
     private void onEntityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity, CallbackInfo ci) {
         if (Configs.disableSlowdown.getBooleanValue() && entity instanceof LocalPlayer) {

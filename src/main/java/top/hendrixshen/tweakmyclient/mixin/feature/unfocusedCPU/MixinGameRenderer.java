@@ -13,7 +13,7 @@ import top.hendrixshen.tweakmyclient.game.Configs;
 //#endif
 
 @Mixin(GameRenderer.class)
-public class MixinGameRenderer {
+public abstract class MixinGameRenderer {
     @Inject(
             //#if MC > 11404
             method = "render",

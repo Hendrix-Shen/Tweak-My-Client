@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(AbstractContainerScreen.class)
-public class MixinAbstractContainerScreen<T extends AbstractContainerMenu> {
+public abstract class MixinAbstractContainerScreen<T extends AbstractContainerMenu> {
     @WrapOperation(
             method = "renderBackground",
             at = @At(

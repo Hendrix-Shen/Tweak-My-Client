@@ -4,5 +4,5 @@ import org.spongepowered.asm.mixin.Mixin;
 import top.hendrixshen.magiclib.api.preprocess.DummyClass;
 
 @Mixin(DummyClass.class)
-public class MixinSoulsandBlock {
+public abstract class MixinSoulsandBlock {
 }

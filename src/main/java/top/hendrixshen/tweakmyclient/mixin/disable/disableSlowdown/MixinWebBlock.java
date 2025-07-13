@@ -11,7 +11,7 @@ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.sugar.Local;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(WebBlock.class)
-public class MixinWebBlock {
+public abstract class MixinWebBlock {
     @Inject(
             method = "entityInside",
             at = @At(
