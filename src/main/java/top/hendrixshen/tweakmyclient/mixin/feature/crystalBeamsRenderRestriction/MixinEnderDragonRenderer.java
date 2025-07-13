@@ -1,15 +1,17 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.crystalBeamsRenderRestriction;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.minecraft.client.renderer.entity.EnderDragonRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import org.objectweb.asm.Opcodes;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
 import top.hendrixshen.tweakmyclient.game.Configs;
 import top.hendrixshen.tweakmyclient.impl.feature.crystalBeamRenderRestriction.CrystalBeamRenderRestrictionMode;
+
+import net.minecraft.client.renderer.entity.EnderDragonRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC < 12103
+import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
+//#endif
 
 //#if MC > 12101
 //$$ import net.minecraft.client.renderer.entity.state.EnderDragonRenderState;
@@ -21,13 +23,22 @@ import top.hendrixshen.tweakmyclient.impl.feature.crystalBeamRenderRestriction.C
 //#else
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 //#endif
+// CHECKSTYLE.ON: ImportOrder
+
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(EnderDragonRenderer.class)
 public abstract class MixinEnderDragonRenderer extends EntityRenderer<
+        // CHECKSTYLE.OFF: NoWhitespaceBefore
+        // CHECKSTYLE.OFF: SeparatorWrap
         EnderDragon
         //#if MC > 12101
         //$$ , EnderDragonRenderState
         //#endif
+        // CHECKSTYLE.ON: SeparatorWrap
+        // CHECKSTYLE.ON: NoWhitespaceBefore
         > {
     protected MixinEnderDragonRenderer(
             //#if MC > 11605
@@ -63,6 +74,8 @@ public abstract class MixinEnderDragonRenderer extends EntityRenderer<
                     opcode = Opcodes.GETFIELD
             )
     )
+    // CHECKSTYLE.OFF: Indentation
+    // @formatter:off
     private
     //#if MC > 12101
     //$$ Vec3
@@ -76,6 +89,8 @@ public abstract class MixinEnderDragonRenderer extends EntityRenderer<
             EndCrystal original
             //#endif
     ) {
+        // @formatter:on
+        // CHECKSTYLE.OFF: Indentation
         if (Configs.crystalBeamRenderRestriction.getBooleanValue() && !((CrystalBeamRenderRestrictionMode) Configs.crystalBeamRenderRestrictionType.getOptionListValue()).isCrystalBeamAllow()) {
             return null;
         }

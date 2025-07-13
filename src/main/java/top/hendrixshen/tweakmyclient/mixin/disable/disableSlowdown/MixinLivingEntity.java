@@ -1,16 +1,23 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
+import top.hendrixshen.magiclib.util.MiscUtil;
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC < 12103
 import org.spongepowered.asm.mixin.injection.Slice;
-import top.hendrixshen.magiclib.util.MiscUtil;
-import top.hendrixshen.tweakmyclient.game.Configs;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity extends Entity {

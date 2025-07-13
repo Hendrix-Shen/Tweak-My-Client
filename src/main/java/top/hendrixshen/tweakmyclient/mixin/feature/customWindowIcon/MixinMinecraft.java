@@ -1,23 +1,27 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.customWindowIcon;
 
-import com.mojang.blaze3d.platform.Window;
-import net.minecraft.client.Minecraft;
-import org.spongepowered.asm.mixin.Unique;
 import top.hendrixshen.tweakmyclient.game.Configs;
 import top.hendrixshen.tweakmyclient.impl.feature.customWindowIcon.CustomIconHelper;
+
+import com.mojang.blaze3d.platform.Window;
+import net.minecraft.client.Minecraft;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.concurrent.CompletableFuture;
-
+// CHECKSTYLE.OFF: ImportOrder
 //#if MC > 11404
 import org.spongepowered.asm.mixin.Final;
 //#else
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#endif
+// CHECKSTYLE.ON: ImportOrder
+
+import java.util.concurrent.CompletableFuture;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
@@ -31,7 +35,7 @@ public abstract class MixinMinecraft {
     //$$ public Window window;
     //#endif
 
-    @Inject(method = "reloadResourcePacks()Ljava/util/concurrent/CompletableFuture;",at = @At("RETURN"))
+    @Inject(method = "reloadResourcePacks()Ljava/util/concurrent/CompletableFuture;", at = @At("RETURN"))
     private void afterReloadResourcePacks(CallbackInfoReturnable<CompletableFuture<Void>> cir) {
         this.tmc$updateIcon();
     }

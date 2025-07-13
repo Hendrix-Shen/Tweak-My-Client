@@ -2,21 +2,31 @@ package top.hendrixshen.tweakmyclient.impl.feature.autoReconnect;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.ConnectScreen;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.multiplayer.ServerData;
-import net.minecraft.network.chat.Component;
-import org.jetbrains.annotations.NotNull;
 
+// CHECKSTYLE.OFF: ImportOrder
 //#if MC > 12004
-//$$ import net.minecraft.client.multiplayer.TransferState;
 //$$ import org.jetbrains.annotations.Nullable;
 //#endif
 
 //#if MC > 11902
 //$$ import com.google.common.collect.Lists;
-//$$ import java.util.List;
+//#else
+import org.jetbrains.annotations.NotNull;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.ConnectScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.network.chat.Component;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC > 12004
+//$$ import net.minecraft.client.multiplayer.TransferState;
+//#endif
+
+//#if MC > 11902
 //$$ import top.hendrixshen.magiclib.api.compat.minecraft.network.chat.ComponentCompat;
 //#else
 import net.minecraft.network.chat.TranslatableComponent;
@@ -25,6 +35,13 @@ import net.minecraft.network.chat.TranslatableComponent;
 //#if MC > 11605
 //$$ import net.minecraft.client.multiplayer.resolver.ServerAddress;
 //#endif
+// CHECKSTYLE.ON: ImportOrder
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC > 11902
+//$$ import java.util.List;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
 
 public class AutoReconnectUtil {
     private static final Minecraft mc = Minecraft.getInstance();
@@ -54,16 +71,18 @@ public class AutoReconnectUtil {
         if (AutoReconnectUtil.lastServer != null) {
             //#if MC > 11904
             //$$ ConnectScreen.startConnecting(
+            //$$         // CHECKSTYLE.OFF: NoWhitespaceBefore
+            //$$         // CHECKSTYLE.OFF: SeparatorWrap
             //$$         screen,
             //$$         AutoReconnectUtil.mc,
             //$$         ServerAddress.parseString(serverInfo.ip),
-            //$$         serverInfo
-            //#if MC > 11904
-            //$$         , AutoReconnectUtil.lastQuickPlay
-            //#endif
-            //#if MC > 12004
-            //$$         , AutoReconnectUtil.lastTransferState
-            //#endif
+            //$$         serverInfo,
+            //$$         AutoReconnectUtil.lastQuickPlay
+            //$$         //#if MC > 12004
+            //$$         //$$ , AutoReconnectUtil.lastTransferState
+            //$$         //#endif
+            //$$         // CHECKSTYLE.ON: SeparatorWrap
+            //$$         // CHECKSTYLE.ON: NoWhitespaceBefore
             //$$ );
             //#elseif MC > 11605
             //$$ ConnectScreen.startConnecting(screen, AutoReconnectUtil.mc, ServerAddress.parseString(serverInfo.ip), serverInfo);

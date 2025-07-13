@@ -2,20 +2,20 @@ package top.hendrixshen.tweakmyclient.impl.feature.openWaterHelper;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.lwjgl.opengl.GL11;
+import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
+import top.hendrixshen.magiclib.api.render.context.LevelRenderContext;
+import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigColor;
+import top.hendrixshen.tweakmyclient.game.Configs;
+import top.hendrixshen.tweakmyclient.mixin.accessor.FishingHookAccessor;
+import top.hendrixshen.tweakmyclient.util.AreaBox;
+import top.hendrixshen.tweakmyclient.util.RenderUtil;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.projectile.FishingHook;
-import org.lwjgl.opengl.GL11;
-import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
-import top.hendrixshen.magiclib.api.render.context.LevelRenderContext;
-import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigColor;
-import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
-import top.hendrixshen.tweakmyclient.game.Configs;
-import top.hendrixshen.tweakmyclient.util.AreaBox;
-import top.hendrixshen.tweakmyclient.mixin.accessor.FishingHookAccessor;
-import top.hendrixshen.tweakmyclient.util.RenderUtil;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class OpenWaterHelperRenderer implements RenderLevelListener {
@@ -43,8 +43,9 @@ public class OpenWaterHelperRenderer implements RenderLevelListener {
         }
 
         BlockPos fishHookPos = fishHook.blockPosition();
-        MagicConfigColor color = ((FishingHookAccessor) fishHook).tmc$invokeCalculateOpenWater(fishHook.blockPosition()) ?
-                Configs.openWaterColor : Configs.shallowWaterColor;
+        MagicConfigColor color = ((FishingHookAccessor) fishHook).tmc$invokeCalculateOpenWater(fishHook.blockPosition())
+                ? Configs.openWaterColor
+                : Configs.shallowWaterColor;
         AreaBox areaBox = new AreaBox(
                 fishHookPos.getX() - 2, fishHookPos.getY() - 3, fishHookPos.getZ() - 2,
                 fishHookPos.getX() + 2, fishHookPos.getY(), fishHookPos.getZ() + 2

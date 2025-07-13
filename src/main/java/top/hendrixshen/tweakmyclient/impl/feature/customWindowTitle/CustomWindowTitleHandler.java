@@ -1,13 +1,8 @@
 package top.hendrixshen.tweakmyclient.impl.feature.customWindowTitle;
 
 import com.google.common.collect.ImmutableMap;
-import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.fabricmc.loader.impl.FabricLoaderImpl;
-import net.minecraft.SharedConstants;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientPacketListener;
 import org.lwjgl.glfw.GLFW;
 import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.magiclib.api.event.minecraft.MinecraftListener;
@@ -15,7 +10,13 @@ import top.hendrixshen.magiclib.api.i18n.I18n;
 import top.hendrixshen.tweakmyclient.game.Configs;
 import top.hendrixshen.tweakmyclient.util.CollectionUtil;
 
-import java.util.*;
+import net.minecraft.SharedConstants;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+
+import net.fabricmc.loader.impl.FabricLoaderImpl;
+
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.LockSupport;
@@ -37,10 +38,10 @@ public class CustomWindowTitleHandler implements MinecraftListener {
                     //#endif
             ))
             .put("{mc_version}", SharedConstants.getCurrentVersion()
-                    //#if MC >= 12106
-                    //$$ .name()
-                    //#else
-                    .getName()
+                            //#if MC >= 12106
+                            //$$ .name()
+                            //#else
+                            .getName()
                     //#endif
             )
             .put("{tmc_version}", top.hendrixshen.tweakmyclient.SharedConstants.getModVersion())
@@ -118,11 +119,11 @@ public class CustomWindowTitleHandler implements MinecraftListener {
         if (this.mc.getSingleplayerServer() != null && !this.mc.getSingleplayerServer().isPublished()) {
             return "title.singleplayer";
         } else if (
-            //#if MC > 12001
-            //$$ this.mc.getCurrentServer() != null && this.mc.getCurrentServer().isRealm()
-            //#else
+                //#if MC > 12001
+                //$$ this.mc.getCurrentServer() != null && this.mc.getCurrentServer().isRealm()
+                //#else
                 this.mc.isConnectedToRealms()
-            //#endif
+                //#endif
         ) {
             return "title.multiplayer.realms";
         } else if (this.mc.getSingleplayerServer() == null && (this.mc.getCurrentServer() == null || !this.mc.getCurrentServer().isLan())) {

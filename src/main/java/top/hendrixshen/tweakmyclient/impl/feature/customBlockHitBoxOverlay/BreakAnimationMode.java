@@ -10,8 +10,7 @@ import top.hendrixshen.tweakmyclient.SharedConstants;
 public enum BreakAnimationMode implements EnumOptionEntry {
     DOWN(true),
     NONE(false),
-    SHRINK(true)
-    ;
+    SHRINK(true);
 
     public static final BreakAnimationMode DEFAULT = BreakAnimationMode.NONE;
 

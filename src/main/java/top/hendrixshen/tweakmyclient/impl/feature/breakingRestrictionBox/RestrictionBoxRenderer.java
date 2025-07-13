@@ -2,20 +2,23 @@ package top.hendrixshen.tweakmyclient.impl.feature.breakingRestrictionBox;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.minecraft.client.multiplayer.ClientLevel;
 import org.lwjgl.opengl.GL11;
 import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
 import top.hendrixshen.magiclib.api.render.context.LevelRenderContext;
 import top.hendrixshen.tweakmyclient.game.Configs;
-import top.hendrixshen.tweakmyclient.util.AreaBox;
 import top.hendrixshen.tweakmyclient.impl.config.EitherUsageRestriction.EitherListType;
+import top.hendrixshen.tweakmyclient.util.AreaBox;
 import top.hendrixshen.tweakmyclient.util.RenderUtil;
 
+// CHECKSTYLE.OFF: ImportOrder
 //#if MC >= 12105
 //$$ import fi.dy.masa.malilib.util.data.Color4f;
 //#else
 import fi.dy.masa.malilib.util.Color4f;
 //#endif
+// CHECKSTYLE.ON: ImportOrder
+
+import net.minecraft.client.multiplayer.ClientLevel;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class RestrictionBoxRenderer implements RenderLevelListener {

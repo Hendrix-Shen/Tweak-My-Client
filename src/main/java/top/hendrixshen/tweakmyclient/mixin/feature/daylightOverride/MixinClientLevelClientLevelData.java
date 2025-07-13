@@ -1,11 +1,13 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.daylightOverride;
 
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.multiplayer.ClientLevel;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(ClientLevel.ClientLevelData.class)
 public abstract class MixinClientLevelClientLevelData {

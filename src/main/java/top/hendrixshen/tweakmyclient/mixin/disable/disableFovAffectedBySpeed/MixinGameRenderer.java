@@ -1,11 +1,13 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableFovAffectedBySpeed;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.renderer.GameRenderer;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import top.hendrixshen.tweakmyclient.game.Configs;
+import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 @Mixin(GameRenderer.class)
 public abstract class MixinGameRenderer {

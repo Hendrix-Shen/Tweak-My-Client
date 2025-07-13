@@ -1,16 +1,18 @@
 package top.hendrixshen.tweakmyclient.mixin.patch.forcePistonWithoutAffectByTool;
 
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.piston.MovingPistonBlock;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(Item.class)
 public abstract class MixinItem {
@@ -20,9 +22,9 @@ public abstract class MixinItem {
             return;
         }
 
-        if (blockState.getBlock() instanceof PistonBaseBlock ||
-                blockState.getBlock() instanceof MovingPistonBlock ||
-                blockState.getBlock() instanceof PistonHeadBlock) {
+        if (blockState.getBlock() instanceof PistonBaseBlock
+                || blockState.getBlock() instanceof MovingPistonBlock
+                || blockState.getBlock() instanceof PistonHeadBlock) {
             cir.setReturnValue(1.0F);
         }
     }

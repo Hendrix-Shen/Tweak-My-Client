@@ -2,7 +2,6 @@ package top.hendrixshen.tweakmyclient;
 
 import lombok.Getter;
 import lombok.ToString;
-import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -13,6 +12,8 @@ import top.hendrixshen.magiclib.api.malilib.config.MagicConfigManager;
 import top.hendrixshen.magiclib.impl.malilib.config.GlobalConfigManager;
 import top.hendrixshen.magiclib.impl.malilib.config.MagicConfigHandlerImpl;
 import top.hendrixshen.magiclib.util.VersionUtil;
+
+import net.minecraft.resources.ResourceLocation;
 
 public class SharedConstants {
     @Getter
@@ -53,8 +54,7 @@ public class SharedConstants {
         AUTH_ME("authme"),
         IN_GAME_ACCOUNT_SWITCHER("ias"),
         OAUTH("oauth-fabric"),
-        RE_AUTH("oreauth")
-        ;
+        RE_AUTH("oreauth");
 
         private final String identifier;
         private final boolean loaded;

@@ -1,14 +1,15 @@
 package top.hendrixshen.tweakmyclient.impl.generic.targetBlockPosition;
 
+import top.hendrixshen.magiclib.api.compat.minecraft.network.chat.ComponentCompat;
+import top.hendrixshen.magiclib.util.minecraft.InfoUtil;
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import top.hendrixshen.magiclib.api.compat.minecraft.network.chat.ComponentCompat;
-import top.hendrixshen.magiclib.util.minecraft.InfoUtil;
-import top.hendrixshen.tweakmyclient.game.Configs;
 
 public class TargetBlockPositionPrinter {
     public static void print() {

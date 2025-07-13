@@ -1,9 +1,10 @@
 package top.hendrixshen.tweakmyclient.impl.event;
 
 import lombok.AllArgsConstructor;
-import net.minecraft.client.player.LocalPlayer;
 import top.hendrixshen.magiclib.api.event.Event;
 import top.hendrixshen.tweakmyclient.api.event.LocalPlayerListener;
+
+import net.minecraft.client.player.LocalPlayer;
 
 import java.util.List;
 

@@ -1,13 +1,14 @@
 package top.hendrixshen.tweakmyclient.mixin.patch.disableLitematicaEasyPlaceFailTip;
 
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import fi.dy.masa.litematica.util.WorldUtils;
 import fi.dy.masa.malilib.gui.Message.MessageType;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
 import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
 import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.game.Configs;
+
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 @Dependencies(
         require = @Dependency(value = "litematica"),

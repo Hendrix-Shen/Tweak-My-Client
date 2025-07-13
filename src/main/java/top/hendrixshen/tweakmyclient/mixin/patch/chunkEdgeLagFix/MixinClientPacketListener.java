@@ -1,22 +1,31 @@
 package top.hendrixshen.tweakmyclient.mixin.patch.chunkEdgeLagFix;
 
-import org.spongepowered.asm.mixin.Mixin;
-
-import net.minecraft.client.multiplayer.ClientPacketListener;
-import org.spongepowered.asm.mixin.injection.At;
 import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
 import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
+import net.minecraft.client.multiplayer.ClientPacketListener;
+
+// CHECKSTYLE.OFF: ImportOrder
 //#if MC > 11701
 //$$ import net.minecraft.network.protocol.game.ClientboundForgetLevelChunkPacket;
-//$$ import org.spongepowered.asm.mixin.injection.Inject;
-//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#else
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.core.SectionPos;
 import net.minecraft.world.level.lighting.LevelLightEngine;
 //#endif
+// CHECKSTYLE.ON: ImportOrder
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC > 11701
+//$$ import org.spongepowered.asm.mixin.injection.Inject;
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#else
+import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
 
 @Dependencies(conflict = @Dependency(value = "forgetmechunk"))
 @Mixin(ClientPacketListener.class)

@@ -1,17 +1,34 @@
 package top.hendrixshen.tweakmyclient.impl.feature.customWindowIcon;
 
-import com.mojang.blaze3d.platform.NativeImage;
-import net.minecraft.SharedConstants;
-import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
-import top.hendrixshen.magiclib.util.MiscUtil;
 import top.hendrixshen.tweakmyclient.game.Configs;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC < 11904
+import top.hendrixshen.tweakmyclient.mixin.accessor.NativeImageAccessor;
+import top.hendrixshen.magiclib.util.MiscUtil;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
+import com.mojang.blaze3d.platform.NativeImage;
+import net.minecraft.SharedConstants;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if 12101 > MC && MC > 11404
+import com.mojang.blaze3d.systems.RenderSystem;
+//#endif
+
+//#if MC < 11903
+import net.minecraft.server.packs.PackType;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,23 +36,15 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.function.Function;
 
+// CHECKSTYLE.OFF: ImportOrder
 //#if MC < 11904
-import top.hendrixshen.tweakmyclient.mixin.accessor.NativeImageAccessor;
-
 import java.util.Locale;
-//#endif
-
-//#if MC < 11903
-import net.minecraft.server.packs.PackType;
 //#endif
 
 //#if MC > 11902
 //$$ import java.util.Objects;
 //#endif
-
-//#if MC > 11404
-import com.mojang.blaze3d.systems.RenderSystem;
-//#endif
+// CHECKSTYLE.ON: ImportOrder
 
 // Steal from Minecraft Vanilla
 public class CustomIconHelper {
@@ -111,7 +120,7 @@ public class CustomIconHelper {
         //#else
         NativeImageAccessor accessor = MiscUtil.cast(nativeImage);
 
-        if (accessor.tmc$getFormat() != NativeImage.Format.RGBA) {// 232
+        if (accessor.tmc$getFormat() != NativeImage.Format.RGBA) {
             throw new IllegalArgumentException(String.format(Locale.ROOT, "getPixelsRGBA only works on RGBA images; have %s", accessor.tmc$getFormat()));
         } else {
             accessor.tmc$invokeCheckAllocated();
@@ -159,21 +168,21 @@ public class CustomIconHelper {
                                      ResourceLocation snapshot) throws IOException {
         Minecraft mc = Minecraft.getInstance();
         boolean isStable = SharedConstants.getCurrentVersion()
+                // CHECKSTYLE.OFF: Indentation
                 //#if MC >= 12106
                 //$$ .stable();
                 //#else
                 .isStable();
                 //#endif
-        list.add(
-                mc.getResourceManager().getResource(
-                        Configs.customWindowIcon.getBooleanValue() ?
-                                ("Public Release".equals(top.hendrixshen.tweakmyclient.SharedConstants.getModVersionType()) ? stable : snapshot) :
-                                isStable ? stable : snapshot)
-                //#if MC > 11802
-                //$$ .orElseThrow(RuntimeException::new).open()
-                //#else
-                .getInputStream()
-                //#endif
+                // CHECKSTYLE.ON: Indentation
+        list.add(mc.getResourceManager().getResource(Configs.customWindowIcon.getBooleanValue()
+                                ? ("Public Release".equals(top.hendrixshen.tweakmyclient.SharedConstants.getModVersionType()) ? stable : snapshot)
+                                : isStable ? stable : snapshot)
+                        //#if MC > 11802
+                        //$$ .orElseThrow(RuntimeException::new).open()
+                        //#else
+                        .getInputStream()
+                        //#endif
         );
     }
 

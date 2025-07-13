@@ -1,9 +1,10 @@
 package top.hendrixshen.tweakmyclient.impl.config;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
 import top.hendrixshen.magiclib.api.malilib.config.option.ConfigVec3iTupleList.Entry;
 import top.hendrixshen.tweakmyclient.util.AreaBox;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 
 public class AreaBoxEitherRestriction extends EitherUsageRestriction<Entry, AreaBox> {
     @Override

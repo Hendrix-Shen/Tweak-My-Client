@@ -1,10 +1,6 @@
 package top.hendrixshen.tweakmyclient.impl.feature.autoReconnect;
 
 import com.google.common.collect.Maps;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
 import top.hendrixshen.magiclib.api.compat.minecraft.client.gui.components.ButtonCompat;
 import top.hendrixshen.magiclib.api.compat.minecraft.client.gui.screen.ScreenCompat;
 import top.hendrixshen.magiclib.api.compat.minecraft.network.chat.ComponentCompat;
@@ -14,22 +10,39 @@ import top.hendrixshen.tweakmyclient.SharedConstants;
 import top.hendrixshen.tweakmyclient.SharedConstants.Mods;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
-import java.util.LinkedHashMap;
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC > 11904
+//$$ import org.jetbrains.annotations.NotNull;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if 12000 > MC && MC > 11502
+import com.mojang.blaze3d.vertex.PoseStack;
+//#endif
 
 //#if MC > 11904
 //$$ import net.minecraft.network.chat.CommonComponents;
-//$$ import org.jetbrains.annotations.NotNull;
 //#endif
 
 //#if MC > 11502
-//#if MC < 12000
-import com.mojang.blaze3d.vertex.PoseStack;
-//#endif
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.MultiLineLabel;
-//#else
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
+import java.util.LinkedHashMap;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC < 11600
 //$$ import java.util.List;
 //#endif
+// CHECKSTYLE.ON: ImportOrder
 
 public class PatchedDisconnectedScreen extends Screen {
     //#if MC > 11502
@@ -82,12 +95,12 @@ public class PatchedDisconnectedScreen extends Screen {
         screen.addButton(staticButton);
         screen.addButton(this.autoReconnectButton);
 
-        if (this.reason == null ||
+        if (this.reason == null
                 //#if MC > 11902
-                //$$ AutoReconnectUtil.RE_AUTH_MESSAGES.stream().anyMatch(component -> component.getString().equals(this.reason.getString()))
+                //$$ || AutoReconnectUtil.RE_AUTH_MESSAGES.stream().anyMatch(component -> component.getString().equals(this.reason.getString()))
                 //#else
-                AutoReconnectUtil.getTranslationKey(reason).startsWith("disconnect.loginFailed")
-            //#endif
+                || AutoReconnectUtil.getTranslationKey(reason).startsWith("disconnect.loginFailed")
+                //#endif
         ) {
             Configs.autoReconnect.setBooleanValue(false);
 
@@ -100,7 +113,7 @@ public class PatchedDisconnectedScreen extends Screen {
 
             for (String modId : this.modHashMap.keySet()) {
                 screen.addButton(ButtonCompat.builder(
-                        ComponentCompat.literal(SharedConstants.tr(String.format("feature.autoReconnect.gui.button.authenticate.%s", modId))),
+                                ComponentCompat.literal(SharedConstants.tr(String.format("feature.autoReconnect.gui.button.authenticate.%s", modId))),
                                 button -> mc.setScreen(this.modHashMap.get(modId)))
                         .pos(backButtonX + offsetX, 48 + backButtonY)
                         .size(buttonWidth, 20).build());
@@ -127,16 +140,24 @@ public class PatchedDisconnectedScreen extends Screen {
             int mouseY,
             float partialTick
     ) {
+        //#if MC > 11502
         this.renderBackground(
+                // CHECKSTYLE.OFF: NoWhitespaceBefore
+                // CHECKSTYLE.OFF: SeparatorWrap
                 //#if MC > 11502
                 guiGraphicsOrPoseStack
                 //#endif
                 //#if MC > 12001
-                //$$ ,mouseX
-                //$$ ,mouseY
-                //$$ ,partialTick
+                //$$ , mouseX
+                //$$ , mouseY
+                //$$ , partialTick
                 //#endif
+                // CHECKSTYLE.ON: SeparatorWrap
+                // CHECKSTYLE.ON: NoWhitespaceBefore
         );
+        //#else
+        //$$ this.renderBackground();
+        //#endif
 
         //#if MC > 11502
         //#if MC > 11904
@@ -150,7 +171,7 @@ public class PatchedDisconnectedScreen extends Screen {
         //$$ int k = this.height / 2 - this.textHeight / 2;
         //$$
         //$$ if (this.lines != null) {
-        //$$     for(String string : this.lines) {
+        //$$     for (String string : this.lines) {
         //$$         this.drawCenteredString(this.font, string, this.width / 2, k, 0xFFFFFF);
         //$$         k += 9;
         //$$     }

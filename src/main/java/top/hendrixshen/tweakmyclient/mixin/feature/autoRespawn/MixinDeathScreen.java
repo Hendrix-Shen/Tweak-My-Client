@@ -1,12 +1,14 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.autoRespawn;
 
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.DeathScreen;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(DeathScreen.class)
 public abstract class MixinDeathScreen {

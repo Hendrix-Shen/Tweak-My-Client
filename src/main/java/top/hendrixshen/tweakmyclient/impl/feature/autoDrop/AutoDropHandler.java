@@ -2,6 +2,10 @@ package top.hendrixshen.tweakmyclient.impl.feature.autoDrop;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.player.PlayerCompat;
+import top.hendrixshen.tweakmyclient.api.event.LocalPlayerListener;
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -9,9 +13,6 @@ import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.item.ItemStack;
-import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.player.PlayerCompat;
-import top.hendrixshen.tweakmyclient.api.event.LocalPlayerListener;
-import top.hendrixshen.tweakmyclient.game.Configs;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class AutoDropHandler implements LocalPlayerListener {
@@ -22,7 +23,7 @@ public class AutoDropHandler implements LocalPlayerListener {
 
     @Override
     public void onGameJoin(LocalPlayer localPlayer) {
-
+        // NO-OP
     }
 
     @Override

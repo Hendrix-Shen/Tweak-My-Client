@@ -4,8 +4,9 @@ import com.google.common.collect.Sets;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.minecraft.client.player.LocalPlayer;
 import top.hendrixshen.tweakmyclient.api.event.LocalPlayerListener;
+
+import net.minecraft.client.player.LocalPlayer;
 
 import java.util.Set;
 
@@ -22,7 +23,7 @@ public class InGameParserHandler implements LocalPlayerListener {
 
     @Override
     public void onTick(LocalPlayer localPlayer) {
-
+        // NO-OP
     }
 
     public void registerItemStackRestriction(ItemStackRestriction restriction) {

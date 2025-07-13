@@ -1,11 +1,13 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.customSidebarBackgroundColor;
 
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.gui.Gui;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
-import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(Gui.class)
 public abstract class MixinGui {

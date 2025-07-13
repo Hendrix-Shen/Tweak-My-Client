@@ -1,25 +1,18 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlimeBlock;
 import net.minecraft.world.phys.Vec3;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.game.Configs;
-
-//#if MC > 11605
-//$$ import net.minecraft.world.level.block.state.BlockState;
-//#endif
-
-//#if MC < 11500
-//$$ import net.minecraft.world.level.BlockGetter;
-//#endif
+import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.sugar.Local;
 
 @Mixin(SlimeBlock.class)
 public abstract class MixinSlimeBlock extends Block {
@@ -39,13 +32,7 @@ public abstract class MixinSlimeBlock extends Block {
             ),
             cancellable = true
     )
-    private void MakeVerticalVelocityBalance(
-            //#if MC < 11500
-            //$$ BlockGetter blockGetter,
-            //#endif
-            Entity entity,
-            CallbackInfo ci
-    ) {
+    private void MakeVerticalVelocityBalance(CallbackInfo ci, @Local(argsOnly = true) Entity entity) {
         if (Configs.disableSlowdown.getBooleanValue() && entity instanceof LocalPlayer) {
             Vec3 vec3 = entity.getDeltaMovement();
 
@@ -57,15 +44,7 @@ public abstract class MixinSlimeBlock extends Block {
     }
 
     @Inject(method = "stepOn", at = @At("HEAD"), cancellable = true)
-    private void stepOn(
-            Level level,
-            BlockPos blockPos,
-            //#if MC > 11605
-            //$$ BlockState blockState,
-            //#endif
-            Entity entity,
-            CallbackInfo ci
-    ) {
+    private void stepOn(CallbackInfo ci, @Local(argsOnly = true) Entity entity) {
         if (Configs.disableSlowdown.getBooleanValue() && entity instanceof LocalPlayer) {
             ci.cancel();
         }

@@ -5,8 +5,7 @@ import top.hendrixshen.tweakmyclient.SharedConstants;
 
 public enum TargetBlockPositionPrintMode implements EnumOptionEntry {
     PUBLIC,
-    PRIVATE
-    ;
+    PRIVATE;
 
     public static final TargetBlockPositionPrintMode DEFAULT = TargetBlockPositionPrintMode.PRIVATE;
 

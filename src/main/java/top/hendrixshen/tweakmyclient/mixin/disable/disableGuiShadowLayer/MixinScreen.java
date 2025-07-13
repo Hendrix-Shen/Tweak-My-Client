@@ -1,18 +1,14 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableGuiShadowLayer;
 
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.gui.components.events.AbstractContainerEventHandler;
 import net.minecraft.client.gui.screens.Screen;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.game.Configs;
-
-//#if MC > 11904
-//$$ import net.minecraft.client.gui.GuiGraphics;
-//#elseif MC > 11502
-import com.mojang.blaze3d.vertex.PoseStack;
-//#endif
 
 @Mixin(Screen.class)
 public abstract class MixinScreen extends AbstractContainerEventHandler {
@@ -38,22 +34,7 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
             ),
             cancellable = true
     )
-    private void onFillGradient(
-            //#if MC > 11904
-            //$$ GuiGraphics guiGraphics,
-            //#elseif MC > 11502
-            PoseStack poseStack,
-            //#endif
-            //#if MC > 12001
-            //$$ int mouseX,
-            //$$ int mouseY,
-            //$$ float partialTick,
-            //#endif
-            //#if MC < 11904
-            int vOffset,
-            //#endif
-            CallbackInfo ci
-    ) {
+    private void onFillGradient(CallbackInfo ci) {
         if (Configs.disableGuiShadowLayer.getBooleanValue()) {
             ci.cancel();
         }

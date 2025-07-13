@@ -2,13 +2,33 @@ package top.hendrixshen.tweakmyclient.impl.feature.customBlockHitBoxOverlay;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.lwjgl.opengl.GL11;
+import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
+import top.hendrixshen.magiclib.api.render.context.LevelRenderContext;
+import top.hendrixshen.tweakmyclient.game.Configs;
+import top.hendrixshen.tweakmyclient.mixin.accessor.MultiPlayerGameModeAccessor;
+import top.hendrixshen.tweakmyclient.util.RenderUtil;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC >= 12105
+//$$ import fi.dy.masa.malilib.util.data.Color4f;
+//#else
+import fi.dy.masa.malilib.util.Color4f;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,19 +39,14 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.lwjgl.opengl.GL11;
-import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
-import top.hendrixshen.magiclib.api.render.context.LevelRenderContext;
-import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
-import top.hendrixshen.tweakmyclient.game.Configs;
-import top.hendrixshen.tweakmyclient.mixin.accessor.MultiPlayerGameModeAccessor;
-import top.hendrixshen.tweakmyclient.util.RenderUtil;
 
-//#if MC >= 12105
-//$$ import fi.dy.masa.malilib.util.data.Color4f;
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC > 11404
+import net.minecraft.client.multiplayer.ClientLevel;
 //#else
-import fi.dy.masa.malilib.util.Color4f;
+//$$ import net.minecraft.client.multiplayer.MultiPlayerLevel;
 //#endif
+// CHECKSTYLE.ON: ImportOrder
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class CustomBlockHitBoxRenderer implements RenderLevelListener {
@@ -108,9 +123,9 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
         Vec3 vec3 = mc.gameRenderer.getMainCamera().getPosition();
 
         if (Configs.customBlockHitBoxOverlay.getBooleanValue()) {
-            float k = System.currentTimeMillis() %
-                    (100 * (101 - Configs.customBlockHitBoxOverlayRainbowSpeed.getIntegerValue())) /
-                    (50F * (101 - Configs.customBlockHitBoxOverlayRainbowSpeed.getIntegerValue()));
+            float k = System.currentTimeMillis()
+                    % (100 * (101 - Configs.customBlockHitBoxOverlayRainbowSpeed.getIntegerValue()))
+                    / (50F * (101 - Configs.customBlockHitBoxOverlayRainbowSpeed.getIntegerValue()));
 
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
             GL11.glPolygonOffset(-1.0F, -1.0F);
@@ -128,9 +143,9 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
         }
 
         if (Configs.customBlockHitBoxOutline.getBooleanValue()) {
-            float k = System.currentTimeMillis() %
-                    (100 * (101 - Configs.customBlockHitBoxOutlineRainbowSpeed.getIntegerValue())) /
-                    (50F * (101 - Configs.customBlockHitBoxOutlineRainbowSpeed.getIntegerValue()));
+            float k = System.currentTimeMillis()
+                    % (100 * (101 - Configs.customBlockHitBoxOutlineRainbowSpeed.getIntegerValue()))
+                    / (50F * (101 - Configs.customBlockHitBoxOutlineRainbowSpeed.getIntegerValue()));
 
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
             GL11.glPolygonOffset(-1.0F, -1.0F);
@@ -216,6 +231,7 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                 }
             }
         } catch (Exception ignore) {
+            // NO-OP
         }
 
         return shape;

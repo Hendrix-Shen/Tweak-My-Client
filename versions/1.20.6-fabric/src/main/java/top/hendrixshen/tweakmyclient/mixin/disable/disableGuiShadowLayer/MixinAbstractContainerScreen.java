@@ -1,13 +1,15 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableGuiShadowLayer;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(AbstractContainerScreen.class)
 public abstract class MixinAbstractContainerScreen<T extends AbstractContainerMenu> {

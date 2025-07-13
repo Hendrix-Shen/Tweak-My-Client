@@ -1,19 +1,25 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.autoReconnect;
 
+import org.jetbrains.annotations.NotNull;
+import top.hendrixshen.tweakmyclient.impl.feature.autoReconnect.PatchedDisconnectedScreen;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import org.jetbrains.annotations.NotNull;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.impl.feature.autoReconnect.PatchedDisconnectedScreen;
 
+// CHECKSTYLE.OFF: ImportOrder
 //#if MC > 12006
 //$$ import net.minecraft.network.DisconnectionDetails;
 //#endif
+// CHECKSTYLE.ON: ImportOrder
+
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = DisconnectedScreen.class, priority = 900)
 public abstract class MixinDisconnectedScreen extends Screen {

@@ -1,19 +1,18 @@
 package top.hendrixshen.tweakmyclient.impl.config;
 
-import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction;
 import lombok.EqualsAndHashCode;
+import top.hendrixshen.magiclib.api.compat.minecraft.world.item.ItemStackCompat;
+import top.hendrixshen.tweakmyclient.SharedConstants;
+
+import com.mojang.brigadier.StringReader;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.arguments.item.ItemParser;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import top.hendrixshen.magiclib.api.compat.minecraft.world.item.ItemStackCompat;
-import top.hendrixshen.tweakmyclient.SharedConstants;
 
-import java.util.List;
-import java.util.Set;
-
+// CHECKSTYLE.OFF: ImportOrder
 //#if MC > 12004
 //$$ import net.minecraft.commands.arguments.item.ItemParser.ItemResult;
 //#elseif MC > 11902
@@ -22,6 +21,10 @@ import java.util.Set;
 //$$ import net.minecraft.core.HolderLookup;
 //$$ import net.minecraft.core.Registry;
 //#endif
+// CHECKSTYLE.ON: ImportOrder
+
+import java.util.List;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = false)
 public class ItemStackRestriction extends UsageRestriction<ItemStack> {
@@ -63,19 +66,23 @@ public class ItemStackRestriction extends UsageRestriction<ItemStack> {
     @Override
     public boolean isAllowed(ItemStack value) {
         if (
+                // CHECKSTYLE.OFF: Indentation
+                // @formatter:off
                 //#if MC > 12004
                 //$$ value.getComponents().isEmpty()
                 //#else
                 value.hasTag()
                 //#endif
+                // @formatter:on
+                // CHECKSTYLE.OFF: Indentation
         ) {
             if (this.type == UsageRestriction.ListType.BLACKLIST) {
                 return this.blackList.isEmpty()
                         || this.blackList.stream().noneMatch(itemStack -> this.matchItems(itemStack, value));
             }
 
-            return this.type == UsageRestriction.ListType.NONE ||
-                    this.whiteList.stream().anyMatch(itemStack -> this.matchItems(itemStack, value));
+            return this.type == UsageRestriction.ListType.NONE
+                    || this.whiteList.stream().anyMatch(itemStack -> this.matchItems(itemStack, value));
         }
 
         return super.isAllowed(value);
@@ -83,11 +90,15 @@ public class ItemStackRestriction extends UsageRestriction<ItemStack> {
 
     private boolean matchItems(ItemStack stackA, ItemStack stackB) {
         if (
+                // CHECKSTYLE.OFF: Indentation
+                // @formatter:off
                 //#if MC > 12004
                 //$$ stackA.getComponents().isEmpty()
                 //#else
                 stackA.hasTag()
                 //#endif
+                // @formatter:on
+                // CHECKSTYLE.OFF: Indentation
         ) {
             return stackA.isDamageableItem()
                     ? ItemStackCompat.isSameItemSameTags(stackA, stackB)

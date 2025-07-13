@@ -1,27 +1,23 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.customWindowIcon;
 
+import top.hendrixshen.tweakmyclient.game.Configs;
+import top.hendrixshen.tweakmyclient.impl.feature.customWindowIcon.CustomIconHelper;
+
+import net.minecraft.client.main.Main;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//#if MC > 11404
-import net.minecraft.client.main.Main;
-import top.hendrixshen.tweakmyclient.game.Configs;
-import top.hendrixshen.tweakmyclient.impl.feature.customWindowIcon.CustomIconHelper;
-//#else
-//$$ import net.minecraft.client.Minecraft;
-//#endif
-
-@Mixin(
-        //#if MC > 11404
-        Main.class
-        //#else
-        //$$ Minecraft.class
-        //#endif
-)
+// CHECKSTYLE.OFF: JavadocStyle
+/**
+ * <li>mc1.14 : subproject 1.14.4 [dummy]</li>
+ * <li>mc1.15+: subproject 1.16.5 (main project)        &lt;--------</li>
+ */
+// CHECKSTYLE.ON: JavadocStyle
+@Mixin(Main.class)
 public abstract class MixinMain {
-    //#if MC > 11404
     @Inject(
             //#if MC > 11903 || MC < 11900
             method = "main",
@@ -44,5 +40,4 @@ public abstract class MixinMain {
             CustomIconHelper.updateIcon();
         }
     }
-    //#endif
 }

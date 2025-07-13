@@ -2,13 +2,14 @@ package top.hendrixshen.tweakmyclient.impl.feature.globalEventListener;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.BlockPos;
 import top.hendrixshen.magiclib.api.compat.minecraft.network.chat.ComponentCompat;
 import top.hendrixshen.magiclib.util.minecraft.InfoUtil;
 import top.hendrixshen.tweakmyclient.SharedConstants;
 import top.hendrixshen.tweakmyclient.game.Configs;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.BlockPos;
 
 public class GlobalEventListener {
     public static void onGlobalEvent(int eventId, BlockPos pos) {
@@ -31,7 +32,7 @@ public class GlobalEventListener {
 
     private static void displayGlobalEvent(GlobalEventType event, BlockPos pos) {
         InfoUtil.displayChatMessage(ComponentCompat.literalCompat(
-                SharedConstants.tr("feature.globalEventListener.message.prefix"))
+                        SharedConstants.tr("feature.globalEventListener.message.prefix"))
                 .append(ComponentCompat.literalCompat(SharedConstants.tr("feature.globalEventListener.message."
                         .concat(event.getKey()), pos.getX(), pos.getY(), pos.getZ()))));
     }

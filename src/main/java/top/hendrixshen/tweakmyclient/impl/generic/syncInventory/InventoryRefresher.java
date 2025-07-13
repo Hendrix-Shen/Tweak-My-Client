@@ -1,5 +1,11 @@
 package top.hendrixshen.tweakmyclient.impl.generic.syncInventory;
 
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC > 11605
+//$$ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ServerboundContainerClickPacket;
@@ -8,6 +14,7 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+// CHECKSTYLE.OFF: ImportOrder
 //#if MC >= 12105
 //$$ import net.minecraft.network.HashedStack;
 //#endif
@@ -17,10 +24,7 @@ import net.minecraft.world.item.Items;
 //$$ import net.minecraft.nbt.CompoundTag;
 //$$ import net.minecraft.world.item.component.CustomData;
 //#endif
-
-//#if MC > 11605
-//$$ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-//#endif
+// CHECKSTYLE.ON: ImportOrder
 
 public class InventoryRefresher {
     public static void refresh() {
@@ -45,6 +49,8 @@ public class InventoryRefresher {
         //#endif
 
         clientPacketListener.send(new ServerboundContainerClickPacket(
+                // CHECKSTYLE.OFF: NoWhitespaceBefore
+                // CHECKSTYLE.OFF: SeparatorWrap
                 container.containerId,
                 //#if MC > 11605
                 //$$ container.getStateId(),
@@ -63,6 +69,8 @@ public class InventoryRefresher {
                 //#else
                 container.backup(mc.player.inventory)
                 //#endif
+                // CHECKSTYLE.ON: SeparatorWrap
+                // CHECKSTYLE.ON: NoWhitespaceBefore
         ));
     }
 }

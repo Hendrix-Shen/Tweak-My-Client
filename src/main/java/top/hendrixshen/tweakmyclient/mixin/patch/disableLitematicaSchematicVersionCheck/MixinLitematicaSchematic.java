@@ -2,21 +2,25 @@ package top.hendrixshen.tweakmyclient.mixin.patch.disableLitematicaSchematicVers
 
 import fi.dy.masa.litematica.schematic.LitematicaSchematic;
 import fi.dy.masa.litematica.schematic.SchematicMetadata;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
+import top.hendrixshen.tweakmyclient.game.Configs;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC >= 12105
+//$$ import fi.dy.masa.litematica.config.Configs.Generic;
+//$$ import fi.dy.masa.litematica.util.FileType;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
 import net.minecraft.nbt.CompoundTag;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
-import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
-import top.hendrixshen.tweakmyclient.game.Configs;
-
-//#if MC >= 12105
-//$$ import fi.dy.masa.litematica.config.Configs.Generic;
-//$$ import fi.dy.masa.litematica.util.FileType;
-//#endif
 
 @Dependencies(require = @Dependency(value = "litematica"))
 @Mixin(LitematicaSchematic.class)

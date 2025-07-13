@@ -4,8 +4,6 @@ import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction.ListType;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.Vec3i;
 import top.hendrixshen.magiclib.MagicLib;
 import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
 import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
@@ -17,28 +15,45 @@ import top.hendrixshen.magiclib.api.malilib.config.MagicConfigHandler;
 import top.hendrixshen.magiclib.api.malilib.config.MagicConfigManager;
 import top.hendrixshen.magiclib.api.malilib.config.option.ConfigVec3iTupleList.Entry;
 import top.hendrixshen.magiclib.impl.malilib.config.MagicConfigFactory;
-import top.hendrixshen.magiclib.impl.malilib.config.option.*;
+import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigBoolean;
+import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigBooleanHotkeyed;
+import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigColor;
+import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigDouble;
+import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigHotkey;
+import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigInteger;
+import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigOptionList;
+import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigString;
+import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigStringList;
+import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigVec3iTupleList;
 import top.hendrixshen.magiclib.impl.malilib.config.restriction.EntityTypeRestriction;
 import top.hendrixshen.tweakmyclient.SharedConstants;
 import top.hendrixshen.tweakmyclient.api.event.LocalPlayerListener;
+import top.hendrixshen.tweakmyclient.impl.config.AreaBoxEitherRestriction;
+import top.hendrixshen.tweakmyclient.impl.config.EitherUsageRestriction.EitherListType;
+import top.hendrixshen.tweakmyclient.impl.config.ItemStackRestriction;
 import top.hendrixshen.tweakmyclient.impl.feature.autoDrop.AutoDropHandler;
 import top.hendrixshen.tweakmyclient.impl.feature.autoTotem.AutoTotemHandler;
 import top.hendrixshen.tweakmyclient.impl.feature.breakingRestrictionBox.RestrictionBoxRenderer;
+import top.hendrixshen.tweakmyclient.impl.feature.crystalBeamRenderRestriction.CrystalBeamRenderRestrictionMode;
 import top.hendrixshen.tweakmyclient.impl.feature.customBlockHitBoxOverlay.BreakAnimationMode;
 import top.hendrixshen.tweakmyclient.impl.feature.customBlockHitBoxOverlay.CustomBlockHitBoxRenderer;
 import top.hendrixshen.tweakmyclient.impl.feature.customWindowIcon.CustomIconHelper;
 import top.hendrixshen.tweakmyclient.impl.feature.customWindowTitle.CustomWindowTitleHandler;
-import top.hendrixshen.tweakmyclient.impl.feature.crystalBeamRenderRestriction.CrystalBeamRenderRestrictionMode;
-import top.hendrixshen.tweakmyclient.impl.feature.openWaterHelper.OpenWaterHelperRenderer;
 import top.hendrixshen.tweakmyclient.impl.generic.memoryCleaner.MemoryCleaner;
 import top.hendrixshen.tweakmyclient.impl.generic.syncBlocks.BlockRefresher;
 import top.hendrixshen.tweakmyclient.impl.generic.syncInventory.InventoryRefresher;
+import top.hendrixshen.tweakmyclient.impl.generic.targetBlockPosition.TargetBlockPositionPrintMode;
 import top.hendrixshen.tweakmyclient.impl.generic.targetBlockPosition.TargetBlockPositionPrinter;
 import top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix.EndPortalRenderMode;
-import top.hendrixshen.tweakmyclient.impl.generic.targetBlockPosition.TargetBlockPositionPrintMode;
-import top.hendrixshen.tweakmyclient.impl.config.AreaBoxEitherRestriction;
-import top.hendrixshen.tweakmyclient.impl.config.EitherUsageRestriction.EitherListType;
-import top.hendrixshen.tweakmyclient.impl.config.ItemStackRestriction;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC > 11502
+import top.hendrixshen.tweakmyclient.impl.feature.openWaterHelper.OpenWaterHelperRenderer;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.Vec3i;
 
 @SuppressWarnings("UnstableApiUsage")
 public class Configs {

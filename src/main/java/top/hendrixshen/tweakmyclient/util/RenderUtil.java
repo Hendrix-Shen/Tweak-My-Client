@@ -1,36 +1,57 @@
 package top.hendrixshen.tweakmyclient.util;
 
-import com.mojang.blaze3d.vertex.*;
 import fi.dy.masa.malilib.render.RenderUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-import top.hendrixshen.magiclib.api.compat.mojang.blaze3d.vertex.VertexFormatCompat;
 import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
 
+// CHECKSTYLE.OFF: ImportOrder
 //#if MC >= 12105
-//$$ import com.mojang.blaze3d.opengl.GlStateManager;
 //$$ import fi.dy.masa.malilib.util.data.Color4f;
 //$$ import fi.dy.masa.malilib.render.MaLiLibPipelines;
 //$$ import fi.dy.masa.malilib.render.RenderContext;
 //#else
 import fi.dy.masa.malilib.util.Color4f;
+import top.hendrixshen.magiclib.api.compat.mojang.blaze3d.vertex.VertexFormatCompat;
 //#endif
+// CHECKSTYLE.ON: ImportOrder
 
-//#if 12106 > MC && MC >= 12105
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if 12106 > MC && MC > 12104
 //$$ import com.mojang.blaze3d.buffers.BufferUsage;
 //#endif
 
-//#if MC > 11605
+//#if MC >= 12105
+//$$ import com.mojang.blaze3d.opengl.GlStateManager;
+//#else
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+//#endif
+
+//#if 12105 > MC && MC > 12006
+//$$ import com.mojang.blaze3d.vertex.BufferUploader;
+//#endif
+
+//#if 12105 > MC && MC > 11404
+import com.mojang.blaze3d.systems.RenderSystem;
+//#endif
+
+//#if 12103 > MC && MC > 11605
 //$$ import net.minecraft.client.renderer.GameRenderer;
 //#endif
 
-//#if MC > 11404
-import com.mojang.blaze3d.systems.RenderSystem;
-//#else
+//#if MC > 12006
+//$$ import com.mojang.blaze3d.vertex.MeshData;
+//#endif
+
+//#if MC < 11500
 //$$ import com.mojang.blaze3d.platform.GlStateManager;
 //#endif
+// CHECKSTYLE.ON: ImportOrder
 
 public class RenderUtil {
     public static void renderAreaOutline(double minX, double minY, double minZ,
@@ -106,6 +127,8 @@ public class RenderUtil {
 
         //#if MC > 12104
         //$$ RenderContext ctx = new RenderContext(
+        //$$         // CHECKSTYLE.OFF: NoWhitespaceBefore
+        //$$         // CHECKSTYLE.OFF: SeparatorWrap
         //$$         //#if MC >= 12107
         //$$         //$$ () -> "tweak_my_client:bounding_box_outline",
         //$$         //#endif
@@ -113,6 +136,8 @@ public class RenderUtil {
         //$$         //#if MC < 12106
         //$$         , BufferUsage.STATIC_WRITE
         //$$         //#endif
+        //$$         // CHECKSTYLE.ON: SeparatorWrap
+        //$$         // CHECKSTYLE.ON: NoWhitespaceBefore
         //$$ );
         //$$ BufferBuilder builder = ctx.getBuilder();
         //#else
@@ -154,6 +179,7 @@ public class RenderUtil {
         //$$
         //$$     ctx.close();
         //$$ } catch (Exception ignored) {
+        //$$     // NO-OP
         //$$ }
         //#elseif MC > 12006
         //$$ RenderUtil.end(buffer);
@@ -208,6 +234,8 @@ public class RenderUtil {
 
         //#if MC > 12104
         //$$ RenderContext ctx = new RenderContext(
+        //$$         // CHECKSTYLE.OFF: NoWhitespaceBefore
+        //$$         // CHECKSTYLE.OFF: SeparatorWrap
         //$$         //#if MC >= 12107
         //$$         //$$ () -> "tweak_my_client:bounding_box_overlay",
         //$$         //#endif
@@ -215,6 +243,8 @@ public class RenderUtil {
         //$$         //#if MC < 12106
         //$$         , BufferUsage.STATIC_WRITE
         //$$         //#endif
+        //$$         // CHECKSTYLE.ON: SeparatorWrap
+        //$$         // CHECKSTYLE.ON: NoWhitespaceBefore
         //$$ );
         //$$ BufferBuilder builder = ctx.getBuilder();
         //#else
@@ -252,6 +282,7 @@ public class RenderUtil {
         //$$
         //$$     ctx.close();
         //$$ } catch (Exception ignored) {
+        //$$     // NO-OP
         //$$ }
         //#elseif MC > 12006
         //$$ RenderUtil.end(buffer);
@@ -304,6 +335,8 @@ public class RenderUtil {
 
         //#if MC > 12104
         //$$ RenderContext ctx = new RenderContext(
+        //$$         // CHECKSTYLE.OFF: NoWhitespaceBefore
+        //$$         // CHECKSTYLE.OFF: SeparatorWrap
         //$$         //#if MC >= 12107
         //$$         //$$ () -> "tweak_my_client:shape_outline",
         //$$         //#endif
@@ -311,6 +344,8 @@ public class RenderUtil {
         //$$         //#if MC < 12106
         //$$         , BufferUsage.STATIC_WRITE
         //$$         //#endif
+        //$$         // CHECKSTYLE.ON: SeparatorWrap
+        //$$         // CHECKSTYLE.ON: NoWhitespaceBefore
         //$$ );
         //$$ BufferBuilder builder = ctx.getBuilder();
         //#else
@@ -346,6 +381,7 @@ public class RenderUtil {
         //$$
         //$$     ctx.close();
         //$$ } catch (Exception ignored) {
+        //$$     // NO-OP
         //$$ }
         //#elseif MC > 12006
         //$$ RenderUtil.end(buffer);
@@ -398,6 +434,8 @@ public class RenderUtil {
 
         //#if MC > 12104
         //$$ RenderContext ctx = new RenderContext(
+        //$$         // CHECKSTYLE.OFF: NoWhitespaceBefore
+        //$$         // CHECKSTYLE.OFF: SeparatorWrap
         //$$         //#if MC >= 12107
         //$$         //$$ () -> "tweak_my_client:shape_overlay",
         //$$         //#endif
@@ -405,6 +443,8 @@ public class RenderUtil {
         //$$         //#if MC < 12106
         //$$         , BufferUsage.STATIC_WRITE
         //$$         //#endif
+        //$$         // CHECKSTYLE.ON: SeparatorWrap
+        //$$         // CHECKSTYLE.ON: NoWhitespaceBefore
         //$$ );
         //$$ BufferBuilder builder = ctx.getBuilder();
         //#else
@@ -445,6 +485,7 @@ public class RenderUtil {
         //$$
         //$$     ctx.close();
         //$$ } catch (Exception ignored) {
+        //$$     // NO-OP
         //$$ }
         //#elseif MC > 12006
         //$$ RenderUtil.end(buffer);
@@ -472,14 +513,13 @@ public class RenderUtil {
         //#endif
     }
 
-    //#if MC < 12105
-    //#if MC > 12006
+    //#if 12105 > MC && MC > 12006
     //$$ private static void end(BufferBuilder builder) {
     //$$     try (MeshData meshData = builder.buildOrThrow()) {
     //$$         BufferUploader.drawWithShader(meshData);
     //$$     } catch (Exception ignore) {
+    //$$         // NO-OP
     //$$     }
     //$$ }
-    //#endif
     //#endif
 }

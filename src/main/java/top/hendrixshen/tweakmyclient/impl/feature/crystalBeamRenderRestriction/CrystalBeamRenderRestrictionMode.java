@@ -11,8 +11,7 @@ public enum CrystalBeamRenderRestrictionMode implements EnumOptionEntry {
     BLOCK(false, false),
     FIXED_ONLY(true, false),
     NONE(true, true),
-    TRACKING_ONLY(false, true)
-    ;
+    TRACKING_ONLY(false, true);
 
     public static final CrystalBeamRenderRestrictionMode DEFAULT = CrystalBeamRenderRestrictionMode.NONE;
 

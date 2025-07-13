@@ -7,8 +7,7 @@ public enum EndPortalRenderMode implements EnumOptionEntry {
     ACTUAL,
     FULL,
     LEGACY,
-    MODERN
-    ;
+    MODERN;
 
     public static final EndPortalRenderMode DEFAULT = EndPortalRenderMode.LEGACY;
 

@@ -1,11 +1,12 @@
 package top.hendrixshen.tweakmyclient.impl.generic.syncBlocks;
 
+import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.player.PlayerCompat;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
-import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.player.PlayerCompat;
 
 public class BlockRefresher {
     public static void refresh() {

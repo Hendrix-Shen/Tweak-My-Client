@@ -1,10 +1,12 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.customGuiBackgroundColor;
 
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.gui.screens.Screen;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import top.hendrixshen.tweakmyclient.game.Configs;
 
 @Mixin(Screen.class)
 public abstract class MixinScreen {

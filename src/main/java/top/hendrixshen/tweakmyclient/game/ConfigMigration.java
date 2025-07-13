@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.malilib.util.JsonUtils;
-import net.minecraft.core.Vec3i;
 import org.jetbrains.annotations.Nullable;
 import top.hendrixshen.magiclib.api.malilib.config.MagicConfigHandler;
 import top.hendrixshen.magiclib.api.malilib.config.migration.ConfigMigrator;
@@ -18,6 +17,8 @@ import top.hendrixshen.magiclib.impl.malilib.config.migration.VersionMigrator;
 import top.hendrixshen.magiclib.impl.malilib.config.option.MagicConfigVec3iTupleList;
 import top.hendrixshen.tweakmyclient.SharedConstants;
 import top.hendrixshen.tweakmyclient.game.Configs.ConfigCategory;
+
+import net.minecraft.core.Vec3i;
 
 import java.util.List;
 import java.util.Map;

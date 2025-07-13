@@ -1,14 +1,11 @@
 package top.hendrixshen.tweakmyclient.util;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-import net.minecraft.core.BlockPos;
+import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 
-@Getter
-@ToString
-@EqualsAndHashCode
+import net.minecraft.core.BlockPos;
+
+@Data
 public class AreaBox {
     private final int minX;
     private final int minY;
