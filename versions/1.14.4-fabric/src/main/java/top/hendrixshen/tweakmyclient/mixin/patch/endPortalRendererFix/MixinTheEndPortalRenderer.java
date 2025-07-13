@@ -27,6 +27,12 @@ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.wrapoper
 import java.nio.FloatBuffer;
 import java.util.Random;
 
+// CHECKSTYLE.OFF: JavadocStyle
+/**
+ * <li>mc1.14 : subproject 1.14.4        &lt;--------</li>
+ * <li>mc1.15+: subproject 1.16.5 (main project)</li>
+ */
+// CHECKSTYLE.ON: JavadocStyle
 @Mixin(TheEndPortalRenderer.class)
 public abstract class MixinTheEndPortalRenderer extends BlockEntityRenderer<TheEndPortalBlockEntity> {
     @Shadow

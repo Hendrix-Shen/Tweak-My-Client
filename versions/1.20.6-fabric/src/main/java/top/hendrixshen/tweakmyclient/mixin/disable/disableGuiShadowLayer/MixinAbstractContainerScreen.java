@@ -11,6 +11,12 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+// CHECKSTYLE.OFF: JavadocStyle
+/**
+ * <li>mc1.14 ~ mc1.20.4: subproject 1.16.5 (main project) [dummy]</li>
+ * <li>mc1.20.5+        : subproject 1.20.6        &lt;--------</li>
+ */
+// CHECKSTYLE.ON: JavadocStyle
 @Mixin(AbstractContainerScreen.class)
 public abstract class MixinAbstractContainerScreen<T extends AbstractContainerMenu> {
     @WrapOperation(

@@ -11,5 +11,5 @@ import org.spongepowered.asm.mixin.Mixin;
  */
 // CHECKSTYLE.ON: JavadocStyle
 @Mixin(DummyClass.class)
-public class MixinMain {
+public abstract class MixinMain {
 }

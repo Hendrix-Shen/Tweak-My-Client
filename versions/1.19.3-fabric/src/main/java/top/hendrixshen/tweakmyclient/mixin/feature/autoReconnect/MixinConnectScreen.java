@@ -19,6 +19,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#endif
 // CHECKSTYLE.ON: ImportOrder
 
+// CHECKSTYLE.OFF: JavadocStyle
+/**
+ * <li>mc1.14 ~ mc1.19.2: subproject 1.16.5 (main project) [dummy]</li>
+ * <li>mc1.19.3+        : subproject 1.21.3        &lt;--------</li>
+ */
+// CHECKSTYLE.ON: JavadocStyle
 @Mixin(ConnectScreen.class)
 public abstract class MixinConnectScreen {
     @Inject(method = "startConnecting", at = @At("HEAD"))

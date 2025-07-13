@@ -27,6 +27,12 @@ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.v2.WrapW
 //#endif
 // CHECKSTYLE.ON: ImportOrder
 
+// CHECKSTYLE.OFF: JavadocStyle
+/**
+ * <li>mc1.14 ~ mc1.19: subproject 1.16.5 (main project)        &lt;--------</li>
+ * <li>mc1.20+        : subproject 1.20.1 [dummy]</li>
+ */
+// CHECKSTYLE.ON: JavadocStyle
 @Dependencies(conflict = @Dependency(value = "forgetmechunk"))
 @Mixin(ClientPacketListener.class)
 public abstract class MixinClientPacketListener {

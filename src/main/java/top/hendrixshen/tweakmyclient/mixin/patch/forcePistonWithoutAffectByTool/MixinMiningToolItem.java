@@ -14,6 +14,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+// CHECKSTYLE.OFF: JavadocStyle
+/**
+ * <li>mc1.14 ~ mc1.20.4: subproject 1.16.5 (main project)        &lt;--------</li>
+ * <li>mc1.20.5+        : subproject 1.20.6 [dummy]</li>
+ */
+// CHECKSTYLE.ON: JavadocStyle
 @Mixin(DiggerItem.class)
 public abstract class MixinMiningToolItem {
     @Inject(method = "getDestroySpeed", at = @At("HEAD"), cancellable = true)
