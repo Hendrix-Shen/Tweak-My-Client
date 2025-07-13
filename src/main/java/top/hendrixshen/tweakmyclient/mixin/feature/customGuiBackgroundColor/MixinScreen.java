@@ -31,9 +31,9 @@ public abstract class MixinScreen {
                     //#endif
             ),
             //#if MC > 11904
-            index = 4
+            //$$ index = 4
             //#elseif MC > 11502
-            //$$ index = 5
+            index = 5
             //#else
             //$$ index = 4
             //#endif
@@ -67,9 +67,9 @@ public abstract class MixinScreen {
                     //#endif
             ),
             //#if MC > 11904
-            index = 5
+            //$$ index = 5
             //#elseif MC > 11502
-            //$$ index = 6
+            index = 6
             //#else
             //$$ index = 5
             //#endif
