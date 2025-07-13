@@ -53,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Maven Local
-          path: ~/.m2/repository/com/plusls/
+          path: ~/.m2/repository/top/hendrixshen/tweak-my-client
   summary:
     runs-on: ubuntu-24.04
     needs:
