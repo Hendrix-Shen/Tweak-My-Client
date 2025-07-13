@@ -140,7 +140,9 @@ public class PatchedDisconnectedScreen extends Screen {
             int mouseY,
             float partialTick
     ) {
-        //#if MC > 11502
+        //#if MC >= 12002
+        //$$ // NO-OP
+        //#elseif MC > 11502
         this.renderBackground(
                 // CHECKSTYLE.OFF: NoWhitespaceBefore
                 // CHECKSTYLE.OFF: SeparatorWrap
@@ -158,6 +160,15 @@ public class PatchedDisconnectedScreen extends Screen {
         //#else
         //$$ this.renderBackground();
         //#endif
+
+        super.render(
+                //#if MC > 11502
+                guiGraphicsOrPoseStack,
+                //#endif
+                mouseX,
+                mouseY,
+                partialTick
+        );
 
         //#if MC > 11502
         //#if MC > 11904
@@ -177,14 +188,6 @@ public class PatchedDisconnectedScreen extends Screen {
         //$$     }
         //$$ }
         //#endif
-        super.render(
-                //#if MC > 11502
-                guiGraphicsOrPoseStack,
-                //#endif
-                mouseX,
-                mouseY,
-                partialTick
-        );
     }
 
     @Override
