@@ -193,7 +193,7 @@ jobs:
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: HMEK2HpH
-          modrinth-token: ${{ secrets.MODRINTH || '${undefined}' }}
+          modrinth-token: ${{ secrets.MODRINTH_API_TOKEN || '${undefined}' }}
           curseforge-id: 478757
           curseforge-token: ${{ secrets.CF_API_TOKEN || '${undefined}' }}
           files: ${{ steps.file_info.outputs.path }}
@@ -212,7 +212,7 @@ jobs:
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: HMEK2HpH
-          modrinth-token: ${{ secrets.MODRINTH || '${undefined}' }}
+          modrinth-token: ${{ secrets.MODRINTH_API_TOKEN || '${undefined}' }}
           curseforge-id: 478757
           curseforge-token: ${{ secrets.CF_API_TOKEN || '${undefined}' }}
           files: ${{ steps.file_info.outputs.path }}
