@@ -1,16 +1,23 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableSlowdown;
 
+import top.hendrixshen.magiclib.util.MiscUtil;
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC < 12103
 import org.spongepowered.asm.mixin.injection.Slice;
-import top.hendrixshen.tweakmyclient.config.Configs;
-import top.hendrixshen.tweakmyclient.util.MiscUtil;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity extends Entity {
@@ -18,12 +25,21 @@ public abstract class MixinLivingEntity extends Entity {
         super(entityType, level);
     }
 
+    //#if MC > 12101
+    //$$ @SuppressWarnings("ConstantConditions")
+    //$$ @ModifyVariable(method = "travelInAir", at = @At(value = "STORE"), ordinal = 0)
+    //$$ private float modifyFriction(float friction) {
+    //$$     if (Configs.disableSlowdown.getBooleanValue() && MiscUtil.cast(this) instanceof LocalPlayer && friction > 0.6F) {
+    //$$         return 0.6F;
+    //$$     }
+    //$$
+    //$$     return friction;
+    //$$ }
+    //#else
     @SuppressWarnings("ConstantConditions")
     @ModifyVariable(
             method = "travel",
-            at = @At(
-                    value = "STORE"
-            ),
+            at = @At("STORE"),
             slice = @Slice(
                     from = @At(
                             value = "INVOKE",
@@ -44,11 +60,12 @@ public abstract class MixinLivingEntity extends Entity {
             ),
             ordinal = 0
     )
-    private float onGetFriction(float f) {
-        if (Configs.disableSlowdown && MiscUtil.cast(this) instanceof LocalPlayer && !this.isInWater() && f > 0.6F) {
+    private float modifyFriction(float friction) {
+        if (Configs.disableSlowdown.getBooleanValue() && MiscUtil.cast(this) instanceof LocalPlayer && !this.isInWater() && friction > 0.6F) {
             return 0.6F;
         }
 
-        return f;
+        return friction;
     }
+    //#endif
 }

@@ -1,37 +1,38 @@
 package top.hendrixshen.tweakmyclient.mixin.patch.disableResourcePackIncompatibleTip;
 
+import top.hendrixshen.tweakmyclient.game.Configs;
+
 import net.minecraft.client.gui.screens.packs.TransferableSelectionList;
-import net.minecraft.server.packs.repository.PackCompatibility;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import top.hendrixshen.tweakmyclient.config.Configs;
+import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 @Mixin(TransferableSelectionList.PackEntry.class)
-public class MixinTransferableSelectionList {
-    @Redirect(
+public abstract class MixinTransferableSelectionList {
+    @ModifyExpressionValue(
             method = "render",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/server/packs/repository/PackCompatibility;isCompatible()Z"
             )
     )
-    private boolean disableIncompatibleTipLabel(PackCompatibility packCompatibility) {
-        return Configs.disableResourcePackIncompatibleTip || packCompatibility.isCompatible();
+    private boolean disableIncompatibleTipLabel(boolean original) {
+        return Configs.disableResourcePackIncompatibleTip.getBooleanValue() || original;
     }
 
-    @Redirect(
+    @ModifyExpressionValue(
             //#if MC > 11903
-            method = "handlePackSelection",
+            //$$ method = "handlePackSelection",
             //#else
-            //$$ method = "mouseClicked",
+            method = "mouseClicked",
             //#endif
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/server/packs/repository/PackCompatibility;isCompatible()Z"
             )
     )
-    private boolean disableIncompatibleTipScreen(PackCompatibility packCompatibility) {
-        return Configs.disableResourcePackIncompatibleTip || packCompatibility.isCompatible();
+    private boolean disableIncompatibleTipScreen(boolean original) {
+        return Configs.disableResourcePackIncompatibleTip.getBooleanValue() || original;
     }
 }

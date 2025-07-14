@@ -1,0 +1,22 @@
+name: _step.generate_matrix
+on:
+  workflow_call:
+    outputs:
+      matrix:
+        description: The generated run matrix
+        value: ${{ jobs.generate_matrix.outputs.matrix }}
+jobs:
+  generate_matrix:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout the sources
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Generate matrix
+        id: generate_matrix
+        run: |
+          pip install jproperties
+          python .github/workflows/scripts/matrix.py
+    outputs:
+      matrix: ${{ steps.generate_matrix.outputs.matrix }}

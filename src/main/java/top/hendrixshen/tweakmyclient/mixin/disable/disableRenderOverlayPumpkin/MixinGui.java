@@ -1,51 +1,75 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableRenderOverlayPumpkin;
 
+import top.hendrixshen.tweakmyclient.game.Configs;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC > 12101
+//$$ import top.hendrixshen.magiclib.api.compat.minecraft.resources.ResourceLocationCompat;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
 import net.minecraft.client.gui.Gui;
-import net.minecraft.resources.ResourceLocation;
-import org.spongepowered.asm.mixin.Final;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC > 11605
+//$$ import net.minecraft.resources.ResourceLocation;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.tweakmyclient.config.Configs;
 
-//#if MC > 11904
-import net.minecraft.client.gui.GuiGraphics;
-//#elseif MC > 11903
-//$$ import com.mojang.blaze3d.vertex.PoseStack;
+// CHECKSTYLE.OFF: ImportOrder
+//#if 12102 > MC && MC > 11605
+//$$ import org.spongepowered.asm.mixin.Final;
+//$$ import org.spongepowered.asm.mixin.Shadow;
 //#endif
+
+//#if MC > 11605
+//$$ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.sugar.Local;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
 
 @Mixin(Gui.class)
 public abstract class MixinGui {
-    @Shadow
-    @Final
-    private static ResourceLocation PUMPKIN_BLUR_LOCATION;
+    //#if 12102 > MC && MC > 11700
+    //$$ @Shadow
+    //$$ @Final
+    //$$ private static ResourceLocation PUMPKIN_BLUR_LOCATION;
+    //#endif
 
     @Inject(
             //#if MC > 11700
-            method = "renderTextureOverlay",
+            //$$ method = "renderTextureOverlay",
             //#else
-            //$$ method = "renderPumpkin",
+            method = "renderPumpkin",
             //#endif
-            at = @At(
-                    value = "HEAD"
-            ),
+            at = @At("HEAD"),
             cancellable = true
     )
-    //#if MC > 11904
-    private void onRenderTextureOverlay(GuiGraphics guiGraphics, ResourceLocation resourceLocation, float f, CallbackInfo ci) {
-        if (Configs.disableRenderOverlayPumpkin && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {
-    //#elseif MC > 11903
-    //$$ private void onRenderTextureOverlay(PoseStack poseStack, ResourceLocation resourceLocation, float f, CallbackInfo ci) {
-    //$$     if (Configs.disableRenderOverlayPumpkin && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {
-    //#elseif MC > 11700
-    //$$ private void onRenderTextureOverlay(ResourceLocation resourceLocation, float f, CallbackInfo ci) {
-    //$$     if (Configs.disableRenderOverlayPumpkin && resourceLocation.equals(PUMPKIN_BLUR_LOCATION)) {
-    //#else
-    //$$ private void onRenderPumpkinOverlay(CallbackInfo ci) {
-    //$$     if (Configs.disableRenderOverlayPumpkin) {
-    //#endif
+    private void onRenderPumpkinOverlay(
+            CallbackInfo ci
+            // CHECKSTYLE.OFF: NoWhitespaceBefore
+            // CHECKSTYLE.OFF: SeparatorWrap
+            //#if MC >= 11700
+            //$$ , @Local(argsOnly = true) ResourceLocation resourceLocation
+            // CHECKSTYLE.ON: SeparatorWrap
+            // CHECKSTYLE.ON: NoWhitespaceBefore
+            //#endif
+    ) {
+        if (Configs.disablePumpkinOverlayRender.getBooleanValue()
+                //#if MC > 11700
+                //$$ && resourceLocation.equals(
+                //$$         //#if MC > 12101
+                //$$         //$$ ResourceLocationCompat.withDefaultNamespace("misc/pumpkinblur")
+                //$$         //#else
+                //$$         MixinGui.PUMPKIN_BLUR_LOCATION
+                //$$         //#endif
+                //$$ )
+                //#endif
+        ) {
             ci.cancel();
         }
     }

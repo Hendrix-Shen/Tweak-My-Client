@@ -2,18 +2,27 @@ package top.hendrixshen.tweakmyclient.mixin.patch.disableLitematicaSchematicVers
 
 import fi.dy.masa.litematica.schematic.LitematicaSchematic;
 import fi.dy.masa.litematica.schematic.SchematicMetadata;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
+import top.hendrixshen.tweakmyclient.game.Configs;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC >= 12105
+//$$ import fi.dy.masa.litematica.config.Configs.Generic;
+//$$ import fi.dy.masa.litematica.util.FileType;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
 import net.minecraft.nbt.CompoundTag;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
-import top.hendrixshen.tweakmyclient.config.Configs;
 
-@Dependencies(and = @Dependency(value = "litematica"))
+@Dependencies(require = @Dependency(value = "litematica"))
 @Mixin(LitematicaSchematic.class)
 public abstract class MixinLitematicaSchematic {
     @Shadow(remap = false)
@@ -27,15 +36,29 @@ public abstract class MixinLitematicaSchematic {
             method = "readFromNBT",
             at = @At(
                     value = "INVOKE",
+                    //#if MC >= 12105
+                    //$$ target = "Lnet/minecraft/nbt/CompoundTag;getIntOr(Ljava/lang/String;I)I",
+                    //#else
                     target = "Lnet/minecraft/nbt/CompoundTag;getInt(Ljava/lang/String;)I",
+                    //#endif
                     ordinal = 0
             ),
             cancellable = true
     )
     private void ignoreVersionCheck(CompoundTag nbt, CallbackInfoReturnable<Boolean> cir) {
-        if (Configs.disableLitematicaSchematicVersionCheck) {
+        if (Configs.disableLitematicaSchematicVersionCheck.getBooleanValue()) {
+            //#if MC >= 12105
+            //$$ int version = nbt.getIntOr("Version", -1);
+            //$$ int minecraftDataVersion = nbt.getIntOr("MinecraftDataVersion", Generic.DATAFIXER_DEFAULT_SCHEMA.getIntegerValue());
+            //$$ this.metadata.readFromNBT(nbt.getCompoundOrEmpty("Metadata"));
+            //$$ this.metadata.setSchematicVersion(version);
+            //$$ this.metadata.setMinecraftDataVersion(minecraftDataVersion);
+            //$$ this.metadata.setFileType(FileType.LITEMATICA_SCHEMATIC);
+            //$$ this.readSubRegionsFromNBT(nbt.getCompoundOrEmpty("Regions"), version, minecraftDataVersion);
+            //#else
             this.metadata.readFromNBT(nbt.getCompound("Metadata"));
             this.readSubRegionsFromNBT(nbt.getCompound("Regions"), nbt.getInt("Version"), nbt.getInt("MinecraftDataVersion"));
+            //#endif
             cir.setReturnValue(true);
         }
     }

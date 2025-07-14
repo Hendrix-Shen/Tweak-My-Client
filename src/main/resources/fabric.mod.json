@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "${mod_id}-${minecraft_version_id}",
-  "version": "${mod_version}",
-  "icon": "assets/${mod_id}/icon.png",
-  "name": "${mod_name} for ${minecraft_version}",
+  "id": "${mod_id}",
+  "name": "${mod_name}",
   "description": "${mod_description}",
+  "icon": "assets/${mod_id}/icon.png",
+  "version": "${mod_version}",
   "authors": [
     {
       "name": "Hendrix_Shen",
@@ -12,6 +12,8 @@
         "homepage": "https://github.com/Hendrix-Shen"
       }
     }
+  ],
+  "contributors": [
   ],
   "contact": {
     "homepage": "${mod_homepage}",
@@ -25,23 +27,18 @@
       "top.hendrixshen.tweakmyclient.TweakMyClient"
     ],
     "modmenu": [
-      "top.hendrixshen.tweakmyclient.compat.modmenu.ModMenuApiImpl"
+      "top.hendrixshen.tweakmyclient.impl.compat.modmenu.ModMenuImpl"
     ]
   },
   "mixins": [
-    "${mod_id}.mixins.json",
-    "${mod_id}-compat-meteor.mixins.json",
-    "${mod_id}-compat-wurst.mixins.json"
+    "${mod_id}.mixins.json"
   ],
   "depends": {
-    "minecraft": "${minecraft_dependency}",
-    "magiclib-${minecraft_version_id}": ">=${magiclib_dependency}",
-    "malilib": "*"
+    "magiclib": ">=${magiclib_dependency}",
+    "malilib": "*",
+    "minecraft": "${minecraft_dependency}"
   },
   "custom": {
-    "modmenu:parent": "${mod_id}",
-    "modmenu": {
-      "parent": "${mod_id}"
-    }
+    "modmenu:clientsideOnly": true
   }
 }

@@ -1,0 +1,492 @@
+tweak_my_client:
+  config:
+    category:
+      all:
+        name: 全部
+      debug:
+        name: 调试
+      disable:
+        name: 禁用
+      feature:
+        name: 功能
+      generic:
+        name: 通用
+      patch:
+        name: 补丁
+    gui:
+      title:
+        .: "TweakMyClient - 版本: %1$s (%2$s)"
+      either_list_type:
+        value:
+          BLACKLIST: 黑名单
+          WHITELIST: 白名单
+    option:
+      # ================================ 通用 ================================
+      getTargetBlockPosition:
+        name: 获取指向方块坐标
+        comment: 获取你指向的方块的坐标.
+      getTargetBlockPositionMaxDistance:
+        name: 获取指向方块坐标-最大距离
+        comment: "触发@config#getTargetBlockPosition@的最大距离 (单位: 方块)."
+      getTargetBlockPositionMessage:
+        name: 获取指向方块坐标-消息
+        comment: |-
+          触发@config#getTargetBlockPosition@的消息.
+          另见: 配置 @config#getTargetBlockPositionMessageMode@.
+      getTargetBlockPositionMessageMode:
+        name: 获取指向方块坐标-消息发送模式
+        comment: |-
+          触发@config#getTargetBlockPosition@的消息发送模式.
+          另见: 配置 @config#getTargetBlockPositionMessage@.
+        value:
+          PUBLIC: 公共
+          PRIVATE: 私有
+      memoryCleaner:
+        name: 内存清理器
+        comment: |-
+          立即启动新的线程显式调用System.gc().
+          注意:
+          - §c请谨慎执行此操作,§r
+          §c触发后可能使游戏进入短暂的停滞,§r
+          §c并且并不一定能够达到预期效果,§r
+          §c请自行承担风险.§r
+          - §e若为JVM附加了-XX:+DisableExplicitGC则此功能不会有任何效果.§r
+          - §6此功能使用不同的垃圾回收器时行为可能并不一致.§r
+      openConfigGui:
+        name: 打开设置界面
+        comment: 打开TweakMyClient配置界面的快捷键.
+      syncBlocks:
+        name: 同步方块
+        comment: |-
+          尝试发送挖掘中断数据以便于
+          从服务器获得正确的方块数据.
+      syncInventory:
+        name: 同步背包
+        comment: |-
+          尝试发送虚假数据以便于
+          从服务器获取正确的背包数据.
+      # ================================ 功能 ================================
+      attackEntityRestriction:
+        name: 攻击实体约束
+        comment: 不允许你攻击任何实体.
+      attackEntityRestrictionBlacklist:
+        name: 攻击实体约束-黑名单
+        comment: 触发@config#attackEntityRestriction@时不允许你攻击的实体.
+      attackEntityRestrictionType:
+        name: 攻击实体约束-名单约束类型
+        comment: 触发@config#attackEntityRestriction@的实体名单约束类型.
+      attackEntityRestrictionWhitelist:
+        name: 攻击实体约束-白名单
+        comment: 触发@config#attackEntityRestriction@时允许你攻击的实体.
+      autoClimb:
+        name: 自动攀爬
+        comment: |-
+          当你靠近梯子/藤蔓并抬起头时,
+          你将会自动爬上去.
+      autoDrop:
+        name: 自动丢弃
+        comment: 自动将你背包内的所有物品扔出.
+      autoDropBlackList:
+        name: 自动丢弃-黑名单
+        comment: |-
+          触发@config#autoDrop@时从背包里扔出的物品类型.
+          注意: 支持 NBT 解析.
+      autoDropInterval:
+        name: 自动丢弃-间隔
+        comment: '触发@config#autoDrop@的间隔 (单位: 游戏刻).'
+      autoDropType:
+        name: 自动丢弃-名单约束类型
+        comment: 触发@config#autoDrop@的物品名单约束类型.
+      autoDropWhiteList:
+        name: 自动丢弃-白名单
+        comment: |-
+          触发@config#autoDrop@时不会从背包里扔出的物品类型.
+          注意: 支持 NBT 解析.
+      autoReconnect:
+        name: 自动重连
+        comment: |-
+          当你被服务器断开连接时自动重新连接.
+          本配置将在检测到身份验证失败时自动禁用.
+          支持 AuthMe, OAuth, ReAuth 和 In-Game Account Switcher 快捷方式.
+          注意: 这里使用的身份验证失败检测方式是
+          检查断开连接原因是否匹配指定的翻译键或翻译,
+          因此可能无法做到 100%% 的准确识别.
+      autoReconnectInterval:
+        name: 自动重连-间隔
+        comment: '触发@config#autoReconnect@的间隔 (单位: 秒).'
+      autoRespawn:
+        name: 自动重生
+        comment: 当你失败时自动让你复活.
+      autoTotem:
+        name: 自动移动不死图腾
+        comment: |-
+          自动将背包中的不死图腾移动至副手.
+          注意: 快捷栏中的不死图腾不会被移动.
+      breakingRestrictionBox:
+        name: 挖掘约束区域模式
+        comment: |-
+          区域性约束你的挖掘行为.
+          你将不能在指定区域内进行挖掘行为.
+      breakingRestrictionBoxBlacklist:
+        name: 挖掘约束区域模式-黑名单
+        comment: 触发@config#breakingRestrictionBox@时不能挖掘的区域.
+      breakingRestrictionBoxBlacklistColor:
+        name: 挖掘约束区域模式-黑名单颜色
+        comment: 触发@config#breakingRestrictionBoxBlacklist@时的颜色.
+      breakingRestrictionBoxType:
+        name: 挖掘约束区域模式-名单约束类型
+        comment: 触发@config#breakingRestrictionBox@的区域名单约束类型.
+      breakingRestrictionBoxWhitelist:
+        name: 挖掘约束区域模式-白名单
+        comment: 触发@config#breakingRestrictionBox@时能够挖掘的区域.
+      breakingRestrictionBoxWhitelistColor:
+        name: 挖掘约束区域模式-白名单颜色
+        comment: 触发@config#breakingRestrictionBoxWhitelist@时的颜色.
+      breakingRestrictionFlat:
+        name: 挖掘约束平坦模式
+        comment: |-
+          阻止你挖掘脚下的方块,
+          当你按下潜行键可以绕过此限制.
+      clientEntityUpdateRestriction:
+        name: 客户端实体更新约束
+        comment: |-
+          不会运算客户端世界的任何实体.
+          注意: 玩家永远会被计算.
+      clientEntityUpdateRestrictionBlacklist:
+        name: 客户端实体更新约束-黑名单
+        comment: 触发@config#clientEntityUpdateRestriction@时不会被更新的实体.
+      clientEntityUpdateRestrictionType:
+        name: 客户端实体更新约束-名单约束类型
+        comment: 触发@config#clientEntityUpdateRestriction@时的实体类型名单约束类型.
+      clientEntityUpdateRestrictionWhitelist:
+        name: 客户端实体更新约束-白名单
+        comment: 触发@config#clientEntityUpdateRestriction@时会被更新的实体.
+      crystalBeamRenderRestriction:
+        name: 水晶光束渲染约束
+        comment: 不再渲染末影水晶光束.
+      crystalBeamRenderRestrictionType:
+        name: 水晶光束渲染约束-约束类型
+        comment: |-
+          触发@config#crystalBeamRenderRestriction@时的约束类型.
+          屏蔽 - 屏蔽所有光束渲染.
+          仅固定 - 仅渲染末影水晶指向固定坐标的光束.
+          无 - 无约束条件.
+          仅追踪 - 仅渲染末影龙指向末影水晶的光束.
+        value:
+          BLOCK: 屏蔽
+          FIXED_ONLY: 仅固定
+          NONE: 无
+          TRACKING_ONLY: 仅追踪
+      customBlockHitBoxBreakAnimation:
+        name: 自定义方块命中箱渲染-挖掘动画
+        comment: |-
+          触发@config#customBlockHitBoxOutline@和@config#customBlockHitBoxOverlay@时的挖掘动画.
+          下降 - 随着挖掘的进行, 碰撞箱箱将展示自上而下缓慢缩小的动画.
+          无 - 无动画.
+          收缩 - 随着挖掘的进行, 命中箱将展示自外而内缓慢收缩的动画.
+        value:
+          DOWN: 下降
+          NONE: 无
+          SHRINK: 收缩
+      customBlockHitBoxLinkedAdapter:
+        name: 自定义方块命中箱连接体方块适配
+        comment: |-
+          尝试调整多方块结构的尺寸, 
+          例如命中大箱子时渲染的是整个大箱子.
+          注意: 这个配置并非总是有效.
+          另见: 配置 @config#customBlockHitBoxOutline@, @config#customBlockHitBoxOverlay@.
+      customBlockHitBoxDepthTest:
+        name: 自定义方块命中箱深度测试
+        comment: 强制为@config#customBlockHitBoxOutline@和@config#customBlockHitBoxOverlay@禁用深度测试.
+      customBlockHitBoxOutline:
+        name: 自定义方块命中箱边框渲染
+        comment: 启用方块命中箱边框渲染.
+      customBlockHitBoxOutlineColor:
+        name: 自定义方块命中箱边框渲染-颜色
+        comment: 触发@config#customBlockHitBoxOutline@时的颜色.
+      customBlockHitBoxOutlineRainbow:
+        name: 自定义方块命中箱边框渲染-彩虹色
+        comment: |-
+          §c警告: 此特性包含快速变换的颜色,§r 
+          §c可能诱发光敏性癫痫, 请谨慎启用!§r
+          触发@config#customBlockHitBoxOutlineRainbow@时使用彩虹色.
+          注意: 将会使用@config#customBlockHitBoxOutlineColor@提供的透明度.
+      customBlockHitBoxOutlineRainbowSpeed:
+        name: 自定义方块命中箱边框渲染-彩虹速率
+        comment: |-
+          §c警告: 此特性包含快速变换的颜色,§r 
+          §c可能诱发光敏性癫痫, 请谨慎配置!§r
+          触发@config#customBlockHitBoxOutlineRainbow@时颜色变换的速度.
+      customBlockHitBoxOverlay:
+        name: 自定义方块命中箱覆盖层渲染
+        comment: 启用方块命中箱覆盖层渲染.
+      customBlockHitBoxOverlayColor:
+        name: 自定义方块命中箱覆盖层渲染-颜色
+        comment: 触发@config#customBlockHitBoxOverlay@时的颜色.
+      customBlockHitBoxOverlayRainbow:
+        name: 自定义方块命中箱覆盖层渲染-彩虹色
+        comment: |-
+          §c警告: 此特性包含快速变换的颜色,§r 
+          §c可能诱发光敏性癫痫, 请谨慎启用!§r
+          触发@config#customBlockHitBoxOverlay@时使用彩虹色.
+          注意: 将会使用@config#customBlockHitBoxOverlayColor@提供的透明度.
+      customBlockHitBoxOverlayRainbowSpeed:
+        name: 自定义方块命中箱覆盖层渲染-彩虹速率
+        comment: |-
+          §c警告: 此特性包含快速变换的颜色,§r 
+          §c可能诱发光敏性癫痫, 请谨慎配置!§r
+          触发@config#customBlockHitBoxOverlayRainbow@时颜色变换的速度.
+      customGuiBackgroundColor:
+        name: 自定义界面背景颜色
+        comment: |-
+          自定义你的界面背景颜色.
+          界面背景颜色为自上而下垂直
+          由@config#customGuiBackgroundStartColor@过渡到@config#customGuiBackgroundStopColor@的线性渐变.
+          另见: 配置 @config#disableGuiShadowLayer@.
+      customGuiBackgroundStartColor:
+        name: 自定义界面背景颜色-渐变起始颜色
+        comment: 触发@config#customGuiBackgroundStartColor@时的渐变起始颜色.
+      customGuiBackgroundStopColor:
+        name: 自定义界面背景颜色-渐变终止颜色
+        comment: 触发@config#customGuiBackgroundStartColor@时的渐变终止颜色.
+      customSidebarBackgroundColor:
+        name: 自定义侧边栏背景颜色
+        comment: |-
+          自定义你的侧边栏背景颜色.
+          另见: 配置 @config#customSidebarContentColor@, @config#customSidebarTitleColor@.
+      customSidebarContentColor:
+        name: 自定义侧边栏背景颜色-内容
+        comment: |-
+          触发@config#customSidebarContentColor@时的内容背景颜色.
+          另见: 配置 @config#customSidebarBackgroundColor@, @config#customSidebarTitleColor@.
+      customSidebarTitleColor:
+        name: 自定义侧边栏背景颜色-标题
+        comment: |-
+          触发@config#customSidebarContentColor@时的标题背景颜色.
+          另见: 配置 @config#customSidebarBackgroundColor@, @config#customSidebarContentColor@.
+      customWindowIcon:
+        name: 自定义窗口图标
+        comment: |-
+          自定义你的窗口图标.
+          你可以通过以下资源包命名空间文件来自定义图标:
+          对于稳定版 Minecraft:
+          tweakmyclient:texture/icon/icon_16x16.png
+          tweakmyclient:texture/icon/icon_32x32.png
+          tweakmyclient:texture/icon/icon_48x48.png
+          tweakmyclient:texture/icon/icon_64x64.png
+          tweakmyclient:texture/icon/icon_128x128.png
+          tweakmyclient:texture/icon/icon_256x256.png
+          对于快照版 Minecraft:
+          tweakmyclient:texture/icon/icon_snapshot_16x16.png
+          tweakmyclient:texture/icon/icon_snapshot_32x32.png
+          tweakmyclient:texture/icon/icon_snapshot_48x48.png
+          tweakmyclient:texture/icon/icon_snapshot_64x64.png
+          tweakmyclient:texture/icon/icon_snapshot_128x128.png
+          tweakmyclient:texture/icon/icon_snapshot_256x256.png
+          注意: 你必须重新加载资源包才能应用文件更改
+      customWindowTitle:
+        name: 自定义窗口标题
+        comment: |-
+          自定义你的窗口标题.
+          另见: 配置 @config#customWindowTitleActivitySupport@, @config#customWindowTitleRandomly@.
+      customWindowTitleActivitySupport:
+        name: 自定义窗口标题-活动支持
+        comment: |-
+          支持触发@config#customWindowTitle@时使用 Minecraft 活动状态.
+          可以分别为活动状态和非活动状态设置窗口标题.
+          另见: 配置 @config#customWindowTitle@, @config#customWindowTitleRandomly@.
+      customWindowTitleList:
+        name: 自定义窗口标题-列表
+        comment: |-
+          触发@config#customWindowTitle@时的标题列表.
+          注意: 只有在启用@config#customWindowTitleRandomly@时
+          会随机在列表中获取标题,
+          否则永远使用第一个元素.
+      customWindowTitleWithActivityList:
+        name: 自定义窗口标题-带活动列表
+        comment: |-
+          触发@config#customWindowTitleActivitySupport@时的标题列表.
+          注意: 只有在启用@config#customWindowTitleRandomly@时
+          会随机在列表中获取标题,
+          否则永远使用第一个元素.
+      customWindowTitleRandomly:
+        name: 自定义窗口标题-随机化
+        comment: |-
+          触发@config#customWindowTitle@时使用随机标题.
+          另见: 配置 @config#customWindowTitle@, @config#customWindowTitleActivitySupport@.
+      daylightOverride:
+        name: 覆盖客户端世界时间
+        comment: 覆盖客户端的世界时间为你想要的时间.
+      daylightOverrideTime:
+        name: 覆盖客户端世界时间-世界时间
+        comment: 触发@config#daylightOverride@时的世界时间.
+      entityRenderingRestriction:
+        name: 实体渲染约束
+        comment: |-
+          不会渲染任何实体.
+          注意: 玩家永远会被渲染.
+      entityRenderingRestrictionBlacklist:
+        name: 实体渲染约束-黑名单
+        comment: 触发@config#entityRenderingRestriction@时不会渲染的实体类型.
+      entityRenderingRestrictionType:
+        name: 实体渲染约束-名单约束类型
+        comment: 触发@config#entityRenderingRestriction@时的实体名单约束类型.
+      entityRenderingRestrictionWhitelist:
+        name: 实体渲染约束-名单
+        comment: 触发@config#entityRenderingRestriction@时会渲染的实体类型.
+      globalEventListener:
+        name: 全局事件监听
+        comment: 打印全局事件触发坐标.
+      itemGlintRestriction:
+        name: 物品光效渲染约束
+        comment: 不会渲染任何物品光效.
+      itemGlintRestrictionBlacklist:
+        name: 物品光效渲染约束-黑名单
+        comment: |-
+          触发时@config#itemGlintRestriction@不会被渲染光效的物品类型.
+          注意: 支持 NBT 解析.
+      itemGlintRestrictionType:
+        name: 物品光效渲染约束-名单约束类型
+        comment: 触发@config#itemGlintRestriction@的物品名单约束类型.
+      itemGlintRestrictionWhiteList:
+        name: 物品光效渲染约束-白名单
+        comment: |-
+          触发时@config#itemGlintRestriction@会被渲染光效的物品类型.
+          注意: 支持 NBT 解析.
+      lowHealthWarning:
+        name: 低血量警告
+        comment: 当你的生命值过低时将会向动作栏发送警告信息.
+      lowHealthWarningThreshold:
+        name: 低血量警告-阈值
+        comment: 触发@config#lowHealthWarning@时的生命值阈值.
+      openWaterHelper:
+        name: 开阔水域助手
+        comment: 扔出鱼钩时展示开阔水域判定箱.
+      openWaterColor:
+        name: 开阔水域助手-开阔水域颜色
+        comment: 触发@config#openWaterHelper@时的开阔水域颜色.
+      shallowWaterColor:
+        name: 开阔水域助手-浅水域颜色
+        comment: 触发@config#openWaterHelper@时的浅水域颜色.
+      unfocusedCPU:
+        name: 失去焦点释放CPU
+        comment: 窗口失去焦点后禁用客户端主渲染逻辑.
+      # ================================ 补丁 ================================
+      chunkEdgeLagFix:
+        name: 区块边界卡顿修复
+        comment: |-
+          禁用卸载区块时的光照更新队列, 
+          这将缓解某些时候跨越区块边界时的卡顿.
+      disableLitematicaEasyPlaceFailTip:
+        name: 禁用投影轻松放置失败提示
+        comment: 禁用轻松放置失败时那烦人的提示窗.
+      disableLitematicaSchematicVersionCheck:
+        name: 禁用投影蓝图版本检查
+        comment: |-
+          移除加载投影蓝图时的版本检查.
+          注意: 仅仅是绕过版本检查来加载蓝图,
+          并§c不能§r改变它本身不兼容的事实,
+          所以请自行承担风险.
+      disableResourcePackIncompatibleTip:
+        name: 禁用资源包不兼容提示
+        comment: |-
+          不兼容的资源包不会在
+          资源包列表中被标记为不兼容,
+          且在尝试加载时不会弹出确认窗口.
+          注意: 仅仅是绕过版本检查来加载资源包,
+          并§c不能§r改变它本身不兼容的事实,
+          所以请自行承担风险.
+      endPortalRendererFix:
+        name: 末地传送门渲染器修复
+        comment: 修复末地传送门渲染问题
+      endPortalRenderMode:
+        name: 末地传送门渲染器修复-渲染模式
+        comment: |-
+          触发@config#endPortalRenderMode@时的渲染模式.
+          可用的模式如下:
+          实际的 - 渲染末地传送门使用其自身碰撞箱.
+          完整的 - 渲染末地传送门为一个完整的方块.
+          新版的 - 渲染末地传送门使用 Minecraft 21w13a 及以上版本的行为.
+          旧版的 - 渲染末地传送门使用 Minecraft 21w13a 以下版本的行为.
+        value:
+          ACTUAL: 实际的
+          FULL: 完整的
+          LEGACY: 新版的
+          MODERN: 旧版的
+      forceDebugInfoDetailed:
+        name: 强制详细调试信息
+        comment: |-
+          始终展示完整调试信息, 
+          即使游戏规则 reducedDebugInfo 为 true.
+      forcePistonWithoutAffectByTool:
+        name: 强制活塞无有效采集工具
+        comment: 镐子将不再作为活塞的有效开采工具.
+      # ================================ 禁用 ================================
+      disableBossBarRender:
+        name: 禁用Boss血条渲染
+        comment: 不再渲染Boss血条.
+      disableClientBlockEvent:
+        name: 禁用客户端方块事件
+        comment: 不再处理来自服务端的方块事件数据包.
+      disableEffectBoxRender:
+        name: 禁用效果指示计渲染
+        comment: 不再在你拥有某种效果时渲染效果指示计.
+      disableFireOverlayRender:
+        name: 禁用火焰覆盖层渲染
+        comment: 不再在你处于着火时渲染火焰覆盖层.
+      disableFovAffectedBySpeed:
+        name: 禁用速度倍率影响视角
+        comment: 速度倍率不再影响视距.
+      disableGuiShadowLayer:
+        name: 禁用界面阴影层
+        comment: 不再渲染打开界面时的渐变背景色.
+      disablePowderSnowOverlayRender:
+        name: 禁用细雪覆盖层渲染
+        comment: 不再在你结冰时渲染细雪覆盖层.
+      disablePumpkinOverlayRender:
+        name: 禁用南瓜覆盖层渲染
+        comment: 不再在你戴上南瓜时渲染覆盖层.
+      disableScoreboardRender:
+        name: 禁用计分板渲染
+        comment: 不再渲染计分板.
+      disableSlowdown:
+        name: 禁用减速
+        comment: |-
+          你在使用物品或行走在
+          具有阻力的地面时, 不再会被减速.
+          注意: 此行为可能在某些服务器上认定为作弊.
+      disableToastRender:
+        name: 禁用弹窗消息渲染
+        comment: 不再渲染弹窗消息.
+      # ================================ 调试 ================================
+      debugMode:
+        name: 调试模式
+        comment: |-
+          TweakMyClient的调试模式
+          当启用时, 调试用参数配置以及不满足依赖的配置会被显示
+          以及调试相关的功能会被启用.
+      hideUnavailableConfigs:
+        name: 隐藏不可用配置
+        comment: 在配置界面中隐藏因依赖关系不被满足而被禁用的配置.
+      resetConfigStatistic:
+        name: 重置TweakMyClient所有配置统计数据
+        comment: 重置TweakMyClient的所有配置的统计数据.
+  feature:
+    autoReconnect:
+      gui:
+        button:
+          reconnect: 重新连接
+          switcher:
+            disabled: "自动重连(§c已禁用§r)"
+            timer: "自动重连(§a%d§r秒)"
+          authenticate:
+            authme: Auth Me
+            ias: IAS
+            oauth: OAuth
+            reauth: ReAuth
+    globalEventListener:
+      message:
+        prefix: "§e[全局事件]§r: "
+        end_portal_spawn: "末地传送门已被激活, 坐标 [x: %d, y: %d, z: %d]"
+        ender_dragon_death: "末影龙已被击败, 坐标 [x: %d, y: %d, z: %d]"
+        wither_spawn: "凋零已生成, 坐标 [x: %d, y: %d, z: %d]"

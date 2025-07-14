@@ -1,23 +1,19 @@
 package top.hendrixshen.tweakmyclient.mixin.accessor;
 
-import org.spongepowered.asm.mixin.Mixin;
-
-//#if MC > 11502
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.projectile.FishingHook;
-import org.spongepowered.asm.mixin.gen.Invoker;
-//#else
-//$$ import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
-//#endif
 
-//#if MC > 11502
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Invoker;
+
+// CHECKSTYLE.OFF: JavadocStyle
+/**
+ * <li>mc1.14 ~ mc1.15: subproject 1.15.2 [dummy]</li>
+ * <li>mc1.16+        : subproject 1.16.5 (main project)        &lt;--------</li>
+ */
+// CHECKSTYLE.ON: JavadocStyle
 @Mixin(FishingHook.class)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
 public interface FishingHookAccessor {
-    //#if MC > 11502
-    @Invoker
-    boolean invokeCalculateOpenWater(BlockPos blockPos);
-    //#endif
+    @Invoker("calculateOpenWater")
+    boolean tmc$invokeCalculateOpenWater(BlockPos blockPos);
 }

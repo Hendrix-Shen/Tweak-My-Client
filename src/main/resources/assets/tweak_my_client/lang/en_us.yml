@@ -1,0 +1,492 @@
+tweak_my_client:
+  config:
+    category:
+      all:
+        name: All
+      debug:
+        name: Debug
+      disable:
+        name: Disable
+      feature:
+        name: Feature
+      generic:
+        name: Generic
+      patch:
+        name: Patch
+    gui:
+      title:
+        .: 'TweakMyClient - Version: %1$s (%2$s)'
+      either_list_type:
+        value:
+          BLACKLIST: Blacklist
+          WHITELIST: Whitelist
+    option:
+      # ================================ Generics ================================
+      getTargetBlockPosition:
+        name: getTargetBlockPosition
+        comment: Get the block position of the block you are looking at.
+      getTargetBlockPositionMaxDistance:
+        name: getTargetBlockPositionMaxDistance
+        comment: "Max distance for @config#getTargetBlockPosition@ (Unit: blocks)."
+      getTargetBlockPositionMessage:
+        name: getTargetBlockPositionMessage
+        comment: |-
+          Message for @config#getTargetBlockPosition@.
+          See also: config @config#getTargetBlockPositionMessageMode@.
+      getTargetBlockPositionMessageMode:
+        name: getTargetBlockPositionMessageMode
+        comment: |- 
+          Print mode for @config#getTargetBlockPosition@
+          See also: config @config#getTargetBlockPositionMessage@.
+        value:
+          PUBLIC: Public
+          PRIVATE: Private
+      memoryCleaner:
+        name: memoryCleaner
+        comment: |-
+          Immediately start a new thread explicitly calling System.gc().
+          Note:
+          - §cPlease perform this action with caution,§r
+          §cas triggering it may cause the game to stall for a short period of time§r
+          §cand may not always have the expected effect,§r
+          §cso please do so at your own risk!§r
+          - §eIf -XX:+DisableExplicitGC is applied to the JVM, this will have no effect.§r
+          - §6The behaviour of this feature may not be consistent when using different garbage collectors.§r
+      openConfigGui:
+        name: openConfigGui
+        comment: A hotkey to open the in-game TweakMyClient Config GUI.
+      syncBlocks:
+        name: syncBlocks
+        comment: |-
+          Try to send mining abort packets to server in order to
+          get the correct blocks data from the server.
+      syncInventory:
+        name: syncInventory
+        comment: |-
+          Try to send fake data in order to
+          get the correct player inventory data from the server.
+      # ================================ Features ================================
+      attackEntityRestriction:
+        name: attackEntityRestriction
+        comment: You are not allowed to attack any entity.
+      attackEntityRestrictionBlacklist:
+        name: attackEntityRestrictionBlacklist
+        comment: Entities that will NOT allow you to attack with @config#attackEntityRestriction@.
+      attackEntityRestrictionType:
+        name: attackEntityRestrictionType
+        comment: The entity restriction type for @config#attackEntityRestriction@.
+      attackEntityRestrictionWhitelist:
+        name: attackEntityRestrictionWhitelist
+        comment: Entities that will allow you to attack with @config#attackEntityRestriction@.
+      autoClimb:
+        name: autoClimb
+        comment: |-
+          When you are approaching the ladder / vine and raises your head,
+          you will automatically climb.
+      autoDrop:
+        name: autoDrop
+        comment: Automatically drops everything in your inventory.
+      autoDropBlackList:
+        name: autoDropBlackList
+        comment: |-
+          Items that will be thrown out from the inventory with @config#autoDrop@.
+          Note: NBT parsing supported.
+      autoDropInterval:
+        name: autoDropInterval
+        comment: 'Interval for @config#autoDrop@ (Unit: gt).'
+      autoDropType:
+        name: autoDropType
+        comment: The item restriction type for @config#autoDrop@.
+      autoDropWhiteList:
+        name: autoDropWhiteList
+        comment: |-
+          Items that will NOT thrown out from the inventory with @config#autoDrop@.
+          Note: NBT parsing supported.
+      autoReconnect:
+        name: autoReconnect
+        comment: |-
+          Automatically reconnects when you disconnect from the server.
+          This config will be disabled automatically when authentication failure detected.
+          Support shortcuts AuthMe, OAuth, ReAuth and In-Game Account Switcher.
+          Note: The way to check for authentication failure is by checking if its
+          disconnect reason matches the specified translation key or translation,
+          which might not be 100%% accurate if the server is not vanilla.
+      autoReconnectInterval:
+        name: autoReconnectInterval
+        comment: 'Interval for @config#autoReconnect@ (Unit: seconds).'
+      autoRespawn:
+        name: autoRespawn
+        comment: Automatically respawns you whenever you die.
+      autoTotem:
+        name: autoTotem
+        comment: |-
+          Automatically moves totems of undying to your off-hand.
+          Note: Totems of undying in the hot bar will not be moved.
+      breakingRestrictionBox:
+        name: breakingRestrictionBox
+        comment: |-
+          Regionally restrict your digging behavior.
+          You will NOT be able to perform digging behavior in the specific area.
+      breakingRestrictionBoxBlacklist:
+        name: breakingRestrictionBoxBlacklist
+        comment: Blocks that will NOT be able to be break in the specific area with @config#breakingRestrictionBox@.
+      breakingRestrictionBoxBlacklistColor:
+        name: breakingRestrictionBoxBlacklistColor
+        comment: Color for @config#breakingRestrictionBoxBlacklist@.
+      breakingRestrictionBoxType:
+        name: breakingRestrictionBoxType
+        comment: The area restriction type for @config#breakingRestrictionBox@.
+      breakingRestrictionBoxWhitelist:
+        name: breakingRestrictionBoxWhitelist
+        comment: Blocks that will be able to be break in the specific area with @config#breakingRestrictionBox@.
+      breakingRestrictionBoxWhitelistColor:
+        name: breakingRestrictionBoxWhitelistColor
+        comment: Color for @config#breakingRestrictionBoxWhitelist@.
+      breakingRestrictionFlat:
+        name: breakingRestrictionFlat
+        comment: |-
+          Prevents you from digging under your feet,
+          You can bypass this restriction by pressing the sneak key.
+      clientEntityUpdateRestriction:
+        name: clientEntityUpdateRestriction
+        comment: |-
+          No entity ticking in the client world.
+          Note: Player will be always ticked.
+      clientEntityUpdateRestrictionBlacklist:
+        name: clientEntityUpdateRestrictionBlacklist
+        comment: Entities that will NOT be ticked with @config#clientEntityUpdateRestriction@.
+      clientEntityUpdateRestrictionType:
+        name: clientEntityUpdateRestrictionType
+        comment: The entity restriction type for @config#clientEntityUpdateRestriction@.
+      clientEntityUpdateRestrictionWhitelist:
+        name: clientEntityUpdateRestrictionWhitelist
+        comment: Entities that will be ticked with @config#clientEntityUpdateRestriction@.
+      crystalBeamRenderRestriction:
+        name: crystalBeamRenderRestriction
+        comment: No longer render the ender crystal beam.
+      crystalBeamRenderRestrictionType:
+        name: crystalBeamRenderRestrictionType
+        comment: |-
+          Restriction type for @config#crystalBeamRenderRestriction@.
+          Block - Block all beam rendering.
+          Fixed only - Only render beams with ender crystals pointing to fixed coordinates.
+          None - No restriction.
+          Tracking only - Only render beams with Ender Dragon pointing to ender crystal.
+        value:
+          BLOCK: Block
+          FIXED_ONLY: Fixed only
+          NONE: None
+          TRACKING_ONLY: Tracking only
+      customBlockHitBoxBreakAnimation:
+        name: customBlockHitBoxBreakAnimation
+        comment: |-
+          Mining animation for @config#customBlockHitBoxOutline@ and @config#customBlockHitBoxOverlay@.
+          Down - As the excavation progresses, hit box will display a slow top-down shrinking animation.
+          None - No animation.
+          Shrink - As the excavation proceeds, hit box will display a slow shrinking from outside to inside animation.
+        value:
+          DOWN: Down
+          NONE: None
+          SHRINK: Shrink
+      customBlockHitBoxLinkedAdapter:
+        name: customBlockHitBoxLinkedAdapter
+        comment: |-
+          Try resizing multi-block structures, 
+          e.g. hitting a large box renders the whole large box.
+          Note: This config does not always work.
+          See also: config @config#customBlockHitBoxOutline@, @config#customBlockHitBoxOverlay@.
+      customBlockHitBoxDepthTest:
+        name: customBlockHitBoxDepthTest
+        comment: Force disable depth test for @config#customBlockHitBoxOutline@ and @config#customBlockHitBoxOverlay@.
+      customBlockHitBoxOutline:
+        name: customBlockHitBoxOutline
+        comment: Enable block hitbox outline rendering.
+      customBlockHitBoxOutlineColor:
+        name: customBlockHitBoxOutlineColor
+        comment: Color for @config#customBlockHitBoxOutline@.
+      customBlockHitBoxOutlineRainbow:
+        name: customBlockHitBoxOutlineRainbow
+        comment: |-
+          §cWARN: This feature contains quickly changing color that§r
+          §cmay induce photosensitive epilepsy, so please enable it with caution!§r
+          Use rainbow colors for @config#customBlockHitBoxOutline@.
+          Note: Will use the alpha provided by @config#customBlockHitBoxOutlineColor@.
+      customBlockHitBoxOutlineRainbowSpeed:
+        name: customBlockHitBoxOutlineRainbowSpeed
+        comment: |-
+          §cWARN: This feature contains quickly changing color that§r
+          §cmay induce photosensitive epilepsy, so please configure it with caution!§r
+          Transformation speed for @config#customBlockHitBoxOutlineRainbow@.
+      customBlockHitBoxOverlay:
+        name: customBlockHitBoxOverlayFill
+        comment: Enable block hitbox overlay rendering.
+      customBlockHitBoxOverlayColor:
+        name: customBlockHitBoxOverlayColor
+        comment: Color for @config#customBlockHitBoxOverlay@.
+      customBlockHitBoxOverlayRainbow:
+        name: customBlockHitBoxOverlayRainbow
+        comment: |-
+          §cWARN: This feature contains quickly changing color that§r
+          §cmay induce photosensitive epilepsy, so please enable it with caution!§r
+          Use rainbow colors for @config#customBlockHitBoxOverlay@.
+          Note: Will use the alpha provided by @config#customBlockHitBoxOverlayColor@.
+      customBlockHitBoxOverlayRainbowSpeed:
+        name: customBlockHitBoxOverlayRainbowSpeed
+        comment: |-
+          §cWARN: This feature contains quickly changing color that§r
+          §cmay induce photosensitive epilepsy, so please configure it with caution!§r
+          Transformation speed for @config#customBlockHitBoxOverlayRainbow@.
+      customGuiBackgroundColor:
+        name: customGuiBackgroundColor
+        comment: |-
+          Customize your gui background color.
+          Screen background color is a linear gradient transitioning
+          vertically from @config#customGuiBackgroundStartColor@ to @config#customGuiBackgroundStopColor@ from top to bottom.
+          See also: config @config#disableGuiShadowLayer@.
+      customGuiBackgroundStartColor:
+        name: customGuiBackgroundStartColor
+        comment: Gradient start color for @config#customGuiBackgroundColor@.
+      customGuiBackgroundStopColor:
+        name: customGuiBackgroundStopColor
+        comment: Gradient stop color for @config#customGuiBackgroundColor@.
+      customSidebarBackgroundColor:
+        name: customSidebarBackgroundColor
+        comment: |-
+          Customize your sidebar background color.
+          See also: config @config#customSidebarContentColor@, @config#customSidebarTitleColor@.
+      customSidebarContentColor:
+        name: customSidebarContentColor
+        comment: |-
+          Sidebar content color for @config#customSidebarContentColor@.
+          See also: config @config#customSidebarBackgroundColor@, @config#customSidebarTitleColor@.
+      customSidebarTitleColor:
+        name: customSidebarTitleColor
+        comment: |-
+          Sidebar title color for @config#customSidebarContentColor@.
+          See also: config @config#customSidebarBackgroundColor@, @config#customSidebarContentColor@.
+      customWindowIcon:
+        name: customWindowIcon
+        comment: |-
+          Customize your window icon.
+          You can define your own icons using the following resource pack namespace
+          For stable Minecraft:
+          tweakmyclient:texture/icon/icon_16x16.png
+          tweakmyclient:texture/icon/icon_32x32.png
+          tweakmyclient:texture/icon/icon_48x48.png
+          tweakmyclient:texture/icon/icon_64x64.png
+          tweakmyclient:texture/icon/icon_128x128.png
+          tweakmyclient:texture/icon/icon_256x256.png
+          For snapshot Minecraft:
+          tweakmyclient:texture/icon/icon_snapshot_16x16.png
+          tweakmyclient:texture/icon/icon_snapshot_32x32.png
+          tweakmyclient:texture/icon/icon_snapshot_48x48.png
+          tweakmyclient:texture/icon/icon_snapshot_64x64.png
+          tweakmyclient:texture/icon/icon_snapshot_128x128.png
+          tweakmyclient:texture/icon/icon_snapshot_256x256.png
+          Note: You must reload the resource pack to apply the file changes.
+      customWindowTitle:
+        name: customWindowTitle
+        comment: |-
+          Customize your window title.
+          See also: config @config#customWindowTitleActivitySupport@, @config#customWindowTitleRandomly@.
+      customWindowTitleActivitySupport:
+        name: customWindowTitleActivitySupport
+        comment: |-
+          Minecraft activity support for @config#customWindowTitle@.
+          Separate titles can be set for active and inactive times.
+          See also: config @config#customWindowTitle@, @config#customWindowTitleRandomly@.
+      customWindowTitleList:
+        name: customWindowTitleList
+        comment: |-
+          Title list for @config#customWindowTitle@.
+          Note: Only if @config#customWindowTitleRandomly@ 
+          is enabled will the title be randomized in the list,
+          otherwise the first element is always used.
+      customWindowTitleWithActivityList:
+        name: customWindowTitleWithActivityList
+        comment: |-
+          Title list for @config#customWindowTitleActivitySupport@.
+          Note: Only if @config#customWindowTitleRandomly@ 
+          is enabled will the title be randomized in the list,
+          otherwise the first element is always used.
+      customWindowTitleRandomly:
+        name: customWindowTitleRandomly
+        comment: |-
+          Randomized title for @config#customWindowTitle@.
+          See also: config @config#customWindowTitle@, @config#customWindowTitleActivitySupport@.
+      daylightOverride:
+        name: daylightOverride
+        comment: Override the client's world time to the daytime you want.
+      daylightOverrideTime:
+        name: daylightOverrideTime
+        comment: World time for @config#daylightOverride@.
+      entityRenderingRestriction:
+        name: entityRenderingRestriction
+        comment: |-
+          No entities will be rendered.
+          Note: Players will always be rendered.
+      entityRenderingRestrictionBlacklist:
+        name: entityRenderingRestrictionBlacklist
+        comment: Entities that will NOT be rendered with @config#entityRenderingRestriction@.
+      entityRenderingRestrictionType:
+        name: entityRenderingRestrictionType
+        comment: The entity restriction type for @config#entityRenderingRestriction@.
+      entityRenderingRestrictionWhitelist:
+        name: entityRenderingRestrictionWhitelist
+        comment: Entities that will be rendered with @config#entityRenderingRestriction@.
+      globalEventListener:
+        name: globalEventListener
+        comment: Print global event trigger coordinates.
+      itemGlintRestriction:
+        name: itemGlintRestriction
+        comment: No item glint will be rendered.
+      itemGlintRestrictionBlacklist:
+        name: itemGlintRestrictionBlacklist
+        comment: |-
+          Items glint will NOT be rendered with @config#itemGlintRestriction@.
+          Note: NBT parsing supported.
+      itemGlintRestrictionType:
+        name: itemGlintRestrictionType
+        comment: The item glint restriction type for @config#itemGlintRestriction@.
+      itemGlintRestrictionWhiteList:
+        name: itemGlintRestrictionWhiteList
+        comment: |-
+          Items glint will be rendered with @config#itemGlintRestriction@.
+          Note: NBT parsing supported.
+      lowHealthWarning:
+        name: lowHealthWarning
+        comment: Sends a warning message to action bar when your health is low.
+      lowHealthWarningThreshold:
+        name: lowHealthWarning
+        comment: Health threshold for @config#lowHealthWarning@.
+      openWaterHelper:
+        name: openWaterHelper
+        comment: Display open-water judgment box when throwing hooks.
+      openWaterColor:
+        name: openWaterColor
+        comment: Open water color for @config#openWaterHelper@.
+      shallowWaterColor:
+        name: shallowWaterColor
+        comment: Shallow water color for @config#openWaterHelper@.
+      unfocusedCPU:
+        name: unfocusedCPU
+        comment: Disable client-side main rendering logic after window loses focus.
+      # ================================ Patches ================================
+      chunkEdgeLagFix:
+        name: chunkEdgeLagFix
+        comment: |-
+          Disable the light update queue when unloading chunks,
+          this will reduce the lag when crossing chunk borders at some times.
+      disableLitematicaEasyPlaceFailTip:
+        name: disableLitematicaEasyPlaceFailTip
+        comment: Disable easyPlace failure that annoying prompt window.
+      disableLitematicaSchematicVersionCheck:
+        name: disableLitematicaSchematicVersionCheck
+        comment: |-
+          Remove version checking when loading Litematica schematic.
+          Note: Simply bypassing the version check to load the schematic
+          does §cNOT§r change the fact that it is inherently incompatible,
+          so do so at your own risk!
+      disableResourcePackIncompatibleTip:
+        name: disableResourcePackIncompatibleTip
+        comment: |-
+          Incompatible resource packs will not be marked as incompatible 
+          in the resource pack list and will not pop up a confirmation screen
+          when attempting to load them.
+          Note: Simply bypassing the version check to load the resource pack
+          does §cNOT§r change the fact that it is inherently incompatible,
+          so do so at your own risk!
+      endPortalRendererFix:
+        name: endPortalRendererFix
+        comment: Fix End Portal Renderer
+      endPortalRenderMode:
+        name: endPortalRenderMode
+        comment: |-
+          Render mode for @config#endPortalRenderMode@.
+          The available modes are as follows:
+          Actual - Rendering the ender portal using its hit box.
+          Full - Rendering the ender portal as a full block.
+          Legacy - Rendering the ender portal with Minecraft 21w13a below.
+          Modern - Rendering the ender portal with Minecraft 21w13a and above.
+        value:
+          ACTUAL: Actual
+          FULL: Full
+          LEGACY: Legacy
+          MODERN: Modern
+      forceDebugInfoDetailed:
+        name: forceDebugInfoDetailed
+        comment: |- 
+          Always show full debug information, 
+          even if game rule reducedDebugInfo is true.
+      forcePistonWithoutAffectByTool:
+        name: forcePistonWithoutAffectByTool
+        comment: The pickaxe will no longer be used as an effective mining tool for pistons.
+      # ================================ Disables ================================
+      disableBossBarRender:
+        name: disableBossBarRender
+        comment: No longer rendering boss bar.
+      disableClientBlockEvent:
+        name: disableClientBlockEvent
+        comment: No longer processing block event packets from the server.
+      disableEffectBoxRender:
+        name: disableEffectBoxRender
+        comment: No longer rendering effect indicator when you have some effect.
+      disableFireOverlayRender:
+        name: disableFireOverlayRender
+        comment: No longer renders fire overlay when you are on fire.
+      disableFovAffectedBySpeed:
+        name: disableFovAffectedBySpeed
+        comment: Speed multiplier no longer affects fov.
+      disableGuiShadowLayer:
+        name: disableGuiShadowLayer
+        comment: No longer render gradient background color when opening gui.
+      disablePowderSnowOverlayRender:
+        name: disablePowderSnowOverlayRender
+        comment: No longer render powder snow overlay when you are iced over.
+      disablePumpkinOverlayRender:
+        name: disablePumpkinOverlayRender
+        comment: No longer render overlays when you put on a pumpkin.
+      disableScoreboardRender:
+        name: disableScoreboardRender
+        comment: No longer render scoreboard.
+      disableSlowdown:
+        name: disableSlowdown
+        comment: |-
+          You are no longer slowed down when using items
+          or walking on surfaces with resistance.
+          Note: This behavior may be considered cheating on some servers.
+      disableToastRender:
+        name: disableToastRender
+        comment: No longer render toast.
+      # ================================ Debug ================================
+      debugMode:
+        name: debugMode
+        comment: |-
+          Debug mode of TweakMyClient
+          When enabled, debug parameter configs and configs not satisfied dependencies will be displayed
+          and debugging related functions will be enabled.
+      hideUnavailableConfigs:
+        name: hideAvailableConfigs
+        comment: Hide configs which are unavailable due to dependency relations unsatisfied in the config GUI.
+      resetConfigStatistic:
+        name: resetConfigStatistic
+        comment: Reset statistics of configs of TweakMyClient.
+  feature:
+    autoReconnect:
+      gui:
+        button:
+          reconnect: Reconnect
+          switcherss:
+            disabled: "AutoReconnect(§cDisabled§r)"
+            timer: "AutoReconnect(§a%d§rs)"
+          authenticate:
+            authme: Auth Me
+            ias: IAS
+            oauth: OAuth
+            reauth: ReAuth
+    globalEventListener:
+      message:
+        prefix: "§e[GlobalEvent]§r: "
+        end_portal_spawn: "End Portal Activated at  [x: %d, y: %d, z: %d]"
+        ender_dragon_death: "Ender Dragon Defeated at [x: %d, y: %d, z: %d]"
+        wither_spawn: "Wither Spawned at [x: %d, y: %d, z: %d]"

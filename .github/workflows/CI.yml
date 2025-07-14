@@ -1,299 +1,38 @@
 name: CI
-
 on:
   push:
     branches:
-      - "dev/**"
-      - "dev"
-      - "exp/**"
-      - "exp"
+      - 'dev'
+    paths:
+      - '**/*.gradle'
+      - '**/gradle.properties'
+      - '**/src/**'
+      - '**/versions/**'
+      - '.github/**'
+  pull_request:
   release:
     types:
       - published
-  pull_request:
-
 jobs:
+  prepare_action_info:
+    if: ${{ !startsWith(github.event.ref, 'refs/tags/') }}
+    uses: ./.github/workflows/prepare_action_info.yml
   build:
-    if: ${{ github.event_name == 'push' && !startsWith(github.event.ref, 'refs/tags/') && contains(github.event.head_commit.message, '[build skip]') == false }}
-    strategy:
-      matrix:
-        java: [ 17 ]
-        os: [ ubuntu-latest ]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout the sources
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Set up JDK ${{ matrix.java }}
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: ${{ matrix.java }}
-
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ./.gradle/loom-caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('*.gradle', 'gradle.properties', '**/*.accesswidener') }}
-          restore-keys: ${{ runner.os }}-gradle-
-
-      - name: Get short commit sha
-        id: get_short_sha
-        run: |
-          short_sha=$(echo ${GITHUB_SHA} | cut -c1-7)
-          echo "short_sha=$short_sha" >> $GITHUB_OUTPUT
-
-      - name: Get commit count
-        id: get_commit_count
-        run: |
-          commit_count=$(git log | grep -e '^commit [a-zA-Z0-9]*' | wc -l)
-          echo "commit_count=$commit_count" >> $GITHUB_OUTPUT
-
-      - name: Read Properties mod info
-        id: mod_info
-        uses: christian-draeger/read-properties@1.1.1
-        with:
-          path: gradle.properties
-          properties: "mod_name mod_version"
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Preprocess resources
-        env:
-          BUILD_TYPE: "BETA"
-        run: ./gradlew preprocessResources
-
-      - name: Build with Gradle
-        env:
-          BUILD_TYPE: "BETA"
-        run: ./gradlew build
-
-      - name: Upload assets to GitHub Action
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ steps.mod_info.outputs.mod_name }} ${{ steps.mod_info.outputs.mod_version }}.${{ steps.get_commit_count.outputs.commit_count }}+${{ steps.get_short_sha.outputs.short_sha }}
-          path: |
-            LICENSE
-            fabricWrapper/build/libs/*.jar
-            fabricWrapper/build/tmp/submods/META-INF/jars/*.jar
-
-      - name: Create Github Release
-        if: contains(github.event.head_commit.message, '[publish skip]') == false && contains(github.event.ref, 'refs/heads/exp') == false
-        uses: softprops/action-gh-release@v1
-        with:
-          prerelease: true
-          files: |
-            LICENSE
-            fabricWrapper/build/libs/*.jar
-            fabricWrapper/build/tmp/submods/META-INF/jars/*.jar
-          name: "[CI#${{ github.run_number }}]${{ steps.mod_info.outputs.mod_name }} ${{ steps.mod_info.outputs.mod_version }}.${{ steps.get_commit_count.outputs.commit_count }}+${{ steps.get_short_sha.outputs.short_sha }}"
-          tag_name: dev-${{ github.run_number }}
-          target_commitish: ${{ github.event.ref }}
-          generate_release_notes: true
-
-      - name: Publish release to Curseforge
-        if: contains(github.event.head_commit.message, '[publish skip]') == false && contains(github.event.ref, 'refs/heads/exp') == false
-        uses: Kir-Antipov/mc-publish@v3.2
-        with:
-          curseforge-id: 478757
-          curseforge-token: ${{ secrets.CF_API_TOKEN }}
-          files-primary: fabricWrapper/build/libs/!(*-@(dev|sources)).jar
-          files-secondary: fabricWrapper/build/tmp/submods/META-INF/jars/!(*-@(dev|sources)).jar
-
-          name: ''
-          version: ${{ steps.mod_info.outputs.mod_version }}.${{ steps.get_commit_count.outputs.commit_count }}+${{ steps.get_short_sha.outputs.short_sha }}
-          version-type: alpha
-
-          changelog: |
-            **This version is automatically released by CI Build**
-            Latest commit log:
-            ${{ github.event.head_commit.message }}
-          loaders:
-            fabric
-          game-versions: |
-            1.14.4
-            1.15.2
-            1.16.5
-            1.17.1
-            1.18.2
-            1.19.2
-            1.19.3
-            1.19.4
-            1.20.1
-            1.20.2
-            1.20.4
-          version-resolver: any
-          java: |
-            8
-            9
-            10
-            11
-            12
-            13
-            14
-            15
-            16
-            17
-            18
-
-          retry-attempts: 2
-          retry-delay: 10000
-
+    if: ${{ !contains(github.event.head_commit.message, '[build skip]') }}
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
+    needs:
+      - prepare_action_info
+    with:
+      build_publish: ${{ fromJSON(needs.prepare_action_info.outputs.build_publish) }}
+      build_version_type: ${{ needs.prepare_action_info.outputs.build_version_type }}
   publish:
-    if: ${{ github.event_name == 'release' }}
-    strategy:
-      matrix:
-        java: [ 17 ]
-        os: [ ubuntu-latest ]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout the sources
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Set up JDK ${{ matrix.java }}
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: ${{ matrix.java }}
-
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ./.gradle/loom-caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('*.gradle', 'gradle.properties', '**/*.accesswidener') }}
-          restore-keys: ${{ runner.os }}-gradle-
-
-      - name: Get short commit sha
-        id: get_short_sha
-        run: |
-          short_sha=$(echo ${GITHUB_SHA} | cut -c1-7)
-          echo "::set-output name=short_sha::$short_sha"
-
-      - name: Get commit count
-        id: get_commit_count
-        run: |
-          commit_count=$(git log | grep -e '^commit [a-zA-Z0-9]*' | wc -l)
-          echo "commit_count=$commit_count" >> $GITHUB_OUTPUT
-
-      - name: Read Properties mod info
-        id: mod_info
-        uses: christian-draeger/read-properties@1.1.1
-        with:
-          path: gradle.properties
-          properties: "mod_name mod_version"
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Preprocess resources
-        env:
-          BUILD_TYPE: "RELEASE"
-        run: ./gradlew preprocessResources
-
-      - name: Build with Gradle
-        env:
-          BUILD_TYPE: "RELEASE"
-        run: ./gradlew build
-
-      - name: Upload assets to GitHub Action
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ steps.mod_info.outputs.mod_name }} ${{ steps.mod_info.outputs.mod_version }}.${{ steps.get_commit_count.outputs.commit_count }}+${{ steps.get_short_sha.outputs.short_sha }}
-          path: |
-            LICENSE
-            fabricWrapper/build/libs/*.jar
-            fabricWrapper/build/tmp/submods/META-INF/jars/*.jar
-
-      - name: Upload assets to Github Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            LICENSE
-            fabricWrapper/build/libs/*.jar
-            fabricWrapper/build/tmp/submods/META-INF/jars/*.jar
-          tag_name: ${{ github.event.ref }}
-
-      - name: Publish to curseforge
-        uses: Kir-Antipov/mc-publish@v3.2
-        with:
-          curseforge-id: 478757
-          curseforge-token: ${{ secrets.CF_API_TOKEN }}
-
-          files-primary: fabricWrapper/build/libs/!(*-@(dev|sources)).jar
-          files-secondary: fabricWrapper/build/tmp/submods/META-INF/jars/!(*-@(dev|sources)).jar
-
-          name: ''
-          version: ${{ steps.mod_info.outputs.mod_version }}.${{ steps.get_commit_count.outputs.commit_count }}+${{ steps.get_short_sha.outputs.short_sha }}
-          version-type: 'release'
-
-          changelog: ${{ github.event.release.body }}
-          loaders:
-            fabric
-          game-versions: |
-            1.14.4
-            1.15.2
-            1.16.5
-            1.17.1
-            1.18.2
-            1.19.2
-            1.19.3
-            1.19.4
-            1.20.1
-            1.20.2
-            1.20.4
-          version-resolver: any
-          java: |
-            8
-            9
-            10
-            11
-            12
-            13
-            14
-            15
-            16
-            17
-            18
-
-          retry-attempts: 2
-          retry-delay: 10000
-
-  pull_request:
-    if: ${{ github.event_name == 'pull_request' }}
-    strategy:
-      matrix:
-        java: [ 17 ]
-        os: [ ubuntu-latest ]
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - name: Checkout the sources
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Set up JDK ${{ matrix.java }}
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: ${{ matrix.java }}
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Preprocess resources
-        run: ./gradlew preprocessResources
-
-      - name: Build with Gradle
-        run: ./gradlew build
+    if: ${{ fromJSON(needs.prepare_action_info.outputs.publish_enable) }}
+    uses: ./.github/workflows/publish.yml
+    secrets: inherit
+    needs:
+      - build
+      - prepare_action_info
+    with:
+      publish_platform_channel: ${{ needs.prepare_action_info.outputs.publish_platform_channel }}
+      publish_type: ${{ needs.prepare_action_info.outputs.publish_type }}

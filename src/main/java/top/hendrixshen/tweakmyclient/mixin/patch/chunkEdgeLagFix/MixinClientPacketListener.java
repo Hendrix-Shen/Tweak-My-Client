@@ -1,35 +1,41 @@
 package top.hendrixshen.tweakmyclient.mixin.patch.chunkEdgeLagFix;
 
-import org.spongepowered.asm.mixin.Mixin;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
+import top.hendrixshen.tweakmyclient.game.Configs;
 
-//#if MC > 11904
-import top.hendrixshen.magiclib.compat.preprocess.api.DummyClass;
-//#else
-//$$ import net.minecraft.client.multiplayer.ClientPacketListener;
-//$$ import org.spongepowered.asm.mixin.injection.At;
-//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//$$ import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-//$$ import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
-//$$ import top.hendrixshen.tweakmyclient.config.Configs;
-//$$
+import net.minecraft.client.multiplayer.ClientPacketListener;
+
+// CHECKSTYLE.OFF: ImportOrder
 //#if MC > 11701
 //$$ import net.minecraft.network.protocol.game.ClientboundForgetLevelChunkPacket;
-//$$ import org.spongepowered.asm.mixin.injection.Inject;
 //#else
-//$$ import net.minecraft.core.SectionPos;
-//$$ import net.minecraft.world.level.lighting.LevelLightEngine;
-//$$ import org.spongepowered.asm.mixin.injection.Redirect;
+import net.minecraft.core.SectionPos;
+import net.minecraft.world.level.lighting.LevelLightEngine;
 //#endif
-//#endif
+// CHECKSTYLE.ON: ImportOrder
 
-//#if MC > 11904
-@Mixin(DummyClass.class)
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC > 11701
+//$$ import org.spongepowered.asm.mixin.injection.Inject;
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#else
-//$$ @Dependencies(not = @Dependency(value = "forgetmechunk"))
-//$$ @Mixin(ClientPacketListener.class)
+import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 //#endif
-public class MixinClientPacketListener {
-    //#if MC < 12000
+// CHECKSTYLE.ON: ImportOrder
+
+// CHECKSTYLE.OFF: JavadocStyle
+/**
+ * <li>mc1.14 ~ mc1.19: subproject 1.16.5 (main project)        &lt;--------</li>
+ * <li>mc1.20+        : subproject 1.20.1 [dummy]</li>
+ */
+// CHECKSTYLE.ON: JavadocStyle
+@Dependencies(conflict = @Dependency(value = "forgetmechunk"))
+@Mixin(ClientPacketListener.class)
+public abstract class MixinClientPacketListener {
     //#if MC > 11701
     //$$ @Inject(
     //$$         method = "handleForgetLevelChunk",
@@ -40,23 +46,20 @@ public class MixinClientPacketListener {
     //$$         cancellable = true
     //$$ )
     //$$ private void chunkEdgeLagFix(ClientboundForgetLevelChunkPacket clientboundForgetLevelChunkPacket, CallbackInfo ci) {
-    //$$     if (Configs.chunkEdgeLagFix) {
+    //$$     if (Configs.chunkEdgeLagFix.getBooleanValue()) {
     //$$         ci.cancel();
     //$$     }
     //$$ }
     //#else
-    //$$ @Redirect(
-    //$$         method = "handleForgetLevelChunk",
-    //$$         at = @At(
-    //$$                 value = "INVOKE",
-    //$$                 target = "Lnet/minecraft/world/level/lighting/LevelLightEngine;updateSectionStatus(Lnet/minecraft/core/SectionPos;Z)V"
-    //$$         )
-    //$$ )
-    //$$ private void chunkEdgeLagFix(LevelLightEngine instance, SectionPos sectionPos, boolean bl) {
-    //$$     if (!Configs.chunkEdgeLagFix) {
-    //$$          instance.updateSectionStatus(sectionPos, bl);
-    //$$     }
-    //$$ }
-    //#endif
+    @WrapWithCondition(
+            method = "handleForgetLevelChunk",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/lighting/LevelLightEngine;updateSectionStatus(Lnet/minecraft/core/SectionPos;Z)V"
+            )
+    )
+    private boolean chunkEdgeLagFix(LevelLightEngine instance, SectionPos sectionPos, boolean bl) {
+        return !Configs.chunkEdgeLagFix.getBooleanValue();
+    }
     //#endif
 }
