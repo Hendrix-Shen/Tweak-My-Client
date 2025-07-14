@@ -25,9 +25,9 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 //#endif
 // CHECKSTYLE.ON: ImportOrder
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 @Mixin(EnderDragonRenderer.class)
 public abstract class MixinEnderDragonRenderer extends EntityRenderer<
