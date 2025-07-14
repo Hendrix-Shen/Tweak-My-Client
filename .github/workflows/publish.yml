@@ -51,8 +51,8 @@ jobs:
         run: |
           short_sha=$(echo ${GITHUB_SHA} | cut -c1-7)
           commit_count=$(git log | grep -e '^commit [a-zA-Z0-9]*' | wc -l)
-          mod_name="${{ steps.mod_info.outputs.mod-name }}"
-          mod_version="${{ steps.mod_info.outputs.mod-version }}"
+          mod_name=${{ steps.mod_info.outputs.mod-name }}
+          mod_version=${{ steps.mod_info.outputs.mod-version }}
           mod_full_version="$mod_version.$commit_count+$short_sha"
           
           if [ "${{ inputs.publish_type }}" == 'release' ]
@@ -61,7 +61,7 @@ jobs:
               release_title="${{ github.event.release.name }}"
           elif [ "${{ inputs.publish_type }}" == "dev" ]
           then
-              if [ "$REPO_OWNER" == 'plusls' ]
+              if [ "$REPO_OWNER" == 'Hendrix-Shen' ]
               then
                   github_tag="${{ github.ref_name }}.$commit_count"
                   release_title="[CI#${{ github.run_number }}]$mod_name $mod_full_version"
