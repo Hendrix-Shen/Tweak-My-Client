@@ -171,8 +171,20 @@ public class PatchedDisconnectedScreen extends Screen {
         );
 
         //#if MC > 11502
-        //#if MC > 11904
-        //$$ guiGraphicsOrPoseStack.drawCenteredString(this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
+        //#if MC >= 12107
+        //$$ guiGraphicsOrPoseStack.drawCenteredString(this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, -1);
+        //#elseif MC > 11904
+        //$$ guiGraphicsOrPoseStack.drawCenteredString(
+        //$$         this.font,
+        //$$         this.title,
+        //$$         this.width / 2,
+        //$$         this.height / 2 - this.textHeight / 2 - 9 * 2,
+        //$$         //#if MC >= 12107
+        //$$         //$$ -1
+        //$$         //#else
+        //$$         0xAAAAAA
+        //$$         //#endif
+        //$$ );
         //#else
         GuiComponent.drawCenteredString(guiGraphicsOrPoseStack, this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
         //#endif
@@ -205,7 +217,7 @@ public class PatchedDisconnectedScreen extends Screen {
 
         this.autoReconnectButton.setMessage(
                 //#if MC > 11502
-                ComponentCompat.literal(SharedConstants.tr("feature.autoReconnect.gui.button.switcher.timer", this.reconnectTimer))
+                ComponentCompat.literal(SharedConstants.tr("feature.autoReconnect.gui.button.switcher.timer", (this.reconnectTimer + 10) / 20))
                 //#else
                 //$$ SharedConstants.tr("feature.autoReconnect.gui.button.switcher.timer")
                 //#endif
