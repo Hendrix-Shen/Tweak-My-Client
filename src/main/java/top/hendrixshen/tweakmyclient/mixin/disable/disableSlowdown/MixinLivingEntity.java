@@ -11,11 +11,13 @@ import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 // CHECKSTYLE.OFF: ImportOrder
-//#if MC < 12103
+//#if MC > 12101
+//$$ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+//#else
 import org.spongepowered.asm.mixin.injection.Slice;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 //#endif
 // CHECKSTYLE.ON: ImportOrder
 
@@ -27,7 +29,13 @@ public abstract class MixinLivingEntity extends Entity {
 
     //#if MC > 12101
     //$$ @SuppressWarnings("ConstantConditions")
-    //$$ @ModifyVariable(method = "travelInAir", at = @At(value = "STORE"), ordinal = 0)
+    //$$ @ModifyExpressionValue(
+    //$$         method = "travelInAir",
+    //$$         at = @At(
+    //$$                 value = "INVOKE",
+    //$$                 target = "Lnet/minecraft/world/level/block/Block;getFriction()F"
+    //$$         )
+    //$$ )
     //$$ private float modifyFriction(float friction) {
     //$$     if (Configs.disableSlowdown.getBooleanValue() && MiscUtil.cast(this) instanceof LocalPlayer && friction > 0.6F) {
     //$$         return 0.6F;
