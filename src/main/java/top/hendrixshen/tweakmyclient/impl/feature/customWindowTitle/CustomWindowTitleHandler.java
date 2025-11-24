@@ -14,7 +14,11 @@ import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 
+// CHECKSTYLE.OFF: ImportOrder
+//#if FABRIC
 import net.fabricmc.loader.impl.FabricLoaderImpl;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,8 +32,10 @@ public class CustomWindowTitleHandler implements MinecraftListener {
     private static final CustomWindowTitleHandler instance = new CustomWindowTitleHandler();
 
     private final Map<String, String> PLACEHOLDER_MAP = ImmutableMap.<String, String>builder()
+            //#if FABRIC
             .put("{fabric_loader_version}", FabricLoaderImpl.VERSION)
             .put("{fabric_loader_asm_version}", String.valueOf(FabricLoaderImpl.ASM_VERSION))
+            //#endif
             .put("{mc_protocol_version}", Integer.toString(
                     //#if MC > 11502
                     SharedConstants.getProtocolVersion()

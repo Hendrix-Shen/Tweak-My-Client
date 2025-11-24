@@ -1,3 +1,5 @@
+//#if FABRIC_LIKE
+
 package top.hendrixshen.tweakmyclient.impl.compat.modmenu;
 
 import top.hendrixshen.magiclib.api.compat.modmenu.ModMenuApiCompat;
@@ -23,3 +25,4 @@ public class ModMenuImpl implements ModMenuApiCompat {
         return SharedConstants.getModIdentifier();
     }
 }
+//#endif

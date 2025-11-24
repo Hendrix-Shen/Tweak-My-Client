@@ -45,6 +45,11 @@ preprocess {
     mc12103_fabric.link(mc12104_fabric, null)
     mc12104_fabric.link(mc12105_fabric, null)
     mc12105_fabric.link(mc12108_fabric, null)
+
+    // Forge
+    Node mc12001_forge = createNode("1.20.1-forge", 1_20_01, "mojang")
+
+    mc12001_fabric.link(mc12001_forge, null)
 }
 
 ext {

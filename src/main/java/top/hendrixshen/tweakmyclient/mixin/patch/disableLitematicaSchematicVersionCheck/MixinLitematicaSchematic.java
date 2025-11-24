@@ -23,9 +23,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Dependencies(require = @Dependency(value = "litematica"))
-@Mixin(LitematicaSchematic.class)
+@Mixin(value = LitematicaSchematic.class, remap = false)
 public abstract class MixinLitematicaSchematic {
-    @Shadow(remap = false)
+    @Shadow
     @Final
     private SchematicMetadata metadata;
 
@@ -41,6 +41,7 @@ public abstract class MixinLitematicaSchematic {
                     //#else
                     target = "Lnet/minecraft/nbt/CompoundTag;getInt(Ljava/lang/String;)I",
                     //#endif
+                    remap = true,
                     ordinal = 0
             ),
             cancellable = true

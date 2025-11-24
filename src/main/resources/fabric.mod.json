@@ -24,7 +24,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "top.hendrixshen.tweakmyclient.TweakMyClient"
+      "top.hendrixshen.tweakmyclient.TweakMyClientFabric"
     ],
     "modmenu": [
       "top.hendrixshen.tweakmyclient.impl.compat.modmenu.ModMenuImpl"
