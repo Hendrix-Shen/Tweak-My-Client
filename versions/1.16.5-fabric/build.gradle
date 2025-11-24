@@ -69,7 +69,8 @@ String litematica_fabric_ga = project.getProperties().getOrDefault("dependencies
 
 // Module, Property prefix, Resolve condition, Transitive dependencies.
 def apiDependencies = [
-        [litematica_fabric_ga, "litematica"        , fabricLike, false],
+        [litematica_fabric_ga        , "litematica", fabricLike, false],
+        ["maven.modrinth:forgematica", "litematica", forgeLike , false],
 ]
 
 // Module, Property prefix, Resolve condition, Transitive dependencies.
@@ -234,6 +235,7 @@ replaceToken {
     replace("@MOD_NAME@"      , project.parent.property("mod.name"))
     replace("@MOD_VERSION@"   , project.getVersionWithCommitHash(this.project.parent) as String)
     replaceIn("top/hendrixshen/tweakmyclient/SharedConstants")
+    replaceIn("top/hendrixshen/tweakmyclient/TweakMyClientForge")
 }
 
 processResources {
