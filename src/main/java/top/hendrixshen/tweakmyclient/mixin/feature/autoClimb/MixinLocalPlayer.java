@@ -33,9 +33,9 @@ public abstract class MixinLocalPlayer extends LivingEntity {
                 //#endif
                 && playerCompat.getXRot() <= -50F
                 //#if MC > 11404
-                && this.isCrouching()
+                && !this.isCrouching()
                 //#else
-                //$$ && this.isVisuallySneaking()
+                //$$ && !this.isVisuallySneaking()
                 //#endif
         ) {
             Vec3 vec3 = this.getDeltaMovement();
