@@ -12,11 +12,18 @@ import top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix.EndPortalRe
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.entity.TheEndPortalBlockEntity;
 
 // CHECKSTYLE.OFF: ImportOrder
 //#if MC < 11903
 import com.mojang.math.Matrix4f;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC >= 12110
+//$$ import java.util.EnumSet;
+//#else
+import net.minecraft.world.level.block.entity.TheEndPortalBlockEntity;
 //#endif
 // CHECKSTYLE.ON: ImportOrder
 
@@ -37,7 +44,11 @@ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.sugar.Local;
 public abstract class MixinTheEndPortalRenderer {
     @Shadow
     protected abstract void renderFace(
+            //#if MC >= 12110
+            //$$ EnumSet<Direction> enumSet,
+            //#else
             TheEndPortalBlockEntity theEndPortalBlockEntity,
+            //#endif
             Matrix4f matrix4f,
             VertexConsumer vertexConsumer,
             float x0,
@@ -60,7 +71,9 @@ public abstract class MixinTheEndPortalRenderer {
             method = "renderCube",
             at = @At(
                     value = "INVOKE",
-                    //#if MC > 11902
+                    //#if MC >= 12110
+                    //$$ target = "Lnet/minecraft/client/renderer/blockentity/AbstractEndPortalRenderer;renderFace(Ljava/util/EnumSet;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFFFFFLnet/minecraft/core/Direction;)V",
+                    //#elseif MC > 11902
                     //$$ target = "Lnet/minecraft/client/renderer/blockentity/TheEndPortalRenderer;renderFace(Lnet/minecraft/world/level/block/entity/TheEndPortalBlockEntity;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFFFFFLnet/minecraft/core/Direction;)V",
                     //#elseif MC > 11605
                     //$$ target = "Lnet/minecraft/client/renderer/blockentity/TheEndPortalRenderer;renderFace(Lnet/minecraft/world/level/block/entity/TheEndPortalBlockEntity;Lcom/mojang/math/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFFFFFLnet/minecraft/core/Direction;)V",
@@ -72,7 +85,12 @@ public abstract class MixinTheEndPortalRenderer {
             cancellable = true
     )
     private void onRenderCube(
-            TheEndPortalBlockEntity blockEntity,
+            //#if MC >= 12110
+            //$$ EnumSet<Direction>
+            //#else
+            TheEndPortalBlockEntity
+            //#endif
+            blockEntity,
             //#if MC < 11700
             float offset,
             float factor,

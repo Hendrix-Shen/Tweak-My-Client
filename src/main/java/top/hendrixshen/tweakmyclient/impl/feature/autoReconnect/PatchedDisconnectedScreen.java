@@ -188,7 +188,11 @@ public class PatchedDisconnectedScreen extends Screen {
         //#else
         GuiComponent.drawCenteredString(guiGraphicsOrPoseStack, this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
         //#endif
+        //#if MC >= 12110
+        //$$ this.message.render(guiGraphicsOrPoseStack, MultiLineLabel.Align.CENTER, this.width / 2, this.height / 2 - this.textHeight / 2, 9, false, -1);
+        //#else
         this.message.renderCentered(guiGraphicsOrPoseStack, this.width / 2, this.height / 2 - this.textHeight / 2);
+        //#endif
         //#else
         //$$ this.drawCenteredString(this.font, this.title.getColoredString(), this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
         //$$ int k = this.height / 2 - this.textHeight / 2;

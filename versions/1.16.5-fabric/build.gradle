@@ -167,10 +167,6 @@ loom {
 
     runConfigs.named("client") {
         programArgs([
-                "--width",
-                project.getOrDefault("ow.game.window.width", "1920"),
-                "--height",
-                project.getOrDefault("ow.game.window.height", "1080"),
                 "--username",
                 project.getOrDefault("ow.game.window.username", "dev")
         ])

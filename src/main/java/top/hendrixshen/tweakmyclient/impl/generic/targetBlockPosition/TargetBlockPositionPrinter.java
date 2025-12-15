@@ -14,7 +14,11 @@ import net.minecraft.world.phys.HitResult;
 public class TargetBlockPositionPrinter {
     public static void print() {
         Minecraft mc = Minecraft.getInstance();
+        //#if MC >= 12110
+        //$$ Entity cameraEntity = mc.getCameraEntity();
+        //#else
         Entity cameraEntity = mc.cameraEntity;
+        //#endif
         MultiPlayerGameMode multiPlayerGameMode = mc.gameMode;
 
         if (cameraEntity == null || multiPlayerGameMode == null) {
