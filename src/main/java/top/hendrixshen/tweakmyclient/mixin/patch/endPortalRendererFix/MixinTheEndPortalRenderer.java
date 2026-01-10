@@ -12,9 +12,12 @@ import top.hendrixshen.tweakmyclient.impl.patch.endPortalRendererFix.EndPortalRe
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.entity.TheEndPortalBlockEntity;
 
 // CHECKSTYLE.OFF: ImportOrder
+//#if MC < 12110
+import net.minecraft.world.level.block.entity.TheEndPortalBlockEntity;
+//#endif
+
 //#if MC < 11903
 import com.mojang.math.Matrix4f;
 //#endif
@@ -27,6 +30,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.sugar.Local;
 
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC >= 12110
+//$$ import java.util.EnumSet;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
 // CHECKSTYLE.OFF: JavadocStyle
 /**
  * <li>mc1.14 : subproject 1.14.4</li>
@@ -37,7 +46,11 @@ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.sugar.Local;
 public abstract class MixinTheEndPortalRenderer {
     @Shadow
     protected abstract void renderFace(
-            TheEndPortalBlockEntity theEndPortalBlockEntity,
+            //#if MC >= 12110
+            //$$ EnumSet<Direction> enumSetOrTheEndPortalBlockEntity,
+            //#else
+            TheEndPortalBlockEntity enumSetOrTheEndPortalBlockEntity,
+            //#endif
             Matrix4f matrix4f,
             VertexConsumer vertexConsumer,
             float x0,
@@ -60,7 +73,9 @@ public abstract class MixinTheEndPortalRenderer {
             method = "renderCube",
             at = @At(
                     value = "INVOKE",
-                    //#if MC > 11902
+                    //#if MC >= 12110
+                    //$$ target = "Lnet/minecraft/client/renderer/blockentity/AbstractEndPortalRenderer;renderFace(Ljava/util/EnumSet;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFFFFFLnet/minecraft/core/Direction;)V",
+                    //#elseif MC > 11902
                     //$$ target = "Lnet/minecraft/client/renderer/blockentity/TheEndPortalRenderer;renderFace(Lnet/minecraft/world/level/block/entity/TheEndPortalBlockEntity;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFFFFFLnet/minecraft/core/Direction;)V",
                     //#elseif MC > 11605
                     //$$ target = "Lnet/minecraft/client/renderer/blockentity/TheEndPortalRenderer;renderFace(Lnet/minecraft/world/level/block/entity/TheEndPortalBlockEntity;Lcom/mojang/math/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFFFFFLnet/minecraft/core/Direction;)V",
@@ -72,7 +87,11 @@ public abstract class MixinTheEndPortalRenderer {
             cancellable = true
     )
     private void onRenderCube(
-            TheEndPortalBlockEntity blockEntity,
+            //#if MC >= 12110
+            //$$ EnumSet<Direction> enumSetOrBlockEntity,
+            //#else
+            TheEndPortalBlockEntity enumSetOrBlockEntity,
+            //#endif
             //#if MC < 11700
             float offset,
             float factor,
@@ -96,70 +115,70 @@ public abstract class MixinTheEndPortalRenderer {
         if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.ACTUAL) {
             // Rendering the ender portal using its hit box.
             //#if MC > 11605
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetDown, offsetUp, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetUp, offsetDown, 0.0F, 0.0F, 0.0F, 0.0F, Direction.NORTH);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 1.0F, 1.0F, offsetUp, offsetDown, 0.0F, 1.0F, 1.0F, 0.0F, Direction.EAST);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 0.0F, offsetDown, offsetUp, 0.0F, 1.0F, 1.0F, 0.0F, Direction.WEST);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetDown, offsetDown, 0.0F, 0.0F, 1.0F, 1.0F, Direction.DOWN);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetUp, offsetUp, 1.0F, 1.0F, 0.0F, 0.0F, Direction.UP);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetDown, offsetUp, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetUp, offsetDown, 0.0F, 0.0F, 0.0F, 0.0F, Direction.NORTH);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 1.0F, 1.0F, offsetUp, offsetDown, 0.0F, 1.0F, 1.0F, 0.0F, Direction.EAST);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 0.0F, offsetDown, offsetUp, 0.0F, 1.0F, 1.0F, 0.0F, Direction.WEST);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetDown, offsetDown, 0.0F, 0.0F, 1.0F, 1.0F, Direction.DOWN);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetUp, offsetUp, 1.0F, 1.0F, 0.0F, 0.0F, Direction.UP);
             //#else
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, offset, 1.0F, 1.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.SOUTH);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offset, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.NORTH);
-            this.renderFace(blockEntity, matrix4f, consumer, 1.0F, 1.0F, offset, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.EAST);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, offset, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.WEST);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.DOWN);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offset, offset, 1.0F, 1.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.UP);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, offset, 1.0F, 1.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.SOUTH);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, offset, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.NORTH);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 1.0F, 1.0F, offset, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.EAST);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, offset, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.WEST);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.DOWN);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, offset, offset, 1.0F, 1.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.UP);
             //#endif
         } else if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.FULL) {
             // Rendering the end portal as a full block.
             //#if MC > 11605
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Direction.NORTH);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.EAST);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.WEST);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, Direction.DOWN);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, Direction.UP);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Direction.NORTH);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.EAST);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.WEST);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, Direction.DOWN);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, Direction.UP);
             //#else
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.SOUTH);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.NORTH);
-            this.renderFace(blockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.EAST);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.WEST);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.DOWN);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.UP);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.SOUTH);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.NORTH);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.EAST);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.WEST);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.DOWN);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.UP);
             //#endif
         } else if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.LEGACY) {
             // Rendering the end portal with Minecraft 21w13a below.
             //#if MC > 11605
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Direction.NORTH);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.EAST);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.WEST);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, Direction.DOWN);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetUp, offsetUp, 1.0F, 1.0F, 0.0F, 0.0F, Direction.UP);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Direction.NORTH);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.EAST);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.WEST);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, Direction.DOWN);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetUp, offsetUp, 1.0F, 1.0F, 0.0F, 0.0F, Direction.UP);
             //#else
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.SOUTH);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.NORTH);
-            this.renderFace(blockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.EAST);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.WEST);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.DOWN);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offset, offset, 1.0F, 1.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.UP);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.SOUTH);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.NORTH);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.EAST);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.WEST);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.DOWN);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, offset, offset, 1.0F, 1.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.UP);
             //#endif
         } else if (Configs.endPortalRenderMode.getOptionListValue() == EndPortalRenderMode.MODERN) {
             // Rendering the end portal with Minecraft 21w13a and above.
             //#if MC > 11605
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Direction.NORTH);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.EAST);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.WEST);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetDown, offsetDown, 0.0F, 0.0F, 1.0F, 1.0F, Direction.DOWN);
-            //$$ this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetUp, offsetUp, 1.0F, 1.0F, 0.0F, 0.0F, Direction.UP);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, Direction.SOUTH);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Direction.NORTH);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.EAST);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, Direction.WEST);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetDown, offsetDown, 0.0F, 0.0F, 1.0F, 1.0F, Direction.DOWN);
+            //$$ this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, offsetUp, offsetUp, 1.0F, 1.0F, 0.0F, 0.0F, Direction.UP);
             //#else
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.SOUTH);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.NORTH);
-            this.renderFace(blockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.EAST);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.WEST);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.375F, 0.375F, 0.0F, 0.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.DOWN);
-            this.renderFace(blockEntity, matrix4f, consumer, 0.0F, 1.0F, offset, offset, 1.0F, 1.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.UP);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.SOUTH);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.NORTH);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 1.0F, 1.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.EAST);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, colorR, colorG, colorB, Direction.WEST);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, 0.375F, 0.375F, 0.0F, 0.0F, 1.0F, 1.0F, colorR, colorG, colorB, Direction.DOWN);
+            this.renderFace(enumSetOrBlockEntity, matrix4f, consumer, 0.0F, 1.0F, offset, offset, 1.0F, 1.0F, 0.0F, 0.0F, colorR, colorG, colorB, Direction.UP);
             //#endif
         }
 

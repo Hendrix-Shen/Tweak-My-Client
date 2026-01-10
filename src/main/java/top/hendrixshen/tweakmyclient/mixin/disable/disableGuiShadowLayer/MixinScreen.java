@@ -5,20 +5,32 @@ import top.hendrixshen.tweakmyclient.game.Configs;
 import net.minecraft.client.gui.components.events.AbstractContainerEventHandler;
 import net.minecraft.client.gui.screens.Screen;
 
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC > 11904
+//$$ import net.minecraft.client.gui.GuiGraphics;
+//#endif
+
+//#if 12000 > MC && MC > 11502
+import com.mojang.blaze3d.vertex.PoseStack;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 // CHECKSTYLE.OFF: JavadocStyle
+
 /**
  * <li>mc1.14 ~ mc1.20.4: subproject 1.16.5 (main project)        &lt;--------</li>
  * <li>mc1.20.5+        : subproject 1.20.6 [dummy]</li>
+ * <li>mc1.21.10+       : subproject 1.20.10</li>
  */
 // CHECKSTYLE.ON: JavadocStyle
 @Mixin(Screen.class)
 public abstract class MixinScreen extends AbstractContainerEventHandler {
-    @Inject(
+    @WrapOperation(
             //#if MC > 11903
             //$$ method = "renderBackground",
             //#elseif MC > 11502
@@ -37,12 +49,51 @@ public abstract class MixinScreen extends AbstractContainerEventHandler {
                     //#else
                     //$$ target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(IIIIII)V"
                     //#endif
-            ),
-            cancellable = true
+            )
     )
-    private void onFillGradient(CallbackInfo ci) {
-        if (Configs.disableGuiShadowLayer.getBooleanValue()) {
-            ci.cancel();
+    private void onFillGradient(
+            //#if MC > 12001
+            //$$ Screen instance,
+            //$$ GuiGraphics guiGraphics,
+            //#elseif MC > 11904
+            //$$ GuiGraphics instance,
+            //#elseif MC > 11903
+            //#else
+            Screen instance,
+            //#endif
+            //#if 12000 > MC && MC > 11502
+            PoseStack poseStack,
+            //#endif
+            //#if MC < 12002
+            int minX,
+            int minY,
+            int maxX,
+            int maxY,
+            int colorFrom,
+            int colorTo,
+            //#endif
+            Operation<Void> original
+    ) {
+        if (!Configs.disableGuiShadowLayer.getBooleanValue()) {
+            original.call(
+                    //#if 11904 > MC || MC > 11904
+                    instance,
+                    //#endif
+                    //#if MC > 12001
+                    //$$ guiGraphics
+                    //#endif
+                    //#if 12000 > MC && MC > 11502
+                    poseStack,
+                    //#endif
+                    //#if MC < 12002
+                    minX,
+                    minY,
+                    maxX,
+                    maxY,
+                    colorFrom,
+                    colorTo
+                    //#endif
+            );
         }
     }
 }

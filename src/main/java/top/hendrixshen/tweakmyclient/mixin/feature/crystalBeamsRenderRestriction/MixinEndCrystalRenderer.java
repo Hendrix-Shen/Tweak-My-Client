@@ -26,7 +26,9 @@ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.ModifyEx
 @Mixin(EndCrystalRenderer.class)
 public abstract class MixinEndCrystalRenderer {
     @ModifyExpressionValue(
-            //#if MC >= 12102
+            //#if MC >= 12110
+            //$$ method = "submit",
+            //#elseif MC >= 12102
             //$$ method = "render(Lnet/minecraft/client/renderer/entity/state/EndCrystalRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
             //#elseif MC > 11404
             method = "render(Lnet/minecraft/world/entity/boss/enderdragon/EndCrystal;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",

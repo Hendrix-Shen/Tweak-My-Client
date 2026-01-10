@@ -74,7 +74,11 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
         }
 
         BlockHitResult hitResult = (BlockHitResult) mc.hitResult;
+        //#if MC >= 12110
+        //$$ Entity cameraEntity = mc.getCameraEntity();
+        //#else
         Entity cameraEntity = mc.cameraEntity;
+        //#endif
         MultiPlayerGameMode multiPlayerGameMode = mc.gameMode;
 
         if (level == null || cameraEntity == null || multiPlayerGameMode == null) {

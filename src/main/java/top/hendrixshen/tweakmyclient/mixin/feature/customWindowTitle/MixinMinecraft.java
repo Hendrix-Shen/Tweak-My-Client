@@ -14,8 +14,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.expression.Definition;
+import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.expression.Expression;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
@@ -31,36 +32,14 @@ public abstract class MixinMinecraft {
     }
     //#endif
 
-    // Expose FPS data
+    @Definition(id = "fps", field = "Lnet/minecraft/client/Minecraft;fps:I")
+    @Definition(id = "frames", field = "Lnet/minecraft/client/Minecraft;frames:I")
+    @Expression("fps = this.frames")
     @Inject(
             method = "runTick",
-            slice = @Slice(
-                    from = @At(
-                            value = "INVOKE",
-                            target = "Lnet/minecraft/Util;getMillis()J",
-                            ordinal = 1
-                    ),
-                    to = @At(
-                            value = "INVOKE",
-                            //#if MC > 11802
-                            //$$ target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
-                            //#else
-                            target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
-                            //#endif
-                            remap = false
-                    )
-            ),
-            at = @At(
-                    value = "INVOKE",
-                    //#if MC > 11802
-                    //$$ target = "Ljava/lang/String;format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
-                    //#else
-                    target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;",
-                    //#endif
-                    remap = false
-            )
+            at = @At("MIXINEXTRAS:EXPRESSION")
     )
-    private void afterCalculateFPS(boolean bl, CallbackInfo ci) {
+    private void exposeFps(boolean renderLevel, CallbackInfo ci) {
         CustomWindowTitleHandler.getInstance().updateFps(MixinMinecraft.fps);
     }
 }
