@@ -29,6 +29,7 @@ preprocess {
     Node mc12105_fabric = createNode("1.21.5-fabric", 1_21_05, "mojang")
     Node mc12108_fabric = createNode("1.21.8-fabric", 1_21_08, "mojang")
     Node mc12110_fabric = createNode("1.21.10-fabric", 1_21_10, "mojang")
+    Node mc12111_fabric = createNode("1.21.11-fabric", 1_21_11, "mojang")
 
     mc11404_fabric.link(mc11502_fabric, null)
     mc11502_fabric.link(mc11605_fabric, null)
@@ -47,6 +48,7 @@ preprocess {
     mc12104_fabric.link(mc12105_fabric, null)
     mc12105_fabric.link(mc12108_fabric, null)
     mc12108_fabric.link(mc12110_fabric, null)
+    mc12110_fabric.link(mc12111_fabric, file("versions/mapping-fabric-1.21.10-1.21.11.txt"))
 
     // Forge
     Node mc12001_forge = createNode("1.20.1-forge", 1_20_01, "mojang")

@@ -1,11 +1,10 @@
 package top.hendrixshen.tweakmyclient.mixin.disable.disableGuiShadowLayer;
 
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import top.hendrixshen.magiclib.api.preprocess.DummyClass;
+
 import net.minecraft.world.inventory.AbstractContainerMenu;
 
 import org.spongepowered.asm.mixin.Mixin;
-
-import top.hendrixshen.magiclib.api.preprocess.DummyClass;
 
 // CHECKSTYLE.OFF: JavadocStyle
 /**

@@ -22,6 +22,14 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
 // CHECKSTYLE.OFF: ImportOrder
+//#if MC >= 12111
+//$$ import net.minecraft.client.gui.components.MultiLineTextWidget;
+//#endif
+
+//#if 12111 > MC && MC > 11502
+import net.minecraft.client.gui.components.MultiLineLabel;
+//#endif
+
 //#if 12000 > MC && MC > 11502
 import com.mojang.blaze3d.vertex.PoseStack;
 //#endif
@@ -32,7 +40,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 //#if MC > 11502
 import net.minecraft.client.gui.GuiComponent;
-import net.minecraft.client.gui.components.MultiLineLabel;
 //#endif
 // CHECKSTYLE.ON: ImportOrder
 
@@ -45,7 +52,9 @@ import java.util.LinkedHashMap;
 // CHECKSTYLE.ON: ImportOrder
 
 public class PatchedDisconnectedScreen extends Screen {
-    //#if MC > 11502
+    //#if MC >= 12111
+    //$$ private MultiLineTextWidget message;
+    //#elseif MC > 11502
     private MultiLineLabel message = MultiLineLabel.EMPTY;
     //#else
     //$$ private List<String> lines;
@@ -66,7 +75,11 @@ public class PatchedDisconnectedScreen extends Screen {
     @Override
     protected void init() {
         this.initModMap();
-        //#if MC > 11502
+        //#if MC >= 12111
+        //$$ this.message = new MultiLineTextWidget(this.reason, this.font).setMaxWidth(this.width - 50).setCentered(true);
+        //$$ this.message.setPosition(this.width / 2 - font.width(this.message.getMessage()) / 2, this.height / 2 - this.textHeight / 2);
+        //$$ this.textHeight = this.message.getHeight();
+        //#elseif MC > 11502
         this.message = MultiLineLabel.create(this.font, this.reason, this.width - 50);
         this.textHeight = this.message.getLineCount() * 9;
         //#else
@@ -188,7 +201,9 @@ public class PatchedDisconnectedScreen extends Screen {
         //#else
         GuiComponent.drawCenteredString(guiGraphicsOrPoseStack, this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, 0xAAAAAA);
         //#endif
-        //#if MC >= 12110
+        //#if MC >= 12111
+        //$$ this.message.renderWidget(guiGraphicsOrPoseStack, -1, -1, -1);
+        //#elseif MC >= 12110
         //$$ this.message.render(guiGraphicsOrPoseStack, MultiLineLabel.Align.CENTER, this.width / 2, this.height / 2 - this.textHeight / 2, 9, false, -1);
         //#else
         this.message.renderCentered(guiGraphicsOrPoseStack, this.width / 2, this.height / 2 - this.textHeight / 2);

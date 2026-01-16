@@ -161,6 +161,9 @@ public class RenderUtil {
                 maxX, maxY, maxZ,
                 //#endif
                 color,
+                //#if MC >= 12111
+                //$$ 2.0F,
+                //#endif
                 //#if MC >= 12105
                 //$$ builder
                 //#else

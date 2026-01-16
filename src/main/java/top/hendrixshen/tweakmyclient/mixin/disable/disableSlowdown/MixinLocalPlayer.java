@@ -26,11 +26,21 @@ public abstract class MixinLocalPlayer extends LivingEntity {
     }
 
     @ModifyExpressionValue(
+            //#if MC >= 12111
+            //$$ method = "modifyInput",
+            //#else
             method = "aiStep",
+            //#endif
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/player/LocalPlayer;isUsingItem ()Z",
-                    ordinal = 0
+                    target = "Lnet/minecraft/client/player/LocalPlayer;isUsingItem ()Z"
+                    // CHECKSTYLE.OFF: NoWhitespaceBefore
+                    // CHECKSTYLE.OFF: SeparatorWrap
+                    //#if MC < 12111
+                    , ordinal = 0
+                    //#endif
+                    // CHECKSTYLE.ON: SeparatorWrap
+                    // CHECKSTYLE.ON: NoWhitespaceBefore
             )
     )
     private boolean getUsingItemState(boolean original) {
