@@ -3,7 +3,6 @@
 .gradle/
 build/
 out/
-publish/
 classes/
 
 # eclipse
@@ -30,5 +29,6 @@ bin/
 *.DS_Store
 
 # fabric
-
+publish/
 run/
+local.properties

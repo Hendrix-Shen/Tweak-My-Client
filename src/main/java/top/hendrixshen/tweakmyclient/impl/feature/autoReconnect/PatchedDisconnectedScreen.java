@@ -77,8 +77,8 @@ public class PatchedDisconnectedScreen extends Screen {
         this.initModMap();
         //#if MC >= 12111
         //$$ this.message = new MultiLineTextWidget(this.reason, this.font).setMaxWidth(this.width - 50).setCentered(true);
-        //$$ this.message.setPosition(this.width / 2 - font.width(this.message.getMessage()) / 2, this.height / 2 - this.textHeight / 2);
         //$$ this.textHeight = this.message.getHeight();
+        //$$ this.message.setPosition(this.width / 2 - this.message.getWidth() / 2, this.height / 2 - this.textHeight / 2);
         //#elseif MC > 11502
         this.message = MultiLineLabel.create(this.font, this.reason, this.width - 50);
         this.textHeight = this.message.getLineCount() * 9;
