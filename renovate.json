@@ -1,0 +1,21 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "dev.architectury.loom",
+        "dev.architectury.loom:dev.architectury.loom.gradle.plugin",
+        "com.replaymod.preprocess",
+        "com.replaymod.preprocess:com.replaymod.preprocess.gradle.plugin",
+        
+        "com.mojang:minecraft",
+
+        "maven.modrinth:*"
+      ],
+      "enabled": false
+    }
+  ]
+}
