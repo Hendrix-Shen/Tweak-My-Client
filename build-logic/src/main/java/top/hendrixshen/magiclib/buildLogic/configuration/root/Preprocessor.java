@@ -6,6 +6,7 @@ import com.replaymod.gradle.preprocess.RootPreprocessPlugin;
 import groovy.json.JsonSlurper;
 import org.gradle.api.GradleException;
 import org.gradle.api.Project;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import net.fabricmc.loom.util.ModPlatform;
@@ -123,20 +124,7 @@ public abstract class Preprocessor implements Runnable {
                     multiPlatformSupport
             );
 
-            File mappingFile = this.getProject().file(mappingFilePath);
-
-            if (!mappingFile.exists()) {
-                if (this.magicLoomExtension.getExtraMappingFailureStrategy().get() == ExtraMappingFailureStrategy.FAIL) {
-                    throw new GradleException("Mapping file " + mappingFile + " does not exist.");
-                }
-
-                if (this.magicLoomExtension.getExtraMappingFailureStrategy().get() == ExtraMappingFailureStrategy.WARN) {
-                    this.getProject().getLogger().warn("Mapping file {} does not exist.", mappingFile);
-                }
-
-                mappingFile = null;
-            }
-
+            File mappingFile = this.checkMappingFile(this.getProject().file(mappingFilePath));
             previousNode.link(node, mappingFile);
             this.magicLoomExtension.recordProjectDetail(detail.getProjectNameReal(), detail);
             // this.getProject().getLogger().lifecycle("Linked {} to {} with {}", previousNode.getProject(), node.getProject(), mappingFile);
@@ -170,8 +158,9 @@ public abstract class Preprocessor implements Runnable {
         ProjectDetail targetPlatformDetail = ProjectDetail.createOtherPlatform(sourceDetail, platform);
 
         if (details.contains(targetPlatformDetail)) {
+            File mappingFile = this.checkMappingFile(this.getProject().file(String.format("versions/mapping-%s-%s-%s.txt", sourceDetail.getMinecraftVersionName(), sourceDetail.getPlatform().id(), targetPlatformDetail.getPlatform().id())));
             Node targetNode = this.createNode(targetPlatformDetail);
-            sourceNode.link(targetNode, null);
+            sourceNode.link(targetNode, mappingFile);
             this.magicLoomExtension.recordProjectDetail(targetPlatformDetail.getProjectNameReal(), targetPlatformDetail);
             // this.getProject().getLogger().lifecycle("Linked {} to {}", sourceNode.getProject(), targetNode.getProject());
             return targetNode;
@@ -197,6 +186,22 @@ public abstract class Preprocessor implements Runnable {
                 .append(".txt");
 
         return mapping.toString();
+    }
+
+    private @Nullable File checkMappingFile(@NonNull File mappingFile) {
+        if (!mappingFile.exists()) {
+            if (this.magicLoomExtension.getExtraMappingFailureStrategy().get() == ExtraMappingFailureStrategy.FAIL) {
+                throw new GradleException("Mapping file " + mappingFile + " does not exist.");
+            }
+
+            if (this.magicLoomExtension.getExtraMappingFailureStrategy().get() == ExtraMappingFailureStrategy.WARN) {
+                this.getProject().getLogger().warn("Mapping file {} does not exist.", mappingFile);
+            }
+
+            mappingFile = null;
+        }
+
+        return mappingFile;
     }
 
     private Map<String, ?> getSettings() {
