@@ -1,1 +1,3 @@
 net.minecraft.client.Camera getPosition() position()
+
+fi.dy.masa.malilib.util.JsonUtils fi.dy.masa.malilib.util.data.json.JsonUtils
