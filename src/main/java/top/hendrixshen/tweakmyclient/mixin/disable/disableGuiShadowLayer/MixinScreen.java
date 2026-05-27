@@ -23,9 +23,10 @@ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.wrapoper
 // CHECKSTYLE.OFF: JavadocStyle
 
 /**
- * <li>mc1.14 ~ mc1.20.4: subproject 1.16.5 (main project)        &lt;--------</li>
- * <li>mc1.20.5+        : subproject 1.20.6 [dummy]</li>
- * <li>mc1.21.10+       : subproject 1.20.10</li>
+ * <li>mc1.14 ~ mc1.20.4    : subproject 1.16.5 (main project)        &lt;--------</li>
+ * <li>mc1.20.5+            : subproject 1.20.6 [dummy]</li>
+ * <li>mc1.21.10 ~ mc1.21.11: subproject 1.20.10</li>
+ * <li>mc26.1+              : subproject 26.1.2</li>
  */
 // CHECKSTYLE.ON: JavadocStyle
 @Mixin(Screen.class)

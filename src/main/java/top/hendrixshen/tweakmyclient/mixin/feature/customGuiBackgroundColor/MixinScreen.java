@@ -11,7 +11,9 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(Screen.class)
 public abstract class MixinScreen {
     @ModifyArg(
-            //#if MC > 12001
+            //#if MC >= 26.1
+            //$$ method = "extractTransparentBackground",
+            //#elseif MC > 12001
             //$$ method = "renderTransparentBackground",
             //#elseif MC > 11903
             //$$ method = "renderBackground",
@@ -22,7 +24,9 @@ public abstract class MixinScreen {
             //#endif
             at = @At(
                     value = "INVOKE",
-                    //#if MC > 11904
+                    //#if MC >= 26.1
+                    //$$ target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;fillGradient(IIIIII)V"
+                    //#elseif MC > 11904
                     //$$ target = "Lnet/minecraft/client/gui/GuiGraphics;fillGradient(IIIIII)V"
                     //#elseif MC > 11502
                     target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V"
@@ -47,7 +51,9 @@ public abstract class MixinScreen {
     }
 
     @ModifyArg(
-            //#if MC > 12001
+            //#if MC >= 26.1
+            //$$ method = "extractTransparentBackground",
+            //#elseif MC > 12001
             //$$ method = "renderTransparentBackground",
             //#elseif MC > 11903
             //$$ method = "renderBackground",
@@ -58,7 +64,9 @@ public abstract class MixinScreen {
             //#endif
             at = @At(
                     value = "INVOKE",
-                    //#if MC > 11904
+                    //#if MC >= 26.1
+                    //$$ target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;fillGradient(IIIIII)V"
+                    //#elseif MC > 11904
                     //$$ target = "Lnet/minecraft/client/gui/GuiGraphics;fillGradient(IIIIII)V"
                     //#elseif MC > 11502
                     target = "Lnet/minecraft/client/gui/screens/Screen;fillGradient(Lcom/mojang/blaze3d/vertex/PoseStack;IIIIII)V"

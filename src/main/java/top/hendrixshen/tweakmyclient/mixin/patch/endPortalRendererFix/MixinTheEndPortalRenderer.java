@@ -38,12 +38,14 @@ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.sugar.Local;
 
 // CHECKSTYLE.OFF: JavadocStyle
 /**
- * <li>mc1.14 : subproject 1.14.4</li>
- * <li>mc1.15+: subproject 1.16.5 (main project)        &lt;--------</li>
+ * <li>mc1.14            : subproject 1.14.4</li>
+ * <li>mc1.15 ~ mc1.21.11: subproject 1.16.5 (main project)        &lt;--------</li>
+ * <li>mc26.1+           : subproject 26.1.2 [dummy]</li>
  */
 // CHECKSTYLE.ON: JavadocStyle
 @Mixin(TheEndPortalRenderer.class)
 public abstract class MixinTheEndPortalRenderer {
+    //#if MC < 26.1
     @Shadow
     protected abstract void renderFace(
             //#if MC >= 12110
@@ -184,4 +186,5 @@ public abstract class MixinTheEndPortalRenderer {
 
         ci.cancel();
     }
+    //#endif
 }

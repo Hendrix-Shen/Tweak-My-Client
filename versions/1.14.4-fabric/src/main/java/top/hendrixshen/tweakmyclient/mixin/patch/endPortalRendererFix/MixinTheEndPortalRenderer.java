@@ -29,8 +29,9 @@ import java.util.Random;
 
 // CHECKSTYLE.OFF: JavadocStyle
 /**
- * <li>mc1.14 : subproject 1.14.4        &lt;--------</li>
- * <li>mc1.15+: subproject 1.16.5 (main project)</li>
+ * <li>mc1.14            : subproject 1.14.4        &lt;--------</li>
+ * <li>mc1.15 ~ mc1.21.11: subproject 1.16.5 (main project)</li>
+ * <li>mc26.1+           : subproject 26.1.2 [dummy]</li>
  */
 // CHECKSTYLE.ON: JavadocStyle
 @Mixin(TheEndPortalRenderer.class)

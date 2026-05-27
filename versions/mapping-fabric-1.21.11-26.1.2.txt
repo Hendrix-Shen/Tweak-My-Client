@@ -1,0 +1,5 @@
+net.minecraft.world.inventory.ClickType net.minecraft.world.inventory.ContainerInput
+
+net.minecraft.client.gui.Gui renderEffects() extractEffects()
+net.minecraft.client.gui.components.BossHealthOverlay render() extractRenderState()
+net.minecraft.client.multiplayer.MultiPlayerGameMode handleInventoryMouseClick() handleContainerInput()

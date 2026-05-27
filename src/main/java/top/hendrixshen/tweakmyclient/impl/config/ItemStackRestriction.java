@@ -13,7 +13,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 // CHECKSTYLE.OFF: ImportOrder
-//#if MC > 12004
+//#if MC >= 26.1
+//$$ import net.minecraft.commands.arguments.item.ItemInput;
+//#elseif MC > 12004
 //$$ import net.minecraft.commands.arguments.item.ItemParser.ItemResult;
 //#elseif MC > 11902
 //$$ import net.minecraft.core.registries.BuiltInRegistries;
@@ -119,7 +121,11 @@ public class ItemStackRestriction extends UsageRestriction<ItemStack> {
             //$$ }
             //$$
             //$$ ItemParser itemParser = new ItemParser(Minecraft.getInstance().level.registryAccess());
+            //#if MC >= 26.1
+            //$$ ItemInput result = itemParser.parse(new StringReader(string));
+            //#else
             //$$ ItemResult result = itemParser.parse(new StringReader(string));
+            //#endif
             //#else
             //$$ ItemParser.ItemResult result = ItemParser.parseForItem(
             //#if MC > 11902
