@@ -65,7 +65,8 @@ repositories {
 
 // Configuration name, Module, Resolve condition, Use version mapping, Configuration closure.
 def deps = [
-        ["autoApi", "litematica", fabricLike, true , { transitive = false }]
+        ["autoApi", "litematica" , fabricLike, true, { transitive = false }],
+        ["autoApi", "forgematica", forgeLike, true , { transitive = false }]
 ]
 
 dependencies {
@@ -172,7 +173,7 @@ processResources {
             "META-INF/mods.toml"         : ["forge", mcVersion < 12005 ? "neoforge": "none"],
             "META-INF/neoforge.mods.toml": [mcVersion > 12004 ? "neoforge" : "none"]
     ].forEach { file, platforms ->
-        if (platforms.contains(modPlatform)) {
+        if (platforms.contains(modPlatform.id())) {
             filesMatching(file) {
                 expand([
                         "magiclib_dependency" : inputs.properties.get("magiclib_dependency"),
