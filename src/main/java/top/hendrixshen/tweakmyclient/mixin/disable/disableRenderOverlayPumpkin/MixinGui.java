@@ -41,7 +41,9 @@ public abstract class MixinGui {
     //#endif
 
     @Inject(
-            //#if MC > 11700
+            //#if MC >= 26.1
+            //$$ method = "extractTextureOverlay",
+            //#elseif MC > 11700
             //$$ method = "renderTextureOverlay",
             //#else
             method = "renderPumpkin",

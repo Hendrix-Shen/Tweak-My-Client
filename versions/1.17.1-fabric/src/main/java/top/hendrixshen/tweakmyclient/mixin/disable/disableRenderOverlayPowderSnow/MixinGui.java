@@ -25,7 +25,15 @@ public abstract class MixinGui {
     @Final
     private static ResourceLocation POWDER_SNOW_OUTLINE_LOCATION;
 
-    @Inject(method = "renderTextureOverlay", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(
+            //#if MC >= 26.1
+            //$$ method = "extractTextureOverlay",
+            //#else
+            method = "renderTextureOverlay",
+            //#endif
+            at = @At(value = "HEAD"),
+            cancellable = true
+    )
     private void onRenderPowderSnowOverlay(CallbackInfo ci, @Local(argsOnly = true) ResourceLocation resourceLocation) {
         if (Configs.disablePowderSnowOverlayRender.getBooleanValue()
                 && resourceLocation.equals(MixinGui.POWDER_SNOW_OUTLINE_LOCATION)) {

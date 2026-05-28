@@ -22,6 +22,14 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
 // CHECKSTYLE.OFF: ImportOrder
+//#if MC >= 26.1
+//$$ import net.minecraft.client.gui.GuiGraphicsExtractor;
+//#endif
+
+//#if 26.1 > MC && MC > 11502
+import net.minecraft.client.gui.GuiComponent;
+//#endif
+
 //#if MC >= 12111
 //$$ import net.minecraft.client.gui.components.MultiLineTextWidget;
 //#endif
@@ -36,10 +44,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 //#if MC > 11904
 //$$ import net.minecraft.network.chat.CommonComponents;
-//#endif
-
-//#if MC > 11502
-import net.minecraft.client.gui.GuiComponent;
 //#endif
 // CHECKSTYLE.ON: ImportOrder
 
@@ -142,6 +146,14 @@ public class PatchedDisconnectedScreen extends Screen {
     //$$ }
     //#endif
 
+    //#if MC >= 26.1
+    //$$ @Override
+    //$$ public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+    //$$     super.extractRenderState(graphics, mouseX, mouseY, a);
+    //$$     graphics.centeredText(this.font, this.title, this.width / 2, this.height / 2 - this.textHeight / 2 - 9 * 2, -1);
+    //$$     this.message.extractWidgetRenderState(graphics, -1, -1, -1);
+    //$$ }
+    //#else
     @Override
     public void render(
             //#if MC > 11904
@@ -220,6 +232,7 @@ public class PatchedDisconnectedScreen extends Screen {
         //$$ }
         //#endif
     }
+    //#endif
 
     @Override
     public void tick() {

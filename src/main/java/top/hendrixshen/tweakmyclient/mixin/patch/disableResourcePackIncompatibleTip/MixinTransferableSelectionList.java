@@ -11,7 +11,11 @@ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.ModifyEx
 @Mixin(TransferableSelectionList.PackEntry.class)
 public abstract class MixinTransferableSelectionList {
     @ModifyExpressionValue(
+            //#if MC >= 26.1
+            //$$ method = "extractContent",
+            //#else
             method = "render",
+            //#endif
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/server/packs/repository/PackCompatibility;isCompatible()Z"

@@ -17,7 +17,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 // CHECKSTYLE.ON: JavadocStyle
 @Mixin(ClientLevel.ClientLevelData.class)
 public abstract class MixinClientLevelClientLevelData {
-    @Inject(method = "getDayTime", at = @At("RETURN"), cancellable = true)
+    @Inject(
+            //#if MC >= 26.1
+            //$$ method = "getGameTime",
+            //#else
+            method = "getDayTime",
+            //#endif
+            at = @At("RETURN"),
+            cancellable = true
+    )
     private void onGetTimeOfDay(CallbackInfoReturnable<Long> cir) {
         if (Configs.daylightOverride.getBooleanValue()) {
             cir.setReturnValue((long) Configs.daylightOverrideTime.getIntegerValue());

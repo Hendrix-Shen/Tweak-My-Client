@@ -6,27 +6,16 @@ pluginManagement {
 
         maven {
             name = "NyanMaven Mirror"
-            url = "https://maven.hendrixshen.top/mirror"
-        }
-
-        maven {
-            name = "Architectury"
-            url = "https://maven.architectury.dev"
-        }
-
-        maven {
-            name = "MinecraftForge"
-            url = "https://files.minecraftforge.net/maven"
-        }
-
-        maven {
-            name = "NeoForge"
-            url = "https://maven.neoforged.net/releases"
+            url = "https://maven.hendrixshen.moe/mirror"
         }
 
         maven {
             name = "Jitpack"
             url = "https://jitpack.io"
+
+            content {
+                includeGroupAndSubgroups("com.github")
+            }
         }
 
         mavenCentral()
@@ -44,6 +33,20 @@ pluginManagement {
         }
     }
 }
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        register("forges") {
+            from(files("./gradle/forges.versions.toml"))
+        }
+
+        register("mods") {
+            from(files("./gradle/mods.versions.toml"))
+        }
+    }
+}
+
+includeBuild("build-logic")
 
 Map<String, List<String>> settings = file("settings.json").withReader {
     new JsonSlurper().parse(it) as Map<String, List<String>>

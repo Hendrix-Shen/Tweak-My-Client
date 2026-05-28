@@ -36,7 +36,11 @@ public abstract class MixinMinecraft {
     @Definition(id = "frames", field = "Lnet/minecraft/client/Minecraft;frames:I")
     @Expression("fps = this.frames")
     @Inject(
+            //#if MC >= 26.1
+            //$$ method = "renderFrame",
+            //#else
             method = "runTick",
+            //#endif
             at = @At("MIXINEXTRAS:EXPRESSION")
     )
     private void exposeFps(boolean renderLevel, CallbackInfo ci) {

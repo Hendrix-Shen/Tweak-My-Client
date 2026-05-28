@@ -1,0 +1,48 @@
+[versions]
+magiclib = "0.8.840-beta"
+litematica-mc11404 = "0.0.0-dev.20191222.014040"
+litematica-mc11502 = "0.0.0-dev.20201006.194726"
+litematica-mc11605 = "0.0.0-dev.20210917.192300"
+litematica-mc11701 = "0.9.0"
+litematica-mc11802 = "0.11.7"
+litematica-mc11902 = "0.12.7"
+litematica-mc11903 = "0.13.2"
+litematica-mc11904 = "0.14.7"
+litematica-mc12001 = "0.15.4"
+litematica-mc12002 = "0.16.1"
+litematica-mc12004 = "0.17.4"
+litematica-mc12006 = "0.18.3"
+litematica-mc12101 = "0.19.60"
+litematica-mc12103 = "0.20.8"
+litematica-mc12104 = "0.21.6"
+litematica-mc12105 = "0.22.4"
+litematica-mc12108 = "0.23.6"
+litematica-mc12110 = "0.24.7"
+litematica-mc12111 = "0.26.8"
+litematica-mc260102 = "0.27.6"
+
+forgematica-mc12001 = "YncE2C0Y" # 0.1.13-mc1.20.1
+
+[libraries]
+litematica-mc11404 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc11404" }
+litematica-mc11502 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc11502" }
+litematica-mc11605 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc11605" }
+litematica-mc11701 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc11701" }
+litematica-mc11802 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc11802" }
+litematica-mc11902 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc11902" }
+litematica-mc11903 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc11903" }
+litematica-mc11904 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc11904" }
+litematica-mc12001 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12001" }
+litematica-mc12002 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12002" }
+litematica-mc12004 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12004" }
+litematica-mc12006 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12006" }
+litematica-mc12101 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12101" }
+litematica-mc12103 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12103" }
+litematica-mc12104 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12104" }
+litematica-mc12105 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12105" }
+litematica-mc12108 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12108" }
+litematica-mc12110 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12110" }
+litematica-mc12111 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12111" }
+litematica-mc260102 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc260102" }
+
+forgematica-mc12001 = { module = "maven.modrinth:forgematica", version.ref = "forgematica-mc12001" }

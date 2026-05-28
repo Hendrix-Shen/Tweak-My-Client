@@ -9,6 +9,7 @@
     "accessor.MultiPlayerGameModeAccessor",
     "accessor.NativeImageAccessor",
     "disable.disableClientBlockEvent.MixinClientPacketListener",
+    "disable.disableFovAffectedBySpeed.MixinCamera",
     "disable.disableFovAffectedBySpeed.MixinGameRenderer",
     "disable.disableGuiShadowLayer.MixinAbstractContainerScreen",
     "disable.disableGuiShadowLayer.MixinScreen",
