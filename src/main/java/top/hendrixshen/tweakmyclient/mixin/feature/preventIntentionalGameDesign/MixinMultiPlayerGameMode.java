@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.sugar.Local;
 
 @Mixin(MultiPlayerGameMode.class)
-public class MixinMultiPlayerGameMode {
+public abstract class MixinMultiPlayerGameMode {
     @Inject(method = "useItemOn", at = @At("HEAD"), cancellable = true)
     private void onUseItemOn(
             CallbackInfoReturnable<InteractionResult> cir,
