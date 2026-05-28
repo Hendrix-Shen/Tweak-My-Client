@@ -297,6 +297,9 @@ public class Configs {
     @Config(category = ConfigCategory.FEATURE)
     public static final MagicConfigColor openWaterColor = Configs.cf.newConfigColor("openWaterColor", "#7F00FF00");
 
+    @Config(category = ConfigCategory.FEATURE)
+    public static final MagicConfigBooleanHotkeyed preventIntentionalGameDesign = Configs.cf.newConfigBooleanHotkeyed("preventIntentionalGameDesign", false);
+
     @Dependencies(require = @Dependency(value = "minecraft", versionPredicates = ">=1.16"))
     @Config(category = ConfigCategory.FEATURE)
     public static final MagicConfigColor shallowWaterColor = Configs.cf.newConfigColor("shallowWaterColor", "#2CFFFF10");

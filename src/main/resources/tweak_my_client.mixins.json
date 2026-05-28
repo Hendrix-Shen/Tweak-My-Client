@@ -53,6 +53,7 @@
     "feature.globalEventListener.MixinLevelEventHandler",
     "feature.globalEventListener.MixinLevelRenderer",
     "feature.lowHealthWarning.MixinLocalPlayer",
+    "feature.preventIntentionalGameDesign.MixinMultiPlayerGameMode",
     "feature.unfocusedCPU.MixinGameRenderer",
     "patch.chunkEdgeLagFix.MixinClientPacketListener",
     "patch.disableLitematicaEasyPlaceFailTip.MixinWorldUtils",

@@ -365,6 +365,13 @@ tweak_my_client:
       openWaterColor:
         name: openWaterColor
         comment: Open water color for @config#openWaterHelper@.
+      preventIntentionalGameDesign:
+        name: preventIntentionalGameDesign
+        comment: |-
+          Preventing you from interacting with Intentional Game Design.
+          You will not be able to interact with it in dimensions where the bed does not function.
+          For Minecraft 1.16+
+          This option also works for the Respawn Anchor.
       shallowWaterColor:
         name: shallowWaterColor
         comment: Shallow water color for @config#openWaterHelper@.
