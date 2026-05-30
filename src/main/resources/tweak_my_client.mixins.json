@@ -36,6 +36,7 @@
     "feature.autoReconnect.MixinDisconnectedScreen",
     "feature.autoReconnect.MixinMinecraft",
     "feature.autoRespawn.MixinDeathScreen",
+    "feature.betterSneaking.MixinPlayer",
     "feature.breakingRestrictionBox.MixinMultiPlayerGameMode",
     "feature.breakingRestrictionFlat.MixinMultiPlayerGameMode",
     "feature.clientEntityUpdateRestriction.MixinLevel",

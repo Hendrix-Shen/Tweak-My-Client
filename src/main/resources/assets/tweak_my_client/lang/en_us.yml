@@ -334,6 +334,9 @@ tweak_my_client:
       entityRenderingRestrictionWhitelist:
         name: entityRenderingRestrictionWhitelist
         comment: Entities that will be rendered with @config#entityRenderingRestriction@.
+      flexibleSneaking:
+        name: flexibleSneaking
+        comment: Allows you to walk directly down one block while sneaking.
       globalEventListener:
         name: globalEventListener
         comment: Print global event trigger coordinates.

@@ -267,6 +267,9 @@ public class Configs {
     public static final EntityTypeRestriction entityRenderingRestrictionList = new EntityTypeRestriction();
 
     @Config(category = ConfigCategory.FEATURE)
+    public static final MagicConfigBooleanHotkeyed flexibleSneaking = Configs.cf.newConfigBooleanHotkeyed("flexibleSneaking", false);
+
+    @Config(category = ConfigCategory.FEATURE)
     public static final MagicConfigBooleanHotkeyed globalEventListener = Configs.cf.newConfigBooleanHotkeyed("globalEventListener", false);
 
     @Config(category = ConfigCategory.FEATURE)

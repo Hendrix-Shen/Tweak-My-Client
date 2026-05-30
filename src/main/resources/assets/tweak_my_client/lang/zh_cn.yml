@@ -334,6 +334,9 @@ tweak_my_client:
       entityRenderingRestrictionWhitelist:
         name: 实体渲染约束-名单
         comment: 触发@config#entityRenderingRestriction@时会渲染的实体类型.
+      flexibleSneaking:
+        name: 灵活潜行
+        comment: 允许你在潜行中直接走下一格高的方块.
       globalEventListener:
         name: 全局事件监听
         comment: 打印全局事件触发坐标.
