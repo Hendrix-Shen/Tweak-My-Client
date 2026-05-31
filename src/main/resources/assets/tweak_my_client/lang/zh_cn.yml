@@ -340,6 +340,9 @@ tweak_my_client:
       globalEventListener:
         name: 全局事件监听
         comment: 打印全局事件触发坐标.
+      instantBreakingCooldown:
+        name: 瞬间破坏冷却
+        comment: 瞬间破坏后也将添加 5 游戏刻冷却.
       itemGlintRestriction:
         name: 物品光效渲染约束
         comment: 不会渲染任何物品光效.

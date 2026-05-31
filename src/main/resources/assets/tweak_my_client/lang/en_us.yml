@@ -340,6 +340,9 @@ tweak_my_client:
       globalEventListener:
         name: globalEventListener
         comment: Print global event trigger coordinates.
+      instantBreakingCooldown:
+        name: instantBreakingCooldown
+        comment: Add 5 game ticks cooldown after instant breaking.
       itemGlintRestriction:
         name: itemGlintRestriction
         comment: No item glint will be rendered.

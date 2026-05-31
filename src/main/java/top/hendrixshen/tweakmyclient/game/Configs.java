@@ -273,6 +273,9 @@ public class Configs {
     public static final MagicConfigBooleanHotkeyed globalEventListener = Configs.cf.newConfigBooleanHotkeyed("globalEventListener", false);
 
     @Config(category = ConfigCategory.FEATURE)
+    public static final MagicConfigBooleanHotkeyed instantBreakingCooldown = Configs.cf.newConfigBooleanHotkeyed("instantBreakingCooldown", false);
+
+    @Config(category = ConfigCategory.FEATURE)
     public static final MagicConfigBooleanHotkeyed itemGlintRestriction = Configs.cf.newConfigBooleanHotkeyed("itemGlintRestriction", false);
 
     @Config(category = ConfigCategory.FEATURE)
