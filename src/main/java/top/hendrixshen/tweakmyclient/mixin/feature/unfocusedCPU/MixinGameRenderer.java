@@ -18,6 +18,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameRenderer.class)
 public abstract class MixinGameRenderer {
+    //#if MC >= 26.1
+    //$$ @Inject(method = "extract", at = @At("HEAD"), cancellable = true)
+    //$$ private void onExtract(CallbackInfo ci) {
+    //$$     if (Configs.unfocusedCPU.getBooleanValue() && !Minecraft.getInstance().isWindowActive()) {
+    //$$         ci.cancel();
+    //$$     }
+    //$$ }
+    //$$
+    //#endif
     @Inject(
             //#if MC > 11404
             method = "render",
