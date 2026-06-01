@@ -267,7 +267,13 @@ public class Configs {
     public static final EntityTypeRestriction entityRenderingRestrictionList = new EntityTypeRestriction();
 
     @Config(category = ConfigCategory.FEATURE)
+    public static final MagicConfigBooleanHotkeyed flexibleSneaking = Configs.cf.newConfigBooleanHotkeyed("flexibleSneaking", false);
+
+    @Config(category = ConfigCategory.FEATURE)
     public static final MagicConfigBooleanHotkeyed globalEventListener = Configs.cf.newConfigBooleanHotkeyed("globalEventListener", false);
+
+    @Config(category = ConfigCategory.FEATURE)
+    public static final MagicConfigBooleanHotkeyed instantBreakingCooldown = Configs.cf.newConfigBooleanHotkeyed("instantBreakingCooldown", false);
 
     @Config(category = ConfigCategory.FEATURE)
     public static final MagicConfigBooleanHotkeyed itemGlintRestriction = Configs.cf.newConfigBooleanHotkeyed("itemGlintRestriction", false);
@@ -296,6 +302,9 @@ public class Configs {
     @Dependencies(require = @Dependency(value = "minecraft", versionPredicates = ">=1.16"))
     @Config(category = ConfigCategory.FEATURE)
     public static final MagicConfigColor openWaterColor = Configs.cf.newConfigColor("openWaterColor", "#7F00FF00");
+
+    @Config(category = ConfigCategory.FEATURE)
+    public static final MagicConfigBooleanHotkeyed preventIntentionalGameDesign = Configs.cf.newConfigBooleanHotkeyed("preventIntentionalGameDesign", false);
 
     @Dependencies(require = @Dependency(value = "minecraft", versionPredicates = ">=1.16"))
     @Config(category = ConfigCategory.FEATURE)

@@ -334,9 +334,15 @@ tweak_my_client:
       entityRenderingRestrictionWhitelist:
         name: 实体渲染约束-名单
         comment: 触发@config#entityRenderingRestriction@时会渲染的实体类型.
+      flexibleSneaking:
+        name: 灵活潜行
+        comment: 允许你在潜行中直接走下一格高的方块.
       globalEventListener:
         name: 全局事件监听
         comment: 打印全局事件触发坐标.
+      instantBreakingCooldown:
+        name: 瞬间破坏冷却
+        comment: 瞬间破坏后也将添加 5 游戏刻冷却.
       itemGlintRestriction:
         name: 物品光效渲染约束
         comment: 不会渲染任何物品光效.
@@ -365,6 +371,13 @@ tweak_my_client:
       openWaterColor:
         name: 开阔水域助手-开阔水域颜色
         comment: 触发@config#openWaterHelper@时的开阔水域颜色.
+      preventIntentionalGameDesign:
+        name: 阻止刻意的游戏设计
+        comment: |-
+          阻止你与刻意的游戏设计交互.
+          你将不能在床不工作的维度与之交互.
+          对于 Minecraft 1.16+
+          该选项对重生锚也生效.
       shallowWaterColor:
         name: 开阔水域助手-浅水域颜色
         comment: 触发@config#openWaterHelper@时的浅水域颜色.
