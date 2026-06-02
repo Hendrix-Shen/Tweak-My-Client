@@ -361,7 +361,10 @@ public class RenderUtil {
         //#endif
         //#endif
         voxelShape.forAllEdges((minX, minY, minZ, maxX, maxY, maxZ) -> {
-            //#if MC >= 12105
+            //#if MC >= 1.21.11
+            //$$ builder.addVertex((float) (minX + x), (float) (minY + y), (float) (minZ + z)).setColor(color.r, color.g, color.b, color.a).setLineWidth(1.0F);
+            //$$ builder.addVertex((float) (maxX + x), (float) (maxY + y), (float) (maxZ + z)).setColor(color.r, color.g, color.b, color.a).setLineWidth(1.0F);
+            //#elseif MC >= 12105
             //$$ builder.addVertex((float) (minX + x), (float) (minY + y), (float) (minZ + z)).setColor(color.r, color.g, color.b, color.a);
             //$$ builder.addVertex((float) (maxX + x), (float) (maxY + y), (float) (maxZ + z)).setColor(color.r, color.g, color.b, color.a);
             //#elseif MC > 12006
