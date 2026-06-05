@@ -1,4 +1,4 @@
-package top.hendrixshen.tweakmyclient.mixin.feature.betterSneaking;
+package top.hendrixshen.tweakmyclient.mixin.feature.flexibleSneaking;
 
 import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.EntityCompat;
 import top.hendrixshen.tweakmyclient.game.Configs;
@@ -114,7 +114,7 @@ public abstract class MixinPlayer {
             //$$ Player entity,
             //$$ double deltaX,
             //$$ double deltaZ,
-            //#if MC >= 1.20.5
+            //#if MC >= 1.21.5
             //$$ double minHeight,
             //#else
             //$$ float minHeight,
