@@ -75,7 +75,7 @@ for (String version : versions) {
         throw new IllegalArgumentException("Invalid submodule name: ${version}")
     }
 
-    File project_dir = file("/versions/${version}")
+    File project_dir = file("./versions/${version}")
 
     if (!project_dir.exists()) {
         if (!project_dir.mkdirs()) {
