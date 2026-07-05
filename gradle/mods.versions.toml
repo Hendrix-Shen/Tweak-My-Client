@@ -1,5 +1,5 @@
 [versions]
-magiclib = "0.8.840-beta"
+magiclib = "0.8.852"
 litematica-mc11404 = "0.0.0-dev.20191222.014040"
 litematica-mc11502 = "0.0.0-dev.20201006.194726"
 litematica-mc11605 = "0.0.0-dev.20210917.192300"
@@ -20,6 +20,7 @@ litematica-mc12108 = "0.23.6"
 litematica-mc12110 = "0.24.7"
 litematica-mc12111 = "0.26.8"
 litematica-mc260102 = "0.27.6"
+litematica-mc260200 = "0.28.2"
 
 forgematica-mc12001 = "YncE2C0Y" # 0.1.13-mc1.20.1
 
@@ -44,5 +45,6 @@ litematica-mc12108 = { module = "maven.modrinth:litematica", version.ref = "lite
 litematica-mc12110 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12110" }
 litematica-mc12111 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc12111" }
 litematica-mc260102 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc260102" }
+litematica-mc260200 = { module = "maven.modrinth:litematica", version.ref = "litematica-mc260200" }
 
 forgematica-mc12001 = { module = "maven.modrinth:forgematica", version.ref = "forgematica-mc12001" }

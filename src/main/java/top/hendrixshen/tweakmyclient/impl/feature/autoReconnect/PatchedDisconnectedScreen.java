@@ -1,6 +1,7 @@
 package top.hendrixshen.tweakmyclient.impl.feature.autoReconnect;
 
 import com.google.common.collect.Maps;
+import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.magiclib.api.compat.minecraft.client.gui.components.ButtonCompat;
 import top.hendrixshen.magiclib.api.compat.minecraft.client.gui.screen.ScreenCompat;
 import top.hendrixshen.magiclib.api.compat.minecraft.network.chat.ComponentCompat;
@@ -16,7 +17,6 @@ import top.hendrixshen.tweakmyclient.game.Configs;
 //#endif
 // CHECKSTYLE.ON: ImportOrder
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -92,9 +92,9 @@ public class PatchedDisconnectedScreen extends Screen {
         //#endif
         int backButtonX = width / 2 - 100;
         int backButtonY = Math.min(this.height / 2 + this.textHeight / 2 + 9, this.height - 30);
-        Minecraft mc = Minecraft.getInstance();
+        MinecraftCompat minecraftCompat = MinecraftCompat.getInstance();
         Button backButton = ButtonCompat.builder(
-                        ComponentCompat.translatable("gui.toMenu"), button -> mc.setScreen(this.parent))
+                        ComponentCompat.translatable("gui.toMenu"), button -> minecraftCompat.setScreen(this.parent))
                 .bounds(backButtonX, backButtonY, 200, 20)
                 .build();
         Button staticButton = ButtonCompat.builder(
@@ -131,7 +131,7 @@ public class PatchedDisconnectedScreen extends Screen {
             for (String modId : this.modHashMap.keySet()) {
                 screen.addButton(ButtonCompat.builder(
                                 ComponentCompat.literal(SharedConstants.tr(String.format("feature.autoReconnect.gui.button.authenticate.%s", modId))),
-                                button -> mc.setScreen(this.modHashMap.get(modId)))
+                                button -> minecraftCompat.setScreen(this.modHashMap.get(modId)))
                         .pos(backButtonX + offsetX, 48 + backButtonY)
                         .size(buttonWidth, 20).build());
                 offsetX += buttonWidth + 4;

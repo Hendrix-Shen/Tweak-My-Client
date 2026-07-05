@@ -1,5 +1,6 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.autoRespawn;
 
+import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
 import net.minecraft.client.Minecraft;
@@ -18,7 +19,7 @@ public abstract class MixinDeathScreen {
             Minecraft mc = Minecraft.getInstance();
             assert mc.player != null;
             mc.player.respawn();
-            mc.setScreen(null);
+            MinecraftCompat.getInstance().setScreen(null);
         }
     }
 }

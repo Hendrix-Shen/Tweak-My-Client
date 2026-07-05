@@ -2,6 +2,7 @@ package top.hendrixshen.tweakmyclient.impl.feature.autoDrop;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.player.PlayerCompat;
 import top.hendrixshen.tweakmyclient.api.event.LocalPlayerListener;
 import top.hendrixshen.tweakmyclient.game.Configs;
@@ -38,8 +39,9 @@ public class AutoDropHandler implements LocalPlayerListener {
         }
 
         Minecraft mc = Minecraft.getInstance();
+        MinecraftCompat minecraftCompat = MinecraftCompat.getInstance();
 
-        if (mc.screen instanceof AbstractContainerScreen && !(mc.screen instanceof InventoryScreen)) {
+        if (minecraftCompat.getScreen() instanceof AbstractContainerScreen && !(minecraftCompat.getScreen() instanceof InventoryScreen)) {
             return;
         }
 

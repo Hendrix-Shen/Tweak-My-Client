@@ -32,6 +32,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#endif
 // CHECKSTYLE.ON: ImportOrder
 
+// CHECKSTYLE.OFF: JavadocStyle
+/**
+ * <li>mc1.14 ~ mc26.1: subproject 1.16.5 (main project)        &lt;--------</li>
+ * <li>mc26.2+        : subproject 26.2 [dummy]</li>
+ */
+// CHECKSTYLE.ON: JavadocStyle
 @Mixin(Gui.class)
 public abstract class MixinGui {
     //#if 12102 > MC && MC > 11700

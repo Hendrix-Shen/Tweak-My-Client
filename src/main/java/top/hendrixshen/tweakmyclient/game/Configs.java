@@ -5,6 +5,7 @@ import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.malilib.interfaces.IValueChangeCallback;
 import fi.dy.masa.malilib.util.restrictions.UsageRestriction.ListType;
 import top.hendrixshen.magiclib.MagicLib;
+import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
 import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 import top.hendrixshen.magiclib.api.event.minecraft.MinecraftListener;
@@ -52,7 +53,6 @@ import top.hendrixshen.tweakmyclient.impl.feature.openWaterHelper.OpenWaterHelpe
 //#endif
 // CHECKSTYLE.ON: ImportOrder
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Vec3i;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -433,7 +433,7 @@ public class Configs {
         Configs.customWindowTitleList.setValueChangeCallback(list -> CustomWindowTitleHandler.getInstance().onConfigUpdate());
         Configs.customWindowTitleRandomly.setValueChangeCallback(bl -> CustomWindowTitleHandler.getInstance().onConfigUpdate());
         Configs.customWindowTitleWithActivityList.setValueChangeCallback(list -> CustomWindowTitleHandler.getInstance().onConfigUpdate());
-        Configs.disableToastRender.setValueChangeCallback(bl -> Minecraft.getInstance().getToasts().clear());
+        Configs.disableToastRender.setValueChangeCallback(bl -> MinecraftCompat.getInstance().getToasts().clear());
 
         // Debugs
         Configs.debugMode.setValueChangeCallback(redrawConfigGui);

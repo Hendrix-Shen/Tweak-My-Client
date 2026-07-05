@@ -2,7 +2,7 @@ package top.hendrixshen.tweakmyclient.mixin.disable.disableRenderScoreboard;
 
 import top.hendrixshen.tweakmyclient.game.Configs;
 
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.Hud;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 // CHECKSTYLE.OFF: JavadocStyle
 /**
- * <li>mc1.14 ~ mc26.1: subproject 1.16.5 (main project)        &lt;--------</li>
- * <li>mc26.2+        : subproject 26.2 [dummy]</li>
+ * <li>mc1.14 ~ mc26.1: subproject 1.16.5 (main project) [dummy]</li>
+ * <li>mc26.2+        : subproject 26.2       &lt;--------</li>
  */
 // CHECKSTYLE.ON: JavadocStyle
-@Mixin(Gui.class)
-public abstract class MixinGui {
-    @Inject(method = "displayScoreboardSidebar", at = @At("HEAD"), cancellable = true)
+@Mixin(Hud.class)
+public abstract class MixinHud {
+    @Inject(method = "displayScoreboardSidebar(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/world/scores/Objective;)V", at = @At("HEAD"), cancellable = true)
     private void onRenderScoreboardSidebar(CallbackInfo ci) {
         if (Configs.disableScoreboardRender.getBooleanValue()) {
             ci.cancel();

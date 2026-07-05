@@ -2,8 +2,8 @@ package top.hendrixshen.tweakmyclient.mixin.disable.disableRenderOverlayPowderSn
 
 import top.hendrixshen.tweakmyclient.game.Configs;
 
-import net.minecraft.client.gui.Gui;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.Hud;
+import net.minecraft.resources.Identifier;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,29 +15,24 @@ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.sugar.Local;
 
 // CHECKSTYLE.OFF: JavadocStyle
 /**
- * <li>mc1.14 ~ mc1.16: subproject 1.16.5 (main project) [dummy]</li>
- * <li>mc1.17 ~ mc26.1: subproject 1.17.1        &lt;--------</li>
- * <li>mc26.2+        : subproject 26.2 [dummy]</li>
+ * <li>mc1.14 ~ mc26.1: subproject 1.16.5 (main project) [dummy]</li>
+ * <li>mc26.2+        : subproject 26.2       &lt;--------</li>
  */
 // CHECKSTYLE.ON: JavadocStyle
-@Mixin(Gui.class)
-public abstract class MixinGui {
+@Mixin(Hud.class)
+public abstract class MixinHud {
     @Shadow
     @Final
-    private static ResourceLocation POWDER_SNOW_OUTLINE_LOCATION;
+    private static Identifier POWDER_SNOW_OUTLINE_LOCATION;
 
     @Inject(
-            //#if MC >= 26.1
-            //$$ method = "extractTextureOverlay",
-            //#else
-            method = "renderTextureOverlay",
-            //#endif
+            method = "extractTextureOverlay",
             at = @At(value = "HEAD"),
             cancellable = true
     )
-    private void onRenderPowderSnowOverlay(CallbackInfo ci, @Local(argsOnly = true) ResourceLocation resourceLocation) {
+    private void onRenderPowderSnowOverlay(CallbackInfo ci, @Local(argsOnly = true) Identifier identifier) {
         if (Configs.disablePowderSnowOverlayRender.getBooleanValue()
-                && resourceLocation.equals(MixinGui.POWDER_SNOW_OUTLINE_LOCATION)) {
+                && identifier.equals(MixinHud.POWDER_SNOW_OUTLINE_LOCATION)) {
             ci.cancel();
         }
     }
