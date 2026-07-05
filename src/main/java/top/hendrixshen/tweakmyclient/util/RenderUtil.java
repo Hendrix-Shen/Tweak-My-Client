@@ -2,6 +2,7 @@ package top.hendrixshen.tweakmyclient.util;
 
 import fi.dy.masa.malilib.render.RenderUtils;
 import org.jetbrains.annotations.NotNull;
+import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
 
 // CHECKSTYLE.OFF: ImportOrder
@@ -16,7 +17,6 @@ import top.hendrixshen.magiclib.api.compat.mojang.blaze3d.vertex.VertexFormatCom
 // CHECKSTYLE.ON: ImportOrder
 
 import com.mojang.blaze3d.vertex.BufferBuilder;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -57,7 +57,7 @@ public class RenderUtil {
     public static void renderAreaOutline(double minX, double minY, double minZ,
                                          double maxX, double maxY, double maxZ,
                                          Color4f color, boolean depthTest) {
-        Vec3 cameraPos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+        Vec3 cameraPos = MinecraftCompat.getInstance().getMainCamera().getPosition();
         final double dx = cameraPos.x;
         final double dy = cameraPos.y;
         final double dz = cameraPos.z;
@@ -80,7 +80,7 @@ public class RenderUtil {
     public static void renderAreaOverlay(double minX, double minY, double minZ,
                                          double maxX, double maxY, double maxZ,
                                          Color4f color, boolean depthTest) {
-        Vec3 cameraPos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+        Vec3 cameraPos = MinecraftCompat.getInstance().getMainCamera().getPosition();
         final double dx = cameraPos.x;
         final double dy = cameraPos.y;
         final double dz = cameraPos.z;
@@ -133,6 +133,9 @@ public class RenderUtil {
         //$$         //$$ () -> "tweak_my_client:bounding_box_outline",
         //$$         //#endif
         //$$         depthTest ? MaLiLibPipelines.DEBUG_LINES_MASA_SIMPLE_NO_CULL : MaLiLibPipelines.DEBUG_LINES_MASA_SIMPLE_NO_DEPTH_NO_CULL
+        //$$         //#if MC >= 26.2
+        //$$         //$$ , 0
+        //$$         //#endif
         //$$         //#if MC < 12106
         //$$         , BufferUsage.STATIC_WRITE
         //$$         //#endif
@@ -243,6 +246,9 @@ public class RenderUtil {
         //$$         //$$ () -> "tweak_my_client:bounding_box_overlay",
         //$$         //#endif
         //$$         depthTest ? MaLiLibPipelines.POSITION_COLOR_MASA : MaLiLibPipelines.POSITION_COLOR_MASA_NO_DEPTH_NO_CULL
+        //$$         //#if MC >= 26.2
+        //$$         //$$ , 0
+        //$$         //#endif
         //$$         //#if MC < 12106
         //$$         , BufferUsage.STATIC_WRITE
         //$$         //#endif
@@ -344,6 +350,9 @@ public class RenderUtil {
         //$$         //$$ () -> "tweak_my_client:shape_outline",
         //$$         //#endif
         //$$         depthTest ? MaLiLibPipelines.DEBUG_LINES_MASA_SIMPLE_NO_CULL : MaLiLibPipelines.DEBUG_LINES_MASA_SIMPLE_NO_DEPTH_NO_CULL
+        //$$         //#if MC >= 26.2
+        //$$         //$$ , 0
+        //$$         //#endif
         //$$         //#if MC < 12106
         //$$         , BufferUsage.STATIC_WRITE
         //$$         //#endif
@@ -446,6 +455,9 @@ public class RenderUtil {
         //$$         //$$ () -> "tweak_my_client:shape_overlay",
         //$$         //#endif
         //$$         depthTest ? MaLiLibPipelines.POSITION_COLOR_MASA : MaLiLibPipelines.POSITION_COLOR_MASA_NO_DEPTH_NO_CULL
+        //$$         //#if MC >= 26.2
+        //$$         //$$ , 0
+        //$$         //#endif
         //$$         //#if MC < 12106
         //$$         , BufferUsage.STATIC_WRITE
         //$$         //#endif

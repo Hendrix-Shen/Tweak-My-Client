@@ -3,6 +3,7 @@ package top.hendrixshen.tweakmyclient.impl.feature.customBlockHitBoxOverlay;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.lwjgl.opengl.GL11;
+import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.magiclib.api.event.minecraft.render.RenderLevelListener;
 import top.hendrixshen.magiclib.api.render.context.LevelRenderContext;
 import top.hendrixshen.tweakmyclient.game.Configs;
@@ -124,7 +125,7 @@ public class CustomBlockHitBoxRenderer implements RenderLevelListener {
                         .orElse(Shapes.empty()).optimize();
         }
 
-        Vec3 vec3 = mc.gameRenderer.getMainCamera().getPosition();
+        Vec3 vec3 = MinecraftCompat.getInstance().getMainCamera().getPosition();
 
         if (Configs.customBlockHitBoxOverlay.getBooleanValue()) {
             float k = System.currentTimeMillis()

@@ -2,7 +2,7 @@ package top.hendrixshen.tweakmyclient.mixin.feature.customSidebarBackgroundColor
 
 import top.hendrixshen.tweakmyclient.game.Configs;
 
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.Hud;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -10,18 +10,14 @@ import top.hendrixshen.magiclib.libs.com.llamalad7.mixinextras.injector.ModifyEx
 
 // CHECKSTYLE.OFF: JavadocStyle
 /**
- * <li>mc1.14 ~ mc26.1: subproject 1.16.5 (main project)        &lt;--------</li>
- * <li>mc26.2+        : subproject 26.2 [dummy]</li>
+ * <li>mc1.14 ~ mc26.1: subproject 1.16.5 (main project) [dummy]</li>
+ * <li>mc26.2+        : subproject 26.2       &lt;--------</li>
  */
 // CHECKSTYLE.ON: JavadocStyle
-@Mixin(Gui.class)
-public abstract class MixinGui {
+@Mixin(Hud.class)
+public abstract class MixinHud {
     @ModifyExpressionValue(
-            //#if 12102 > MC && MC > 12002
-            //$$ method = "method_55440",
-            //#else
             method = "displayScoreboardSidebar",
-            //#endif
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/Options;getBackgroundColor(F)I",
@@ -37,11 +33,7 @@ public abstract class MixinGui {
     }
 
     @ModifyExpressionValue(
-            //#if 12102 > MC && MC > 12002
-            //$$ method = "method_55440",
-            //#else
             method = "displayScoreboardSidebar",
-            //#endif
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/Options;getBackgroundColor(F)I",

@@ -11,7 +11,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LevelRenderer.class)
 public abstract class MixinLevelRenderer {
-    @Inject(method = "renderHitOutline", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(
+            //#if MC >= 26.2
+            //$$ method = "submitBlockOutline",
+            //#else
+            method = "renderHitOutline",
+            //#endif
+            at = @At(value = "HEAD"),
+            cancellable = true
+    )
     private void onDrawBlockOutline(CallbackInfo ci) {
         if (Configs.customBlockHitBoxOutline.getBooleanValue()) {
             ci.cancel();

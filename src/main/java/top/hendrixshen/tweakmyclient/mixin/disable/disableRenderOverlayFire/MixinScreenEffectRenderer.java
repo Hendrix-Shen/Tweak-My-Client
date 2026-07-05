@@ -17,7 +17,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 // CHECKSTYLE.ON: JavadocStyle
 @Mixin(ScreenEffectRenderer.class)
 public abstract class MixinScreenEffectRenderer {
-    @Inject(method = "renderFire", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            //#if MC >= 26.1
+            //$$ method = "submitFire",
+            //#else
+            method = "renderFire",
+            //#endif
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private static void onRenderFire(CallbackInfo ci) {
         if (Configs.disableFireOverlayRender.getBooleanValue()) {
             ci.cancel();

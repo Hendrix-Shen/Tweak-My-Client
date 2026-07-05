@@ -1,9 +1,9 @@
 package top.hendrixshen.tweakmyclient.mixin.feature.autoReconnect;
 
 import org.jetbrains.annotations.NotNull;
+import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.tweakmyclient.impl.feature.autoReconnect.PatchedDisconnectedScreen;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -41,7 +41,7 @@ public abstract class MixinDisconnectedScreen extends Screen {
 
     @Inject(method = "init", at = @At("HEAD"), cancellable = true)
     private void onInitDisconnectedScreen(@NotNull CallbackInfo ci) {
-        Minecraft.getInstance().setScreen(new PatchedDisconnectedScreen(
+        MinecraftCompat.getInstance().setScreen(new PatchedDisconnectedScreen(
                 this.parent,
                 this.title,
                 //#if MC > 12006

@@ -2,6 +2,7 @@ package top.hendrixshen.tweakmyclient.impl.feature.autoTotem;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.player.PlayerCompat;
 import top.hendrixshen.magiclib.api.compat.minecraft.world.item.ItemStackCompat;
 import top.hendrixshen.tweakmyclient.api.event.LocalPlayerListener;
@@ -33,13 +34,14 @@ public class AutoTotemHandler implements LocalPlayerListener {
         }
 
         Minecraft mc = Minecraft.getInstance();
+        MinecraftCompat minecraftCompat = MinecraftCompat.getInstance();
         ItemStackCompat offhandItemCompat = ItemStackCompat.of(localPlayer.getOffhandItem());
 
         if (offhandItemCompat.is(Items.TOTEM_OF_UNDYING)) {
             return;
         }
 
-        if (mc.screen instanceof AbstractContainerScreen && !(mc.screen instanceof InventoryScreen)) {
+        if (minecraftCompat.getScreen() instanceof AbstractContainerScreen && !(minecraftCompat.getScreen() instanceof InventoryScreen)) {
             return;
         }
 
