@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ScreenEffectRenderer.class)
 public abstract class MixinScreenEffectRenderer {
     @Inject(
-            //#if MC >= 26.1
+            //#if MC >= 26.2
             //$$ method = "submitFire",
             //#else
             method = "renderFire",
