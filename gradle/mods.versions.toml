@@ -1,5 +1,5 @@
 [versions]
-magiclib = "0.8.852"
+magiclib = "0.8.855-beta"
 litematica-mc11404 = "0.0.0-dev.20191222.014040"
 litematica-mc11502 = "0.0.0-dev.20201006.194726"
 litematica-mc11605 = "0.0.0-dev.20210917.192300"
