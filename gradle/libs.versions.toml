@@ -9,7 +9,7 @@ yamlang = { id = "me.fallenbreath.yamlang", version.ref = "yamlang" }
 [versions]
 checkstyle = "13.8.0"
 essential-loom = "1.15.50"
-fabric-loader = "0.19.3"
+fabric-loader = "0.19.5"
 grgit = "5.3.3"
 gson = "2.14.0"
 guava = "33.7.1-jre"
