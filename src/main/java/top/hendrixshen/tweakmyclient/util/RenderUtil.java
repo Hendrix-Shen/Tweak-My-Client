@@ -14,6 +14,10 @@ import top.hendrixshen.magiclib.impl.render.context.RenderGlobal;
 import fi.dy.masa.malilib.util.Color4f;
 import top.hendrixshen.magiclib.api.compat.mojang.blaze3d.vertex.VertexFormatCompat;
 //#endif
+
+//#if MC >= 26.3
+//$$ import top.hendrixshen.magiclib.api.render.RenderBackend;
+//#endif
 // CHECKSTYLE.ON: ImportOrder
 
 import com.mojang.blaze3d.vertex.BufferBuilder;
@@ -25,7 +29,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 //$$ import com.mojang.blaze3d.buffers.BufferUsage;
 //#endif
 
-//#if MC >= 12105
+//#if MC >= 26.3
+//$$ import com.mojang.renderpearl.backend.opengl.GlStateManager;
+//#elseif MC >= 12105
 //$$ import com.mojang.blaze3d.opengl.GlStateManager;
 //#else
 import com.mojang.blaze3d.vertex.Tesselator;
@@ -111,7 +117,9 @@ public class RenderUtil {
 
         RenderGlobal.enableBlend();
         // TODO: Migrate to RenderGlobal.
-        //#if MC >= 12105
+        //#if MC >= 26.3
+        //$$ RenderUtil.disableCull();
+        //#elseif MC >= 12105
         //$$ GlStateManager._disableCull();
         //#elseif MC > 11404
         RenderSystem.disableCull();
@@ -197,7 +205,9 @@ public class RenderUtil {
         RenderGlobal.enableTexture();
         //#endif
         // TODO: Migrate to RenderGlobal.
-        //#if MC >= 12105
+        //#if MC >= 26.3
+        //$$ RenderUtil.enableCull();
+        //#elseif MC >= 12105
         //$$ GlStateManager._enableCull();
         //#elseif MC > 11404
         RenderSystem.enableCull();
@@ -224,7 +234,9 @@ public class RenderUtil {
 
         RenderGlobal.enableBlend();
         // TODO: Migrate to RenderGlobal.
-        //#if MC >= 12105
+        //#if MC >= 26.3
+        //$$ RenderUtil.disableCull();
+        //#elseif MC >= 12105
         //$$ GlStateManager._disableCull();
         //#elseif MC > 11404
         RenderSystem.disableCull();
@@ -303,7 +315,9 @@ public class RenderUtil {
         RenderGlobal.enableTexture();
         //#endif
         // TODO: Migrate to RenderGlobal.
-        //#if MC >= 12105
+        //#if MC >= 26.3
+        //$$ RenderUtil.enableCull();
+        //#elseif MC >= 12105
         //$$ GlStateManager._enableCull();
         //#elseif MC > 11404
         RenderSystem.enableCull();
@@ -328,7 +342,9 @@ public class RenderUtil {
 
         RenderGlobal.enableBlend();
         // TODO: Migrate to RenderGlobal.
-        //#if MC >= 12105
+        //#if MC >= 26.3
+        //$$ RenderUtil.disableCull();
+        //#elseif MC >= 12105
         //$$ GlStateManager._disableCull();
         //#elseif MC > 11404
         RenderSystem.disableCull();
@@ -408,7 +424,9 @@ public class RenderUtil {
         RenderGlobal.enableTexture();
         //#endif
         // TODO: Migrate to RenderGlobal.
-        //#if MC >= 12105
+        //#if MC >= 26.3
+        //$$ RenderUtil.enableCull();
+        //#elseif MC >= 12105
         //$$ GlStateManager._enableCull();
         //#elseif MC > 11404
         RenderSystem.enableCull();
@@ -433,7 +451,9 @@ public class RenderUtil {
 
         RenderGlobal.enableBlend();
         // TODO: Migrate to RenderGlobal.
-        //#if MC >= 12105
+        //#if MC >= 26.3
+        //$$ RenderUtil.disableCull();
+        //#elseif MC >= 12105
         //$$ GlStateManager._disableCull();
         //#elseif MC > 11404
         RenderSystem.disableCull();
@@ -515,7 +535,9 @@ public class RenderUtil {
         RenderGlobal.enableTexture();
         //#endif
         // TODO: Migrate to RenderGlobal.
-        //#if MC >= 12105
+        //#if MC >= 26.3
+        //$$ RenderUtil.enableCull();
+        //#elseif MC >= 12105
         //$$ GlStateManager._enableCull();
         //#elseif MC > 11404
         RenderSystem.enableCull();
@@ -537,6 +559,21 @@ public class RenderUtil {
     //$$         BufferUploader.drawWithShader(meshData);
     //$$     } catch (Exception ignore) {
     //$$         // NO-OP
+    //$$     }
+    //$$ }
+    //#endif
+
+    //#if MC >= 26.3
+    //$$ private static void disableCull() {
+    //$$     // Only the OpenGL backend exposes the immediate graphics state, the Vulkan backend owns no GL context.
+    //$$     if (RenderBackend.getCurrent().supportsImmediateState()) {
+    //$$         GlStateManager._disableCull();
+    //$$     }
+    //$$ }
+    //$$
+    //$$ private static void enableCull() {
+    //$$     if (RenderBackend.getCurrent().supportsImmediateState()) {
+    //$$         GlStateManager._enableCull();
     //$$     }
     //$$ }
     //#endif

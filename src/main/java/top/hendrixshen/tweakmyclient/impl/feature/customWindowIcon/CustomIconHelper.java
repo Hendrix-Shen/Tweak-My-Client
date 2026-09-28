@@ -1,10 +1,6 @@
 package top.hendrixshen.tweakmyclient.impl.feature.customWindowIcon;
 
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.GLFWImage;
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.MemoryUtil;
 import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.tweakmyclient.game.Configs;
 
@@ -13,14 +9,29 @@ import top.hendrixshen.tweakmyclient.game.Configs;
 import top.hendrixshen.tweakmyclient.mixin.accessor.NativeImageAccessor;
 import top.hendrixshen.magiclib.util.MiscUtil;
 //#endif
+
+//#if MC >= 26.3
+//$$ import top.hendrixshen.magiclib.util.MiscUtil;
+//$$ import top.hendrixshen.tweakmyclient.mixin.accessor.WindowAccessor;
+//#else
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWImage;
+import org.lwjgl.system.MemoryStack;
+import org.lwjgl.system.MemoryUtil;
+//#endif
 // CHECKSTYLE.ON: ImportOrder
 
-import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 
 // CHECKSTYLE.OFF: ImportOrder
+//#if MC >= 26.3
+//$$ import net.minecraft.server.packs.resources.IoSupplier;
+//#else
+import com.mojang.blaze3d.platform.NativeImage;
+//#endif
+
 //#if 12101 > MC && MC > 11404
 import com.mojang.blaze3d.systems.RenderSystem;
 //#endif
@@ -32,11 +43,14 @@ import net.minecraft.server.packs.PackType;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.function.Function;
 
 // CHECKSTYLE.OFF: ImportOrder
+//#if MC < 26.3
+import java.nio.ByteBuffer;
+//#endif
+
 //#if MC < 11904
 import java.util.Locale;
 //#endif
@@ -87,6 +101,17 @@ public class CustomIconHelper {
         //#endif
         //#endif
 
+        //#if MC >= 26.3
+        //$$ ArrayList<IoSupplier<InputStream>> iconStreams = new ArrayList<>(inputStreams.size());
+        //$$
+        //$$ for (InputStream inputStream : inputStreams) {
+        //$$     iconStreams.add(() -> inputStream);
+        //$$ }
+        //$$
+        //$$ // 26.3 dropped GLFW in favour of SDL, hand the icon streams over to the vanilla routine.
+        //$$ WindowAccessor accessor = MiscUtil.cast(MinecraftCompat.getInstance().getWindow());
+        //$$ accessor.tmc$setIcon(iconStreams);
+        //#else
         ArrayList<ByteBuffer> byteBuffers = new ArrayList<>(inputStreams.size());
 
         try (MemoryStack memoryStack = MemoryStack.stackPush()) {
@@ -112,8 +137,10 @@ public class CustomIconHelper {
         } finally {
             byteBuffers.forEach(MemoryUtil::memFree);
         }
+        //#endif
     }
 
+    //#if MC < 26.3
     private static int @NotNull [] getPixelsRGBA(@NotNull NativeImage nativeImage) {
         //#if MC > 11903
         //$$ return nativeImage.getPixelsRGBA();
@@ -130,6 +157,7 @@ public class CustomIconHelper {
         }
         //#endif
     }
+    //#endif
 
     public static void updateIcon() {
         Minecraft mc = Minecraft.getInstance();
@@ -186,7 +214,7 @@ public class CustomIconHelper {
         );
     }
 
-    //#if MC > 11904
+    //#if 26.3 > MC && MC > 11904
     //$$ private static void pushVanillaResource(@NotNull ArrayList<InputStream> list, String[] stable,
     //$$                                         String[] snapshot) throws IOException {
     //$$     Minecraft mc = Minecraft.getInstance();
@@ -198,6 +226,16 @@ public class CustomIconHelper {
     //$$             //#endif
     //$$     list.add(Objects.requireNonNull(mc.getVanillaPackResources()
     //$$             .getRootResource(isStable ? stable : snapshot)).get());
+    //$$ }
+    //#endif
+
+    //#if MC >= 26.3
+    //$$ private static void pushVanillaResource(@NotNull ArrayList<InputStream> list, String[] stable,
+    //$$                                         String[] snapshot) throws IOException {
+    //$$     Minecraft mc = Minecraft.getInstance();
+    //$$     // Vanilla exposes the window icon files through the pack resources, see Minecraft#reloadResourcePacks.
+    //$$     list.add(Objects.requireNonNull(mc.getVanillaPackResources().fullResources()
+    //$$             .getRootResource(SharedConstants.getCurrentVersion().stable() ? stable : snapshot)).get());
     //$$ }
     //#endif
 }

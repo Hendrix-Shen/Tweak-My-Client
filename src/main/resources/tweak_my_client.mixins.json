@@ -8,6 +8,7 @@
     "accessor.FishingHookAccessor",
     "accessor.MultiPlayerGameModeAccessor",
     "accessor.NativeImageAccessor",
+    "accessor.WindowAccessor",
     "disable.disableClientBlockEvent.MixinClientPacketListener",
     "disable.disableFovAffectedBySpeed.MixinCamera",
     "disable.disableFovAffectedBySpeed.MixinGameRenderer",

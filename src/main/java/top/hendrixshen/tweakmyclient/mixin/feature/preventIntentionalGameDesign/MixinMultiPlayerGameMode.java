@@ -54,7 +54,9 @@ public abstract class MixinMultiPlayerGameMode {
         //#endif
 
         if (block instanceof BedBlock
-                //#if MC >= 1.21.11
+                //#if MC >= 26.3
+                //$$ && bedRule.destroyOnUse()
+                //#elseif MC >= 1.21.11
                 //$$ && bedRule.explodes()
                 //#elseif MC >= 1.16
                 && !level.dimensionType().bedWorks()

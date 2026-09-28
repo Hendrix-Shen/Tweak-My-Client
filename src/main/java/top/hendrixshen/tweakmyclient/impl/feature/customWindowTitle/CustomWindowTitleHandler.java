@@ -3,12 +3,17 @@ package top.hendrixshen.tweakmyclient.impl.feature.customWindowTitle;
 import com.google.common.collect.ImmutableMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.lwjgl.glfw.GLFW;
 import top.hendrixshen.magiclib.api.compat.minecraft.client.MinecraftCompat;
 import top.hendrixshen.magiclib.api.event.minecraft.MinecraftListener;
 import top.hendrixshen.magiclib.api.i18n.I18n;
 import top.hendrixshen.tweakmyclient.game.Configs;
 import top.hendrixshen.tweakmyclient.util.CollectionUtil;
+
+// CHECKSTYLE.OFF: ImportOrder
+//#if MC < 26.3
+import org.lwjgl.glfw.GLFW;
+//#endif
+// CHECKSTYLE.ON: ImportOrder
 
 import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
@@ -186,7 +191,11 @@ public class CustomWindowTitleHandler implements MinecraftListener {
 
                 try {
                     CustomWindowTitleHandler.getInstance().getCurrentTitle();
+                    //#if MC >= 26.3
+                    //$$ MinecraftCompat.getInstance().getWindow().setTitle(this.getRealtimeTitle());
+                    //#else
                     GLFW.glfwSetWindowTitle(MinecraftCompat.getInstance().getWindow().getWindow(), this.getRealtimeTitle());
+                    //#endif
                     this.waitUntilNextTick();
                 } catch (Exception e) {
                     top.hendrixshen.tweakmyclient.SharedConstants.getLogger().error("Exception in title changer", e);
